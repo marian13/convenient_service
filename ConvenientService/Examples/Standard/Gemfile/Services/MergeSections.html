@@ -283,6 +283,9 @@
   
   
   
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../../Service/Configs/Standard.html" title="ConvenientService::Service::Configs::Standard (module)">Service::Configs::Standard</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../../../../Service/Configs/Standard.html#service%3F-class_method" title="ConvenientService::Service::Configs::Standard.service? (method)">service?</a></span>, <span class='object_link'><a href="../../../../Service/Configs/Standard.html#service_class%3F-class_method" title="ConvenientService::Service::Configs::Standard.service_class? (method)">service_class?</a></span></p>
+
   
   
   
@@ -315,68 +318,9 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <div id="constructor_details" class="method_details_list">
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../../Config.html" title="ConvenientService::Config (module)">Config</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../../../../Config.html#included-class_method" title="ConvenientService::Config.included (method)">included</a></span></p>
+<div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
     <div class="method_details first">
@@ -404,13 +348,13 @@
       <pre class="lines">
 
 
-25
-26
-27
-28</pre>
+30
+31
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>header:</span><span class='comma'>,</span> <span class='label'>body:</span><span class='rparen'>)</span>
   <span class='ivar'>@header</span> <span class='op'>=</span> <span class='id identifier rubyid_header'>header</span>
@@ -453,12 +397,12 @@
       <pre class="lines">
 
 
-11
-12
-13</pre>
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_body'>body</span>
   <span class='ivar'>@body</span>
@@ -495,12 +439,12 @@
       <pre class="lines">
 
 
-11
-12
-13</pre>
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_header'>header</span>
   <span class='ivar'>@header</span>
@@ -532,12 +476,12 @@
       <pre class="lines">
 
 
-30
-31
-32</pre>
+35
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
   <span class='id identifier rubyid_success'>success</span><span class='lparen'>(</span><span class='label'>merged_sections:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_header'>header</span><span class='embexpr_end'>}</span><span class='tstring_content'>\n</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_body'>body</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -562,15 +506,15 @@
       <pre class="lines">
 
 
-41
-42
-43
-44
-45
-46</pre>
+46
+47
+48
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate_body'>validate_body</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_error'>error</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Body is `nil`</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_body'>body</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -598,15 +542,15 @@
       <pre class="lines">
 
 
-34
-35
-36
-37
-38
-39</pre>
+39
+40
+41
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/examples/standard/gemfile/services/merge_sections.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_validate_header'>validate_header</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_error'>error</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Header is `nil`</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_header'>header</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -624,9 +568,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:24 2024 by
+  Generated on Mon May 26 21:15:32 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

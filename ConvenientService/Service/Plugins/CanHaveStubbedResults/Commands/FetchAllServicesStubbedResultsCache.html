@@ -201,22 +201,22 @@
       <pre class="lines">
 
 
-18
-19
-20
-21
-22
-23
-24</pre>
+24
+25
+26
+27
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/fetch_all_services_stubbed_results_cache.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/fetch_all_services_stubbed_results_cache.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="../../../../Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_rspec'><span class='object_link'><a href="../../../../Dependencies/Queries.html#rspec-instance_method" title="ConvenientService::Dependencies::Queries#rspec (method)">rspec</a></span></span><span class='period'>.</span><span class='id identifier rubyid_current_example'>current_example</span>
-    <span class='const'><span class='object_link'><a href="../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Utils/Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_memoize_including_falsy_values'><span class='object_link'><a href="../../../../Utils/Object.html#memoize_including_falsy_values-class_method" title="ConvenientService::Utils::Object.memoize_including_falsy_values (method)">memoize_including_falsy_values</a></span></span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_rspec'><span class='object_link'><a href="../../../../Dependencies/Queries.html#rspec-instance_method" title="ConvenientService::Dependencies::Queries#rspec (method)">rspec</a></span></span><span class='period'>.</span><span class='id identifier rubyid_current_example'>current_example</span><span class='comma'>,</span> <span class='symbol'>:@__convenient_service_stubbed_results__</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Cache.html" title="ConvenientService::Support::Cache (class)">Cache</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'><span class='object_link'><a href="../../../../Support/Cache.html#create-class_method" title="ConvenientService::Support::Cache.create (method)">create</a></span></span><span class='lparen'>(</span><span class='label'>backend:</span> <span class='symbol'>:thread_safe_array</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+    <span class='const'><span class='object_link'><a href="../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Utils/Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_memoize_including_falsy_values'><span class='object_link'><a href="../../../../Utils/Object.html#memoize_including_falsy_values-class_method" title="ConvenientService::Utils::Object.memoize_including_falsy_values (method)">memoize_including_falsy_values</a></span></span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_rspec'><span class='object_link'><a href="../../../../Dependencies/Queries.html#rspec-instance_method" title="ConvenientService::Dependencies::Queries#rspec (method)">rspec</a></span></span><span class='period'>.</span><span class='id identifier rubyid_current_example'>current_example</span><span class='comma'>,</span> <span class='symbol'>:@__convenient_service_stubbed_results__</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Cache.html" title="ConvenientService::Support::Cache (class)">Cache</a></span></span><span class='period'>.</span><span class='id identifier rubyid_backed_by'><span class='object_link'><a href="../../../../Support/Cache.html#backed_by-class_method" title="ConvenientService::Support::Cache.backed_by (method)">backed_by</a></span></span><span class='lparen'>(</span><span class='symbol'>:thread_safe_hash</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='rbrace'>}</span>
   <span class='kw'>else</span>
-    <span class='const'><span class='object_link'><a href="../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Cache.html" title="ConvenientService::Support::Cache (class)">Cache</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'><span class='object_link'><a href="../../../../Support/Cache.html#create-class_method" title="ConvenientService::Support::Cache.create (method)">create</a></span></span><span class='lparen'>(</span><span class='label'>backend:</span> <span class='symbol'>:thread_safe_array</span><span class='rparen'>)</span>
+    <span class='const'><span class='object_link'><a href="../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Support/Cache.html" title="ConvenientService::Support::Cache (class)">Cache</a></span></span><span class='period'>.</span><span class='id identifier rubyid_backed_by'><span class='object_link'><a href="../../../../Support/Cache.html#backed_by-class_method" title="ConvenientService::Support::Cache.backed_by (method)">backed_by</a></span></span><span class='lparen'>(</span><span class='symbol'>:thread_safe_hash</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -229,9 +229,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:31 2024 by
+  Generated on Mon May 26 21:15:39 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

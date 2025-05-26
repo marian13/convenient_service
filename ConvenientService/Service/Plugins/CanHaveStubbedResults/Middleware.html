@@ -182,21 +182,15 @@
       <pre class="lines">
 
 
-13
-14
-15
-16
-17
-18</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/middleware.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/middleware.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_cache'>cache</span><span class='lbracket'>[</span><span class='id identifier rubyid_key_with_arguments'>key_with_arguments</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='id identifier rubyid_key_with_arguments'>key_with_arguments</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_cache'>cache</span><span class='lbracket'>[</span><span class='id identifier rubyid_key_without_arguments'>key_without_arguments</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='id identifier rubyid_key_without_arguments'>key_without_arguments</span><span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -208,9 +202,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:25 2024 by
+  Generated on Mon May 26 21:15:32 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

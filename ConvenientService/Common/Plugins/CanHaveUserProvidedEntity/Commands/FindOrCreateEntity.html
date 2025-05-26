@@ -290,13 +290,13 @@
       <pre class="lines">
 
 
-26
-27
-28
-29</pre>
+31
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>namespace:</span><span class='comma'>,</span> <span class='label'>proto_entity:</span><span class='rparen'>)</span>
   <span class='ivar'>@namespace</span> <span class='op'>=</span> <span class='id identifier rubyid_namespace'>namespace</span>
@@ -339,12 +339,12 @@
       <pre class="lines">
 
 
-13
-14
-15</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_namespace'>namespace</span>
   <span class='ivar'>@namespace</span>
@@ -381,12 +381,12 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span>
   <span class='ivar'>@proto_entity</span>
@@ -427,11 +427,6 @@
       <pre class="lines">
 
 
-34
-35
-36
-37
-38
 39
 40
 41
@@ -481,10 +476,21 @@
 85
 86
 87
-88</pre>
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../../../../Support/Command/Exceptions.html" title="ConvenientService::Support::Command::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'>ProtoEntityHasNoName</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>proto_entity:</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_proto_entity_name'>proto_entity_name</span>
@@ -525,9 +531,15 @@
 </span>  <span class='comment'>#   # end
 </span>  <span class='comment'>#
 </span>  <span class='id identifier rubyid_entity'>entity</span><span class='period'>.</span><span class='id identifier rubyid_class_exec'>class_exec</span><span class='lparen'>(</span><span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_proto_entity'>proto_entity</span><span class='op'>|</span>
-    <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='symbol'>:proto_entity</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span> <span class='rbrace'>}</span>
+    <span class='comment'>##
+</span>    <span class='comment'># @return [Class]
+</span>    <span class='comment'>#
+</span>    <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='symbol'>:proto_entity</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_proto_entity'>proto_entity</span> <span class='rbrace'>}</span>
 
     <span class='comment'>##
+</span>    <span class='comment'># @param other [Object] Can by any type.
+</span>    <span class='comment'># @return [Boolean, nil]
+</span>    <span class='comment'>#
 </span>    <span class='comment'># @internal
 </span>    <span class='comment'>#   TODO: Try `self.proto_entity == other.proto_entity if self &lt; proto_entity_concern`.
 </span>    <span class='comment'>#
@@ -551,9 +563,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:29 2024 by
+  Generated on Mon May 26 21:15:37 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

@@ -356,13 +356,13 @@
       <pre class="lines">
 
 
-26
-27
-28
-29</pre>
+31
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>config:</span><span class='comma'>,</span> <span class='label'>trigger:</span><span class='rparen'>)</span>
   <span class='ivar'>@config</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span>
@@ -405,12 +405,12 @@
       <pre class="lines">
 
 
-13
-14
-15</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_config'>config</span>
   <span class='ivar'>@config</span>
@@ -447,12 +447,12 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_trigger'>trigger</span>
   <span class='ivar'>@trigger</span>
@@ -493,15 +493,15 @@
       <pre class="lines">
 
 
-34
-35
-36
-37
-38
-39</pre>
+39
+40
+41
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_method_missing_trigger_valid?'>method_missing_trigger_valid?</span>
@@ -551,12 +551,12 @@
       <pre class="lines">
 
 
-51
-52
-53</pre>
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing_commits_counter_incremented?'>method_missing_commits_counter_incremented?</span>
   <span class='const'><span class='object_link'><a href="../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_memoize_including_falsy_values'><span class='object_link'><a href="../../../../Utils.html#memoize_including_falsy_values-class_method" title="ConvenientService::Utils.memoize_including_falsy_values (method)">memoize_including_falsy_values</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:@method_missing_commits_counter_incremented</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_method_missing_commits_counter'>method_missing_commits_counter</span><span class='period'>.</span><span class='id identifier rubyid_bincrement'>bincrement</span> <span class='rbrace'>}</span>
@@ -603,12 +603,12 @@
       <pre class="lines">
 
 
-44
-45
-46</pre>
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing_trigger_valid?'>method_missing_trigger_valid?</span>
   <span class='id identifier rubyid_method_missing_triggers'>method_missing_triggers</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span><span class='lparen'>(</span><span class='id identifier rubyid_trigger'>trigger</span><span class='rparen'>)</span>
@@ -655,15 +655,15 @@
       <pre class="lines">
 
 
-58
-59
-60
-61
-62
-63</pre>
+63
+64
+65
+66
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/commands/track_method_missing_commit_trigger.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing_triggers'>method_missing_triggers</span>
   <span class='ivar'>@method_missing_triggers</span> <span class='op'>||=</span> <span class='lbracket'>[</span>
@@ -681,9 +681,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:28 2024 by
+  Generated on Mon May 26 21:15:35 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

@@ -414,12 +414,12 @@
       <pre class="lines">
 
 
-39
-40
-41</pre>
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>arguments:</span><span class='rparen'>)</span>
   <span class='ivar'>@arguments</span> <span class='op'>=</span> <span class='id identifier rubyid_arguments'>arguments</span>
@@ -461,12 +461,12 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_arguments'>arguments</span>
   <span class='ivar'>@arguments</span>
@@ -520,10 +520,10 @@
       <pre class="lines">
 
 
-24</pre>
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 29</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:args</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:arguments</span></pre>
     </td>
@@ -568,10 +568,10 @@
       <pre class="lines">
 
 
-34</pre>
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 39</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:block</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:arguments</span></pre>
     </td>
@@ -616,11 +616,6 @@
       <pre class="lines">
 
 
-46
-47
-48
-49
-50
 51
 52
 53
@@ -633,10 +628,15 @@
 60
 61
 62
-63</pre>
+63
+64
+65
+66
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='period'>.</span><span class='id identifier rubyid_null_arguments?'>null_arguments?</span>
@@ -698,10 +698,10 @@
       <pre class="lines">
 
 
-29</pre>
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 34</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:kwargs</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:arguments</span></pre>
     </td>
@@ -746,12 +746,12 @@
       <pre class="lines">
 
 
-68
-69
-70</pre>
+73
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_printable_args'>printable_args</span>
   <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:inspect</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>, </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -798,12 +798,12 @@
       <pre class="lines">
 
 
-82
-83
-84</pre>
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_printable_block'>printable_block</span>
   <span class='id identifier rubyid_block'>block</span> <span class='op'>?</span> <span class='const'><span class='object_link'><a href="../../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils/Proc.html" title="ConvenientService::Utils::Proc (module)">Proc</a></span></span><span class='period'>.</span><span class='id identifier rubyid_display'><span class='object_link'><a href="../../../../../../../../Utils/Proc.html#display-class_method" title="ConvenientService::Utils::Proc.display (method)">display</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -850,12 +850,12 @@
       <pre class="lines">
 
 
-75
-76
-77</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/sub_matchers/arguments/commands/generate_printable_arguments.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_printable_kwargs'>printable_kwargs</span>
   <span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>, </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -870,9 +870,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:32 2024 by
+  Generated on Mon May 26 21:15:40 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

@@ -196,6 +196,72 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#else_group-class_method" title="else_group (class method)">.<strong>else_group</strong>(*args, **kwargs, &amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#elsif_not_step_group-class_method" title="elsif_not_step_group (class method)">.<strong>elsif_not_step_group</strong>(*args, **kwargs, &amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#elsif_step_group-class_method" title="elsif_step_group (class method)">.<strong>elsif_step_group</strong>(*args, **kwargs, &amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#group-class_method" title="group (class method)">.<strong>group</strong>(&amp;block)  &#x21d2; ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base </a>
     
 
@@ -211,6 +277,51 @@
 
   
     <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#if_not_step_group-class_method" title="if_not_step_group (class method)">.<strong>if_not_step_group</strong>(*args, **kwargs, &amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#if_step_group-class_method" title="if_step_group (class method)">.<strong>if_step_group</strong>(*args, **kwargs, &amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>or_if_step_group.</p>
+</div></span>
   
 </li>
 
@@ -429,6 +540,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#step-instance_method" title="#step (instance method)">#<strong>step</strong>(*args, **kwargs)  &#x21d2; ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Registers a step (step definition).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#steps-instance_method" title="#steps (instance method)">#<strong>steps</strong>  &#x21d2; ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection </a>
     
 
@@ -569,11 +703,6 @@
       <pre class="lines">
 
 
-301
-302
-303
-304
-305
 306
 307
 308
@@ -587,10 +716,15 @@
 316
 317
 318
-319</pre>
+319
+320
+321
+322
+323
+324</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 301</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 306</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_group'>and_group</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -706,11 +840,6 @@
       <pre class="lines">
 
 
-334
-335
-336
-337
-338
 339
 340
 341
@@ -726,10 +855,15 @@
 351
 352
 353
-354</pre>
+354
+355
+356
+357
+358
+359</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 334</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 339</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_not_group'>and_not_group</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -853,11 +987,6 @@
       <pre class="lines">
 
 
-115
-116
-117
-118
-119
 120
 121
 122
@@ -867,10 +996,15 @@
 126
 127
 128
-129</pre>
+129
+130
+131
+132
+133
+134</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 120</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_not_step'>and_not_step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -982,11 +1116,6 @@
       <pre class="lines">
 
 
-86
-87
-88
-89
-90
 91
 92
 93
@@ -994,10 +1123,15 @@
 95
 96
 97
-98</pre>
+98
+99
+100
+101
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and_step'>and_step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1010,6 +1144,246 @@
     <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/And.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::And (class)">And</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/And.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::And#initialize (method)">new</a></span></span><span class='lparen'>(</span>
       <span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='comma'>,</span>
       <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Scalar.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar (class)">Scalar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Scalar.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_new_step'>new_step</span><span class='rparen'>)</span>
+    <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="else_group-class_method">
+  
+    .<strong>else_group</strong>(*args, **kwargs, &amp;block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 614</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_else_group'>else_group</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
+
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/FirstStepIsNotSet.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet (class)">FirstStepIsNotSet</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/FirstGroupStepIsNotSet.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet (class)">FirstGroupStepIsNotSet</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid___method__'>__method__</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='period'>.</span><span class='id identifier rubyid_complex_if?'>complex_if?</span>
+
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Empty.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty (class)">Empty</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Empty.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty#initialize (method)">new</a></span></span>
+
+  <span class='id identifier rubyid_block'>block</span><span class='op'>&amp;.</span><span class='id identifier rubyid_call'>call</span>
+
+  <span class='id identifier rubyid_current_expression'>current_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
+
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/FirstGroupStepIsNotSet.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet (class)">FirstGroupStepIsNotSet</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid___method__'>__method__</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_current_expression'>current_expression</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span> <span class='op'>=</span>
+    <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf (class)">ComplexIf</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+      <span class='lbracket'>[</span>
+        <span class='op'>*</span><span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='period'>.</span><span class='id identifier rubyid_if_expressions'>if_expressions</span>
+      <span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Else.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Else (class)">Else</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Else.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Else#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_current_expression'>current_expression</span><span class='rparen'>)</span>
+    <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="elsif_not_step_group-class_method">
+  
+    .<strong>elsif_not_step_group</strong>(*args, **kwargs, &amp;block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 580</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_elsif_not_step_group'>elsif_not_step_group</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
+
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/FirstStepIsNotSet.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet (class)">FirstStepIsNotSet</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/FirstGroupStepIsNotSet.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet (class)">FirstGroupStepIsNotSet</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid___method__'>__method__</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='period'>.</span><span class='id identifier rubyid_complex_if?'>complex_if?</span>
+
+  <span class='id identifier rubyid_new_step'>new_step</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Empty.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty (class)">Empty</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Empty.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty#initialize (method)">new</a></span></span>
+
+  <span class='id identifier rubyid_block'>block</span><span class='op'>&amp;.</span><span class='id identifier rubyid_call'>call</span>
+
+  <span class='id identifier rubyid_current_expression'>current_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
+
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/FirstGroupStepIsNotSet.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet (class)">FirstGroupStepIsNotSet</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid___method__'>__method__</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_current_expression'>current_expression</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span> <span class='op'>=</span>
+    <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf (class)">ComplexIf</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+      <span class='lbracket'>[</span>
+        <span class='op'>*</span><span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='period'>.</span><span class='id identifier rubyid_if_expressions'>if_expressions</span><span class='comma'>,</span>
+        <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/If.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If (class)">If</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/If.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+          <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Not.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Not (class)">Not</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Not.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Not#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+            <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Scalar.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar (class)">Scalar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Scalar.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_new_step'>new_step</span><span class='rparen'>)</span>
+          <span class='rparen'>)</span><span class='comma'>,</span>
+          <span class='id identifier rubyid_current_expression'>current_expression</span>
+        <span class='rparen'>)</span>
+      <span class='rbracket'>]</span>
+    <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="elsif_step_group-class_method">
+  
+    .<strong>elsif_step_group</strong>(*args, **kwargs, &amp;block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 545</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_elsif_step_group'>elsif_step_group</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='comment'># require &quot;debug&quot;; binding.break
+</span>
+  <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
+
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/FirstStepIsNotSet.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet (class)">FirstStepIsNotSet</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='comment'># `and` or `or`.
+</span>  <span class='comment'># ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) unless previous_expression.complex_if?
+</span>
+  <span class='id identifier rubyid_new_step'>new_step</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Empty.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty (class)">Empty</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Empty.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty#initialize (method)">new</a></span></span>
+
+  <span class='id identifier rubyid_block'>block</span><span class='op'>&amp;.</span><span class='id identifier rubyid_call'>call</span>
+
+  <span class='id identifier rubyid_current_expression'>current_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
+
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/FirstGroupStepIsNotSet.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet (class)">FirstGroupStepIsNotSet</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid___method__'>__method__</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_current_expression'>current_expression</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span> <span class='op'>=</span>
+    <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf (class)">ComplexIf</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+      <span class='lbracket'>[</span>
+        <span class='op'>*</span><span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='period'>.</span><span class='id identifier rubyid_if_expressions'>if_expressions</span><span class='comma'>,</span>
+        <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/If.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If (class)">If</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/If.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+          <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Scalar.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar (class)">Scalar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Scalar.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_new_step'>new_step</span><span class='rparen'>)</span><span class='comma'>,</span>
+          <span class='id identifier rubyid_current_expression'>current_expression</span>
+        <span class='rparen'>)</span>
+      <span class='rbracket'>]</span>
     <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1095,11 +1469,6 @@
       <pre class="lines">
 
 
-229
-230
-231
-232
-233
 234
 235
 236
@@ -1115,10 +1484,15 @@
 246
 247
 248
-249</pre>
+249
+250
+251
+252
+253
+254</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 229</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 234</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_group'>group</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1138,6 +1512,220 @@
       <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/And.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::And (class)">And</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/And.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::And#initialize (method)">new</a></span></span><span class='lparen'>(</span>
         <span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='comma'>,</span>
         <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Group.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Group (class)">Group</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Group.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Group#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_current_expression'>current_expression</span><span class='rparen'>)</span>
+      <span class='rparen'>)</span>
+    <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="if_not_step_group-class_method">
+  
+    .<strong>if_not_step_group</strong>(*args, **kwargs, &amp;block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 500</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_if_not_step_group'>if_not_step_group</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
+
+  <span class='id identifier rubyid_new_step'>new_step</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Empty.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty (class)">Empty</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Empty.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty#initialize (method)">new</a></span></span>
+
+  <span class='id identifier rubyid_block'>block</span><span class='op'>&amp;.</span><span class='id identifier rubyid_call'>call</span>
+
+  <span class='id identifier rubyid_current_expression'>current_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
+
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/FirstGroupStepIsNotSet.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet (class)">FirstGroupStepIsNotSet</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid___method__'>__method__</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_current_expression'>current_expression</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span> <span class='op'>=</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+      <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf (class)">ComplexIf</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+        <span class='lbracket'>[</span>
+          <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/If.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If (class)">If</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/If.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+            <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Not.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Not (class)">Not</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Not.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Not#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+              <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Scalar.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar (class)">Scalar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Scalar.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_new_step'>new_step</span><span class='rparen'>)</span>
+            <span class='rparen'>)</span><span class='comma'>,</span>
+            <span class='id identifier rubyid_current_expression'>current_expression</span>
+          <span class='rparen'>)</span>
+        <span class='rbracket'>]</span>
+      <span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/And.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::And (class)">And</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/And.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::And#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+        <span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='comma'>,</span>
+        <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf (class)">ComplexIf</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+          <span class='lbracket'>[</span>
+            <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/If.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If (class)">If</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/If.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+              <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Not.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Not (class)">Not</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Not.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Not#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+                <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Scalar.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar (class)">Scalar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Scalar.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_new_step'>new_step</span><span class='rparen'>)</span>
+              <span class='rparen'>)</span><span class='comma'>,</span>
+              <span class='id identifier rubyid_current_expression'>current_expression</span>
+            <span class='rparen'>)</span>
+          <span class='rbracket'>]</span>
+        <span class='rparen'>)</span>
+      <span class='rparen'>)</span>
+    <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="if_step_group-class_method">
+  
+    .<strong>if_step_group</strong>(*args, **kwargs, &amp;block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>or_if_step_group</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 459</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_if_step_group'>if_step_group</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
+
+  <span class='id identifier rubyid_new_step'>new_step</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Empty.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty (class)">Empty</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Empty.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty#initialize (method)">new</a></span></span>
+
+  <span class='id identifier rubyid_block'>block</span><span class='op'>&amp;.</span><span class='id identifier rubyid_call'>call</span>
+
+  <span class='id identifier rubyid_current_expression'>current_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
+
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/FirstGroupStepIsNotSet.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::FirstGroupStepIsNotSet (class)">FirstGroupStepIsNotSet</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid___method__'>__method__</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_current_expression'>current_expression</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span> <span class='op'>=</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+      <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf (class)">ComplexIf</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+        <span class='lbracket'>[</span>
+          <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/If.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If (class)">If</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/If.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+            <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Scalar.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar (class)">Scalar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Scalar.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_new_step'>new_step</span><span class='rparen'>)</span><span class='comma'>,</span>
+            <span class='id identifier rubyid_current_expression'>current_expression</span>
+          <span class='rparen'>)</span>
+        <span class='rbracket'>]</span>
+      <span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/And.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::And (class)">And</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/And.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::And#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+        <span class='id identifier rubyid_previous_expression'>previous_expression</span><span class='comma'>,</span>
+        <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf (class)">ComplexIf</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/ComplexIf.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+          <span class='lbracket'>[</span>
+            <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/If.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If (class)">If</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/If.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+              <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions (module)">Expressions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Expressions/Scalar.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar (class)">Scalar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/Expressions/Scalar.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_new_step'>new_step</span><span class='rparen'>)</span><span class='comma'>,</span>
+              <span class='id identifier rubyid_current_expression'>current_expression</span>
+            <span class='rparen'>)</span>
+          <span class='rbracket'>]</span>
+        <span class='rparen'>)</span>
       <span class='rparen'>)</span>
     <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1230,11 +1818,6 @@
       <pre class="lines">
 
 
-263
-264
-265
-266
-267
 268
 269
 270
@@ -1254,10 +1837,15 @@
 284
 285
 286
-287</pre>
+287
+288
+289
+290
+291
+292</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 263</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 268</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_not_group'>not_group</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1379,11 +1967,6 @@
       <pre class="lines">
 
 
-52
-53
-54
-55
-56
 57
 58
 59
@@ -1397,10 +1980,15 @@
 67
 68
 69
-70</pre>
+70
+71
+72
+73
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_not_step'>not_step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1510,11 +2098,6 @@
       <pre class="lines">
 
 
-371
-372
-373
-374
-375
 376
 377
 378
@@ -1538,10 +2121,15 @@
 396
 397
 398
-399</pre>
+399
+400
+401
+402
+403
+404</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 371</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 376</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_or_group'>or_group</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1667,11 +2255,6 @@
       <pre class="lines">
 
 
-417
-418
-419
-420
-421
 422
 423
 424
@@ -1699,10 +2282,15 @@
 446
 447
 448
-449</pre>
+449
+450
+451
+452
+453
+454</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 417</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 422</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_or_not_group'>or_not_group</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1838,11 +2426,6 @@
       <pre class="lines">
 
 
-190
-191
-192
-193
-194
 195
 196
 197
@@ -1864,10 +2447,15 @@
 213
 214
 215
-216</pre>
+216
+217
+218
+219
+220
+221</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 190</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 195</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_or_not_step'>or_not_step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -1991,11 +2579,6 @@
       <pre class="lines">
 
 
-148
-149
-150
-151
-152
 153
 154
 155
@@ -2013,10 +2596,15 @@
 167
 168
 169
-170</pre>
+170
+171
+172
+173
+174
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 153</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_or_step'>or_step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -2117,11 +2705,6 @@
       <pre class="lines">
 
 
-22
-23
-24
-25
-26
 27
 28
 29
@@ -2131,10 +2714,15 @@
 33
 34
 35
-36</pre>
+36
+37
+38
+39
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_step'>step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_previous_expression'>previous_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_expression'>expression</span>
@@ -2197,12 +2785,12 @@
       <pre class="lines">
 
 
-456
-457
-458</pre>
+643
+644
+645</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 456</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 643</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
   <span class='id identifier rubyid_internals_class'>internals_class</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:steps</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/StepCollection.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection (class)">StepCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/StepCollection.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::StepCollection#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -2259,15 +2847,95 @@
       <pre class="lines">
 
 
-471
-472
-473</pre>
+658
+659
+660</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 471</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 658</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_regular_result'>regular_result</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result_without_middlewares'>result_without_middlewares</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="step-instance_method">
+  
+    #<strong>step</strong>(*args, **kwargs)  &#x21d2; <tt><span class='object_link'><a href="../CanHaveSteps/Entities/Step.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Registers a step (step definition).</p>
+<p>TODO: Dynamic expressions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Object&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol =&gt; Object}</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../CanHaveSteps/Entities/Step.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step (class)">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+709
+710
+711</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 709</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_step'>step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_step_class'>step_class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='label'>organizer:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>index:</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2333,18 +3001,17 @@
       <pre class="lines">
 
 
-486
-487
-488
-489
-490
-491
-492
-493
-494</pre>
+673
+674
+675
+676
+677
+678
+679
+680</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 486</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 673</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
   <span class='id identifier rubyid_internals'>internals</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:steps</span><span class='rparen'>)</span> <span class='kw'>do</span>
@@ -2352,7 +3019,6 @@
       <span class='period'>.</span><span class='id identifier rubyid_steps'>steps</span>
       <span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:commit!</span><span class='rparen'>)</span>
       <span class='period'>.</span><span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
-      <span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:commit!</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2410,20 +3076,20 @@
       <pre class="lines">
 
 
-500
-501
-502
-503
-504
-505
-506
-507
-508
-509
-510</pre>
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 500</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/concern.rb', line 686</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps_result'>steps_result</span>
   <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/ServiceHasNoSteps.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::ServiceHasNoSteps (class)">ServiceHasNoSteps</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>service_class:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
@@ -2431,7 +3097,7 @@
   <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_each_evaluated_step'>each_evaluated_step</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_step'>step</span><span class='op'>|</span>
     <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_save_outputs_in_organizer!'>save_outputs_in_organizer!</span>
 
-    <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_mark_as_completed!'>mark_as_completed!</span>
+    <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_mark_as_evaluated!'>mark_as_evaluated!</span>
   <span class='kw'>end</span>
 
   <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span>
@@ -2446,9 +3112,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:19 2024 by
+  Generated on Mon May 26 21:15:26 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

@@ -307,12 +307,12 @@
       <pre class="lines">
 
 
-40
-41
-42</pre>
+45
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/concern.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/concern.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_after'>after</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_callback'>callback</span><span class='lparen'>(</span><span class='symbol'>:after</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -396,12 +396,12 @@
       <pre class="lines">
 
 
-52
-53
-54</pre>
+57
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/concern.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/concern.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_around'>around</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_callback'>callback</span><span class='lparen'>(</span><span class='symbol'>:around</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -485,12 +485,12 @@
       <pre class="lines">
 
 
-28
-29
-30</pre>
+33
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/concern.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/concern.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_before'>before</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_callback'>callback</span><span class='lparen'>(</span><span class='symbol'>:before</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -585,12 +585,12 @@
       <pre class="lines">
 
 
-65
-66
-67</pre>
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/concern.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/concern.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_callback'>callback</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_callbacks'>callbacks</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='label'>types:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='id identifier rubyid_block'>block</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
@@ -641,12 +641,12 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+21
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/concern.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/concern.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_callbacks'>callbacks</span>
   <span class='id identifier rubyid_internals_class'>internals_class</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:callbacks</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/CallbackCollection.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::CallbackCollection (class)">CallbackCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/CallbackCollection.html#initialize-instance_method" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::CallbackCollection#initialize (method)">new</a></span></span> <span class='rbrace'>}</span>
@@ -661,9 +661,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:18 2024 by
+  Generated on Mon May 26 21:15:25 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

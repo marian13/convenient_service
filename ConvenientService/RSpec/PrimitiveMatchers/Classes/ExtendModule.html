@@ -117,7 +117,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#description-instance_method" title="#description (instance method)">#<strong>description</strong>  &#x21d2; Object </a>
+      <a href="#description-instance_method" title="#description (instance method)">#<strong>description</strong>  &#x21d2; String </a>
     
 
     
@@ -139,7 +139,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#failure_message-instance_method" title="#failure_message (instance method)">#<strong>failure_message</strong>  &#x21d2; Object </a>
+      <a href="#failure_message-instance_method" title="#failure_message (instance method)">#<strong>failure_message</strong>  &#x21d2; String </a>
     
 
     
@@ -161,7 +161,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#failure_message_when_negated-instance_method" title="#failure_message_when_negated (instance method)">#<strong>failure_message_when_negated</strong>  &#x21d2; Object </a>
+      <a href="#failure_message_when_negated-instance_method" title="#failure_message_when_negated (instance method)">#<strong>failure_message_when_negated</strong>  &#x21d2; String </a>
     
 
     
@@ -199,7 +199,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>NOTE: <code>mod</code> since <code>module</code> is a keyword.</p>
+    <span class="summary_desc"><div class='inline'><p>A new instance of ExtendModule.</p>
 </div></span>
   
 </li>
@@ -244,13 +244,28 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>NOTE: <code>mod</code> since <code>module</code> is a keyword.</p>
+    <p>Returns a new instance of ExtendModule.</p>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>mod</span>
+      
+      
+        <span class='type'>(<tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -258,12 +273,12 @@
       <pre class="lines">
 
 
-11
-12
-13</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/extend_module.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/extend_module.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='rparen'>)</span>
   <span class='ivar'>@mod</span> <span class='op'>=</span> <span class='id identifier rubyid_mod'>mod</span>
@@ -283,24 +298,46 @@
       <div class="method_details first">
   <h3 class="signature first" id="description-instance_method">
   
-    #<strong>description</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>description</strong>  &#x21d2; <tt>String</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-21
-22
-23</pre>
+39
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/extend_module.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/extend_module.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_description'>description</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>extend module `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_mod'>mod</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
@@ -313,24 +350,46 @@
       <div class="method_details ">
   <h3 class="signature " id="failure_message-instance_method">
   
-    #<strong>failure_message</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>failure_message</strong>  &#x21d2; <tt>String</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-25
-26
-27</pre>
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/extend_module.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/extend_module.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message'>failure_message</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_klass'>klass</span><span class='embexpr_end'>}</span><span class='tstring_content'>` to extend module `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_mod'>mod</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
@@ -343,24 +402,46 @@
       <div class="method_details ">
   <h3 class="signature " id="failure_message_when_negated-instance_method">
   
-    #<strong>failure_message_when_negated</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>failure_message_when_negated</strong>  &#x21d2; <tt>String</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-29
-30
-31</pre>
+53
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/extend_module.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/extend_module.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure_message_when_negated'>failure_message_when_negated</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expected `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_klass'>klass</span><span class='embexpr_end'>}</span><span class='tstring_content'>` NOT to extend module `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_mod'>mod</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
@@ -386,7 +467,22 @@
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>klass</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>, <tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -407,19 +503,19 @@
       <pre class="lines">
 
 
-15
-16
-17
-18
-19</pre>
+30
+31
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/extend_module.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/extend_module.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_matches?'>matches?</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
   <span class='ivar'>@klass</span> <span class='op'>=</span> <span class='id identifier rubyid_klass'>klass</span>
 
-  <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_singleton_class'>singleton_class</span><span class='period'>.</span><span class='id identifier rubyid_included_modules'>included_modules</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_singleton_class'>singleton_class</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='period'>.</span><span class='id identifier rubyid_drop_while'>drop_while</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_ancestor'>ancestor</span><span class='op'>|</span> <span class='id identifier rubyid_ancestor'>ancestor</span> <span class='op'>!=</span> <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_singleton_class'>singleton_class</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -431,9 +527,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:24 2024 by
+  Generated on Mon May 26 21:15:31 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

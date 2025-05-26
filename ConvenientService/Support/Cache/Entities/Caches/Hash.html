@@ -101,11 +101,20 @@
   
 </div>
 
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="ThreadSafeHash.html" title="ConvenientService::Support::Cache::Entities::Caches::ThreadSafeHash (class)">ThreadSafeHash</a></span></p>
+</div>
 
 
 
 
 
+
+  <h2>Instance Attribute Summary</h2>
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Base.html" title="ConvenientService::Support::Cache::Entities::Caches::Base (class)">Base</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Base.html#default-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#default (method)">#default</a></span>, <span class='object_link'><a href="Base.html#key-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#key (method)">#key</a></span>, <span class='object_link'><a href="Base.html#parent-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#parent (method)">#parent</a></span>, <span class='object_link'><a href="Base.html#store-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#store (method)">#store</a></span></p>
 
 
   
@@ -115,6 +124,28 @@
     </h2>
 
     <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#backend-instance_method" title="#backend (instance method)">#<strong>backend</strong>  &#x21d2; Symbol </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
       
         <li class="public ">
   <span class="summary_signature">
@@ -134,6 +165,29 @@
 
   
     <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default=-instance_method" title="#default= (instance method)">#<strong>default=</strong>(value)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
+</div></span>
   
 </li>
 
@@ -231,7 +285,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(hash = {})  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(store: {}, **kwargs)  &#x21d2; void </a>
     
 
     
@@ -278,7 +332,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#store-instance_method" title="#store (instance method)">#<strong>store</strong>  &#x21d2; Hash{Object =&gt; Object} </a>
+      <a href="#scope-instance_method" title="#scope (instance method)">#<strong>scope</strong>(key, backed_by: backend, default: self.default)  &#x21d2; ConvenientService::Support::Cache::Entities::Caches::Base </a>
     
 
     
@@ -292,7 +346,31 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Creates a scoped cache.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scope!-instance_method" title="#scope! (instance method)">#<strong>scope!</strong>(key, backed_by: backend, default: self.default)  &#x21d2; ConvenientService::Support::Cache::Entities::Caches::Base </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a scoped cache.</p>
+</div></span>
   
 </li>
 
@@ -333,7 +411,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Base.html" title="ConvenientService::Support::Cache::Entities::Caches::Base (class)">Base</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Base.html#==-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#== (method)">#==</a></span>, <span class='object_link'><a href="Base.html#[]-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#[] (method)">#[]</a></span>, <span class='object_link'><a href="Base.html#[]=-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#[]= (method)">#[]=</a></span>, <span class='object_link'><a href="Base.html#keygen-class_method" title="ConvenientService::Support::Cache::Entities::Caches::Base.keygen (method)">keygen</a></span>, <span class='object_link'><a href="Base.html#keygen-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#keygen (method)">#keygen</a></span>, <span class='object_link'><a href="Base.html#scope-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#scope (method)">#scope</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Base.html#==-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#== (method)">#==</a></span>, <span class='object_link'><a href="Base.html#[]-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#[] (method)">#[]</a></span>, <span class='object_link'><a href="Base.html#[]=-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#[]= (method)">#[]=</a></span>, <span class='object_link'><a href="Base.html#get-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#get (method)">#get</a></span>, <span class='object_link'><a href="Base.html#keygen-class_method" title="ConvenientService::Support::Cache::Entities::Caches::Base.keygen (method)">keygen</a></span>, <span class='object_link'><a href="Base.html#keygen-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#keygen (method)">#keygen</a></span>, <span class='object_link'><a href="Base.html#set-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#set (method)">#set</a></span></p>
 
   
   
@@ -357,7 +435,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(hash = {})  &#x21d2; <tt>void</tt> 
+    #<strong>initialize</strong>(store: {}, **kwargs)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -370,7 +448,24 @@
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>store</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Support::Cache::Entities::Caches::Hash (class)">Hash</a></span>{Object =&gt; Object}</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -378,15 +473,15 @@
       <pre class="lines">
 
 
-12
-13
-14</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 18</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@hash</span> <span class='op'>=</span> <span class='id identifier rubyid_hash'>hash</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>store:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='label'>store:</span> <span class='op'>::</span><span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:default</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_store'>store</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -401,7 +496,59 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="clear-instance_method">
+  <h3 class="signature first" id="backend-instance_method">
+  
+    #<strong>backend</strong>  &#x21d2; <tt>Symbol</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 25</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_backend'>backend</span>
+  <span class='const'><span class='object_link'><a href="../../Constants.html" title="ConvenientService::Support::Cache::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Constants/Backends.html#HASH-constant" title="ConvenientService::Support::Cache::Constants::Backends::HASH (constant)">HASH</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clear-instance_method">
   
     #<strong>clear</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Support::Cache::Entities::Caches::Hash (class)">ConvenientService::Support::Cache::Entities::Caches::Hash</a></span></tt> 
   
@@ -437,19 +584,103 @@
       <pre class="lines">
 
 
-95
-96
-97
-98
-99</pre>
+109
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 109</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clear'>clear</span>
-  <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
+  <span class='id identifier rubyid_store'>store</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
 
   <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default=-instance_method">
+  
+    #<strong>default=</strong>(value)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Can be any type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+149
+150
+151
+152
+153
+154
+155</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 149</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_default='>default=</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_save_self_as_scope_in_parent!'>save_self_as_scope_in_parent!</span>
+
+  <span class='id identifier rubyid_store'>store</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+
+  <span class='ivar'>@default</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -517,15 +748,23 @@
       <pre class="lines">
 
 
-88
-89
-90</pre>
+98
+99
+100
+101
+102
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 88</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_store'>store</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_delete_self_as_scope_in_parent!'>delete_self_as_scope_in_parent!</span> <span class='kw'>if</span> <span class='id identifier rubyid_store'>store</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='id identifier rubyid_value'>value</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -569,15 +808,15 @@
       <pre class="lines">
 
 
-29
-30
-31</pre>
+35
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
-  <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_store'>store</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -640,15 +879,15 @@
       <pre class="lines">
 
 
-40
-41
-42</pre>
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_store'>store</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -727,19 +966,23 @@
       <pre class="lines">
 
 
-75
-76
-77
-78
-79</pre>
+83
+84
+85
+86
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_store'>store</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block'>block</span>
 
-  <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>yield</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_save_self_as_scope_in_parent!'>save_self_as_scope_in_parent!</span>
+
+  <span class='id identifier rubyid_store'>store</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_store'>store</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>yield</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -807,15 +1050,15 @@
       <pre class="lines">
 
 
-51
-52
-53</pre>
+57
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_store'>store</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -823,9 +1066,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="store-instance_method">
+  <h3 class="signature " id="scope-instance_method">
   
-    #<strong>store</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Support::Cache::Entities::Caches::Hash (class)">Hash</a></span>{Object =&gt; Object}</tt> 
+    #<strong>scope</strong>(key, backed_by: backend, default: self.default)  &#x21d2; <tt><span class='object_link'><a href="Base.html" title="ConvenientService::Support::Cache::Entities::Caches::Base (class)">ConvenientService::Support::Cache::Entities::Caches::Base</a></span></tt> 
   
 
   
@@ -833,19 +1076,69 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p>Creates a scoped cache. Parent cache is modified on the first write to the scoped cache.</p>
+
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>backed_by</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>backend</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>self.default</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Support::Cache::Entities::Caches::Hash (class)">Hash</a></span>{Object =&gt; Object}</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Base.html" title="ConvenientService::Support::Cache::Entities::Caches::Base (class)">ConvenientService::Support::Cache::Entities::Caches::Base</a></span></tt>)</span>
       
       
       
@@ -859,15 +1152,117 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 126</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_store'>store</span>
-  <span class='id identifier rubyid_hash'>hash</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_scope'>scope</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='label'>backed_by:</span> <span class='id identifier rubyid_backend'>backend</span><span class='comma'>,</span> <span class='label'>default:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_store'>store</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cache.html" title="ConvenientService::Support::Cache (class)">Cache</a></span></span><span class='period'>.</span><span class='id identifier rubyid_backed_by'><span class='object_link'><a href="../../../Cache.html#backed_by-class_method" title="ConvenientService::Support::Cache.backed_by (method)">backed_by</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_backed_by'>backed_by</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>default:</span> <span class='id identifier rubyid_default'>default</span><span class='comma'>,</span> <span class='label'>parent:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>key:</span> <span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scope!-instance_method">
+  
+    #<strong>scope!</strong>(key, backed_by: backend, default: self.default)  &#x21d2; <tt><span class='object_link'><a href="Base.html" title="ConvenientService::Support::Cache::Entities::Caches::Base (class)">ConvenientService::Support::Cache::Entities::Caches::Base</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a scoped cache. Parent cache is modified immediately.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>backed_by</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>backend</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>self.default</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Base.html" title="ConvenientService::Support::Cache::Entities::Caches::Base (class)">ConvenientService::Support::Cache::Entities::Caches::Base</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+141
+142
+143</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 141</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_scope!'>scope!</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='label'>backed_by:</span> <span class='id identifier rubyid_backend'>backend</span><span class='comma'>,</span> <span class='label'>default:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_store'>store</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_store'>store</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cache.html" title="ConvenientService::Support::Cache (class)">Cache</a></span></span><span class='period'>.</span><span class='id identifier rubyid_backed_by'><span class='object_link'><a href="../../../Cache.html#backed_by-class_method" title="ConvenientService::Support::Cache.backed_by (method)">backed_by</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_backed_by'>backed_by</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>default:</span> <span class='id identifier rubyid_default'>default</span><span class='comma'>,</span> <span class='label'>parent:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>key:</span> <span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -950,15 +1345,19 @@
       <pre class="lines">
 
 
-63
-64
-65</pre>
+69
+70
+71
+72
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/hash.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='id identifier rubyid_save_self_as_scope_in_parent!'>save_self_as_scope_in_parent!</span>
+
+  <span class='id identifier rubyid_store'>store</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -970,9 +1369,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:23 2024 by
+  Generated on Mon May 26 21:15:30 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

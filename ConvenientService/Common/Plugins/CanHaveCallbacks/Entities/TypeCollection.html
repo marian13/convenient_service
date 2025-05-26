@@ -260,12 +260,12 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>types:</span><span class='rparen'>)</span>
   <span class='ivar'>@types</span> <span class='op'>=</span> <span class='id identifier rubyid_types'>types</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Type.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type (class)">Type</a></span></span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:cast!</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -307,12 +307,12 @@
       <pre class="lines">
 
 
-13
-14
-15</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_types'>types</span>
   <span class='ivar'>@types</span>
@@ -385,16 +385,16 @@
       <pre class="lines">
 
 
-37
-38
-39
-40
-41
 42
-43</pre>
+43
+44
+45
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -460,14 +460,14 @@
       <pre class="lines">
 
 
-27
-28
-29
-30
-31</pre>
+32
+33
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_contain_exactly?'>contain_exactly?</span><span class='lparen'>(</span><span class='id identifier rubyid_other_types'>other_types</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_other_types'>other_types</span> <span class='op'>=</span> <span class='id identifier rubyid_other_types'>other_types</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Type.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type (class)">Type</a></span></span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:cast!</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -484,9 +484,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:26 2024 by
+  Generated on Mon May 26 21:15:34 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

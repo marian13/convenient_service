@@ -431,12 +431,12 @@ prepended as well.</p>
       <pre class="lines">
 
 
-146
-147
-148</pre>
+156
+157
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 156</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_extended'>extended</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span> <span class='comment'># :nodoc:
 </span>  <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='symbol'>:@_dependencies</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -477,16 +477,6 @@ prepended as well.</p>
       <pre class="lines">
 
 
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
 160
 161
 162
@@ -499,10 +489,20 @@ prepended as well.</p>
 169
 170
 171
-172</pre>
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 150</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 160</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_append_features'>append_features</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span> <span class='comment'># :nodoc:
 </span>  <span class='kw'>if</span> <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_defined?'>instance_variable_defined?</span><span class='lparen'>(</span><span class='symbol'>:@_dependencies</span><span class='rparen'>)</span>
@@ -513,7 +513,7 @@ prepended as well.</p>
     <span class='ivar'>@_dependencies</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_dep'>dep</span><span class='op'>|</span> <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_include'>include</span><span class='lparen'>(</span><span class='id identifier rubyid_dep'>dep</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
     <span class='kw'>super</span>
 
-    <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_class_eval'>class_eval</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='ivar'>@_included_block</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_instance_variable_defined?'>instance_variable_defined?</span><span class='lparen'>(</span><span class='symbol'>:@_included_block</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_eval_included_block'>eval_included_block</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span>
 
     <span class='comment'>##
 </span>    <span class='comment'># NOTE: Customization compared to original `Concern` implementation.
@@ -573,16 +573,16 @@ Buzz.bar # =&gt; private method 'bar' called for Buzz:Class(NoMethodError)</p>
       <pre class="lines">
 
 
-266
-267
-268
-269
-270
-271
-272</pre>
+276
+277
+278
+279
+280
+281
+282</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 266</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 276</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_class_methods'>class_methods</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_class_methods_module_definition'>class_methods_module_definition</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_mod'>mod</span> <span class='op'>=</span> <span class='id identifier rubyid_const_defined?'>const_defined?</span><span class='lparen'>(</span><span class='symbol'>:ClassMethods</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span> <span class='op'>?</span>
@@ -623,22 +623,22 @@ When you define more than one +included+ block, it raises an exception.</p>
       <pre class="lines">
 
 
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
 209
 210
-211</pre>
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 199</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 209</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_included'>included</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -683,21 +683,21 @@ When you define more than one +included+ block, it raises an exception.</p>
       <pre class="lines">
 
 
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
 243
-244</pre>
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 233</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 243</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_instance_methods'>instance_methods</span><span class='lparen'>(</span><span class='id identifier rubyid_include_private'>include_private</span> <span class='op'>=</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_instance_methods_module_definition'>instance_methods_module_definition</span><span class='rparen'>)</span>
   <span class='comment'>##
@@ -741,16 +741,6 @@ When you define more than one +included+ block, it raises an exception.</p>
       <pre class="lines">
 
 
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
 184
 185
 186
@@ -761,10 +751,20 @@ When you define more than one +included+ block, it raises an exception.</p>
 191
 192
 193
-194</pre>
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 184</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_prepend_features'>prepend_features</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span> <span class='comment'># :nodoc:
 </span>  <span class='kw'>if</span> <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_defined?'>instance_variable_defined?</span><span class='lparen'>(</span><span class='symbol'>:@_dependencies</span><span class='rparen'>)</span>
@@ -775,7 +775,7 @@ When you define more than one +included+ block, it raises an exception.</p>
     <span class='ivar'>@_dependencies</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_dep'>dep</span><span class='op'>|</span> <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_prepend'>prepend</span><span class='lparen'>(</span><span class='id identifier rubyid_dep'>dep</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
     <span class='kw'>super</span>
 
-    <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_class_eval'>class_eval</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='ivar'>@_prepended_block</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_instance_variable_defined?'>instance_variable_defined?</span><span class='lparen'>(</span><span class='symbol'>:@_prepended_block</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_eval_prepended_block'>eval_prepended_block</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span>
 
     <span class='comment'>##
 </span>    <span class='comment'># NOTE: Customization compared to original `Concern` implementation.
@@ -819,22 +819,22 @@ When you define more than one +prepended+ block, it raises an exception.</p>
       <pre class="lines">
 
 
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
 226
 227
-228</pre>
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 216</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 226</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_prepended'>prepended</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_base'>base</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -895,16 +895,16 @@ Buzz.singleton_class.bar # =&gt; private method 'bar' called for Buzz:Class(NoMe
       <pre class="lines">
 
 
-294
-295
-296
-297
-298
-299
-300</pre>
+304
+305
+306
+307
+308
+309
+310</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 294</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_concern/concern.rb', line 304</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_singleton_class_methods'>singleton_class_methods</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_singleton_class_methods_module_definition'>singleton_class_methods_module_definition</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_mod'>mod</span> <span class='op'>=</span> <span class='id identifier rubyid_const_defined?'>const_defined?</span><span class='lparen'>(</span><span class='symbol'>:SingletonClassMethods</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span> <span class='op'>?</span>
@@ -923,9 +923,9 @@ Buzz.singleton_class.bar # =&gt; private method 'bar' called for Buzz:Class(NoMe
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:19 2024 by
+  Generated on Mon May 26 21:15:26 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

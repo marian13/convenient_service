@@ -388,12 +388,12 @@
       <pre class="lines">
 
 
-31
-32
-33</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='ivar'>@middleware</span> <span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:middleware</span><span class='rparen'>)</span>
@@ -435,12 +435,12 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_middleware'>middleware</span>
   <span class='ivar'>@middleware</span>
@@ -509,16 +509,16 @@
       <pre class="lines">
 
 
-80
-81
-82
-83
-84
 85
-86</pre>
+86
+87
+88
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -576,12 +576,12 @@
       <pre class="lines">
 
 
-63
-64
-65</pre>
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decorated_middleware'>decorated_middleware</span>
   <span class='id identifier rubyid_middleware'>middleware</span>
@@ -635,12 +635,12 @@
       <pre class="lines">
 
 
-72
-73
-74</pre>
+77
+78
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span>
   <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -713,12 +713,12 @@
       <pre class="lines">
 
 
-54
-55
-56</pre>
+59
+60
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_stack'>stack</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_decorated_middleware'>decorated_middleware</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_stack'>stack</span><span class='comma'>,</span> <span class='op'>**</span><span class='lbracket'>[</span><span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='period'>.</span><span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span><span class='comma'>,</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='symbol'>:merge</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -765,12 +765,12 @@
       <pre class="lines">
 
 
-45
-46
-47</pre>
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_observable'>observable</span>
   <span class='const'><span class='object_link'><a href="../../Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../MiddlewareCreators.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators (module)">MiddlewareCreators</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Observable.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Observable (class)">Observable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>middleware:</span> <span class='kw'>self</span><span class='rparen'>)</span>
@@ -817,10 +817,10 @@
       <pre class="lines">
 
 
-23</pre>
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 28</span>
 
 <span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:to_observable_middleware</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:middleware</span></pre>
     </td>
@@ -865,12 +865,12 @@
       <pre class="lines">
 
 
-38
-39
-40</pre>
+43
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middleware_creators/base.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with'>with</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../../Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../MiddlewareCreators.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators (module)">MiddlewareCreators</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="With.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With (class)">With</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>middleware:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>middleware_arguments:</span> <span class='const'><span class='object_link'><a href="../../../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../../../Support/Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -885,9 +885,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:30 2024 by
+  Generated on Mon May 26 21:15:37 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

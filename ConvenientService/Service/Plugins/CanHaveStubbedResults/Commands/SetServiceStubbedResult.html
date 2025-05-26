@@ -329,14 +329,14 @@
       <pre class="lines">
 
 
-33
-34
-35
-36
-37</pre>
+38
+39
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/set_service_stubbed_result.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/set_service_stubbed_result.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>service:</span><span class='comma'>,</span> <span class='label'>arguments:</span><span class='comma'>,</span> <span class='label'>result:</span><span class='rparen'>)</span>
   <span class='ivar'>@service</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span>
@@ -380,12 +380,12 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/set_service_stubbed_result.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/set_service_stubbed_result.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_arguments'>arguments</span>
   <span class='ivar'>@arguments</span>
@@ -422,12 +422,12 @@
       <pre class="lines">
 
 
-25
-26
-27</pre>
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/set_service_stubbed_result.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/set_service_stubbed_result.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
   <span class='ivar'>@result</span>
@@ -464,12 +464,12 @@
       <pre class="lines">
 
 
-13
-14
-15</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/set_service_stubbed_result.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/set_service_stubbed_result.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_service'>service</span>
   <span class='ivar'>@service</span>
@@ -523,15 +523,23 @@
       <pre class="lines">
 
 
-42
-43
-44</pre>
+50
+51
+52
+53
+54
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/set_service_stubbed_result.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/set_service_stubbed_result.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span> <span class='op'>=</span> <span class='id identifier rubyid_result'>result</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_keygen'>keygen</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_arguments'>arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_arguments'>arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_arguments'>arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -543,9 +551,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:30 2024 by
+  Generated on Mon May 26 21:15:37 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

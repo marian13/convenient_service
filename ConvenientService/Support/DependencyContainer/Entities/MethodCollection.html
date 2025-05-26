@@ -339,12 +339,12 @@
       <pre class="lines">
 
 
-12
-13
-14</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>methods:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='ivar'>@methods</span> <span class='op'>=</span> <span class='id identifier rubyid_methods'>methods</span>
@@ -413,14 +413,14 @@
       <pre class="lines">
 
 
-38
-39
-40
-41
-42</pre>
+43
+44
+45
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='op'>&lt;&lt;</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_methods'>methods</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_method'>method</span>
@@ -488,16 +488,16 @@
       <pre class="lines">
 
 
-79
-80
-81
-82
-83
 84
-85</pre>
+85
+86
+87
+88
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -548,14 +548,14 @@
       <pre class="lines">
 
 
-62
-63
-64
-65
-66</pre>
+67
+68
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clear'>clear</span>
   <span class='id identifier rubyid_methods'>methods</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
@@ -604,12 +604,12 @@
       <pre class="lines">
 
 
-47
-48
-49</pre>
+52
+53
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 52</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
   <span class='id identifier rubyid_methods'>methods</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -699,27 +699,27 @@
       <pre class="lines">
 
 
-22
-23
-24
-25
-26
 27
 28
 29
 30
 31
-32</pre>
+32
+33
+34
+35
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>name:</span> <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span><span class='comma'>,</span> <span class='label'>slug:</span> <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_rules'>rules</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
-  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>==</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_name'>name</span> <span class='op'>!=</span> <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span>
-  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_slug'>slug</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>==</span> <span class='id identifier rubyid_slug'>slug</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_slug'>slug</span> <span class='op'>!=</span> <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span>
-  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span> <span class='op'>==</span> <span class='id identifier rubyid_scope'>scope</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_scope'>scope</span> <span class='op'>!=</span> <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span>
+  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>==</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='rbrace'>}</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_slug'>slug</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>==</span> <span class='id identifier rubyid_slug'>slug</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='rbrace'>}</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_slug'>slug</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_rules'>rules</span> <span class='op'>&lt;&lt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span> <span class='op'>==</span> <span class='id identifier rubyid_scope'>scope</span> <span class='rbrace'>}</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Support.html#NOT_PASSED-constant" title="ConvenientService::Support::NOT_PASSED (constant)">NOT_PASSED</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_scope'>scope</span><span class='rbracket'>]</span>
 
   <span class='id identifier rubyid_condition'>condition</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Utils/Proc.html" title="ConvenientService::Utils::Proc (module)">Proc</a></span></span><span class='period'>.</span><span class='id identifier rubyid_conjunct'><span class='object_link'><a href="../../../Utils/Proc.html#conjunct-class_method" title="ConvenientService::Utils::Proc.conjunct (method)">conjunct</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_rules'>rules</span><span class='rparen'>)</span>
 
@@ -782,12 +782,12 @@
       <pre class="lines">
 
 
-55
-56
-57</pre>
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_methods'>methods</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
@@ -834,12 +834,12 @@
       <pre class="lines">
 
 
-71
-72
-73</pre>
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/entities/method_collection.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
   <span class='id identifier rubyid_methods'>methods</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
@@ -854,9 +854,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:26 2024 by
+  Generated on Mon May 26 21:15:33 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

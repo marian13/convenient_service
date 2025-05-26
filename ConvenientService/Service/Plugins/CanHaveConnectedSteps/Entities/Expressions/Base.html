@@ -106,7 +106,7 @@
 
 <div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="And.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::And (class)">And</a></span>, <span class='object_link'><a href="Empty.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty (class)">Empty</a></span>, <span class='object_link'><a href="Group.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Group (class)">Group</a></span>, <span class='object_link'><a href="Not.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Not (class)">Not</a></span>, <span class='object_link'><a href="Or.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Or (class)">Or</a></span>, <span class='object_link'><a href="Scalar.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar (class)">Scalar</a></span></p>
+  <p class="children"><span class='object_link'><a href="And.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::And (class)">And</a></span>, <span class='object_link'><a href="ComplexIf.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::ComplexIf (class)">ComplexIf</a></span>, <span class='object_link'><a href="Else.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Else (class)">Else</a></span>, <span class='object_link'><a href="Empty.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty (class)">Empty</a></span>, <span class='object_link'><a href="Group.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Group (class)">Group</a></span>, <span class='object_link'><a href="If.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If (class)">If</a></span>, <span class='object_link'><a href="Not.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Not (class)">Not</a></span>, <span class='object_link'><a href="Or.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Or (class)">Or</a></span>, <span class='object_link'><a href="Scalar.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar (class)">Scalar</a></span></p>
 </div>
 
 
@@ -127,6 +127,28 @@
   <span class="summary_signature">
     
       <a href="#and%3F-instance_method" title="#and? (instance method)">#<strong>and?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#complex_if%3F-instance_method" title="#complex_if? (instance method)">#<strong>complex_if?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -171,6 +193,28 @@
   <span class="summary_signature">
     
       <a href="#each_step-instance_method" title="#each_step (instance method)">#<strong>each_step</strong>  &#x21d2; ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#else%3F-instance_method" title="#else? (instance method)">#<strong>else?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -259,6 +303,28 @@
   <span class="summary_signature">
     
       <a href="#group%3F-instance_method" title="#group? (instance method)">#<strong>group?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#if%3F-instance_method" title="#if? (instance method)">#<strong>if?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -557,10 +623,10 @@
       <pre class="lines">
 
 
-16</pre>
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 21</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:initialize</span></pre>
     </td>
@@ -612,14 +678,66 @@
       <pre class="lines">
 
 
-96
-97
-98</pre>
+101
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_and?'>and?</span>
+  <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="complex_if?-instance_method">
+  
+    #<strong>complex_if?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+143
+144
+145</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 143</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_complex_if?'>complex_if?</span>
   <span class='kw'>false</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -664,10 +782,10 @@
       <pre class="lines">
 
 
-46</pre>
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 51</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:each_evaluated_step</span></pre>
     </td>
@@ -712,12 +830,64 @@
       <pre class="lines">
 
 
-41</pre>
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 46</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:each_step</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="else?-instance_method">
+  
+    #<strong>else?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+136
+137
+138</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 136</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_else?'>else?</span>
+  <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -760,12 +930,12 @@
       <pre class="lines">
 
 
-117
-118
-119</pre>
+122
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 122</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
   <span class='kw'>false</span>
@@ -812,10 +982,10 @@
       <pre class="lines">
 
 
-36</pre>
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 41</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:error?</span></pre>
     </td>
@@ -860,10 +1030,10 @@
       <pre class="lines">
 
 
-31</pre>
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 36</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:failure?</span></pre>
     </td>
@@ -908,14 +1078,66 @@
       <pre class="lines">
 
 
-110
-111
-112</pre>
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 110</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_group?'>group?</span>
+  <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="if?-instance_method">
+  
+    #<strong>if?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 129</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_if?'>if?</span>
   <span class='kw'>false</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -960,10 +1182,10 @@
       <pre class="lines">
 
 
-56</pre>
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 61</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:inspect</span></pre>
     </td>
@@ -1008,12 +1230,12 @@
       <pre class="lines">
 
 
-89
-90
-91</pre>
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_not?'>not?</span>
   <span class='kw'>false</span>
@@ -1060,12 +1282,12 @@
       <pre class="lines">
 
 
-103
-104
-105</pre>
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_or?'>or?</span>
   <span class='kw'>false</span>
@@ -1112,10 +1334,10 @@
       <pre class="lines">
 
 
-21</pre>
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 26</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:result</span></pre>
     </td>
@@ -1160,12 +1382,12 @@
       <pre class="lines">
 
 
-82
-83
-84</pre>
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_scalar?'>scalar?</span>
   <span class='kw'>false</span>
@@ -1212,16 +1434,16 @@
       <pre class="lines">
 
 
-71
-72
-73
-74
-75
 76
-77</pre>
+77
+78
+79
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
   <span class='id identifier rubyid_array'>array</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -1272,10 +1494,10 @@
       <pre class="lines">
 
 
-26</pre>
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 31</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:success?</span></pre>
     </td>
@@ -1320,10 +1542,10 @@
       <pre class="lines">
 
 
-66</pre>
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 71</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:to_arguments</span></pre>
     </td>
@@ -1368,10 +1590,10 @@
       <pre class="lines">
 
 
-51</pre>
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/base.rb', line 56</span>
 
 <span class='id identifier rubyid_abstract_method'>abstract_method</span> <span class='symbol'>:with_organizer</span></pre>
     </td>
@@ -1384,9 +1606,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:28 2024 by
+  Generated on Mon May 26 21:15:36 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

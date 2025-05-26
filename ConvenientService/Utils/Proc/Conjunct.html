@@ -250,12 +250,12 @@
       <pre class="lines">
 
 
-14
-15
-16</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/proc/conjunct.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/proc/conjunct.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_procs'>procs</span><span class='rparen'>)</span>
   <span class='ivar'>@procs</span> <span class='op'>=</span> <span class='id identifier rubyid_procs'>procs</span>
@@ -297,12 +297,12 @@
       <pre class="lines">
 
 
-12
-13
-14</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/proc/conjunct.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/proc/conjunct.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_procs'>procs</span>
   <span class='ivar'>@procs</span>
@@ -353,11 +353,6 @@ h(x) = f(x) &amp;&amp; g(x)</p>
       <pre class="lines">
 
 
-31
-32
-33
-34
-35
 36
 37
 38
@@ -366,10 +361,15 @@ h(x) = f(x) &amp;&amp; g(x)</p>
 41
 42
 43
-44</pre>
+44
+45
+46
+47
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/proc/conjunct.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/proc/conjunct.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='kw'>return</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='rparen'>)</span> <span class='tlambeg'>{</span><span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_procs'>procs</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
@@ -395,9 +395,9 @@ h(x) = f(x) &amp;&amp; g(x)</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:21 2024 by
+  Generated on Mon May 26 21:15:29 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

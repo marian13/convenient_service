@@ -246,6 +246,28 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#undefine_method_callers!-instance_method" title="#undefine_method_callers! (instance method)">#<strong>undefine_method_callers!</strong>(scope, method, container)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -291,12 +313,12 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_prefix'>prefix</span>
   <span class='ivar'>@prefix</span>
@@ -365,16 +387,16 @@
       <pre class="lines">
 
 
-43
-44
-45
-46
-47
-48
-49</pre>
+58
+59
+60
+61
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -462,12 +484,12 @@
       <pre class="lines">
 
 
-35
-36
-37</pre>
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_define_method_callers!'>define_method_callers!</span><span class='lparen'>(</span><span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_container'>container</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/DefineMethodCallers.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Commands::DefineMethodCallers (class)">DefineMethodCallers</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="../Commands/DefineMethodCallers.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Commands::DefineMethodCallers#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>container:</span> <span class='id identifier rubyid_container'>container</span><span class='comma'>,</span> <span class='label'>caller:</span> <span class='kw'>self</span><span class='rparen'>)</span>
@@ -516,12 +538,12 @@
       <pre class="lines">
 
 
-25
-26
-27</pre>
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>prefix:</span><span class='rparen'>)</span>
   <span class='ivar'>@prefix</span> <span class='op'>=</span> <span class='id identifier rubyid_prefix'>prefix</span>
@@ -568,12 +590,12 @@
       <pre class="lines">
 
 
-61
-62
-63</pre>
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_arguments'>to_arguments</span>
   <span class='const'><span class='object_link'><a href="../../../../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../../../../Support/Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>prefix:</span> <span class='id identifier rubyid_prefix'>prefix</span><span class='rparen'>)</span>
@@ -620,15 +642,104 @@
       <pre class="lines">
 
 
-54
-55
-56</pre>
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_kwargs'>to_kwargs</span>
   <span class='id identifier rubyid_to_arguments'>to_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="undefine_method_callers!-instance_method">
+  
+    #<strong>undefine_method_callers!</strong>(scope, method, container)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>:instance</tt>, <tt>:class</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>method</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>container</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Container.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container (class)">ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Container</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/caller/concern/instance_methods.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_undefine_method_callers!'>undefine_method_callers!</span><span class='lparen'>(</span><span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_container'>container</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/UndefineMethodCallers.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Commands::UndefineMethodCallers (class)">UndefineMethodCallers</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="../Commands/UndefineMethodCallers.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Commands::UndefineMethodCallers#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>container:</span> <span class='id identifier rubyid_container'>container</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -640,9 +751,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:20 2024 by
+  Generated on Mon May 26 21:15:27 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

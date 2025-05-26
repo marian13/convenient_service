@@ -508,15 +508,15 @@
       <pre class="lines">
 
 
-89
-90
-91
-92
-93
-94</pre>
+94
+95
+96
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>initial_value:</span> <span class='int'>0</span><span class='comma'>,</span> <span class='label'>min_value:</span> <span class='op'>-</span><span class='op'>::</span><span class='const'>Float</span><span class='op'>::</span><span class='const'>INFINITY</span><span class='comma'>,</span> <span class='label'>max_value:</span> <span class='op'>::</span><span class='const'>Float</span><span class='op'>::</span><span class='const'>INFINITY</span><span class='rparen'>)</span>
   <span class='ivar'>@initial_value</span> <span class='op'>=</span> <span class='id identifier rubyid_initial_value'>initial_value</span>
@@ -573,12 +573,12 @@
       <pre class="lines">
 
 
-66
-67
-68</pre>
+71
+72
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_current_value'>current_value</span>
   <span class='ivar'>@current_value</span>
@@ -615,12 +615,12 @@
       <pre class="lines">
 
 
-60
-61
-62</pre>
+65
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initial_value'>initial_value</span>
   <span class='ivar'>@initial_value</span>
@@ -657,12 +657,12 @@
       <pre class="lines">
 
 
-78
-79
-80</pre>
+83
+84
+85</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max_value'>max_value</span>
   <span class='ivar'>@max_value</span>
@@ -699,12 +699,12 @@
       <pre class="lines">
 
 
-72
-73
-74</pre>
+77
+78
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_min_value'>min_value</span>
   <span class='ivar'>@min_value</span>
@@ -777,16 +777,16 @@ If decremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
 199
-200</pre>
+200
+201
+202
+203
+204
+205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 199</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bdecrement'>bdecrement</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>-</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&lt;</span> <span class='ivar'>@min_value</span>
@@ -856,16 +856,16 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-141
-142
-143
-144
-145
 146
-147</pre>
+147
+148
+149
+150
+151
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 141</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 146</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bincrement'>bincrement</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>+</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&gt;</span> <span class='ivar'>@max_value</span>
@@ -933,14 +933,14 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-160
-161
-162
-163
-164</pre>
+165
+166
+167
+168
+169</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 165</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decrement'>decrement</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='ivar'>@current_value</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>-</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&lt;</span> <span class='ivar'>@min_value</span>
@@ -1019,14 +1019,14 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-178
-179
-180
-181
-182</pre>
+183
+184
+185
+186
+187</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 178</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 183</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decrement!'>decrement!</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Counter/Exceptions.html" title="ConvenientService::Support::Counter::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Counter/Exceptions/ValueAfterDecrementIsLowerThanMinValue.html" title="ConvenientService::Support::Counter::Exceptions::ValueAfterDecrementIsLowerThanMinValue (class)">ValueAfterDecrementIsLowerThanMinValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>n:</span> <span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='label'>current_value:</span> <span class='ivar'>@current_value</span><span class='comma'>,</span> <span class='label'>min_value:</span> <span class='ivar'>@min_value</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>-</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&lt;</span> <span class='ivar'>@min_value</span>
@@ -1092,14 +1092,14 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-107
-108
-109
-110
-111</pre>
+112
+113
+114
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_increment'>increment</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='ivar'>@current_value</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>+</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&gt;</span> <span class='ivar'>@max_value</span>
@@ -1178,14 +1178,14 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-125
-126
-127
-128
-129</pre>
+130
+131
+132
+133
+134</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 130</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_increment!'>increment!</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Counter/Exceptions.html" title="ConvenientService::Support::Counter::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Counter/Exceptions/ValueAfterIncrementIsGreaterThanMaxValue.html" title="ConvenientService::Support::Counter::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue (class)">ValueAfterIncrementIsGreaterThanMaxValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>n:</span> <span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='label'>current_value:</span> <span class='ivar'>@current_value</span><span class='comma'>,</span> <span class='label'>max_value:</span> <span class='ivar'>@max_value</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@current_value</span> <span class='op'>+</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&gt;</span> <span class='ivar'>@max_value</span>
@@ -1234,12 +1234,12 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
       <pre class="lines">
 
 
-208
-209
-210</pre>
+213
+214
+215</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 208</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/counter.rb', line 213</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reset'>reset</span>
   <span class='ivar'>@current_value</span> <span class='op'>=</span> <span class='ivar'>@initial_value</span>
@@ -1254,9 +1254,9 @@ If incremented successfully then returns <code>true</code>, otherwise - returns 
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:21 2024 by
+  Generated on Mon May 26 21:15:28 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

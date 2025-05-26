@@ -251,12 +251,12 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/fetch_service_stubbed_results_cache.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/fetch_service_stubbed_results_cache.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>service:</span><span class='rparen'>)</span>
   <span class='ivar'>@service</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span>
@@ -298,12 +298,12 @@
       <pre class="lines">
 
 
-13
-14
-15</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/fetch_service_stubbed_results_cache.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/fetch_service_stubbed_results_cache.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_service'>service</span>
   <span class='ivar'>@service</span>
@@ -357,15 +357,15 @@
       <pre class="lines">
 
 
-26
-27
-28</pre>
+31
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/fetch_service_stubbed_results_cache.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/commands/fetch_service_stubbed_results_cache.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span><span class='lparen'>(</span><span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span><span class='lparen'>(</span><span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='label'>backed_by:</span> <span class='symbol'>:thread_safe_array</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -377,9 +377,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:30 2024 by
+  Generated on Mon May 26 21:15:38 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

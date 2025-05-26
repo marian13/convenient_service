@@ -221,12 +221,12 @@
       <pre class="lines">
 
 
-21
-22
-23</pre>
+26
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_have_parent_result/concern.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_have_parent_result/concern.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parent'>parent</span>
   <span class='const'><span class='object_link'><a href="../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_memoize_including_falsy_values'><span class='object_link'><a href="../../../../../../../Utils.html#memoize_including_falsy_values-class_method" title="ConvenientService::Utils.memoize_including_falsy_values (method)">memoize_including_falsy_values</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:@parent</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span><span class='lbracket'>[</span><span class='symbol'>:parent</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -303,12 +303,12 @@
       <pre class="lines">
 
 
-53
-54
-55</pre>
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_have_parent_result/concern.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_have_parent_result/concern.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parents'>parents</span><span class='lparen'>(</span><span class='label'>include_self:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='const'><span class='object_link'><a href="Constants.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants.html#PARENTS_LIMIT-constant" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Constants::PARENTS_LIMIT (constant)">PARENTS_LIMIT</a></span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_parents_enum'>parents_enum</span><span class='lparen'>(</span><span class='label'>include_self:</span> <span class='id identifier rubyid_include_self'>include_self</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='id identifier rubyid_limit'>limit</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
@@ -392,11 +392,6 @@
       <pre class="lines">
 
 
-64
-65
-66
-67
-68
 69
 70
 71
@@ -413,10 +408,15 @@
 82
 83
 84
-85</pre>
+85
+86
+87
+88
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_have_parent_result/concern.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_have_parent_result/concern.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parents_enum'>parents_enum</span><span class='lparen'>(</span><span class='label'>include_self:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='const'><span class='object_link'><a href="Constants.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Constants.html#PARENTS_LIMIT-constant" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Constants::PARENTS_LIMIT (constant)">PARENTS_LIMIT</a></span></span><span class='rparen'>)</span>
   <span class='op'>::</span><span class='const'>Enumerator</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_yielder'>yielder</span><span class='op'>|</span>
@@ -450,9 +450,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:20 2024 by
+  Generated on Mon May 26 21:15:27 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

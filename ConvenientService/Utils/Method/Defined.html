@@ -477,16 +477,16 @@
       <pre class="lines">
 
 
-55
-56
-57
-58
-59
 60
-61</pre>
+61
+62
+63
+64
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='label'>public:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>protected:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='ivar'>@method</span> <span class='op'>=</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -532,12 +532,12 @@
       <pre class="lines">
 
 
-23
-24
-25</pre>
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_klass'>klass</span>
   <span class='ivar'>@klass</span>
@@ -574,12 +574,12 @@
       <pre class="lines">
 
 
-17
-18
-19</pre>
+22
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method'>method</span>
   <span class='ivar'>@method</span>
@@ -616,12 +616,12 @@
       <pre class="lines">
 
 
-41
-42
-43</pre>
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_private'>private</span>
   <span class='ivar'>@private</span>
@@ -658,12 +658,12 @@
       <pre class="lines">
 
 
-35
-36
-37</pre>
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_protected'>protected</span>
   <span class='ivar'>@protected</span>
@@ -700,12 +700,12 @@
       <pre class="lines">
 
 
-29
-30
-31</pre>
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_public'>public</span>
   <span class='ivar'>@public</span>
@@ -746,14 +746,14 @@
       <pre class="lines">
 
 
-66
-67
-68
-69
-70</pre>
+71
+72
+73
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_selected_visibilities'>selected_visibilities</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
@@ -817,12 +817,12 @@
       <pre class="lines">
 
 
-87
-88
-89</pre>
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 92</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_defined?'>method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_visibility'>visibility</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="#METHOD_DEFINED_CHECKERS-constant" title="ConvenientService::Utils::Method::Defined::METHOD_DEFINED_CHECKERS (constant)">METHOD_DEFINED_CHECKERS</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_visibility'>visibility</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
@@ -869,12 +869,12 @@
       <pre class="lines">
 
 
-79
-80
-81</pre>
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_selected_visibilities'>selected_visibilities</span>
   <span class='ivar'>@selected_visibilities</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='label'>public:</span> <span class='id identifier rubyid_public'>public</span><span class='comma'>,</span> <span class='label'>protected:</span> <span class='id identifier rubyid_protected'>protected</span><span class='comma'>,</span> <span class='label'>private:</span> <span class='id identifier rubyid_private'>private</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_keep_if'>keep_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_should_be_checked'>should_be_checked</span><span class='op'>|</span> <span class='id identifier rubyid_should_be_checked'>should_be_checked</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
@@ -889,9 +889,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:22 2024 by
+  Generated on Mon May 26 21:15:29 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

@@ -241,13 +241,13 @@
       <pre class="lines">
 
 
-32
-33
-34
-35</pre>
+37
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/entities/method_chain.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/entities/method_chain.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>stack:</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='ivar'>@stack</span> <span class='op'>=</span> <span class='id identifier rubyid_stack'>stack</span>
@@ -317,17 +317,17 @@
       <pre class="lines">
 
 
-54
-55
-56
-57
-58
 59
 60
-61</pre>
+61
+62
+63
+64
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/entities/method_chain.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/entities/method_chain.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -421,12 +421,12 @@
       <pre class="lines">
 
 
-46
-47
-48</pre>
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/entities/method_chain.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/entities/method_chain.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>kwargs:</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -441,9 +441,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:31 2024 by
+  Generated on Mon May 26 21:15:40 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

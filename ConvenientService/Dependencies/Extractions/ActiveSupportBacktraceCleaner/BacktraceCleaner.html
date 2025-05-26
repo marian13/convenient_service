@@ -347,15 +347,15 @@ These two methods will give you a completely untouched backtrace.</p>
       <pre class="lines">
 
 
-49
-50
-51
-52
-53
-54</pre>
+56
+57
+58
+59
+60
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
   <span class='ivar'>@filters</span><span class='comma'>,</span> <span class='ivar'>@silencers</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -403,12 +403,12 @@ mapped against this filter.</p>
       <pre class="lines">
 
 
-95
-96
-97</pre>
+102
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_filter'>add_filter</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='ivar'>@filters</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_block'>block</span>
@@ -446,12 +446,12 @@ for a given line, it will be excluded from the clean backtrace.</p>
       <pre class="lines">
 
 
-104
-105
-106</pre>
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_silencer'>add_silencer</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='ivar'>@silencers</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_block'>block</span>
@@ -491,21 +491,21 @@ against it. Filters run first, then silencers.</p>
       <pre class="lines">
 
 
-58
-59
-60
-61
-62
-63
-64
 65
 66
 67
 68
-69</pre>
+69
+70
+71
+72
+73
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clean'>clean</span><span class='lparen'>(</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span> <span class='op'>=</span> <span class='symbol'>:silent</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_filtered'>filtered</span> <span class='op'>=</span> <span class='id identifier rubyid_filter_backtrace'>filter_backtrace</span><span class='lparen'>(</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='rparen'>)</span>
@@ -550,13 +550,6 @@ returns +nil+ if the frame was silenced.</p>
       <pre class="lines">
 
 
-74
-75
-76
-77
-78
-79
-80
 81
 82
 83
@@ -564,10 +557,17 @@ returns +nil+ if the frame was silenced.</p>
 85
 86
 87
-88</pre>
+88
+89
+90
+91
+92
+93
+94
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clean_frame'>clean_frame</span><span class='lparen'>(</span><span class='id identifier rubyid_frame'>frame</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span> <span class='op'>=</span> <span class='symbol'>:silent</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_frame'>frame</span> <span class='op'>=</span> <span class='id identifier rubyid_frame'>frame</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -616,12 +616,12 @@ filtered out.</p>
       <pre class="lines">
 
 
-118
-119
-120</pre>
+125
+126
+127</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 125</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_filters!'>remove_filters!</span>
   <span class='ivar'>@filters</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -658,12 +658,12 @@ the libraries you use.</p>
       <pre class="lines">
 
 
-111
-112
-113</pre>
+118
+119
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 118</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_silencers!'>remove_silencers!</span>
   <span class='ivar'>@silencers</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -678,9 +678,9 @@ the libraries you use.</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:29 2024 by
+  Generated on Mon May 26 21:15:37 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

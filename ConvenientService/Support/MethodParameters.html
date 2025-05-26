@@ -343,12 +343,12 @@ end</p>
       <pre class="lines">
 
 
-38
-39
-40</pre>
+43
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_method_parameters'>method_parameters</span><span class='rparen'>)</span>
   <span class='ivar'>@method_parameters</span> <span class='op'>=</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span>
@@ -390,12 +390,12 @@ end</p>
       <pre class="lines">
 
 
-32
-33
-34</pre>
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span>
   <span class='ivar'>@method_parameters</span>
@@ -479,14 +479,14 @@ end</p>
       <pre class="lines">
 
 
-62
-63
-64
-65
-66</pre>
+67
+68
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_has_rest_kwargs?'>has_rest_kwargs?</span>
   <span class='kw'>return</span> <span class='ivar'>@has_rest_kwargs</span> <span class='kw'>if</span> <span class='kw'>defined?</span> <span class='ivar'>@has_rest_kwargs</span>
@@ -565,12 +565,12 @@ end</p>
       <pre class="lines">
 
 
-82
-83
-84</pre>
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_named_kwargs_keys'>named_kwargs_keys</span>
   <span class='ivar'>@named_kwargs_keys</span> <span class='op'>||=</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid__name'>_name</span><span class='op'>|</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html#REQUIRED_KEYWORD-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::REQUIRED_KEYWORD (constant)">REQUIRED_KEYWORD</a></span></span> <span class='op'>||</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html#OPTIONAL_KEYWORD-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::OPTIONAL_KEYWORD (constant)">OPTIONAL_KEYWORD</a></span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__type'>_type</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>|</span> <span class='id identifier rubyid_name'>name</span> <span class='rbrace'>}</span>
@@ -635,12 +635,12 @@ end</p>
       <pre class="lines">
 
 
-116
-117
-118</pre>
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 121</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_optional_kwargs_keys'>optional_kwargs_keys</span>
   <span class='ivar'>@optional_kwargs_keys</span> <span class='op'>||=</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid__name'>_name</span><span class='op'>|</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html#OPTIONAL_KEYWORD-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::OPTIONAL_KEYWORD (constant)">OPTIONAL_KEYWORD</a></span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__type'>_type</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>|</span> <span class='id identifier rubyid_name'>name</span> <span class='rbrace'>}</span>
@@ -705,12 +705,12 @@ end</p>
       <pre class="lines">
 
 
-99
-100
-101</pre>
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_required_kwargs_keys'>required_kwargs_keys</span>
   <span class='ivar'>@required_kwargs_keys</span> <span class='op'>||=</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid__name'>_name</span><span class='op'>|</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html#REQUIRED_KEYWORD-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::REQUIRED_KEYWORD (constant)">REQUIRED_KEYWORD</a></span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__type'>_type</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>|</span> <span class='id identifier rubyid_name'>name</span> <span class='rbrace'>}</span>
@@ -725,9 +725,9 @@ end</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:22 2024 by
+  Generated on Mon May 26 21:15:29 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

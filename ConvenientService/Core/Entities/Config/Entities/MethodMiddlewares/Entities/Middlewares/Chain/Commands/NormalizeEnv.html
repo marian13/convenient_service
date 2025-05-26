@@ -271,12 +271,12 @@ This way <code>__send__(:next, *env[:args], **env[:kwargs], &amp;env[:block])</c
       <pre class="lines">
 
 
-35
-36
-37</pre>
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/commands/normalize_env.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/commands/normalize_env.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>env:</span><span class='rparen'>)</span>
   <span class='ivar'>@env</span> <span class='op'>=</span> <span class='id identifier rubyid_env'>env</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span>
@@ -318,12 +318,12 @@ This way <code>__send__(:next, *env[:args], **env[:kwargs], &amp;env[:block])</c
       <pre class="lines">
 
 
-29
-30
-31</pre>
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/commands/normalize_env.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/commands/normalize_env.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_env'>env</span>
   <span class='ivar'>@env</span>
@@ -377,12 +377,12 @@ This way <code>__send__(:next, *env[:args], **env[:kwargs], &amp;env[:block])</c
       <pre class="lines">
 
 
-42
-43
-44</pre>
+47
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/commands/normalize_env.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config/entities/method_middlewares/entities/middlewares/chain/commands/normalize_env.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='id identifier rubyid_env'>env</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>args:</span> <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span><span class='comma'>,</span> <span class='label'>kwargs:</span> <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:kwargs</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:block</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -397,9 +397,9 @@ This way <code>__send__(:next, *env[:args], **env[:kwargs], &amp;env[:block])</c
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:31 2024 by
+  Generated on Mon May 26 21:15:40 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

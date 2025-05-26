@@ -73,7 +73,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="../../Config.html" title="ConvenientService::Config (module)">Config</a></span>, <span class='object_link'><a href="../../Core.html" title="ConvenientService::Core (module)">Core</a></span></dd>
+      <dd><span class='object_link'><a href="../../Config.html" title="ConvenientService::Config (module)">Config</a></span>, <span class='object_link'><a href="../Core.html" title="ConvenientService::Feature::Core (module)">ConvenientService::Feature::Core</a></span></dd>
   </dl>
   
   
@@ -81,14 +81,16 @@
   
   <dl>
     <dt>Included in:</dt>
-    <dd><span class='object_link'><a href="../../Examples/Rails/V1/Gemfile.html" title="ConvenientService::Examples::Rails::V1::Gemfile (class)">Examples::Rails::V1::Gemfile</a></span>, <span class='object_link'><a href="../../Examples/Standard/ComprehensiveSuite.html" title="ConvenientService::Examples::Standard::ComprehensiveSuite (class)">Examples::Standard::ComprehensiveSuite</a></span>, <span class='object_link'><a href="../../Examples/Standard/Cowsay.html" title="ConvenientService::Examples::Standard::Cowsay (class)">Examples::Standard::Cowsay</a></span>, <span class='object_link'><a href="../../Examples/Standard/DateTime.html" title="ConvenientService::Examples::Standard::DateTime (class)">Examples::Standard::DateTime</a></span>, <span class='object_link'><a href="../../Examples/Standard/Factorial.html" title="ConvenientService::Examples::Standard::Factorial (class)">Examples::Standard::Factorial</a></span>, <span class='object_link'><a href="../../Examples/Standard/Gemfile.html" title="ConvenientService::Examples::Standard::Gemfile (class)">Examples::Standard::Gemfile</a></span>, <span class='object_link'><a href="../../Examples/Standard/RequestParams.html" title="ConvenientService::Examples::Standard::RequestParams (class)">Examples::Standard::RequestParams</a></span>, <span class='object_link'><a href="../../Examples/Standard/V1/Cowsay.html" title="ConvenientService::Examples::Standard::V1::Cowsay (class)">Examples::Standard::V1::Cowsay</a></span>, <span class='object_link'><a href="../../Examples/Standard/V1/DateTime.html" title="ConvenientService::Examples::Standard::V1::DateTime (class)">Examples::Standard::V1::DateTime</a></span>, <span class='object_link'><a href="../../Examples/Standard/V1/Factorial.html" title="ConvenientService::Examples::Standard::V1::Factorial (class)">Examples::Standard::V1::Factorial</a></span>, <span class='object_link'><a href="../../Examples/Standard/V1/Gemfile.html" title="ConvenientService::Examples::Standard::V1::Gemfile (class)">Examples::Standard::V1::Gemfile</a></span>, <span class='object_link'><a href="../../Examples/Standard/V1/RequestParams.html" title="ConvenientService::Examples::Standard::V1::RequestParams (class)">Examples::Standard::V1::RequestParams</a></span></dd>
+    <dd><span class='object_link'><a href="../../Examples/Rails/V1/Gemfile.html" title="ConvenientService::Examples::Rails::V1::Gemfile (class)">Examples::Rails::V1::Gemfile</a></span>, <span class='object_link'><a href="../../Examples/Standard/Cowsay.html" title="ConvenientService::Examples::Standard::Cowsay (class)">Examples::Standard::Cowsay</a></span>, <span class='object_link'><a href="../../Examples/Standard/DateTime.html" title="ConvenientService::Examples::Standard::DateTime (class)">Examples::Standard::DateTime</a></span>, <span class='object_link'><a href="../../Examples/Standard/Factorial.html" title="ConvenientService::Examples::Standard::Factorial (class)">Examples::Standard::Factorial</a></span>, <span class='object_link'><a href="../../Examples/Standard/Gemfile.html" title="ConvenientService::Examples::Standard::Gemfile (class)">Examples::Standard::Gemfile</a></span>, <span class='object_link'><a href="../../Examples/Standard/RequestParams.html" title="ConvenientService::Examples::Standard::RequestParams (class)">Examples::Standard::RequestParams</a></span>, <span class='object_link'><a href="../../Examples/Standard/V1/Cowsay.html" title="ConvenientService::Examples::Standard::V1::Cowsay (class)">Examples::Standard::V1::Cowsay</a></span>, <span class='object_link'><a href="../../Examples/Standard/V1/DateTime.html" title="ConvenientService::Examples::Standard::V1::DateTime (class)">Examples::Standard::V1::DateTime</a></span>, <span class='object_link'><a href="../../Examples/Standard/V1/Factorial.html" title="ConvenientService::Examples::Standard::V1::Factorial (class)">Examples::Standard::V1::Factorial</a></span>, <span class='object_link'><a href="../../Examples/Standard/V1/Gemfile.html" title="ConvenientService::Examples::Standard::V1::Gemfile (class)">Examples::Standard::V1::Gemfile</a></span>, <span class='object_link'><a href="../../Examples/Standard/V1/RequestParams.html" title="ConvenientService::Examples::Standard::V1::RequestParams (class)">Examples::Standard::V1::RequestParams</a></span></dd>
   </dl>
   
 
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/feature/configs/standard.rb</dd>
+    <dd>lib/convenient_service/feature/configs/standard.rb<span class="defines">,<br />
+  lib/convenient_service/feature/configs/standard/commands/is_feature.rb,<br /> lib/convenient_service/feature/configs/standard/commands/is_feature_class.rb</span>
+</dd>
   </dl>
   
 </div>
@@ -103,45 +105,325 @@
 <div class="tags">
   
 
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Standard/Commands.html" title="ConvenientService::Feature::Configs::Standard::Commands (module)">Commands</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#feature%3F-class_method" title="feature? (class method)">.<strong>feature?</strong>(feature)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether an object is a feature instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#feature_class%3F-class_method" title="feature_class? (class method)">.<strong>feature_class?</strong>(feature_class)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether a class is a feature class.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../../Config.html" title="ConvenientService::Config (module)">Config</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../../Config.html#included-class_method" title="ConvenientService::Config.included (method)">included</a></span></p>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="feature?-class_method">
+  
+    .<strong>feature?</strong>(feature)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether an object is a feature instance.</p>
+
+
+  </div>
 </div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Simple usage.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Standard.html" title="ConvenientService::Feature::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Standard.html#Config-constant" title="ConvenientService::Feature::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='id identifier rubyid_entry'>entry</span> <span class='symbol'>:main</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_main'>main</span>
+    <span class='symbol'>:main_entry_value</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_feature'>feature</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+
+ <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Configs.html" title="ConvenientService::Feature::Configs (module)">Configs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Feature::Configs::Standard (module)">Standard</a></span></span><span class='period'>.</span><span class='id identifier rubyid_feature?'>feature?</span><span class='lparen'>(</span><span class='id identifier rubyid_feature'>feature</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; true
+</span>
+ <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Configs.html" title="ConvenientService::Feature::Configs (module)">Configs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Feature::Configs::Standard (module)">Standard</a></span></span><span class='period'>.</span><span class='id identifier rubyid_feature?'>feature?</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; false</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>feature</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
 
 
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/configs/standard.rb', line 105</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_feature?'>feature?</span><span class='lparen'>(</span><span class='id identifier rubyid_feature'>feature</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Standard/Commands.html" title="ConvenientService::Feature::Configs::Standard::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Standard/Commands/IsFeature.html" title="ConvenientService::Feature::Configs::Standard::Commands::IsFeature (class)">IsFeature</a></span></span><span class='lbracket'>[</span><span class='label'>feature:</span> <span class='id identifier rubyid_feature'>feature</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="feature_class?-class_method">
+  
+    .<strong>feature_class?</strong>(feature_class)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether a class is a feature class.</p>
 
 
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Simple usage.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Standard.html" title="ConvenientService::Feature::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Standard.html#Config-constant" title="ConvenientService::Feature::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='id identifier rubyid_entry'>entry</span> <span class='symbol'>:main</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_main'>main</span>
+    <span class='symbol'>:main_entry_value</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+ <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Configs.html" title="ConvenientService::Feature::Configs (module)">Configs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Feature::Configs::Standard (module)">Standard</a></span></span><span class='period'>.</span><span class='id identifier rubyid_feature_class?'>feature_class?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='rparen'>)</span>
+<span class='comment'># =&gt; true
+</span>
+ <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Configs.html" title="ConvenientService::Feature::Configs (module)">Configs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Feature::Configs::Standard (module)">Standard</a></span></span><span class='period'>.</span><span class='id identifier rubyid_feature_class?'>feature_class?</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; false</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>feature_class</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
 
 
+74
+75
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/configs/standard.rb', line 74</span>
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+<span class='kw'>def</span> <span class='id identifier rubyid_feature_class?'>feature_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_feature_class'>feature_class</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Standard/Commands.html" title="ConvenientService::Feature::Configs::Standard::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Standard/Commands/IsFeatureClass.html" title="ConvenientService::Feature::Configs::Standard::Commands::IsFeatureClass (class)">IsFeatureClass</a></span></span><span class='lbracket'>[</span><span class='label'>feature_class:</span> <span class='id identifier rubyid_feature_class'>feature_class</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:18 2024 by
+  Generated on Mon May 26 21:15:25 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

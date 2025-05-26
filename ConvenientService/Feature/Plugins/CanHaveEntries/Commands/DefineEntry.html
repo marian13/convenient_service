@@ -331,14 +331,14 @@
       <pre class="lines">
 
 
-32
-33
-34
-35
-36</pre>
+37
+38
+39
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_entries/commands/define_entry.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_entries/commands/define_entry.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>feature_class:</span><span class='comma'>,</span> <span class='label'>name:</span><span class='comma'>,</span> <span class='label'>body:</span><span class='rparen'>)</span>
   <span class='ivar'>@feature_class</span> <span class='op'>=</span> <span class='id identifier rubyid_feature_class'>feature_class</span>
@@ -382,12 +382,12 @@
       <pre class="lines">
 
 
-25
-26
-27</pre>
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_entries/commands/define_entry.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_entries/commands/define_entry.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_body'>body</span>
   <span class='ivar'>@body</span>
@@ -424,12 +424,12 @@
       <pre class="lines">
 
 
-13
-14
-15</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_entries/commands/define_entry.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_entries/commands/define_entry.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_feature_class'>feature_class</span>
   <span class='ivar'>@feature_class</span>
@@ -466,12 +466,12 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_entries/commands/define_entry.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_entries/commands/define_entry.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
   <span class='ivar'>@name</span>
@@ -525,11 +525,6 @@
       <pre class="lines">
 
 
-41
-42
-43
-44
-45
 46
 47
 48
@@ -555,10 +550,15 @@
 68
 69
 70
-71</pre>
+71
+72
+73
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_entries/commands/define_entry.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_entries/commands/define_entry.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='comment'>##
@@ -566,7 +566,7 @@
 </span>  <span class='comment'># That is why `feature_class.class_exec` wrapper is required.
 </span>  <span class='comment'>#
 </span>  <span class='id identifier rubyid_feature_class'>feature_class</span><span class='period'>.</span><span class='id identifier rubyid_class_exec'>class_exec</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='op'>|</span>
-    <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='op'>|</span> <span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_define_singleton_method'>define_singleton_method</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='op'>|</span> <span class='id identifier rubyid_trigger'>trigger</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
   <span class='kw'>end</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_body'>body</span>
@@ -581,12 +581,12 @@
 </span>  <span class='comment'>#
 </span>  <span class='id identifier rubyid_feature_class'>feature_class</span><span class='period'>.</span><span class='id identifier rubyid_instance_proxy_class'>instance_proxy_class</span><span class='period'>.</span><span class='id identifier rubyid_class_exec'>class_exec</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='op'>|</span>
     <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='op'>|</span>
-      <span class='id identifier rubyid_instance_proxy_target'>instance_proxy_target</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_instance_proxy_target'>instance_proxy_target</span><span class='period'>.</span><span class='id identifier rubyid_trigger'>trigger</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_feature_class'>feature_class</span><span class='period'>.</span><span class='id identifier rubyid_instance_proxy_class'>instance_proxy_class</span><span class='period'>.</span><span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='symbol'>:entry</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='op'>|</span>
-    <span class='id identifier rubyid_instance_proxy_target'>instance_proxy_target</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_feature_class'>feature_class</span><span class='period'>.</span><span class='id identifier rubyid_instance_proxy_class'>instance_proxy_class</span><span class='period'>.</span><span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='symbol'>:trigger</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='op'>|</span>
+    <span class='id identifier rubyid_instance_proxy_target'>instance_proxy_target</span><span class='period'>.</span><span class='id identifier rubyid_trigger'>trigger</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='id identifier rubyid_name'>name</span>
@@ -601,9 +601,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:25 2024 by
+  Generated on Mon May 26 21:15:33 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

@@ -403,12 +403,12 @@
       <pre class="lines">
 
 
-20
-21
-22</pre>
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_value'>value</span>
   <span class='ivar'>@value</span>
@@ -560,19 +560,23 @@
       <pre class="lines">
 
 
-59
-60
-61
-62
-63</pre>
+64
+65
+66
+67
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_eql?'>eql?</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
 
-  <span class='id identifier rubyid_hash'>hash</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_hash'>hash</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
+
+  <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -616,12 +620,16 @@
       <pre class="lines">
 
 
-25</pre>
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/type.rb', line 79</span>
 
-<span class='id identifier rubyid_delegate'>delegate</span> <span class='symbol'>:hash</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='symbol'>:value</span></pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_hash'>hash</span>
+  <span class='lbracket'>[</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_hash'>hash</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -632,9 +640,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:24 2024 by
+  Generated on Mon May 26 21:15:31 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>

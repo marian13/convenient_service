@@ -295,13 +295,13 @@ More comprehensive solution can be found in Rails, for example:</p>
       <pre class="lines">
 
 
-30
-31
-32
-33</pre>
+35
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string/camelize.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string/camelize.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span><span class='comma'>,</span> <span class='label'>capitalize_first_letter:</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='ivar'>@string</span> <span class='op'>=</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -344,12 +344,12 @@ More comprehensive solution can be found in Rails, for example:</p>
       <pre class="lines">
 
 
-24
-25
-26</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string/camelize.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string/camelize.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_capitalize_first_letter'>capitalize_first_letter</span>
   <span class='ivar'>@capitalize_first_letter</span>
@@ -386,12 +386,12 @@ More comprehensive solution can be found in Rails, for example:</p>
       <pre class="lines">
 
 
-18
-19
-20</pre>
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string/camelize.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string/camelize.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_string'>string</span>
   <span class='ivar'>@string</span>
@@ -445,16 +445,16 @@ More comprehensive solution can be found in Rails, for example:</p>
       <pre class="lines">
 
 
-38
-39
-40
-41
-42
 43
-44</pre>
+44
+45
+46
+47
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string/camelize.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/string/camelize.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='id identifier rubyid_camelized'>camelized</span> <span class='op'>=</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>[:_?!\-\ ]</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_part'>part</span><span class='op'>|</span> <span class='id identifier rubyid_upcase_first_char'>upcase_first_char</span><span class='lparen'>(</span><span class='id identifier rubyid_part'>part</span><span class='rparen'>)</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span>
@@ -473,9 +473,9 @@ More comprehensive solution can be found in Rails, for example:</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 12 01:09:22 2024 by
+  Generated on Mon May 26 21:15:29 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.5).
+  0.9.37 (ruby-3.2.8).
 </div>
 
     </div>
