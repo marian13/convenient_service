@@ -445,7 +445,7 @@ tasks:
 
   minitest:
     cmds:
-      - bundle exec ruby minitest.rb {{.GIT_STAGED_MINITEST_FILES}} {{.CLI_ARGS}}
+      - bundle exec ruby ./bin/minitest {{.GIT_STAGED_MINITEST_FILES}} {{.CLI_ARGS}}
     vars:
       GIT_STAGED_MINITEST_FILES:
         sh: ruby -e 'puts `task git:staged:minitest --silent` if "{{.STAGED}}" == "true"'
