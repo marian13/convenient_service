@@ -14,15 +14,19 @@
 source "https://rubygems.org"
 
 ##
+# NOTE: Should be placed before `gemspec`.
+# - https://github.com/mbj/mutant/issues/1396
+# - https://github.com/mbj/mutant/tree/a19e11a07e71a40cfa62636f7aea611e314de841#getting-an-opensource-license
+# - https://github.com/mbj/auom/blob/master/Gemfile#L5
+#
+if ENV["CONVENIENT_SERVICE_MUTANT_LICENCE_KEY"]
+  source "https://oss:#{ENV["CONVENIENT_SERVICE_MUTANT_LICENCE_KEY"]}@gem.mutant.dev" do
+    gem "mutant-license"
+  end
+end
+
+##
 # Specify your gem's dependencies in `convenient_service.gemspec`.
 # - https://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/
 #
 gemspec
-
-##
-# TODO: Uncomment if a license key is approved.
-# - https://github.com/mbj/mutant/tree/a19e11a07e71a40cfa62636f7aea611e314de841#getting-an-opensource-license
-#
-# source 'https://${plan}:${key}@gem.mutant.dev' do
-#   gem 'mutant-license'
-# end
