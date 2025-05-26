@@ -58,7 +58,7 @@ jobs:
     # That is why the well-known Ubuntu is used.
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
     #
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     name: Lint
     steps:
       - uses: actions/checkout@v2
@@ -96,7 +96,7 @@ jobs:
     # NOTE: List of all possible Ruby, JRuby versions.
     # https://github.com/ruby/setup-ruby/blob/master/ruby-builder-versions.json
     #
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         gemfile:
@@ -221,7 +221,7 @@ jobs:
     # That is why the well-known Ubuntu is used.
     # - https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
     #
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     name: Gather coverage
     steps:
       - name: Upload coverage reports to Coveralls
