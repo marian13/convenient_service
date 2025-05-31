@@ -9,7 +9,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-return unless defined? ConvenientService::AmazingPrintInspect::Config
+return unless defined? ConvenientService::Service::Plugins::HasAmazingPrintInspect
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasAmazingPrintInspect::Concern, type: :amazing_print do

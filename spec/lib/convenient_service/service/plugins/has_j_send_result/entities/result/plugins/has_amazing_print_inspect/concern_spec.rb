@@ -9,7 +9,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-return unless defined? ConvenientService::AmazingPrintInspect::Config
+return unless defined? ConvenientService::Service::Plugins::HasAmazingPrintInspect
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasAmazingPrintInspect::Concern, type: :amazing_print do
@@ -141,6 +141,34 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "AnonymousClass(##{service.object_id})", ":status", ":success"] }
 
         it "uses custom class name" do
+          expect(result.inspect).to include(*keywords)
+        end
+      end
+
+      context "when original service is NOT same as service" do
+        let(:first_step) do
+          Class.new do
+            include ConvenientService::Standard::Config.with(:amazing_print_inspect)
+
+            def result
+              success
+            end
+          end
+        end
+
+        let(:service) do
+          Class.new.tap do |klass|
+            klass.class_exec(first_step) do |first_step|
+              include ConvenientService::Standard::Config.with(:amazing_print_inspect)
+
+              step first_step
+            end
+          end
+        end
+
+        let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "AnonymousClass(##{service.object_id})", ":original_service", "AnonymousClass(##{first_step.object_id})"] }
+
+        it "includes original service into `inspect` representation of result" do
           expect(result.inspect).to include(*keywords)
         end
       end
