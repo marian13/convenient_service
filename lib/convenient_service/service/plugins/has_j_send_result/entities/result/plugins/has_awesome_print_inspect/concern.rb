@@ -21,13 +21,12 @@ module ConvenientService
                     # @return [String]
                     #
                     def inspect
-                      metadata = {
-                        ConvenientService: {
-                          entity: "Result",
-                          service: Utils::Class.display_name(service.class),
-                          status: status.to_sym
-                        }
-                      }
+                      metadata = {ConvenientService: {}}
+
+                      metadata[:ConvenientService][:entity] = "Result"
+                      metadata[:ConvenientService][:service] = Utils::Class.display_name(service.class)
+                      metadata[:ConvenientService][:original_service] = Utils::Class.display_name(original_service.class) if service != original_service
+                      metadata[:ConvenientService][:status] = status.to_sym
 
                       metadata[:ConvenientService][:data_keys] = unsafe_data.keys if unsafe_data.keys.any?
 
@@ -35,7 +34,7 @@ module ConvenientService
                       # TODO: Specs.
                       # TODO: Same for `amazing_print`.
                       #
-                      if from_unhandled_exception?
+                      if Utils.safe_send(self, :from_unhandled_exception?)
                         metadata[:ConvenientService][:message] = unhandled_exception.message.to_s
                         metadata[:ConvenientService][:backtrace] = unhandled_exception.backtrace.to_a.take(10) + ["..."]
                       else
