@@ -103,6 +103,40 @@ module ConvenientService
 
         true
       end
+
+      ##
+      # @api public
+      # @return [Array]
+      # @note https://zverok.space/blog/2022-12-20-pattern-matching.html
+      # @note https://ruby-doc.org/core-2.7.2/doc/syntax/pattern_matching_rdoc.html
+      # @note Expected to be called only from pattern matching. Avoid direct usage of this method.
+      #
+      def deconstruct
+        [args, kwargs, block]
+      end
+
+      ##
+      # @api public
+      # @param keys [Array<Symbol>, nil]
+      # @return [Hash]
+      # @note https://zverok.space/blog/2022-12-20-pattern-matching.html
+      # @note https://ruby-doc.org/core-2.7.2/doc/syntax/pattern_matching_rdoc.html
+      # @note Expected to be called only from pattern matching. Avoid direct usage of this method.
+      #
+      def deconstruct_keys(keys)
+        keys ||= [:args, :kwargs, :block]
+
+        keys.each_with_object({}) do |key, hash|
+          case key
+          when :args
+            hash[key] = args
+          when :kwargs
+            hash[key] = kwargs
+          when :block
+            hash[key] = block
+          end
+        end
+      end
     end
   end
 end

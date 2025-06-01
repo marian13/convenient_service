@@ -227,6 +227,77 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         end
       end
     end
+
+    describe "#deconstruct" do
+      let(:arguments) { described_class.new(*args, **kwargs, &block) }
+
+      let(:args) { [:foo] }
+      let(:kwargs) { {foo: :bar} }
+      let(:block) { proc { :foo } }
+
+      it "returns array with args, kwargs and block" do
+        expect(arguments.deconstruct).to eq([args, kwargs, block])
+      end
+    end
+
+    describe "#deconstruct_keys" do
+      let(:arguments) { described_class.new(*args, **kwargs, &block) }
+
+      let(:args) { [:foo] }
+      let(:kwargs) { {foo: :bar} }
+      let(:block) { proc { :foo } }
+
+      context "when `keys` is NOT `nil`" do
+        context "when `keys` is array with one key" do
+          context "when `keys` is array with `:args` key" do
+            it "returns hash with only `:args` key" do
+              expect(arguments.deconstruct_keys([:args])).to eq({args: args})
+            end
+          end
+
+          context "when `keys` is array with `:kwargs` key" do
+            it "returns hash with only `:kwargs` key" do
+              expect(arguments.deconstruct_keys([:kwargs])).to eq({kwargs: kwargs})
+            end
+          end
+
+          context "when `keys` is array with `:block` key" do
+            it "returns hash with only `:block` key" do
+              expect(arguments.deconstruct_keys([:block])).to eq({block: block})
+            end
+          end
+        end
+
+        context "when `keys` is array with multiple keys" do
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
+          it "returns hash with only those multiple keys" do
+            expect(arguments.deconstruct_keys([:args, :kwargs])).to eq({
+              args: args,
+              kwargs: kwargs
+            })
+
+            expect(arguments.deconstruct_keys([:args, :block])).to eq({
+              args: args,
+              block: block
+            })
+
+            expect(arguments.deconstruct_keys([:kwargs, :block])).to eq({
+              kwargs: kwargs,
+              block: block
+            })
+          end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/ExampleLength
+        end
+      end
+
+      context "when `keys` is `nil`" do
+        context "when result has step" do
+          it "returns hash with all possible keys" do
+            expect(arguments.deconstruct_keys(nil)).to eq({args: args, kwargs: kwargs, block: block})
+          end
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
