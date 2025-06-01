@@ -81,6 +81,26 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
       end
     end
+
+    describe "#to_callback_arguments" do
+      let(:kwargs) { {action: Class.new, inputs: [:foo], outputs: [:bar], strict: false, index: 0, organizer: Object.new} }
+
+      let(:params) { described_class.new(**kwargs) }
+
+      it "returns callback arguments" do
+        expect(params.to_callback_arguments).to eq(ConvenientService::Support::Arguments.new(params.action, in: params.inputs, out: params.outputs, strict: params.strict, index: params.index))
+      end
+
+      context "when params have extra kwargs" do
+        let(:kwargs) { {action: Class.new, inputs: [:foo], outputs: [:bar], strict: false, index: 0, organizer: Object.new, extra_kwargs: {fallback: true}} }
+
+        let(:params) { described_class.new(**kwargs) }
+
+        it "returns callback arguments with extra kwargs" do
+          expect(params.to_callback_arguments).to eq(ConvenientService::Support::Arguments.new(params.action, in: params.inputs, out: params.outputs, strict: params.strict, index: params.index, fallback: params.extra_kwargs[:fallback]))
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups
