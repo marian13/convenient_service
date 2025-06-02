@@ -1,0 +1,38 @@
+/**
+ * AUTHOR: Marian Kostyk <mariankostyk13895@gmail.com>
+ * LICENSE: LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+ */
+
+{
+  ////
+  // NOTE: `.code-snippets` files support only C-style comments.
+  // NOTE: More information about VS Code Snippets can be found here:
+  // - https://code.visualstudio.com/docs/editor/userdefinedsnippets
+  //
+  "let(:service_with_steps) - RSpec `let` with minimal service with steps": {
+    "scope": "ruby",
+    "prefix": "let(:service_with_steps)",
+    "body": [
+      "let(:first_step) do",
+      "  Class.new do",
+      "    include ConvenientService::Standard::Config",
+      "",
+      "    def result",
+      "      success",
+      "    end",
+      "  end",
+      "end",
+      "",
+      "let(:service) do",
+      "  Class.new.tap do |klass|",
+      "    klass.class_exec(first_step) do |first_step|",
+      "      include ConvenientService::Standard::Config",
+      "",
+      "      step first_step",
+      "    end",
+      "  end",
+      "end"
+    ],
+    "description": "`let(:service_with_steps)` - RSpec `let` with minimal service with steps"
+  }
+}
