@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       let(:strict) { false }
       let(:index) { 0 }
       let(:container) { Class.new }
-      let(:organizer) { container.new }
+      let(:organizer) { nil }
       let(:extra_kwargs) { {fallback: false} }
 
       let(:original_params) do
@@ -90,6 +90,20 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             end
           end
         end
+
+        context "when organizer is NOT set" do
+          it "returns inputs without organizer" do
+            expect(command_result.inputs.map { |input| input.organizer(raise_when_missing: false) }.uniq).to eq([nil])
+          end
+        end
+
+        context "when organizer is set" do
+          let(:organizer) { container.new }
+
+          it "returns copies of inputs with organizer set" do
+            expect(command_result.inputs.map { |input| input.organizer(raise_when_missing: false) }.uniq).to eq([organizer])
+          end
+        end
       end
 
       example_group "`outputs`" do
@@ -131,6 +145,20 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast({qux: :quux}, direction: :output)
               ])
             end
+          end
+        end
+
+        context "when organizer is NOT set" do
+          it "returns outputs without organizer" do
+            expect(command_result.outputs.map { |output| output.organizer(raise_when_missing: false) }.uniq).to eq([nil])
+          end
+        end
+
+        context "when organizer is set" do
+          let(:organizer) { container.new }
+
+          it "returns copies of outputs with organizer set" do
+            expect(command_result.outputs.map { |input| input.organizer(raise_when_missing: false) }.uniq).to eq([organizer])
           end
         end
       end

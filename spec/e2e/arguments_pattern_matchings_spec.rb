@@ -9,7 +9,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass, RSpec/ExampleLength
 RSpec.describe "Arguments pattern matching", type: [:standard, :e2e] do
   let(:first_step) do
     Class.new do
@@ -102,3 +102,4 @@ RSpec.describe "Arguments pattern matching", type: [:standard, :e2e] do
     ##
   end
 end
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass, RSpec/ExampleLength

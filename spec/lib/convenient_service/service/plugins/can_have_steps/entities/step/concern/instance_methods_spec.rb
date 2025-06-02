@@ -326,10 +326,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
     describe "#inputs" do
       specify { expect { step.inputs }.to delegate_to(step.params, :inputs) }
-
-      it "returns copies of inputs with organizer set" do
-        expect(step.inputs.map(&:organizer)).to eq([organizer])
-      end
     end
 
     describe "#input_values" do
@@ -367,10 +363,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
     describe "#outputs" do
       specify { expect { step.outputs }.to delegate_to(step.params, :outputs) }
-
-      it "returns copies of outputs with organizer set" do
-        expect(step.outputs.map(&:organizer)).to eq([organizer])
-      end
     end
 
     describe "#output_values" do

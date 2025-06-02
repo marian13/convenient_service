@@ -73,6 +73,20 @@ module ConvenientService
                 delegate :action, to: :params
 
                 ##
+                # @api public
+                #
+                # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method>]
+                #
+                delegate :inputs, to: :params
+
+                ##
+                # @api public
+                #
+                # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method>]
+                #
+                delegate :outputs, to: :params
+
+                ##
                 # @return [Integer]
                 #
                 delegate :index, to: :params
@@ -163,29 +177,11 @@ module ConvenientService
                 ##
                 # @api public
                 #
-                # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method>]
-                #
-                def inputs
-                  @inputs ||= params.inputs.map { |input| input.copy(overrides: {kwargs: {organizer: organizer(raise_when_missing: false)}}) }
-                end
-
-                ##
-                # @api public
-                #
                 # @return [Hash{Symbol => Object}]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
                 def input_values
                   @input_values ||= calculate_input_values
-                end
-
-                ##
-                # @api public
-                #
-                # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method>]
-                #
-                def outputs
-                  @outputs ||= params.outputs.map { |output| output.copy(overrides: {kwargs: {organizer: organizer(raise_when_missing: false)}}) }
                 end
 
                 ##

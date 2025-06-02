@@ -53,18 +53,15 @@ module ConvenientService
                 ##
                 # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method>]
                 #
-                # @internal
-                #   TODO: `cast_many`, `cast_many!`.
-                #
                 def inputs
-                  @inputs ||= flatten_methods(original_params.inputs).map { |input| Entities::Method.cast!(input, direction: :input) }
+                  @inputs ||= cast_inputs
                 end
 
                 ##
                 # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method>]
                 #
                 def outputs
-                  @outputs ||= flatten_methods(original_params.outputs).map { |output| Entities::Method.cast!(output, direction: :output) }
+                  @outputs ||= cast_outputs
                 end
 
                 ##
@@ -92,7 +89,7 @@ module ConvenientService
                 # @return [ConvenientService::Service]
                 #
                 def organizer
-                  @organizer ||= original_params.organizer
+                  Utils.memoize_including_falsy_values(self, :@organizer) { original_params.organizer }
                 end
 
                 ##
@@ -117,6 +114,31 @@ module ConvenientService
                   return methods if methods.last.keys.size < 2
 
                   methods.dup.tap(&:pop).concat(methods.last.map { |key, value| {key => value} })
+                end
+
+                ##
+                # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method>]
+                #
+                # @internal
+                #   TODO: `cast_many`, `cast_many!`.
+                #
+                def cast_inputs
+                  inputs = flatten_methods(original_params.inputs)
+                  inputs = inputs.map { |input| Entities::Method.cast!(input, direction: :input) }
+                  inputs = inputs.map { |input| input.copy(overrides: {kwargs: {organizer: organizer}}) } if organizer
+
+                  inputs
+                end
+
+                ##
+                # @return [Array<ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method>]
+                #
+                def cast_outputs
+                  outputs = flatten_methods(original_params.outputs)
+                  outputs = outputs.map { |output| Entities::Method.cast!(output, direction: :output) }
+                  outputs = outputs.map { |input| input.copy(overrides: {kwargs: {organizer: organizer}}) } if organizer
+
+                  outputs
                 end
               end
             end
