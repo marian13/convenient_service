@@ -71,10 +71,7 @@ module ConvenientService
             entity.step_class.class_exec(kwargs, block) do |kwargs, block|
               before :result, **kwargs.merge(source_location: block.source_location) do
                 organizer.instance_exec(
-                  Support::Arguments.new(
-                    *args,
-                    **Utils::Hash.except(self.kwargs, [:organizer, :container])
-                  ),
+                  params.to_callback_arguments,
                   &block
                 )
               end

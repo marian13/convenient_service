@@ -363,7 +363,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
                 <<~TEXT
                   first around before step
                     args - [:foo]
-                    kwargs.keys - [:in, :out, :index]
+                    kwargs.keys - [:in, :out, :strict, :index]
                     block - nil
                   step :foo
                   first around after step
@@ -414,7 +414,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
                   <<~TEXT
                     first around before step
                       args - [:foo]
-                      kwargs.keys - [:in, :out, :cache, :index]
+                      kwargs.keys - [:in, :out, :strict, :index, :cache]
                       block - nil
                     step :foo
                     first around after step

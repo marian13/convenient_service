@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
 
     describe "#to_callback_arguments" do
-      let(:kwargs) { {action: Class.new, inputs: [:foo], outputs: [:bar], strict: false, index: 0, organizer: Object.new} }
+      let(:kwargs) { {action: Class.new, inputs: [:foo], outputs: [:bar], strict: false, index: 0, organizer: Object.new, extra_kwargs: {}} }
 
       let(:params) { described_class.new(**kwargs) }
 

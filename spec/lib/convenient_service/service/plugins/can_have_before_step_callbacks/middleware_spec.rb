@@ -205,7 +205,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveBeforeStepCallbacks::
               <<~TEXT
                 first before step
                   args - [:foo]
-                  kwargs.keys - [:in, :out, :index]
+                  kwargs.keys - [:in, :out, :strict, :index]
                   block - nil
                 step :foo
               TEXT
@@ -251,7 +251,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveBeforeStepCallbacks::
                 <<~TEXT
                   first before step
                     args - [:foo]
-                    kwargs.keys - [:in, :out, :cache, :index]
+                    kwargs.keys - [:in, :out, :strict, :index, :cache]
                     block - nil
                   step :foo
                 TEXT

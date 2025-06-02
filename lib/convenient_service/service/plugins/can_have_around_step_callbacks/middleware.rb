@@ -76,10 +76,7 @@ module ConvenientService
               around :result, **kwargs.merge(source_location: block.source_location) do |chain|
                 organizer.instance_exec(
                   proc { chain.yield.step },
-                  Support::Arguments.new(
-                    *args,
-                    **Utils::Hash.except(self.kwargs, [:organizer, :container])
-                  ),
+                  params.to_callback_arguments,
                   &block
                 )
               end
