@@ -47,7 +47,7 @@ module ConvenientService
                     index: kwargs[:index],
                     container: kwargs[:container],
                     organizer: kwargs[:organizer],
-                    extra_kwargs: Utils::Hash.except(kwargs, [:in, :out, :index, :container, :organizer])
+                    extra_kwargs: Utils::Hash.except(kwargs, [:in, :out, :strict, :index, :container, :organizer])
                   )
                 end
               end

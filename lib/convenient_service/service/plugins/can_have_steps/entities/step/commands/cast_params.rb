@@ -86,7 +86,7 @@ module ConvenientService
                 end
 
                 ##
-                # @return [ConvenientService::Service]
+                # @return [ConvenientService::Service, nil]
                 #
                 def organizer
                   Utils.memoize_including_falsy_values(self, :@organizer) { original_params.organizer }
@@ -103,6 +103,7 @@ module ConvenientService
 
                 ##
                 # @param methods [Array<Symbol, Hash>]
+                # @return [Array<Symbol, Hash>]
                 #
                 # @internal
                 #   NOTE:
@@ -136,7 +137,7 @@ module ConvenientService
                 def cast_outputs
                   outputs = flatten_methods(original_params.outputs)
                   outputs = outputs.map { |output| Entities::Method.cast!(output, direction: :output) }
-                  outputs = outputs.map { |input| input.copy(overrides: {kwargs: {organizer: organizer}}) } if organizer
+                  outputs = outputs.map { |output| output.copy(overrides: {kwargs: {organizer: organizer}}) } if organizer
 
                   outputs
                 end
