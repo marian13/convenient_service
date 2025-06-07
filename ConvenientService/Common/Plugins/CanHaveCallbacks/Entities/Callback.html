@@ -319,28 +319,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#called%3F-instance_method" title="#called? (instance method)">#<strong>called?</strong>  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(types:, block:, **extra_kwargs)  &#x21d2; void </a>
     
 
@@ -349,28 +327,6 @@
   
   
     <span class="note title constructor">constructor</span>
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#not_called%3F-instance_method" title="#not_called? (instance method)">#<strong>not_called?</strong>  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
   
   
   
@@ -708,18 +664,18 @@
       <pre class="lines">
 
 
-125
-126
-127
-128
-129
-130
-131
-132
-133</pre>
+111
+112
+113
+114
+115
+116
+117
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -781,12 +737,12 @@
       <pre class="lines">
 
 
-71
-72
-73</pre>
+57
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_call_callback'>call_callback</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -852,12 +808,12 @@
       <pre class="lines">
 
 
-94
-95
-96</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call_in_context'>call_in_context</span><span class='lparen'>(</span><span class='id identifier rubyid_context'>context</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_call_callback_in_context'>call_callback_in_context</span><span class='lparen'>(</span><span class='id identifier rubyid_context'>context</span><span class='rparen'>)</span>
@@ -956,12 +912,12 @@
       <pre class="lines">
 
 
-105
-106
-107</pre>
+91
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call_in_context_with_arguments'>call_in_context_with_arguments</span><span class='lparen'>(</span><span class='id identifier rubyid_context'>context</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_call_callback_in_context'>call_callback_in_context</span><span class='lparen'>(</span><span class='id identifier rubyid_context'>context</span><span class='comma'>,</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1075,119 +1031,15 @@
       <pre class="lines">
 
 
-117
-118
-119</pre>
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 103</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call_in_context_with_value_and_arguments'>call_in_context_with_value_and_arguments</span><span class='lparen'>(</span><span class='id identifier rubyid_context'>context</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_call_callback_in_context'>call_callback_in_context</span><span class='lparen'>(</span><span class='id identifier rubyid_context'>context</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="called?-instance_method">
-  
-    #<strong>called?</strong>  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-57
-58
-59</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 57</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_called?'>called?</span>
-  <span class='const'><span class='object_link'><a href="../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="../../../../Utils.html#to_bool-class_method" title="ConvenientService::Utils.to_bool (method)">to_bool</a></span></span><span class='lparen'>(</span><span class='ivar'>@called</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="not_called?-instance_method">
-  
-    #<strong>not_called?</strong>  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-64
-65
-66</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 64</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_not_called?'>not_called?</span>
-  <span class='op'>!</span><span class='id identifier rubyid_called?'>called?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1283,12 +1135,12 @@
       <pre class="lines">
 
 
-138
-139
-140</pre>
+124
+125
+126</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 138</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 124</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_proc'>to_proc</span>
   <span class='id identifier rubyid_block'>block</span>
@@ -1303,7 +1155,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jun  2 00:57:46 2025 by
+  Generated on Sat Jun  7 20:37:43 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.8).
 </div>
