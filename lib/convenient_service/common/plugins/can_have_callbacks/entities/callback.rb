@@ -52,20 +52,6 @@ module ConvenientService
             end
 
             ##
-            # @return [Boolean]
-            #
-            def called?
-              Utils.to_bool(@called)
-            end
-
-            ##
-            # @return [Boolean]
-            #
-            def not_called?
-              !called?
-            end
-
-            ##
             # @return [Object] Can be any type.
             #
             def call(...)
@@ -142,16 +128,6 @@ module ConvenientService
             private
 
             ##
-            # @return [Boolean]
-            #
-            # @internal
-            #   FIX: What if method is executed second time? Callback `called` status is NOT reset.
-            #
-            def mark_as_called
-              @called = true
-            end
-
-            ##
             # @return [ConvenientService::Support::Arguments]
             #
             def arguments(...)
@@ -162,7 +138,7 @@ module ConvenientService
             # @return [Object] Can be any type.
             #
             def call_callback(...)
-              block.call(...).tap { mark_as_called }
+              block.call(...)
             end
 
             ##
@@ -170,11 +146,8 @@ module ConvenientService
             # @param args [Array<Object>]
             # @return [Object] Can be any type.
             #
-            # @internal
-            #   FIX: `mark_as_called`.
-            #
             def call_callback_in_context(context, *args)
-              context.instance_exec(*args, &block).tap { mark_as_called }
+              context.instance_exec(*args, &block)
             end
           end
         end

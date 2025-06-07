@@ -75,38 +75,6 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
       end
     end
 
-    describe "#called?" do
-      context "when callback is NOT called" do
-        it "returns false" do
-          expect(callback.called?).to eq(false)
-        end
-      end
-
-      context "when callback is called" do
-        it "returns true" do
-          callback.call
-
-          expect(callback.called?).to eq(true)
-        end
-      end
-    end
-
-    describe "#not_called?" do
-      context "when callback is NOT called" do
-        it "returns true" do
-          expect(callback.not_called?).to eq(true)
-        end
-      end
-
-      context "when callback is called" do
-        it "returns false" do
-          callback.call
-
-          expect(callback.not_called?).to eq(false)
-        end
-      end
-    end
-
     describe "#call" do
       include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -115,10 +83,6 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
           .to delegate_to(callback_block, :call)
           .with_arguments(*arguments_args, arguments_kwargs, arguments_block)
           .and_return_its_value
-      end
-
-      it "marks callback as called" do
-        expect { callback.call(*arguments_args, arguments_kwargs, arguments_block) }.to change(callback, :called?).from(false).to(true)
       end
     end
 
@@ -133,10 +97,6 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
           .with_arguments(&callback_block)
           .and_return_its_value
       end
-
-      it "marks callback as called" do
-        expect { callback.call_in_context(context) }.to change(callback, :called?).from(false).to(true)
-      end
     end
 
     describe "#call_in_context_with_arguments" do
@@ -149,10 +109,6 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
           .to delegate_to(context, :instance_exec)
           .with_arguments(arguments, &callback_block)
           .and_return_its_value
-      end
-
-      it "marks callback as called" do
-        expect { callback.call_in_context_with_arguments(context, *arguments_args, **arguments_kwargs, &arguments_block) }.to change(callback, :called?).from(false).to(true)
       end
     end
 
@@ -167,10 +123,6 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
           .to delegate_to(context, :instance_exec)
           .with_arguments(value, arguments, &callback_block)
           .and_return_its_value
-      end
-
-      it "marks callback as called" do
-        expect { callback.call_in_context_with_value_and_arguments(context, value, *arguments_args, **arguments_kwargs, &arguments_block) }.to change(callback, :called?).from(false).to(true)
       end
     end
 

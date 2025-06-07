@@ -108,6 +108,36 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
 
             expect(output).to eq(text)
           end
+
+          context "when service is called multiple times" do
+            let(:service_class) do
+              Class.new.tap do |klass|
+                klass.class_exec(result_original_value, out, middleware) do |result_original_value, out, middleware|
+                  include ConvenientService::Standard::Config
+
+                  middlewares :result do
+                    observe middleware
+
+                    delete ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                  end
+
+                  middlewares :regular_result do
+                    delete ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                  end
+
+                  define_method(:out) { out }
+
+                  define_method(:result) { success(value: result_original_value).tap { out.puts "original result" } }
+                end
+              end
+            end
+
+            it "runs that before callback in addition to `chain.next` multiple times" do
+              3.times { method.call }
+
+              expect(output).to eq(text * 3)
+            end
+          end
         end
 
         context "when service class has one after callback" do
@@ -122,10 +152,34 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
             service_class.after(:result) { out.puts "first after result" }
           end
 
-          it "runs that after callback in addition to `chain.next`" do
-            method_value
+          context "when service is called multiple times" do
+            let(:service_class) do
+              Class.new.tap do |klass|
+                klass.class_exec(result_original_value, out, middleware) do |result_original_value, out, middleware|
+                  include ConvenientService::Standard::Config
 
-            expect(output).to eq(text)
+                  middlewares :result do
+                    observe middleware
+
+                    delete ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                  end
+
+                  middlewares :regular_result do
+                    delete ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                  end
+
+                  define_method(:out) { out }
+
+                  define_method(:result) { success(value: result_original_value).tap { out.puts "original result" } }
+                end
+              end
+            end
+
+            it "runs that after callback in addition to `chain.next` multiple times" do
+              3.times { method.call }
+
+              expect(output).to eq(text * 3)
+            end
           end
         end
 
@@ -339,10 +393,34 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
             end
           end
 
-          it "runs that around callback in addition to middleware `chain.next`" do
-            method_value
+          context "when service is called multiple times" do
+            let(:service_class) do
+              Class.new.tap do |klass|
+                klass.class_exec(result_original_value, out, middleware) do |result_original_value, out, middleware|
+                  include ConvenientService::Standard::Config
 
-            expect(output).to eq(text)
+                  middlewares :result do
+                    observe middleware
+
+                    delete ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                  end
+
+                  middlewares :regular_result do
+                    delete ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                  end
+
+                  define_method(:out) { out }
+
+                  define_method(:result) { success(value: result_original_value).tap { out.puts "original result" } }
+                end
+              end
+            end
+
+            it "runs that around callback in addition to middleware `chain.next` multiple times" do
+              3.times { method.call }
+
+              expect(output).to eq(text * 3)
+            end
           end
         end
 

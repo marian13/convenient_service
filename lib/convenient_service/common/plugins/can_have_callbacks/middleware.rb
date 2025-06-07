@@ -125,15 +125,34 @@ module ConvenientService
             #   end
             # end
             #
-            around_callbacks = callbacks.for([:around, method])
+            # They are wrapped by Ruby hashes in order to have a way to track whether they were called.
+            # That is needed to raise a self-explanatory exception when any around callback misses to call the next callback in a sequence.
+            # See specs for examples and more details.
+            #
+            around_callbacks = callbacks.for([:around, method]).map do |callback_object|
+              {
+                object: callback_object,
+                called: false
+              }
+            end
 
             ##
+            # So-called initial callback is required to track whether the last around callback in a sequence is called.
+            # See specs for examples and more details.
             #
-            #
-            initial_around_callback = Entities::Callback.new(
-              types: [:around, method],
-              block: proc { original_value = chain.next(*args, **kwargs, &block) }
-            )
+            initial_around_callback = {
+              object: Entities::Callback.new(
+                types: [:around, method],
+                block: proc do
+                  original_value = chain.next(*args, **kwargs, &block)
+
+                  initial_around_callback[:called] = true
+
+                  original_value
+                end
+              ),
+              called: false
+            }
 
             ##
             # Let's suppose that we have 3 `around` callbacks:
@@ -161,7 +180,7 @@ module ConvenientService
             #   end
             # end
             #
-            # NOTE: if a user forgets to call `chain.yield` - an error is raised.
+            # NOTE: if a user forgets to call `chain.yield` - an exception is raised.
             #
             # Then `composed` may be built with the following preudocode (that is why `reverse` is needed):
             #
@@ -180,15 +199,19 @@ module ConvenientService
             #       proc { instance_exec(composed, &callback) }
             #     end
             #
-            # Original implementation is modified for the second time in order to raise an error
+            # Original implementation is modified for the second time in order to raise an exception
             # if a user forgets to call `chain.yield` inside an around callback.
             #
-            # rubocop:disable Style/Semicolon
             composed =
-              around_callbacks.reverse.reduce(initial_around_callback) do |composed, callback|
-                proc { callback.call_in_context_with_value_and_arguments(entity, composed, *args, **kwargs, &block); original_value }
+              around_callbacks.reverse_each.reduce(initial_around_callback[:object]) do |composed, callback|
+                proc do
+                  callback[:object].call_in_context_with_value_and_arguments(entity, composed, *args, **kwargs, &block)
+
+                  callback[:called] = true
+
+                  original_value
+                end
               end
-            # rubocop:enable Style/Semicolon
 
             ##
             # Call sequence:
@@ -205,14 +228,56 @@ module ConvenientService
             composed.call
 
             ##
+            # Raised when any intermediate around callback does NOT call `chain.yield`.
             #
+            #   around :result do |chain|
+            #     puts "first around before result"
             #
-            ::ConvenientService.raise Exceptions::AroundCallbackChainIsNotContinued.new(callback: Utils::Array.find_last(around_callbacks, &:called?)) if around_callbacks.any?(&:not_called?)
+            #     chain.yield
+            #
+            #     puts "first around after result"
+            #   end
+            #
+            #   around :result do |chain|
+            #     puts "second around before result"
+            #
+            #     puts "second around after result"
+            #   end
+            #
+            #   around :result do |chain|
+            #     puts "third around before result"
+            #
+            #     chain.yield
+            #
+            #     puts "third around after result"
+            #   end
+            #
+            if around_callbacks.any? { |callback| !callback[:called] }
+              last_called_callback = Utils::Array.find_last(around_callbacks) { |callback| callback[:called] }
+
+              ::ConvenientService.raise Exceptions::AroundCallbackChainIsNotContinued.new(callback: last_called_callback[:object])
+            end
 
             ##
+            # Raised when the last around callback does NOT call `chain.yield`.
             #
+            #   around :result do |chain|
+            #     puts "first around before result"
             #
-            ::ConvenientService.raise Exceptions::AroundCallbackChainIsNotContinued.new(callback: around_callbacks.last) if initial_around_callback.not_called?
+            #     chain.yield
+            #
+            #     puts "first around after result"
+            #   end
+            #
+            #   around :result do |chain|
+            #     puts "second around before result"
+            #
+            #     puts "second around after result"
+            #   end
+            #
+            if !initial_around_callback[:called]
+              ::ConvenientService.raise Exceptions::AroundCallbackChainIsNotContinued.new(callback: around_callbacks.last[:object])
+            end
 
             original_value
           end
