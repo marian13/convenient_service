@@ -40,7 +40,24 @@ module ConvenientService
           enabled
         end
 
-        private
+        ##
+        # @param other [Object] Can be any type.
+        # @return [Boolean, nil]
+        #
+        # @internal
+        #   TODO: Tests.
+        #
+        def ==(other)
+          return unless other.instance_of?(self.class)
+
+          return false if name != other.name
+          return false if enabled != other.enabled
+          return false if data != other.data
+
+          true
+        end
+
+        protected
 
         ##
         # @!attribute [r] enabled

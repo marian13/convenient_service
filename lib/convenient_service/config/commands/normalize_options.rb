@@ -27,43 +27,84 @@ module ConvenientService
         # @return [Hash]
         #
         def call
-          normalize_options(options)
-        end
-
-        ##
-        # @param options [Object] Can be any type.
-        # @return [Hash]
-        #
-        def normalize_options(options)
           Utils::Array.wrap(options)
-            .flat_map { |option| normalize_option(option) }
-            .group_by(&:name)
-            .transform_values(&:first)
+            .flat_map { |option| normalize(option) }
+            .reduce({}) { |memo, option| memo.merge(option.name => option) } # index_by
         end
 
         ##
-        # @param option [Object] Can be any type.
-        # @return [Entities::Option]
+        # @param value [Object] Can be any type.
+        # @return [ConvenientService::Config::Entities::Option, Array<ConvenientService::Config::Entities::Option>]
         #
-        def normalize_option(option)
-          case option
-          when ::Symbol then Entities::Option.new(name: option, enabled: true)
-          when ::Hash then normalize_hash(option)
-          when Entities::Option then option
-          when Entities::Options then option.to_a
+        def normalize(value)
+          case value
+          when ::Symbol then normalize_symbol(value)
+          when ::Array then normalize_array(value)
+          when ::Hash then normalize_hash(value)
+          when Entities::Option then normalize_option(value)
+          when Entities::Options then normalize_options(value)
           else
-            ::ConvenientService.raise Exceptions::OptionCanNotBeNormalized.new(option: option)
+            raise_option_can_not_be_normalized(value)
+          end
+        end
+
+        ##
+        # @param symbol [Symbol]
+        # @return [ConvenientService::Config::Entities::Option]
+        #
+        def normalize_symbol(symbol)
+          Entities::Option.new(name: symbol, enabled: true)
+        end
+
+        ##
+        # @param array [Array<Object>]
+        # @return [Array<ConvenientService::Config::Entities::Option>]
+        #
+        def normalize_array(array)
+          array.map do |value|
+            case value
+            when ::Symbol then normalize_symbol(value)
+            when ::Hash then normalize_hash(value)
+            when Entities::Option then normalize_option(value)
+            when Entities::Options then normalize_options(value)
+            else
+              raise_option_can_not_be_normalized(array)
+            end
           end
         end
 
         ##
         # @param hash [Hash{Symbol => Object}]
-        # @return [Entities::Option]
+        # @return [ConvenientService::Config::Entities::Option, Array<ConvenientService::Config::Entities::Option>]
         #
         def normalize_hash(hash)
           return Entities::Option.new(**hash) if hash.has_key?(:name)
 
           hash.map { |name, enabled| Entities::Option.new(name: name, enabled: enabled) }
+        end
+
+        ##
+        # @param option [ConvenientService::Config::Entities::Option]
+        # @return [ConvenientService::Config::Entities::Option]
+        #
+        def normalize_option(option)
+          option
+        end
+
+        ##
+        # @param options [ConvenientService::Config::Entities::Options]
+        # @return [Array<ConvenientService::Config::Entities::Option>]
+        #
+        def normalize_options(options)
+          options.to_a
+        end
+
+        ##
+        # @param option [ConvenientService::Config::Entities::Option]
+        # @raise [ConvenientService::Config::Exceptions::OptionCanNotBeNormalized]
+        #
+        def raise_option_can_not_be_normalized(option)
+          ::ConvenientService.raise Exceptions::OptionCanNotBeNormalized.new(option: option)
         end
       end
     end

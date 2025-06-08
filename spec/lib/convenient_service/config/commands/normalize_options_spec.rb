@@ -11,47 +11,84 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Config::Commands::NormalizeOptions, type: :standard do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "class methods" do
     describe ".call" do
       subject(:command_result) { described_class.call(options: options) }
 
       context "when `options` is `nil`" do
         let(:options) { nil }
+        let(:normalized_options) { {} }
 
-        it "returns empty set" do
-          expect(command_result).to eq(Set.new)
+        it "returns empty hash" do
+          expect(command_result).to eq(normalized_options)
         end
       end
 
       context "when `options` is array" do
         context "when `options` is empty array" do
           let(:options) { [] }
+          let(:normalized_options) { {} }
 
-          it "returns empty set" do
-            expect(command_result).to eq(Set.new)
+          it "returns empty hash" do
+            expect(command_result).to eq(normalized_options)
           end
         end
 
         context "when `options` contains symbols" do
           let(:options) { [:callbacks, :fallbacks, :rollbacks] }
 
-          it "returns set with those symbols" do
-            expect(command_result).to eq(Set[:callbacks, :fallbacks, :rollbacks])
+          let(:normalized_options) do
+            {
+              callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+              fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: true),
+              rollbacks: ConvenientService::Config::Entities::Option.new(name: :rollbacks, enabled: true)
+            }
+          end
+
+          it "returns hash with those symbols" do
+            expect(command_result).to eq(normalized_options)
           end
         end
 
         context "when `options` contains arrays" do
           let(:options) { [:callbacks, [:fallbacks], [:rollbacks]] }
 
-          it "returns set with those arrays flattened" do
-            expect(command_result).to eq(Set[:callbacks, :fallbacks, :rollbacks])
+          let(:normalized_options) do
+            {
+              callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+              fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: true),
+              rollbacks: ConvenientService::Config::Entities::Option.new(name: :rollbacks, enabled: true)
+            }
+          end
+
+          it "returns hash with those arrays flattened" do
+            expect(command_result).to eq(normalized_options)
           end
 
           context "when `options` contains nested arrays" do
             let(:options) { [:callbacks, [:fallbacks, [:rollbacks]]] }
 
-            it "returns set with those arrays flattened only one level flattened" do
-              expect(command_result).to eq(Set[:callbacks, :fallbacks, [:rollbacks]])
+            let(:exception_message) do
+              <<~TEXT
+                Option `#{[:fallbacks, [:rollbacks]].inspect}` can NOT be normalized.
+
+                Consider passing `Symbol` or `Hash` instead.
+              TEXT
+            end
+
+            it "raises `ConvenientService::Config::Exceptions::OptionCanNotBeNormalized`" do
+              expect { command_result }
+                .to raise_error(ConvenientService::Config::Exceptions::OptionCanNotBeNormalized)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Config::Exceptions::OptionCanNotBeNormalized) { command_result } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
         end
