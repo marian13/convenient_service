@@ -547,7 +547,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='const'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Utils/Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></span><span class='period'>.</span><span class='id identifier rubyid_wrap'><span class='object_link'><a href="../../Utils/Array.html#wrap-class_method" title="ConvenientService::Utils::Array.wrap (method)">wrap</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Utils/Array.html" title="ConvenientService::Utils::Array (module)">Array</a></span></span><span class='period'>.</span><span class='id identifier rubyid_wrap'><span class='object_link'><a href="../../Utils/Array.html#wrap-class_method" title="ConvenientService::Utils::Array.wrap (method)">wrap</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span><span class='rparen'>)</span>
     <span class='period'>.</span><span class='id identifier rubyid_flat_map'>flat_map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_option'>option</span><span class='op'>|</span> <span class='id identifier rubyid_normalize'>normalize</span><span class='lparen'>(</span><span class='id identifier rubyid_option'>option</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
     <span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_memo'>memo</span><span class='comma'>,</span> <span class='id identifier rubyid_option'>option</span><span class='op'>|</span> <span class='id identifier rubyid_memo'>memo</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_option'>option</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_option'>option</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='comment'># index_by
 </span><span class='kw'>end</span></pre>
@@ -1159,7 +1159,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jun  9 22:33:02 2025 by
+  Generated on Mon Jun  9 22:54:03 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.8).
 </div>
