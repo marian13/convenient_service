@@ -5,5 +5,4 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "has_awesome_print_inspect/commands"
-require_relative "has_awesome_print_inspect/concern"
+require_relative "commands/generate_inspect_output"

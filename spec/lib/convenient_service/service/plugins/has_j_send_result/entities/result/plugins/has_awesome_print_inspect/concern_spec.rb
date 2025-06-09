@@ -106,24 +106,48 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       context "when result has message" do
-        let(:service) do
-          Class.new do
-            include ConvenientService::Standard::Config.with(:awesome_print_inspect)
+        context "when message has one line" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config.with(:awesome_print_inspect)
 
-            def self.name
-              "ImportantService"
-            end
+              def self.name
+                "ImportantService"
+              end
 
-            def result
-              error(message: "foo")
+              def result
+                error(message: "foobarbaz")
+              end
             end
+          end
+
+          let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "\"foobarbaz\""] }
+
+          it "includes message into `inspect` representation of result" do
+            expect(result.inspect).to include(*keywords)
           end
         end
 
-        let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "foo"] }
+        context "when message has multiple lines" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config.with(:awesome_print_inspect)
 
-        it "includes message into `inspect` representation of result" do
-          expect(result.inspect).to include(*keywords)
+              def self.name
+                "ImportantService"
+              end
+
+              def result
+                error(message: "foo\nbar\nbaz")
+              end
+            end
+          end
+
+          let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "\"foo\"", "\"bar\"", "\"baz\""] }
+
+          it "includes message into `inspect` representation of result" do
+            expect(result.inspect).to include(*keywords)
+          end
         end
       end
 
