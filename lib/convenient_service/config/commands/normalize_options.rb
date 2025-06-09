@@ -40,6 +40,7 @@ module ConvenientService
           case value
           when ::Symbol then normalize_symbol(value)
           when ::Array then normalize_array(value)
+          when ::Set then normalize_set(value)
           when ::Hash then normalize_hash(value)
           when Entities::Option then normalize_option(value)
           when Entities::Options then normalize_options(value)
@@ -69,6 +70,23 @@ module ConvenientService
             when Entities::Options then normalize_options(value)
             else
               raise_option_can_not_be_normalized(array)
+            end
+          end
+        end
+
+        ##
+        # @param set [Set<Object>]
+        # @return [Array<ConvenientService::Config::Entities::Option>]
+        #
+        def normalize_set(set)
+          set.map do |value|
+            case value
+            when ::Symbol then normalize_symbol(value)
+            when ::Hash then normalize_hash(value)
+            when Entities::Option then normalize_option(value)
+            when Entities::Options then normalize_options(value)
+            else
+              raise_option_can_not_be_normalized(set)
             end
           end
         end

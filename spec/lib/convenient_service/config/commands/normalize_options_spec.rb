@@ -96,15 +96,38 @@ RSpec.describe ConvenientService::Config::Commands::NormalizeOptions, type: :sta
         context "when `options` contains sets" do
           let(:options) { [:callbacks, Set[:fallbacks], Set[:rollbacks]] }
 
-          it "returns set with those sets flattened" do
-            expect(command_result).to eq(Set[:callbacks, :fallbacks, :rollbacks])
+          let(:normalized_options) do
+            {
+              callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+              fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: true),
+              rollbacks: ConvenientService::Config::Entities::Option.new(name: :rollbacks, enabled: true)
+            }
           end
 
-          context "when `options` contains nested arrays" do
+          it "returns hash with those sets flattened" do
+            expect(command_result).to eq(normalized_options)
+          end
+
+          context "when `options` contains nested sets" do
             let(:options) { [:callbacks, Set[:fallbacks, Set[:rollbacks]]] }
 
-            it "returns set with those arrays only one level flattened" do
-              expect(command_result).to eq(Set[:callbacks, :fallbacks, Set[:rollbacks]])
+            let(:exception_message) do
+              <<~TEXT
+                Option `#{Set[:fallbacks, Set[:rollbacks]].inspect}` can NOT be normalized.
+
+                Consider passing `Symbol` or `Hash` instead.
+              TEXT
+            end
+
+            it "raises `ConvenientService::Config::Exceptions::OptionCanNotBeNormalized`" do
+              expect { command_result }
+                .to raise_error(ConvenientService::Config::Exceptions::OptionCanNotBeNormalized)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Config::Exceptions::OptionCanNotBeNormalized) { command_result } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
         end
@@ -113,20 +136,40 @@ RSpec.describe ConvenientService::Config::Commands::NormalizeOptions, type: :sta
           context "when `options` contains hashes with falsy values" do
             let(:options) { [:callbacks, {fallbacks: false}, {rollbacks: nil}] }
 
-            it "returns set without hashes" do
-              expect(command_result).to eq(Set[:callbacks])
+            let(:normalized_options) do
+              {
+                callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+                fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: false),
+                rollbacks: ConvenientService::Config::Entities::Option.new(name: :rollbacks, enabled: false)
+              }
+            end
+
+            it "returns hash with disabled options" do
+              expect(command_result).to eq(normalized_options)
             end
           end
 
           context "when `options` contains hashes with truthy values" do
             let(:options) { [:callbacks, {fallbacks: true}, {rollbacks: 42}] }
 
-            it "returns set with those hashes keys" do
-              expect(command_result).to eq(Set[:callbacks, :fallbacks, :rollbacks])
+            let(:normalized_options) do
+              {
+                callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+                fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: true),
+                rollbacks: ConvenientService::Config::Entities::Option.new(name: :rollbacks, enabled: true)
+              }
+            end
+
+            it "returns hash with enabled options" do
+              expect(command_result).to eq(normalized_options)
             end
           end
         end
       end
+
+      ##
+      # TODO: Add specs for the trailing hash.
+      ##
 
       context "when `options` is set" do
         context "when `options` is empty" do
