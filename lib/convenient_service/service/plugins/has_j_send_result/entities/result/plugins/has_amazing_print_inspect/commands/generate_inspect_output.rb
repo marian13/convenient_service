@@ -94,7 +94,7 @@ module ConvenientService
                     def backtrace
                       locations = result.unhandled_exception.backtrace.to_a
 
-                      locations.size >= 10 ? locations.take(10) + ["..."] : locations
+                      (locations.size >= 10) ? locations.take(10) + ["..."] : locations
                     end
 
                     ##
