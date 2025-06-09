@@ -308,6 +308,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#normalize_set-instance_method" title="#normalize_set (instance method)">#<strong>normalize_set</strong>(set)  &#x21d2; Array&lt;ConvenientService::Config::Entities::Option&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#normalize_symbol-instance_method" title="#normalize_symbol (instance method)">#<strong>normalize_symbol</strong>(symbol)  &#x21d2; ConvenientService::Config::Entities::Option </a>
     
 
@@ -600,7 +622,8 @@
 46
 47
 48
-49</pre>
+49
+50</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 39</span>
@@ -609,6 +632,7 @@
   <span class='kw'>case</span> <span class='id identifier rubyid_value'>value</span>
   <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Symbol</span> <span class='kw'>then</span> <span class='id identifier rubyid_normalize_symbol'>normalize_symbol</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Array</span> <span class='kw'>then</span> <span class='id identifier rubyid_normalize_array'>normalize_array</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+  <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Set</span> <span class='kw'>then</span> <span class='id identifier rubyid_normalize_set'>normalize_set</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Hash</span> <span class='kw'>then</span> <span class='id identifier rubyid_normalize_hash'>normalize_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/Option.html" title="ConvenientService::Config::Entities::Option (class)">Option</a></span></span> <span class='kw'>then</span> <span class='id identifier rubyid_normalize_option'>normalize_option</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/Options.html" title="ConvenientService::Config::Entities::Options (class)">Options</a></span></span> <span class='kw'>then</span> <span class='id identifier rubyid_normalize_options'>normalize_options</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
@@ -673,7 +697,6 @@
       <pre class="lines">
 
 
-63
 64
 65
 66
@@ -684,10 +707,11 @@
 71
 72
 73
-74</pre>
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_normalize_array'>normalize_array</span><span class='lparen'>(</span><span class='id identifier rubyid_array'>array</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_array'>array</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
@@ -758,14 +782,14 @@
       <pre class="lines">
 
 
-80
-81
-82
-83
-84</pre>
+98
+99
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_normalize_hash'>normalize_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/Option.html" title="ConvenientService::Config::Entities::Option (class)">Option</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Entities/Option.html#initialize-instance_method" title="ConvenientService::Config::Entities::Option#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_hash'>hash</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='symbol'>:name</span><span class='rparen'>)</span>
@@ -829,12 +853,12 @@
       <pre class="lines">
 
 
-90
-91
-92</pre>
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_normalize_option'>normalize_option</span><span class='lparen'>(</span><span class='id identifier rubyid_option'>option</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_option'>option</span>
@@ -896,15 +920,100 @@
       <pre class="lines">
 
 
-98
-99
-100</pre>
+116
+117
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_normalize_options'>normalize_options</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="normalize_set-instance_method">
+  
+    #<strong>normalize_set</strong>(set)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../Entities/Option.html" title="ConvenientService::Config::Entities::Option (class)">ConvenientService::Config::Entities::Option</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>set</span>
+      
+      
+        <span class='type'>(<tt>Set&lt;Object&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../Entities/Option.html" title="ConvenientService::Config::Entities::Option (class)">ConvenientService::Config::Entities::Option</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 81</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_normalize_set'>normalize_set</span><span class='lparen'>(</span><span class='id identifier rubyid_set'>set</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_set'>set</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
+    <span class='kw'>case</span> <span class='id identifier rubyid_value'>value</span>
+    <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Symbol</span> <span class='kw'>then</span> <span class='id identifier rubyid_normalize_symbol'>normalize_symbol</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Hash</span> <span class='kw'>then</span> <span class='id identifier rubyid_normalize_hash'>normalize_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/Option.html" title="ConvenientService::Config::Entities::Option (class)">Option</a></span></span> <span class='kw'>then</span> <span class='id identifier rubyid_normalize_option'>normalize_option</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/Options.html" title="ConvenientService::Config::Entities::Options (class)">Options</a></span></span> <span class='kw'>then</span> <span class='id identifier rubyid_normalize_options'>normalize_options</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_raise_option_can_not_be_normalized'>raise_option_can_not_be_normalized</span><span class='lparen'>(</span><span class='id identifier rubyid_set'>set</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -963,12 +1072,12 @@
       <pre class="lines">
 
 
-55
 56
-57</pre>
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_normalize_symbol'>normalize_symbol</span><span class='lparen'>(</span><span class='id identifier rubyid_symbol'>symbol</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/Option.html" title="ConvenientService::Config::Entities::Option (class)">Option</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Entities/Option.html#initialize-instance_method" title="ConvenientService::Config::Entities::Option#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>name:</span> <span class='id identifier rubyid_symbol'>symbol</span><span class='comma'>,</span> <span class='label'>enabled:</span> <span class='kw'>true</span><span class='rparen'>)</span>
@@ -1030,12 +1139,12 @@
       <pre class="lines">
 
 
-106
-107
-108</pre>
+124
+125
+126</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/commands/normalize_options.rb', line 124</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_raise_option_can_not_be_normalized'>raise_option_can_not_be_normalized</span><span class='lparen'>(</span><span class='id identifier rubyid_option'>option</span><span class='rparen'>)</span>
   <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../../Support/Command/Exceptions.html" title="ConvenientService::Support::Command::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'>OptionCanNotBeNormalized</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>option:</span> <span class='id identifier rubyid_option'>option</span><span class='rparen'>)</span>
@@ -1050,7 +1159,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jun  9 21:58:38 2025 by
+  Generated on Mon Jun  9 22:33:02 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.8).
 </div>
