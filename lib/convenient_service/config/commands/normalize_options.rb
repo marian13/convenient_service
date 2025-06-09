@@ -27,7 +27,7 @@ module ConvenientService
         # @return [Hash]
         #
         def call
-          Utils::Array.wrap(options)
+          Utils::Array.wrap(options.to_a)
             .flat_map { |option| normalize(option) }
             .reduce({}) { |memo, option| memo.merge(option.name => option) } # index_by
         end
