@@ -8,6 +8,10 @@
 module ConvenientService
   module Config
     module Entities
+      ##
+      # @internal
+      #   TODO: Specs.
+      #
       class Options
         ##
         # @!attribute [r] options
@@ -21,6 +25,13 @@ module ConvenientService
         #
         def initialize(options: nil)
           @options = Commands::NormalizeOptions[options: options]
+        end
+
+        ##
+        # @return [Array<Symbol>]
+        #
+        def keys
+          options.keys
         end
 
         ##
@@ -80,6 +91,21 @@ module ConvenientService
           options.replace(Commands::NormalizeOptions[options: other_options])
 
           self
+        end
+
+        ##
+        # @param other [Object] Can be any type.
+        # @return [Boolean, nil]
+        #
+        # @internal
+        #   TODO: Tests.
+        #
+        def ==(other)
+          return unless other.instance_of?(self.class)
+
+          return false if options != other.options
+
+          true
         end
 
         ##

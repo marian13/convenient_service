@@ -380,8 +380,8 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
             specify do
               expect { config.options }
-                .to delegate_to(ConvenientService::Config::Commands::NormalizeOptions, :call)
-                .with_arguments(options: config.default_options)
+                .to delegate_to(ConvenientService::Config::Entities::Options, :new)
+                .with_arguments(options: config.default_options.dup)
                 .and_return_its_value
             end
 
@@ -401,7 +401,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
             end
 
             context "when `block` is NOT passed" do
-              it "returns empty set" do
+              it "returns empty options" do
                 expect(config.default_options).to eq(ConvenientService::Config::Entities::Options.new)
               end
 
@@ -411,12 +411,12 @@ RSpec.describe ConvenientService::Config, type: :standard do
             end
 
             context "when `block` is passed" do
-              let(:options) { Set[:foo, :bar] }
+              let(:options) { [:foo, :bar] }
               let(:block) { proc { options } }
 
               specify do
                 expect { config.default_options(&block) }
-                  .to delegate_to(ConvenientService::Config::Commands::NormalizeOptions, :call)
+                  .to delegate_to(ConvenientService::Config::Entities::Options, :new)
                   .with_arguments(options: options)
                   .and_return_its_value
               end
@@ -424,7 +424,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
               it "sets default options" do
                 config.default_options(&block)
 
-                expect(config.default_options).to eq(options)
+                expect(config.default_options).to eq(ConvenientService::Config::Entities::Options.new(options: options))
               end
             end
           end

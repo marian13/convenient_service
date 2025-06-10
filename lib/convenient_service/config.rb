@@ -156,7 +156,7 @@ module ConvenientService
           def inspect
             name = base.name || "AnonymousConfig"
 
-            options.any? ? "#{name}.with(#{options.map(&:inspect).join(", ")})" : name
+            options.any? ? "#{name}.with(#{options.keys.map(&:inspect).join(", ")})" : name
           end
         end
       end

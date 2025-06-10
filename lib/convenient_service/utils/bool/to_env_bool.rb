@@ -33,6 +33,9 @@ module ConvenientService
         ##
         # @return [Boolean]
         #
+        # @internal
+        #   TODO: Consider to create a plugin with the `semantic_boolean` gem.
+        #
         def call
           return true if object == "true"
           return true if object == "1"
