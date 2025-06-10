@@ -594,21 +594,23 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
     describe ".default_options" do
       context "when `RSpec` is loaded" do
         let(:default_options) do
-          Set[
-            :essential,
-            :callbacks,
-            :inspect,
-            :recalculation,
-            :result_parents_trace,
-            :code_review_automation,
-            :short_syntax,
-            :type_safety,
-            :exception_services_trace,
-            :per_instance_caching,
-            :mermaid_flowchart,
-            :backtrace_cleaner,
-            :rspec
-          ]
+          ConvenientService::Config::Entities::Options.new(
+            options: [
+              :essential,
+              :callbacks,
+              :inspect,
+              :recalculation,
+              :result_parents_trace,
+              :code_review_automation,
+              :short_syntax,
+              :type_safety,
+              :exception_services_trace,
+              :per_instance_caching,
+              :mermaid_flowchart,
+              :backtrace_cleaner,
+              :rspec
+            ]
+          )
         end
 
         it "returns default options with `:rspec`" do

@@ -118,7 +118,7 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
       ##
 
       context "when `RSpec` is loaded" do
-        let(:default_options) { Set[:essential, :rspec] }
+        let(:default_options) { ConvenientService::Config::Entities::Options.new(options: [:essential, :rspec]) }
 
         it "returns default options with `:rspec`" do
           expect(described_class.default_options).to eq(default_options)
