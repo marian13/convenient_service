@@ -29,7 +29,7 @@ module ConvenientService
         #
         def initialize(name:, enabled: false, **data)
           @name = name
-          @enabled = Utils.to_env_bool(enabled)
+          @enabled = Utils.to_bool(enabled)
           @data = data
         end
 
