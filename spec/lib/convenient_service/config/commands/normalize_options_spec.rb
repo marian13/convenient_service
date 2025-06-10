@@ -256,6 +256,22 @@ RSpec.describe ConvenientService::Config::Commands::NormalizeOptions, type: :sta
                   end
                 end
               end
+
+              context "when `options` contains hashes with multiple keys with `:name` key and with `:enabled` key and extra data" do
+                let(:options) { [:callbacks, {name: :fallbacks, enabled: false, status: :failure}, {name: :rollbacks, enabled: nil, exception: false}] }
+
+                let(:normalized_options) do
+                  {
+                    callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+                    fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: false, status: :failure),
+                    rollbacks: ConvenientService::Config::Entities::Option.new(name: :rollbacks, enabled: false, exception: false)
+                  }
+                end
+
+                it "returns hash with hashes normalized to options with extra data" do
+                  expect(command_result).to eq(normalized_options)
+                end
+              end
             end
           end
         end
@@ -357,6 +373,21 @@ RSpec.describe ConvenientService::Config::Commands::NormalizeOptions, type: :sta
                   it "returns hash with last element normalized to enabled option" do
                     expect(command_result).to eq(normalized_options)
                   end
+                end
+              end
+
+              context "when `options` contains hashes with multiple keys with `:name` key and with `:enabled` key and extra data" do
+                let(:options) { [:callbacks, name: :fallbacks, enabled: false, status: :failure] }
+
+                let(:normalized_options) do
+                  {
+                    callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+                    fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: false, status: :failure)
+                  }
+                end
+
+                it "returns hash with last element normalized to option with extra data" do
+                  expect(command_result).to eq(normalized_options)
                 end
               end
             end
@@ -589,6 +620,22 @@ RSpec.describe ConvenientService::Config::Commands::NormalizeOptions, type: :sta
                   end
                 end
               end
+
+              context "when `options` contains hashes with multiple keys with `:name` key and with `:enabled` key and extra data" do
+                let(:options) { Set[:callbacks, {name: :fallbacks, enabled: false, status: :failure}, {name: :rollbacks, enabled: nil, exception: false}] }
+
+                let(:normalized_options) do
+                  {
+                    callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+                    fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: false, status: :failure),
+                    rollbacks: ConvenientService::Config::Entities::Option.new(name: :rollbacks, enabled: false, exception: false)
+                  }
+                end
+
+                it "returns hash with hashes normalized to options with extra data" do
+                  expect(command_result).to eq(normalized_options)
+                end
+              end
             end
           end
         end
@@ -690,6 +737,21 @@ RSpec.describe ConvenientService::Config::Commands::NormalizeOptions, type: :sta
                   it "returns hash with last element normalized to enabled option" do
                     expect(command_result).to eq(normalized_options)
                   end
+                end
+              end
+
+              context "when `options` contains hashes with multiple keys with `:name` key and with `:enabled` key and extra data" do
+                let(:options) { Set[:callbacks, name: :fallbacks, enabled: false, status: :failure] }
+
+                let(:normalized_options) do
+                  {
+                    callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+                    fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: false, status: :failure)
+                  }
+                end
+
+                it "returns hash with last element normalized to option with extra data" do
+                  expect(command_result).to eq(normalized_options)
                 end
               end
             end
