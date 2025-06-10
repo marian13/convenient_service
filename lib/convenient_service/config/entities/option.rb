@@ -27,7 +27,7 @@ module ConvenientService
         # @param data [Hash{Symbol => Object}]
         # @return [void]
         #
-        def initialize(name:, enabled:, **data)
+        def initialize(name:, enabled: false, **data)
           @name = name
           @enabled = Utils.to_env_bool(enabled)
           @data = data
