@@ -313,17 +313,51 @@ RSpec.describe ConvenientService::Config::Commands::NormalizeOptions, type: :sta
             end
 
             context "when `options` last element has `:name` key" do
-              let(:options) { [:callbacks, name: :fallbacks, rollbacks: true] }
+              context "when `options` last element has `:name` key without `:enabled` key" do
+                let(:options) { [:callbacks, name: :fallbacks, rollbacks: true] }
 
-              let(:normalized_options) do
-                {
-                  callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
-                  fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: false, rollbacks: true)
-                }
+                let(:normalized_options) do
+                  {
+                    callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+                    fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: false, rollbacks: true)
+                  }
+                end
+
+                it "returns hash with last element normalized to disabled singular option with extra data" do
+                  expect(command_result).to eq(normalized_options)
+                end
               end
 
-              it "returns hash with last element normalized to singular option with extra data" do
-                expect(command_result).to eq(normalized_options)
+              context "when `options` last element has `:name` key with `:enabled` key" do
+                context "when `options` last element value is falsy value" do
+                  let(:options) { [:callbacks, name: :fallbacks, enabled: false] }
+
+                  let(:normalized_options) do
+                    {
+                      callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+                      fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: false)
+                    }
+                  end
+
+                  it "returns hash with last element normalized to disabled option" do
+                    expect(command_result).to eq(normalized_options)
+                  end
+                end
+
+                context "when `options` last element value is truthy value" do
+                  let(:options) { [:callbacks, name: :fallbacks, enabled: true] }
+
+                  let(:normalized_options) do
+                    {
+                      callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+                      fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: true)
+                    }
+                  end
+
+                  it "returns hash with last element normalized to enabled option" do
+                    expect(command_result).to eq(normalized_options)
+                  end
+                end
               end
             end
           end
@@ -612,17 +646,51 @@ RSpec.describe ConvenientService::Config::Commands::NormalizeOptions, type: :sta
             end
 
             context "when `options` last element has `:name` key" do
-              let(:options) { Set[:callbacks, name: :fallbacks, rollbacks: true] }
+              context "when `options` last element has `:name` key without `:enabled` key" do
+                let(:options) { Set[:callbacks, name: :fallbacks, rollbacks: true] }
 
-              let(:normalized_options) do
-                {
-                  callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
-                  fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: false, rollbacks: true)
-                }
+                let(:normalized_options) do
+                  {
+                    callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+                    fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: false, rollbacks: true)
+                  }
+                end
+
+                it "returns hash with last element normalized to disabled singular option with extra data" do
+                  expect(command_result).to eq(normalized_options)
+                end
               end
 
-              it "returns hash with last element normalized to singular option with extra data" do
-                expect(command_result).to eq(normalized_options)
+              context "when `options` last element has `:name` key with `:enabled` key" do
+                context "when `options` last element value is falsy value" do
+                  let(:options) { Set[:callbacks, name: :fallbacks, enabled: false] }
+
+                  let(:normalized_options) do
+                    {
+                      callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+                      fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: false)
+                    }
+                  end
+
+                  it "returns hash with last element normalized to disabled option" do
+                    expect(command_result).to eq(normalized_options)
+                  end
+                end
+
+                context "when `options` last element value is truthy value" do
+                  let(:options) { Set[:callbacks, name: :fallbacks, enabled: true] }
+
+                  let(:normalized_options) do
+                    {
+                      callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+                      fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: true)
+                    }
+                  end
+
+                  it "returns hash with last element normalized to enabled option" do
+                    expect(command_result).to eq(normalized_options)
+                  end
+                end
               end
             end
           end
