@@ -25,10 +25,7 @@ module ConvenientService
 
             return false unless Utils::Method.defined?(alias_name, object.class, private: true)
 
-            ##
-            # https://stackoverflow.com/a/45640516/12201472
-            #
-            object.method(alias_name).original_name == object.method(original_name).original_name
+            equal_methods?(alias_name, original_name)
           end
 
           def description
@@ -46,6 +43,68 @@ module ConvenientService
           private
 
           attr_reader :object, :alias_name, :original_name
+
+          ##
+          # NOTE: How to compare methods?
+          # - https://stackoverflow.com/a/45640516/12201472
+          #
+          # HACK: CRuby and JRuby have different behaviour when the alias method is defined for the attribute reader. That is why they have their own `equal_methods?` versions. For example:
+          #
+          #   class Data
+          #     attr_reader :result
+          #
+          #     alias_method :alias_result, :result
+          #
+          #     def value
+          #       @value
+          #     end
+          #
+          #     alias_method :alias_value, :value
+          #   end
+          #
+          #   object = Data.new
+          #
+          #   # CRuby
+          #   object.method(:result).original_name
+          #   # => :result
+          #
+          #   object.method(:alias_result).original_name
+          #   # => :result
+          #
+          #   object.method(:value).original_name
+          #   # => :value
+          #
+          #   object.method(:alias_value).original_name
+          #   # => :value
+          #
+          #   # JRuby
+          #   object.method(:result).original_name
+          #   # => :result
+          #
+          #   object.method(:alias_result).original_name
+          #   # => :@result
+          #
+          #   object.method(:value).original_name
+          #   # => :value
+          #
+          #   object.method(:alias_value).original_name
+          #   # => :value
+          #
+          if Dependencies.ruby.jruby?
+            def equal_methods?(alias_name, original_name)
+              alias_method_name = object.method(alias_name).original_name
+              original_method_name = object.method(original_name).original_name
+
+              return true if alias_method_name == original_method_name
+              return true if alias_method_name.to_s == "@#{original_method_name}"
+
+              false
+            end
+          else
+            def equal_methods?(alias_name, original_name)
+              object.method(alias_name).original_name == object.method(original_name).original_name
+            end
+          end
         end
       end
     end

@@ -106,6 +106,96 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAliasMe
           it "returns `true`" do
             expect(matcher_result).to eq(true)
           end
+
+          context "when `object` has method with original method name defined by `attr_reader`" do
+            let(:klass) do
+              Class.new do
+                attr_reader :foo
+
+                alias_method :bar, :foo
+              end
+            end
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          context "when `object` has method with original method name defined by `attr_writer`" do
+            let(:original_name) { :foo= }
+
+            let(:klass) do
+              Class.new do
+                attr_writer :foo
+
+                alias_method :bar, :foo=
+              end
+            end
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          context "when `object` has method with original method name defined by `attr_accessor` reader" do
+            let(:klass) do
+              Class.new do
+                attr_accessor :foo
+
+                alias_method :bar, :foo
+              end
+            end
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          context "when `object` has method with original method name defined by `attr_accessor` writer" do
+            let(:original_name) { :foo= }
+
+            let(:klass) do
+              Class.new do
+                attr_accessor :foo
+
+                alias_method :bar, :foo=
+              end
+            end
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          context "when `object` has method with original method name defined by `attr` reader" do
+            let(:klass) do
+              Class.new do
+                attr :foo
+
+                alias_method :bar, :foo
+              end
+            end
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
+
+          context "when `object` has method with original method name defined by `attr` writer" do
+            let(:original_name) { :foo= }
+
+            let(:klass) do
+              Class.new do
+                attr :foo, true
+
+                alias_method :bar, :foo=
+              end
+            end
+
+            it "returns `true`" do
+              expect(matcher_result).to eq(true)
+            end
+          end
         end
       end
     end
