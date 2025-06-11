@@ -18,7 +18,7 @@ class ConvenientService::Feature::Configs::StandardTest < Minitest::Test
     describe ".default_options" do
       context "when `RSpec` is NOT loaded" do
         should "return options without `:rspec`" do
-          default_options = Set[:essential]
+          default_options = ConvenientService::Config::Entities::Options.new(options: [:essential, rspec: false])
 
           assert_equal(default_options, ConvenientService::Feature::Configs::Standard.default_options)
         end

@@ -40,6 +40,7 @@ module ConvenientService
             # :dry_initializer,
             # :memo_wise,
             # :not_passed_arguments,
+            # :finite_loop,
             rspec: Dependencies.rspec.loaded?
           ]
         end
