@@ -186,7 +186,9 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAliasMe
 
             let(:klass) do
               Class.new do
+                # rubocop:disable Lint/DeprecatedClassMethods
                 attr :foo, true
+                # rubocop:enable Lint/DeprecatedClassMethods
 
                 alias_method :bar, :foo=
               end
