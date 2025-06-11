@@ -55,6 +55,15 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   ##
+  # Used for logging of the most critical Convenient Service parts, like config auto commitment.
+  # - https://github.com/ruby/logger
+  #
+  # Starting from Ruby 3.5, the `logger` is NO longer bundled with the stdlib.
+  # - https://github.com/sidekiq/sidekiq/pull/6320
+  #
+  spec.add_dependency "logger"
+
+  ##
   # Used for pretty printing when debugging Ruby code. `amazing_print` is `awesome_print` successor.
   # - https://github.com/amazing-print/amazing_print
   #
