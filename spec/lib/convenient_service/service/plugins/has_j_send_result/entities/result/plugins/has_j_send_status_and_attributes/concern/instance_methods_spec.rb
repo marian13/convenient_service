@@ -208,6 +208,20 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             .and_return { |data| data.copy(overrides: {kwargs: {result: result_instance}}) }
       end
 
+      ##
+      # TODO: JRuby raises exception for do/end? Why? Same test above with curly brackets works.
+      #
+      # if ConvenientService::Dependencies.ruby.jruby?
+      #   specify do
+      #     expect { result_instance.create_data!(params[:data]) }
+      #       .to delegate_to(result_class.data_class, :cast!)
+      #         .with_arguments(params[:data])
+      #         .and_return do |data|
+      #           data.copy(overrides: {kwargs: {result: result_instance}})
+      #         end
+      #   end
+      # end
+
       context "when `data` NOT castable" do
         let(:data) { 42 }
 

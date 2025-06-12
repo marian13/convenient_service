@@ -29,6 +29,7 @@ RSpec.configure do |config|
 end
 
 require_relative "support/thread_backtraces"
+require_relative "support/break"
 require_relative "support/convenient_service"
 require_relative "support/faker"
 require_relative "support/timeout_debug"
