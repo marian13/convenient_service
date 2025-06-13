@@ -6723,16 +6723,32 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((0...0)).slice_when { |number| number % 3 == 0 }.result).to be_success.with_data(values: [])
           expect(service.step_aware_enumerable(set([])).slice_when { |number| number % 3 == 0 }.result).to be_success.with_data(values: [])
 
-          # NOTE: No block.
-          expect { [0, 1, 2, 3, 4, 5].slice_when.to_a }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerator(chain_enumerator([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerable([0, 1, 2, 3, 4, 5]).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerable(set([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerable((0..5)).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+          ##
+          # HACK: JRuby has different exception message.
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.version < 9.5
+            # NOTE: No block.
+            expect { [0, 1, 2, 3, 4, 5].slice_when.to_a }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerator(chain_enumerator([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerable([0, 1, 2, 3, 4, 5]).slice_when.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerable(set([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).slice_when.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerable((0..5)).slice_when.result }.to raise_error(ArgumentError).with_message("missing block")
+          else
+            # NOTE: No block.
+            expect { [0, 1, 2, 3, 4, 5].slice_when.to_a }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerator(chain_enumerator([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerable([0, 1, 2, 3, 4, 5]).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerable(set([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerable((0..5)).slice_when.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+          end
 
           # NOTE: Block with one argument.
           expect([0, 1, 2, 3, 4, 5].slice_when { |number| number % 3 == 0 }.to_a).to eq([[0], [1, 2, 3], [4, 5]])
@@ -7385,6 +7401,9 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:success...:success)).tally.result).to be_success.with_data(values: {})
           expect(service.step_aware_enumerable(set([])).tally.result).to be_success.with_data(values: {})
 
+          ##
+          # HACK: `(1..3)).tally` returns `{nil => 3}` in JRuby.
+          #
           if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.version < 9.5
             # NOTE: Not empty collection.
             expect([1, 2, 2, 3, 3, 3].tally).to eq({1 => 1, 2 => 2, 3 => 3})
