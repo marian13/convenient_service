@@ -1040,16 +1040,29 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({}).chunk_while { raise }.result).to be_success.with_data(values: [])
           expect(service.step_aware_enumerable((:success...:success)).chunk_while { raise }.result).to be_success.with_data(values: [])
 
-          # NOTE: No block.
-          expect { [:success, :success, :success].chunk_while.to_a }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerable(enumerable([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerator(enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerator(lazy_enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerator(chain_enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerable([:success, :success, :success]).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerable(set([:success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerable({success: :success}).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
-          expect { service.step_aware_enumerable((:success..:success)).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: No block.
+            expect { [:success, :success, :success].chunk_while.to_a }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerable(enumerable([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerator(enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerator(lazy_enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerator(chain_enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerable([:success, :success, :success]).chunk_while.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerable(set([:success])).chunk_while.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerable({success: :success}).chunk_while.result }.to raise_error(ArgumentError).with_message("missing block")
+            expect { service.step_aware_enumerable((:success..:success)).chunk_while.result }.to raise_error(ArgumentError).with_message("missing block")
+          else
+            # NOTE: No block.
+            expect { [:success, :success, :success].chunk_while.to_a }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerable(enumerable([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerator(enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerator(lazy_enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerator(chain_enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerable([:success, :success, :success]).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerable(set([:success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerable({success: :success}).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+            expect { service.step_aware_enumerable((:success..:success)).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+          end
 
           # NOTE: Block with one argument.
           expect([:success, :failure, :success, :failure].chunk_while { |status| status_condition[status] }.to_a).to eq([[:success, :failure], [:success, :failure]])
