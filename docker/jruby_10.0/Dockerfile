@@ -9,19 +9,19 @@
 #
 # NOTE: Linted by hadolint.
 #
-#   docker run --rm -i ghcr.io/hadolint/hadolint < docker/jruby-9.4/Dockerfile
+#   docker run --rm -i ghcr.io/hadolint/hadolint < docker/jruby_10.0/Dockerfile
 #
 # NOTE: A command to build image.
 #
 #   cd convenient_service
-#   cp Gemfile Gemfile.jruby-9.4
-#   docker build . -f docker/jruby-9.4/Dockerfile -t convenient_service:jruby-9.4
+#   cp Gemfile Gemfile.jruby_10.0
+#   docker build . -f docker/jruby_10.0/Dockerfile -t convenient_service:jruby_10.0
 #   # or `ENGINE=jruby RUBY_VERSION=9.4 task docker:build`
 #
 # NOTE: A command to run bash in container.
 #
 #   cd convenient_service
-#   docker run --rm -it -v $(pwd):/gem convenient_service:jruby-9.4 bash
+#   docker run --rm -it -v $(pwd):/gem convenient_service:jruby_10.0 bash
 #   # or `task docker:bash RUBY_ENGINE=jruby RUBY_VERSION=9.4`
 #
 # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.

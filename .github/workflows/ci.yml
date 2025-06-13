@@ -136,6 +136,7 @@ jobs:
           # TODO: Make ConvenientService TruffleRuby 22.3 compatible.
           #
           # - "truffleruby-22.3"
+          # - "truffleruby-24.0"
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
 

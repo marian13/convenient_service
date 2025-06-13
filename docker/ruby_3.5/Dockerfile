@@ -39,19 +39,19 @@ RUN printf 'Package: nodejs\nPin: origin deb.nodesource.com\nPin-Priority: 1001'
 #
 # NOTE: Linted by hadolint.
 #
-#   docker run --rm -i ghcr.io/hadolint/hadolint < docker/ruby-3.4/Dockerfile
+#   docker run --rm -i ghcr.io/hadolint/hadolint < docker/ruby_3.4/Dockerfile
 #
 # NOTE: A command to build image.
 #
 #   cd convenient_service
-#   cp Gemfile Gemfile.ruby-3.4
-#   docker build . -f docker/ruby-3.4/Dockerfile -t convenient_service:ruby-3.4
+#   cp Gemfile Gemfile.ruby_3.4
+#   docker build . -f docker/ruby_3.4/Dockerfile -t convenient_service:ruby_3.4
 #   # or `RUBY_ENGINE=ruby RUBY_VERSION=3.4 task docker:build`
 #
 # NOTE: A command to run bash in container.
 #
 #   cd convenient_service
-#   docker run --rm -it -v $(pwd):/gem convenient_service:ruby-3.4 bash
+#   docker run --rm -it -v $(pwd):/gem convenient_service:ruby_3.4 bash
 #   # or `task docker:bash RUBY_ENGINE=ruby RUBY_VERSION=3.4`
 #
 # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
