@@ -858,29 +858,31 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_error.without_data
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_error.without_data
 
-          # NOTE: Failure propagation.
           if ConvenientService::Dependencies.ruby.version >= 3.1
+            # NOTE: Failure propagation.
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Lazy)
+            expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
           else
+            # NOTE: Failure propagation.
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
-          end
-
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-
-          if ConvenientService::Dependencies.ruby.version >= 3.1
-            expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-          else
+            expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
             expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_success.with_data(values: [2, 3])
+            expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
           end
-
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.chain([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -2130,8 +2132,8 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).each_cons(2).result).to be_success.with_data(values: [[[0, 0], [1, 1]], [[1, 1], [2, 2]], [[2, 2], [3, 3]], [[3, 3], [4, 4]], [[4, 4], [5, 5]]])
           expect(service.step_aware_enumerable((0..5)).each_cons(2).result).to be_success.with_data(values: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]])
 
-          # NOTE: Block.
           if ConvenientService::Dependencies.ruby.version >= 3.1
+            # NOTE: Block.
             expect([0, 1, 2, 3, 4, 5].each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }).to eq([0, 1, 2, 3, 4, 5])
 
             expect(service.step_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: enumerable([0, 1, 2, 3, 4, 5]))
@@ -2144,6 +2146,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable((0..5)).each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: (0..5))
             expect(service.step_aware_enumerable((0..0)).each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: (0..0))
           else
+            # NOTE: Block.
             expect([0, 1, 2, 3, 4, 5].each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }).to eq(nil)
 
             expect(service.step_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
@@ -2223,24 +2226,32 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable((:success..:success)).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: nil)
           end
 
-          # NOTE: Error result.
           if ConvenientService::Dependencies.ruby.version >= 3.1
+            # NOTE: Error result.
             expect((:error..:error).each_cons(2) { raise }).to eq((:error..:error))
-          else
-            expect((:error..:error).each_cons(2) { raise }).to eq(nil)
-          end
 
-          expect(service.step_aware_enumerable(enumerable([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(enumerator([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable([:success, :error, :exception]).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable(set([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses.map(&:last) }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable((:error..:error)).each_cons(1) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
-          if ConvenientService::Dependencies.ruby.version >= 3.1
+            expect(service.step_aware_enumerable(enumerable([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(enumerator([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(lazy_enumerator([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerable([:success, :error, :exception]).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerable(set([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses.map(&:last) }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerable((:error..:error)).each_cons(1) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+
             expect(service.step_aware_enumerable((:error..:error)).each_cons(2) { raise }.result).to be_success.with_data(values: (:error..:error))
           else
+            # NOTE: Error result.
+            expect((:error..:error).each_cons(2) { raise }).to eq(nil)
+
+            expect(service.step_aware_enumerable(enumerable([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(enumerator([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(lazy_enumerator([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerable([:success, :error, :exception]).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerable(set([:success, :error, :exception])).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).each_cons(2) { |statuses| step statuses_service, in: [statuses: -> { statuses.map(&:last) }] }.result).to be_error.without_data
+            expect(service.step_aware_enumerable((:error..:error)).each_cons(1) { |statuses| step statuses_service, in: [statuses: -> { statuses }] }.result).to be_error.without_data
             expect(service.step_aware_enumerable((:error..:error)).each_cons(2) { raise }.result).to be_success.with_data(values: nil)
           end
 
@@ -2580,6 +2591,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable([]).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: [])
             expect(service.step_aware_enumerable(set([])).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: set([]))
             expect(service.step_aware_enumerable({}).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: {})
+            expect(service.step_aware_enumerable((:success...:success)).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: (:success...:success))
           else
             # NOTE: Empty collection.
             expect(set([]).each_with_index { |status, index| index.abs }).to eq(set([]))
@@ -2594,25 +2606,34 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable([]).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: [])
             expect(service.step_aware_enumerable(set([])).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: set([]))
             expect(service.step_aware_enumerable({}).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: {})
+            expect(service.step_aware_enumerable((:success...:success)).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: (:success...:success))
           end
 
-          expect(service.step_aware_enumerable((:success...:success)).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: (:success...:success))
-
-          # NOTE: No block.
-          expect([0, 1, 2, 3, 4, 5].each_with_index.to_a).to eq([[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
-
-          expect(service.step_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
-          expect(service.step_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
-          expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
           if ConvenientService::Dependencies.ruby.version >= 3.1
+            # NOTE: No block.
+            expect([0, 1, 2, 3, 4, 5].each_with_index.to_a).to eq([[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+
+            expect(service.step_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+            expect(service.step_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+            expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
             expect(service.step_aware_enumerator(chain_enumerator([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+            expect(service.step_aware_enumerable([0, 1, 2, 3, 4, 5]).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+            expect(service.step_aware_enumerable(set([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+            expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).each_with_index.result).to be_success.with_data(values: [[[0, 0], 0], [[1, 1], 1], [[2, 2], 2], [[3, 3], 3], [[4, 4], 4], [[5, 5], 5]])
+            expect(service.step_aware_enumerable((0..5)).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
           else
+            # NOTE: No block.
+            expect([0, 1, 2, 3, 4, 5].each_with_index.to_a).to eq([[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+
+            expect(service.step_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+            expect(service.step_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+            expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
             expect { service.step_aware_enumerator(chain_enumerator([0, 1, 2, 3, 4, 5])).each_with_index.result }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+            expect(service.step_aware_enumerable([0, 1, 2, 3, 4, 5]).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+            expect(service.step_aware_enumerable(set([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+            expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).each_with_index.result).to be_success.with_data(values: [[[0, 0], 0], [[1, 1], 1], [[2, 2], 2], [[3, 3], 3], [[4, 4], 4], [[5, 5], 5]])
+            expect(service.step_aware_enumerable((0..5)).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
           end
-          expect(service.step_aware_enumerable([0, 1, 2, 3, 4, 5]).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
-          expect(service.step_aware_enumerable(set([0, 1, 2, 3, 4, 5])).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
-          expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).each_with_index.result).to be_success.with_data(values: [[[0, 0], 0], [[1, 1], 1], [[2, 2], 2], [[3, 3], 3], [[4, 4], 4], [[5, 5], 5]])
-          expect(service.step_aware_enumerable((0..5)).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
 
           # NOTE: Block.
           expect([0, 1, 2, 3, 4, 5].each_with_index { |number, index| index.abs }).to eq([0, 1, 2, 3, 4, 5])
@@ -2709,6 +2730,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable([]).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerable(set([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerable({}).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+            expect(service.step_aware_enumerable((:success...:success)).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
           else
             # NOTE: Empty collection.
 
@@ -2720,30 +2742,36 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable([]).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerable(set([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerable({}).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+            expect(service.step_aware_enumerable((:success...:success)).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
           end
 
-          expect(service.step_aware_enumerable((:success...:success)).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
-
-          # NOTE: No block.
-          expect(["0", "1", "2", "3", "4", "5"].each_with_object("").to_a).to eq([["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
           if ConvenientService::Dependencies.ruby.version >= 3.1
+            # NOTE: No block.
+            expect(["0", "1", "2", "3", "4", "5"].each_with_object("").to_a).to eq([["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
             expect(chain_enumerator(["0", "1", "2", "3", "4", "5"]).each_with_object("").to_a).to eq([["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
-          else
-            expect { chain_enumerator(["0", "1", "2", "3", "4", "5"]).each_with_object("").to_a }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
-          end
 
-          expect(service.step_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
-          expect(service.step_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
-          expect(service.step_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
-          if ConvenientService::Dependencies.ruby.version >= 3.1
+            expect(service.step_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+            expect(service.step_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+            expect(service.step_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
             expect(service.step_aware_enumerator(chain_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+            expect(service.step_aware_enumerable(["0", "1", "2", "3", "4", "5"]).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+            expect(service.step_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+            expect(service.step_aware_enumerable({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each_with_object("").result).to be_success.with_data(values: [[["0", "0"], ""], [["1", "1"], ""], [["2", "2"], ""], [["3", "3"], ""], [["4", "4"], ""], [["5", "5"], ""]])
+            expect(service.step_aware_enumerable(("0".."5")).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
           else
+            # NOTE: No block.
+            expect(["0", "1", "2", "3", "4", "5"].each_with_object("").to_a).to eq([["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+            expect { chain_enumerator(["0", "1", "2", "3", "4", "5"]).each_with_object("").to_a }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+
+            expect(service.step_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+            expect(service.step_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+            expect(service.step_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
             expect { service.step_aware_enumerator(chain_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object("").result }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+            expect(service.step_aware_enumerable(["0", "1", "2", "3", "4", "5"]).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+            expect(service.step_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+            expect(service.step_aware_enumerable({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each_with_object("").result).to be_success.with_data(values: [[["0", "0"], ""], [["1", "1"], ""], [["2", "2"], ""], [["3", "3"], ""], [["4", "4"], ""], [["5", "5"], ""]])
+            expect(service.step_aware_enumerable(("0".."5")).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
           end
-          expect(service.step_aware_enumerable(["0", "1", "2", "3", "4", "5"]).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
-          expect(service.step_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
-          expect(service.step_aware_enumerable({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each_with_object("").result).to be_success.with_data(values: [[["0", "0"], ""], [["1", "1"], ""], [["2", "2"], ""], [["3", "3"], ""], [["4", "4"], ""], [["5", "5"], ""]])
-          expect(service.step_aware_enumerable(("0".."5")).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
 
           # NOTE: Block.
           expect(["0", "1", "2", "3", "4", "5"].each_with_object(+"") { |string, object| concat_strings(object, string) }).to eq("12345")
@@ -7754,21 +7782,42 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({1 => 1}).zip({2 => 2}, {3 => 3}).result).to be_success.with_data(values: [[[1, 1], [2, 2], [3, 3]]])
           expect(service.step_aware_enumerable((1..1)).zip([2], [3]).result).to be_success.with_data(values: [[1, 2, 3]])
 
-          # No argument, block.
-          expect([1].zip { |array| raise if array.sum != 1 }).to eq(nil)
-          expect(lazy_enumerator([1]).zip { |integer| raise if integer != 1 }).to eq(nil)
-          expect(set([1]).zip { |integer| raise if integer != 1 }).to eq(nil)
-          expect({1 => 1}.zip { |array| raise if array.flatten.sum != 2 }).to eq(nil)
-          expect((1..1).zip { |integer| raise if integer != 1 }).to eq(nil)
+          ##
+          # HACK: JRuby and CRuby does not have the same behaviour for zip. JRuby passes the whole array to block, while CRuby passes one element.
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # No argument, block.
+            expect([1].zip { |array| raise if array.sum != 1 }).to eq(nil)
+            expect(lazy_enumerator([1]).zip { |integer| raise if integer.sum != 1 }).to eq(nil)
+            expect(set([1]).zip { |integer| raise if integer.sum != 1 }).to eq(nil)
+            expect({1 => 1}.zip { |array| raise if array.map(&:sum).sum != 2 }).to eq(nil)
+            expect((1..1).zip { |integer| raise if integer.sum != 1 }).to eq(nil)
 
-          expect(service.step_aware_enumerable(enumerable([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
-          expect(service.step_aware_enumerator(enumerator([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
-          expect(service.step_aware_enumerator(lazy_enumerator([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
-          expect(service.step_aware_enumerator(chain_enumerator([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
-          expect(service.step_aware_enumerable([1]).zip { |array| raise if array.sum != 1 }.result).to be_success.with_data(value: nil)
-          expect(service.step_aware_enumerable(set([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
-          expect(service.step_aware_enumerable({1 => 1}).zip { |array| raise if array.flatten.sum != 2 }.result).to be_success.with_data(value: nil)
-          expect(service.step_aware_enumerable((1..1)).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerable(enumerable([1])).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerator(enumerator([1])).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerator(lazy_enumerator([1])).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerator(chain_enumerator([1])).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerable([1]).zip { |array| raise if array.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerable(set([1])).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerable({1 => 1}).zip { |array| raise if array.map(&:sum).sum != 2 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerable((1..1)).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
+          else
+            # No argument, block.
+            expect([1].zip { |array| raise if array.sum != 1 }).to eq(nil)
+            expect(lazy_enumerator([1]).zip { |integer| raise if integer != 1 }).to eq(nil)
+            expect(set([1]).zip { |integer| raise if integer != 1 }).to eq(nil)
+            expect({1 => 1}.zip { |array| raise if array.sum != 2 }).to eq(nil)
+            expect((1..1).zip { |integer| raise if integer != 1 }).to eq(nil)
+
+            expect(service.step_aware_enumerable(enumerable([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerator(enumerator([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerator(lazy_enumerator([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerator(chain_enumerator([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerable([1]).zip { |array| raise if array.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerable(set([1])).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerable({1 => 1}).zip { |array| raise if array.flatten.sum != 2 }.result).to be_success.with_data(value: nil)
+            expect(service.step_aware_enumerable((1..1)).zip { |integer| raise if integer != 1 }.result).to be_success.with_data(value: nil)
+          end
 
           # One argument, block.
           expect([1].zip([2]) { |array| raise if array.sum != 3 }).to eq(nil)
