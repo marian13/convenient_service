@@ -4720,19 +4720,38 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect { service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).max { |hash, other_hash| step compare_numbers_service, in: [number: -> { hash.last }, other_number: -> { other_hash.last }], out: [:integer, :operator] }.result }.to raise_error(TypeError).with_message("no implicit conversion of Integer into Hash")
           expect { service.step_aware_enumerable((1..5)).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: [:integer, :operator] }.result }.to raise_error(TypeError).with_message("no implicit conversion of Integer into Hash")
 
-          # NOTE: Error result.
-          expect(service.step_aware_enumerable(enumerable([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(enumerator([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
-          expect(service.step_aware_enumerable([1, -1, :exception]).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
-          expect(service.step_aware_enumerable(set([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+          ##
+          # HACK: JRuby returns `nil` for `(-1..-1)`.
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: Error result.
+            expect(service.step_aware_enumerable(enumerable([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(enumerator([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(lazy_enumerator([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(chain_enumerator([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable([1, -1, :exception]).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable(set([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
 
-          expect(service.step_aware_enumerable({1 => 1, -1 => -1, :exception => :exception}).max { |hash, other_hash| step compare_numbers_service, in: [number: -> { hash.last }, other_number: -> { other_hash.last }], out: :number_code }.result).to be_error.without_data
-          expect(service.step_aware_enumerable((-2..-1)).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable({1 => 1, -1 => -1, :exception => :exception}).max { |hash, other_hash| step compare_numbers_service, in: [number: -> { hash.last }, other_number: -> { other_hash.last }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable((-2..-1)).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
 
-          expect((-1..-1).max { raise }).to eq(-1)
-          expect(service.step_aware_enumerable((-1..-1)).max { raise }.result).to be_success.with_data(value: -1)
+            expect((-1..-1).max { raise }).to eq(nil)
+            expect(service.step_aware_enumerable((-1..-1)).max { raise }.result).to be_success.with_data(value: -1)
+          else
+            # NOTE: Error result.
+            expect(service.step_aware_enumerable(enumerable([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(enumerator([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(lazy_enumerator([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(chain_enumerator([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable([1, -1, :exception]).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable(set([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+
+            expect(service.step_aware_enumerable({1 => 1, -1 => -1, :exception => :exception}).max { |hash, other_hash| step compare_numbers_service, in: [number: -> { hash.last }, other_number: -> { other_hash.last }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable((-2..-1)).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+
+            expect((-1..-1).max { raise }).to eq(-1)
+            expect(service.step_aware_enumerable((-1..-1)).max { raise }.result).to be_success.with_data(value: -1)
+          end
 
           # NOTE: Error propagation.
           expect(service.step_aware_enumerable(enumerable([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.max.result).to be_error.without_data
@@ -5061,19 +5080,38 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect { service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min { |hash, other_hash| step compare_numbers_service, in: [number: -> { hash.last }, other_number: -> { other_hash.last }], out: [:integer, :operator] }.result }.to raise_error(TypeError).with_message("no implicit conversion of Integer into Hash")
           expect { service.step_aware_enumerable((1..5)).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: [:integer, :operator] }.result }.to raise_error(TypeError).with_message("no implicit conversion of Integer into Hash")
 
-          # NOTE: Error result.
-          expect(service.step_aware_enumerable(enumerable([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(enumerator([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
-          expect(service.step_aware_enumerable([1, -1, :exception]).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
-          expect(service.step_aware_enumerable(set([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+          ##
+          # HACK: JRuby returns `nil` for `(-1..-1)`.
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: Error result.
+            expect(service.step_aware_enumerable(enumerable([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(enumerator([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(lazy_enumerator([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(chain_enumerator([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable([1, -1, :exception]).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable(set([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
 
-          expect(service.step_aware_enumerable({1 => 1, -1 => -1, :exception => :exception}).min { |hash, other_hash| step compare_numbers_service, in: [number: -> { hash.last }, other_number: -> { other_hash.last }], out: :number_code }.result).to be_error.without_data
-          expect(service.step_aware_enumerable((-2..-1)).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable({1 => 1, -1 => -1, :exception => :exception}).min { |hash, other_hash| step compare_numbers_service, in: [number: -> { hash.last }, other_number: -> { other_hash.last }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable((-2..-1)).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
 
-          expect((-1..-1).min { raise }).to eq(-1)
-          expect(service.step_aware_enumerable((-1..-1)).min { raise }.result).to be_success.with_data(value: -1)
+            expect((-1..-1).min { raise }).to eq(nil)
+            expect(service.step_aware_enumerable((-1..-1)).min { raise }.result).to be_success.with_data(value: -1)
+          else
+            # NOTE: Error result.
+            expect(service.step_aware_enumerable(enumerable([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(enumerator([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(lazy_enumerator([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerator(chain_enumerator([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable([1, -1, :exception]).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable(set([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+
+            expect(service.step_aware_enumerable({1 => 1, -1 => -1, :exception => :exception}).min { |hash, other_hash| step compare_numbers_service, in: [number: -> { hash.last }, other_number: -> { other_hash.last }], out: :number_code }.result).to be_error.without_data
+            expect(service.step_aware_enumerable((-2..-1)).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
+
+            expect((-1..-1).min { raise }).to eq(-1)
+            expect(service.step_aware_enumerable((-1..-1)).min { raise }.result).to be_success.with_data(value: -1)
+          end
 
           # NOTE: Error propagation.
           expect(service.step_aware_enumerable(enumerable([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.min.result).to be_error.without_data
