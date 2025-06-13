@@ -2925,18 +2925,36 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({}).filter { |status| status_condition[status] }.result).to be_success.with_data(values: {})
           expect(service.step_aware_enumerable((:success...:success)).filter { |status| status_condition[status] }.result).to be_success.with_data(values: [])
 
-          # NOTE: No block.
-          expect([:success, :failure, :success, :failure].filter.to_a).to eq([:success, :failure, :success, :failure])
+          ##
+          # HACK: JRuby raises `"tried to call lazy filter without a block"` instead of `"tried to call lazy select without a block"`.
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: No block.
+            expect([:success, :failure, :success, :failure].filter.to_a).to eq([:success, :failure, :success, :failure])
 
-          expect(service.step_aware_enumerable(enumerable([:success, :failure, :success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
-          expect(service.step_aware_enumerator(enumerator([:success, :failure, :success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
-          expect { service.step_aware_enumerator(lazy_enumerator([:success, :failure, :success, :failure])).filter.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([:success, :failure, :success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
-          expect(service.step_aware_enumerable([:success, :failure, :success, :failure]).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect(service.step_aware_enumerable(enumerable([:success, :failure, :success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect(service.step_aware_enumerator(enumerator([:success, :failure, :success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect { service.step_aware_enumerator(lazy_enumerator([:success, :failure, :success, :failure])).filter.result }.to raise_error(ArgumentError).with_message("tried to call lazy filter without a block")
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :failure, :success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect(service.step_aware_enumerable([:success, :failure, :success, :failure]).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
 
-          expect(service.step_aware_enumerable(set([:success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure])
-          expect(service.step_aware_enumerable({success: :success, failure: :failure}).filter.result).to be_success.with_data(values: [[:success, :success], [:failure, :failure]])
-          expect(service.step_aware_enumerable((:success..:success)).filter.result).to be_success.with_data(values: [:success])
+            expect(service.step_aware_enumerable(set([:success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure])
+            expect(service.step_aware_enumerable({success: :success, failure: :failure}).filter.result).to be_success.with_data(values: [[:success, :success], [:failure, :failure]])
+            expect(service.step_aware_enumerable((:success..:success)).filter.result).to be_success.with_data(values: [:success])
+          else
+            # NOTE: No block.
+            expect([:success, :failure, :success, :failure].filter.to_a).to eq([:success, :failure, :success, :failure])
+
+            expect(service.step_aware_enumerable(enumerable([:success, :failure, :success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect(service.step_aware_enumerator(enumerator([:success, :failure, :success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect { service.step_aware_enumerator(lazy_enumerator([:success, :failure, :success, :failure])).filter.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :failure, :success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect(service.step_aware_enumerable([:success, :failure, :success, :failure]).filter.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+
+            expect(service.step_aware_enumerable(set([:success, :failure])).filter.result).to be_success.with_data(values: [:success, :failure])
+            expect(service.step_aware_enumerable({success: :success, failure: :failure}).filter.result).to be_success.with_data(values: [[:success, :success], [:failure, :failure]])
+            expect(service.step_aware_enumerable((:success..:success)).filter.result).to be_success.with_data(values: [:success])
+          end
 
           # NOTE: Block.
           expect([:success, :failure, :success, :failure].filter { |status| status_condition[status] }).to eq([:success, :success])
@@ -3360,18 +3378,36 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({}).find_all { |status| status_condition[status] }.result).to be_success.with_data(values: [])
           expect(service.step_aware_enumerable((:success...:success)).find_all { |status| status_condition[status] }.result).to be_success.with_data(values: [])
 
-          # NOTE: No block.
-          expect([:success, :failure, :success, :failure].find_all.to_a).to eq([:success, :failure, :success, :failure])
+          ##
+          # HACK: JRuby raises `"tried to call lazy find_all without a block"` instead of `"tried to call lazy select without a block"`.
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: No block.
+            expect([:success, :failure, :success, :failure].find_all.to_a).to eq([:success, :failure, :success, :failure])
 
-          expect(service.step_aware_enumerable(enumerable([:success, :failure, :success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
-          expect(service.step_aware_enumerator(enumerator([:success, :failure, :success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
-          expect { service.step_aware_enumerator(lazy_enumerator([:success, :failure, :success, :failure])).find_all.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([:success, :failure, :success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
-          expect(service.step_aware_enumerable([:success, :failure, :success, :failure]).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
-          expect(service.step_aware_enumerable(set([:success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure])
-          expect(service.step_aware_enumerable({success: :success, failure: :failure}).find_all.result).to be_success.with_data(values: [[:success, :success], [:failure, :failure]])
-          expect(service.step_aware_enumerable((:success..:success)).find_all.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable((:failure..:failure)).find_all.result).to be_success.with_data(values: [:failure])
+            expect(service.step_aware_enumerable(enumerable([:success, :failure, :success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect(service.step_aware_enumerator(enumerator([:success, :failure, :success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect { service.step_aware_enumerator(lazy_enumerator([:success, :failure, :success, :failure])).find_all.result }.to raise_error(ArgumentError).with_message("tried to call lazy find_all without a block")
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :failure, :success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect(service.step_aware_enumerable([:success, :failure, :success, :failure]).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect(service.step_aware_enumerable(set([:success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure])
+            expect(service.step_aware_enumerable({success: :success, failure: :failure}).find_all.result).to be_success.with_data(values: [[:success, :success], [:failure, :failure]])
+            expect(service.step_aware_enumerable((:success..:success)).find_all.result).to be_success.with_data(values: [:success])
+            expect(service.step_aware_enumerable((:failure..:failure)).find_all.result).to be_success.with_data(values: [:failure])
+          else
+            # NOTE: No block.
+            expect([:success, :failure, :success, :failure].find_all.to_a).to eq([:success, :failure, :success, :failure])
+
+            expect(service.step_aware_enumerable(enumerable([:success, :failure, :success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect(service.step_aware_enumerator(enumerator([:success, :failure, :success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect { service.step_aware_enumerator(lazy_enumerator([:success, :failure, :success, :failure])).find_all.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :failure, :success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect(service.step_aware_enumerable([:success, :failure, :success, :failure]).find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
+            expect(service.step_aware_enumerable(set([:success, :failure])).find_all.result).to be_success.with_data(values: [:success, :failure])
+            expect(service.step_aware_enumerable({success: :success, failure: :failure}).find_all.result).to be_success.with_data(values: [[:success, :success], [:failure, :failure]])
+            expect(service.step_aware_enumerable((:success..:success)).find_all.result).to be_success.with_data(values: [:success])
+            expect(service.step_aware_enumerable((:failure..:failure)).find_all.result).to be_success.with_data(values: [:failure])
+          end
 
           # NOTE: Block.
           expect([:success, :failure, :success, :failure].find_all { |status| status_condition[status] }).to eq([:success, :success])
