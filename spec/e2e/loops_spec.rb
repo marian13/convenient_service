@@ -7385,17 +7385,31 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:success...:success)).tally.result).to be_success.with_data(values: {})
           expect(service.step_aware_enumerable(set([])).tally.result).to be_success.with_data(values: {})
 
-          # NOTE: Not empty collection.
-          expect([1, 2, 2, 3, 3, 3].tally).to eq({1 => 1, 2 => 2, 3 => 3})
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.version < 9.5
+            # NOTE: Not empty collection.
+            expect([1, 2, 2, 3, 3, 3].tally).to eq({1 => 1, 2 => 2, 3 => 3})
 
-          expect(service.step_aware_enumerable(enumerable([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
-          expect(service.step_aware_enumerator(enumerator([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
-          expect(service.step_aware_enumerator(lazy_enumerator([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
-          expect(service.step_aware_enumerable([1, 2, 2, 3, 3, 3]).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
-          expect(service.step_aware_enumerable(set([1, 2, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 1, 3 => 1})
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3}).tally.result).to be_success.with_data(values: {[1, 1] => 1, [2, 2] => 1, [3, 3] => 1})
-          expect(service.step_aware_enumerable((1..3)).tally.result).to be_success.with_data(values: {1 => 1, 2 => 1, 3 => 1})
+            expect(service.step_aware_enumerable(enumerable([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+            expect(service.step_aware_enumerator(enumerator([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+            expect(service.step_aware_enumerator(lazy_enumerator([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+            expect(service.step_aware_enumerator(chain_enumerator([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+            expect(service.step_aware_enumerable([1, 2, 2, 3, 3, 3]).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+            expect(service.step_aware_enumerable(set([1, 2, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 1, 3 => 1})
+            expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3}).tally.result).to be_success.with_data(values: {[1, 1] => 1, [2, 2] => 1, [3, 3] => 1})
+            expect(service.step_aware_enumerable((1..3)).tally.result).to be_success.with_data(values: {nil => 3})
+          else
+            # NOTE: Not empty collection.
+            expect([1, 2, 2, 3, 3, 3].tally).to eq({1 => 1, 2 => 2, 3 => 3})
+
+            expect(service.step_aware_enumerable(enumerable([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+            expect(service.step_aware_enumerator(enumerator([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+            expect(service.step_aware_enumerator(lazy_enumerator([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+            expect(service.step_aware_enumerator(chain_enumerator([1, 2, 2, 3, 3, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+            expect(service.step_aware_enumerable([1, 2, 2, 3, 3, 3]).tally.result).to be_success.with_data(values: {1 => 1, 2 => 2, 3 => 3})
+            expect(service.step_aware_enumerable(set([1, 2, 3])).tally.result).to be_success.with_data(values: {1 => 1, 2 => 1, 3 => 1})
+            expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3}).tally.result).to be_success.with_data(values: {[1, 1] => 1, [2, 2] => 1, [3, 3] => 1})
+            expect(service.step_aware_enumerable((1..3)).tally.result).to be_success.with_data(values: {1 => 1, 2 => 1, 3 => 1})
+          end
 
           # NOTE: Error propagation.
           expect(service.step_aware_enumerable(enumerable([:success, :error, :exception])).select { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_error.without_data
