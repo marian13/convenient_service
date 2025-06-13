@@ -1167,17 +1167,34 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({}).collect { |status| status_condition[status] }.result).to be_success.with_data(values: [])
           expect(service.step_aware_enumerable((:success...:success)).collect { |status| status_condition[status] }.result).to be_success.with_data(values: [])
 
-          # NOTE: No block.
-          expect([:success, :success, :success].collect.to_a).to eq([:success, :success, :success])
+          ##
+          # HACK: JRuby raises `"tried to call lazy collect without a block"` instead of `"tried to call lazy map without a block"`.
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: No block.
+            expect([:success, :success, :success].collect.to_a).to eq([:success, :success, :success])
 
-          expect(service.step_aware_enumerable(enumerable([:success, :success, :success])).collect.result).to be_success.with_data(values: [:success, :success, :success])
-          expect(service.step_aware_enumerator(enumerator([:success, :success, :success])).collect.result).to be_success.with_data(values: [:success, :success, :success])
-          expect { service.step_aware_enumerator(lazy_enumerator([:success, :success, :success])).collect.result }.to raise_error(ArgumentError).with_message("tried to call lazy map without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([:success, :success, :success])).collect.result).to be_success.with_data(values: [:success, :success, :success])
-          expect(service.step_aware_enumerable([:success, :success, :success]).collect.result).to be_success.with_data(values: [:success, :success, :success])
-          expect(service.step_aware_enumerable(set([:success])).collect.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable({success: :success}).collect.result).to be_success.with_data(values: [[:success, :success]])
-          expect(service.step_aware_enumerable((:success..:success)).collect.result).to be_success.with_data(values: [:success])
+            expect(service.step_aware_enumerable(enumerable([:success, :success, :success])).collect.result).to be_success.with_data(values: [:success, :success, :success])
+            expect(service.step_aware_enumerator(enumerator([:success, :success, :success])).collect.result).to be_success.with_data(values: [:success, :success, :success])
+            expect { service.step_aware_enumerator(lazy_enumerator([:success, :success, :success])).collect.result }.to raise_error(ArgumentError).with_message("tried to call lazy collect without a block")
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :success, :success])).collect.result).to be_success.with_data(values: [:success, :success, :success])
+            expect(service.step_aware_enumerable([:success, :success, :success]).collect.result).to be_success.with_data(values: [:success, :success, :success])
+            expect(service.step_aware_enumerable(set([:success])).collect.result).to be_success.with_data(values: [:success])
+            expect(service.step_aware_enumerable({success: :success}).collect.result).to be_success.with_data(values: [[:success, :success]])
+            expect(service.step_aware_enumerable((:success..:success)).collect.result).to be_success.with_data(values: [:success])
+          else
+            # NOTE: No block.
+            expect([:success, :success, :success].collect.to_a).to eq([:success, :success, :success])
+
+            expect(service.step_aware_enumerable(enumerable([:success, :success, :success])).collect.result).to be_success.with_data(values: [:success, :success, :success])
+            expect(service.step_aware_enumerator(enumerator([:success, :success, :success])).collect.result).to be_success.with_data(values: [:success, :success, :success])
+            expect { service.step_aware_enumerator(lazy_enumerator([:success, :success, :success])).collect.result }.to raise_error(ArgumentError).with_message("tried to call lazy map without a block")
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :success, :success])).collect.result).to be_success.with_data(values: [:success, :success, :success])
+            expect(service.step_aware_enumerable([:success, :success, :success]).collect.result).to be_success.with_data(values: [:success, :success, :success])
+            expect(service.step_aware_enumerable(set([:success])).collect.result).to be_success.with_data(values: [:success])
+            expect(service.step_aware_enumerable({success: :success}).collect.result).to be_success.with_data(values: [[:success, :success]])
+            expect(service.step_aware_enumerable((:success..:success)).collect.result).to be_success.with_data(values: [:success])
+          end
 
           # NOTE: Block.
           expect([:success, :success, :success].collect { |status| status_condition[status] }).to eq([true, true, true])
