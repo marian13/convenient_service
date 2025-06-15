@@ -20,7 +20,30 @@ module ConvenientService
               alias_method :chain_enumerator, :object
 
               ##
-              # HACK: JRuby returns chain emumerator for block version.
+              # HACK: JRuby returns chain emumerator.
+              #
+              if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+                ##
+                # @api public
+                #
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::ChainEnumerator]
+                #
+                def each_with_index(&iteration_block)
+                  if iteration_block
+                    with_processing_return_value_as_chain_enumerator(arguments(&iteration_block)) do |&step_aware_iteration_block|
+                      enumerable.each_with_index(&step_aware_iteration_block)
+                    end
+                  else
+                    with_processing_return_value_as_chain_enumerator do
+                      enumerable.each_with_index
+                    end
+                  end
+                end
+              end
+
+              ##
+              # HACK: JRuby returns chain emumerator.
               #
               if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
                 ##
@@ -35,7 +58,7 @@ module ConvenientService
                       enumerable.each(&step_aware_iteration_block)
                     end
                   else
-                    with_processing_return_value_as_enumerator do
+                    with_processing_return_value_as_chain_enumerator do
                       enumerable.each
                     end
                   end
@@ -43,7 +66,7 @@ module ConvenientService
               end
 
               ##
-              # HACK: JRuby returns chain emumerator for block version.
+              # HACK: JRuby returns chain emumerator.
               #
               if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
                 ##
@@ -51,7 +74,7 @@ module ConvenientService
                 #
                 # @param n [Integer]
                 # @param iteration_block [Proc, nil]
-                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::ChainEnumerator]
                 #
                 def each_cons(n, &iteration_block)
                   if iteration_block
@@ -59,7 +82,7 @@ module ConvenientService
                       enumerable.each_cons(n, &step_aware_iteration_block)
                     end
                   else
-                    with_processing_return_value_as_enumerator(arguments(n)) do |n|
+                    with_processing_return_value_as_chain_enumerator(arguments(n)) do |n|
                       enumerable.each_cons(n)
                     end
                   end
@@ -67,14 +90,14 @@ module ConvenientService
               end
 
               ##
-              # HACK: JRuby returns chain emumerator for block version.
+              # HACK: JRuby returns chain emumerator.
               #
               if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
                 ##
                 # @api public
                 #
                 # @param iteration_block [Proc, nil]
-                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::ChainEnumerator]
                 #
                 def each_entry(&iteration_block)
                   if iteration_block
@@ -82,7 +105,7 @@ module ConvenientService
                       enumerable.each_entry(&step_aware_iteration_block)
                     end
                   else
-                    with_processing_return_value_as_enumerator do
+                    with_processing_return_value_as_chain_enumerator do
                       enumerable.each_entry
                     end
                   end
@@ -90,7 +113,7 @@ module ConvenientService
               end
 
               ##
-              # HACK: JRuby returns chain emumerator for block version.
+              # HACK: JRuby returns chain emumerator.
               #
               if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
                 ##
@@ -98,7 +121,7 @@ module ConvenientService
                 #
                 # @param n [Integer]
                 # @param iteration_block [Proc, nil]
-                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::ChainEnumerator]
                 #
                 def each_slice(n, &iteration_block)
                   if iteration_block
@@ -106,7 +129,7 @@ module ConvenientService
                       enumerable.each_slice(n, &step_aware_iteration_block)
                     end
                   else
-                    with_processing_return_value_as_enumerator(arguments(n)) do |n|
+                    with_processing_return_value_as_chain_enumerator(arguments(n)) do |n|
                       enumerable.each_slice(n)
                     end
                   end
@@ -114,14 +137,14 @@ module ConvenientService
               end
 
               ##
-              # HACK: JRuby returns chain emumerator for block version.
+              # HACK: JRuby returns chain emumerator.
               #
               if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
                 ##
                 # @api public
                 #
                 # @param iteration_block [Proc, nil]
-                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::ChainEnumerator]
                 #
                 def reverse_each(&iteration_block)
                   if iteration_block
@@ -129,7 +152,7 @@ module ConvenientService
                       enumerable.reverse_each(&step_aware_iteration_block)
                     end
                   else
-                    with_processing_return_value_as_enumerator do
+                    with_processing_return_value_as_chain_enumerator do
                       enumerable.reverse_each
                     end
                   end

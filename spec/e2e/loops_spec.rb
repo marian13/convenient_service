@@ -2605,10 +2605,25 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
 
       describe "#each_with_index" do
         specify do
-          expect([].each_with_index { |status, index| index.abs }).to eq([])
-
-          if ConvenientService::Dependencies.ruby.version >= 3.1
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
             # NOTE: Empty collection.
+            expect([].each_with_index { |status, index| index.abs }).to eq([])
+            expect(set([]).each_with_index { |status, index| index.abs }).to eq(set([]))
+            expect({}.each_with_index { |status, index| index.abs }).to eq({})
+            expect((:success...:success).each_with_index { |status, index| index.abs }).to eq((:success...:success))
+            expect(chain_enumerator([]).each_with_index { |status, index| index.abs }.to_a).to eq([])
+
+            expect(service.step_aware_enumerable(enumerable([])).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: enumerable([]))
+            expect(service.step_aware_enumerator(enumerator([])).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: [])
+            expect(service.step_aware_enumerator(lazy_enumerator([])).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: [])
+            expect(service.step_aware_enumerator(chain_enumerator([])).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: [])
+            expect(service.step_aware_enumerable([]).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: [])
+            expect(service.step_aware_enumerable(set([])).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: set([]))
+            expect(service.step_aware_enumerable({}).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: {})
+            expect(service.step_aware_enumerable((:success...:success)).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: (:success...:success))
+          elsif ConvenientService::Dependencies.ruby.version >= 3.1
+            # NOTE: Empty collection.
+            expect([].each_with_index { |status, index| index.abs }).to eq([])
             expect(set([]).each_with_index { |status, index| index.abs }).to eq(set([]))
             expect({}.each_with_index { |status, index| index.abs }).to eq({})
             expect((:success...:success).each_with_index { |status, index| index.abs }).to eq((:success...:success))
@@ -2624,6 +2639,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable((:success...:success)).each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: (:success...:success))
           else
             # NOTE: Empty collection.
+            expect([].each_with_index { |status, index| index.abs }).to eq([])
             expect(set([]).each_with_index { |status, index| index.abs }).to eq(set([]))
             expect({}.each_with_index { |status, index| index.abs }).to eq({})
             expect((:success...:success).each_with_index { |status, index| index.abs }).to eq((:success...:success))
@@ -2665,17 +2681,31 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable((0..5)).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
           end
 
-          # NOTE: Block.
-          expect([0, 1, 2, 3, 4, 5].each_with_index { |number, index| index.abs }).to eq([0, 1, 2, 3, 4, 5])
-          expect { chain_enumerator([0, 1, 2, 3, 4, 5]).each_with_index { |status, index| index.abs } }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: Block.
+            expect([0, 1, 2, 3, 4, 5].each_with_index { |number, index| index.abs }).to eq([0, 1, 2, 3, 4, 5])
+            expect(chain_enumerator([0, 1, 2, 3, 4, 5]).each_with_index { |status, index| index.abs }.to_a).to eq([0, 1, 2, 3, 4, 5])
 
-          expect(service.step_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: enumerable([0, 1, 2, 3, 4, 5]))
-          expect(service.step_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerable([0, 1, 2, 3, 4, 5]).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerable(set([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: set([0, 1, 2, 3, 4, 5]))
-          expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).each_with_index { |(key, value), index| value.to_s.ord }.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5})
-          expect(service.step_aware_enumerable((0..5)).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: (0..5))
+            expect(service.step_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: enumerable([0, 1, 2, 3, 4, 5]))
+            expect(service.step_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerable([0, 1, 2, 3, 4, 5]).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerable(set([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: set([0, 1, 2, 3, 4, 5]))
+            expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).each_with_index { |(key, value), index| value.to_s.ord }.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5})
+            expect(service.step_aware_enumerable((0..5)).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: (0..5))
+          else
+            # NOTE: Block.
+            expect([0, 1, 2, 3, 4, 5].each_with_index { |number, index| index.abs }).to eq([0, 1, 2, 3, 4, 5])
+            expect { chain_enumerator([0, 1, 2, 3, 4, 5]).each_with_index { |status, index| index.abs } }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+
+            expect(service.step_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: enumerable([0, 1, 2, 3, 4, 5]))
+            expect(service.step_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerable([0, 1, 2, 3, 4, 5]).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerable(set([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: set([0, 1, 2, 3, 4, 5]))
+            expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).each_with_index { |(key, value), index| value.to_s.ord }.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5})
+            expect(service.step_aware_enumerable((0..5)).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: (0..5))
+          end
 
           # NOTE: Step with no outputs.
           expect(service.step_aware_enumerable(enumerable([:success, :success, :success])).each_with_index { |status, index| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: enumerable([:success, :success, :success]))
@@ -2747,15 +2777,27 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
 
       describe "#each_with_object" do
         specify do
-          expect([].each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
-
-          if ConvenientService::Dependencies.ruby.version >= 3.1
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
             # NOTE: Empty collection.
+            expect([].each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
 
             expect(service.step_aware_enumerable(enumerable([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerator(enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerator(lazy_enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
-            expect { chain_enumerator([]).each_with_object("") { |string, object| concat_strings(object, string) } }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+            expect(chain_enumerator([]).each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
+            expect(service.step_aware_enumerator(chain_enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+            expect(service.step_aware_enumerable([]).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+            expect(service.step_aware_enumerable(set([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+            expect(service.step_aware_enumerable({}).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+            expect(service.step_aware_enumerable((:success...:success)).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+          elsif ConvenientService::Dependencies.ruby.version >= 3.1
+            # NOTE: Empty collection.
+            expect([].each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
+
+            expect(service.step_aware_enumerable(enumerable([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+            expect(service.step_aware_enumerator(enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+            expect(service.step_aware_enumerator(lazy_enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+            expect { chain_enumerator([]).each_with_object("") { |string, object| concat_strings(object, string) }.result }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
             expect { service.step_aware_enumerator(chain_enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
             expect(service.step_aware_enumerable([]).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerable(set([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
@@ -2763,11 +2805,12 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable((:success...:success)).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
           else
             # NOTE: Empty collection.
+            expect([].each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
 
             expect(service.step_aware_enumerable(enumerable([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerator(enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerator(lazy_enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
-            expect { chain_enumerator([]).each_with_object("") { |string, object| concat_strings(object, string) } }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+            expect { chain_enumerator([]).each_with_object("") { |string, object| concat_strings(object, string) }.result }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
             expect { service.step_aware_enumerator(chain_enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
             expect(service.step_aware_enumerable([]).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerable(set([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
@@ -2803,19 +2846,35 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable(("0".."5")).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
           end
 
-          # NOTE: Block.
-          expect(["0", "1", "2", "3", "4", "5"].each_with_object(+"") { |string, object| concat_strings(object, string) }).to eq("12345")
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: Block.
+            expect(["0", "1", "2", "3", "4", "5"].each_with_object(+"") { |string, object| concat_strings(object, string) }).to eq("12345")
 
-          expect(service.step_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
-          expect(service.step_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
-          expect(service.step_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
-          expect { chain_enumerator(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| concat_strings(object, string) } }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
-          expect { service.step_aware_enumerator(chain_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
-          expect(service.step_aware_enumerable(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
-          expect(service.step_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
-          expect({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}.each_with_object(+"") { |(key, value), object| concat_strings(object, value) }).to eq("12345")
-          expect(service.step_aware_enumerable({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each_with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_success.with_data(value: "12345")
-          expect(service.step_aware_enumerable(("0".."5")).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.step_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.step_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.step_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(chain_enumerator(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| concat_strings(object, string) }).to eq("12345")
+            expect(service.step_aware_enumerator(chain_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.step_aware_enumerable(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.step_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}.each_with_object(+"") { |(key, value), object| concat_strings(object, value) }).to eq("12345")
+            expect(service.step_aware_enumerable({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each_with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_success.with_data(value: "12345")
+            expect(service.step_aware_enumerable(("0".."5")).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+          else
+            # NOTE: Block.
+            expect(["0", "1", "2", "3", "4", "5"].each_with_object(+"") { |string, object| concat_strings(object, string) }).to eq("12345")
+
+            expect(service.step_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.step_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.step_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect { chain_enumerator(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| concat_strings(object, string) } }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+            expect { service.step_aware_enumerator(chain_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+            expect(service.step_aware_enumerable(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.step_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}.each_with_object(+"") { |(key, value), object| concat_strings(object, value) }).to eq("12345")
+            expect(service.step_aware_enumerable({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each_with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_success.with_data(value: "12345")
+            expect(service.step_aware_enumerable(("0".."5")).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+          end
 
           # NOTE: Step with no outputs.
           expect(service.step_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "12345")
@@ -4895,17 +4954,34 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable((1..5)).max_by.result).to be_success.with_data(values: [1, 2, 3, 4, 5])
           end
 
-          # NOTE: No block, n.
-          expect([1, 2, 3, 4, 5].max_by(2).to_a).to eq([1, 2, 3, 4, 5])
+          ##
+          # TODO: Why JRuby raises exception only for wrapped `max_by`?
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: No block, n.
+            expect([1, 2, 3, 4, 5].max_by(2).to_a).to eq([1, 2, 3, 4, 5])
 
-          expect(service.step_aware_enumerable(enumerable([1, 2, 3, 4, 5])).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerator(enumerator([1, 2, 3, 4, 5])).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerator(lazy_enumerator([1, 2, 3, 4, 5])).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2, 3, 4, 5])).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerable([1, 2, 3, 4, 5]).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerable(set([1, 2, 3, 4, 5])).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).max_by(2).result).to be_success.with_data(values: [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
-          expect(service.step_aware_enumerable((1..5)).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect { service.step_aware_enumerable(enumerable([1, 2, 3, 4, 5])).max_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerator(enumerator([1, 2, 3, 4, 5])).max_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerator(lazy_enumerator([1, 2, 3, 4, 5])).max_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerator(chain_enumerator([1, 2, 3, 4, 5])).max_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable([1, 2, 3, 4, 5]).max_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable(set([1, 2, 3, 4, 5])).max_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).max_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Array with Array failed")
+            expect { service.step_aware_enumerable((1..5)).max_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+          else
+            # NOTE: No block, n.
+            expect([1, 2, 3, 4, 5].max_by(2).to_a).to eq([1, 2, 3, 4, 5])
+
+            expect(service.step_aware_enumerable(enumerable([1, 2, 3, 4, 5])).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerator(enumerator([1, 2, 3, 4, 5])).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerator(lazy_enumerator([1, 2, 3, 4, 5])).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerator(chain_enumerator([1, 2, 3, 4, 5])).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerable([1, 2, 3, 4, 5]).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerable(set([1, 2, 3, 4, 5])).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).max_by(2).result).to be_success.with_data(values: [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+            expect(service.step_aware_enumerable((1..5)).max_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+          end
 
           # NOTE: Block, no n.
           expect([1, 2, 3, 4, 5].max_by { |number| number.to_s.ord }).to eq(5)
@@ -5272,17 +5348,34 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable((1..5)).min_by.result).to be_success.with_data(values: [1, 2, 3, 4, 5])
           end
 
-          # NOTE: No block, n.
-          expect([1, 2, 3, 4, 5].min_by(2).to_a).to eq([1, 2, 3, 4, 5])
+          ##
+          # TODO: Why JRuby raises exception only for wrapped `min_by`?
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: No block, n.
+            expect([1, 2, 3, 4, 5].min_by(2).to_a).to eq([1, 2, 3, 4, 5])
 
-          expect(service.step_aware_enumerable(enumerable([1, 2, 3, 4, 5])).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerator(enumerator([1, 2, 3, 4, 5])).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerator(lazy_enumerator([1, 2, 3, 4, 5])).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2, 3, 4, 5])).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerable([1, 2, 3, 4, 5]).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerable(set([1, 2, 3, 4, 5])).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min_by(2).result).to be_success.with_data(values: [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
-          expect(service.step_aware_enumerable((1..5)).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect { service.step_aware_enumerable(enumerable([1, 2, 3, 4, 5])).min_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerator(enumerator([1, 2, 3, 4, 5])).min_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerator(lazy_enumerator([1, 2, 3, 4, 5])).min_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerator(chain_enumerator([1, 2, 3, 4, 5])).min_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable([1, 2, 3, 4, 5]).min_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable(set([1, 2, 3, 4, 5])).min_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Array with Array failed")
+            expect { service.step_aware_enumerable((1..5)).min_by(2).result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+          else
+            # NOTE: No block, n.
+            expect([1, 2, 3, 4, 5].min_by(2).to_a).to eq([1, 2, 3, 4, 5])
+
+            expect(service.step_aware_enumerable(enumerable([1, 2, 3, 4, 5])).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerator(enumerator([1, 2, 3, 4, 5])).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerator(lazy_enumerator([1, 2, 3, 4, 5])).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerator(chain_enumerator([1, 2, 3, 4, 5])).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerable([1, 2, 3, 4, 5]).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerable(set([1, 2, 3, 4, 5])).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+            expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min_by(2).result).to be_success.with_data(values: [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
+            expect(service.step_aware_enumerable((1..5)).min_by(2).result).to be_success.with_data(values: [1, 2, 3, 4, 5])
+          end
 
           # NOTE: Block, no n.
           expect([1, 2, 3, 4, 5].min_by { |number| number.to_s.ord }).to eq(1)
@@ -8641,13 +8734,15 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      ##
+      # TODO:
       # first(2) => [only_one] # What to do? success of failure?
       # cycle(2) => nil # What to do? success without data?
       # drop(2) => [] # What to do? success when nothing dropped?
-
+      #
       # add not_step specs.
       # failure propagation
-
+      #
       # check return type
       # delegate
       # select no block
@@ -8659,7 +8754,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
       # with_index, with_object specs, cast object
       # find step aware default
       # null_arguments to nil_arguments
-      # specs for with_index, with_object !!!
+      ##
     end
   end
 end
