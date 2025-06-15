@@ -18,6 +18,123 @@ module ConvenientService
               # @return [Enumerator::Chain]
               #
               alias_method :chain_enumerator, :object
+
+              ##
+              # HACK: JRuby returns chain emumerator for block version.
+              #
+              if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+                ##
+                # @api public
+                #
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable]
+                #
+                def each(&iteration_block)
+                  if iteration_block
+                    with_processing_return_value_as_chain_enumerator(arguments(&iteration_block)) do |&step_aware_iteration_block|
+                      enumerable.each(&step_aware_iteration_block)
+                    end
+                  else
+                    with_processing_return_value_as_enumerator do
+                      enumerable.each
+                    end
+                  end
+                end
+              end
+
+              ##
+              # HACK: JRuby returns chain emumerator for block version.
+              #
+              if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+                ##
+                # @api public
+                #
+                # @param n [Integer]
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                #
+                def each_cons(n, &iteration_block)
+                  if iteration_block
+                    with_processing_return_value_as_chain_enumerator(arguments(n, &iteration_block)) do |n, &step_aware_iteration_block|
+                      enumerable.each_cons(n, &step_aware_iteration_block)
+                    end
+                  else
+                    with_processing_return_value_as_enumerator(arguments(n)) do |n|
+                      enumerable.each_cons(n)
+                    end
+                  end
+                end
+              end
+
+              ##
+              # HACK: JRuby returns chain emumerator for block version.
+              #
+              if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+                ##
+                # @api public
+                #
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                #
+                def each_entry(&iteration_block)
+                  if iteration_block
+                    with_processing_return_value_as_chain_enumerator(arguments(&iteration_block)) do |&step_aware_iteration_block|
+                      enumerable.each_entry(&step_aware_iteration_block)
+                    end
+                  else
+                    with_processing_return_value_as_enumerator do
+                      enumerable.each_entry
+                    end
+                  end
+                end
+              end
+
+              ##
+              # HACK: JRuby returns chain emumerator for block version.
+              #
+              if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+                ##
+                # @api public
+                #
+                # @param n [Integer]
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                #
+                def each_slice(n, &iteration_block)
+                  if iteration_block
+                    with_processing_return_value_as_chain_enumerator(arguments(n, &iteration_block)) do |n, &step_aware_iteration_block|
+                      enumerable.each_slice(n, &step_aware_iteration_block)
+                    end
+                  else
+                    with_processing_return_value_as_enumerator(arguments(n)) do |n|
+                      enumerable.each_slice(n)
+                    end
+                  end
+                end
+              end
+
+              ##
+              # HACK: JRuby returns chain emumerator for block version.
+              #
+              if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+                ##
+                # @api public
+                #
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+                #
+                def reverse_each(&iteration_block)
+                  if iteration_block
+                    with_processing_return_value_as_chain_enumerator(arguments(&iteration_block)) do |&step_aware_iteration_block|
+                      enumerable.reverse_each(&step_aware_iteration_block)
+                    end
+                  else
+                    with_processing_return_value_as_enumerator do
+                      enumerable.reverse_each
+                    end
+                  end
+                end
+              end
             end
           end
         end

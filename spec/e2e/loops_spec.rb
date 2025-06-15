@@ -4871,16 +4871,16 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           #
           if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
             # NOTE: No block, no n.
-            expect { [1, 2, 3, 4, 5].max_by.to_a }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
+            expect { [1, 2, 3, 4, 5].max_by.to_a }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
 
-            expect { service.step_aware_enumerable(enumerable([1, 2, 3, 4, 5])).max_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerator(enumerator([1, 2, 3, 4, 5])).max_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerator(lazy_enumerator([1, 2, 3, 4, 5])).max_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerator(chain_enumerator([1, 2, 3, 4, 5])).max_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerable([1, 2, 3, 4, 5]).max_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerable(set([1, 2, 3, 4, 5])).max_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).max_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerable((1..5)).max_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable(enumerable([1, 2, 3, 4, 5])).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerator(enumerator([1, 2, 3, 4, 5])).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerator(lazy_enumerator([1, 2, 3, 4, 5])).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerator(chain_enumerator([1, 2, 3, 4, 5])).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable([1, 2, 3, 4, 5]).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable(set([1, 2, 3, 4, 5])).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable((1..5)).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
           else
             # NOTE: No block, no n.
             expect([1, 2, 3, 4, 5].max_by.to_a).to eq([1, 2, 3, 4, 5])
@@ -5248,16 +5248,16 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           #
           if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
             # NOTE: No block, no n.
-            expect { [1, 2, 3, 4, 5].min_by.to_a }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
+            expect { [1, 2, 3, 4, 5].min_by.to_a }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
 
-            expect { service.step_aware_enumerable(enumerable([1, 2, 3, 4, 5])).min_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerator(enumerator([1, 2, 3, 4, 5])).min_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerator(lazy_enumerator([1, 2, 3, 4, 5])).min_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerator(chain_enumerator([1, 2, 3, 4, 5])).min_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerable([1, 2, 3, 4, 5]).min_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerable(set([1, 2, 3, 4, 5])).min_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerable((1..5)).min_by.result }.to raise_error(ArgumentError).with_message("ArgumentError: comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable(enumerable([1, 2, 3, 4, 5])).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerator(enumerator([1, 2, 3, 4, 5])).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerator(lazy_enumerator([1, 2, 3, 4, 5])).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerator(chain_enumerator([1, 2, 3, 4, 5])).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable([1, 2, 3, 4, 5]).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable(set([1, 2, 3, 4, 5])).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable((1..5)).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
           else
             # NOTE: No block, no n.
             expect([1, 2, 3, 4, 5].min_by.to_a).to eq([1, 2, 3, 4, 5])
