@@ -4879,7 +4879,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect { service.step_aware_enumerator(chain_enumerator([1, 2, 3, 4, 5])).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
             expect { service.step_aware_enumerable([1, 2, 3, 4, 5]).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
             expect { service.step_aware_enumerable(set([1, 2, 3, 4, 5])).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Array with Array failed")
             expect { service.step_aware_enumerable((1..5)).max_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
           else
             # NOTE: No block, no n.
@@ -5256,7 +5256,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect { service.step_aware_enumerator(chain_enumerator([1, 2, 3, 4, 5])).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
             expect { service.step_aware_enumerable([1, 2, 3, 4, 5]).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
             expect { service.step_aware_enumerable(set([1, 2, 3, 4, 5])).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
-            expect { service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
+            expect { service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Array with Array failed")
             expect { service.step_aware_enumerable((1..5)).min_by.result }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
           else
             # NOTE: No block, no n.
