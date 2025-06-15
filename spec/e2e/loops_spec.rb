@@ -858,7 +858,19 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_error.without_data
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_error.without_data
 
-          if ConvenientService::Dependencies.ruby.version >= 3.1
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: Failure propagation.
+            expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
+            expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
+            expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
+            expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+          elsif ConvenientService::Dependencies.ruby.version >= 3.1
             # NOTE: Failure propagation.
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Lazy)
