@@ -2078,29 +2078,64 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:success..:success)).drop_while { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [])
           expect(service.step_aware_enumerable((:failure..:failure)).drop_while { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:failure])
 
-          # NOTE: Step with one output.
-          expect(service.step_aware_enumerable(enumerable([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
-          expect(service.step_aware_enumerator(enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
-          expect(service.step_aware_enumerator(lazy_enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
-          expect(service.step_aware_enumerator(chain_enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
-          expect(service.step_aware_enumerable([:success, :success, :failure, :exception]).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
+          ##
+          # HACK: For some reason in JRuby `Enumerator::Lazy#drop_while` does NOT stop after first falsy value.
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: Step with one output.
+            expect([true, nil, true].drop_while { |value| value }.to_a).to eq([nil, true])
+            expect([true, nil, true].lazy.drop_while { |value| value }.to_a).to eq([nil])
 
-          expect(service.step_aware_enumerable(set([:success, :failure])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure])
-          expect(service.step_aware_enumerable({success: :success, failure: :failure, exception: :exception}).drop_while { |key, value| step status_service, in: [status: -> { value }], out: :status_string }.result).to be_success.with_data(values: [[:failure, :failure], [:exception, :exception]])
-          expect(service.step_aware_enumerable((:success..:success)).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable((:failure..:failure)).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure])
+            expect(service.step_aware_enumerable(enumerable([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerator(enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerator(lazy_enumerator([:success, :success, :failure])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure])
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerable([:success, :success, :failure, :exception]).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
 
-          # NOTE: Step with multiple outputs.
-          expect(service.step_aware_enumerable(enumerable([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
-          expect(service.step_aware_enumerator(enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
-          expect(service.step_aware_enumerator(lazy_enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
-          expect(service.step_aware_enumerator(chain_enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
-          expect(service.step_aware_enumerable([:success, :success, :failure, :exception]).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerable(set([:success, :failure])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure])
+            expect(service.step_aware_enumerable({success: :success, failure: :failure, exception: :exception}).drop_while { |key, value| step status_service, in: [status: -> { value }], out: :status_string }.result).to be_success.with_data(values: [[:failure, :failure], [:exception, :exception]])
+            expect(service.step_aware_enumerable((:success..:success)).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [])
+            expect(service.step_aware_enumerable((:failure..:failure)).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure])
 
-          expect(service.step_aware_enumerable(set([:success, :failure])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure])
-          expect(service.step_aware_enumerable({success: :success, failure: :failure, exception: :exception}).drop_while { |key, value| step status_service, in: [status: -> { value }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[:failure, :failure], [:exception, :exception]])
-          expect(service.step_aware_enumerable((:success..:success)).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable((:failure..:failure)).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure])
+            # NOTE: Step with multiple outputs.
+            expect(service.step_aware_enumerable(enumerable([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerator(enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerator(lazy_enumerator([:success, :success, :failure])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure])
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerable([:success, :success, :failure, :exception]).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
+
+            expect(service.step_aware_enumerable(set([:success, :failure])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure])
+            expect(service.step_aware_enumerable({success: :success, failure: :failure, exception: :exception}).drop_while { |key, value| step status_service, in: [status: -> { value }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[:failure, :failure], [:exception, :exception]])
+            expect(service.step_aware_enumerable((:success..:success)).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [])
+            expect(service.step_aware_enumerable((:failure..:failure)).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure])
+          else
+            # NOTE: Step with one output.
+            expect([true, nil, true].drop_while { |value| value }.to_a).to eq([nil, true])
+            expect([true, nil, true].lazy.drop_while { |value| value }.to_a).to eq([nil, true])
+
+            expect(service.step_aware_enumerable(enumerable([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerator(enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerator(lazy_enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerable([:success, :success, :failure, :exception]).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure, :exception])
+
+            expect(service.step_aware_enumerable(set([:success, :failure])).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure])
+            expect(service.step_aware_enumerable({success: :success, failure: :failure, exception: :exception}).drop_while { |key, value| step status_service, in: [status: -> { value }], out: :status_string }.result).to be_success.with_data(values: [[:failure, :failure], [:exception, :exception]])
+            expect(service.step_aware_enumerable((:success..:success)).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [])
+            expect(service.step_aware_enumerable((:failure..:failure)).drop_while { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:failure])
+
+            # NOTE: Step with multiple outputs.
+            expect(service.step_aware_enumerable(enumerable([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerator(enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerator(lazy_enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :success, :failure, :exception])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
+            expect(service.step_aware_enumerable([:success, :success, :failure, :exception]).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure, :exception])
+
+            expect(service.step_aware_enumerable(set([:success, :failure])).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure])
+            expect(service.step_aware_enumerable({success: :success, failure: :failure, exception: :exception}).drop_while { |key, value| step status_service, in: [status: -> { value }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [[:failure, :failure], [:exception, :exception]])
+            expect(service.step_aware_enumerable((:success..:success)).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [])
+            expect(service.step_aware_enumerable((:failure..:failure)).drop_while { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:failure])
+          end
 
           # NOTE: Error result.
           expect(service.step_aware_enumerable(enumerable([:success, :error, :exception])).drop_while { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
