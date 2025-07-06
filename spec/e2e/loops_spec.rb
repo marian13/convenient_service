@@ -857,7 +857,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: `Enumerator::Lazy.chain` returns `Enumetator::Chain` in JRuby.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: Failure propagation.
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
@@ -1056,7 +1056,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby has different exception message.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: No block.
             expect { [:success, :success, :success].chunk_while.to_a }.to raise_error(ArgumentError).with_message("missing block")
 
@@ -1524,7 +1524,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby raises exception for one element range.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
             # NOTE: Item.
             expect([:success, :failure, :success, :failure].count(:success)).to eq(2)
             expect { (:success..:success).count(:success) }.to raise_error(ArgumentError).with_message("`count': wrong number of arguments (given 1, expected 0)")
@@ -2683,7 +2683,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby does NOT raise exception for chain enumerators.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
             # NOTE: Empty collection.
             expect([].each_with_index { |status, index| index.abs }).to eq([])
             expect(set([]).each_with_index { |status, index| index.abs }).to eq(set([]))
@@ -5035,7 +5035,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # TODO: Why JRuby raises exception only for wrapped `max_by`?
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: No block, n.
             expect([1, 2, 3, 4, 5].max_by(2).to_a).to eq([1, 2, 3, 4, 5])
 
