@@ -7368,15 +7368,30 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.sort_by.result).to be_error.without_data
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_error.without_data
 
-          # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.sort_by.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+          ##
+          # HACK: For some reason `LazyEnumerator#sort_by` returns `Enumerator` on JRuby.
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+            # NOTE: Failure propagation.
+            expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_success.with_data(values: [])
+            expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+          else
+            # NOTE: Failure propagation.
+            expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.sort_by.result).to be_failure.without_data
+            expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+          end
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.sort_by.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
