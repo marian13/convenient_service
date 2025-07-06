@@ -310,10 +310,6 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         service.step(...)
       end
 
-      # def sorted_set(collection)
-      #   SortedSet.new(collection)
-      # end
-
       def concat_strings(first_string, second_string)
         return if second_string.include?("0")
 
@@ -7373,6 +7369,8 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           #
           if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
             # NOTE: Failure propagation.
+            expect([1, 2, 3].lazy.sort_by).to be_instance_of(Enumerator)
+
             expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
             expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
             expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_success.with_data(values: [])
@@ -7383,6 +7381,8 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
           else
             # NOTE: Failure propagation.
+            expect([1, 2, 3].lazy.sort_by).to be_instance_of(Enumerator::Lazy)
+
             expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
             expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
             expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
