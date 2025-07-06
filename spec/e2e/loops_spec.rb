@@ -854,10 +854,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_error.without_data
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_error.without_data
 
+          ##
+          # HACK: `Enumerator::Lazy.chain` returns `Enumetator::Chain` in JRuby.
+          #
           if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
             # NOTE: Failure propagation.
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
+
             expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
             expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
             expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
@@ -870,6 +874,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             # NOTE: Failure propagation.
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Lazy)
+
             expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
             expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
             expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
@@ -1048,9 +1053,13 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({}).chunk_while { raise }.result).to be_success.with_data(values: [])
           expect(service.step_aware_enumerable((:success...:success)).chunk_while { raise }.result).to be_success.with_data(values: [])
 
+          ##
+          # HACK: JRuby has different exception message.
+          #
           if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
             # NOTE: No block.
             expect { [:success, :success, :success].chunk_while.to_a }.to raise_error(ArgumentError).with_message("missing block")
+
             expect { service.step_aware_enumerable(enumerable([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("missing block")
             expect { service.step_aware_enumerator(enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("missing block")
             expect { service.step_aware_enumerator(lazy_enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("missing block")
@@ -1062,6 +1071,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           else
             # NOTE: No block.
             expect { [:success, :success, :success].chunk_while.to_a }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
+
             expect { service.step_aware_enumerable(enumerable([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
             expect { service.step_aware_enumerator(enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
             expect { service.step_aware_enumerator(lazy_enumerator([:success, :success, :success])).chunk_while.result }.to raise_error(ArgumentError).with_message("tried to create Proc object without a block")
@@ -1191,7 +1201,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby raises `"tried to call lazy collect without a block"` instead of `"tried to call lazy map without a block"`.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: No block.
             expect([:success, :success, :success].collect.to_a).to eq([:success, :success, :success])
 
@@ -1511,7 +1521,10 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success}).count.result).to be_success.with_data(value: 1)
           expect(service.step_aware_enumerable((:success..:success)).count.result).to be_success.with_data(value: 1)
 
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          ##
+          # HACK: JRuby raises exception for one element range.
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: Item.
             expect([:success, :failure, :success, :failure].count(:success)).to eq(2)
             expect { (:success..:success).count(:success) }.to raise_error(ArgumentError).with_message("`count': wrong number of arguments (given 1, expected 0)")
@@ -2077,7 +2090,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: For some reason in JRuby `Enumerator::Lazy#drop_while` does NOT stop after first falsy value.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: Step with one output.
             expect([true, nil, true].drop_while { |value| value }.to_a).to eq([nil, true])
             expect([true, nil, true].lazy.drop_while { |value| value }.to_a).to eq([nil])
@@ -2667,7 +2680,10 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
 
       describe "#each_with_index" do
         specify do
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          ##
+          # HACK: JRuby does NOT raise exception for chain enumerators.
+          #
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: Empty collection.
             expect([].each_with_index { |status, index| index.abs }).to eq([])
             expect(set([]).each_with_index { |status, index| index.abs }).to eq(set([]))
@@ -2842,11 +2858,11 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
             # NOTE: Empty collection.
             expect([].each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
+            expect(chain_enumerator([]).each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
 
             expect(service.step_aware_enumerable(enumerable([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerator(enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerator(lazy_enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
-            expect(chain_enumerator([]).each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
             expect(service.step_aware_enumerator(chain_enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerable([]).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerable(set([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
@@ -2855,12 +2871,12 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           elsif ConvenientService::Dependencies.ruby.version >= 3.1
             # NOTE: Empty collection.
             expect([].each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
+            expect { chain_enumerator([]).each_with_object("") { |string, object| concat_strings(object, string) } }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
 
             expect(service.step_aware_enumerable(enumerable([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerator(enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
-            expect(service.step_aware_enumerator(lazy_enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
-            expect { chain_enumerator([]).each_with_object("") { |string, object| concat_strings(object, string) }.result }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
             expect { service.step_aware_enumerator(chain_enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result }.to raise_error(TypeError).with_message("wrong argument type chain (expected enumerator)")
+            expect(service.step_aware_enumerator(lazy_enumerator([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerable([]).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerable(set([])).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
             expect(service.step_aware_enumerable({}).each_with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
@@ -3079,7 +3095,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby raises `"tried to call lazy filter without a block"` instead of `"tried to call lazy select without a block"`.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: No block.
             expect([:success, :failure, :success, :failure].filter.to_a).to eq([:success, :failure, :success, :failure])
 
@@ -3532,7 +3548,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby raises `"tried to call lazy find_all without a block"` instead of `"tried to call lazy select without a block"`.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: No block.
             expect([:success, :failure, :success, :failure].find_all.to_a).to eq([:success, :failure, :success, :failure])
 
@@ -4990,7 +5006,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: Looks like JRuby has a default block.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: No block, no n.
             expect { [1, 2, 3, 4, 5].max_by.to_a }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
 
@@ -5411,9 +5427,9 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           end
 
           ##
-          # TODO: Why JRuby raises exception only for wrapped `min_by`?
+          # HACK: Why JRuby raises exception only for wrapped `min_by`?
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: No block, n.
             expect([1, 2, 3, 4, 5].min_by(2).to_a).to eq([1, 2, 3, 4, 5])
 
@@ -8149,7 +8165,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby and CRuby does not have the same behaviour for `zip`. JRuby passes the whole array to block, while CRuby passes only one element.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version <= 10.1
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # No argument, block.
             expect([1].zip { |array| raise if array.sum != 1 }).to eq(nil)
             expect(lazy_enumerator([1]).zip { |integer| raise if integer.sum != 1 }).to eq(nil)
