@@ -2774,7 +2774,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable((0..5)).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
           end
 
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: Block.
             expect([0, 1, 2, 3, 4, 5].each_with_index { |number, index| index.abs }).to eq([0, 1, 2, 3, 4, 5])
             expect(chain_enumerator([0, 1, 2, 3, 4, 5]).each_with_index { |status, index| index.abs }.to_a).to eq([0, 1, 2, 3, 4, 5])
@@ -2939,7 +2939,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable(("0".."5")).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
           end
 
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: Block.
             expect(["0", "1", "2", "3", "4", "5"].each_with_object(+"") { |string, object| concat_strings(object, string) }).to eq("12345")
 
