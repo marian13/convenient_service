@@ -1524,7 +1524,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby raises exception for one element range.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: Item.
             expect([:success, :failure, :success, :failure].count(:success)).to eq(2)
             expect { (:success..:success).count(:success) }.to raise_error(ArgumentError).with_message("`count': wrong number of arguments (given 1, expected 0)")
@@ -2683,7 +2683,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby does NOT raise exception for chain enumerators.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: Empty collection.
             expect([].each_with_index { |status, index| index.abs }).to eq([])
             expect(set([]).each_with_index { |status, index| index.abs }).to eq(set([]))
@@ -2855,7 +2855,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
 
       describe "#each_with_object" do
         specify do
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
             # NOTE: Empty collection.
             expect([].each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
             expect(chain_enumerator([]).each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
