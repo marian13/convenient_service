@@ -1524,7 +1524,22 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby raises exception for one element range.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version >= 9.5 && ConvenientService::Dependencies.ruby.engine_version < 10.1
+            # NOTE: Item.
+            expect([:success, :failure, :success, :failure].count(:success)).to eq(2)
+            expect { (:success..:success).count(:success) }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
+            expect { (:failure..:failure).count(:success) }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
+
+            expect(service.step_aware_enumerable(enumerable([:success, :failure, :success, :failure])).count(:success).result).to be_success.with_data(value: 2)
+            expect(service.step_aware_enumerator(enumerator([:success, :failure, :success, :failure])).count(:success).result).to be_success.with_data(value: 2)
+            expect(service.step_aware_enumerator(lazy_enumerator([:success, :failure, :success, :failure])).count(:success).result).to be_success.with_data(value: 2)
+            expect(service.step_aware_enumerator(chain_enumerator([:success, :failure, :success, :failure])).count(:success).result).to be_success.with_data(value: 2)
+            expect(service.step_aware_enumerable([:success, :failure, :success, :failure]).count(:success).result).to be_success.with_data(value: 2)
+            expect(service.step_aware_enumerable(set([:success, :failure])).count(:success).result).to be_success.with_data(value: 1)
+            expect(service.step_aware_enumerable({success: :success, failure: :failure}).count([:success, :success]).result).to be_success.with_data(value: 1)
+            expect { service.step_aware_enumerable((:success..:success)).count(:success).result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
+            expect { service.step_aware_enumerable((:failure..:failure)).count(:success).result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
+          elsif ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
             # NOTE: Item.
             expect([:success, :failure, :success, :failure].count(:success)).to eq(2)
             expect { (:success..:success).count(:success) }.to raise_error(ArgumentError).with_message("`count': wrong number of arguments (given 1, expected 0)")
