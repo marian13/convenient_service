@@ -201,6 +201,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     end
 
     describe "#create_data!" do
+      ##
+      # NOTE: If this spec fails on JRuby, it is probably due to a version constraint in `lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb`.
+      # IMPORTANT: If the logic behind this spec becomes stale someday, do not delete it; instead, write a similar one to still catch the JRuby issue.
+      #
       specify do
         expect { result_instance.create_data!(params[:data]) }
           .to delegate_to(result_class.data_class, :cast!)

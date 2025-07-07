@@ -106,7 +106,7 @@ module ConvenientService
               #
               #  And run RSpec with `JRUBY_OPTS='--debug'`.
               #
-              if Dependencies.ruby.jruby? && Dependencies.ruby.engine_version <= 9.5
+              if Dependencies.ruby.jruby? && Dependencies.ruby.engine_version < 10.1
                 ##
                 # @api private
                 #
