@@ -288,6 +288,7 @@ Gem::Specification.new do |spec|
   ##
   # Used as a set of rules for rubocop for linting magic numbers in Ruby files.
   # - https://github.com/rubocop/rubocop-magic_numbers
+  # - https://github.com/meetcleo/rubocop-magic_numbers
   #
   spec.add_development_dependency "rubocop-magic_numbers", "~> 0.4.0" if ConvenientService::Dependencies.ruby.mri?
 
@@ -309,6 +310,17 @@ Gem::Specification.new do |spec|
   #
   spec.add_development_dependency "rubocop-thread_safety", "~> 0.5.1" if ConvenientService::Dependencies.ruby.mri?
 
+  ##
+  # Used for linting of Ruby files.
+  # TODO: Add `.rubycritic` config.
+  # - https://github.com/whitesmith/rubycritic
+  #
+  spec.add_development_dependency "rubycritic"
+
+  ##
+  # Used for parsing console input.
+  # - https://github.com/piotrmurach/tty-prompt
+  #
   spec.add_development_dependency "tty-prompt"
 
   ##

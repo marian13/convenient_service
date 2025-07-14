@@ -624,6 +624,14 @@ tasks:
       AUTOCORRECT_SUFFIX:
         sh: ruby -e 'puts "-A" if "{{.AUTOCORRECT}}" == "true"'
 
+  ##
+  # NOTE: Usage examples.
+  #   task rubycritic
+  #
+  rubycritic:
+    cmds:
+      - bundle exec rubycritic {{.CLI_ARGS}}
+
   test:
     cmds:
       - task: rspec:all
