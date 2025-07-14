@@ -62,7 +62,7 @@ module ConvenientService
         # @return [Array<ConvenientService::Config::Entities::Option>]
         #
         def normalize_array(array)
-          array.map do |value|
+          array.flat_map do |value|
             case value
             when ::Symbol then normalize_symbol(value)
             when ::Hash then normalize_hash(value)
