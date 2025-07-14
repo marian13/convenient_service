@@ -77,7 +77,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
                     included do
                       example.instance_exec(options) do |options|
-                        expect(options).to eq(ConvenientService::Config::Entities::Options.new(options: [:foo, :bar]))
+                        expect(options).to eq(ConvenientService::Config::Commands::NormalizeOptions.call(options: [:foo, :bar]))
                       end
                     end
                   end
@@ -103,7 +103,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
               config.eval_included_block(klass)
 
-              expect(klass.options).to eq(ConvenientService::Config::Entities::Options.new)
+              expect(klass.options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
             end
 
             context "when `included` block raises exception" do
@@ -125,7 +125,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
                 ignoring_exception(ArgumentError) { config.eval_included_block(klass) }
 
-                expect(klass.options).to eq(ConvenientService::Config::Entities::Options.new)
+                expect(klass.options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
               end
             end
           end
@@ -349,7 +349,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
               describe ".options" do
                 it "returns original empty `options`" do
-                  expect(config_copy.options).to eq(ConvenientService::Config::Entities::Options.new)
+                  expect(config_copy.options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
                 end
               end
             end
@@ -380,13 +380,6 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
             specify do
               expect { config.options }
-                .to delegate_to(ConvenientService::Config::Entities::Options, :new)
-                .with_arguments(options: config.default_options.dup)
-                .and_return_its_value
-            end
-
-            specify do
-              expect { config.options }
                 .to delegate_to(config.default_options, :dup)
             end
           end
@@ -402,7 +395,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
             context "when `block` is NOT passed" do
               it "returns empty options" do
-                expect(config.default_options).to eq(ConvenientService::Config::Entities::Options.new)
+                expect(config.default_options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
               end
 
               specify do
@@ -416,7 +409,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
               specify do
                 expect { config.default_options(&block) }
-                  .to delegate_to(ConvenientService::Config::Entities::Options, :new)
+                  .to delegate_to(ConvenientService::Config::Commands::NormalizeOptions, :call)
                   .with_arguments(options: options)
                   .and_return_its_value
               end
@@ -424,7 +417,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
               it "sets default options" do
                 config.default_options(&block)
 
-                expect(config.default_options).to eq(ConvenientService::Config::Entities::Options.new(options: options))
+                expect(config.default_options).to eq(ConvenientService::Config::Commands::NormalizeOptions.call(options: options))
               end
             end
           end

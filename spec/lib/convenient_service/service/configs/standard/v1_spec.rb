@@ -594,7 +594,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
     describe ".default_options" do
       context "when `RSpec` is loaded" do
         let(:default_options) do
-          ConvenientService::Config::Entities::Options.new(
+          ConvenientService::Config::Commands::NormalizeOptions.call(
             options: [
               :essential,
               :callbacks,

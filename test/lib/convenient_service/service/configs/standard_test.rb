@@ -18,7 +18,7 @@ class ConvenientService::Service::Configs::StandardTest < Minitest::Test
     describe ".default_options" do
       context "when `RSpec` is NOT loaded" do
         should "return options without `:rspec`" do
-          default_options = ConvenientService::Config::Entities::Options.new(
+          default_options = ConvenientService::Config::Commands::NormalizeOptions.call(
             options: [
               :essential,
               :callbacks,

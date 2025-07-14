@@ -12,19 +12,19 @@ module ConvenientService
       # @internal
       #   TODO: Specs.
       #
-      class Options
+      class OptionCollection
         ##
         # @!attribute [r] options
-        #   @return [Hash]
+        #   @return [Hash{Symbol => ConvenientService::Config::Entities::Option}]
         #
         attr_reader :options
 
         ##
-        # @param options [Object] Can be any type.
+        # @param options [Hash{Symbol => ConvenientService::Config::Entities::Option}] Can be any type.
         # @return [void]
         #
-        def initialize(options: nil)
-          @options = Commands::NormalizeOptions[options: options]
+        def initialize(options: {})
+          @options = options
         end
 
         ##
@@ -67,28 +67,31 @@ module ConvenientService
         end
 
         ##
+        # @param other_options [Object] Can be any type.
         # @return [ConvenientService::Config::Entities::Options]
         #
         def merge(other_options)
-          options.merge!(Commands::NormalizeOptions[options: other_options])
+          options.merge!(Commands::NormalizeOptions[options: other_options].to_h)
 
           self
         end
 
         ##
+        # @param other_options [Object] Can be any type.
         # @return [ConvenientService::Config::Entities::Options]
         #
         def subtract(other_options)
-          Commands::NormalizeOptions[options: other_options].each_key { |name| options.delete(name) }
+          Commands::NormalizeOptions[options: other_options].to_h.each_key { |name| options.delete(name) }
 
           self
         end
 
         ##
+        # @param other_options [Object] Can be any type.
         # @return [ConvenientService::Config::Entities::Options]
         #
         def replace(other_options)
-          options.replace(Commands::NormalizeOptions[options: other_options])
+          options.replace(Commands::NormalizeOptions[options: other_options].to_h)
 
           self
         end
@@ -96,9 +99,6 @@ module ConvenientService
         ##
         # @param other [Object] Can be any type.
         # @return [Boolean, nil]
-        #
-        # @internal
-        #   TODO: Tests.
         #
         def ==(other)
           return unless other.instance_of?(self.class)
@@ -109,10 +109,17 @@ module ConvenientService
         end
 
         ##
-        # @return [Array]
+        # @return [Array<ConvenientService::Config::Entities::Option>]
         #
         def to_a
           options.values
+        end
+
+        ##
+        # @return [Hash{Symbol => ConvenientService::Config::Entities::Option}]
+        #
+        def to_h
+          options
         end
       end
     end

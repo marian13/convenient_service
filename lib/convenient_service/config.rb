@@ -100,7 +100,7 @@ module ConvenientService
           #
           def without_defaults
             dup.tap do |mod|
-              mod.module_exec(base, Entities::Options.new) do |base, options|
+              mod.module_exec(base, Entities::OptionCollection.new) do |base, options|
                 ##
                 # @return [ConvenientService::Config]
                 #
@@ -125,7 +125,7 @@ module ConvenientService
           # @return [ConvenientService::Config::Entities::Options]
           #
           def options
-            @options ||= Entities::Options.new(options: default_options.dup)
+            @options ||= default_options.dup
           end
 
           ##
@@ -133,7 +133,7 @@ module ConvenientService
           # @return [ConvenientService::Config::Entities::Options]
           #
           def default_options(&block)
-            block ? @default_options = Entities::Options.new(options: yield) : @default_options ||= Entities::Options.new
+            block ? @default_options = Commands::NormalizeOptions[options: yield] : @default_options ||= Entities::OptionCollection.new
           end
 
           ##

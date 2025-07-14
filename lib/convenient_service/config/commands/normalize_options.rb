@@ -11,12 +11,12 @@ module ConvenientService
       class NormalizeOptions < Support::Command
         ##
         # @!attribute [r] options
-        #   @return [Object] Can be any type.
+        #   @return [nil, Array, ConvenientService::Config::Entities::Options]
         #
         attr_reader :options
 
         ##
-        # @param options [Object] Can be any type.
+        # @param options [nil, Array, ConvenientService::Config::Entities::Options]
         # @return [void]
         #
         def initialize(options:)
@@ -24,12 +24,22 @@ module ConvenientService
         end
 
         ##
-        # @return [Hash]
+        # @return [ConvenientService::Config::Entities::OptionCollection]
         #
         def call
-          Utils::Array.wrap(options.to_a)
-            .flat_map { |option| normalize(option) }
-            .reduce({}) { |memo, option| memo.merge(option.name => option) } # index_by
+          Entities::OptionCollection.new(options: normalized_options)
+        end
+
+        private
+
+        ##
+        # @return [Hash{Symbol => ConvenientService::Config::Entities::Option}]
+        #
+        def normalized_options
+          @normalized_options ||=
+            Utils::Array.wrap(options)
+              .flat_map { |option| normalize(option) }
+              .reduce({}) { |options, option| options.merge(option.name => option) } # index_by
         end
 
         ##
@@ -40,10 +50,9 @@ module ConvenientService
           case value
           when ::Symbol then normalize_symbol(value)
           when ::Array then normalize_array(value)
-          when ::Set then normalize_set(value)
           when ::Hash then normalize_hash(value)
           when Entities::Option then normalize_option(value)
-          when Entities::Options then normalize_options(value)
+          when Entities::OptionCollection then normalize_options(value)
           else
             raise_option_can_not_be_normalized(value)
           end
@@ -67,26 +76,9 @@ module ConvenientService
             when ::Symbol then normalize_symbol(value)
             when ::Hash then normalize_hash(value)
             when Entities::Option then normalize_option(value)
-            when Entities::Options then normalize_options(value)
+            when Entities::OptionCollection then normalize_options(value)
             else
               raise_option_can_not_be_normalized(array)
-            end
-          end
-        end
-
-        ##
-        # @param set [Set<Object>]
-        # @return [Array<ConvenientService::Config::Entities::Option>]
-        #
-        def normalize_set(set)
-          set.map do |value|
-            case value
-            when ::Symbol then normalize_symbol(value)
-            when ::Hash then normalize_hash(value)
-            when Entities::Option then normalize_option(value)
-            when Entities::Options then normalize_options(value)
-            else
-              raise_option_can_not_be_normalized(set)
             end
           end
         end
