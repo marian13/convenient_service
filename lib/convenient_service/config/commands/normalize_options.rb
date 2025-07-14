@@ -11,12 +11,12 @@ module ConvenientService
       class NormalizeOptions < Support::Command
         ##
         # @!attribute [r] options
-        #   @return [nil, Array, ConvenientService::Config::Entities::Options]
+        #   @return [nil, Array, ConvenientService::Config::Entities::OptionCollection]
         #
         attr_reader :options
 
         ##
-        # @param options [nil, Array, ConvenientService::Config::Entities::Options]
+        # @param options [nil, Array, ConvenientService::Config::Entities::OptionCollection]
         # @return [void]
         #
         def initialize(options:)
@@ -102,7 +102,7 @@ module ConvenientService
         end
 
         ##
-        # @param options [ConvenientService::Config::Entities::Options]
+        # @param options [ConvenientService::Config::Entities::OptionCollection]
         # @return [Array<ConvenientService::Config::Entities::Option>]
         #
         def normalize_options(options)

@@ -122,7 +122,7 @@ module ConvenientService
           end
 
           ##
-          # @return [ConvenientService::Config::Entities::Options]
+          # @return [ConvenientService::Config::Entities::OptionCollection]
           #
           def options
             @options ||= default_options.dup
@@ -130,7 +130,7 @@ module ConvenientService
 
           ##
           # @param block [Proc, nil]
-          # @return [ConvenientService::Config::Entities::Options]
+          # @return [ConvenientService::Config::Entities::OptionCollection]
           #
           def default_options(&block)
             block ? @default_options = Commands::NormalizeOptions[options: yield] : @default_options ||= Entities::OptionCollection.new

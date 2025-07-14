@@ -60,7 +60,7 @@ module ConvenientService
         end
 
         ##
-        # @return [ConvenientService::Config::Entities::Options]
+        # @return [ConvenientService::Config::Entities::OptionCollection]
         #
         def dup
           self.class.new(options: options.dup)
@@ -68,7 +68,7 @@ module ConvenientService
 
         ##
         # @param other_options [Object] Can be any type.
-        # @return [ConvenientService::Config::Entities::Options]
+        # @return [ConvenientService::Config::Entities::OptionCollection]
         #
         def merge(other_options)
           options.merge!(Commands::NormalizeOptions[options: other_options].to_h)
@@ -78,7 +78,7 @@ module ConvenientService
 
         ##
         # @param other_options [Object] Can be any type.
-        # @return [ConvenientService::Config::Entities::Options]
+        # @return [ConvenientService::Config::Entities::OptionCollection]
         #
         def subtract(other_options)
           Commands::NormalizeOptions[options: other_options].to_h.each_key { |name| options.delete(name) }
@@ -88,7 +88,7 @@ module ConvenientService
 
         ##
         # @param other_options [Object] Can be any type.
-        # @return [ConvenientService::Config::Entities::Options]
+        # @return [ConvenientService::Config::Entities::OptionCollection]
         #
         def replace(other_options)
           options.replace(Commands::NormalizeOptions[options: other_options].to_h)

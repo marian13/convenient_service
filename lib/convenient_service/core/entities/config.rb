@@ -135,7 +135,7 @@ module ConvenientService
         ##
         # This method is intended to be used only inside config `included` blocks.
         #
-        # @return [ConvenientService::Config::Entities::Options]
+        # @return [ConvenientService::Config::Entities::OptionCollection]
         #
         # @internal
         #   NOTE: `namespace` is defined only for classes that were created by `Config#entity`.
