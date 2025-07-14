@@ -780,6 +780,29 @@ RSpec.describe ConvenientService::Config::Commands::NormalizeOptions, type: :sta
             end
           end
         end
+
+        context "when `options` contains invalid elements" do
+          let(:options) { Set[:callbacks, :fallbacks, 42] }
+
+          let(:exception_message) do
+            <<~TEXT
+              Option `42` can NOT be normalized.
+
+              Consider passing `Symbol` or `Hash` instead.
+            TEXT
+          end
+
+          it "raises `ConvenientService::Config::Exceptions::OptionCanNotBeNormalized`" do
+            expect { command_result }
+              .to raise_error(ConvenientService::Config::Exceptions::OptionCanNotBeNormalized)
+              .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Config::Exceptions::OptionCanNotBeNormalized) { command_result } }
+              .to delegate_to(ConvenientService, :raise)
+          end
+        end
       end
     end
   end
