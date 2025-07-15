@@ -449,10 +449,6 @@
         <em class="default">(defaults to: <tt>{}</tt>)</em>
       
       
-        &mdash;
-        <div class='inline'><p>Can be any type.</p>
-</div>
-      
     </li>
   
 </ul>
@@ -464,12 +460,12 @@
       <pre class="lines">
 
 
-26
-27
-28</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>options:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='ivar'>@options</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span>
@@ -589,16 +585,16 @@
       <pre class="lines">
 
 
-103
-104
-105
-106
-107
-108
-109</pre>
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 124</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -664,12 +660,12 @@
       <pre class="lines">
 
 
-58
-59
-60</pre>
+67
+68
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
@@ -716,12 +712,12 @@
       <pre class="lines">
 
 
-40
-41
-42</pre>
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_any?'>any?</span>
   <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__name'>_name</span><span class='comma'>,</span> <span class='id identifier rubyid_option'>option</span><span class='op'>|</span> <span class='id identifier rubyid_option'>option</span><span class='period'>.</span><span class='id identifier rubyid_enabled?'>enabled?</span> <span class='rbrace'>}</span>
@@ -768,12 +764,12 @@
       <pre class="lines">
 
 
-65
-66
-67</pre>
+77
+78
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dup'>dup</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>options:</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='rparen'>)</span>
@@ -835,14 +831,14 @@
       <pre class="lines">
 
 
-48
-49
-50
-51
-52</pre>
+57
+58
+59
+60
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -891,12 +887,12 @@
       <pre class="lines">
 
 
-33
-34
-35</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_keys'>keys</span>
   <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
@@ -962,14 +958,14 @@
       <pre class="lines">
 
 
-73
-74
-75
-76
-77</pre>
+88
+89
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_other_options'>other_options</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/NormalizeOptions.html" title="ConvenientService::Config::Commands::NormalizeOptions (class)">NormalizeOptions</a></span></span><span class='lbracket'>[</span><span class='label'>options:</span> <span class='id identifier rubyid_other_options'>other_options</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='rparen'>)</span>
@@ -1037,14 +1033,14 @@
       <pre class="lines">
 
 
-93
-94
-95
-96
-97</pre>
+114
+115
+116
+117
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_other_options'>other_options</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/NormalizeOptions.html" title="ConvenientService::Config::Commands::NormalizeOptions (class)">NormalizeOptions</a></span></span><span class='lbracket'>[</span><span class='label'>options:</span> <span class='id identifier rubyid_other_options'>other_options</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='rparen'>)</span>
@@ -1112,14 +1108,14 @@
       <pre class="lines">
 
 
-83
-84
-85
-86
-87</pre>
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 83</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subtract'>subtract</span><span class='lparen'>(</span><span class='id identifier rubyid_other_options'>other_options</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/NormalizeOptions.html" title="ConvenientService::Config::Commands::NormalizeOptions (class)">NormalizeOptions</a></span></span><span class='lbracket'>[</span><span class='label'>options:</span> <span class='id identifier rubyid_other_options'>other_options</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='period'>.</span><span class='id identifier rubyid_each_key'>each_key</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='op'>|</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -1168,12 +1164,12 @@
       <pre class="lines">
 
 
-114
-115
-116</pre>
+135
+136
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 114</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 135</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
   <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_values'>values</span>
@@ -1220,12 +1216,12 @@
       <pre class="lines">
 
 
-121
-122
-123</pre>
+142
+143
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config/entities/option_collection.rb', line 142</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
   <span class='id identifier rubyid_options'>options</span>
@@ -1240,7 +1236,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jul 14 23:57:56 2025 by
+  Generated on Tue Jul 15 18:45:14 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.8).
 </div>
