@@ -88,3 +88,4 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups
