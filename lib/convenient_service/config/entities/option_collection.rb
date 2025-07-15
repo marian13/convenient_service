@@ -20,8 +20,11 @@ module ConvenientService
         attr_reader :options
 
         ##
-        # @param options [Hash{Symbol => ConvenientService::Config::Entities::Option}] Can be any type.
+        # @param options [Hash{Symbol => ConvenientService::Config::Entities::Option}]
         # @return [void]
+        #
+        # @internal
+        #   TODO: Direct specs.
         #
         def initialize(options: {})
           @options = options
@@ -37,6 +40,9 @@ module ConvenientService
         ##
         # @return [Boolean]
         #
+        # @internal
+        #   TODO: Direct specs.
+        #
         def any?
           options.any? { |_name, option| option.enabled? }
         end
@@ -44,6 +50,9 @@ module ConvenientService
         ##
         # @param name [Symbol]
         # @return [Boolean]
+        #
+        # @internal
+        #   TODO: Direct specs.
         #
         def include?(name)
           return false unless options.has_key?(name)
@@ -62,6 +71,9 @@ module ConvenientService
         ##
         # @return [ConvenientService::Config::Entities::OptionCollection]
         #
+        # @internal
+        #   TODO: Direct specs.
+        #
         def dup
           self.class.new(options: options.dup)
         end
@@ -69,6 +81,9 @@ module ConvenientService
         ##
         # @param other_options [Object] Can be any type.
         # @return [ConvenientService::Config::Entities::OptionCollection]
+        #
+        # @internal
+        #   TODO: Direct specs.
         #
         def merge(other_options)
           options.merge!(Commands::NormalizeOptions[options: other_options].to_h)
@@ -80,6 +95,9 @@ module ConvenientService
         # @param other_options [Object] Can be any type.
         # @return [ConvenientService::Config::Entities::OptionCollection]
         #
+        # @internal
+        #   TODO: Direct specs.
+        #
         def subtract(other_options)
           Commands::NormalizeOptions[options: other_options].to_h.each_key { |name| options.delete(name) }
 
@@ -89,6 +107,9 @@ module ConvenientService
         ##
         # @param other_options [Object] Can be any type.
         # @return [ConvenientService::Config::Entities::OptionCollection]
+        #
+        # @internal
+        #   TODO: Direct specs.
         #
         def replace(other_options)
           options.replace(Commands::NormalizeOptions[options: other_options].to_h)
