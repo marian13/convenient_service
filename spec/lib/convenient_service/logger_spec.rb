@@ -196,7 +196,7 @@ RSpec.describe ConvenientService::Logger, type: :standard do
             context "when severity is `ANY`" do
               let(:severity) { "ANY" }
 
-              it "returns colored log" do
+              it "returns original log" do
                 expect(colored_log).to eq(original_log)
               end
             end
@@ -212,7 +212,7 @@ RSpec.describe ConvenientService::Logger, type: :standard do
             context "when severity is `UNKNOWN`" do
               let(:severity) { "UNKNOWN" }
 
-              it "returns colored log" do
+              it "returns original log" do
                 expect(colored_log).to eq(original_log)
               end
             end

@@ -138,12 +138,6 @@ module ConvenientService
     end
 
     ##
-    # @api public
-    #
-    # @param original_exception [StandardError]
-    #
-    # @raise [StandardError]
-    #
     # @internal
     #   NOTE: `rescue ::StandardError => exception` is the same as `rescue => exception`.
     #
@@ -156,13 +150,23 @@ module ConvenientService
     #
     #   TODO: Create a custom Rubocop cop to statically catch all places where plain `raise` is used.
     #
-    if Dependencies.ruby.jruby?
+    if Dependencies.ruby.jruby? && Dependencies.ruby.engine_version < 10.1
+      ##
+      # @api public
+      # @param original_exception [StandardError]
+      # @raise [StandardError]
+      #
       def raise(original_exception)
         ::Kernel.raise original_exception
       rescue => exception
         ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace)
       end
     else
+      ##
+      # @api public
+      # @param original_exception [StandardError]
+      # @raise [StandardError]
+      #
       def raise(original_exception)
         ::Kernel.raise original_exception
       rescue => exception
@@ -171,12 +175,6 @@ module ConvenientService
     end
 
     ##
-    # @api public
-    #
-    # @return [Object] Can be any type.
-    #
-    # @raise [StandardError]
-    #
     # @internal
     #   NOTE: `rescue ::StandardError => exception` is the same as `rescue => exception`.
     #
@@ -187,13 +185,23 @@ module ConvenientService
     #   - https://github.com/jruby/jruby/blob/9.4.0.0/core/src/main/java/org/jruby/RubyKernel.java#L881
     #   - https://github.com/ruby/spec/blob/master/core/kernel/raise_spec.rb#L5
     #
-    if Dependencies.ruby.jruby?
+    if Dependencies.ruby.jruby? && Dependencies.ruby.engine_version < 10.1
+      ##
+      # @api public
+      # @return [Object] Can be any type.
+      # @raise [StandardError]
+      #
       def reraise
         yield
       rescue => exception
         ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace)
       end
     else
+      ##
+      # @api public
+      # @return [Object] Can be any type.
+      # @raise [StandardError]
+      #
       def reraise
         yield
       rescue => exception
