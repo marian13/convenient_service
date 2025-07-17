@@ -125,10 +125,12 @@ RSpec.describe ConvenientService::Logger, type: :standard do
       context "when `Paint` is NOT loaded" do
         before do
           allow(ConvenientService::Dependencies.paint).to receive(:loaded?).and_return(false)
+
+          allow(described_class).to receive(:original_formatter).and_return(double)
         end
 
-        it "returns `Logger::Formatter.new`" do
-          expect(described_class.original_formatter).to be_instance_of(Logger::Formatter)
+        it "returns original formatter" do
+          expect(described_class.colored_formatter).to eq(described_class.original_formatter)
         end
       end
 
