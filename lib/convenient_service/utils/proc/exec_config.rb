@@ -110,17 +110,29 @@ module ConvenientService
         # @return [Array]
         #
         # @note
-        #   proc { |a| }.parameters
-        #   # => [[:opt, :a]]
+        #   proc { |foo| }.parameters
+        #   # => [[:opt, :foo]]
         #
-        #   proc { |a = 0| }.parameters
-        #   [[:opt, :a]]
+        #   proc { |foo = nil| }.parameters
+        #   # => [[:opt, :foo]]
         #
-        #   ->(a) {}.parameters
-        #   # => [[:req, :a]]
+        #   ->(foo) {}.parameters
+        #   # => [[:req, :foo]]
         #
-        #   ->(a = 0) {}.parameters
-        #   [[:opt, :a]]
+        #   ->(foo = nil) {}.parameters
+        #   # => [[:opt, :foo]]
+        #
+        #   proc { |foo:| }.parameters
+        #   # => [[:keyreq, :foo]]
+        #
+        #   proc { |foo: nil| }.parameters
+        #   # => [[:key, :foo]]
+        #
+        #   ->(foo:) {}.parameters
+        #   # => [[:keyreq, :foo]]
+        #
+        #   ->(foo: nil) {}.parameters
+        #   # => [[:key, :foo]]
         #
         def acceptable_proc_parameter_types
           proc.lambda? ? [:req, :opt] : [:opt]
