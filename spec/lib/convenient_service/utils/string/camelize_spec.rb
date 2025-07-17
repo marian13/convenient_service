@@ -71,6 +71,15 @@ RSpec.describe ConvenientService::Utils::String::Camelize, type: :standard do
         end
       end
 
+      context "when string contains doubled delimiter" do
+        let(:string) { "foo!!bar" }
+
+        it "returns camelized string with uppercased first letter" do
+          expect(util_result).to eq("FooBar")
+        end
+      end
+
+
       context "when string contains uppercase letter" do
         let(:string) { "bAr" }
 
@@ -146,6 +155,14 @@ RSpec.describe ConvenientService::Utils::String::Camelize, type: :standard do
           end
         end
 
+        context "when string contains doubled delimiter" do
+          let(:string) { "foo!!bar" }
+
+          it "returns camelized string with uppercased first letter" do
+            expect(util_result).to eq("fooBar")
+          end
+        end
+
         context "when string contains uppercase letter" do
           let(:string) { "bAr" }
 
@@ -212,6 +229,14 @@ RSpec.describe ConvenientService::Utils::String::Camelize, type: :standard do
 
         context "when string contains space" do
           let(:string) { "foo bar" }
+
+          it "returns camelized string with uppercased first letter" do
+            expect(util_result).to eq("FooBar")
+          end
+        end
+
+        context "when string contains doubled delimiter" do
+          let(:string) { "foo!!bar" }
 
           it "returns camelized string with uppercased first letter" do
             expect(util_result).to eq("FooBar")
