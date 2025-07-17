@@ -41,13 +41,6 @@ module ConvenientService
       end
 
       ##
-      # @return [Boolean]
-      #
-      def to_env_bool(...)
-        Bool::ToEnvBool.call(...)
-      end
-
-      ##
       # @return [Object] Can be any type.
       #
       def with_one_time_object(...)
