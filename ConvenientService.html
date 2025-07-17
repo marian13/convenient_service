@@ -388,7 +388,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
+</div></span>
   
 </li>
 
@@ -814,20 +815,57 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>original_exception</span>
+      
+      
+        <span class='type'>(<tt>StandardError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>StandardError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
+159
 160
 161
 162
-163
-164</pre>
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_raise'>raise</span><span class='lparen'>(</span><span class='id identifier rubyid_original_exception'>original_exception</span><span class='rparen'>)</span>
   <span class='op'>::</span><span class='const'>Kernel</span><span class='period'>.</span><span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_original_exception'>original_exception</span>
@@ -848,20 +886,60 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Can be any type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>StandardError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-191
-192
-193
 194
-195</pre>
+195
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 191</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 194</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reraise'>reraise</span>
   <span class='kw'>yield</span>
@@ -878,7 +956,7 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
 </div>
 
       <div id="footer">
-  Generated on Thu Jul 17 15:54:01 2025 by
+  Generated on Thu Jul 17 22:41:40 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.8).
 </div>
