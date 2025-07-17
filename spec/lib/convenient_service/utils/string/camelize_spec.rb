@@ -79,7 +79,6 @@ RSpec.describe ConvenientService::Utils::String::Camelize, type: :standard do
         end
       end
 
-
       context "when string contains uppercase letter" do
         let(:string) { "bAr" }
 
