@@ -27,21 +27,21 @@ module ConvenientService
       #   NOTE: The `respond_to` solution was slower by 16%. Check this file history to review the previous implementation. Use the `empty_service` benchmark to compare.
       #
       def copy(overrides: {})
-        defaults = {args: {}, kwargs: {}}
-
-        ##
-        # IMPORTANT: Do not mutate `overrides`.
-        #
-        overrides = defaults.merge(overrides)
-
         args =
-          case overrides[:args]
-          when ::Array then overrides[:args]
-          when ::Hash then Utils::Array.merge(to_arguments.args, overrides[:args])
+          if overrides.has_key?(:args)
+            overrides[:args].instance_of?(::Hash) ? Utils::Array.merge(to_arguments.args, overrides[:args]) : overrides[:args]
+          else
+            to_arguments.args
           end
 
-        kwargs = to_arguments.kwargs.merge(overrides[:kwargs])
-        block = overrides[:block] || to_arguments.block
+        kwargs =
+          if overrides.has_key?(:kwargs)
+            overrides[:kwargs].instance_of?(::Array) ? overrides[:kwargs].first : to_arguments.kwargs.merge(overrides[:kwargs])
+          else
+            to_arguments.kwargs
+          end
+
+        block = overrides.fetch(:block) { to_arguments.block }
 
         self.class.new(*args, **kwargs, &block)
       end

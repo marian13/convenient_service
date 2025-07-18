@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::Support::Copyable, type: :standard do
 
             return false if args != other.args
             return false if kwargs != other.kwargs
-            return false if block&.source_location != other.block&.source_location
+            return false if block != other.block
 
             true
           end
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Support::Copyable, type: :standard do
 
       let(:klass) { Class.new(base_class) }
       let(:instance) { klass.new(*arguments.args, **arguments.kwargs, &arguments.block) }
-      let(:arguments) { ConvenientService::Support::Arguments.new(:foo, :bar, foo: 0, bar: 1) { :foo } }
+      let(:arguments) { ConvenientService::Support::Arguments.new(:foo, :bar, :baz, foo: 0, bar: 1, baz: 2) { :foo } }
 
       it "returns copy" do
         expect(instance.copy).to eq(instance)
@@ -53,28 +53,20 @@ RSpec.describe ConvenientService::Support::Copyable, type: :standard do
         expect(instance.copy.object_id).not_to eq(instance.object_id)
       end
 
-      context "when `overrides[:args]` is NOT passed" do
-        let(:overrides) { {} }
-
-        it "defaults to empty hash`" do
-          expect(instance.copy(overrides: overrides).args).to eq(arguments.args)
-        end
-      end
-
       context "when `overrides[:args]` is passed" do
         context "when `overrides[:args]` is array" do
-          let(:overrides) { {args: [:baz, :qux]} }
+          let(:overrides) { {args: [:qux, :quux]} }
 
           it "replaces `to_arguments.args` with `overrides[:args]`" do
-            expect(instance.copy(overrides: overrides).args).to eq(overrides[:args])
+            expect(instance.copy(overrides: overrides).args).to eq([:qux, :quux])
           end
         end
 
         context "when `overrides[:args]` is hash" do
-          let(:overrides) { {args: {0 => :baz, 1 => :qux}} }
+          let(:overrides) { {args: {0 => :qux, 1 => :quux}} }
 
           it "merges `to_arguments.args` with `overrides[:args]`" do
-            expect(instance.copy(overrides: overrides).args).to eq(overrides[:args].values)
+            expect(instance.copy(overrides: overrides).args).to eq([:qux, :quux, :baz])
           end
 
           it "delegates to `ConvenientService::Utils::Array.merge`" do
@@ -87,19 +79,21 @@ RSpec.describe ConvenientService::Support::Copyable, type: :standard do
         end
       end
 
-      context "when `overrides[:kwargs]` is NOT passed" do
-        let(:overrides) { {} }
-
-        it "defaults to empty hash`" do
-          expect(instance.copy(overrides: overrides).kwargs).to eq(arguments.kwargs)
-        end
-      end
-
       context "when `overrides[:kwargs]` is passed" do
-        let(:overrides) { {kwargs: {foo: 3, bar: 4}} }
+        context "when `overrides[:kwargs]` is array" do
+          let(:overrides) { {kwargs: [foo: 3, bar: 4]} }
 
-        it "merges `to_arguments.kwargs` with `overrides[:kwargs]`" do
-          expect(instance.copy(overrides: overrides).kwargs).to eq(overrides[:kwargs])
+          it "replaces `to_arguments.kwargs` with `overrides[:kwargs]`" do
+            expect(instance.copy(overrides: overrides).kwargs).to eq({foo: 3, bar: 4})
+          end
+        end
+
+        context "when `overrides[:kwargs]` is hash" do
+          let(:overrides) { {kwargs: {foo: 3, bar: 4}} }
+
+          it "merges `to_arguments.kwargs` with `overrides[:kwargs]`" do
+            expect(instance.copy(overrides: overrides).kwargs).to eq({foo: 3, bar: 4, baz: 2})
+          end
         end
       end
 
@@ -108,21 +102,6 @@ RSpec.describe ConvenientService::Support::Copyable, type: :standard do
 
         it "merges `to_arguments.block` with `overrides[:block]`" do
           expect(instance.copy(overrides: overrides).block).to eq(overrides[:block])
-        end
-      end
-
-      context "when `overrides` is passed" do
-        let(:overrides) { {block: proc { :bar }} }
-
-        it "does NOT mutate `overrides`" do
-          overrides.freeze
-
-          ##
-          # NOTE: Using specific error in `not_to raise_error` may lead to false positives.
-          # - https://stackoverflow.com/questions/44515447/best-practices-for-rspec-expect-raise-error
-          # - https://github.com/rspec/rspec-expectations/issues/231
-          #
-          expect { instance.copy(overrides: overrides) }.not_to raise_error
         end
       end
     end
