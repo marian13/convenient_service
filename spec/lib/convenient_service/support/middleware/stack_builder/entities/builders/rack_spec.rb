@@ -97,35 +97,50 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
     # TODO: Comprehensive specs.
     #
     describe "#call" do
-      let(:service) do
-        Class.new do
-          include ConvenientService::Standard::Config
+      example_group "e2e" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
 
-          step :foo
-          step :bar
-          step :baz
+            step :foo
+            step :bar
+            step :baz
 
-          def foo
-            success
+            def foo
+              success
+            end
+
+            def bar
+              success
+            end
+
+            def baz
+              success
+            end
           end
+        end
 
-          def bar
-            success
-          end
+        before do
+          stub_const("ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::DEFAULT", ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::RACK)
+        end
 
-          def baz
-            success
-          end
+        it "runs middleware stack" do
+          expect(service.result.success?).to eq(true)
         end
       end
 
-      before do
-        stub_const("ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::DEFAULT", ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::RACK)
+      context "when stack is empty" do
+        let(:stack) { [] }
+        let(:env) { {} }
+
+        it "returns `env`" do
+          expect(stack_builder.call(env).object_id).to eq(env.object_id)
+        end
       end
 
-      it "runs middleware stack" do
-        expect(service.result.success?).to eq(true)
-      end
+      ##
+      # TODO: More direct specs.
+      ##
     end
 
     describe "#unshift" do
