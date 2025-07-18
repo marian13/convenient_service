@@ -445,9 +445,7 @@
 47
 48
 49
-50
-51
-52</pre>
+50</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/hash/triple_equality_compare.rb', line 45</span>
@@ -456,9 +454,7 @@
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>!=</span> <span class='id identifier rubyid_other_hash'>other_hash</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_difference'>difference</span><span class='lparen'>(</span><span class='id identifier rubyid_other_hash'>other_hash</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
 
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_all?'>all?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span> <span class='id identifier rubyid_value'>value</span> <span class='op'>===</span> <span class='id identifier rubyid_other_hash'>other_hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
-
-  <span class='kw'>true</span>
+  <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_all?'>all?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span> <span class='id identifier rubyid_value'>value</span> <span class='op'>===</span> <span class='id identifier rubyid_other_hash'>other_hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -470,7 +466,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Jul 18 13:51:43 2025 by
+  Generated on Fri Jul 18 20:00:08 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.8).
 </div>
