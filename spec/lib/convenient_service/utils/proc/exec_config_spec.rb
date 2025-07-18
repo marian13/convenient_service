@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Utils::Proc::ExecConfig, type: :standard do
             let(:block) { proc { |foo:| method_from_enclosing_context } }
 
             it "raises `ArgumentError`" do
-              expect { described_class.call(block, object) }.to raise_error(ArgumentError).with_message("missing keyword: :foo")
+              expect { described_class.call(block, object) }.to raise_error(ArgumentError).with_message(/missing keyword: :?foo/)
             end
           end
 
@@ -159,7 +159,7 @@ RSpec.describe ConvenientService::Utils::Proc::ExecConfig, type: :standard do
             let(:block) { ->(foo:) { method_from_enclosing_context } }
 
             it "raises `ArgumentError`" do
-              expect { described_class.call(block, object) }.to raise_error(ArgumentError).with_message("missing keyword: :foo")
+              expect { described_class.call(block, object) }.to raise_error(ArgumentError).with_message(/missing keyword: :?foo/)
             end
           end
 
