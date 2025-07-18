@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Utils::Hash::TripleEqualityCompare, type: :sta
 
       context "when `other_hash` has same amount of keys as hash" do
         context "when those keys are NOT same as hash keys" do
-          let(:other_hash) { {foo: 5, bar: :baz} }
+          let(:other_hash) { {foo: 5, baz: :baz} }
 
           it "returns `false`" do
             expect(command_result).to eq(false)

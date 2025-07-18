@@ -46,9 +46,7 @@ module ConvenientService
           return false if hash.size != other_hash.size
           return false if hash.keys.difference(other_hash.keys).any?
 
-          return false unless hash.all? { |key, value| value === other_hash[key] }
-
-          true
+          hash.all? { |key, value| value === other_hash[key] }
         end
       end
     end
