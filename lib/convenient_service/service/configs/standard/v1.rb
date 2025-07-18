@@ -48,7 +48,7 @@ module ConvenientService
               .with(options)
 
             concerns do
-              if options.include?(:essential)
+              if options.enabled?(:essential)
                 replace \
                   ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern,
                   ConvenientService::Plugins::Service::CanHaveSequentialSteps::Concern
@@ -56,13 +56,13 @@ module ConvenientService
             end
 
             middlewares :result do
-              if options.include?(:essential)
+              if options.enabled?(:essential)
                 replace \
                   ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware,
                   ConvenientService::Plugins::Service::CanHaveSequentialSteps::Middleware
               end
 
-              if options.include?(:active_model_validations)
+              if options.enabled?(:active_model_validations)
                 replace \
                   ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware,
                   ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware.with(status: :failure)

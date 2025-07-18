@@ -24,6 +24,112 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
   end
 
   example_group "instance methods" do
+    describe "#include?" do
+      context "when `options` do NOT contain option with `key`" do
+        let(:options) do
+          {
+            fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: true)
+          }
+        end
+
+        it "returns `false`" do
+          expect(option_collection.include?(:callbacks)).to eq(false)
+        end
+      end
+
+      context "when `options` contain option with `key`" do
+        let(:options) do
+          {
+            callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true)
+          }
+        end
+
+        it "returns `true`" do
+          expect(option_collection.include?(:callbacks)).to eq(true)
+        end
+      end
+    end
+
+    describe "#enabled?" do
+      context "when `options` do NOT contain option with `key`" do
+        let(:options) do
+          {
+            fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: true)
+          }
+        end
+
+        it "returns `false`" do
+          expect(option_collection.enabled?(:callbacks)).to eq(false)
+        end
+      end
+
+      context "when `options` contain option with `key`" do
+        context "when `options` contain NOT enabled option with `key`" do
+          let(:options) do
+            {
+              callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: false)
+            }
+          end
+
+          it "returns `false`" do
+            expect(option_collection.enabled?(:callbacks)).to eq(false)
+          end
+        end
+
+        context "when `options` contain enabled option with `key`" do
+          let(:options) do
+            {
+              callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true)
+            }
+          end
+
+          it "returns `true`" do
+            expect(option_collection.enabled?(:callbacks)).to eq(true)
+          end
+        end
+      end
+    end
+
+    describe "#disabled?" do
+      context "when `options` do NOT contain option with `key`" do
+        let(:options) do
+          {
+            fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: true)
+          }
+        end
+
+        it "returns `true`" do
+          expect(option_collection.disabled?(:callbacks)).to eq(true)
+        end
+      end
+
+      context "when `options` contain option with `key`" do
+        context "when `options` contain NOT enabled option with `key`" do
+          let(:options) do
+            {
+              callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: false)
+            }
+          end
+
+          it "returns `true`" do
+            expect(option_collection.disabled?(:callbacks)).to eq(true)
+          end
+        end
+
+        context "when `options` contain enabled option with `key`" do
+          let(:options) do
+            {
+              callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true)
+            }
+          end
+
+          it "returns `false`" do
+            expect(option_collection.disabled?(:callbacks)).to eq(false)
+          end
+        end
+      end
+    end
+
     describe "#keys" do
       specify do
         expect { option_collection.keys }

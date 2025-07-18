@@ -51,13 +51,26 @@ module ConvenientService
         # @param name [Symbol]
         # @return [Boolean]
         #
-        # @internal
-        #   TODO: Direct specs.
-        #
         def include?(name)
-          return false unless options.has_key?(name)
+          options.has_key?(name)
+        end
+
+        ##
+        # @param name [Symbol]
+        # @return [Boolean]
+        #
+        def enabled?(name)
+          return false unless include?(name)
 
           options[name].enabled?
+        end
+
+        ##
+        # @param name [Symbol]
+        # @return [Boolean]
+        #
+        def disabled?(name)
+          !enabled?(name)
         end
 
         ##
