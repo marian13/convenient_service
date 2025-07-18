@@ -374,7 +374,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         context "when `other` has different `alias_slug`" do
-          let(:other) { described_class.new(slug: slug, scope: scope, body: proc { :bar }, alias_slug: :bar) }
+          let(:other) { described_class.new(slug: slug, scope: scope, body: body, alias_slug: :bar) }
 
           it "returns `false`" do
             expect(method == other).to eq(false)
