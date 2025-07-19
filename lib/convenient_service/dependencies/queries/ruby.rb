@@ -77,15 +77,8 @@ module ConvenientService
           #
           # @see https://github.com/rdp/os
           #
-          # @internal
-          #   NOTE: Gratefully copied from the `os` gem. Version `1.1.4`.
-          #   - https://github.com/rdp/os/blob/v1.1.4/lib/os.rb#L101
-          #
-          #   NOTE: Modified original implementation in order to return a boolean.
-          #   NOTE: Consider to use `RUBY_ENGINE` as for others?
-          #
           def jruby?
-            ::RUBY_PLATFORM.to_s.match?(/java/)
+            ::RUBY_ENGINE.to_s.match?(/jruby/)
           end
 
           ##
@@ -93,13 +86,23 @@ module ConvenientService
           #
           # @return [Boolean]
           #
-          # @internal
-          #   NOTE: Taken from irb testing. May NOT be stable.
-          #
-          #   TODO: Find a confirmation of stability.
-          #
           def truffleruby?
             ::RUBY_ENGINE.to_s.match?(/truffleruby/)
+          end
+
+          ##
+          # Returns `true` when TruffleRuby, `false` otherwise.
+          #
+          # @param pattern [String]
+          # @return [Boolean]
+          #
+          def match?(pattern)
+            engine_name, operator, engine_version = pattern.split(" ")
+
+            return false unless public_send("#{engine_name}?")
+            return false unless self.engine_version.public_send(operator, engine_version)
+
+            true
           end
         end
       end

@@ -22,7 +22,7 @@ module ConvenientService
               ##
               # HACK: JRuby returns chain emumerator.
               #
-              if Dependencies.ruby.jruby? && Dependencies.ruby.engine_version < 10.1
+              if Dependencies.ruby.match?("jruby < 10.1")
                 ##
                 # @api public
                 #
@@ -45,7 +45,7 @@ module ConvenientService
               ##
               # HACK: JRuby returns chain emumerator.
               #
-              if Dependencies.ruby.jruby? && Dependencies.ruby.engine_version < 10.1
+              if Dependencies.ruby.match?("jruby < 10.1")
                 ##
                 # @api public
                 #
@@ -68,7 +68,7 @@ module ConvenientService
               ##
               # HACK: JRuby returns chain emumerator.
               #
-              if Dependencies.ruby.jruby? && Dependencies.ruby.engine_version < 10.1
+              if Dependencies.ruby.match?("jruby < 10.1")
                 ##
                 # @api public
                 #
@@ -92,7 +92,7 @@ module ConvenientService
               ##
               # HACK: JRuby returns chain emumerator.
               #
-              if Dependencies.ruby.jruby? && Dependencies.ruby.engine_version < 10.1
+              if Dependencies.ruby.match?("jruby < 10.1")
                 ##
                 # @api public
                 #
@@ -115,7 +115,7 @@ module ConvenientService
               ##
               # HACK: JRuby returns chain emumerator.
               #
-              if Dependencies.ruby.jruby? && Dependencies.ruby.engine_version < 10.1
+              if Dependencies.ruby.match?("jruby < 10.1")
                 ##
                 # @api public
                 #
@@ -139,7 +139,7 @@ module ConvenientService
               ##
               # HACK: JRuby returns chain emumerator.
               #
-              if Dependencies.ruby.jruby? && Dependencies.ruby.engine_version < 10.1
+              if Dependencies.ruby.match?("jruby < 10.1")
                 ##
                 # @api public
                 #

@@ -857,7 +857,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: `Enumerator::Lazy.chain` returns `Enumetator::Chain` in JRuby.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Failure propagation.
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
@@ -1056,7 +1056,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby has different exception message.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: No block.
             expect { [:success, :success, :success].chunk_while.to_a }.to raise_error(ArgumentError).with_message("missing block")
 
@@ -1201,7 +1201,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby raises `"tried to call lazy collect without a block"` instead of `"tried to call lazy map without a block"`.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: No block.
             expect([:success, :success, :success].collect.to_a).to eq([:success, :success, :success])
 
@@ -1524,7 +1524,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby raises exception for one element range.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version >= 9.5 && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby >= 9.5") && ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Item.
             expect([:success, :failure, :success, :failure].count(:success)).to eq(2)
             expect { (:success..:success).count(:success) }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
@@ -1539,7 +1539,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable({success: :success, failure: :failure}).count([:success, :success]).result).to be_success.with_data(value: 1)
             expect { service.step_aware_enumerable((:success..:success)).count(:success).result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
             expect { service.step_aware_enumerable((:failure..:failure)).count(:success).result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
-          elsif ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5
+          elsif ConvenientService::Dependencies.ruby.match?("jruby < 9.5")
             # NOTE: Item.
             expect([:success, :failure, :success, :failure].count(:success)).to eq(2)
             expect { (:success..:success).count(:success) }.to raise_error(ArgumentError).with_message("`count': wrong number of arguments (given 1, expected 0)")
@@ -2105,7 +2105,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: For some reason in JRuby `Enumerator::Lazy#drop_while` does NOT stop after first falsy value.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Step with one output.
             expect([true, nil, true].drop_while { |value| value }.to_a).to eq([nil, true])
             expect([true, nil, true].lazy.drop_while { |value| value }.to_a).to eq([nil])
@@ -2698,7 +2698,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby does NOT raise exception for chain enumerators.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Empty collection.
             expect([].each_with_index { |status, index| index.abs }).to eq([])
             expect(set([]).each_with_index { |status, index| index.abs }).to eq(set([]))
@@ -2774,7 +2774,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable((0..5)).each_with_index.result).to be_success.with_data(values: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])
           end
 
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Block.
             expect([0, 1, 2, 3, 4, 5].each_with_index { |number, index| index.abs }).to eq([0, 1, 2, 3, 4, 5])
             expect(chain_enumerator([0, 1, 2, 3, 4, 5]).each_with_index { |status, index| index.abs }.to_a).to eq([0, 1, 2, 3, 4, 5])
@@ -2870,7 +2870,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
 
       describe "#each_with_object" do
         specify do
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Empty collection.
             expect([].each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
             expect(chain_enumerator([]).each_with_object("") { |string, object| concat_strings(object, string) }).to eq("")
@@ -2939,7 +2939,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable(("0".."5")).each_with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
           end
 
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Block.
             expect(["0", "1", "2", "3", "4", "5"].each_with_object(+"") { |string, object| concat_strings(object, string) }).to eq("12345")
 
@@ -3110,7 +3110,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby raises `"tried to call lazy filter without a block"` instead of `"tried to call lazy select without a block"`.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: No block.
             expect([:success, :failure, :success, :failure].filter.to_a).to eq([:success, :failure, :success, :failure])
 
@@ -3563,7 +3563,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby raises `"tried to call lazy find_all without a block"` instead of `"tried to call lazy select without a block"`.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: No block.
             expect([:success, :failure, :success, :failure].find_all.to_a).to eq([:success, :failure, :success, :failure])
 
@@ -4525,7 +4525,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({}).inject(0) { |memo, number| memo + number }.result).to be_success.with_data(value: 0)
           expect(service.step_aware_enumerable((:success...:success)).inject(0) { |memo, number| memo + number }.result).to be_success.with_data(value: 0)
 
-          if ConvenientService::Dependencies.ruby.version >= 3.2 || (ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5)
+          if ConvenientService::Dependencies.ruby.version >= 3.2 || (ConvenientService::Dependencies.ruby.match?("jruby < 9.5"))
             # NOTE: No initial, no sym, no block.
             expect { [0, 1, 2, 3, 4, 5].inject }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
 
@@ -4941,7 +4941,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby returns `nil` for `(-1..-1)`.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Error result.
             expect(service.step_aware_enumerable(enumerable([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
             expect(service.step_aware_enumerator(enumerator([1, -1, :exception])).max { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
@@ -5021,7 +5021,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: Looks like JRuby has a default block.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: No block, no n.
             expect { [1, 2, 3, 4, 5].max_by.to_a }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
 
@@ -5050,7 +5050,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # TODO: Why JRuby raises exception only for wrapped `max_by`?
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: No block, n.
             expect([1, 2, 3, 4, 5].max_by(2).to_a).to eq([1, 2, 3, 4, 5])
 
@@ -5335,7 +5335,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby returns `nil` for `(-1..-1)`.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Error result.
             expect(service.step_aware_enumerable(enumerable([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
             expect(service.step_aware_enumerator(enumerator([1, -1, :exception])).min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
@@ -5415,7 +5415,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: Looks like JRuby has a default block.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: No block, no n.
             expect { [1, 2, 3, 4, 5].min_by.to_a }.to raise_error(ArgumentError).with_message("comparison of Integer with 1 failed")
 
@@ -5444,7 +5444,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: Why JRuby raises exception only for wrapped `min_by`?
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: No block, n.
             expect([1, 2, 3, 4, 5].min_by(2).to_a).to eq([1, 2, 3, 4, 5])
 
@@ -5646,7 +5646,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby returns `[nil, nil]` for range `(-1..-1)`.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Error result.
             expect(service.step_aware_enumerable(enumerable([1, -1, :exception])).minmax { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
             expect(service.step_aware_enumerator(enumerator([1, -1, :exception])).minmax { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
@@ -6318,7 +6318,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({}).reduce(0) { |memo, number| memo + number }.result).to be_success.with_data(value: 0)
           expect(service.step_aware_enumerable((:success...:success)).reduce(0) { |memo, number| memo + number }.result).to be_success.with_data(value: 0)
 
-          if ConvenientService::Dependencies.ruby.version >= 3.2 || (ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 9.5)
+          if ConvenientService::Dependencies.ruby.version >= 3.2 || (ConvenientService::Dependencies.ruby.match?("jruby < 9.5"))
             # NOTE: No initial, no sym, no block.
             expect { [0, 1, 2, 3, 4, 5].reduce }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
 
@@ -7069,7 +7069,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby has different exception message comparing to CRuby.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: No block.
             expect { [0, 1, 2, 3, 4, 5].slice_when.to_a }.to raise_error(ArgumentError).with_message("missing block")
             expect { service.step_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).slice_when.result }.to raise_error(ArgumentError).with_message("missing block")
@@ -7398,7 +7398,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: For some reason `Enumerator::Lazy#sort_by` returns just `Enumerator` on JRuby, not `Enumerator::Lazy` as in CRuby.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Failure propagation.
             expect([1, 2, 3].lazy.sort_by).to be_instance_of(Enumerator)
 
@@ -7766,7 +7766,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: For some reason `(1..3)).tally` returns `{nil => 3}` in JRuby.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Not empty collection.
             expect([1, 2, 2, 3, 3, 3].tally).to eq({1 => 1, 2 => 2, 3 => 3})
 
@@ -8180,7 +8180,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           ##
           # HACK: JRuby and CRuby does not have the same behaviour for `zip`. JRuby passes the whole array to block, while CRuby passes only one element.
           #
-          if ConvenientService::Dependencies.ruby.jruby? && ConvenientService::Dependencies.ruby.engine_version < 10.1
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # No argument, block.
             expect([1].zip { |array| raise if array.sum != 1 }).to eq(nil)
             expect(lazy_enumerator([1]).zip { |integer| raise if integer.sum != 1 }).to eq(nil)

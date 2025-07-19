@@ -90,7 +90,7 @@ module ConvenientService
           #   object.method(:alias_value).original_name
           #   # => :value
           #
-          if Dependencies.ruby.jruby?
+          if Dependencies.ruby.match?("jruby < 10.1")
             def equal_methods?(alias_name, original_name)
               alias_method_name = object.method(alias_name).original_name
               original_method_name = object.method(original_name).original_name

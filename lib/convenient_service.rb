@@ -150,7 +150,7 @@ module ConvenientService
     #
     #   TODO: Create a custom Rubocop cop to statically catch all places where plain `raise` is used.
     #
-    if Dependencies.ruby.jruby? && Dependencies.ruby.engine_version < 10.1
+    if Dependencies.ruby.match?("jruby < 10.1")
       ##
       # @api public
       # @param original_exception [StandardError]
@@ -185,7 +185,7 @@ module ConvenientService
     #   - https://github.com/jruby/jruby/blob/9.4.0.0/core/src/main/java/org/jruby/RubyKernel.java#L881
     #   - https://github.com/ruby/spec/blob/master/core/kernel/raise_spec.rb#L5
     #
-    if Dependencies.ruby.jruby? && Dependencies.ruby.engine_version < 10.1
+    if Dependencies.ruby.match?("jruby < 10.1")
       ##
       # @api public
       # @return [Object] Can be any type.
