@@ -4525,7 +4525,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({}).inject(0) { |memo, number| memo + number }.result).to be_success.with_data(value: 0)
           expect(service.step_aware_enumerable((:success...:success)).inject(0) { |memo, number| memo + number }.result).to be_success.with_data(value: 0)
 
-          if ConvenientService::Dependencies.ruby.version >= 3.2 || (ConvenientService::Dependencies.ruby.match?("jruby < 9.5"))
+          if ConvenientService::Dependencies.ruby.version >= 3.2 || ConvenientService::Dependencies.ruby.match?("jruby < 9.5")
             # NOTE: No initial, no sym, no block.
             expect { [0, 1, 2, 3, 4, 5].inject }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
 
@@ -6318,7 +6318,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({}).reduce(0) { |memo, number| memo + number }.result).to be_success.with_data(value: 0)
           expect(service.step_aware_enumerable((:success...:success)).reduce(0) { |memo, number| memo + number }.result).to be_success.with_data(value: 0)
 
-          if ConvenientService::Dependencies.ruby.version >= 3.2 || (ConvenientService::Dependencies.ruby.match?("jruby < 9.5"))
+          if ConvenientService::Dependencies.ruby.version >= 3.2 || ConvenientService::Dependencies.ruby.match?("jruby < 9.5")
             # NOTE: No initial, no sym, no block.
             expect { [0, 1, 2, 3, 4, 5].reduce }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
 

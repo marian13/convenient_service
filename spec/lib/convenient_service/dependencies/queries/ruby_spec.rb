@@ -217,6 +217,10 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
       end
 
       context "when `engine_name` is valid" do
+        before do
+          allow(described_class).to receive(:ruby?).and_return(true)
+        end
+
         context "when `operator` is NOT valid" do
           let(:pattern) { "ruby << 10.0" }
 
