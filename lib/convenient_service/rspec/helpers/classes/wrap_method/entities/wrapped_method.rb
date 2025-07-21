@@ -43,14 +43,12 @@ module ConvenientService
               # @return [void]
               #
               def initialize(entity:, method:, observe_middleware:)
-                @chain = {}
-
                 @entity = entity
                 @method = method
                 @observe_middleware = observe_middleware
 
                 ##
-                # TODO: When middleware is NOT used yet.
+                # TODO: When middleware is NOT used yet (`::ConvenientService.raise Exceptions::NoMiddlewareIsSetToObserve.new`).
                 #
                 observable_middleware.middleware_events[:before_chain_next].add_observer(self)
                 observable_middleware.middleware_events[:after_chain_next].add_observer(self)
@@ -67,8 +65,8 @@ module ConvenientService
               #   NOTE: The following handler is triggered only when `chain.next` is called from method chain middleware.
               #
               def handle_before_chain_next(arguments)
-                @chain[:called] = true
-                @chain[:arguments] = arguments
+                chain[:called] = true
+                chain[:arguments] = arguments
               end
 
               ##
@@ -76,7 +74,7 @@ module ConvenientService
               #   NOTE: The following handler is triggered only when `chain.next` is called from method chain middleware.
               #
               def handle_after_chain_next(value, _arguments)
-                @chain[:value] = value
+                chain[:value] = value
               end
 
               ##
@@ -112,7 +110,7 @@ module ConvenientService
               def call(*args, **kwargs, &block)
                 entity.__send__(method, *args, **kwargs, &block)
               rescue => exception
-                @chain[:exception] = exception
+                chain[:exception] = exception
 
                 raise
               end
@@ -121,14 +119,14 @@ module ConvenientService
               # @return [void]
               #
               def reset!
-                @chain.clear
+                chain.clear
               end
 
               ##
               # @return [Boolean]
               #
               def chain_called?
-                @chain.has_key?(:called)
+                chain.has_key?(:called)
               end
 
               ##
@@ -138,7 +136,7 @@ module ConvenientService
               def chain_value
                 ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :value) unless chain_called?
 
-                @chain[:value]
+                chain[:value]
               end
 
               ##
@@ -148,7 +146,7 @@ module ConvenientService
               def chain_args
                 ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :args) unless chain_called?
 
-                @chain[:arguments].args
+                chain[:arguments].args
               end
 
               ##
@@ -158,7 +156,7 @@ module ConvenientService
               def chain_kwargs
                 ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :kwargs) unless chain_called?
 
-                @chain[:arguments].kwargs
+                chain[:arguments].kwargs
               end
 
               ##
@@ -168,7 +166,7 @@ module ConvenientService
               def chain_block
                 ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :block) unless chain_called?
 
-                @chain[:arguments].block
+                chain[:arguments].block
               end
 
               ##
@@ -178,7 +176,7 @@ module ConvenientService
               def chain_exception
                 ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :exception) unless chain_called?
 
-                @chain[:exception]
+                chain[:exception]
               end
 
               ##
@@ -191,8 +189,18 @@ module ConvenientService
                 return false if entity != other.entity
                 return false if method != other.method
                 return false if observe_middleware != other.observe_middleware
+                return false if chain != other.chain
 
                 true
+              end
+
+              protected
+
+              ##
+              # @return [Hash{Symbol => Object}]
+              #
+              def chain
+                @chain ||= {}
               end
             end
           end

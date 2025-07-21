@@ -9,24 +9,28 @@ require "spec_helper"
 
 require "convenient_service"
 
-# frozen_string_literal: true
-
-##
-# TODO: Update direct specs.
-#
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities::WrappedMethod do
+RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities::WrappedMethod, type: :standard do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
   include ConvenientService::RSpec::Matchers::DelegateTo
+  include ConvenientService::RSpec::Matchers::Results
   include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
 
   subject(:method) { described_class.new(entity: entity, method: method_name, observe_middleware: middleware) }
 
   let(:service_class) do
-    Class.new do
-      def result
-        :original_result_value
+    Class.new.tap do |klass|
+      klass.class_exec(method_name, middleware) do |method_name, middleware|
+        include ConvenientService::Standard::Config
+
+        middlewares method_name do
+          observe middleware
+        end
+
+        def result
+          success(data: {from: :original_result})
+        end
       end
     end
   end
@@ -35,7 +39,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
 
   let(:entity) { service_instance }
   let(:method_name) { :result }
-  let(:middleware) { nil }
+  let(:middleware) { ConvenientService::Plugins::Common::CachesReturnValue::Middleware }
 
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
@@ -44,7 +48,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
   example_group "instance methods" do
     ##
     # TODO: Specs.
-    #
+    ##
 
     describe "#chain_called?" do
       context "when chain is NOT called" do
@@ -90,7 +94,7 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
         end
 
         it "returns chain value" do
-          expect(method.chain_value).to eq(:original_result_value)
+          expect(method.chain_value).to be_success.with_data(from: :original_result)
         end
 
         specify do
@@ -101,9 +105,17 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
 
     describe "#chain_args" do
       let(:service_class) do
-        Class.new do
-          def result(*args)
-            :original_result_value
+        Class.new.tap do |klass|
+          klass.class_exec(method_name, middleware) do |method_name, middleware|
+            include ConvenientService::Standard::Config
+
+            middlewares method_name do
+              observe middleware
+            end
+
+            def result(*args)
+              success(data: {from: :original_result})
+            end
           end
         end
       end
@@ -144,9 +156,17 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
 
     describe "#chain_kwargs" do
       let(:service_class) do
-        Class.new do
-          def result(**kwargs)
-            :original_result_value
+        Class.new.tap do |klass|
+          klass.class_exec(method_name, middleware) do |method_name, middleware|
+            include ConvenientService::Standard::Config
+
+            middlewares method_name do
+              observe middleware
+            end
+
+            def result(*kwargs)
+              success(data: {from: :original_result})
+            end
           end
         end
       end
@@ -187,9 +207,17 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
 
     describe "#chain_block" do
       let(:service_class) do
-        Class.new do
-          def result(&block)
-            :original_result_value
+        Class.new.tap do |klass|
+          klass.class_exec(method_name, middleware) do |method_name, middleware|
+            include ConvenientService::Standard::Config
+
+            middlewares method_name do
+              observe middleware
+            end
+
+            def result(&block)
+              success(data: {from: :original_result})
+            end
           end
         end
       end
@@ -230,9 +258,17 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
 
     describe "#chain_exception" do
       let(:service_class) do
-        Class.new do
-          def result
-            raise StandardError, "exception message"
+        Class.new.tap do |klass|
+          klass.class_exec(method_name, middleware) do |method_name, middleware|
+            include ConvenientService::Standard::Config
+
+            middlewares method_name do
+              observe middleware
+            end
+
+            def result(&block)
+              raise StandardError, "exception message"
+            end
           end
         end
       end
@@ -273,6 +309,65 @@ RSpec.xdescribe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities
 
         specify do
           expect { method.chain_exception }.to cache_its_value
+        end
+      end
+    end
+
+    example_group "comparison" do
+      describe "#==" do
+        context "when `other` have different class" do
+          let(:other) { 42 }
+
+          it "returns `nil`" do
+            expect(method == other).to be_nil
+          end
+        end
+
+        context "when `other` have different `entity`" do
+          let(:other) { described_class.new(entity: service_class.new, method: method_name, observe_middleware: middleware) }
+
+          it "returns `false`" do
+            expect(method == other).to eq(false)
+          end
+        end
+
+        ##
+        # TODO: Complete.
+        #
+        xcontext "when `other` have different `method`" do
+          let(:other) { described_class.new(entity: service_class, method: :negated_result, observe_middleware: middleware) }
+
+          it "returns `false`" do
+            expect(method == other).to eq(false)
+          end
+        end
+
+        xcontext "when `other` have different `observe_middleware`" do
+          let(:other) { described_class.new(entity: entity, method: method_name, observe_middleware: ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware) }
+
+          it "returns `false`" do
+            expect(method == other).to eq(false)
+          end
+        end
+
+        context "when `other` have different chain" do
+          let(:other) { described_class.new(entity: entity, method: method_name, observe_middleware: middleware) }
+
+          before do
+            method.call
+          end
+
+          it "returns `false`" do
+            expect(method == other).to eq(false)
+          end
+        end
+
+        context "when `other` has same attributes" do
+          let(:other) { described_class.new(entity: entity, method: method_name, observe_middleware: middleware) }
+
+          it "returns `true`" do
+            expect(method == other).to eq(true)
+          end
         end
       end
     end
