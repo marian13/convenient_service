@@ -13,6 +13,8 @@ require "convenient_service"
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::ImportMethod, type: :standard do
   example_group "class methods" do
     describe ".call" do
+      include ConvenientService::RSpec::Helpers::IgnoringException
+
       include ConvenientService::RSpec::Matchers::DelegateTo
       include ConvenientService::RSpec::Matchers::IncludeModule
       include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
@@ -28,7 +30,35 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
       let(:full_name) { :"foo.bar.baz.qux" }
       let(:body) { proc { :"foo.bar.baz.qux" } }
 
-      context "when `scope` is instance" do
+      let(:prepend) { false }
+
+      ##
+      # NOTE: This case is impossible in the read-world usage. Added this context for the coverage reasons.
+      #
+      context "when `scope` is nor `instance` neither `class`" do
+        let(:scope) { :foo }
+
+        let(:exception_message) do
+          <<~TEXT
+            Scope `#{scope.inspect}` is NOT valid.
+
+            Valid options are `:instance`, `:class`.
+          TEXT
+        end
+
+        it "raises `ConvenientService::Support::DependencyContainer::Exceptions::InvalidScope`" do
+          expect { command_result }
+            .to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::InvalidScope)
+            .with_message(exception_message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Support::DependencyContainer::Exceptions::InvalidScope) { command_result } }
+            .to delegate_to(ConvenientService, :raise)
+        end
+      end
+
+      context "when `scope` is `instance`" do
         let(:scope) { :instance }
 
         context "when `prepend` is `false`" do
@@ -95,7 +125,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
         end
       end
 
-      context "when `scope` is class" do
+      context "when `scope` is `class`" do
         let(:scope) { :class }
 
         context "when `prepend` is `false`" do

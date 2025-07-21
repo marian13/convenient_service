@@ -76,10 +76,7 @@ module ConvenientService
           # @return [String]
           #
           def scoped_prefix
-            case scope
-            when Constants::INSTANCE_SCOPE then "Instance"
-            when Constants::CLASS_SCOPE then "Class"
-            end
+            scope.capitalize
           end
 
           ##
@@ -89,6 +86,8 @@ module ConvenientService
             case scope
             when Constants::INSTANCE_SCOPE then importing_module
             when Constants::CLASS_SCOPE then importing_module.singleton_class
+            else
+              ::ConvenientService.raise Exceptions::InvalidScope.new(scope: scope)
             end
           end
 
