@@ -11,6 +11,10 @@ module ConvenientService
       module Classes
         class StubService < Support::Command
           module Entities
+            ##
+            # @internal
+            #   IMPORTANT: Do NOT cache `data`, `message`, and `code` since they can be set multiple times by `with_data`, `and_data`, `with_message`, `and_message`, `with_code`, and `and_code`.
+            #
             class ResultSpec
               ##
               # @param status [Symbol]
@@ -139,13 +143,6 @@ module ConvenientService
               # @return [Hash]
               #
               def kwargs
-                @kwargs ||= calculate_kwargs
-              end
-
-              ##
-              # @return [Hash]
-              #
-              def calculate_kwargs
                 kwargs = {}
 
                 kwargs[:data] = data if used_data?
@@ -182,28 +179,28 @@ module ConvenientService
               # @return [Hash]
               #
               def data
-                @data ||= chain[:data] || {}
+                chain[:data] || {}
               end
 
               ##
               # @return [String]
               #
               def message
-                @message ||= chain[:message] || ""
+                chain[:message] || ""
               end
 
               ##
               # @return [String]
               #
               def code
-                @code ||= chain[:code] || ""
+                chain[:code] || ""
               end
 
               ##
-              # @return [Object]
+              # @return [ConvenientService::Service]
               #
               def service_instance
-                @service_instance ||= service_class.new_without_initialize
+                service_class.new_without_initialize
               end
             end
           end

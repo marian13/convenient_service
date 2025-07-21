@@ -173,7 +173,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
 
     describe "#with_code" do
       it "sets chain `code`" do
-        expect { result_spec.with_code(code) }.to change { result_spec.calculate_value.unsafe_code.to_sym }.from(:default_code).to(code)
+        expect { result_spec.with_code(code) }.to change { result_spec.calculate_value.unsafe_code.to_sym }.from(:default_success).to(code)
       end
 
       it "returns result spec" do
@@ -203,7 +203,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
 
     describe "#and_code" do
       it "sets chain `code`" do
-        expect { result_spec.and_code(code) }.to change { result_spec.calculate_value.unsafe_code.to_sym }.from(:default_code).to(code)
+        expect { result_spec.and_code(code) }.to change { result_spec.calculate_value.unsafe_code.to_sym }.from(:default_success).to(code)
       end
 
       it "returns result spec" do
