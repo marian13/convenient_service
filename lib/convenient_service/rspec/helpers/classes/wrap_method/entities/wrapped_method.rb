@@ -43,6 +43,8 @@ module ConvenientService
               # @return [void]
               #
               def initialize(entity:, method:, observe_middleware:)
+                @chain = {}
+
                 @entity = entity
                 @method = method
                 @observe_middleware = observe_middleware
@@ -65,8 +67,8 @@ module ConvenientService
               #   NOTE: The following handler is triggered only when `chain.next` is called from method chain middleware.
               #
               def handle_before_chain_next(arguments)
-                @chain_called = true
-                @chain_arguments = arguments
+                @chain[:called] = true
+                @chain[:arguments] = arguments
               end
 
               ##
@@ -74,7 +76,7 @@ module ConvenientService
               #   NOTE: The following handler is triggered only when `chain.next` is called from method chain middleware.
               #
               def handle_after_chain_next(value, _arguments)
-                @chain_value = value
+                @chain[:value] = value
               end
 
               ##
@@ -104,14 +106,14 @@ module ConvenientService
               # @param block [Proc, nil]
               # @return [Object] Can be any type.
               #
+              # @internal
+              #   NOTE: `raise` with no args inside `rescue` reraises rescued exception.
+              #
               def call(*args, **kwargs, &block)
                 entity.__send__(method, *args, **kwargs, &block)
               rescue => exception
-                @chain_exception = exception
+                @chain[:exception] = exception
 
-                ##
-                # NOTE: `raise` with no args inside `rescue` reraises rescued exception.
-                #
                 raise
               end
 
@@ -119,17 +121,14 @@ module ConvenientService
               # @return [void]
               #
               def reset!
-                remove_instance_variable(:@chain_called) if defined? @chain_called
-                remove_instance_variable(:@chain_value) if defined? @chain_value
-                remove_instance_variable(:@chain_arguments) if defined? @chain_arguments
-                remove_instance_variable(:@chain_exception) if defined? @chain_exception
+                @chain.clear
               end
 
               ##
               # @return [Boolean]
               #
               def chain_called?
-                Utils.to_bool(defined? @chain_called)
+                @chain.has_key?(:called)
               end
 
               ##
@@ -139,7 +138,7 @@ module ConvenientService
               def chain_value
                 ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :value) unless chain_called?
 
-                @chain_value
+                @chain[:value]
               end
 
               ##
@@ -149,7 +148,7 @@ module ConvenientService
               def chain_args
                 ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :args) unless chain_called?
 
-                @chain_arguments.args
+                @chain[:arguments].args
               end
 
               ##
@@ -159,7 +158,7 @@ module ConvenientService
               def chain_kwargs
                 ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :kwargs) unless chain_called?
 
-                @chain_arguments.kwargs
+                @chain[:arguments].kwargs
               end
 
               ##
@@ -169,7 +168,7 @@ module ConvenientService
               def chain_block
                 ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :block) unless chain_called?
 
-                @chain_arguments.block
+                @chain[:arguments].block
               end
 
               ##
@@ -179,7 +178,7 @@ module ConvenientService
               def chain_exception
                 ::ConvenientService.raise Exceptions::ChainAttributePreliminaryAccess.new(attribute: :exception) unless chain_called?
 
-                @chain_exception
+                @chain[:exception]
               end
 
               ##
