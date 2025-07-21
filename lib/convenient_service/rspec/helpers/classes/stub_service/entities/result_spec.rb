@@ -9,10 +9,6 @@ module ConvenientService
   module RSpec
     module Helpers
       module Classes
-        ##
-        # @internal
-        #   TODO: Specs.
-        #
         class StubService < Support::Command
           module Entities
             class ResultSpec
@@ -98,9 +94,6 @@ module ConvenientService
 
               ##
               # @return [Object]
-              #
-              # @internal
-              #    TODO: Assert.
               #
               def calculate_value
                 service_class.__send__(status, **kwargs).copy(overrides: {kwargs: {stubbed_result: true}})

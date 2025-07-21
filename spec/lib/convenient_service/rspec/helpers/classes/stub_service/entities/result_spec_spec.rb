@@ -30,6 +30,10 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
     end
   end
 
+  let(:data) { {foo: :bar} }
+  let(:message) { "foo" }
+  let(:code) { :foo }
+
   example_group "class methods" do
     describe ".new" do
       context "when service class is NOT passed" do
@@ -144,6 +148,66 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
             expect(result_spec.calculate_value).to be_success.with_data(data)
           end
         end
+      end
+    end
+
+    describe "#with_data" do
+      it "sets chain `data`" do
+        expect { result_spec.with_data(data) }.to change { result_spec.calculate_value.unsafe_data }.from({}).to(data)
+      end
+
+      it "returns result spec" do
+        expect(result_spec.with_data(data)).to eq(result_spec)
+      end
+    end
+
+    describe "#with_message" do
+      it "sets chain `message`" do
+        expect { result_spec.with_message(message) }.to change { result_spec.calculate_value.unsafe_message }.from("").to(message)
+      end
+
+      it "returns result spec" do
+        expect(result_spec.with_message(message)).to eq(result_spec)
+      end
+    end
+
+    describe "#with_code" do
+      it "sets chain `code`" do
+        expect { result_spec.with_code(code) }.to change { result_spec.calculate_value.unsafe_code }.from(:default_code).to(code)
+      end
+
+      it "returns result spec" do
+        expect(result_spec.with_code(code)).to eq(result_spec)
+      end
+    end
+
+    describe "#and_data" do
+      it "sets chain `data`" do
+        expect { result_spec.and_data(data) }.to change { result_spec.calculate_value.unsafe_data }.from({}).to(data)
+      end
+
+      it "returns result spec" do
+        expect(result_spec.and_data(data)).to eq(result_spec)
+      end
+    end
+
+    describe "#and_message" do
+      it "sets chain `message`" do
+        expect { result_spec.and_message(message) }.to change { result_spec.calculate_value.unsafe_message }.from("").to(message)
+      end
+
+      it "returns result spec" do
+        expect(result_spec.and_message(message)).to eq(result_spec)
+      end
+    end
+
+    describe "#and_code" do
+      it "sets chain `code`" do
+        expect { result_spec.and_code(code) }.to change { result_spec.calculate_value.unsafe_code }.from(:default_code).to(code)
+      end
+
+      it "returns result spec" do
+        expect(result_spec.and_code(code)).to eq(result_spec)
       end
     end
 
