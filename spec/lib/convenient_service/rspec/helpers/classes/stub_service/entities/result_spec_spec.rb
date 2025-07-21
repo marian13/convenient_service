@@ -153,7 +153,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
 
     describe "#with_data" do
       it "sets chain `data`" do
-        expect { result_spec.with_data(data) }.to change { result_spec.calculate_value.unsafe_data }.from({}).to(data)
+        expect { result_spec.with_data(data) }.to change { result_spec.calculate_value.unsafe_data.to_h }.from({}).to(data)
       end
 
       it "returns result spec" do
@@ -163,7 +163,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
 
     describe "#with_message" do
       it "sets chain `message`" do
-        expect { result_spec.with_message(message) }.to change { result_spec.calculate_value.unsafe_message }.from("").to(message)
+        expect { result_spec.with_message(message) }.to change { result_spec.calculate_value.unsafe_message.to_s }.from("").to(message)
       end
 
       it "returns result spec" do
@@ -173,7 +173,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
 
     describe "#with_code" do
       it "sets chain `code`" do
-        expect { result_spec.with_code(code) }.to change { result_spec.calculate_value.unsafe_code }.from(:default_code).to(code)
+        expect { result_spec.with_code(code) }.to change { result_spec.calculate_value.unsafe_code.to_sym }.from(:default_code).to(code)
       end
 
       it "returns result spec" do
@@ -183,7 +183,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
 
     describe "#and_data" do
       it "sets chain `data`" do
-        expect { result_spec.and_data(data) }.to change { result_spec.calculate_value.unsafe_data }.from({}).to(data)
+        expect { result_spec.and_data(data) }.to change { result_spec.calculate_value.unsafe_data.to_h }.from({}).to(data)
       end
 
       it "returns result spec" do
@@ -193,7 +193,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
 
     describe "#and_message" do
       it "sets chain `message`" do
-        expect { result_spec.and_message(message) }.to change { result_spec.calculate_value.unsafe_message }.from("").to(message)
+        expect { result_spec.and_message(message) }.to change { result_spec.calculate_value.unsafe_message.to_s }.from("").to(message)
       end
 
       it "returns result spec" do
@@ -203,7 +203,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
 
     describe "#and_code" do
       it "sets chain `code`" do
-        expect { result_spec.and_code(code) }.to change { result_spec.calculate_value.unsafe_code }.from(:default_code).to(code)
+        expect { result_spec.and_code(code) }.to change { result_spec.calculate_value.unsafe_code.to_sym }.from(:default_code).to(code)
       end
 
       it "returns result spec" do
