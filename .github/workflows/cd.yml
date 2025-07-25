@@ -43,12 +43,15 @@ jobs:
           #
           bundler-cache: true
       ##
-      # NOTE: Installs Task (task runner).
+      # NOTE: Installs Task (task runner). Repo token is required to increase API quota.
       # - https://taskfile.dev/installation/#github-actions
       # - https://github.com/go-task/task
+      # - https://github.com/arduino/setup-task?tab=readme-ov-file#repo-token
       #
       - name: Install Task (task runner)
-        uses: arduino/setup-task@v1
+        uses: arduino/setup-task@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Generate docs
         working-directory: ./
         run: task docs:generate
