@@ -124,26 +124,6 @@ end
 
 appraise "dry" do
   gem "dry-initializer", "~> 3.0.0"
-
-  gem "dry-validation", "~> 1.5.0"
-
-  ##
-  # NOTE: Restricts temporarily `dry-configurable` version (dependency of `dry-validation`) until the following issue is resolved:
-  # https://github.com/dry-rb/dry-configurable/issues/146
-  #
-  gem "dry-configurable", "~> 0.15.0"
-
-  ##
-  # NOTE: Restricts temporarily `dry-schema` version (dependency of `dry-validation`) until the following issue is resolved:
-  # https://github.com/dry-rb/dry-schema/issues/434
-  #
-  gem "dry-schema", "~> 1.10"
-
-  ##
-  # NOTE: Restricts temporarily `dry-core` version (dependency of `dry-validation`) until the following issue is resolved:
-  # https://github.com/dry-rb/dry-core/issues/73#issuecomment-1279774309
-  #
-  gem "dry-core", "~> 0.8.0"
 end
 
 appraise "amazing_print" do
@@ -166,26 +146,6 @@ appraise "all" do
   gem "activemodel", "~> 7.0.0"
 
   gem "dry-initializer", "~> 3.0.0"
-
-  gem "dry-validation", "~> 1.5.0"
-
-  ##
-  # NOTE: Restricts temporarily `dry-configurable` version (dependency of `dry-validation`) until the following issue is resolved:
-  # https://github.com/dry-rb/dry-configurable/issues/146
-  #
-  gem "dry-configurable", "~> 0.15.0"
-
-  ##
-  # NOTE: Restricts temporarily `dry-schema` version (dependency of `dry-validation`) until the following issue is resolved:
-  # https://github.com/dry-rb/dry-schema/issues/434
-  #
-  gem "dry-schema", "~> 1.10.0"
-
-  ##
-  # NOTE: Restricts temporarily `dry-core` version (dependency of `dry-validation`) until the following issue is resolved:
-  # https://github.com/dry-rb/dry-core/issues/73#issuecomment-1279774309
-  #
-  gem "dry-core", "~> 0.8.0"
 
   ##
   # NOTE: Waits for `should-matchers` full support.
