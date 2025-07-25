@@ -137,7 +137,7 @@ appraise "dry" do
   # NOTE: Restricts temporarily `dry-schema` version (dependency of `dry-validation`) until the following issue is resolved:
   # https://github.com/dry-rb/dry-schema/issues/434
   #
-  gem "dry-schema", "~> 1.10.0"
+  gem "dry-schema", "~> 1.10"
 
   ##
   # NOTE: Restricts temporarily `dry-core` version (dependency of `dry-validation`) until the following issue is resolved:
