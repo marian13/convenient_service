@@ -126,6 +126,11 @@ appraise "dry" do
   gem "dry-initializer", "~> 3.0.0"
 
   gem "dry-validation", "~> 1.5.0"
+
+  ##
+  # NOTE: Added to avoid `undefined method 'types' for nil` issue.
+  #
+  gem "dry-schema", "~> 1.11"
 end
 
 appraise "amazing_print" do
@@ -150,6 +155,11 @@ appraise "all" do
   gem "dry-initializer", "~> 3.0.0"
 
   gem "dry-validation", "~> 1.5.0"
+
+  ##
+  # NOTE: Added to avoid `undefined method 'types' for nil` issue.
+  #
+  gem "dry-schema", "~> 1.11"
 
   ##
   # NOTE: Waits for `should-matchers` full support.
