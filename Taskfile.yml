@@ -50,7 +50,7 @@ from-host-os: &from-host-os
 #
 from-mac-os: &from-mac-os
   sh: '[ "$(uname)" == "Darwin" ]'
-  msg: This task uses macOS specific commands. Try to adjust it your OS and/or run it manually.
+  msg: This task uses macOS specific commands. Try to adjust it for your OS and/or run it manually.
 
 ##
 # Prepends `bundle exec` when no Appraisal is set.
