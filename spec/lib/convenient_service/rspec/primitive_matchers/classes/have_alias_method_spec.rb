@@ -94,23 +94,11 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAliasMe
         end
 
         context "when that method is actually alias" do
-          let(:klass) do
-            Class.new do
-              def foo
-              end
-
-              alias_method :bar, :foo
-            end
-          end
-
-          it "returns `true`" do
-            expect(matcher_result).to eq(true)
-          end
-
-          context "when `object` has method with original method name defined by `attr_reader`" do
+          context "when that method is defined by `alias_method`" do
             let(:klass) do
               Class.new do
-                attr_reader :foo
+                def foo
+                end
 
                 alias_method :bar, :foo
               end
@@ -119,85 +107,208 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAliasMe
             it "returns `true`" do
               expect(matcher_result).to eq(true)
             end
+
+            context "when `object` has method with original method name defined by `attr_reader`" do
+              let(:klass) do
+                Class.new do
+                  attr_reader :foo
+
+                  alias_method :bar, :foo
+                end
+              end
+
+              it "returns `true`" do
+                expect(matcher_result).to eq(true)
+              end
+            end
+
+            context "when `object` has method with original method name defined by `attr_writer`" do
+              let(:original_name) { :foo= }
+
+              let(:klass) do
+                Class.new do
+                  attr_writer :foo
+
+                  alias_method :bar, :foo=
+                end
+              end
+
+              it "returns `true`" do
+                expect(matcher_result).to eq(true)
+              end
+            end
+
+            context "when `object` has method with original method name defined by `attr_accessor` reader" do
+              let(:klass) do
+                Class.new do
+                  attr_accessor :foo
+
+                  alias_method :bar, :foo
+                end
+              end
+
+              it "returns `true`" do
+                expect(matcher_result).to eq(true)
+              end
+            end
+
+            context "when `object` has method with original method name defined by `attr_accessor` writer" do
+              let(:original_name) { :foo= }
+
+              let(:klass) do
+                Class.new do
+                  attr_accessor :foo
+
+                  alias_method :bar, :foo=
+                end
+              end
+
+              it "returns `true`" do
+                expect(matcher_result).to eq(true)
+              end
+            end
+
+            context "when `object` has method with original method name defined by `attr` reader" do
+              let(:klass) do
+                Class.new do
+                  attr :foo
+
+                  alias_method :bar, :foo
+                end
+              end
+
+              it "returns `true`" do
+                expect(matcher_result).to eq(true)
+              end
+            end
+
+            context "when `object` has method with original method name defined by `attr` writer" do
+              let(:original_name) { :foo= }
+
+              let(:klass) do
+                Class.new do
+                  # rubocop:disable Lint/DeprecatedClassMethods
+                  attr :foo, true
+                  # rubocop:enable Lint/DeprecatedClassMethods
+
+                  alias_method :bar, :foo=
+                end
+              end
+
+              it "returns `true`" do
+                expect(matcher_result).to eq(true)
+              end
+            end
           end
 
-          context "when `object` has method with original method name defined by `attr_writer`" do
-            let(:original_name) { :foo= }
-
+          # rubocop:disable Style/Alias
+          context "when that method is defined by `alias`" do
             let(:klass) do
               Class.new do
-                attr_writer :foo
+                def foo
+                end
 
-                alias_method :bar, :foo=
+                alias bar foo
               end
             end
 
             it "returns `true`" do
               expect(matcher_result).to eq(true)
             end
-          end
 
-          context "when `object` has method with original method name defined by `attr_accessor` reader" do
-            let(:klass) do
-              Class.new do
-                attr_accessor :foo
+            context "when `object` has method with original method name defined by `attr_reader`" do
+              let(:klass) do
+                Class.new do
+                  attr_reader :foo
 
-                alias_method :bar, :foo
+                  alias bar foo
+                end
+              end
+
+              it "returns `true`" do
+                expect(matcher_result).to eq(true)
               end
             end
 
-            it "returns `true`" do
-              expect(matcher_result).to eq(true)
-            end
-          end
+            context "when `object` has method with original method name defined by `attr_writer`" do
+              let(:original_name) { :foo= }
 
-          context "when `object` has method with original method name defined by `attr_accessor` writer" do
-            let(:original_name) { :foo= }
+              let(:klass) do
+                Class.new do
+                  attr_writer :foo
 
-            let(:klass) do
-              Class.new do
-                attr_accessor :foo
+                  alias bar foo=
+                end
+              end
 
-                alias_method :bar, :foo=
+              it "returns `true`" do
+                expect(matcher_result).to eq(true)
               end
             end
 
-            it "returns `true`" do
-              expect(matcher_result).to eq(true)
-            end
-          end
+            context "when `object` has method with original method name defined by `attr_accessor` reader" do
+              let(:klass) do
+                Class.new do
+                  attr_accessor :foo
 
-          context "when `object` has method with original method name defined by `attr` reader" do
-            let(:klass) do
-              Class.new do
-                attr :foo
+                  alias bar foo
+                end
+              end
 
-                alias_method :bar, :foo
+              it "returns `true`" do
+                expect(matcher_result).to eq(true)
               end
             end
 
-            it "returns `true`" do
-              expect(matcher_result).to eq(true)
-            end
-          end
+            context "when `object` has method with original method name defined by `attr_accessor` writer" do
+              let(:original_name) { :foo= }
 
-          context "when `object` has method with original method name defined by `attr` writer" do
-            let(:original_name) { :foo= }
+              let(:klass) do
+                Class.new do
+                  attr_accessor :foo
 
-            let(:klass) do
-              Class.new do
-                # rubocop:disable Lint/DeprecatedClassMethods
-                attr :foo, true
-                # rubocop:enable Lint/DeprecatedClassMethods
+                  alias bar foo=
+                end
+              end
 
-                alias_method :bar, :foo=
+              it "returns `true`" do
+                expect(matcher_result).to eq(true)
               end
             end
 
-            it "returns `true`" do
-              expect(matcher_result).to eq(true)
+            context "when `object` has method with original method name defined by `attr` reader" do
+              let(:klass) do
+                Class.new do
+                  attr :foo
+
+                  alias bar foo
+                end
+              end
+
+              it "returns `true`" do
+                expect(matcher_result).to eq(true)
+              end
+            end
+
+            context "when `object` has method with original method name defined by `attr` writer" do
+              let(:original_name) { :foo= }
+
+              let(:klass) do
+                Class.new do
+                  # rubocop:disable Lint/DeprecatedClassMethods
+                  attr :foo, true
+                  # rubocop:enable Lint/DeprecatedClassMethods
+
+                  alias bar foo=
+                end
+              end
+
+              it "returns `true`" do
+                expect(matcher_result).to eq(true)
+              end
             end
           end
+          # rubocop:enable Style/Alias
         end
       end
     end
