@@ -9,14 +9,19 @@ module ConvenientService
   module RSpec
     module PrimitiveMatchers
       module Classes
-        ##
-        # TODO: Specs.
-        #
         class HaveAttrReader
+          ##
+          # @param attr_name [String, Symbol]
+          # @return [void]
+          #
           def initialize(attr_name)
             @attr_name = attr_name
           end
 
+          ##
+          # @param object [Object] Can be any object.
+          # @return [Boolean]
+          #
           def matches?(object)
             @object = object
 
@@ -25,26 +30,47 @@ module ConvenientService
             #
             copy = object.dup
 
-            copy.instance_variable_set("@#{attr_name}", :custom_value)
+            Utils.with_one_time_object do |one_time_object|
+              copy.instance_variable_set("@#{attr_name}", one_time_object)
 
-            copy.public_send(attr_name) == :custom_value
+              Utils.safe_send(copy, attr_name) == one_time_object
+            end
           end
 
+          ##
+          # @return [String]
+          #
           def description
             "have attr reader `#{attr_name}`"
           end
 
+          ##
+          # @return [String]
+          #
           def failure_message
             "expected `#{object.class}` to have attr reader `#{attr_name}`"
           end
 
+          ##
+          # @return [String]
+          #
           def failure_message_when_negated
             "expected `#{object.class}` NOT to have attr reader `#{attr_name}`"
           end
 
           private
 
-          attr_reader :object, :attr_name
+          ##
+          # @!attribute [r] object
+          #   @return [Object] Can be any type.
+          #
+          attr_reader :object
+
+          ##
+          # @!attribute [r] attr_name
+          #   @return [String, Symbol]
+          #
+          attr_reader :attr_name
         end
       end
     end
