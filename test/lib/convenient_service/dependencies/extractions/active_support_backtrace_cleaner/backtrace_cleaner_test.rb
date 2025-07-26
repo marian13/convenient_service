@@ -15,14 +15,14 @@ require "convenient_service"
 # @internal
 #   NOTE:
 #     Copied from `rails/rails` without any logic modification.
-#     Version: v7.1.2.
+#     Version: v8.0.2.
 #     Wrapped in a namespace `ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner`.
 #     Replaced `ActiveSupport::TestCase` to `Minitest::Test`.
 #     Replaced `it` to `should`.
 #
-#   - https://api.rubyonrails.org/v7.1.2/classes/ActiveSupport/BacktraceCleaner.html
-#   - https://github.com/rails/rails/blob/v7.1.2/activesupport/test/clean_backtrace_test.rb
-#   - https://github.com/marian13/rails/blob/main/activesupport/test/clean_backtrace_test.rb
+#   - https://api.rubyonrails.org/v8.0.2/classes/ActiveSupport/BacktraceCleaner.html
+#   - https://github.com/rails/rails/blob/v8.0.2/activesupport/test/backtrace_cleaner_test.rb
+#   - https://github.com/rails/rails/blob/main/activesupport/test/backtrace_cleaner_test.rb
 #   - https://github.com/rails/rails
 #
 class BacktraceCleanerFilterTest < Minitest::Test
@@ -45,6 +45,14 @@ class BacktraceCleanerFilterTest < Minitest::Test
   should "backtrace should contain unaltered lines if they don't match a filter" do
     assert_equal "/my/other_prefix/my/class.rb", @bc.clean(["/my/other_prefix/my/class.rb"]).first
   end
+
+  should "#dup also copy filters" do
+    copy = @bc.dup
+    @bc.add_filter { |line| line.gsub("/other/prefix/", "") }
+
+    assert_equal "my/class.rb", @bc.clean(["/other/prefix/my/class.rb"]).first
+    assert_equal "/other/prefix/my/class.rb", copy.clean(["/other/prefix/my/class.rb"]).first
+  end
 end
 
 class BacktraceCleanerSilencerTest < Minitest::Test
@@ -62,6 +70,14 @@ class BacktraceCleanerSilencerTest < Minitest::Test
   should "backtrace cleaner should allow removing silencer" do
     @bc.remove_silencers!
     assert_equal ["/mongrel/stuff.rb"], @bc.clean(["/mongrel/stuff.rb"])
+  end
+
+  should "#dup also copy silencers" do
+    copy = @bc.dup
+
+    @bc.add_silencer { |line| line.include?("puma") }
+    assert_equal [], @bc.clean(["/puma/stuff.rb"])
+    assert_equal ["/puma/stuff.rb"], copy.clean(["/puma/stuff.rb"])
   end
 end
 

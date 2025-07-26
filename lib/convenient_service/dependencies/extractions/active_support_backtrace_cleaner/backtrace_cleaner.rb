@@ -14,11 +14,11 @@ module ConvenientService
       # @internal
       #   NOTE:
       #     Copied from `rails/rails` without any logic modification.
-      #     Version: v7.1.2.
+      #     Version: v8.0.2.
       #     Wrapped in a namespace `ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner`.
       #
-      #   - https://api.rubyonrails.org/v7.1.2/classes/ActiveSupport/BacktraceCleaner.html
-      #   - https://github.com/rails/rails/blob/v7.1.2/activesupport/lib/active_support/backtrace_cleaner.rb
+      #   - https://api.rubyonrails.org/v8.0.2/classes/ActiveSupport/BacktraceCleaner.html
+      #   - https://github.com/rails/rails/blob/v8.0.2/activesupport/lib/active_support/backtrace_cleaner.rb
       #   - https://github.com/marian13/rails/blob/main/activesupport/lib/active_support/backtrace_cleaner.rb
       #   - https://github.com/rails/rails
       #
@@ -39,7 +39,8 @@ module ConvenientService
         # can focus on the rest.
         #
         #   bc = ActiveSupport::BacktraceCleaner.new
-        #   bc.add_filter   { |line| line.gsub(Rails.root.to_s, '') } # strip the Rails.root prefix
+        #   root = Rails.root} + "/"
+        #   bc.add_filter   { |line| line.delete_prefix(root) } # strip the Rails.root prefix
         #   bc.add_silencer { |line| /puma|rubygems/.match?(line) } # skip any lines from puma or rubygems
         #   bc.clean(exception.backtrace) # perform the cleanup
         #
@@ -55,6 +56,7 @@ module ConvenientService
         class BacktraceCleaner
           def initialize
             @filters, @silencers = [], []
+            add_core_silencer
             add_gem_filter
             add_gem_silencer
             add_stdlib_silencer
@@ -97,8 +99,9 @@ module ConvenientService
           # Adds a filter from the block provided. Each line in the backtrace will be
           # mapped against this filter.
           #
-          #   # Will turn "/my/rails/root/app/models/person.rb" into "/app/models/person.rb"
-          #   backtrace_cleaner.add_filter { |line| line.gsub(Rails.root.to_s, '') }
+          #   # Will turn "/my/rails/root/app/models/person.rb" into "app/models/person.rb"
+          #   root = Rails.root} + "/"
+          #   backtrace_cleaner.add_filter { |line| line.delete_prefix(root) }
           def add_filter(&block)
             @filters << block
           end
@@ -129,6 +132,11 @@ module ConvenientService
           private
             FORMATTED_GEMS_PATTERN = /\A[^\/]+ \([\w.]+\) /
 
+            def initialize_copy(_other)
+              @filters = @filters.dup
+              @silencers = @silencers.dup
+            end
+
             def add_gem_filter
               gems_paths = (Gem.path | [Gem.default_dir]).map { |p| Regexp.escape(p) }
               return if gems_paths.empty?
@@ -136,6 +144,10 @@ module ConvenientService
               gems_regexp = %r{\A(#{gems_paths.join('|')})/(bundler/)?gems/([^/]+)-([\w.]+)/(.*)}
               gems_result = '\3 (\4) \5'
               add_filter { |line| line.sub(gems_regexp, gems_result) }
+            end
+
+            def add_core_silencer
+              add_silencer { |line| line.include?("<internal:") }
             end
 
             def add_gem_silencer
