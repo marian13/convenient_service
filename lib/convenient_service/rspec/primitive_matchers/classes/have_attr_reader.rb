@@ -22,16 +22,16 @@ module ConvenientService
           # @param object [Object] Can be any object.
           # @return [Boolean]
           #
+          # @internal
+          #   IMPORTANT: A copy is created in order to be thread safe.
+          #
           def matches?(object)
             @object = object
 
-            ##
-            # IMPORTANT: A copy is created in order to be thread safe.
-            #
-            copy = object.dup
-
             Utils.with_one_time_object do |one_time_object|
-              copy.instance_variable_set("@#{attr_name}", one_time_object)
+              copy = object.dup
+
+              copy.instance_variable_set(instance_variable_name, one_time_object)
 
               Utils.safe_send(copy, attr_name) == one_time_object
             end
@@ -71,6 +71,13 @@ module ConvenientService
           #   @return [String, Symbol]
           #
           attr_reader :attr_name
+
+          ##
+          # @return [String]
+          #
+          def instance_variable_name
+            "@#{attr_name}"
+          end
         end
       end
     end
