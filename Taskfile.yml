@@ -562,6 +562,8 @@ tasks:
   # NOTE: RSpec `--profile` option docs.
   # - https://rspec.info/features/3-12/rspec-core/configuration/profile
   #
+  # TODO: Verify whether `JRUBY_OPTS='--debug'` (`JRUBY_PREFIX`) improve coverage tracking for JRuby.
+  #
   rspec:
     cmds:
       - "{{.JRUBY_PREFIX}} {{.BUNDLE_EXEC_PREFIX}} rspec --profile --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}"
