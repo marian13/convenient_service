@@ -13,10 +13,20 @@ RSpec.describe ConvenientService::Utils::Proc::Display, type: :standard do
   describe ".call" do
     subject(:display) { described_class.call(proc) }
 
-    let(:proc) { -> { :foo } }
+    context "when `proc` is `nil`" do
+      let(:proc) { nil }
 
-    it "returns `{ ... }`" do
-      expect(display).to eq("{ ... }")
+      it "returns empty string" do
+        expect(display).to eq("")
+      end
+    end
+
+    context "when `proc` is `Proc` instance" do
+      let(:proc) { -> { :foo } }
+
+      it "returns `{ ... }`" do
+        expect(display).to eq("{ ... }")
+      end
     end
   end
 end

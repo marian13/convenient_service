@@ -85,7 +85,7 @@ module ConvenientService
                     # @return [String]
                     #
                     def printable_block
-                      block ? Utils::Proc.display(block) : ""
+                      Utils::Proc.display(block)
                     end
                   end
                 end

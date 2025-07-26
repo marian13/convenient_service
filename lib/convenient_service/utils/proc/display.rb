@@ -40,7 +40,7 @@ module ConvenientService
         #   TODO: Generic util to print blocks.
         #
         def call
-          "{ ... }"
+          proc ? "{ ... }" : ""
         end
       end
     end
