@@ -141,6 +141,12 @@ appraise "dry" do
     gem "dry-initializer", "~> 3.0.0"
 
     gem "dry-validation", "~> 1.5.0"
+
+    gem "dry-configurable", "~> 0.15.0"
+
+    gem "dry-schema", "~> 1.10.0"
+
+    gem "dry-core", "~> 0.8.0"
   end
 end
 
@@ -181,6 +187,12 @@ appraise "all" do
     gem "dry-initializer", "~> 3.0.0"
 
     gem "dry-validation", "~> 1.5.0"
+
+    gem "dry-configurable", "~> 0.15.0"
+
+    gem "dry-schema", "~> 1.10.0"
+
+    gem "dry-core", "~> 0.8.0"
   end
 
   ##
