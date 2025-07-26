@@ -564,12 +564,14 @@ tasks:
   #
   rspec:
     cmds:
-      - "{{.BUNDLE_EXEC_PREFIX}} rspec --profile --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}"
+      - "{{.JRUBY_PREFIX}} {{.BUNDLE_EXEC_PREFIX}} rspec --profile --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}"
     vars:
       REQUIRE_SUFFIX:
         sh: ruby -e 'puts case "{{.APPRAISAL}}" when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" when /amazing_print/ then "--require amazing_print_helper" when /awesome_print/ then "--require awesome_print_helper" when /memo_wise/ then "--require memo_wise_helper" else "--require standard_helper" end'
       GIT_STAGED_RSPEC_FILES:
         sh: ruby -e 'puts `task git:staged:rspec --silent` if "{{.STAGED}}" == "true"'
+      JRUBY_PREFIX:
+        sh: ruby -e 'puts "JRUBY_OPTS='--debug'" if RUBY_ENGINE.match?("jruby")'
       BUNDLE_EXEC_PREFIX: *BUNDLE_EXEC_PREFIX
 
   ##
