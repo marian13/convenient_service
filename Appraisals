@@ -123,14 +123,19 @@ if ConvenientService::Dependencies.ruby.version >= 3.2
 end
 
 appraise "dry" do
-  gem "dry-initializer", "~> 3.0.0"
-
-  gem "dry-validation", "~> 1.5.0"
-
   ##
-  # NOTE: Added to avoid `undefined method 'types' for nil` issue.
+  # NOTE:
+  #   - Convenient Service plugins are using `dry-initializer` v3.0.0 and `dry-validation` v1.0.0 APIs under the hood.
+  #   - Dry gems minor versions are often incompatible. For example, `dry-initializer` v3.0.0 and `dry-validation` v1.5.0 worked well until `dry-schema` v1.10.6 was released.
+  #   - https://github.com/dry-rb/dry-configurable/issues/146
+  #   - https://github.com/dry-rb/dry-schema/issues/434
+  #   - https://github.com/dry-rb/dry-schema/issues/434#issuecomment-1279769490
+  #   - https://github.com/dry-rb/dry-core/issues/73#issuecomment-1279774309
+  #   - That is why so high versions are used for specs.
   #
-  gem "dry-schema", "~> 1.11"
+  gem "dry-initializer", "~> 3.2.0"
+
+  gem "dry-validation", "~> 1.11.0"
 end
 
 appraise "amazing_print" do
@@ -152,14 +157,19 @@ end
 appraise "all" do
   gem "activemodel", "~> 7.0.0"
 
-  gem "dry-initializer", "~> 3.0.0"
-
-  gem "dry-validation", "~> 1.5.0"
-
   ##
-  # NOTE: Added to avoid `undefined method 'types' for nil` issue.
+  # NOTE:
+  #   - Convenient Service plugins are using `dry-initializer` v3.0.0 and `dry-validation` v1.0.0 APIs under the hood.
+  #   - Dry gems minor versions are often incompatible. For example, `dry-initializer` v3.0.0 and `dry-validation` v1.5.0 worked well until `dry-schema` v1.10.6 was released.
+  #   - https://github.com/dry-rb/dry-configurable/issues/146
+  #   - https://github.com/dry-rb/dry-schema/issues/434
+  #   - https://github.com/dry-rb/dry-schema/issues/434#issuecomment-1279769490
+  #   - https://github.com/dry-rb/dry-core/issues/73#issuecomment-1279774309
+  #   - That is why so high versions are used for specs.
   #
-  gem "dry-schema", "~> 1.11"
+  gem "dry-initializer", "~> 3.2.0"
+
+  gem "dry-validation", "~> 1.11.0"
 
   ##
   # NOTE: Waits for `should-matchers` full support.
