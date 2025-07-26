@@ -157,6 +157,26 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
         end
       end
     end
+
+    describe "#printable_expected_arguments" do
+      let(:printable_expected_arguments) { "with `#{ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::SubMatchers::Arguments::Commands::GeneratePrintableArguments.call(arguments: expected_arguments)}`" }
+
+      before do
+        matcher.inputs.expected_arguments = expected_arguments
+      end
+
+      it "returns printable expected arguments" do
+        expect(sub_matcher.printable_expected_arguments).to eq(printable_expected_arguments)
+      end
+
+      it "delegates to `ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::SubMatchers::Arguments::Commands::GeneratePrintableArguments`" do
+        allow(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::SubMatchers::Arguments::Commands::GeneratePrintableArguments).to receive(:call).with(arguments: expected_arguments).and_call_original
+
+        sub_matcher.printable_expected_arguments
+
+        expect(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Entities::SubMatchers::Arguments::Commands::GeneratePrintableArguments).to have_received(:call).with(arguments: expected_arguments)
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

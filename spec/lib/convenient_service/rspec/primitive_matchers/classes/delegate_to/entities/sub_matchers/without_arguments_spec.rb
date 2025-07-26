@@ -158,10 +158,10 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo:
       end
     end
 
-    describe "#printable_expected_arguments?" do
+    describe "#printable_expected_arguments" do
       let(:printable_expected_arguments) { "without arguments" }
 
-      it "returns `true`" do
+      it "returns printable expected arguments" do
         expect(sub_matcher.printable_expected_arguments).to eq(printable_expected_arguments)
       end
     end
