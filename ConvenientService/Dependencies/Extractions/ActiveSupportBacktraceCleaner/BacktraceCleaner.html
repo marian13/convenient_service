@@ -114,7 +114,8 @@ app directory instead of the file system root. The typical silencer use case
 is to exclude the output of a noisy library from the backtrace, so that you
 can focus on the rest.</p>
 <p>bc = ActiveSupport::BacktraceCleaner.new
-bc.add_filter   { |line| line.gsub(Rails.root.to_s, '') } # strip the Rails.root prefix
+root = Rails.root} + &quot;/&quot;
+bc.add_filter   { |line| line.delete_prefix(root) } # strip the Rails.root prefix
 bc.add_silencer { |line| /puma|rubygems/.match?(line) } # skip any lines from puma or rubygems
 bc.clean(exception.backtrace) # perform the cleanup</p>
 <p>To reconfigure an existing BacktraceCleaner (like the default one in \Rails)
@@ -347,18 +348,20 @@ These two methods will give you a completely untouched backtrace.</p>
       <pre class="lines">
 
 
-56
 57
 58
 59
 60
-61</pre>
+61
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
   <span class='ivar'>@filters</span><span class='comma'>,</span> <span class='ivar'>@silencers</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_add_core_silencer'>add_core_silencer</span>
   <span class='id identifier rubyid_add_gem_filter'>add_gem_filter</span>
   <span class='id identifier rubyid_add_gem_silencer'>add_gem_silencer</span>
   <span class='id identifier rubyid_add_stdlib_silencer'>add_stdlib_silencer</span>
@@ -388,8 +391,9 @@ These two methods will give you a completely untouched backtrace.</p>
   <div class="discussion">
     <p>Adds a filter from the block provided. Each line in the backtrace will be
 mapped against this filter.</p>
-<h1>Will turn &quot;/my/rails/root/app/models/person.rb&quot; into &quot;/app/models/person.rb&quot;</h1>
-<p>backtrace_cleaner.add_filter { |line| line.gsub(Rails.root.to_s, '') }</p>
+<h1>Will turn &quot;/my/rails/root/app/models/person.rb&quot; into &quot;app/models/person.rb&quot;</h1>
+<p>root = Rails.root} + &quot;/&quot;
+backtrace_cleaner.add_filter { |line| line.delete_prefix(root) }</p>
 
 
   </div>
@@ -403,12 +407,12 @@ mapped against this filter.</p>
       <pre class="lines">
 
 
-102
-103
-104</pre>
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_filter'>add_filter</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='ivar'>@filters</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_block'>block</span>
@@ -446,12 +450,12 @@ for a given line, it will be excluded from the clean backtrace.</p>
       <pre class="lines">
 
 
-111
-112
-113</pre>
+114
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_silencer'>add_silencer</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='ivar'>@silencers</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_block'>block</span>
@@ -491,8 +495,6 @@ against it. Filters run first, then silencers.</p>
       <pre class="lines">
 
 
-65
-66
 67
 68
 69
@@ -502,10 +504,12 @@ against it. Filters run first, then silencers.</p>
 73
 74
 75
-76</pre>
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clean'>clean</span><span class='lparen'>(</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span> <span class='op'>=</span> <span class='symbol'>:silent</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_filtered'>filtered</span> <span class='op'>=</span> <span class='id identifier rubyid_filter_backtrace'>filter_backtrace</span><span class='lparen'>(</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='rparen'>)</span>
@@ -550,8 +554,6 @@ returns +nil+ if the frame was silenced.</p>
       <pre class="lines">
 
 
-81
-82
 83
 84
 85
@@ -564,10 +566,12 @@ returns +nil+ if the frame was silenced.</p>
 92
 93
 94
-95</pre>
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clean_frame'>clean_frame</span><span class='lparen'>(</span><span class='id identifier rubyid_frame'>frame</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span> <span class='op'>=</span> <span class='symbol'>:silent</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_frame'>frame</span> <span class='op'>=</span> <span class='id identifier rubyid_frame'>frame</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -616,12 +620,12 @@ filtered out.</p>
       <pre class="lines">
 
 
-125
-126
-127</pre>
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_filters!'>remove_filters!</span>
   <span class='ivar'>@filters</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -658,12 +662,12 @@ the libraries you use.</p>
       <pre class="lines">
 
 
-118
-119
-120</pre>
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/active_support_backtrace_cleaner/backtrace_cleaner.rb', line 121</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_silencers!'>remove_silencers!</span>
   <span class='ivar'>@silencers</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -678,7 +682,7 @@ the libraries you use.</p>
 </div>
 
       <div id="footer">
-  Generated on Fri Jul 25 23:26:49 2025 by
+  Generated on Sat Jul 26 01:20:36 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
