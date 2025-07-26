@@ -71,6 +71,30 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAttrRea
             expect(matcher_result).to eq(true)
           end
         end
+
+        context "when that `method` defined `attr`" do
+          let(:klass) do
+            Class.new do
+              attr :foo
+            end
+          end
+
+          it "returns `true`" do
+            expect(matcher_result).to eq(true)
+          end
+        end
+
+        context "when that `method` defined `attr` with `false`" do
+          let(:klass) do
+            Class.new do
+              attr :foo
+            end
+          end
+
+          it "returns `true`" do
+            expect(matcher_result).to eq(true)
+          end
+        end
       end
     end
   end
