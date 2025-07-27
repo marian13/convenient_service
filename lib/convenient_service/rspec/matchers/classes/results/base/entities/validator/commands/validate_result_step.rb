@@ -81,9 +81,12 @@ module ConvenientService
                     #
                     def call
                       return false unless matcher.result
+
                       return true unless chain.used_step?
                       return false unless match_step?
-                      return match_step_index? if chain.used_step_index?
+
+                      return true unless chain.used_step_index?
+                      return false unless match_step_index?
 
                       true
                     end
@@ -141,8 +144,6 @@ module ConvenientService
                     # @return [Boolean]
                     #
                     def match_step_index?
-                      return false unless result.step
-
                       return result.step.index == step_index if step_index.instance_of?(::Integer)
 
                       ::ConvenientService.raise Exceptions::InvalidStepIndex.new(step_index: step_index)
