@@ -50,7 +50,7 @@ Gem::Specification.new do |spec|
   # - https://github.com/payolapayments/payola/issues/292
   # - https://github.com/rubocop/rubocop/issues/1555
   #
-  spec.files = ::Dir["COMM-LICENSE.txt", "LICENSE.txt", "README.md", "lib/**/*"] - ::Dir["lib/convenient_service/examples/**/*"]
+  spec.files = ::Dir["COMM-LICENSE.txt", "LICENSE.txt", "README.md", "lib/**/*"] - ::Dir["lib/convenient_service/examples/**/*"] - ::Dir["lib/convenient_service/debug/**/*"]
 
   spec.require_paths = ["lib"]
 

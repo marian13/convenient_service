@@ -6,6 +6,13 @@
 ##
 
 ##
+# NOTE: Sometimes it is needed to debug something even before `convenient_service` is loaded.
+#
+require "convenient_service/dependencies/only_queries"
+
+ConvenientService::Dependencies.require_development_tools(amazing_print: false, awesome_print: false)
+
+##
 # Configures coverage tracking.
 #
 require_relative "coverage_helper"
@@ -28,11 +35,8 @@ RSpec.configure do |config|
   # config.pattern = "spec/**/*_spec.rb"
 end
 
-require_relative "support/thread_backtraces"
-require_relative "support/break"
 require_relative "support/convenient_service"
 require_relative "support/faker"
-require_relative "support/timeout_debug"
 
 ##
 # NOTE: Waits for `should-matchers` full support.

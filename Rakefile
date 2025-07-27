@@ -6,6 +6,13 @@
 ##
 
 ##
+# NOTE: Sometimes it is needed to debug something even before `convenient_service` is loaded.
+#
+require "convenient_service/dependencies/only_queries"
+
+ConvenientService::Dependencies.require_development_tools(amazing_print: false, awesome_print: false)
+
+##
 # TODO: Learn more about the purpose of the `bin` and `exe` folders. Why are scripts from there not in the `Rakefile`?
 # Search for `bin` in the following links for more info.
 # - https://guides.rubygems.org/what-is-a-gem/

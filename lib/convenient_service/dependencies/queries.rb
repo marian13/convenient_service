@@ -408,30 +408,15 @@ module ConvenientService
         #
         require "tempfile"
 
-        ##
-        # - https://gist.github.com/marian13/5dade20a431d7254db30e543167058ce
-        #
-        require "convenient_service/dependencies/extractions/byebug_syntax_highlighting" if support_byebug?
+        require "convenient_service/debug/b" if support_byebug?
+        require "convenient_service/debug/byebug_syntax_highlighting" if support_byebug?
+        require "convenient_service/debug/bb" if ruby.mri?
+        require "convenient_service/debug/ce"
+        require "convenient_service/debug/ds"
 
-        ##
-        #
-        #
-        require "convenient_service/dependencies/extractions/b" if support_byebug?
-
-        ##
-        #
-        #
-        require "convenient_service/dependencies/extractions/bb" if ruby.mri?
-
-        ##
-        #
-        #
-        require "convenient_service/dependencies/extractions/ce"
-
-        ##
-        #
-        #
-        require "convenient_service/dependencies/extractions/ds"
+        require "convenient_service/debug/thread_backtraces"
+        require "convenient_service/debug/break"
+        require "convenient_service/debug/timeout"
       end
 
       ##
