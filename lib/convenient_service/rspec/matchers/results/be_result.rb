@@ -5,6 +5,8 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
+require_relative "be_result/exceptions"
+
 module ConvenientService
   module RSpec
     module Matchers
@@ -12,6 +14,9 @@ module ConvenientService
         module BeResult
           ##
           # @api public
+          #
+          # @return [ConvenientService::RSpec::Matchers::Classes::Results::Base]
+          # @raise [ConvenientService::RSpec::Matchers::Results::BeResult::Exceptions::InvalidStatus]
           #
           def be_result(status, *args, **kwargs, &block)
             case status
@@ -27,6 +32,8 @@ module ConvenientService
               Classes::Results::BeNotFailure.new(*args, **kwargs, &block)
             when :not_error
               Classes::Results::BeNotError.new(*args, **kwargs, &block)
+            else
+              ::ConvenientService.raise Exceptions::InvalidStatus.new(status: status)
             end
           end
         end
