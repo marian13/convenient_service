@@ -156,6 +156,24 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ParseCo
       end
 
       context "when `ParseContent` is NOT successful" do
+        context "when content is NOT valid" do
+          context "when content is `nil`" do
+            let(:content) { nil }
+
+            it "returns `error` with message" do
+              expect(result).to be_error.with_message("Content is `nil`").of_service(described_class).of_step(:validate_content)
+            end
+          end
+
+          context "when content is empty string" do
+            let(:content) { "" }
+
+            it "returns `error` with message" do
+              expect(result).to be_error.with_message("Content is empty").of_service(described_class).of_step(:validate_content)
+            end
+          end
+        end
+
         context "when `AssertValidRubySyntax` is NOT successful" do
           before do
             stub_service(ConvenientService::Examples::Standard::Gemfile::Services::AssertValidRubySyntax)
