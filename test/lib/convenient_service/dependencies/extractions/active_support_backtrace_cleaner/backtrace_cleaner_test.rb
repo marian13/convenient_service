@@ -214,7 +214,7 @@ class BacktraceCleanerFrameSilencerTest < Minitest::Test
     copy = @bc.dup
 
     @bc.add_silencer { |line| line.include?("puma") }
-    assert_equal nil, @bc.clean_frame("/puma/stuff.rb")
+    assert_nil @bc.clean_frame("/puma/stuff.rb")
     assert_equal "/puma/stuff.rb", copy.clean_frame("/puma/stuff.rb")
   end
 end
