@@ -72,9 +72,9 @@ AllCops:
     - lib/convenient_service/dependencies/**/*
 
     ##
-    # NOTE: Excludes timeout debug from linting.
+    # NOTE: Excludes debug scripts from linting.
     #
-    - spec/support/timeout_debug.rb
+    - lib/convenient_service/debug/**/*
 
 ##
 # NOTE: Forces to use `# frozen_string_literal: true` in every Ruby file.
