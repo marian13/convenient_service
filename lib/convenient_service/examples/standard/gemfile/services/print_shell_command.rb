@@ -28,7 +28,7 @@ module ConvenientService
 
             def result
               return error("Command is `nil`") if command.nil?
-              return error("Command is empty?") if command.empty?
+              return error("Command is empty") if command.empty?
 
               return failure("Printing of shell command `#{command}` is skipped") if skip
 

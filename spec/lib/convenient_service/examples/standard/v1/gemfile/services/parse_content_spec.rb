@@ -161,7 +161,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Par
             let(:content) { nil }
 
             it "returns `error` with message" do
-              expect(result).to be_failure.with_message("Content is `nil`").of_service(described_class).of_step(:validate_content)
+              expect(result).to be_failure.with_data(content: "Content is `nil`").of_service(described_class).of_step(:validate_content)
             end
           end
 
@@ -169,7 +169,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Gemfile::Services::Par
             let(:content) { "" }
 
             it "returns `error` with message" do
-              expect(result).to be_failure.with_message("Content is empty").of_service(described_class).of_step(:validate_content)
+              expect(result).to be_failure.with_data(content: "Content is empty").of_service(described_class).of_step(:validate_content)
             end
           end
         end

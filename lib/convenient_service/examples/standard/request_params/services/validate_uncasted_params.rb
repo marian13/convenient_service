@@ -15,6 +15,9 @@ module ConvenientService
 
             attr_reader :id, :format, :title, :description, :tags, :sources
 
+            ##
+            # TODO: `validate_tags`, `validate_sources`.
+            #
             step :validate_id, in: :id
             step :validate_format, in: :format
             step :validate_title, in: :title
@@ -53,20 +56,6 @@ module ConvenientService
             def validate_description
               return error("Description is NOT present") if Utils::Object.present?(description)
 
-              success
-            end
-
-            ##
-            # TODO:
-            #
-            def validate_tags
-              success
-            end
-
-            ##
-            # TODO:
-            #
-            def validate_sources
               success
             end
           end

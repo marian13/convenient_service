@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::PrintSh
             let(:command) { nil }
 
             it "returns `error` with message" do
-              expect(result).to be_failure.with_message("Command is `nil`").of_service(described_class).of_step(:validate_command)
+              expect(result).to be_error.with_message("Command is `nil`").of_service(described_class).without_step
             end
           end
 
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::PrintSh
             let(:command) { "" }
 
             it "returns `error` with message" do
-              expect(result).to be_failure.with_message("Command is empty").of_service(described_class).of_step(:validate_command)
+              expect(result).to be_error.with_message("Command is empty").of_service(described_class).without_step
             end
           end
         end
