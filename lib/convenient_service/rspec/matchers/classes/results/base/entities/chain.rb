@@ -19,7 +19,7 @@ module ConvenientService
                 # @return [void]
                 #
                 def initialize
-                  @hash = {}
+                  @options = {}
                 end
 
                 ##
@@ -28,7 +28,7 @@ module ConvenientService
                 # @return [Boolean]
                 #
                 def used_data?
-                  hash.key?(:data)
+                  options.key?(:data)
                 end
 
                 ##
@@ -37,7 +37,7 @@ module ConvenientService
                 # @return [Boolean]
                 #
                 def used_message?
-                  hash.key?(:message)
+                  options.key?(:message)
                 end
 
                 ##
@@ -46,7 +46,7 @@ module ConvenientService
                 # @return [Boolean]
                 #
                 def used_code?
-                  hash.key?(:code)
+                  options.key?(:code)
                 end
 
                 ##
@@ -55,7 +55,7 @@ module ConvenientService
                 # @return [Boolean]
                 #
                 def used_service?
-                  hash.key?(:service)
+                  options.key?(:service)
                 end
 
                 ##
@@ -64,7 +64,7 @@ module ConvenientService
                 # @return [Boolean]
                 #
                 def used_original_service?
-                  hash.key?(:original_service)
+                  options.key?(:original_service)
                 end
 
                 ##
@@ -73,7 +73,7 @@ module ConvenientService
                 # @return [Boolean]
                 #
                 def used_step?
-                  hash.key?(:step)
+                  options.key?(:step)
                 end
 
                 ##
@@ -82,7 +82,7 @@ module ConvenientService
                 # @return [Boolean]
                 #
                 def used_step_index?
-                  hash.key?(:step_index)
+                  options.key?(:step_index)
                 end
 
                 ##
@@ -91,7 +91,7 @@ module ConvenientService
                 # @return [Array<Symbol>]
                 #
                 def statuses
-                  hash[:statuses] || []
+                  options[:statuses] || []
                 end
 
                 ##
@@ -100,7 +100,7 @@ module ConvenientService
                 # @return [Hash{Symbol => Object}]
                 #
                 def data
-                  hash[:data] || {}
+                  options[:data] || {}
                 end
 
                 ##
@@ -109,7 +109,7 @@ module ConvenientService
                 # @return [String]
                 #
                 def message
-                  hash[:message] || ""
+                  options[:message] || ""
                 end
 
                 ##
@@ -118,7 +118,7 @@ module ConvenientService
                 # @return [String, Symbol, nil]
                 #
                 def code
-                  hash[:code]
+                  options[:code]
                 end
 
                 ##
@@ -127,7 +127,7 @@ module ConvenientService
                 # @return [Symbol, Symbol]
                 #
                 def comparison_method
-                  hash[:comparison_method] || Constants::DEFAULT_COMPARISON_METHOD
+                  options[:comparison_method] || Constants::DEFAULT_COMPARISON_METHOD
                 end
 
                 ##
@@ -136,7 +136,7 @@ module ConvenientService
                 # @return [ConvenientService::Service, nil]
                 #
                 def service
-                  hash[:service]
+                  options[:service]
                 end
 
                 ##
@@ -145,7 +145,7 @@ module ConvenientService
                 # @return [ConvenientService::Service, nil]
                 #
                 def original_service
-                  hash[:original_service]
+                  options[:original_service]
                 end
 
                 ##
@@ -154,7 +154,7 @@ module ConvenientService
                 # @return [ConvenientService::Service, Symbol, nil]
                 #
                 def step
-                  hash[:step]
+                  options[:step]
                 end
 
                 ##
@@ -163,7 +163,7 @@ module ConvenientService
                 # @return [Integer, nil]
                 #
                 def step_index
-                  hash[:step_index]
+                  options[:step_index]
                 end
 
                 ##
@@ -173,7 +173,7 @@ module ConvenientService
                 # @return [Array<Symbol>]
                 #
                 def statuses=(other_statuses)
-                  hash[:statuses] = other_statuses
+                  options[:statuses] = other_statuses
                 end
 
                 ##
@@ -183,7 +183,7 @@ module ConvenientService
                 # @return [Symbol, Symbol]
                 #
                 def comparison_method=(other_comparison_method)
-                  hash[:comparison_method] = other_comparison_method
+                  options[:comparison_method] = other_comparison_method
                 end
 
                 ##
@@ -193,7 +193,7 @@ module ConvenientService
                 # @return [Hash{Symbol => Object}]
                 #
                 def data=(other_data)
-                  hash[:data] = other_data
+                  options[:data] = other_data
                 end
 
                 ##
@@ -203,7 +203,7 @@ module ConvenientService
                 # @return [String]
                 #
                 def message=(other_message)
-                  hash[:message] = other_message
+                  options[:message] = other_message
                 end
 
                 ##
@@ -213,7 +213,7 @@ module ConvenientService
                 # @return [Symbol]
                 #
                 def code=(other_code)
-                  hash[:code] = other_code
+                  options[:code] = other_code
                 end
 
                 ##
@@ -223,7 +223,7 @@ module ConvenientService
                 # @return [ConvenientService::Service]
                 #
                 def service=(other_service)
-                  hash[:service] = other_service
+                  options[:service] = other_service
                 end
 
                 ##
@@ -233,7 +233,7 @@ module ConvenientService
                 # @return [ConvenientService::Service]
                 #
                 def original_service=(other_service)
-                  hash[:original_service] = other_service
+                  options[:original_service] = other_service
                 end
 
                 ##
@@ -243,7 +243,7 @@ module ConvenientService
                 # @return [ConvenientService::Service, Symbol]
                 #
                 def step=(other_step)
-                  hash[:step] = other_step
+                  options[:step] = other_step
                 end
 
                 ##
@@ -253,7 +253,7 @@ module ConvenientService
                 # @return [Integer]
                 #
                 def step_index=(other_step_index)
-                  hash[:step_index] = other_step_index
+                  options[:step_index] = other_step_index
                 end
 
                 ##
@@ -263,9 +263,9 @@ module ConvenientService
                 # @return [Boolean, nil]
                 #
                 def ==(other)
-                  return nil unless other.instance_of?(self.class)
+                  return unless other.instance_of?(self.class)
 
-                  return false if hash != other.hash
+                  return false if options != other.options
 
                   true
                 end
@@ -273,10 +273,10 @@ module ConvenientService
                 protected
 
                 ##
-                # @!attribute hash [r]
+                # @!attribute options [r]
                 #   @return [Hash{Symbol => Object}]
                 #
-                attr_reader :hash
+                attr_reader :options
               end
             end
           end

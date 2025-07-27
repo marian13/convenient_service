@@ -454,6 +454,36 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         expect(chain.step = step).to eq(step)
       end
     end
+
+    example_group "comparison" do
+      describe "#==" do
+        let(:chain) { described_class.new }
+
+        context "when `other` have different class" do
+          let(:other) { 42 }
+
+          it "returns `nil`" do
+            expect(chain == other).to be_nil
+          end
+        end
+
+        context "when `other` have different `options`" do
+          let(:other) { described_class.new.tap { |chain| chain.data = {foo: :bar} } }
+
+          it "returns `false`" do
+            expect(chain == other).to eq(false)
+          end
+        end
+
+        context "when `other` has same attributes" do
+          let(:other) { described_class.new }
+
+          it "returns `true`" do
+            expect(chain == other).to eq(true)
+          end
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
