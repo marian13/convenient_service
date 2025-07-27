@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
       context "when matcher is chained by `of_step` without `index`" do
         let(:matcher) { be_error.of_step(step) }
 
-        context "when chain has no step" do
+        context "when chain has NO step" do
           let(:step) { nil }
 
           it "returns part without step" do
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:matcher) { be_error.of_step(step, index: step_index) }
         let(:step_index) { 0 }
 
-        context "when chain has no step" do
+        context "when chain has NO step" do
           let(:step) { nil }
 
           it "returns part without step" do
@@ -60,7 +60,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         context "when result has step" do
           let(:step) { :foo }
 
-          context "when chain has no index" do
+          context "when chain has NO index" do
             let(:step_index) { nil }
 
             it "returns part with step" do

@@ -220,9 +220,9 @@ module ConvenientService
             # @param index [Integer]
             # @return [ConvenientService::RSpec::Matchers::Classes::Results::Base]
             #
-            def of_step(step, index: nil)
+            def of_step(step, index: Support::NOT_PASSED)
               chain.step = step
-              chain.step_index = index if index
+              chain.step_index = index unless Support::NOT_PASSED[index]
 
               self
             end
