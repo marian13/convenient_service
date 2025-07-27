@@ -526,16 +526,22 @@
 86
 87
 88
-89</pre>
+89
+90
+91
+92</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/matchers/classes/results/base/entities/validator/commands/validate_result_step.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_matcher'>matcher</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span>
+
   <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_step?'>used_step?</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_match_step?'>match_step?</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_match_step_index?'>match_step_index?</span> <span class='kw'>if</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_step_index?'>used_step_index?</span>
+
+  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_used_step_index?'>used_step_index?</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_match_step_index?'>match_step_index?</span>
 
   <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
@@ -809,7 +815,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 27 16:26:55 2025 by
+  Generated on Sun Jul 27 18:43:13 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
