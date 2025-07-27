@@ -121,7 +121,7 @@ module ConvenientService
                 # @return [Boolean, nil]
                 #
                 def ==(other)
-                  return nil unless other.instance_of?(self.class)
+                  return unless other.instance_of?(self.class)
 
                   return false if matcher != other.matcher
 

@@ -125,23 +125,23 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
           let(:other) { 42 }
 
           it "returns `nil`" do
-            expect(matcher == other).to be_nil
+            expect(validator == other).to be_nil
           end
         end
 
         context "when `other` has different `matcher`" do
-          let(:other) { be_success }
+          let(:other) { described_class.new(matcher: be_success) }
 
           it "returns `false`" do
-            expect(matcher == other).to eq(false)
+            expect(validator == other).to eq(false)
           end
         end
 
         context "when `other` has same attributes" do
-          let(:other) { be_success.tap { |matcher| matcher.matches?(result) } }
+          let(:other) { described_class.new(matcher: matcher) }
 
           it "returns `true`" do
-            expect(matcher == other).to eq(true)
+            expect(validator == other).to eq(true)
           end
         end
       end
