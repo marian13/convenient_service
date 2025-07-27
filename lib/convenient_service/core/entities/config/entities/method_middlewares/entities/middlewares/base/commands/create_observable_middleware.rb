@@ -52,7 +52,7 @@ module ConvenientService
                           ##
                           # @return [String]
                           #
-                          define_singleton_method(:inspect) { "Observable(#{middleware})" }
+                          define_singleton_method(:inspect) { "Observable(#{middleware.inspect})" }
                         end
 
                         observable_middleware
@@ -71,6 +71,9 @@ module ConvenientService
                             # @param kwargs [Hash{Symbol => Object}]
                             # @return [void]
                             #
+                            # @internal
+                            #   TODO: Direct specs.
+                            #
                             def initialize(stack, **kwargs)
                               arguments = Support::Arguments.new(stack, **Utils::Hash.except(kwargs, [:middleware_events]))
 
@@ -85,6 +88,9 @@ module ConvenientService
 
                             ##
                             # @return [Object] Can be any type.
+                            #
+                            # @internal
+                            #   TODO: Direct specs.
                             #
                             def call(...)
                               arguments = Support::Arguments.new(...)
