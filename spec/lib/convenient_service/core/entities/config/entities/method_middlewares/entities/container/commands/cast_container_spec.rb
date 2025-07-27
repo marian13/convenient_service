@@ -38,8 +38,21 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           context "when value by `:scope` key is NOT castable" do
             let(:other) { {scope: 42} }
 
-            it "returns `nil`" do
-              expect(casted).to be_nil
+            context "when that hash has no `:klass` key" do
+              let(:other) { {scope: 42} }
+
+              it "returns `nil`" do
+                expect(casted).to be_nil
+              end
+            end
+
+            context "when that hash has `:klass` key" do
+              let(:other) { {scope: 42, klass: klass} }
+              let(:klass) { Class.new }
+
+              it "returns `nil`" do
+                expect(casted).to be_nil
+              end
             end
           end
 
