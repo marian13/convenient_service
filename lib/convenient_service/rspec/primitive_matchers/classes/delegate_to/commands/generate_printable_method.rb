@@ -38,7 +38,7 @@ module ConvenientService
               # @return [String]
               #
               # @internal
-              #   NOTE: `:nocov:` is safe since:
+              #   NOTE: `nocov` is safe since:
               #   - `ConvenientService::Utils::Object.resolve_type` returns a value from enum.
               #   - All possible enum values have their own `when` branch.
               #
@@ -48,7 +48,9 @@ module ConvenientService
                   "#{object}.#{method}"
                 when "instance"
                   "#{object.class}##{method}"
-                else # :nocov:
+                # :nocov:
+                else
+                # :nocov:
                 end
               end
             end
