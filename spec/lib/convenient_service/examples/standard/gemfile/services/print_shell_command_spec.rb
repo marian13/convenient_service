@@ -32,6 +32,24 @@ RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::PrintSh
       subject(:result) { described_class.result(command: command, skip: skip, out: out) }
 
       context "when `PrintShellCommand` is NOT successful" do
+        context "when command is NOT valid" do
+          context "when command is `nil`" do
+            let(:command) { nil }
+
+            it "returns `error` with message" do
+              expect(result).to be_failure.with_message("Command is `nil`").of_service(described_class).of_step(:validate_command)
+            end
+          end
+
+          context "when command is empty string" do
+            let(:command) { "" }
+
+            it "returns `error` with message" do
+              expect(result).to be_failure.with_message("Command is empty").of_service(described_class).of_step(:validate_command)
+            end
+          end
+        end
+
         context "when skipping" do
           let(:skip) { true }
 
