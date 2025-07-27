@@ -331,19 +331,56 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities:
           end
         end
 
-        ##
-        # TODO: Complete.
-        #
-        xcontext "when `other` have different `method`" do
-          let(:other) { described_class.new(entity: service_class, method: :negated_result, observe_middleware: middleware) }
+        context "when `other` have different `method`" do
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(middleware) do |middleware|
+                include ConvenientService::Standard::Config
+
+                middlewares :result do
+                  observe middleware
+                end
+
+                middlewares :negated_result do
+                  observe middleware
+                end
+
+                def result
+                  success(data: {from: :original_result})
+                end
+              end
+            end
+          end
+
+          let(:other) { described_class.new(entity: service_class.new, method: :negated_result, observe_middleware: middleware) }
 
           it "returns `false`" do
             expect(method == other).to eq(false)
           end
         end
 
-        xcontext "when `other` have different `observe_middleware`" do
-          let(:other) { described_class.new(entity: entity, method: method_name, observe_middleware: ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware) }
+        context "when `other` have different `observe_middleware`" do
+          let(:other_middleware) { ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware }
+
+          let(:other) { described_class.new(entity: service_class.new, method: method_name, observe_middleware: other_middleware) }
+
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(middleware, other_middleware) do |middleware, other_middleware|
+                include ConvenientService::Standard::Config
+
+                middlewares :result do
+                  observe middleware
+
+                  observe other_middleware
+                end
+
+                def result
+                  success(data: {from: :original_result})
+                end
+              end
+            end
+          end
 
           it "returns `false`" do
             expect(method == other).to eq(false)
