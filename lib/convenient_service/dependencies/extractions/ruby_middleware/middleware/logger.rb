@@ -5,9 +5,6 @@
 # @see https://github.com/Ibsciss/ruby-middleware
 ##
 
-require 'logger'
-require 'pp'
-
 module ConvenientService
   module Dependencies
     module Extractions
@@ -18,6 +15,7 @@ module ConvenientService
         #     Copied from `Ibsciss/ruby-middleware` without any logic modification.
         #     Version: v0.4.2.
         #     - Wrapped in a namespace `ConvenientService::Dependencies::Extractions::RubyMiddleware`.
+        #     - Removed `require 'logger'` and `require 'pp'`.
         #
         #   - https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/logger.rb
         #

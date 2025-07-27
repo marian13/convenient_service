@@ -393,6 +393,11 @@ module ConvenientService
         require "paint"
 
         ##
+        # - https://github.com/ruby/pp
+        #
+        require "pp"
+
+        ##
         # - https://github.com/rouge-ruby/rouge
         #
         require "rouge"
