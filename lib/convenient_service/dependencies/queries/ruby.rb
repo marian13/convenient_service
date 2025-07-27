@@ -35,6 +35,11 @@ module ConvenientService
           end
 
           ##
+          # @return [String]
+          #
+          alias_method :engine_name, :engine
+
+          ##
           # @return [ConvenientService::Dependencies::Queries::Version]
           #
           # @internal
@@ -65,9 +70,12 @@ module ConvenientService
           #   - https://github.com/janlelis/ruby_engine/blob/v2.0.0/lib/ruby_engine.rb#L19
           #
           def mri?
-            ::RUBY_ENGINE.to_s == "ruby"
+            engine == "ruby"
           end
 
+          ##
+          # @return [Boolean]
+          #
           alias_method :ruby?, :mri?
 
           ##
@@ -78,7 +86,7 @@ module ConvenientService
           # @see https://github.com/rdp/os
           #
           def jruby?
-            ::RUBY_ENGINE.to_s.match?(/jruby/)
+            engine.match?(/jruby/)
           end
 
           ##
@@ -87,7 +95,7 @@ module ConvenientService
           # @return [Boolean]
           #
           def truffleruby?
-            ::RUBY_ENGINE.to_s.match?(/truffleruby/)
+            engine.match?(/truffleruby/)
           end
 
           ##

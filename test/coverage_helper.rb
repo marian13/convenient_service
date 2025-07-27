@@ -22,7 +22,7 @@ return if ConvenientService::Dependencies.ruby.truffleruby?
 # Coverage using SimpleCov.
 #
 # NOTE: What is SimpleCov?
-# https://github.com/simplecov-ruby/simplecov
+# - https://github.com/simplecov-ruby/simplecov
 #
 # NOTE: What is lcov and how to set up it?
 # - https://github.com/fortissimo1997/simplecov-lcov
@@ -33,7 +33,7 @@ return if ConvenientService::Dependencies.ruby.truffleruby?
 # - https://github.com/coverallsapp/github-action/issues/29
 #
 # IMPORTANT: Why `convenient_service/version.rb` is ignored? See:
-# https://github.com/simplecov-ruby/simplecov/issues/557
+# - https://github.com/simplecov-ruby/simplecov/issues/557
 ##
 
 require "simplecov"
@@ -47,30 +47,30 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
   #
   escape = ->(name) { name.tr(".", "_") }
 
-  ##
-  #
-  #
+  ruby_engine_name = ConvenientService::Dependencies.ruby.engine_name
+
+  ruby_engine_version = escape[ConvenientService::Dependencies.ruby.engine_version.major_minor]
+
   appraisal_name = escape[ConvenientService::Dependencies.appraisal_name_for_coverage]
 
-  ##
-  #
-  #
-  ruby_version = escape[ConvenientService::Dependencies.ruby.engine_version.major_minor]
-
-  ##
-  # NOTE: There is also `rspec`.
-  #
   test_framework = "minitest"
 
   ##
-  # https://github.com/fortissimo1997/simplecov-lcov#output-report-as-single-file
+  # - https://github.com/fortissimo1997/simplecov-lcov#output-report-as-single-file
   #
   config.report_with_single_file = true
 
   ##
-  # https://github.com/fortissimo1997/simplecov-lcov#output-report-as-single-file
+  # - https://github.com/fortissimo1997/simplecov-lcov#output-report-as-single-file
   #
-  config.single_report_path = File.join("coverage", test_framework, ruby_version, appraisal_name, "lcov.info")
+  config.single_report_path = File.join(
+    "coverage",
+    test_framework,
+    ruby_engine_name,
+    ruby_engine_version,
+    appraisal_name,
+    "lcov.info"
+  )
 end
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
@@ -81,8 +81,8 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
 SimpleCov.start do
   ##
   # NOTE: Enables branch coverage (requires Ruby 2.5+).
-  # https://github.com/simplecov-ruby/simplecov#branch-coverage-ruby--25
-  # https://github.com/simplecov-ruby/simplecov#primary-coverage
+  # - https://github.com/simplecov-ruby/simplecov#branch-coverage-ruby--25
+  # - https://github.com/simplecov-ruby/simplecov#primary-coverage
   #
   enable_coverage :branch
 

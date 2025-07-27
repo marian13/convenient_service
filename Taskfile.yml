@@ -107,6 +107,13 @@ tasks:
       BUNDLE_EXEC_PREFIX: *BUNDLE_EXEC_PREFIX
     interactive: true
 
+  ##
+  # NOTE: `lcov-result-merger` uses glob pattern.
+  # - https://github.com/mweibel/lcov-result-merger/blob/v5.0.1/lib/configuration.js#L28
+  #
+  # NOTE: Use `Code Coverage LCOV` VSCode plugin to view `lcov.info` locally.
+  # - https://marketplace.visualstudio.com/items?itemName=rherrmannr.code-coverage-lcov
+  #
   coverage:lcov:merge:
     cmds:
       - npx --yes lcov-result-merger 'coverage/**/lcov.info' coverage/lcov.info
