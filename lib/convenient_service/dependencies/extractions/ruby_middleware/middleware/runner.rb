@@ -12,7 +12,7 @@ module ConvenientService
         ##
         # @internal
         #   NOTE:
-        #     Copied from `Ibsciss/ruby-middleware` without any logic modification.
+        #     Copied from `Ibsciss/ruby-middleware` with one logic modification.
         #     Version: v0.4.2.
         #     - Wrapped in a namespace `ConvenientService::Dependencies::Extractions::RubyMiddleware`.
         #     - Added support of middleware creators.
