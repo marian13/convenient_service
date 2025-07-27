@@ -50,8 +50,8 @@ module ConvenientService
                   "#{object.class}##{method}"
                 # :nocov:
                 else
-                # :nocov:
                 end
+                # :nocov:
               end
             end
           end
