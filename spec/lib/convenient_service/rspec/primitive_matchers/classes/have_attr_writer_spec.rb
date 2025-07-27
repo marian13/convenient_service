@@ -89,7 +89,9 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::HaveAttrWri
         context "when that `method` defined `attr` with `true`" do
           let(:klass) do
             Class.new do
+              # rubocop:disable Lint/DeprecatedClassMethods
               attr :foo, true
+              # rubocop:enable Lint/DeprecatedClassMethods
             end
           end
 
