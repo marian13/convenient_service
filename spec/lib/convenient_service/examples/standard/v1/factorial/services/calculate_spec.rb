@@ -74,6 +74,22 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Factorial::Services::C
           expect(result).to be_success.with_data(factorial: factorial).of_service(described_class).without_step
         end
 
+        context "when `number` is `0`" do
+          let(:number) { 0 }
+
+          it "returns `success` with `1` as factorial" do
+            expect(result).to be_success.with_data(factorial: 1).of_service(described_class).without_step
+          end
+        end
+
+        context "when `number` is `1`" do
+          let(:number) { 1 }
+
+          it "returns `success` with `1` as factorial" do
+            expect(result).to be_success.with_data(factorial: 1).of_service(described_class).without_step
+          end
+        end
+
         context "when `timeout_seconds` are NOT passed" do
           subject(:result) { described_class.result(number: number) }
 
