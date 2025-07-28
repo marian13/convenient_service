@@ -233,6 +233,46 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
         it "returns formatted exception with cause" do
           expect(command_result).to eq(formatted_exception)
         end
+
+        context "when exception cause has NO backtrace" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                ##
+                # NOTE: Sometimes exceptions may have no backtrace, especially when they are created by developers manually, NOT by Ruby internals.
+                #   - https://blog.kalina.tech/2019/04/exception-without-backtrace-in-ruby.html
+                #   - https://github.com/jruby/jruby/issues/4467
+                #
+                # NOTE: Check the following tricky behaviour, it explains why an empty array is passed.
+                #   `raise StandardError, "exception message", nil` ignores `nil` and still generates full backtrace.
+                #   `raise StandardError, "exception message", []` generates no backtrace, but `exception.backtrace` returns `nil`.
+                #
+                raise StandardError, "cause message", []
+              rescue
+                raise StandardError, "exception message"
+              end
+            end
+          end
+
+          let(:formatted_exception) do
+            <<~MESSAGE.chomp
+              #{exception.class}:
+                #{exception.message}
+              #{exception.backtrace.take(5).map { |line| "# #{line}" }.join("\n")}
+              # ...
+              ------------------
+              --- Caused by: ---
+              #{exception.cause.class}:
+                #{exception.cause.message}
+            MESSAGE
+          end
+
+          it "returns formatted exception with cause with no backtrace" do
+            expect(command_result).to eq(formatted_exception)
+          end
+        end
       end
 
       context "when `max_backtrace_size` is NOT passed" do

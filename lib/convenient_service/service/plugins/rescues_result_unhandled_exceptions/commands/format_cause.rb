@@ -74,20 +74,10 @@ module ConvenientService
             #   - https://blog.kalina.tech/2019/04/exception-without-backtrace-in-ruby.html
             #   - https://github.com/jruby/jruby/issues/4467
             #
-            def cause_first_line
-              return "" unless cause
-              return "" unless cause.backtrace
-
-              cause.backtrace.first
-            end
-
-            ##
-            # @return [String, nil]
-            #
             def formatted_cause_first_line
-              return "" unless cause_first_line
+              cause_first_line = cause.backtrace.to_a.first
 
-              Commands::FormatLine.call(line: cause_first_line)
+              cause_first_line ? Commands::FormatLine.call(line: cause_first_line) : ""
             end
           end
         end
