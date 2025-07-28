@@ -238,8 +238,8 @@
     <span class='lbracket'>[</span><span class='id identifier rubyid_status'>status</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span> <span class='id identifier rubyid_unsafe_data'>unsafe_data</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='rbracket'>]</span>
   <span class='kw'>when</span> <span class='symbol'>:failure</span>
     <span class='lbracket'>[</span><span class='id identifier rubyid_status'>status</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span> <span class='id identifier rubyid_unsafe_message'>unsafe_message</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span>
-  <span class='kw'>when</span> <span class='symbol'>:error</span>
-    <span class='lbracket'>[</span><span class='id identifier rubyid_status'>status</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span> <span class='id identifier rubyid_unsafe_message'>unsafe_message</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span>
+  <span class='kw'>else</span> <span class='comment'># :error
+</span>    <span class='lbracket'>[</span><span class='id identifier rubyid_status'>status</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span> <span class='id identifier rubyid_unsafe_message'>unsafe_message</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -386,7 +386,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jul 28 01:00:16 2025 by
+  Generated on Mon Jul 28 01:01:55 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
