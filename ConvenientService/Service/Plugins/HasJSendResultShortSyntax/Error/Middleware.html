@@ -231,7 +231,7 @@
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="Exceptions.html" title="ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/BothArgsAndKwargsArePassed.html" title="ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Exceptions::BothArgsAndKwargsArePassed (class)">BothArgsAndKwargsArePassed</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span> <span class='kw'>if</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
 
-  <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>?</span> <span class='id identifier rubyid_error_from_args'>error_from_args</span> <span class='op'>:</span> <span class='id identifier rubyid_error_from_kwargs'>error_from_kwargs</span>
+  <span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>?</span> <span class='id identifier rubyid_error_from_kwargs'>error_from_kwargs</span> <span class='op'>:</span> <span class='id identifier rubyid_error_from_args'>error_from_args</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -243,7 +243,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jul 28 01:09:18 2025 by
+  Generated on Mon Jul 28 01:27:19 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
