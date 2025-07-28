@@ -9,10 +9,11 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::IncludeInOrder, type: :standard do
-  subject(:matcher_result) { matcher.matches?(keywords) }
+  subject(:matcher_result) { matcher.matches?(string) }
 
-  let(:matcher) { described_class.new(string) }
+  let(:matcher) { described_class.new(keywords) }
 
   let(:string) { "foo bar baz" }
   let(:keywords) { ["foo", "bar", "baz"] }
@@ -20,11 +21,54 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::IncludeInOr
   let(:printable_keywords) { ["foo", "bar", "baz"].map(&:inspect).join(", ") }
 
   describe "#matches?" do
-    ##
-    # TODO: Specs.
-    #
-    it "returns `true`" do
-      expect(matcher_result).to eq(true)
+    context "when `keywords` are NOT empty" do
+      context "when `keywords` are strings" do
+        let(:keywords) { ["foo", "bar", "baz"] }
+
+        context "when `string` does NOT include `keywords` in order" do
+          let(:string) { "foo baz bar" }
+
+          it "returns `false`" do
+            expect(matcher_result).to eq(false)
+          end
+        end
+
+        context "when `string` includes `keywords` in order" do
+          let(:string) { "foo bar baz" }
+
+          it "returns `true`" do
+            expect(matcher_result).to eq(true)
+          end
+        end
+      end
+
+      context "when `keywords` are regular expressios" do
+        let(:keywords) { [/foo/, /bar/, /baz/] }
+
+        context "when `string` does NOT include `keywords` in order" do
+          let(:string) { "foo baz bar" }
+
+          it "returns `false`" do
+            expect(matcher_result).to eq(false)
+          end
+        end
+
+        context "when `string` includes `keywords` in order" do
+          let(:string) { "foo bar baz" }
+
+          it "returns `true`" do
+            expect(matcher_result).to eq(true)
+          end
+        end
+      end
+    end
+
+    context "when `keywords` are empty" do
+      let(:keywords) { [] }
+
+      it "returns `false`" do
+        expect(matcher_result).to eq(false)
+      end
     end
   end
 
@@ -52,3 +96,4 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers::Classes::IncludeInOr
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups

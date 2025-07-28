@@ -22,8 +22,13 @@ module ConvenientService
           # @param string [String]
           # @return [Boolean]
           #
+          # @internal
+          #   NOTE: Implementation is very basic just to serve the need of this library.
+          #
           def matches?(string)
             @string = string
+
+            return false if keywords.empty?
 
             scanner = ::StringScanner.new(string)
 
