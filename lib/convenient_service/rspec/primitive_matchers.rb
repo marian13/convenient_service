@@ -17,6 +17,7 @@ require_relative "primitive_matchers/have_alias_method"
 require_relative "primitive_matchers/have_attr_accessor"
 require_relative "primitive_matchers/have_attr_reader"
 require_relative "primitive_matchers/have_attr_writer"
+require_relative "primitive_matchers/include_in_order"
 require_relative "primitive_matchers/include_module"
 require_relative "primitive_matchers/prepend_module"
 require_relative "primitive_matchers/singleton_prepend_module"
@@ -37,6 +38,7 @@ module ConvenientService
         include HaveAttrAccessor
         include HaveAttrReader
         include HaveAttrWriter
+        include IncludeInOrder
         include IncludeModule
         include PrependModule
         include SingletonPrependModule

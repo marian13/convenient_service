@@ -438,6 +438,12 @@ module ConvenientService
         require "ostruct"
 
         ##
+        # - https://ruby-doc.org/stdlib-2.7.0/libdoc/strscan/rdoc/StringScanner.html
+        # - https://github.com/ruby/strscan
+        #
+        require "strscan"
+
+        ##
         # - https://ruby-doc.org/stdlib-2.7.0/libdoc/tempfile/rdoc/Tempfile.html
         # - https://github.com/ruby/tempfile
         #

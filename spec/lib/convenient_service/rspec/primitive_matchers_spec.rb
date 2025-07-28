@@ -38,6 +38,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveMatchers, type: :standard do
       it { is_expected.to include_module(described_class::HaveAttrAccessor) }
       it { is_expected.to include_module(described_class::HaveAttrReader) }
       it { is_expected.to include_module(described_class::HaveAttrWriter) }
+      it { is_expected.to include_module(described_class::IncludeInOrder) }
       it { is_expected.to include_module(described_class::IncludeModule) }
       it { is_expected.to include_module(described_class::PrependModule) }
       it { is_expected.to include_module(described_class::SingletonPrependModule) }
