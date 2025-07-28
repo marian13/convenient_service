@@ -24,6 +24,9 @@ module ConvenientService
           #
           # @internal
           #   NOTE: Implementation is very basic just to serve the need of this library.
+          #   NOTE: Older versions of `StringScanner` do NOT allow to pass strigns to scan methods.
+          #   - https://github.com/ruby/strscan/pull/106/files
+          #   - https://github.com/ruby/strscan/blob/master/NEWS.md#311---2024-12-12
           #
           def matches?(string)
             @string = string
@@ -32,7 +35,9 @@ module ConvenientService
 
             scanner = ::StringScanner.new(string)
 
-            keywords.all? { |keyword| scanner.scan_until(keyword) }
+            keywords
+              .map { |keyword| keyword.instance_of?(::String) ? /#{keyword}/ : keyword }
+              .all? { |keyword| scanner.scan_until(keyword) }
           end
 
           ##
