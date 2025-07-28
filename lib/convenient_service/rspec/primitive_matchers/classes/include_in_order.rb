@@ -36,7 +36,7 @@ module ConvenientService
             scanner = ::StringScanner.new(string)
 
             keywords
-              .map { |keyword| keyword.instance_of?(::String) ? /#{keyword}/ : keyword }
+              .map { |keyword| keyword.instance_of?(::String) ? ::Regexp.new(::Regexp.escape(keyword)) : keyword }
               .all? { |keyword| scanner.scan_until(keyword) }
           end
 
