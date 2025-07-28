@@ -143,6 +143,9 @@ module ConvenientService
                     ##
                     # @return [Boolean]
                     #
+                    # @internal
+                    #   NOTE: It is OK to have library private order-dependant methods.
+                    #
                     def match_step_index?
                       return result.step.index == step_index if step_index.instance_of?(::Integer)
 

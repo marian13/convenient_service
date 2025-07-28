@@ -63,22 +63,25 @@ module ConvenientService
                 ##
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Key]
                 #
+                # @internal
+                #   NOTE: It is OK to have library private order-dependant methods.
+                #
                 def key
-                  Utils.memoize_including_falsy_values(self, :@key) { factory&.create_key }
+                  Utils.memoize_including_falsy_values(self, :@key) { factory.create_key }
                 end
 
                 ##
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Name]
                 #
                 def name
-                  Utils.memoize_including_falsy_values(self, :@name) { factory&.create_name }
+                  Utils.memoize_including_falsy_values(self, :@name) { factory.create_name }
                 end
 
                 ##
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Callers::Base]
                 #
                 def caller
-                  Utils.memoize_including_falsy_values(self, :@caller) { factory&.create_caller }
+                  Utils.memoize_including_falsy_values(self, :@caller) { factory.create_caller }
                 end
 
                 ##
