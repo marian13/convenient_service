@@ -61,6 +61,23 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           it "sets service concerns" do
             expect(service_class.concerns.to_a).to eq(concerns)
           end
+
+          ##
+          # NOTE: This should never happen in the end-user scenario, but theoretically somebody may utilize `Standard::V1` before it is fully removed.
+          #
+          context "when `:essetial` option is NOT enabled" do
+            let(:service_class) do
+              Class.new.tap do |klass|
+                klass.class_exec(described_class) do |mod|
+                  include mod.without(:essential)
+                end
+              end
+            end
+
+            it "does NOT raise" do
+              expect { service_class.concerns }.not_to raise_error
+            end
+          end
         end
 
         example_group "#initialize middlewares" do
@@ -137,6 +154,23 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
 
           it "sets service middlewares for `#result`" do
             expect(service_class.middlewares(:result).to_a).to eq(result_middlewares)
+          end
+
+          ##
+          # NOTE: This should never happen in the end-user scenario, but theoretically somebody may utilize `Standard::V1` before it is fully removed.
+          #
+          context "when `:essetial` option is NOT enabled" do
+            let(:service_class) do
+              Class.new.tap do |klass|
+                klass.class_exec(described_class) do |mod|
+                  include mod.without(:essential)
+                end
+              end
+            end
+
+            it "does NOT raise" do
+              expect { service_class.middlewares(:result) }.not_to raise_error
+            end
           end
         end
 
