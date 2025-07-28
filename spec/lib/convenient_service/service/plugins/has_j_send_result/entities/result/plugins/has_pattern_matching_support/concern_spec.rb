@@ -427,27 +427,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           context "when `keys` is array with multiple keys" do
             # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
             it "returns hash with only those multiple keys" do
-              expect(result.deconstruct_keys([:status, :data])).to eq({
-                status: :success,
-                data: {foo: :bar}
-              })
-
-              expect(result.deconstruct_keys([:message, :code])).to eq({
-                message: "foo",
-                code: :foo
-              })
-
-              expect(result.deconstruct_keys([:step, :step_index])).to eq({
-                step: nil,
-                step_index: nil
-              })
-
-              expect(result.deconstruct_keys([:service, :original_service])).to eq({
-                service: service,
-                original_service: service
-              })
+              expect(result.deconstruct_keys([:status, :data])).to eq({status: :success, data: {foo: :bar}})
+              expect(result.deconstruct_keys([:message, :code])).to eq({message: "foo", code: :foo})
+              expect(result.deconstruct_keys([:step, :step_index])).to eq({step: nil, step_index: nil})
+              expect(result.deconstruct_keys([:service, :original_service])).to eq({service: service, original_service: service})
             end
             # rubocop:enable RSpec/MultipleExpectations, RSpec/ExampleLength
+          end
+
+          context "when `keys` is array with unsupported key" do
+            it "returns empty hash" do
+              expect(result.deconstruct_keys([:unsupported])).to eq({})
+            end
           end
         end
 
