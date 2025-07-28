@@ -22,7 +22,7 @@ module ConvenientService
             def next(*args, **kwargs, &block)
               ::ConvenientService.raise Exceptions::BothArgsAndKwargsArePassed.new if args.any? && kwargs.any?
 
-              args.any? ? failure_from_args : failure_from_kwargs
+              kwargs.any? ? failure_from_kwargs : failure_from_args
             end
 
             private
