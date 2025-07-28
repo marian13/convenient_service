@@ -352,7 +352,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities:
             end
           end
 
-          let(:other) { described_class.new(entity: service_class.new, method: :negated_result, observe_middleware: middleware) }
+          let(:other) { described_class.new(entity: service_instance, method: :negated_result, observe_middleware: middleware) }
 
           it "returns `false`" do
             expect(method == other).to eq(false)
@@ -362,7 +362,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities:
         context "when `other` have different `observe_middleware`" do
           let(:other_middleware) { ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware }
 
-          let(:other) { described_class.new(entity: service_class.new, method: method_name, observe_middleware: other_middleware) }
+          let(:other) { described_class.new(entity: service_instance, method: method_name, observe_middleware: other_middleware) }
 
           let(:service_class) do
             Class.new.tap do |klass|
