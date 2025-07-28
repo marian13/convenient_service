@@ -32,7 +32,7 @@ module ConvenientService
                       result
                     when :failure
                       fallback_failure_step? ? fallback_failure_result(...) : result
-                    when :error
+                    else # :error
                       fallback_error_step? ? fallback_error_result(...) : result
                     end
                   end
