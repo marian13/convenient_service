@@ -10,39 +10,73 @@ module ConvenientService
     module PrimitiveMatchers
       module Classes
         class HaveAliasMethod
+          ##
+          # @param alias_name [String, Symbol]
+          # @param original_name [String, Symbol]
+          # @return [void]
+          #
           def initialize(alias_name, original_name)
             @alias_name = alias_name
             @original_name = original_name
           end
 
+          ##
+          # @param object [Object] Can be any type.
+          # @return [Boolean]
+          #
           def matches?(object)
             @object = object
 
             ##
             # TODO: Use `Utils::Object.duck_class` to support `have_alias_method` for classes.
             #
-            return false unless Utils::Method.defined?(original_name, object.class, private: true)
+            return false unless Utils::Method.defined?(original_name, duck_class, private: true)
 
-            return false unless Utils::Method.defined?(alias_name, object.class, private: true)
+            return false unless Utils::Method.defined?(alias_name, duck_class, private: true)
 
             equal_methods?(alias_name, original_name)
           end
 
+          ##
+          # @return [String]
+          #
           def description
             "have alias method `#{alias_name}` for `#{original_name}`"
           end
 
+          ##
+          # @return [String]
+          #
           def failure_message
-            "expected `#{object.class}` to have alias method `#{alias_name}` for `#{original_name}`"
+            "expected `#{duck_class}` to have alias method `#{alias_name}` for `#{original_name}`"
           end
 
+          ##
+          # @return [String]
+          #
           def failure_message_when_negated
-            "expected `#{object.class}` NOT to have alias method `#{alias_name}` for `#{original_name}`"
+            "expected `#{duck_class}` NOT to have alias method `#{alias_name}` for `#{original_name}`"
           end
 
           private
 
-          attr_reader :object, :alias_name, :original_name
+          ##
+          # @!attribute [r] object
+          #   @return [Object] Can be any type.
+          #
+          attr_reader :object
+
+          ##
+          # @!attribute [r] alias_name
+          #   @return [String, Symbol]
+          #
+          attr_reader :alias_name
+
+          ##
+          # @!attribute [r] original_name
+          #   @return [String, Symbol]
+          #
+          attr_reader :original_name
 
           ##
           # NOTE: How to compare methods?
@@ -91,6 +125,11 @@ module ConvenientService
           #   # => :value
           #
           if Dependencies.ruby.match?("jruby < 10.1")
+            ##
+            # @param alias_name [String, Symbol]
+            # @param original_name [String, Symbol]
+            # @return [Boolean]
+            #
             def equal_methods?(alias_name, original_name)
               alias_method_name = object.method(alias_name).original_name
               original_method_name = object.method(original_name).original_name
@@ -101,9 +140,21 @@ module ConvenientService
               false
             end
           else
+            ##
+            # @param alias_name [String, Symbol]
+            # @param original_name [String, Symbol]
+            # @return [Boolean]
+            #
             def equal_methods?(alias_name, original_name)
               object.method(alias_name).original_name == object.method(original_name).original_name
             end
+          end
+
+          ##
+          # @return [Class]
+          #
+          def duck_class
+            @duck_class ||= ConvenientService::Utils::Object.duck_class(object)
           end
         end
       end
