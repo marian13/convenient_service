@@ -30,7 +30,7 @@ module ConvenientService
                         [status.to_sym, unsafe_data.to_h]
                       when :failure
                         [status.to_sym, unsafe_message.to_s]
-                      when :error
+                      else # :error
                         [status.to_sym, unsafe_message.to_s]
                       end
                     end
