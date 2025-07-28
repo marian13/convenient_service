@@ -13,6 +13,8 @@ return unless defined? ConvenientService::Service::Plugins::HasAwesomePrintInspe
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasAwesomePrintInspect::Concern, type: :awesome_print do
+  include ConvenientService::RSpec::PrimitiveMatchers::IncludeInOrder
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -58,7 +60,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":success"] }
 
       it "returns `inspect` representation of result" do
-        expect(result.inspect).to include(*keywords)
+        expect(result.inspect).to include_in_order(keywords)
       end
 
       context "when result has data" do
@@ -79,7 +81,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":success", ":data_keys", "foo"] }
 
         it "includes data keys into `inspect` representation of result" do
-          expect(result.inspect).to include(*keywords)
+          expect(result.inspect).to include_in_order(keywords)
         end
 
         context "when data has multiple keys" do
@@ -100,7 +102,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":success", ":data_keys", "foo", "baz", "quux"] }
 
           it "delegates to `data.keys.inspect`" do
-            expect(result.inspect).to include(*keywords)
+            expect(result.inspect).to include_in_order(keywords)
           end
         end
       end
@@ -124,7 +126,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "\"foobarbaz\""] }
 
           it "includes message into `inspect` representation of result" do
-            expect(result.inspect).to include(*keywords)
+            expect(result.inspect).to include_in_order(keywords)
           end
         end
 
@@ -146,7 +148,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "\"foo\"", "\"bar\"", "\"baz\""] }
 
           it "includes message into `inspect` representation of result" do
-            expect(result.inspect).to include(*keywords)
+            expect(result.inspect).to include_in_order(keywords)
           end
         end
       end
@@ -165,7 +167,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "AnonymousClass(##{service.object_id})", ":status", ":success"] }
 
         it "uses custom class name" do
-          expect(result.inspect).to include(*keywords)
+          expect(result.inspect).to include_in_order(keywords)
         end
       end
 
@@ -193,7 +195,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "AnonymousClass(##{service.object_id})", ":original_service", "AnonymousClass(##{first_step.object_id})"] }
 
         it "includes original service into `inspect` representation of result" do
-          expect(result.inspect).to include(*keywords)
+          expect(result.inspect).to include_in_order(keywords)
         end
       end
 
@@ -225,7 +227,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "StandardError:", "  exception message", ":backtrace", "[]"] }
 
           it "includes empty backtrace into `inspect` representation of result" do
-            expect(result.inspect).to include(*keywords)
+            expect(result.inspect).to include_in_order(keywords)
           end
         end
 
@@ -250,7 +252,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "StandardError:", "  exception message", ":backtrace", *exception.backtrace.take(5)] }
 
             it "includes backtrace into `inspect` representation of result" do
-              expect(result.inspect).to include(*keywords)
+              expect(result.inspect).to include_in_order(keywords)
             end
           end
 
@@ -272,7 +274,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "StandardError:", "  exception message", ":backtrace", *exception.backtrace.take(10), "..."] }
 
             it "includes backtrace with omission into `inspect` representation of result" do
-              expect(result.inspect).to include(*keywords)
+              expect(result.inspect).to include_in_order(keywords)
             end
           end
         end
