@@ -61,7 +61,7 @@ module ConvenientService
                             }
                           }
                         )
-                      when :error
+                      else # :error
                         copy
                       end
                     end
