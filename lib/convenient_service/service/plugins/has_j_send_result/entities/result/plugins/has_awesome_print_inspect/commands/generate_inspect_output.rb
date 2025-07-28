@@ -82,14 +82,13 @@ module ConvenientService
                     def message
                       lines = result.unsafe_message.to_s.split("\n")
 
+                      lines = lines.take_while { |line| !line.start_with?("#") } if from_unhandled_exception?
+
                       lines.one? ? lines.first : lines
                     end
 
                     ##
                     # @return [Array<String>]
-                    #
-                    # @internal
-                    #   TODO: Specs.
                     #
                     def backtrace
                       locations = result.unhandled_exception.backtrace.to_a
@@ -113,9 +112,6 @@ module ConvenientService
 
                     ##
                     # @return [Boolean]
-                    #
-                    # @internal
-                    #   TODO: Specs.
                     #
                     def include_message?
                       !empty_message? || from_unhandled_exception?

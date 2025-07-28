@@ -17,8 +17,8 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
       let(:exception) do
         service_class.result
-      rescue => error
-        error
+      rescue => an_exception
+        an_exception
       end
 
       let(:max_size) { 5 }

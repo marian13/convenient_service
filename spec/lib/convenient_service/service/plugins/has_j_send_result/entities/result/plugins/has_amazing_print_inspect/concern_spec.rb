@@ -196,6 +196,87 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           expect(result.inspect).to include(*keywords)
         end
       end
+
+      context "when result is from unhandled exception" do
+        context "when that unhandled exception has NO backtrace" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config.with(:fault_tolerance, :amazing_print_inspect)
+
+              def self.name
+                "ImportantService"
+              end
+
+              def result
+                ##
+                # NOTE: Sometimes exceptions may have no backtrace, especially when they are created by developers manually, NOT by Ruby internals.
+                #   - https://blog.kalina.tech/2019/04/exception-without-backtrace-in-ruby.html
+                #   - https://github.com/jruby/jruby/issues/4467
+                #
+                # NOTE: Check the following tricky behaviour, it explains why an empty array is passed.
+                #   `raise StandardError, "exception message", nil` ignores `nil` and still generates full backtrace.
+                #   `raise StandardError, "exception message", []` generates no backtrace, but `exception.backtrace` returns `nil`.
+                #
+                raise StandardError, "exception message", []
+              end
+            end
+          end
+
+          let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "StandardError:", "  exception message", ":backtrace", "[]"] }
+
+          it "includes empty backtrace into `inspect` representation of result" do
+            expect(result.inspect).to include(*keywords)
+          end
+        end
+
+        context "when that unhandled exception has backtrace" do
+          let(:exception) { service.result.unsafe_data[:unhandled_exception] }
+
+          context "when that unhandled exception has short backtrace" do
+            let(:service) do
+              Class.new do
+                include ConvenientService::Standard::Config.with(:fault_tolerance, :amazing_print_inspect)
+
+                def self.name
+                  "ImportantService"
+                end
+
+                def result
+                  raise StandardError, "exception message", ["# /line.rb:1:in `foo'"] * 5
+                end
+              end
+            end
+
+            let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "StandardError:", "  exception message", ":backtrace", *exception.backtrace.take(5)] }
+
+            it "includes backtrace into `inspect` representation of result" do
+              expect(result.inspect).to include(*keywords)
+            end
+          end
+
+          context "when that unhandled exception has long backtrace" do
+            let(:service) do
+              Class.new do
+                include ConvenientService::Standard::Config.with(:fault_tolerance, :amazing_print_inspect)
+
+                def self.name
+                  "ImportantService"
+                end
+
+                def result
+                  raise StandardError, "exception message", ["# /line.rb:1:in `foo'"] * 15
+                end
+              end
+            end
+
+            let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "StandardError:", "  exception message", ":backtrace", *exception.backtrace.take(10), "..."] }
+
+            it "includes backtrace with omission into `inspect` representation of result" do
+              expect(result.inspect).to include(*keywords)
+            end
+          end
+        end
+      end
     end
   end
 end
