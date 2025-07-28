@@ -13,5 +13,4 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
 
   specify { expect(described_class::NotExistingAttribute).to be_descendant_of(ConvenientService::Exception) }
-  specify { expect(described_class::ErrorHasNoOtherTypeRepresentation).to be_descendant_of(ConvenientService::Exception) }
 end
