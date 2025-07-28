@@ -524,7 +524,7 @@
   <span class='id identifier rubyid_scanner'>scanner</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>StringScanner</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_keywords'>keywords</span>
-    <span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_keyword'>keyword</span><span class='op'>|</span> <span class='id identifier rubyid_keyword'>keyword</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_keyword'>keyword</span><span class='embexpr_end'>}</span><span class='regexp_end'>/</span></span> <span class='op'>:</span> <span class='id identifier rubyid_keyword'>keyword</span> <span class='rbrace'>}</span>
+    <span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_keyword'>keyword</span><span class='op'>|</span> <span class='id identifier rubyid_keyword'>keyword</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='op'>::</span><span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_escape'>escape</span><span class='lparen'>(</span><span class='id identifier rubyid_keyword'>keyword</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_keyword'>keyword</span> <span class='rbrace'>}</span>
     <span class='period'>.</span><span class='id identifier rubyid_all?'>all?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_keyword'>keyword</span><span class='op'>|</span> <span class='id identifier rubyid_scanner'>scanner</span><span class='period'>.</span><span class='id identifier rubyid_scan_until'>scan_until</span><span class='lparen'>(</span><span class='id identifier rubyid_keyword'>keyword</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -537,7 +537,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jul 28 17:20:48 2025 by
+  Generated on Mon Jul 28 17:44:21 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
