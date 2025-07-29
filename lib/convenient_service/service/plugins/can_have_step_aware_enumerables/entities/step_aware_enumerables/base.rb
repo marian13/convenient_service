@@ -87,6 +87,20 @@ module ConvenientService
                 end
               end
 
+              ##
+              # @param other [Object] Can be any type.
+              # @return [Boolean, nil]
+              #
+              def ==(other)
+                return unless other.instance_of?(self.class)
+
+                return false if object != other.object
+                return false if organizer != other.organizer
+                return false if propagated_result != other.propagated_result
+
+                true
+              end
+
               private
 
               ##
