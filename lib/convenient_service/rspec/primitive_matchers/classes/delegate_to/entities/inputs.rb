@@ -56,102 +56,17 @@ module ConvenientService
               end
 
               ##
-              # HACK: For some reason, the following spec if NOT passing in JRuby:
+              # @api private
               #
-              #   # spec/lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/concern/instance_methods_spec.rb:205
-              #   RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern::InstanceMethods, type: :standard do
-              #     include ConvenientService::RSpec::Matchers::DelegateTo
+              # @return [Object] Can be any type.
               #
-              #     let(:service_class) do
-              #       Class.new do
-              #         include ConvenientService::Standard::Config
-              #       end
-              #     end
+              # @internal
+              #   IMPORTANT: Must be refreshed when `expected_arguments` are reset.
               #
-              #     let(:service_instance) { service_class.new }
-              #
-              #     let(:result_class) { service_class.result_class }
-              #
-              #     let(:result_instance) { result_class.new(**params) }
-              #
-              #     let(:params) do
-              #       {
-              #         service: service_instance,
-              #         status: status,
-              #         data: {foo_foo_foo: :bar},
-              #         message: "foo",
-              #         code: :foo,
-              #         **extra_kwargs
-              #       }
-              #     end
-              #
-              #     let(:status) { :foo }
-              #
-              #     let(:extra_kwargs) { {} }
-              #
-              #     specify do
-              #       expect { result_instance.create_data!(params[:data]) }
-              #         .to delegate_to(result_class.data_class, :cast!)
-              #           .with_arguments(params[:data])
-              #           .and_return { |data| data.copy(overrides: {kwargs: {result: result_instance}}) }
-              #     end
-              #
-              #  That is why JRuby has its own version of `delegation_value` method.
-              #
-              #  To debug, place the following code inside `delegation_value` method.
-              #
-              #     if expected_arguments.args == [{foo_foo_foo: :bar}]
-              #       binding.pry
-              #     end
-              #
-              #  And run RSpec with `JRUBY_OPTS='--debug'`.
-              #
-              if Dependencies.ruby.match?("jruby < 10.1")
-                ##
-                # @api private
-                #
-                # @return [Object] Can be any type.
-                #
-                # @internal
-                #   IMPORTANT: Must be refreshed when `expected_arguments` are reset.
-                #
-                def delegation_value
-                  return values[:delegation_value] if values.has_key?(:delegation_value)
+              def delegation_value
+                return values[:delegation_value] if values.has_key?(:delegation_value)
 
-                  values[:delegation_value] =
-                    case
-                    when expected_arguments.args.any? && expected_arguments.kwargs.any? && expected_arguments.block
-                      object.__send__(method, *expected_arguments.args, **expected_arguments.kwargs, &expected_arguments.block)
-                    when expected_arguments.args.any? && expected_arguments.kwargs.any? && !expected_arguments.block
-                      object.__send__(method, *expected_arguments.args, **expected_arguments.kwargs)
-                    when expected_arguments.args.any? && !expected_arguments.kwargs.any? && expected_arguments.block
-                      object.__send__(method, *expected_arguments.args, &expected_arguments.block)
-                    when !expected_arguments.args.any? && expected_arguments.kwargs.any? && expected_arguments.block
-                      object.__send__(method, **expected_arguments.kwargs, &expected_arguments.block)
-                    when expected_arguments.args.any? && !expected_arguments.kwargs.any? && !expected_arguments.block
-                      object.__send__(method, *expected_arguments.args)
-                    when !expected_arguments.args.any? && expected_arguments.kwargs.any? && !expected_arguments.block
-                      object.__send__(method, **expected_arguments.kwargs)
-                    when !expected_arguments.args.any? && !expected_arguments.kwargs.any? && expected_arguments.block
-                      object.__send__(method, &expected_arguments.block)
-                    else
-                      object.__send__(method)
-                    end
-                end
-              else
-                ##
-                # @api private
-                #
-                # @return [Object] Can be any type.
-                #
-                # @internal
-                #   IMPORTANT: Must be refreshed when `expected_arguments` are reset.
-                #
-                def delegation_value
-                  return values[:delegation_value] if values.has_key?(:delegation_value)
-
-                  values[:delegation_value] = object.__send__(method, *expected_arguments.args, **expected_arguments.kwargs, &expected_arguments.block)
-                end
+                values[:delegation_value] = object.__send__(method, *expected_arguments.args, **expected_arguments.kwargs, &expected_arguments.block)
               end
 
               ##
@@ -305,3 +220,5 @@ module ConvenientService
     end
   end
 end
+
+require_relative "inputs/jruby"

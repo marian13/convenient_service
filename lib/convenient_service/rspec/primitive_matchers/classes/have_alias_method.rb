@@ -79,85 +79,24 @@ module ConvenientService
           attr_reader :original_name
 
           ##
-          # NOTE: How to compare methods?
-          # - https://stackoverflow.com/a/45640516/12201472
-          #
-          # HACK: CRuby and JRuby have different behaviour when the alias method is defined for the attribute reader. That is why they have their own `equal_methods?` versions. For example:
-          #
-          #   class Data
-          #     attr_reader :result
-          #
-          #     alias_method :alias_result, :result
-          #
-          #     def value
-          #       @value
-          #     end
-          #
-          #     alias_method :alias_value, :value
-          #   end
-          #
-          #   object = Data.new
-          #
-          #   # CRuby
-          #   object.method(:result).original_name
-          #   # => :result
-          #
-          #   object.method(:alias_result).original_name
-          #   # => :result
-          #
-          #   object.method(:value).original_name
-          #   # => :value
-          #
-          #   object.method(:alias_value).original_name
-          #   # => :value
-          #
-          #   # JRuby
-          #   object.method(:result).original_name
-          #   # => :result
-          #
-          #   object.method(:alias_result).original_name
-          #   # => :@result
-          #
-          #   object.method(:value).original_name
-          #   # => :value
-          #
-          #   object.method(:alias_value).original_name
-          #   # => :value
-          #
-          if Dependencies.ruby.match?("jruby < 10.1")
-            ##
-            # @param alias_name [String, Symbol]
-            # @param original_name [String, Symbol]
-            # @return [Boolean]
-            #
-            def equal_methods?(alias_name, original_name)
-              alias_method_name = object.method(alias_name).original_name
-              original_method_name = object.method(original_name).original_name
-
-              return true if alias_method_name == original_method_name
-              return true if alias_method_name.to_s == "@#{original_method_name}"
-
-              false
-            end
-          else
-            ##
-            # @param alias_name [String, Symbol]
-            # @param original_name [String, Symbol]
-            # @return [Boolean]
-            #
-            def equal_methods?(alias_name, original_name)
-              object.method(alias_name).original_name == object.method(original_name).original_name
-            end
-          end
-
-          ##
           # @return [Class]
           #
           def duck_class
             @duck_class ||= ConvenientService::Utils::Object.duck_class(object)
+          end
+
+          ##
+          # @param alias_name [String, Symbol]
+          # @param original_name [String, Symbol]
+          # @return [Boolean]
+          #
+          def equal_methods?(alias_name, original_name)
+            object.method(alias_name).original_name == object.method(original_name).original_name
           end
         end
       end
     end
   end
 end
+
+require_relative "have_alias_method/jruby"

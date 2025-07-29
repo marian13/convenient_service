@@ -138,75 +138,33 @@ module ConvenientService
     end
 
     ##
+    # @api public
+    # @param original_exception [StandardError]
+    # @raise [StandardError]
+    #
     # @internal
     #   NOTE: `rescue ::StandardError => exception` is the same as `rescue => exception`.
     #
-    #   IMPORTANT: CRuby `Kernel.raise` supports `cause` keyword starting from 2.6.
-    #   JRuby 9.4 says that it is Ruby 3.1 compatible, but it still does NOT support `cause` keyword.
-    #   - https://ruby-doc.org/core-2.5.0/Kernel.html#method-i-raise
-    #   - https://ruby-doc.org/core-2.6/Kernel.html#method-i-raise
-    #   - https://github.com/jruby/jruby/blob/9.4.0.0/core/src/main/java/org/jruby/RubyKernel.java#L881
-    #   - https://github.com/ruby/spec/blob/master/core/kernel/raise_spec.rb#L5
-    #
-    #   TODO: Create a custom Rubocop cop to statically catch all places where plain `raise` is used.
-    #
-    if Dependencies.ruby.match?("jruby < 10.1")
-      ##
-      # @api public
-      # @param original_exception [StandardError]
-      # @raise [StandardError]
-      #
-      def raise(original_exception)
-        ::Kernel.raise original_exception
-      rescue => exception
-        ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace)
-      end
-    else
-      ##
-      # @api public
-      # @param original_exception [StandardError]
-      # @raise [StandardError]
-      #
-      def raise(original_exception)
-        ::Kernel.raise original_exception
-      rescue => exception
-        ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace), cause: exception.cause
-      end
+    def raise(original_exception)
+      ::Kernel.raise original_exception
+    rescue => exception
+      ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace), cause: exception.cause
     end
 
     ##
+    # @api public
+    # @return [Object] Can be any type.
+    # @raise [StandardError]
+    #
     # @internal
     #   NOTE: `rescue ::StandardError => exception` is the same as `rescue => exception`.
     #
-    #   IMPORTANT: CRuby `Kernel.raise` supports `cause` keyword starting from 2.6.
-    #   JRuby 9.4 says that it is Ruby 3.1 compatible, but it still does NOT support `cause` keyword.
-    #   - https://ruby-doc.org/core-2.5.0/Kernel.html#method-i-raise
-    #   - https://ruby-doc.org/core-2.6/Kernel.html#method-i-raise
-    #   - https://github.com/jruby/jruby/blob/9.4.0.0/core/src/main/java/org/jruby/RubyKernel.java#L881
-    #   - https://github.com/ruby/spec/blob/master/core/kernel/raise_spec.rb#L5
-    #
-    if Dependencies.ruby.match?("jruby < 10.1")
-      ##
-      # @api public
-      # @return [Object] Can be any type.
-      # @raise [StandardError]
-      #
-      def reraise
-        yield
-      rescue => exception
-        ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace)
-      end
-    else
-      ##
-      # @api public
-      # @return [Object] Can be any type.
-      # @raise [StandardError]
-      #
-      def reraise
-        yield
-      rescue => exception
-        ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace), cause: exception.cause
-      end
+    def reraise
+      yield
+    rescue => exception
+      ::Kernel.raise exception.class, exception.message, backtrace_cleaner.clean(exception.backtrace), cause: exception.cause
     end
   end
 end
+
+require_relative "convenient_service/jruby"
