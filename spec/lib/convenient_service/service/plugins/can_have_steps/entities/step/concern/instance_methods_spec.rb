@@ -773,16 +773,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when `other` has different inputs" do
-          let(:other) { step_class.new(*args, **kwargs.merge(in: [])) }
-
-          it "returns `false`" do
-            expect(step == other).to eq(false)
-          end
-        end
-
-        context "when `other` has different outputs" do
-          let(:other) { step_class.new(*args, **kwargs.merge(out: [])) }
+        context "when `other` has different container" do
+          let(:other) { step_class.new(*args, **kwargs.merge(container: Class.new)) }
 
           it "returns `false`" do
             expect(step == other).to eq(false)
@@ -797,16 +789,24 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
 
-        context "when `other` has different container" do
-          let(:other) { step_class.new(*args, **kwargs.merge(container: Class.new)) }
+        context "when `other` has different organizer" do
+          let(:other) { step_class.new(*args, **kwargs.merge(organizer: nil)) }
 
           it "returns `false`" do
             expect(step == other).to eq(false)
           end
         end
 
-        context "when `other` has different organizer" do
-          let(:other) { step_class.new(*args, **kwargs.merge(organizer: nil)) }
+        context "when `other` has different inputs" do
+          let(:other) { step_class.new(*args, **kwargs.merge(in: [])) }
+
+          it "returns `false`" do
+            expect(step == other).to eq(false)
+          end
+        end
+
+        context "when `other` has different outputs" do
+          let(:other) { step_class.new(*args, **kwargs.merge(out: [])) }
 
           it "returns `false`" do
             expect(step == other).to eq(false)

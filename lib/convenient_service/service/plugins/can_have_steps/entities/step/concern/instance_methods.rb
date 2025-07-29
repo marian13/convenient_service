@@ -276,11 +276,11 @@ module ConvenientService
                   return unless other.instance_of?(self.class)
 
                   return false if action != other.action
+                  return false if container != other.container
+                  return false if index != other.index
+                  return false if organizer(raise_when_missing: false) != other.organizer(raise_when_missing: false)
                   return false if inputs != other.inputs
                   return false if outputs != other.outputs
-                  return false if index != other.index
-                  return false if container != other.container
-                  return false if organizer(raise_when_missing: false) != other.organizer(raise_when_missing: false)
                   return false if extra_kwargs != other.extra_kwargs
 
                   true
