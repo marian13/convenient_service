@@ -94,7 +94,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb</dd>
+    <dd>lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb<span class="defines">,<br />
+  lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs/jruby.rb</span>
+</dd>
   </dl>
   
 </div>
@@ -728,16 +730,16 @@
       <pre class="lines">
 
 
-294
-295
-296
-297
-298
-299
-300</pre>
+209
+210
+211
+212
+213
+214
+215</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 294</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 209</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -848,12 +850,12 @@
       <pre class="lines">
 
 
-236
-237
-238</pre>
+151
+152
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 236</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 151</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_block_expectation='>block_expectation=</span><span class='lparen'>(</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='symbol'>:block_expectation</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_block'>block</span>
@@ -974,55 +976,19 @@
       <pre class="lines">
 
 
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140</pre>
+66
+67
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delegation_value'>delegation_value</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='symbol'>:delegation_value</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='symbol'>:delegation_value</span><span class='rparen'>)</span>
 
-  <span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='symbol'>:delegation_value</span><span class='rbracket'>]</span> <span class='op'>=</span>
-    <span class='kw'>case</span>
-    <span class='kw'>when</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span>
-      <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-    <span class='kw'>when</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span>
-      <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
-    <span class='kw'>when</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span>
-      <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-    <span class='kw'>when</span> <span class='op'>!</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span>
-      <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-    <span class='kw'>when</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span>
-      <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
-    <span class='kw'>when</span> <span class='op'>!</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span>
-      <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
-    <span class='kw'>when</span> <span class='op'>!</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span>
-      <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-    <span class='kw'>else</span>
-      <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
-    <span class='kw'>end</span>
+  <span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='symbol'>:delegation_value</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_expected_arguments'>expected_arguments</span><span class='period'>.</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1070,12 +1036,12 @@
       <pre class="lines">
 
 
-162
-163
-164</pre>
+77
+78
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_expected_arguments'>expected_arguments</span>
   <span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='symbol'>:expected_arguments</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_null_arguments'><span class='object_link'><a href="../../../../../Support/Arguments.html#null_arguments-class_method" title="ConvenientService::Support::Arguments.null_arguments (method)">null_arguments</a></span></span>
@@ -1141,15 +1107,15 @@
       <pre class="lines">
 
 
-246
-247
-248
-249
-250
-251</pre>
+161
+162
+163
+164
+165
+166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 246</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 161</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_expected_arguments='>expected_arguments=</span><span class='lparen'>(</span><span class='id identifier rubyid_arguments'>arguments</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:delegation_value</span><span class='rparen'>)</span>
@@ -1203,12 +1169,12 @@
       <pre class="lines">
 
 
-171
-172
-173</pre>
+86
+87
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 171</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_expected_return_value_block'>expected_return_value_block</span>
   <span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='symbol'>:expected_return_value_block</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='id identifier rubyid_proc'>proc</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Support.html#UNDEFINED-constant" title="ConvenientService::Support::UNDEFINED (constant)">UNDEFINED</a></span></span> <span class='rbrace'>}</span>
@@ -1259,12 +1225,12 @@
       <pre class="lines">
 
 
-216
-217
-218</pre>
+131
+132
+133</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 216</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 131</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_has_call_original?'>has_call_original?</span>
   <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='symbol'>:should_call_original</span><span class='rparen'>)</span>
@@ -1315,12 +1281,12 @@
       <pre class="lines">
 
 
-180
-181
-182</pre>
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 180</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method'>method</span>
   <span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='symbol'>:method</span><span class='rbracket'>]</span>
@@ -1376,12 +1342,12 @@
       <pre class="lines">
 
 
-189
-190
-191</pre>
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 189</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_object'>object</span>
   <span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='symbol'>:object</span><span class='rbracket'>]</span>
@@ -1432,12 +1398,12 @@
       <pre class="lines">
 
 
-198
-199
-200</pre>
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 198</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 113</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_printable_block_expectation'>printable_block_expectation</span>
   <span class='ivar'>@printable_block_expectation</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Utils/Proc.html" title="ConvenientService::Utils::Proc (module)">Proc</a></span></span><span class='period'>.</span><span class='id identifier rubyid_display'><span class='object_link'><a href="../../../../../Utils/Proc.html#display-class_method" title="ConvenientService::Utils::Proc.display (method)">display</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_block_expectation'>block_expectation</span><span class='rparen'>)</span>
@@ -1488,12 +1454,12 @@
       <pre class="lines">
 
 
-207
-208
-209</pre>
+122
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 207</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 122</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_printable_method'>printable_method</span>
   <span class='ivar'>@printable_method</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/GeneratePrintableMethod.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Commands::GeneratePrintableMethod (class)">GeneratePrintableMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="../Commands/GeneratePrintableMethod.html#call-instance_method" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Commands::GeneratePrintableMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>object:</span> <span class='id identifier rubyid_object'>object</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
@@ -1559,12 +1525,12 @@
       <pre class="lines">
 
 
-259
-260
-261</pre>
+174
+175
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 259</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 174</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_should_call_original='>should_call_original=</span><span class='lparen'>(</span><span class='id identifier rubyid_flag'>flag</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='symbol'>:should_call_original</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_flag'>flag</span>
@@ -1615,14 +1581,14 @@
       <pre class="lines">
 
 
-225
-226
-227
-228
-229</pre>
+140
+141
+142
+143
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 225</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_should_call_original?'>should_call_original?</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='symbol'>:should_call_original</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='symbol'>:should_call_original</span><span class='rparen'>)</span>
@@ -1703,36 +1669,36 @@
       <pre class="lines">
 
 
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283</pre>
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 270</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb', line 185</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_expected_return_value_block'>update_expected_return_value_block</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:custom_return_value</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='symbol'>:expected_return_value_block</span><span class='rbracket'>]</span> <span class='op'>=</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_block'>block</span>
-      <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../Exceptions.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Exceptions/ReturnCustomValueChainingInvalidArguments.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnCustomValueChainingInvalidArguments (class)">ReturnCustomValueChainingInvalidArguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span>
+      <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../../../ConvenientService.html#raise-class_method" title="ConvenientService.raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../Exceptions.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Exceptions/ReturnCustomValueChainingInvalidArguments.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnCustomValueChainingInvalidArguments (class)">ReturnCustomValueChainingInvalidArguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span>
     <span class='kw'>elsif</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
       <span class='id identifier rubyid_proc'>proc</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span> <span class='rbrace'>}</span>
     <span class='kw'>elsif</span> <span class='id identifier rubyid_block'>block</span>
       <span class='id identifier rubyid_block'>block</span>
     <span class='kw'>else</span>
-      <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../../../ConvenientService.html#raise-instance_method" title="ConvenientService#raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../Exceptions.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Exceptions/ReturnCustomValueChainingInvalidArguments.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnCustomValueChainingInvalidArguments (class)">ReturnCustomValueChainingInvalidArguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span>
+      <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../../../ConvenientService.html#raise-class_method" title="ConvenientService.raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../Exceptions.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Exceptions/ReturnCustomValueChainingInvalidArguments.html" title="ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo::Exceptions::ReturnCustomValueChainingInvalidArguments (class)">ReturnCustomValueChainingInvalidArguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span>
     <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1745,7 +1711,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Jul 28 18:19:49 2025 by
+  Generated on Tue Jul 29 13:37:30 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
