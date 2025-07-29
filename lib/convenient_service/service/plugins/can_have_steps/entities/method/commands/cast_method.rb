@@ -88,7 +88,7 @@ module ConvenientService
                 # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Direction::Base]
                 #
                 def direction
-                  Utils.memoize_including_falsy_values(self, :@direction) { Commands::CastMethodDirection.call(other: other, options: options) }
+                  Utils.memoize_including_falsy_values(self, :@direction) { Entities::Directions.cast(options[:direction]) }
                 end
               end
             end

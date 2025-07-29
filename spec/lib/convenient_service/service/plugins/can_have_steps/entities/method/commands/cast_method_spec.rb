@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
             context "when `caller` is castable" do
               context "when `direction` is NOT castable" do
                 before do
-                  allow(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodDirection).to receive(:call).and_return(nil)
+                  allow(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Directions).to receive(:cast).and_return(nil)
                 end
 
                 it "returns `nil`" do
@@ -84,7 +84,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
                     key: factory.create_key,
                     name: factory.create_name,
                     caller: factory.create_caller,
-                    direction: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethodDirection.call(other: other, options: options)
+                    direction: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Directions.cast(options[:direction])
                   )
                 end
 
@@ -94,14 +94,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
               end
             end
           end
-        end
-      end
-
-      context "when `other` is method" do
-        let(:other) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method.cast(:foo, direction: :input) }
-
-        it "returns its copy" do
-          expect(casted).to eq(other.copy)
         end
       end
     end
