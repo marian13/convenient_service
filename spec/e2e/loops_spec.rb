@@ -8591,8 +8591,116 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#with_object" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].each.with_object("") { |string, object| concat_strings(object, string) }).to eq("")
+          expect(chain_enumerator([]).each.with_object("") { |string, object| concat_strings(object, string) }).to eq("")
+
+          expect(service.step_aware_enumerable(enumerable([])).each.with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+          expect(service.step_aware_enumerator(enumerator([])).each.with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+          expect(service.step_aware_enumerator(lazy_enumerator([])).each.with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+          expect(service.step_aware_enumerator(chain_enumerator([])).each.with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+          expect(service.step_aware_enumerable([]).each.with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+          expect(service.step_aware_enumerable(set([])).each.with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+          expect(service.step_aware_enumerable({}).each.with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+          expect(service.step_aware_enumerable((:success...:success)).each.with_object("") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+
+          # NOTE: No block.
+          expect(["0", "1", "2", "3", "4", "5"].each.with_object("").to_a).to eq([["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(chain_enumerator(["0", "1", "2", "3", "4", "5"]).each.with_object("").to_a).to eq([["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+
+          expect(service.step_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each.with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(service.step_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).each.with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(service.step_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each.with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(service.step_aware_enumerator(chain_enumerator(["0", "1", "2", "3", "4", "5"])).each.with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(service.step_aware_enumerable(["0", "1", "2", "3", "4", "5"]).each.with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(service.step_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).each.with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+          expect(service.step_aware_enumerable({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each.with_object("").result).to be_success.with_data(values: [[["0", "0"], ""], [["1", "1"], ""], [["2", "2"], ""], [["3", "3"], ""], [["4", "4"], ""], [["5", "5"], ""]])
+          expect(service.step_aware_enumerable(("0".."5")).each.with_object("").result).to be_success.with_data(values: [["0", ""], ["1", ""], ["2", ""], ["3", ""], ["4", ""], ["5", ""]])
+
+          # NOTE: Block.
+          expect(["0", "1", "2", "3", "4", "5"].each.with_object(+"") { |string, object| concat_strings(object, string) }).to eq("12345")
+
+          expect(service.step_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+          expect(chain_enumerator(["0", "1", "2", "3", "4", "5"]).each.with_object(+"") { |string, object| concat_strings(object, string) }).to eq("12345")
+          expect(service.step_aware_enumerator(chain_enumerator(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable(["0", "1", "2", "3", "4", "5"]).each.with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+          expect({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}.each.with_object(+"") { |(key, value), object| concat_strings(object, value) }).to eq("12345")
+          expect(service.step_aware_enumerable({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each.with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable(("0".."5")).each.with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+
+          # NOTE: Step with no outputs.
+          expect(service.step_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable(["0", "1", "2", "3", "4", "5"]).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each.with_object(+"") { |(key, value), object| step concat_strings_service, in: [string: -> { object }, other_string: -> { value }] }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable(("0".."5")).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_success.with_data(value: "12345")
+
+          # NOTE: Step with one output.
+          expect(service.step_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: :concatenation }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: :concatenation }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: :concatenation }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable(["0", "1", "2", "3", "4", "5"]).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: :concatenation }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: :concatenation }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each.with_object(+"") { |(key, value), object| step concat_strings_service, in: [string: -> { object }, other_string: -> { value }], out: :concatenation }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable(("0".."5")).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: :concatenation }.result).to be_success.with_data(value: "12345")
+
+          # NOTE: Step with multiple outputs.
+          expect(service.step_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable(["0", "1", "2", "3", "4", "5"]).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each.with_object(+"") { |(key, value), object| step concat_strings_service, in: [string: -> { object }, other_string: -> { value }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "12345")
+          expect(service.step_aware_enumerable(("0".."5")).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }], out: [:concatenation, :operator] }.result).to be_success.with_data(value: "12345")
+
+          # NOTE: Error result.
+          expect(service.step_aware_enumerable(enumerable(["0", "-1", :exception])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_error.without_data
+          expect(service.step_aware_enumerator(enumerator(["0", "-1", :exception])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_error.without_data
+          expect(service.step_aware_enumerator(lazy_enumerator(["0", "-1", :exception])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_error.without_data
+          expect(service.step_aware_enumerable(["0", "-1", :exception]).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_error.without_data
+          expect(service.step_aware_enumerable(set(["0", "-1", :exception])).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_error.without_data
+          expect(service.step_aware_enumerable({"0" => "0", "-1" => "-1", :exception => :exception}).each.with_object(+"") { |(key, value), object| step concat_strings_service, in: [string: -> { object }, other_string: -> { value }] }.result).to be_error.without_data
+          expect(service.step_aware_enumerable(("-1".."-1")).each.with_object(+"") { |string, object| step concat_strings_service, in: [string: -> { object }, other_string: -> { string }] }.result).to be_error.without_data
+
+          # NOTE: Error propagation.
+          expect(service.step_aware_enumerable(enumerable([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.each.with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
+          expect(service.step_aware_enumerator(enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.each.with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
+          expect(service.step_aware_enumerator(lazy_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.each.with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
+          expect(service.step_aware_enumerable([:success, :error, :exception]).filter { |status| step status_service, in: [status: -> { status }] }.each.with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
+          expect(service.step_aware_enumerable(set([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.each.with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
+          expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.each.with_object(+"") { |(key, value), object| object.concat(status.to_s) }.result).to be_error.without_data
+          expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.each.with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
+
+          # NOTE: Failure propagation.
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each.with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each.with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each.with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each.with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each.with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each.with_object(+"") { |(key, value), object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each.with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.each.with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.step_aware_enumerator(enumerator([:success, :exception, :exception])).first.each.with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.step_aware_enumerator(lazy_enumerator([:success, :exception, :exception])).first.each.with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.step_aware_enumerable([:success, :exception, :exception]).first.each.with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.step_aware_enumerable(set([:success, :exception, :exception])).first.each.with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.step_aware_enumerable({success: :success, exception: :exception}).first.each.with_object(+"") { |(key, value), object| object.concat(status.to_s) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.step_aware_enumerable((:success..:success)).first.each.with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
       ##
       # NOTE: `select_exactly` specs are left commented intentionally. It takes too much time to add them back from brain.
+      # TODO: Try to implement `select_exactly` with wrapped block again.
       #
       # describe "#select_exactly" do
       #   specify do
