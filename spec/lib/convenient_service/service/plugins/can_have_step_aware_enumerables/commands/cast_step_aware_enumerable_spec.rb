@@ -194,25 +194,36 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
           end
         end
 
-        ##
-        # NOTE: Tempfile is delegator, that is why it is NOT converted into step aware enumerable.
-        # NOTE: Tempfile still can be used as step aware enumerable if converted into enumerator.
-        #
-        context "when `object` is tempfile" do
-          let(:object) { Tempfile.new }
+        if ConvenientService::Dependencies.ruby.match?("jruby < 9.5")
+          context "when `object` is tempfile" do
+            let(:object) { Tempfile.new }
+            let(:step_aware_enumerable) { ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable.new(**arguments) }
 
-          let(:exception_message) do
-            <<~TEXT
-              Object of class `Tempfile` is NOT enumerable.
-
-              Valid enumerable examples are classes that mix in `Enumerable` module like `Array`, `Hash`, `Set`, `Range`, `IO`, `Enumerator`, etc.
-            TEXT
+            it "returns step aware enumerable" do
+              expect(command_result).to eq(step_aware_enumerable)
+            end
           end
+        else
+          ##
+          # NOTE: Tempfile is delegator, that is why it is NOT converted into step aware enumerable.
+          # NOTE: Tempfile still can be used as step aware enumerable if converted into enumerator.
+          #
+          context "when `object` is tempfile" do
+            let(:object) { Tempfile.new }
 
-          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable`" do
-            expect { command_result }
-              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable)
-              .with_message(exception_message)
+            let(:exception_message) do
+              <<~TEXT
+                Object of class `Tempfile` is NOT enumerable.
+
+                Valid enumerable examples are classes that mix in `Enumerable` module like `Array`, `Hash`, `Set`, `Range`, `IO`, `Enumerator`, etc.
+              TEXT
+            end
+
+            it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable`" do
+              expect { command_result }
+                .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable)
+                .with_message(exception_message)
+            end
           end
         end
 
