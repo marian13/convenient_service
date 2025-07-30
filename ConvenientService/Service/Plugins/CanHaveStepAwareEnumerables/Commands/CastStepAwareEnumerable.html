@@ -208,7 +208,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable </a>
     
 
     
@@ -495,7 +495,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="call-instance_method">
   
-    #<strong>call</strong>  &#x21d2; <tt><span class='object_link'><a href="../Entities/StepAwareEnumerables/Base.html" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base (class)">ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base</a></span></tt> 
+    #<strong>call</strong>  &#x21d2; <tt><span class='object_link'><a href="../Entities/StepAwareEnumerables/Enumerable.html" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable (class)">ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable</a></span></tt> 
   
 
   
@@ -515,7 +515,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Entities/StepAwareEnumerables/Base.html" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base (class)">ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../Entities/StepAwareEnumerables/Enumerable.html" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable (class)">ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable</a></span></tt>)</span>
       
       
       
@@ -528,7 +528,7 @@
     <li>
       
       
-        <span class='type'>(<tt>ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::CollectionIsNotEnumerable</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../Exceptions/ObjectIsNotEnumerable.html" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable (class)">ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable</a></span></tt>)</span>
       
       
       
@@ -552,7 +552,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_step_aware_enumerables/commands/cast_step_aware_enumerable.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../../ConvenientService.html#raise-class_method" title="ConvenientService.raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../../../../Support/Command/Exceptions.html" title="ConvenientService::Support::Command::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'>ObjectIsNotEnumerable</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>object:</span> <span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Enumerable</span><span class='rparen'>)</span>
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../../ConvenientService.html#raise-class_method" title="ConvenientService.raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../../../../Support/Command/Exceptions.html" title="ConvenientService::Support::Command::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'>ObjectIsNotEnumerable</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>object:</span> <span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Enumerable</span><span class='rparen'>)</span>
 
   <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/StepAwareEnumerables.html" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables (module)">StepAwareEnumerables</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Entities/StepAwareEnumerables/Enumerable.html" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable (class)">Enumerable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Entities/StepAwareEnumerables/Base.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>object:</span> <span class='id identifier rubyid_object'>object</span><span class='comma'>,</span> <span class='label'>organizer:</span> <span class='id identifier rubyid_organizer'>organizer</span><span class='comma'>,</span> <span class='label'>propagated_result:</span> <span class='id identifier rubyid_propagated_result'>propagated_result</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -566,7 +566,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Jul 29 17:54:13 2025 by
+  Generated on Wed Jul 30 03:38:34 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
