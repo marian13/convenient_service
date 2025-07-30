@@ -163,7 +163,7 @@ module ConvenientService
               #
               def with_index(offset = nil, &iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(offset, &iteration_block), allow_modifier: true) do |offset, &step_aware_iteration_block|
+                  with_processing_return_value_as_enumerable(arguments(offset, &iteration_block)) do |offset, &step_aware_iteration_block|
                     enumerator.with_index(offset, &step_aware_iteration_block)
                   end
                 else
@@ -182,7 +182,7 @@ module ConvenientService
               #
               def with_object(obj, &iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_object(arguments(obj, &iteration_block), allow_modifier: true) do |obj, &step_aware_iteration_block|
+                  with_processing_return_value_as_object(arguments(obj, &iteration_block)) do |obj, &step_aware_iteration_block|
                     enumerator.with_object(obj, &step_aware_iteration_block)
                   end
                 else
