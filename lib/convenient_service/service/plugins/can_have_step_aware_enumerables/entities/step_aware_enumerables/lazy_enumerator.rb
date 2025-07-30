@@ -641,8 +641,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::LazyEnumerator]
               #
               def with_index(offset = nil, &iteration_block)
-                with_processing_return_value_as_lazy_enumerator(arguments(*args, &iteration_block), method: :with_index) do |*args, &step_aware_iteration_block|
-                  lazy_enumerator.with_index(*args, &step_aware_iteration_block)
+                with_processing_return_value_as_lazy_enumerator(arguments(offset, &iteration_block)) do |offset, &step_aware_iteration_block|
+                  lazy_enumerator.with_index(offset, &step_aware_iteration_block)
                 end
               end
 
