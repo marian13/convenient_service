@@ -34,7 +34,7 @@ module ConvenientService
               # @return [nil]
               #
               def default_evaluate_by
-                enumerable.is_a?(::Enumerator) ? :to_a : nil
+                nil
               end
 
               ##

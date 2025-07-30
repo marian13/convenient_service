@@ -69,6 +69,34 @@ module ConvenientService
               # @param modifiers [Array<Object>]
               # @return [void]
               #
+              # @internal
+              #   NOTE: Uncomment and place the following code snippet after the `initialize` method to debug whether original classes and step aware wrappers are properly mapped.
+              #   TODO: Consider to create an assertion or to introduce logs.
+              #
+              #     def initialize(object:, organizer:, propagated_result:, modifiers: [])
+              #       if object.is_a?(::Enumerator)
+              #         mapping = {
+              #           ::Enumerator => Entities::StepAwareEnumerables::Enumerator,
+              #           ::Enumerator::Lazy => Entities::StepAwareEnumerables::LazyEnumerator,
+              #           ::Enumerator::Chain => Entities::StepAwareEnumerables::ChainEnumerator,
+              #            ::Enumerator::ArithmeticSequence => Entities::StepAwareEnumerables::ArithmeticSequenceEnumerator
+              #         }
+              #
+              #         raise "No mapping for class `#{object.class}`." unless mapping[object.class]
+              #
+              #         if !self.instance_of?(mapping[object.class])
+              #           p [object.class, self.class]
+              #
+              #           raise "Mapping Mismatch - `#{object.class}` and `#{self.class}` are NOT sychronized."
+              #         end
+              #       end
+              #
+              #       @object = object
+              #       @organizer = organizer
+              #       @propagated_result = propagated_result
+              #       @modifiers = modifiers
+              #     end
+              #
               def initialize(object:, organizer:, propagated_result:, modifiers: [])
                 @object = object
                 @organizer = organizer
