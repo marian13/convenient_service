@@ -26,6 +26,16 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
   let(:propagated_result) { service.error(code: "from propagated result") }
 
   example_group "instance methods" do
+    example_group "attributes" do
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+
+      subject { step_aware_base }
+
+      it { is_expected.to have_attr_reader(:object) }
+      it { is_expected.to have_attr_reader(:organizer) }
+      it { is_expected.to have_attr_reader(:propagated_result) }
+    end
+
     example_group "abstract methods" do
       include ConvenientService::RSpec::PrimitiveMatchers::HaveAbstractMethod
 

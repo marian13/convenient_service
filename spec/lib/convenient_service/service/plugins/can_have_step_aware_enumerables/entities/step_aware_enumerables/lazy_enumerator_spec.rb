@@ -32,5 +32,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
 
     it { is_expected.to be_descendant_of(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator) }
   end
+
+  example_group "instance methods" do
+    example_group "alias methods" do
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
+
+      subject { step_aware_lazy_enumerator }
+
+      it { is_expected.to have_alias_method(:lazy_enumerator, :object) }
+    end
+  end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

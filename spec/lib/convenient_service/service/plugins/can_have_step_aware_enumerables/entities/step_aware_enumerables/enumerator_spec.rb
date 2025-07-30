@@ -34,6 +34,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
   end
 
   example_group "instance methods" do
+    example_group "alias methods" do
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
+
+      subject { step_aware_enumerator }
+
+      it { is_expected.to have_alias_method(:enumerator, :object) }
+    end
+
     describe "#default_data_key" do
       it "returns `:values`" do
         expect(step_aware_enumerator.default_data_key).to eq(:values)

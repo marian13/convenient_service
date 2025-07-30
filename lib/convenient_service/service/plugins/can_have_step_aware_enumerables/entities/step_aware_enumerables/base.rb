@@ -36,7 +36,7 @@ module ConvenientService
               # @!attribute [r] propagated_result
               #   @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
               #
-              attr_accessor :propagated_result
+              attr_reader :propagated_result
 
               ##
               # @api private

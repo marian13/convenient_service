@@ -40,7 +40,7 @@ module ConvenientService
               ##
               # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining]
               #
-              def method_missing(method, *args, **kwargs, &block)
+              def method_missing(...)
                 ::ConvenientService.raise Exceptions::AlreadyUsedTerminalChaining.new
               end
             end

@@ -15,6 +15,13 @@ module ConvenientService
               ##
               # @api private
               #
+              # @return [Boolean]
+              #
+              alias_method :boolean, :object
+
+              ##
+              # @api private
+              #
               # @return [nil]
               #
               def default_data_key

@@ -15,6 +15,13 @@ module ConvenientService
               ##
               # @api private
               #
+              # @return [Array]
+              #
+              alias_method :array, :object
+
+              ##
+              # @api private
+              #
               # @return [Symbol]
               #
               def default_data_key

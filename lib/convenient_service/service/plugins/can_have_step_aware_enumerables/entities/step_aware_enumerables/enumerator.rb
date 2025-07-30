@@ -22,13 +22,6 @@ module ConvenientService
               ##
               # @api private
               #
-              # @return [Enumerator]
-              #
-              alias_method :enumerable, :enumerator
-
-              ##
-              # @api private
-              #
               # @return [Symbol]
               #
               def default_data_key

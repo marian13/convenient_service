@@ -34,6 +34,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
   end
 
   example_group "instance methods" do
+    example_group "alias methods" do
+      include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
+
+      subject { step_aware_boolean }
+
+      it { is_expected.to have_alias_method(:boolean, :object) }
+    end
+
     describe "#default_data_key" do
       it "returns `nil`" do
         expect(step_aware_boolean.default_data_key).to be_nil
