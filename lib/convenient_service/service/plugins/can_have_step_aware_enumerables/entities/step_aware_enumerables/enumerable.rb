@@ -1104,42 +1104,6 @@ module ConvenientService
                   end
                 end
               end
-
-              ##
-              # @api private
-              #
-              # @param n [Integer]
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable, ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
-              #
-              def select_exactly(n, &iteration_block)
-                if iteration_block
-                  with_processing_return_value_as_exactly_enumerable(n, arguments(&iteration_block)) do |&step_aware_iteration_block|
-                    enumerable.select(&step_aware_iteration_block)
-                  end
-                else
-                  with_processing_return_value_as_exactly_enumerator(n) do |n|
-                    to_enum(:_select_exactly, n)
-                  end
-                end
-              end
-
-              private
-
-              ##
-              # @api private
-              #
-              # @param n [Integer]
-              # @param step_aware_iteration_block [Proc, nil]
-              # @return [Enumerable, Enumerator]
-              #
-              def _select_exactly(n, &step_aware_iteration_block)
-                if step_aware_iteration_block
-                  enumerable.select(&step_aware_iteration_block)
-                else
-                  to_enum(:_select_exactly, n)
-                end
-              end
             end
           end
         end

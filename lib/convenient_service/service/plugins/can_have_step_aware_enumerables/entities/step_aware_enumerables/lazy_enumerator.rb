@@ -664,19 +664,6 @@ module ConvenientService
                   end
                 end
               end
-
-              ##
-              # @api private
-              #
-              # @param n [Integer]
-              # @param iteration_block [Proc, nil]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::LazyEnumerator]
-              #
-              def select_exactly(n, &iteration_block)
-                with_processing_return_value_as_exactly_lazy_enumerator(n, arguments(&iteration_block)) do |&step_aware_iteration_block|
-                  lazy_enumerator.select(&step_aware_iteration_block)
-                end
-              end
             end
           end
         end

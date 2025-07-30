@@ -191,64 +191,6 @@ module ConvenientService
                   end
                 end
               end
-
-              private
-
-              ##
-              # @param iterator_arguments [ConvenientService::Support::Arguments]
-              # @param allow_modifier [Boolean]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
-              #
-              def with_processing_return_value_as_enumerable(iterator_arguments = Support::Arguments.null_arguments, allow_modifier: false, &iterator_block)
-                super(iterator_arguments) do |*args, &step_aware_iteration_block|
-                  next iterator_block.call(*args, &step_aware_iteration_block) unless allow_modifier
-                  next iterator_block.call(*args, &step_aware_iteration_block) if modifiers.none?
-
-                  ##
-                  # TODO: `dup`.
-                  #
-                  old_modifier = modifiers.pop
-
-                  modifier = modifier_for(old_modifier[:n], step_aware_iteration_block)
-
-                  modifier[:pre_iterator_block].call
-
-                  values = iterator_block.call(*args, &modifier[:iteration_block])
-
-                  modifier[:post_iterator_block].call
-
-                  values
-                end
-              end
-
-              ##
-              # @param iterator_arguments [ConvenientService::Support::Arguments]
-              # @param allow_modifier [Boolean]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
-              #
-              def with_processing_return_value_as_object(iterator_arguments = Support::Arguments.null_arguments, allow_modifier: false, &iterator_block)
-                super(iterator_arguments) do |*args, &step_aware_iteration_block|
-                  next iterator_block.call(*args, &step_aware_iteration_block) unless allow_modifier
-                  next iterator_block.call(*args, &step_aware_iteration_block) if modifiers.none?
-
-                  ##
-                  # TODO: `dup`.
-                  #
-                  old_modifier = modifiers.pop
-
-                  modifier = modifier_for(old_modifier[:n], step_aware_iteration_block)
-
-                  modifier[:pre_iterator_block].call
-
-                  values = iterator_block.call(*args, &modifier[:iteration_block])
-
-                  modifier[:post_iterator_block].call
-
-                  values
-                end
-              end
             end
           end
         end

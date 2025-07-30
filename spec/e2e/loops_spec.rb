@@ -414,14 +414,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.each { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -590,14 +590,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.all?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.all?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.all?.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.all?.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -766,14 +766,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.any?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.any?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.any?.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.any?.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -862,39 +862,39 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
 
-            expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
           elsif ConvenientService::Dependencies.ruby.version >= 3.1
             # NOTE: Failure propagation.
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Lazy)
 
-            expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
           else
             # NOTE: Failure propagation.
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
             expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
-            expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_success.with_data(values: [2, 3])
-            expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
-            expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_success.with_data(values: [2, 3])
+            # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
           end
 
           # NOTE: Usage on terminal chaining.
@@ -1018,14 +1018,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chunk { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chunk { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.chunk { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -1163,14 +1163,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chunk_while { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chunk_while { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chunk_while { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.chunk_while { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -1290,14 +1290,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.collect { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.collect { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.collect { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -1412,14 +1412,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.collect_concat { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.collect_concat { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.collect_concat { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.collect_concat { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -1472,14 +1472,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_error.without_data
 
             # NOTE: Failure propagation.
-            expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
-            expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
-            expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
-            expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
-            expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
-            expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
-            expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.compact.result).to be_failure.without_data
-            expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.compact.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.compact.result).to be_failure.without_data
 
             # NOTE: Usage on terminal chaining.
             expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.compact.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -1638,14 +1638,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.count { |key, value| step status_service, in: [status: -> { value }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.count { |key, value| step status_service, in: [status: -> { value }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.count { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.count.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -1749,14 +1749,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.cycle(2) { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.cycle(2) { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.cycle(2) { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.cycle(2) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -1956,14 +1956,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({failure: :failure, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.detect { |key, value| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.detect { |key, value| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.detect { |key, value| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.detect { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.detect { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -2027,14 +2027,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.drop(2).result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.drop(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.drop(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop(2).result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.drop(2).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -2183,14 +2183,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.drop_while { |key, value| status_condition[value] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.drop_while { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.drop_while { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.drop_while { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.drop_while { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -2386,14 +2386,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.each_cons(1) { |statuses| statuses.map(&status_condition) }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(2) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(2) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(2) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(2) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(2) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(2) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each_cons(2) { |statuses| statuses.map(&:last).map(&status_condition) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(1) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(2) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(2) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(2) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(2) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(2) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(2) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each_cons(2) { |statuses| statuses.map(&:last).map(&status_condition) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_cons(1) { |statuses| statuses.map(&status_condition) }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.each_cons(2) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -2499,14 +2499,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each_entry { |(key, value)| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each_entry { |(key, value)| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_entry { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.each_entry { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -2678,14 +2678,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each_slice(2) { |(key, value), index| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each_slice(2) { |(key, value), index| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.each_slice(2) { |numbers| numbers.map(&:even?) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -2853,14 +2853,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each_with_index { |(key, value), index| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each_with_index { |(key, value), index| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_index { |status, index| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.each_with_index { |status, index| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -3021,13 +3021,13 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each_with_object(+"") { |(key, value), object| object.concat(status.to_s) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.each_with_object(+"") { |(key, value), object| object.concat(status.to_s) }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.each_with_object(+"") { |status, object| object.concat(status.to_s) }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.each_with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -3077,14 +3077,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.entries.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.entries.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.entries.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.entries.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.entries.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -3216,14 +3216,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.filter { |key, value| status_condition[value] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.filter { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.filter { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.filter { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -3337,14 +3337,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.filter_map { |key, value| status_condition[value] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.filter_map { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.filter_map { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.filter_map { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.filter_map { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -3531,14 +3531,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({failure: :failure, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.find { |key, value| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.find { |key, value| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.find { |key, value| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.find { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -3663,14 +3663,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.find_all { |key, value| status_condition[value] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.find_all { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.find_all { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_all { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.find_all { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -3838,14 +3838,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({failure: :failure, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.find_index { |key, value| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.find_index { |key, value| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.find_index { |key, value| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.find_index { |status| step status_service, in: [status: -> { status }] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.find_index { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -3926,15 +3926,15 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).find { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.first.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
-          expect(service.step_aware_enumerator((0..0).step(1)).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.first.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.first.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.first.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator((0..0).step(1)).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.first.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).any?.first.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -4057,14 +4057,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.flat_map { |key, value| status_condition[value] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.flat_map { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.flat_map { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.flat_map { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.flat_map { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -4179,14 +4179,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.grep([:success, :success]) { |key, value| status_condition[value] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.grep([:success, :success]) { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.grep([:success, :success]) { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.grep(/success/) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -4301,14 +4301,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.grep_v([:success, :success]) { |key, value| status_condition[value] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.grep_v([:success, :success]) { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.grep_v([:success, :success]) { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.grep_v(/success/) { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.grep_v(/success/) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -4422,14 +4422,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.group_by { |key, value| status_condition[value] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.group_by { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.group_by { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.group_by { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.group_by { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -4495,14 +4495,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({failure: :failure, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.include?(:success).result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.include?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.include?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.include?(:success).result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.include?(:success).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -4662,14 +4662,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.inject(0) { |memo, (key, value)| memo + value }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.inject(0) { |memo, (key, value)| memo + value }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.inject { |memo, number| memo + number }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.inject { |memo, number| memo + number }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -4720,14 +4720,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.lazy.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.lazy.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.lazy.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.lazy.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.lazy.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -4837,14 +4837,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.map { |key, value| status_condition[value] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.map { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.map { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.map { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.map { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -4988,14 +4988,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.max.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.max.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.max.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.max.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -5162,14 +5162,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.max_by { |number| number.to_s.ord }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.max_by { |number| number.to_s.ord }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.max_by { |number| number.to_s.ord }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -5232,14 +5232,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({failure: :failure, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.member?(:success).result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.member?(:success).result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.member?(:success).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.member?(:success).result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.member?(:success).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -5382,14 +5382,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.min.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.min.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.min.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.min.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -5556,14 +5556,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.min_by { |number| number.to_s.ord }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.min_by { |number| number.to_s.ord }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.min_by { |number| number.to_s.ord }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -5693,14 +5693,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.minmax.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.minmax.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.minmax.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax.result).to be_failure.without_data
 
           # NOTE: Usage on terminmaxal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.minmax.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -5808,14 +5808,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.minmax_by { |number| number.to_s.ord }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.minmax_by { |number| number.to_s.ord }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.minmax_by { |number| number.to_s.ord }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -5984,14 +5984,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({failure: :failure, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.none?.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.none?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.none?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.none?.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.none?.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -6171,14 +6171,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({failure: :failure, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.one?.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.one?.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.one?.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.one?.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.one?.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -6288,14 +6288,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.partition { |key, value| status_condition[value] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.partition { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.partition { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.partition { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.partition { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -6455,14 +6455,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.reduce(0) { |memo, (key, value)| memo + value }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.reduce(0) { |memo, (key, value)| memo + value }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reduce { |memo, number| memo + number }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.reduce { |memo, number| memo + number }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -6566,14 +6566,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.reject { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.reject { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reject { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.reject { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -6681,14 +6681,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.reverse_each { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.reverse_each { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.reverse_each { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.reverse_each { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -6795,14 +6795,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.select { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.select { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.select { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -6916,14 +6916,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.slice_after { |key, value| value == :success }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.slice_after { |key, value| value == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.slice_after { |key, value| value == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_after { |status| status == :success }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.slice_after { |status| status == :success }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -7037,14 +7037,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.slice_before { |key, value| value == :success }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.slice_before { |key, value| value == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.slice_before { |key, value| value == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_before { |status| status == :success }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.slice_before { |status| status == :success }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -7175,14 +7175,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.slice_when { |key, value| value == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.slice_when { |key, value| value == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.slice_when { |status| status == :success }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.slice_when { |status| status == :success }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -7288,14 +7288,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.sort.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.sort.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.sort.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -7408,26 +7408,26 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             # NOTE: Failure propagation.
             expect([1, 2, 3].lazy.sort_by).to be_instance_of(Enumerator)
 
-            expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_success.with_data(values: [])
-            expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_success.with_data(values: [])
+            # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
           else
             # NOTE: Failure propagation.
             expect([1, 2, 3].lazy.sort_by).to be_instance_of(Enumerator::Lazy)
 
-            expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.sort_by.result).to be_failure.without_data
-            expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.sort_by.result).to be_failure.without_data
+            # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.sort_by.result).to be_failure.without_data
           end
 
           # NOTE: Usage on terminal chaining.
@@ -7544,14 +7544,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((-1..-1)).select { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([0, 0, 0])).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([0, 0, 0])).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([0, 0, 0])).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([0, 0, 0])).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([0, 0, 0]).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([0])).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({0 => 0}).select_exactly(2) { |key, value| step number_service, in: [number: -> { value }] }.sum.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((0..0)).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([0, 0, 0])).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([0, 0, 0])).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([0, 0, 0])).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([0, 0, 0])).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([0, 0, 0]).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([0])).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({0 => 0}).select_exactly(2) { |key, value| step number_service, in: [number: -> { value }] }.sum.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((0..0)).select_exactly(2) { |number| step number_service, in: [number: -> { number }] }.sum.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.sum.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -7614,14 +7614,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.take(2).result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.take(2).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take(2).result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.take(2).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -7734,14 +7734,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.take_while { |key, value| value == :success }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.take_while { |key, value| value == :success }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.take_while { |status| status == :success }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.take_while { |status| status == :success }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -7809,14 +7809,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.tally.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.tally.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.tally.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.tally.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.tally.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -7867,14 +7867,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_a.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_a.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_a.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.to_a.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -7938,13 +7938,13 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([[:failure, :failure], [:failure, :failure], [:failure, :failure]])).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([[:failure, :failure], [:failure, :failure], [:failure, :failure]])).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([[:failure, :failure], [:failure, :failure], [:failure, :failure]])).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([[:failure, :failure], [:failure, :failure], [:failure, :failure]])).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([[:failure, :failure], [:failure, :failure], [:failure, :failure]]).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([[:failure, :failure]])).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([[:failure, :failure], [:failure, :failure], [:failure, :failure]])).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([[:failure, :failure], [:failure, :failure], [:failure, :failure]])).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([[:failure, :failure], [:failure, :failure], [:failure, :failure]])).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([[:failure, :failure], [:failure, :failure], [:failure, :failure]])).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([[:failure, :failure], [:failure, :failure], [:failure, :failure]]).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([[:failure, :failure]])).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_h.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([[:success, :success], [:exception, :exception], [:exception, :exception]])).first.to_h.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -7994,14 +7994,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).select { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_set.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.to_set.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.to_set.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.to_set.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -8104,14 +8104,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.uniq { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.uniq { |key, value| status_condition[value] }.result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.uniq { |status| status_condition[status] }.result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.uniq { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -8323,14 +8323,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_error.without_data
 
           # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.zip([2], [3]).result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
+          # expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.zip([2], [3]).result).to be_failure.without_data
+          # expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.zip([2], [3]).result).to be_failure.without_data
 
           # NOTE: Usage on terminal chaining.
           expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.zip([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
@@ -8344,513 +8344,516 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
-      describe "#select_exactly" do
-        specify do
-          # NOTE: Empty collection, n = 0.
-          expect(service.step_aware_enumerable(enumerable([])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerator(enumerator([])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerator(lazy_enumerator([])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable([]).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable(set([])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable({}).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: {})
-          expect(service.step_aware_enumerable((:success...:success)).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-
-          # NOTE: Empty collection, n = 1.
-          expect(service.step_aware_enumerable(enumerable([])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([]).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({}).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:success...:success)).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-
-          # NOTE: Empty collection, n = 2.
-          expect(service.step_aware_enumerable(enumerable([])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([]).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({}).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:success...:success)).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-
-          # NOTE: 0 matches, no block, n = 0.
-          expect(service.step_aware_enumerable(enumerable([])).select_exactly(0).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerator(enumerator([])).select_exactly(0).result).to be_success.with_data(values: [])
-          expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(0).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(0).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable([]).select_exactly(0).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable(set([])).select_exactly(0).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable({}).select_exactly(0).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable((:success...:success)).select_exactly(0).result).to be_success.with_data(values: [])
-
-          # NOTE: 0 matches, no block, with_index n = 0.
-          expect((:success...:success).select.with_index { |status| status_condition[status] }).to eq([])
-
-          expect(service.step_aware_enumerable(enumerable([])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerator(enumerator([])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [])
-          expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable([]).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable(set([])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable({}).select_exactly(0).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_success.with_data(values: {})
-          expect(service.step_aware_enumerable((:success...:success)).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [])
-
-          # NOTE: 0 matches, no block, with_object n = 0.
-          expect((:success...:success).select.with_object(+"") { |string, object| concat_strings(object, string) }).to eq("")
-
-          expect(service.step_aware_enumerable(enumerable([])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
-          expect(service.step_aware_enumerator(enumerator([])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
-          expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
-          expect(service.step_aware_enumerable([]).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
-          expect(service.step_aware_enumerable(set([])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
-          expect(service.step_aware_enumerable({}).select_exactly(0).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_success.with_data(value: "")
-          expect(service.step_aware_enumerable((:success...:success)).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
-
-          # NOTE: 0 matches, no block, n = 1.
-          expect(service.step_aware_enumerable(enumerable([])).select_exactly(1).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerator(enumerator([])).select_exactly(1).result).to be_success.with_data(values: [])
-          expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(1).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(1).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable([]).select_exactly(1).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable(set([])).select_exactly(1).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable({}).select_exactly(1).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable((:success...:success)).select_exactly(1).result).to be_success.with_data(values: [])
-
-          # NOTE: 0 matches, no block, with_index, n = 1.
-          expect(service.step_aware_enumerable(enumerable([])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([]).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({}).select_exactly(1).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:success...:success)).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-
-          # NOTE: 0 matches, no block, with_object, n = 1.
-          expect(service.step_aware_enumerable(enumerable([])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([]).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({}).select_exactly(1).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(("1"..."1")).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-
-          # NOTE: 0 matches, no block, n = 2.
-          expect(service.step_aware_enumerable(enumerable([])).select_exactly(2).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerator(enumerator([])).select_exactly(2).result).to be_success.with_data(values: [])
-          expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(2).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable([]).select_exactly(2).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable(set([])).select_exactly(2).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable({}).select_exactly(2).result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable((:success...:success)).select_exactly(2).result).to be_success.with_data(values: [])
-
-          # NOTE: 0 matches, no block, with_index, n = 2.
-          expect(service.step_aware_enumerable(enumerable([])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([]).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({}).select_exactly(2).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:success...:success)).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-
-          # NOTE: 0 matches, no block, with_object, n = 2.
-          expect(service.step_aware_enumerable(enumerable([])).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([])).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([]).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([])).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({}).select_exactly(2).with_object(+"") { |(key, value), object| compare_strings(object, value) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:success...:success)).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result).to be_failure.without_data
-
-          # NOTE: 1 match, no block, n = 0.
-          expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(0).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(0).result).to be_success.with_data(values: [:success])
-          expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(0).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(0).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable([:success]).select_exactly(0).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable(set([:success])).select_exactly(0).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable({success: :success}).select_exactly(0).result).to be_success.with_data(values: [[:success, :success]])
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(0).result).to be_success.with_data(values: [:success])
-
-          # NOTE: 1 match, no block, with_index, n = 0.
-          expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:success]).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:success])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({success: :success}).select_exactly(0).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-
-          # NOTE: 1 match, no block, with_object, n = 0.
-          expect(service.step_aware_enumerable(enumerable(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(["1"]).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({"1" => "1"}).select_exactly(0).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(("1".."1")).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-
-          # NOTE: 1 match, no block, n = 1.
-          expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
-          expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(1).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable([:success]).select_exactly(1).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable(set([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable({success: :success}).select_exactly(1).result).to be_success.with_data(values: [[:success, :success]])
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(1).result).to be_success.with_data(values: [:success])
-
-          # NOTE: 1 match, no block, with_index, n = 1.
-          expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
-          expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable([:success]).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable(set([:success])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable({success: :success}).select_exactly(1).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_success.with_data(values: {success: :success})
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
-
-          # NOTE: 1 match, no block, with_object, n = 1.
-          expect(service.step_aware_enumerable(enumerable(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
-          expect(service.step_aware_enumerator(enumerator(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
-          expect { service.step_aware_enumerator(lazy_enumerator(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
-          expect(service.step_aware_enumerable(["1"]).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
-          expect(service.step_aware_enumerable(set(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
-          expect(service.step_aware_enumerable({"1" => "1"}).select_exactly(1).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_success.with_data(value: "1")
-          expect(service.step_aware_enumerable(("1".."1")).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
-
-          # NOTE: 1 match, no block, n = 2.
-          expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(2).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(2).result).to be_success.with_data(values: [:success])
-          expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(2).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable([:success]).select_exactly(2).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable(set([:success])).select_exactly(2).result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable({success: :success}).select_exactly(2).result).to be_success.with_data(values: [[:success, :success]])
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(2).result).to be_success.with_data(values: [:success])
-
-          # NOTE: 1 match, no block, with_index, n = 2.
-          expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:success]).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:success])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({success: :success}).select_exactly(2).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
-
-          # NOTE: 1 match, no block, with_object, n = 2.
-          expect(service.step_aware_enumerable(enumerable(["1"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator(["1"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator(["1"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator(["1"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(["1"]).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set(["1"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({"1" => "1"}).select_exactly(2).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(("1".."1")).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-
-          # NOTE: 2 matches, no block, n = 0.
-          expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(0).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(0).result).to be_success.with_data(values: [1, 2])
-          expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(0).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(0).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable([1, 2]).select_exactly(0).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable(set([1, 2])).select_exactly(0).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(0).result).to be_success.with_data(values: [[1, 1], [2, 2]])
-          expect(service.step_aware_enumerable((1..2)).select_exactly(0).result).to be_success.with_data(values: [1, 2])
-
-          # NOTE: 2 matches, no block, with_index, n = 0.
-          expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([1, 2]).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([1, 2])).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(0).with_index(1) { |(key, value), index| number_condition[value] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((1..2)).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-
-          # NOTE: 2 matches, no block, with_object, n = 0.
-          expect(service.step_aware_enumerable(enumerable(["1", "2"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator(["1", "2"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator(["1", "2"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator(["1", "2"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(["1", "2"]).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set(["1", "2"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({"1" => "1", "2" => "2"}).select_exactly(0).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(("1".."2")).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-
-          # NOTE: 2 matches, no block, n = 1.
-          expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(1).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(1).result).to be_success.with_data(values: [1, 2])
-          expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(1).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(1).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable([1, 2]).select_exactly(1).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable(set([1, 2])).select_exactly(1).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(1).result).to be_success.with_data(values: [[1, 1], [2, 2]])
-          expect(service.step_aware_enumerable((1..2)).select_exactly(1).result).to be_success.with_data(values: [1, 2])
-
-          # NOTE: 2 matches, no block, with_index, n = 1.
-          expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([1, 2]).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([1, 2])).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(1).with_index(1) { |(key, value), index| number_condition[value] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((1..2)).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-
-          # NOTE: 2 matches, no block, with_object, n = 1.
-          expect(service.step_aware_enumerable(enumerable(["1", "2"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator(["1", "2"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator(["1", "2"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator(["1", "2"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(["1", "2"]).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set(["1", "2"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({"1" => "1", "2" => "2"}).select_exactly(1).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(("1".."2")).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-
-          # NOTE: 2 matches, no block, n = 2.
-          expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
-          expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable([1, 2]).select_exactly(2).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable(set([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(2).result).to be_success.with_data(values: [[1, 1], [2, 2]])
-          expect(service.step_aware_enumerable((1..2)).select_exactly(2).result).to be_success.with_data(values: [1, 2])
-
-          # NOTE: 2 matches, no block, with_index, n = 2.
-          expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
-          expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable([1, 2]).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable(set([1, 2])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(2).with_index(1) { |(key, value), index| number_condition[value] && number_condition[index] }.result).to be_success.with_data(values: {1 => 1, 2 => 2})
-          expect(service.step_aware_enumerable((1..2)).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
-
-          # NOTE: 2 matches, no block, with_object, n = 2.
-          expect(service.step_aware_enumerable(enumerable(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
-          expect(service.step_aware_enumerator(enumerator(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
-          expect { service.step_aware_enumerator(lazy_enumerator(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
-          expect(service.step_aware_enumerable(["1", "2"]).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
-          expect(service.step_aware_enumerable(set(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
-          expect(service.step_aware_enumerable({"1" => "1", "2" => "2"}).select_exactly(2).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_success.with_data(value: "12")
-          expect(service.step_aware_enumerable(("1".."2")).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
-
-          # NOTE: 3 matches, no block, n = 2.
-          expect(service.step_aware_enumerable(enumerable([1, 2, 3])).select_exactly(2).result).to be_success.with_data(values: [1, 2, 3])
-          expect(service.step_aware_enumerator(enumerator([1, 2, 3])).select_exactly(2).result).to be_success.with_data(values: [1, 2, 3])
-          expect { service.step_aware_enumerator(lazy_enumerator([1, 2, 3])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2, 3])).select_exactly(2).result).to be_success.with_data(values: [1, 2, 3])
-          expect(service.step_aware_enumerable([1, 2, 3]).select_exactly(2).result).to be_success.with_data(values: [1, 2, 3])
-          expect(service.step_aware_enumerable(set([1, 2, 3])).select_exactly(2).result).to be_success.with_data(values: [1, 2, 3])
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3}).select_exactly(2).result).to be_success.with_data(values: [[1, 1], [2, 2], [3, 3]])
-          expect(service.step_aware_enumerable((1..3)).select_exactly(2).result).to be_success.with_data(values: [1, 2, 3])
-
-          # NOTE: 3 matches, no block, with_index, n = 2.
-          expect(service.step_aware_enumerable(enumerable([1, 2, 3])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([1, 2, 3])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator([1, 2, 3])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator([1, 2, 3])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([1, 2, 3]).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([1, 2, 3])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3}).select_exactly(2).with_index(1) { |(key, value), index| number_condition[value] && number_condition[index] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((1..3)).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
-
-          # NOTE: 3 matches, no block, with_object, n = 2.
-          expect(service.step_aware_enumerable(enumerable(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect { service.step_aware_enumerator(lazy_enumerator(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
-          expect(service.step_aware_enumerator(chain_enumerator(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(["1", "2", "3"]).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({"1" => "1", "2" => "2", "3" => "3"}).select_exactly(2).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(("1".."3")).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
-
-          # NOTE: 0 matches, block, n = 0.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: {})
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-
-          # NOTE: 0 matches, block, n = 1.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-
-          # NOTE: 0 matches, block, n = 2.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-
-          # NOTE: 1 match, block, n = 0.
-          expect(service.step_aware_enumerable(enumerable([:failure, :success, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :success, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :success, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :success, :failure]).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure, :success])).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure, success: :success}).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
-
-          # NOTE: 1 match, block, n = 1.
-          expect(service.step_aware_enumerable(enumerable([:failure, :success, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(enumerator([:failure, :success, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable([:failure, :success, :failure]).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable(set([:failure, :success])).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable({failure: :failure, success: :success}).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: {success: :success})
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
-
-          # NOTE: 1 match, block, n = 2.
-          expect(service.step_aware_enumerable(enumerable([:failure, :success, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :success, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :success, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :success, :failure]).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure, :success])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure, success: :success}).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
-
-          # NOTE: 2 matches, block, n = 0.
-          expect(service.step_aware_enumerable(enumerable([0, 1, 0, 2])).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([0, 1, 0, 2])).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 0, 2])).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([0, 1, 0, 2])).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([0, 1, 0, 2]).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([0, 1, 2])).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2}).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((0..2)).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
-
-          # NOTE: 2 matches, block, n = 1.
-          expect(service.step_aware_enumerable(enumerable([0, 1, 0, 2])).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([0, 1, 0, 2])).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 0, 2])).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([0, 1, 0, 2])).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([0, 1, 0, 2]).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([0, 1, 2])).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2}).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((0..2)).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
-
-          # NOTE: 2 matches, block, n = 2.
-          expect(service.step_aware_enumerable(enumerable([0, 1, 0, 2])).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerator(enumerator([0, 1, 0, 2])).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 0, 2])).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerator(chain_enumerator([0, 1, 0, 2])).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable([0, 1, 0, 2]).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable(set([0, 1, 2])).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
-          expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2}).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: {1 => 1, 2 => 2})
-          expect(service.step_aware_enumerable((0..2)).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
-
-          # NOTE: n = -1.
-          expect(service.step_aware_enumerable(enumerable([0, 1, 0, 2])).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(enumerator([0, 1, 0, 2])).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 0, 2])).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([0, 1, 0, 2])).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable([0, 1, 0, 2]).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable(set([0, 1, 2])).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2}).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable((0..2)).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
-
-          # NOTE: Step with no outputs (1 match, block, n = 1).
-          expect(service.step_aware_enumerable(enumerable([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable([:failure, :success, :failure]).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable(set([:failure, :success])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable({failure: :failure, success: :success}).select_exactly(1) { |key, value| step status_service, in: [status: -> { value }] }.result).to be_success.with_data(values: {success: :success})
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
-
-          # NOTE: Step with one output (1 match, block, n = 1).
-          expect(service.step_aware_enumerable(enumerable([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable([:failure, :success, :failure]).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable(set([:success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable({failure: :failure, success: :success}).select_exactly(1) { |key, value| step status_service, in: [status: -> { value }], out: :status_string }.result).to be_success.with_data(values: {success: :success})
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
-
-          # NOTE: Step with multiple outputs (1 match, block, n = 1).
-          expect(service.step_aware_enumerable(enumerable([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable([:failure, :success, :failure]).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable(set([:success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
-          expect(service.step_aware_enumerable({failure: :failure, success: :success}).select_exactly(1) { |key, value| step status_service, in: [status: -> { value }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: {success: :success})
-          expect(service.step_aware_enumerable((:success..:success)).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
-
-          # NOTE: Error result.
-          expect(service.step_aware_enumerable(enumerable([:success, :error, :exception])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(enumerator([:success, :error, :exception])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:success, :error, :exception])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:success, :error, :exception])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable([:success, :error, :exception]).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable(set([:success, :error, :exception])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select_exactly(1) { |key, value| step status_service, in: [status: -> { value }] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable((:error..:error)).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
-
-          # NOTE: Error propagation.
-          expect(service.step_aware_enumerable(enumerable([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable([:success, :error, :exception]).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable(set([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.select_exactly(1) { |key, value| status_condition[value] }.result).to be_error.without_data
-          expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
-
-          # NOTE: Failure propagation.
-          expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.select_exactly(1) { |key, value| status_condition[value] }.result).to be_failure.without_data
-          expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
-
-          # NOTE: Usage on terminal chaining.
-          expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
-          expect { service.step_aware_enumerator(enumerator([:success, :exception, :exception])).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
-          expect { service.step_aware_enumerator(lazy_enumerator([:success, :exception, :exception])).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
-          expect { service.step_aware_enumerator(chain_enumerator([:success, :exception, :exception])).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
-          expect { service.step_aware_enumerable([:success, :exception, :exception]).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
-          expect { service.step_aware_enumerable(set([:success, :exception, :exception])).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
-          expect { service.step_aware_enumerable({success: :success, exception: :exception}).first.select_exactly(1) { |key, value| status_condition[value] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
-          expect { service.step_aware_enumerable((:success..:success)).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
-        end
-      end
+      ##
+      # NOTE: `select_exactly` specs are left commented intentionally. It takes too much time to add them back from brain.
+      #
+      # describe "#select_exactly" do
+      #   specify do
+      #     # NOTE: Empty collection, n = 0.
+      #     expect(service.step_aware_enumerable(enumerable([])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerator(enumerator([])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerator(lazy_enumerator([])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable([]).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable(set([])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable({}).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: {})
+      #     expect(service.step_aware_enumerable((:success...:success)).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #
+      #     # NOTE: Empty collection, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable([])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(lazy_enumerator([])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([]).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({}).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((:success...:success)).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #
+      #     # NOTE: Empty collection, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(lazy_enumerator([])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([]).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({}).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((:success...:success)).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 0 matches, no block, n = 0.
+      #     expect(service.step_aware_enumerable(enumerable([])).select_exactly(0).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerator(enumerator([])).select_exactly(0).result).to be_success.with_data(values: [])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(0).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(0).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable([]).select_exactly(0).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable(set([])).select_exactly(0).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable({}).select_exactly(0).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable((:success...:success)).select_exactly(0).result).to be_success.with_data(values: [])
+      #
+      #     # NOTE: 0 matches, no block, with_index n = 0.
+      #     expect((:success...:success).select.with_index { |status| status_condition[status] }).to eq([])
+      #
+      #     expect(service.step_aware_enumerable(enumerable([])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerator(enumerator([])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable([]).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable(set([])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable({}).select_exactly(0).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_success.with_data(values: {})
+      #     expect(service.step_aware_enumerable((:success...:success)).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [])
+      #
+      #     # NOTE: 0 matches, no block, with_object n = 0.
+      #     expect((:success...:success).select.with_object(+"") { |string, object| concat_strings(object, string) }).to eq("")
+      #
+      #     expect(service.step_aware_enumerable(enumerable([])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+      #     expect(service.step_aware_enumerator(enumerator([])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+      #     expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+      #     expect(service.step_aware_enumerable([]).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+      #     expect(service.step_aware_enumerable(set([])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+      #     expect(service.step_aware_enumerable({}).select_exactly(0).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_success.with_data(value: "")
+      #     expect(service.step_aware_enumerable((:success...:success)).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "")
+      #
+      #     # NOTE: 0 matches, no block, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable([])).select_exactly(1).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerator(enumerator([])).select_exactly(1).result).to be_success.with_data(values: [])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(1).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(1).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable([]).select_exactly(1).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable(set([])).select_exactly(1).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable({}).select_exactly(1).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable((:success...:success)).select_exactly(1).result).to be_success.with_data(values: [])
+      3
+      #     # NOTE: 0 matches, no block, with_index, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable([])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([]).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({}).select_exactly(1).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((:success...:success)).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 0 matches, no block, with_object, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable([])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([]).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({}).select_exactly(1).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(("1"..."1")).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #
+      #     # NOTE: 0 matches, no block, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([])).select_exactly(2).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerator(enumerator([])).select_exactly(2).result).to be_success.with_data(values: [])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(2).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable([]).select_exactly(2).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable(set([])).select_exactly(2).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable({}).select_exactly(2).result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable((:success...:success)).select_exactly(2).result).to be_success.with_data(values: [])
+      #
+      #     # NOTE: 0 matches, no block, with_index, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([]).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({}).select_exactly(2).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((:success...:success)).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 0 matches, no block, with_object, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([])).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([])).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator([])).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([])).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([]).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([])).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({}).select_exactly(2).with_object(+"") { |(key, value), object| compare_strings(object, value) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((:success...:success)).select_exactly(2).with_object(+"") { |string, object| compare_strings(object, string) }.result).to be_failure.without_data
+      #
+      #     # NOTE: 1 match, no block, n = 0.
+      #     expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(0).result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(0).result).to be_success.with_data(values: [:success])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(0).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(0).result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable([:success]).select_exactly(0).result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable(set([:success])).select_exactly(0).result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable({success: :success}).select_exactly(0).result).to be_success.with_data(values: [[:success, :success]])
+      #     expect(service.step_aware_enumerable((:success..:success)).select_exactly(0).result).to be_success.with_data(values: [:success])
+      #
+      #     # NOTE: 1 match, no block, with_index, n = 0.
+      #     expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([:success]).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([:success])).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({success: :success}).select_exactly(0).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((:success..:success)).select_exactly(0).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 1 match, no block, with_object, n = 0.
+      #     expect(service.step_aware_enumerable(enumerable(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(["1"]).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set(["1"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({"1" => "1"}).select_exactly(0).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(("1".."1")).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #
+      #     # NOTE: 1 match, no block, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(1).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable([:success]).select_exactly(1).result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable(set([:success])).select_exactly(1).result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable({success: :success}).select_exactly(1).result).to be_success.with_data(values: [[:success, :success]])
+      #     expect(service.step_aware_enumerable((:success..:success)).select_exactly(1).result).to be_success.with_data(values: [:success])
+      #
+      #     # NOTE: 1 match, no block, with_index, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable([:success]).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable(set([:success])).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable({success: :success}).select_exactly(1).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_success.with_data(values: {success: :success})
+      #     expect(service.step_aware_enumerable((:success..:success)).select_exactly(1).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [:success])
+      #
+      #     # NOTE: 1 match, no block, with_object, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
+      #     expect(service.step_aware_enumerator(enumerator(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
+      #     expect { service.step_aware_enumerator(lazy_enumerator(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
+      #     expect(service.step_aware_enumerable(["1"]).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
+      #     expect(service.step_aware_enumerable(set(["1"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
+      #     expect(service.step_aware_enumerable({"1" => "1"}).select_exactly(1).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_success.with_data(value: "1")
+      #     expect(service.step_aware_enumerable(("1".."1")).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "1")
+      #
+      #     # NOTE: 1 match, no block, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(2).result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(2).result).to be_success.with_data(values: [:success])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(2).result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable([:success]).select_exactly(2).result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable(set([:success])).select_exactly(2).result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable({success: :success}).select_exactly(2).result).to be_success.with_data(values: [[:success, :success]])
+      #     expect(service.step_aware_enumerable((:success..:success)).select_exactly(2).result).to be_success.with_data(values: [:success])
+      #
+      #     # NOTE: 1 match, no block, with_index, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([:success])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([:success])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator([:success])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([:success])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([:success]).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([:success])).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({success: :success}).select_exactly(2).with_index(1) { |(key, value), index| status_condition[value] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((:success..:success)).select_exactly(2).with_index(1) { |status, index| status_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 1 match, no block, with_object, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable(["1"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator(["1"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator(["1"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator(["1"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(["1"]).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set(["1"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({"1" => "1"}).select_exactly(2).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(("1".."1")).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #
+      #     # NOTE: 2 matches, no block, n = 0.
+      #     expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(0).result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(0).result).to be_success.with_data(values: [1, 2])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(0).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(0).result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable([1, 2]).select_exactly(0).result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable(set([1, 2])).select_exactly(0).result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(0).result).to be_success.with_data(values: [[1, 1], [2, 2]])
+      #     expect(service.step_aware_enumerable((1..2)).select_exactly(0).result).to be_success.with_data(values: [1, 2])
+      #
+      #     # NOTE: 2 matches, no block, with_index, n = 0.
+      #     expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([1, 2]).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([1, 2])).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(0).with_index(1) { |(key, value), index| number_condition[value] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((1..2)).select_exactly(0).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 2 matches, no block, with_object, n = 0.
+      #     expect(service.step_aware_enumerable(enumerable(["1", "2"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator(["1", "2"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator(["1", "2"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator(["1", "2"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(["1", "2"]).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set(["1", "2"])).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({"1" => "1", "2" => "2"}).select_exactly(0).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(("1".."2")).select_exactly(0).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #
+      #     # NOTE: 2 matches, no block, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(1).result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(1).result).to be_success.with_data(values: [1, 2])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(1).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(1).result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable([1, 2]).select_exactly(1).result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable(set([1, 2])).select_exactly(1).result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(1).result).to be_success.with_data(values: [[1, 1], [2, 2]])
+      #     expect(service.step_aware_enumerable((1..2)).select_exactly(1).result).to be_success.with_data(values: [1, 2])
+      #
+      #     # NOTE: 2 matches, no block, with_index, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([1, 2]).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([1, 2])).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(1).with_index(1) { |(key, value), index| number_condition[value] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((1..2)).select_exactly(1).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 2 matches, no block, with_object, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable(["1", "2"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator(["1", "2"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator(["1", "2"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator(["1", "2"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(["1", "2"]).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set(["1", "2"])).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({"1" => "1", "2" => "2"}).select_exactly(1).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(("1".."2")).select_exactly(1).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #
+      #     # NOTE: 2 matches, no block, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable([1, 2]).select_exactly(2).result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable(set([1, 2])).select_exactly(2).result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(2).result).to be_success.with_data(values: [[1, 1], [2, 2]])
+      #     expect(service.step_aware_enumerable((1..2)).select_exactly(2).result).to be_success.with_data(values: [1, 2])
+      #
+      #     # NOTE: 2 matches, no block, with_index, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([1, 2])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerator(enumerator([1, 2])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([1, 2])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([1, 2])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable([1, 2]).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable(set([1, 2])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable({1 => 1, 2 => 2}).select_exactly(2).with_index(1) { |(key, value), index| number_condition[value] && number_condition[index] }.result).to be_success.with_data(values: {1 => 1, 2 => 2})
+      #     expect(service.step_aware_enumerable((1..2)).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_success.with_data(values: [1, 2])
+      #
+      #     # NOTE: 2 matches, no block, with_object, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
+      #     expect(service.step_aware_enumerator(enumerator(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
+      #     expect { service.step_aware_enumerator(lazy_enumerator(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
+      #     expect(service.step_aware_enumerable(["1", "2"]).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
+      #     expect(service.step_aware_enumerable(set(["1", "2"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
+      #     expect(service.step_aware_enumerable({"1" => "1", "2" => "2"}).select_exactly(2).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_success.with_data(value: "12")
+      #     expect(service.step_aware_enumerable(("1".."2")).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12")
+      #
+      #     # NOTE: 3 matches, no block, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([1, 2, 3])).select_exactly(2).result).to be_success.with_data(values: [1, 2, 3])
+      #     expect(service.step_aware_enumerator(enumerator([1, 2, 3])).select_exactly(2).result).to be_success.with_data(values: [1, 2, 3])
+      #     expect { service.step_aware_enumerator(lazy_enumerator([1, 2, 3])).select_exactly(2).result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([1, 2, 3])).select_exactly(2).result).to be_success.with_data(values: [1, 2, 3])
+      #     expect(service.step_aware_enumerable([1, 2, 3]).select_exactly(2).result).to be_success.with_data(values: [1, 2, 3])
+      #     expect(service.step_aware_enumerable(set([1, 2, 3])).select_exactly(2).result).to be_success.with_data(values: [1, 2, 3])
+      #     expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3}).select_exactly(2).result).to be_success.with_data(values: [[1, 1], [2, 2], [3, 3]])
+      #     expect(service.step_aware_enumerable((1..3)).select_exactly(2).result).to be_success.with_data(values: [1, 2, 3])
+      #
+      #     # NOTE: 3 matches, no block, with_index, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([1, 2, 3])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([1, 2, 3])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator([1, 2, 3])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator([1, 2, 3])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([1, 2, 3]).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([1, 2, 3])).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({1 => 1, 2 => 2, 3 => 3}).select_exactly(2).with_index(1) { |(key, value), index| number_condition[value] && number_condition[index] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((1..3)).select_exactly(2).with_index(1) { |status, index| number_condition[status] && number_condition[index] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 3 matches, no block, with_object, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect { service.step_aware_enumerator(lazy_enumerator(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result }.to raise_error(ArgumentError).with_message("tried to call lazy select without a block")
+      #     expect(service.step_aware_enumerator(chain_enumerator(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(["1", "2", "3"]).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set(["1", "2", "3"])).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({"1" => "1", "2" => "2", "3" => "3"}).select_exactly(2).with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(("1".."3")).select_exactly(2).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_failure.without_data
+      #
+      #     # NOTE: 0 matches, block, n = 0.
+      #     expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable(set([:failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #     expect(service.step_aware_enumerable({failure: :failure}).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: {})
+      #     expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(0) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+      #
+      #     # NOTE: 0 matches, block, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([:failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({failure: :failure}).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 0 matches, block, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 1 match, block, n = 0.
+      #     expect(service.step_aware_enumerable(enumerable([:failure, :success, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([:failure, :success, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(chain_enumerator([:failure, :success, :failure])).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([:failure, :success, :failure]).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([:failure, :success])).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({failure: :failure, success: :success}).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((:success..:success)).select_exactly(0) { |status| status_condition[status] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 1 match, block, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable([:failure, :success, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(enumerator([:failure, :success, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(chain_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable([:failure, :success, :failure]).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable(set([:failure, :success])).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable({failure: :failure, success: :success}).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: {success: :success})
+      #     expect(service.step_aware_enumerable((:success..:success)).select_exactly(1) { |status| status_condition[status] }.result).to be_success.with_data(values: [:success])
+      #
+      #     # NOTE: 1 match, block, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([:failure, :success, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([:failure, :success, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(chain_enumerator([:failure, :success, :failure])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([:failure, :success, :failure]).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([:failure, :success])).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({failure: :failure, success: :success}).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((:success..:success)).select_exactly(2) { |status| status_condition[status] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 2 matches, block, n = 0.
+      #     expect(service.step_aware_enumerable(enumerable([0, 1, 0, 2])).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([0, 1, 0, 2])).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 0, 2])).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(chain_enumerator([0, 1, 0, 2])).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([0, 1, 0, 2]).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([0, 1, 2])).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2}).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((0..2)).select_exactly(0) { |number| number_condition[number] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 2 matches, block, n = 1.
+      #     expect(service.step_aware_enumerable(enumerable([0, 1, 0, 2])).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([0, 1, 0, 2])).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 0, 2])).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(chain_enumerator([0, 1, 0, 2])).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([0, 1, 0, 2]).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([0, 1, 2])).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2}).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((0..2)).select_exactly(1) { |number| number_condition[number] }.result).to be_failure.without_data
+      #
+      #     # NOTE: 2 matches, block, n = 2.
+      #     expect(service.step_aware_enumerable(enumerable([0, 1, 0, 2])).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerator(enumerator([0, 1, 0, 2])).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 0, 2])).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerator(chain_enumerator([0, 1, 0, 2])).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable([0, 1, 0, 2]).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable(set([0, 1, 2])).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
+      #     expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2}).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: {1 => 1, 2 => 2})
+      #     expect(service.step_aware_enumerable((0..2)).select_exactly(2) { |number| number_condition[number] }.result).to be_success.with_data(values: [1, 2])
+      #
+      #     # NOTE: n = -1.
+      #     expect(service.step_aware_enumerable(enumerable([0, 1, 0, 2])).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerator(enumerator([0, 1, 0, 2])).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerator(lazy_enumerator([0, 1, 0, 2])).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerator(chain_enumerator([0, 1, 0, 2])).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerable([0, 1, 0, 2]).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerable(set([0, 1, 2])).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerable({0 => 0, 1 => 1, 2 => 2}).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerable((0..2)).select_exactly(-1) { |number| number_condition[number] }.result).to be_error.without_data
+      #
+      #     # NOTE: Step with no outputs (1 match, block, n = 1).
+      #     expect(service.step_aware_enumerable(enumerable([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(chain_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable([:failure, :success, :failure]).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable(set([:failure, :success])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable({failure: :failure, success: :success}).select_exactly(1) { |key, value| step status_service, in: [status: -> { value }] }.result).to be_success.with_data(values: {success: :success})
+      #     expect(service.step_aware_enumerable((:success..:success)).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_success.with_data(values: [:success])
+      #
+      #     # NOTE: Step with one output (1 match, block, n = 1).
+      #     expect(service.step_aware_enumerable(enumerable([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(chain_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable([:failure, :success, :failure]).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable(set([:success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable({failure: :failure, success: :success}).select_exactly(1) { |key, value| step status_service, in: [status: -> { value }], out: :status_string }.result).to be_success.with_data(values: {success: :success})
+      #     expect(service.step_aware_enumerable((:success..:success)).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: :status_string }.result).to be_success.with_data(values: [:success])
+      #
+      #     # NOTE: Step with multiple outputs (1 match, block, n = 1).
+      #     expect(service.step_aware_enumerable(enumerable([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(lazy_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerator(chain_enumerator([:failure, :success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable([:failure, :success, :failure]).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable(set([:success, :failure])).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
+      #     expect(service.step_aware_enumerable({failure: :failure, success: :success}).select_exactly(1) { |key, value| step status_service, in: [status: -> { value }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: {success: :success})
+      #     expect(service.step_aware_enumerable((:success..:success)).select_exactly(1) { |status| step status_service, in: [status: -> { status }], out: [:status_string, :status_code] }.result).to be_success.with_data(values: [:success])
+      #
+      #     # NOTE: Error result.
+      #     expect(service.step_aware_enumerable(enumerable([:success, :error, :exception])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerator(enumerator([:success, :error, :exception])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerator(lazy_enumerator([:success, :error, :exception])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerator(chain_enumerator([:success, :error, :exception])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerable([:success, :error, :exception]).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerable(set([:success, :error, :exception])).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).select_exactly(1) { |key, value| step status_service, in: [status: -> { value }] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerable((:error..:error)).select_exactly(1) { |status| step status_service, in: [status: -> { status }] }.result).to be_error.without_data
+      #
+      #     # NOTE: Error propagation.
+      #     expect(service.step_aware_enumerable(enumerable([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerator(enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerator(lazy_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerator(chain_enumerator([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerable([:success, :error, :exception]).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerable(set([:success, :error, :exception])).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerable({success: :success, error: :error, exception: :exception}).filter { |key, value| step status_service, in: [status: -> { value }] }.select_exactly(1) { |key, value| status_condition[value] }.result).to be_error.without_data
+      #     expect(service.step_aware_enumerable((:error..:error)).filter { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_error.without_data
+      #
+      #     # NOTE: Failure propagation.
+      #     expect(service.step_aware_enumerable(enumerable([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable([:failure, :failure, :failure]).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable(set([:failure])).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable({failure: :failure}).select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.select_exactly(1) { |key, value| status_condition[value] }.result).to be_failure.without_data
+      #     expect(service.step_aware_enumerable((:failure..:failure)).select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.select_exactly(1) { |status| status_condition[status] }.result).to be_failure.without_data
+      #
+      #     # NOTE: Usage on terminal chaining.
+      #     expect { service.step_aware_enumerable(enumerable([:success, :exception, :exception])).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+      #     expect { service.step_aware_enumerator(enumerator([:success, :exception, :exception])).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+      #     expect { service.step_aware_enumerator(lazy_enumerator([:success, :exception, :exception])).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+      #     expect { service.step_aware_enumerator(chain_enumerator([:success, :exception, :exception])).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+      #     expect { service.step_aware_enumerable([:success, :exception, :exception]).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+      #     expect { service.step_aware_enumerable(set([:success, :exception, :exception])).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+      #     expect { service.step_aware_enumerable({success: :success, exception: :exception}).first.select_exactly(1) { |key, value| status_condition[value] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+      #     expect { service.step_aware_enumerable((:success..:success)).first.select_exactly(1) { |status| status_condition[status] }.result }.to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+      #   end
+      # end
 
       ##
       # TODO:

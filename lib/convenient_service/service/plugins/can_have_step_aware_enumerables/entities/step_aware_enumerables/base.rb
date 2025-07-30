@@ -41,14 +41,6 @@ module ConvenientService
               ##
               # @api private
               #
-              # @!attribute [r] modifiers
-              #   @return [Array<Object>]
-              #
-              attr_accessor :modifiers
-
-              ##
-              # @api private
-              #
               # @return [Symbol, nil]
               #
               abstract_method :default_data_key
@@ -66,14 +58,13 @@ module ConvenientService
               # @param object [Object] Can be any type.
               # @param organizer [ConvenientService::Service]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @param modifiers [Array<Object>]
               # @return [void]
               #
               # @internal
               #   NOTE: Uncomment and place the following code snippet after the `initialize` method to debug whether original classes and step aware wrappers are properly mapped.
               #   TODO: Consider to create an assertion or to introduce logs.
               #
-              #     def initialize(object:, organizer:, propagated_result:, modifiers: [])
+              #     def initialize(object:, organizer:, propagated_result:)
               #       if object.is_a?(::Enumerator)
               #         mapping = {
               #           ::Enumerator => Entities::StepAwareEnumerables::Enumerator,
@@ -94,14 +85,12 @@ module ConvenientService
               #       @object = object
               #       @organizer = organizer
               #       @propagated_result = propagated_result
-              #       @modifiers = modifiers
               #     end
               #
-              def initialize(object:, organizer:, propagated_result:, modifiers: [])
+              def initialize(object:, organizer:, propagated_result:)
                 @object = object
                 @organizer = organizer
                 @propagated_result = propagated_result
-                @modifiers = modifiers
               end
 
               ##
@@ -168,16 +157,6 @@ module ConvenientService
               end
 
               ##
-              # @param n [Integer]
-              # @param iterator_arguments [ConvenientService::Support::Arguments]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable]
-              #
-              def with_processing_return_value_as_exactly_enumerable(n, iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
-                with_processing_exactly_return_value(n, iterator_arguments, iterator_block) { |value, propagated_result, modifiers| step_aware_enumerable_from(value, propagated_result, modifiers) }
-              end
-
-              ##
               # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
@@ -219,32 +198,12 @@ module ConvenientService
               alias_method :with_processing_return_value_as_enumerator_generator, :with_processing_return_value_as_enumerator
 
               ##
-              # @param n [Integer]
-              # @param iterator_arguments [ConvenientService::Support::Arguments]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
-              #
-              def with_processing_return_value_as_exactly_enumerator(n, iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
-                with_processing_exactly_return_value(n, iterator_arguments, iterator_block) { |value, propagated_result, modifiers| step_aware_enumerator_from(value, propagated_result, modifiers) }
-              end
-
-              ##
               # @param iterator_arguments [ConvenientService::Support::Arguments]
               # @param iterator_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::LazyEnumerator]
               #
               def with_processing_return_value_as_lazy_enumerator(iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
                 with_processing_return_value(iterator_arguments, iterator_block) { |value, propagated_result| step_aware_lazy_enumerator_from(value, propagated_result) }
-              end
-
-              ##
-              # @param n [Integer]
-              # @param iterator_arguments [ConvenientService::Support::Arguments]
-              # @param iterator_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::LazyEnumerator]
-              #
-              def with_processing_return_value_as_exactly_lazy_enumerator(n, iterator_arguments = Support::Arguments.null_arguments, &iterator_block)
-                with_processing_exactly_return_value(n, iterator_arguments, iterator_block) { |value, propagated_result, modifiers| step_aware_lazy_enumerator_from(value, propagated_result, modifiers) }
               end
 
               ##
@@ -322,112 +281,101 @@ module ConvenientService
               ##
               # @param object [Object] Can be any type.
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @param modifiers [Array<Object>]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
-              def step_aware_object_from(object, propagated_result, modifiers = self.modifiers)
+              def step_aware_object_from(object, propagated_result)
                 # TODO: Cast.
-                Entities::StepAwareEnumerables::Object.new(object: object, organizer: organizer, propagated_result: propagated_result, modifiers: modifiers)
+                Entities::StepAwareEnumerables::Object.new(object: object, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##
               # @param object [Object] Can be any type.
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @param modifiers [Array<Object>]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
-              def step_aware_object_or_nil_from(object, propagated_result, modifiers = self.modifiers)
-                Entities::StepAwareEnumerables::Object.new(object: object, organizer: organizer, propagated_result: propagated_result || (failure unless object), modifiers: modifiers)
+              def step_aware_object_or_nil_from(object, propagated_result)
+                Entities::StepAwareEnumerables::Object.new(object: object, organizer: organizer, propagated_result: propagated_result || (failure unless object))
               end
 
               ##
               # @param boolean [Boolean].
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @param modifiers [Array<Object>]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
-              def step_aware_boolean_from(boolean, propagated_result, modifiers = self.modifiers)
-                Entities::StepAwareEnumerables::Boolean.new(object: boolean, organizer: organizer, propagated_result: propagated_result || (failure unless object), modifiers: modifiers)
+              def step_aware_boolean_from(boolean, propagated_result)
+                Entities::StepAwareEnumerables::Boolean.new(object: boolean, organizer: organizer, propagated_result: propagated_result || (failure unless object))
               end
 
               ##
               # @param enumerable [Enumerable]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @param modifiers [Array<Object>]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable]
               #
-              def step_aware_enumerable_from(enumerable, propagated_result, modifiers = self.modifiers)
-                Entities::StepAwareEnumerables::Enumerable.new(object: enumerable, organizer: organizer, propagated_result: propagated_result, modifiers: modifiers)
+              def step_aware_enumerable_from(enumerable, propagated_result)
+                Entities::StepAwareEnumerables::Enumerable.new(object: enumerable, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##
               # @param array [Array]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @param modifiers [Array<Object>]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable]
               #
-              def step_aware_array_from(array, propagated_result, modifiers = self.modifiers)
-                Entities::StepAwareEnumerables::Array.new(object: array, organizer: organizer, propagated_result: propagated_result, modifiers: modifiers)
+              def step_aware_array_from(array, propagated_result)
+                Entities::StepAwareEnumerables::Array.new(object: array, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##
               # @param hash [Hash]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @param modifiers [Array<Object>]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable]
               #
-              def step_aware_hash_from(hash, propagated_result, modifiers = self.modifiers)
-                Entities::StepAwareEnumerables::Hash.new(object: hash, organizer: organizer, propagated_result: propagated_result, modifiers: modifiers)
+              def step_aware_hash_from(hash, propagated_result)
+                Entities::StepAwareEnumerables::Hash.new(object: hash, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##
               # @param set [Set]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @param modifiers [Array<Object>]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable]
               #
-              def step_aware_set_from(set, propagated_result, modifiers = self.modifiers)
-                Entities::StepAwareEnumerables::Set.new(object: set, organizer: organizer, propagated_result: propagated_result, modifiers: modifiers)
+              def step_aware_set_from(set, propagated_result)
+                Entities::StepAwareEnumerables::Set.new(object: set, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##
               # @param enumerator [Enumerator]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @param modifiers [Array<Object>]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
-              def step_aware_enumerator_from(enumerator, propagated_result, modifiers = self.modifiers)
-                Entities::StepAwareEnumerables::Enumerator.new(object: enumerator, organizer: organizer, propagated_result: propagated_result, modifiers: modifiers)
+              def step_aware_enumerator_from(enumerator, propagated_result)
+                Entities::StepAwareEnumerables::Enumerator.new(object: enumerator, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##
               # @param lazy_enumerator [Enumerator]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @param modifiers [Array<Object>]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator]
               #
-              def step_aware_lazy_enumerator_from(lazy_enumerator, propagated_result, modifiers = self.modifiers)
-                Entities::StepAwareEnumerables::LazyEnumerator.new(object: lazy_enumerator, organizer: organizer, propagated_result: propagated_result, modifiers: modifiers)
+              def step_aware_lazy_enumerator_from(lazy_enumerator, propagated_result)
+                Entities::StepAwareEnumerables::LazyEnumerator.new(object: lazy_enumerator, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##
               # @param chain_enumerator [Enumerator::Chain]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @param modifiers [Array<Object>]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::ChainEnumerator]
               #
-              def step_aware_chain_enumerator_from(chain_enumerator, propagated_result, modifiers = self.modifiers)
-                Entities::StepAwareEnumerables::ChainEnumerator.new(object: chain_enumerator, organizer: organizer, propagated_result: propagated_result, modifiers: modifiers)
+              def step_aware_chain_enumerator_from(chain_enumerator, propagated_result)
+                Entities::StepAwareEnumerables::ChainEnumerator.new(object: chain_enumerator, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##
               # @param arithmetic_sequence_enumerator [Enumerator::ArithmeticSequence]
               # @param propagated_result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result, nil]
-              # @param modifiers [Array<Object>]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::ArithmeticSequence::Enumerator]
               #
-              def step_aware_arithmetic_sequence_enumerator_from(arithmetic_sequence_enumerator, propagated_result, modifiers = self.modifiers)
-                Entities::StepAwareEnumerables::ArithmeticSequenceEnumerator.new(object: arithmetic_sequence_enumerator, organizer: organizer, propagated_result: propagated_result, modifiers: modifiers)
+              def step_aware_arithmetic_sequence_enumerator_from(arithmetic_sequence_enumerator, propagated_result)
+                Entities::StepAwareEnumerables::ArithmeticSequenceEnumerator.new(object: arithmetic_sequence_enumerator, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##
@@ -532,14 +480,7 @@ module ConvenientService
 
                 response =
                   catch(:propagated_result) do
-                    object = evaluate_by_block.call(self.object)
-
-                    ##
-                    # TODO: Refactor.
-                    #
-                    modifiers.each { |modifier| modifier[:post_iterator_block].call } if evaluate_by.nil? || self.object.instance_of?(::Enumerator::Lazy)
-
-                    {object: object}
+                    {object: evaluate_by_block.call(object)}
                   end
 
                 return response[:propagated_result] if response.has_key?(:propagated_result)
@@ -559,14 +500,7 @@ module ConvenientService
 
                   response =
                     catch(:propagated_result) do
-                      object = iterator_block.call(*iterator_arguments.args, &step_aware_iteration_block_from(iterator_arguments.block))
-
-                      ##
-                      # TODO: Refactor.
-                      #
-                      modifiers.each { |modifier| modifier[:post_iterator_block].call } unless object.is_a?(::Enumerator)
-
-                      {object: object}
+                      {object: iterator_block.call(*iterator_arguments.args, &step_aware_iteration_block_from(iterator_arguments.block))}
                     end
 
                   return yield(Support::UNDEFINED, response[:propagated_result]) if response.has_key?(:propagated_result)
@@ -585,55 +519,13 @@ module ConvenientService
 
                   response =
                     catch(:propagated_result) do
-                      object = iterator_block.call(*iterator_arguments.args, **iterator_arguments.kwargs, &step_aware_iteration_block_from(iterator_arguments.block))
-
-                      ##
-                      # TODO: Refactor.
-                      #
-                      modifiers.each { |modifier| modifier[:post_iterator_block].call } unless object.is_a?(::Enumerator)
-
-                      {object: object}
+                      {object: iterator_block.call(*iterator_arguments.args, **iterator_arguments.kwargs, &step_aware_iteration_block_from(iterator_arguments.block))}
                     end
 
                   return yield(Support::UNDEFINED, response[:propagated_result]) if response.has_key?(:propagated_result)
 
                   yield(response[:object], nil)
                 end
-              end
-
-              ##
-              # @param n [Integer]
-              # @param iterator_arguments [ConvenientService::Support::Arguments]
-              # @param iterator_block [Proc]
-              # @param with_processing_return_value_block [Proc]
-              # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
-              #
-              def with_processing_exactly_return_value(n, iterator_arguments, iterator_block, &with_processing_return_value_block)
-                return yield(Support::UNDEFINED, propagated_result) if propagated_result
-
-                response =
-                  catch(:propagated_result) do
-                    step_aware_iteration_block = step_aware_iteration_block_from(iterator_arguments.block)
-
-                    modifier = modifier_for(n, step_aware_iteration_block)
-
-                    modifier[:pre_iterator_block].call
-
-                    object = iterator_block.call(n, *iterator_arguments.args, &modifier[:iteration_block])
-
-                    modifiers = self.modifiers.dup.push(modifier)
-
-                    ##
-                    # TODO: Refactor.
-                    #
-                    modifiers.each { |modifier| modifier[:post_iterator_block].call }.clear unless object.is_a?(::Enumerator)
-
-                    {object: object, modifiers: modifiers}
-                  end
-
-                return yield(Support::UNDEFINED, response[:propagated_result]) if response.has_key?(:propagated_result)
-
-                yield(response[:object], nil, response[:modifiers])
               end
             end
           end
