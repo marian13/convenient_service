@@ -42,11 +42,11 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
-            # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::CollectionIsNotEnumerable]
+            # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable]
+            # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable]
             #
             def call
-              raise ::ConvenientService.raise Exceptions::ObjectIsNotEnumerable.new(object: object) unless object.is_a?(::Enumerable)
+              ::ConvenientService.raise Exceptions::ObjectIsNotEnumerable.new(object: object) unless object.is_a?(::Enumerable)
 
               Entities::StepAwareEnumerables::Enumerable.new(object: object, organizer: organizer, propagated_result: propagated_result)
             end
