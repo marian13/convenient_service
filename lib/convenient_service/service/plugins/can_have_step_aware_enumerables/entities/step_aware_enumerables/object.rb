@@ -33,11 +33,8 @@ module ConvenientService
               # @param include_private [Boolean]
               # @return [Boolean]
               #
-              # @internal
-              #   TODO: Actual behaviour.
-              #
               def respond_to_missing?(method_name, include_private = false)
-                false
+                respond_to?(method_name, include_private)
               end
 
               ##

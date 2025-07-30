@@ -50,7 +50,7 @@ module ConvenientService
             #
             def initialize_without_arguments
               message = <<~TEXT
-                Step aware collection has already used a terminal chaining like `all?`, `any?`, `find`, `first`, etc.
+                Step aware enumerable has already used a terminal chaining like `all?`, `any?`, `find`, `first`, etc.
               TEXT
 
               initialize(message)
