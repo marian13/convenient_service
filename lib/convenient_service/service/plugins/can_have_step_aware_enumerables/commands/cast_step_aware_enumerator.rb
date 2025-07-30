@@ -52,28 +52,35 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base]
+            # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable]
             # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator]
             #
             def call
-              return step_aware_enumerator_klass.new(object: object, organizer: organizer, propagated_result: propagated_result) if step_aware_enumerator_klass
-              return fallback_step_aware_enumerator_klass.new(object: object, organizer: organizer, propagated_result: propagated_result) if fallback_step_aware_enumerator_klass
+              step_aware_enumerable_klass&.new(**attributes) || ::ConvenientService.raise(Exceptions::ObjectIsNotEnumerator.new(object: object))
+            end
 
-              raise ::ConvenientService.raise Exceptions::ObjectIsNotEnumerator.new(object: object)
+            private
+
+            ##
+            # @return [Class]
+            #
+            def step_aware_enumerable_klass
+              klass = RUBY_CLASS_TO_STEP_AWARE_CLASS_MAP[object.class]
+
+              return klass if klass
+
+              case object
+              when ::Enumerator::Lazy then Entities::StepAwareEnumerables::LazyEnumerator
+              when ::Enumerator::Chain then Entities::StepAwareEnumerables::ChainEnumerator
+              when ::Enumerator then Entities::StepAwareEnumerables::Enumerator
+              end
             end
 
             ##
-            # @return [Class, nil]
+            # @return [Hash]
             #
-            def step_aware_enumerator_klass
-              Utils.memoize_including_falsy_values(self, :@step_aware_enumerator_klass) { RUBY_CLASS_TO_STEP_AWARE_CLASS_MAP[object.class] }
-            end
-
-            ##
-            # @return [Class, nil]
-            #
-            def fallback_step_aware_enumerator_klass
-              Utils.memoize_including_falsy_values(self, :@fallback_step_aware_enumerator_klass) { Entities::StepAwareEnumerables::Enumerator if object.respond_to?(:each) }
+            def attributes
+              {object: object, organizer: organizer, propagated_result: propagated_result}
             end
           end
         end

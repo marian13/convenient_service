@@ -379,43 +379,6 @@ module ConvenientService
               end
 
               ##
-              # @param n [Integer]
-              # @param step_aware_iteration_block [Proc, nil]
-              # @return [Hash{Symbol => Proc, nil}]
-              #
-              def modifier_for(n, step_aware_iteration_block)
-                iterator_details = {match_count: 0}
-
-                {
-                  n: n,
-                  iterator_details: iterator_details,
-                  pre_iterator_block: proc { throw :propagated_result, {propagated_result: error} if n < 0 },
-                  post_iterator_block: proc { throw :propagated_result, {propagated_result: failure} if iterator_details[:match_count] != n },
-                  iteration_block: modifier_iteration_block_for(n, iterator_details, step_aware_iteration_block)
-                }
-              end
-
-              ##
-              # @param n [Integer]
-              # @param iterator_details [Hash{Symbol => Object}]
-              # @param step_aware_iteration_block [Proc, nil]
-              # @return [Proc, nil]
-              #
-              def modifier_iteration_block_for(n, iterator_details, step_aware_iteration_block)
-                return unless step_aware_iteration_block
-
-                proc do |*args|
-                  value = step_aware_iteration_block.call(*args)
-
-                  iterator_details[:match_count] += 1 if value
-
-                  throw :propagated_result, {propagated_result: failure} if iterator_details[:match_count] > n
-
-                  value
-                end
-              end
-
-              ##
               # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               #
               def success(...)

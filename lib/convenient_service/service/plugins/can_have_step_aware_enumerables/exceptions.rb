@@ -33,11 +33,11 @@ module ConvenientService
             #
             def initialize_with_kwargs(object:)
               message = <<~TEXT
-                Object of class `#{Utils::Class.display_name(object.class)}` is neither enumerator nor can be converted into it by calling `#each` without block.
+                Object of class `#{Utils::Class.display_name(object.class)}` is NOT enumerator.
 
                 Valid enumerator examples are `Enumerator`, `Enumerator::Lazy`, `Enumerator::Chain`, `Enumerator::ArithmeticSequence`, etc.
 
-                Classes like `Array`, `Hash`, `Set` are also valid, since their `#each` methods return `Enumerator` instances when called without block.
+                Maybe you mistyped `step_aware_enumerator` instead of `step_aware_enumerable`?
               TEXT
 
               initialize(message)

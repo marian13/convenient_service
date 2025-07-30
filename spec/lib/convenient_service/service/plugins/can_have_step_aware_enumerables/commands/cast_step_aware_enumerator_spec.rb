@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Commands::CastStepAwareEnumerable, type: :standard do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Commands::CastStepAwareEnumerator, type: :standard do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
   include ConvenientService::RSpec::Matchers::DelegateTo
@@ -36,20 +36,22 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
 
         let(:exception_message) do
           <<~TEXT
-            Object of class `Integer` is NOT enumerable.
+            Object of class `Integer` is NOT enumerator.
 
-            Valid enumerable examples are classes that mix in `Enumerable` module like `Array`, `Hash`, `Set`, `Range`, `IO`, `Enumerator`, etc.
+            Valid enumerator examples are `Enumerator`, `Enumerator::Lazy`, `Enumerator::Chain`, `Enumerator::ArithmeticSequence`, etc.
+
+            Maybe you mistyped `step_aware_enumerator` instead of `step_aware_enumerable`?
           TEXT
         end
 
-        it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable`" do
+        it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator`" do
           expect { command_result }
-            .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable)
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator)
             .with_message(exception_message)
         end
 
         specify do
-          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable) { command_result } }
+          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator) { command_result } }
             .to delegate_to(ConvenientService, :raise)
         end
 
@@ -59,15 +61,17 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
 
           let(:exception_message) do
             <<~TEXT
-              Object of class `#{ConvenientService::Utils::Class.display_name(object.class)}` is NOT enumerable.
+              Object of class `#{ConvenientService::Utils::Class.display_name(object.class)}` is NOT enumerator.
 
-              Valid enumerable examples are classes that mix in `Enumerable` module like `Array`, `Hash`, `Set`, `Range`, `IO`, `Enumerator`, etc.
+              Valid enumerator examples are `Enumerator`, `Enumerator::Lazy`, `Enumerator::Chain`, `Enumerator::ArithmeticSequence`, etc.
+
+              Maybe you mistyped `step_aware_enumerator` instead of `step_aware_enumerable`?
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable`" do
+          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator`" do
             expect { command_result }
-              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable)
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator)
               .with_message(exception_message)
           end
         end
@@ -76,28 +80,61 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
       context "when `object` is enumerable" do
         context "when `object` is array" do
           let(:object) { [:foo, :bar] }
-          let(:step_aware_enumerable) { ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Array.new(**arguments) }
 
-          it "returns step aware enumerable" do
-            expect(command_result).to eq(step_aware_enumerable)
+          let(:exception_message) do
+            <<~TEXT
+              Object of class `Array` is NOT enumerator.
+
+              Valid enumerator examples are `Enumerator`, `Enumerator::Lazy`, `Enumerator::Chain`, `Enumerator::ArithmeticSequence`, etc.
+
+              Maybe you mistyped `step_aware_enumerator` instead of `step_aware_enumerable`?
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator`" do
+            expect { command_result }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator)
+              .with_message(exception_message)
           end
         end
 
         context "when `object` is hash" do
           let(:object) { {foo: :bar, baz: :qux} }
-          let(:step_aware_enumerable) { ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Hash.new(**arguments) }
 
-          it "returns step aware enumerable" do
-            expect(command_result).to eq(step_aware_enumerable)
+          let(:exception_message) do
+            <<~TEXT
+              Object of class `Hash` is NOT enumerator.
+
+              Valid enumerator examples are `Enumerator`, `Enumerator::Lazy`, `Enumerator::Chain`, `Enumerator::ArithmeticSequence`, etc.
+
+              Maybe you mistyped `step_aware_enumerator` instead of `step_aware_enumerable`?
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator`" do
+            expect { command_result }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator)
+              .with_message(exception_message)
           end
         end
 
         context "when `object` is set" do
           let(:object) { Set[:foo, :bar] }
-          let(:step_aware_enumerable) { ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Set.new(**arguments) }
 
-          it "returns step aware enumerable" do
-            expect(command_result).to eq(step_aware_enumerable)
+          let(:exception_message) do
+            <<~TEXT
+              Object of class `Set` is NOT enumerator.
+
+              Valid enumerator examples are `Enumerator`, `Enumerator::Lazy`, `Enumerator::Chain`, `Enumerator::ArithmeticSequence`, etc.
+
+              Maybe you mistyped `step_aware_enumerator` instead of `step_aware_enumerable`?
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator`" do
+            expect { command_result }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator)
+              .with_message(exception_message)
           end
         end
 
@@ -169,28 +206,61 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
 
         context "when `object` is range" do
           let(:object) { (0..5) }
-          let(:step_aware_enumerable) { ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable.new(**arguments) }
 
-          it "returns step aware enumerable" do
-            expect(command_result).to eq(step_aware_enumerable)
+          let(:exception_message) do
+            <<~TEXT
+              Object of class `Range` is NOT enumerator.
+
+              Valid enumerator examples are `Enumerator`, `Enumerator::Lazy`, `Enumerator::Chain`, `Enumerator::ArithmeticSequence`, etc.
+
+              Maybe you mistyped `step_aware_enumerator` instead of `step_aware_enumerable`?
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator`" do
+            expect { command_result }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator)
+              .with_message(exception_message)
           end
         end
 
         context "when `object` is io" do
           let(:object) { $stdin }
-          let(:step_aware_enumerable) { ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable.new(**arguments) }
 
-          it "returns step aware enumerable" do
-            expect(command_result).to eq(step_aware_enumerable)
+          let(:exception_message) do
+            <<~TEXT
+              Object of class `IO` is NOT enumerator.
+
+              Valid enumerator examples are `Enumerator`, `Enumerator::Lazy`, `Enumerator::Chain`, `Enumerator::ArithmeticSequence`, etc.
+
+              Maybe you mistyped `step_aware_enumerator` instead of `step_aware_enumerable`?
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator`" do
+            expect { command_result }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator)
+              .with_message(exception_message)
           end
         end
 
         context "when `object` is file" do
           let(:object) { File.new(Tempfile.new.path) }
-          let(:step_aware_enumerable) { ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable.new(**arguments) }
 
-          it "returns step aware enumerable" do
-            expect(command_result).to eq(step_aware_enumerable)
+          let(:exception_message) do
+            <<~TEXT
+              Object of class `File` is NOT enumerator.
+
+              Valid enumerator examples are `Enumerator`, `Enumerator::Lazy`, `Enumerator::Chain`, `Enumerator::ArithmeticSequence`, etc.
+
+              Maybe you mistyped `step_aware_enumerator` instead of `step_aware_enumerable`?
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator`" do
+            expect { command_result }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator)
+              .with_message(exception_message)
           end
         end
 
@@ -203,25 +273,38 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
 
           let(:exception_message) do
             <<~TEXT
-              Object of class `Tempfile` is NOT enumerable.
+              Object of class `Tempfile` is NOT enumerator.
 
-              Valid enumerable examples are classes that mix in `Enumerable` module like `Array`, `Hash`, `Set`, `Range`, `IO`, `Enumerator`, etc.
+              Valid enumerator examples are `Enumerator`, `Enumerator::Lazy`, `Enumerator::Chain`, `Enumerator::ArithmeticSequence`, etc.
+
+              Maybe you mistyped `step_aware_enumerator` instead of `step_aware_enumerable`?
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable`" do
+          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator`" do
             expect { command_result }
-              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable)
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator)
               .with_message(exception_message)
           end
         end
 
         context "when `object` is string io" do
           let(:object) { StringIO.new }
-          let(:step_aware_enumerable) { ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable.new(**arguments) }
 
-          it "returns step aware enumerable" do
-            expect(command_result).to eq(step_aware_enumerable)
+          let(:exception_message) do
+            <<~TEXT
+              Object of class `StringIO` is NOT enumerator.
+
+              Valid enumerator examples are `Enumerator`, `Enumerator::Lazy`, `Enumerator::Chain`, `Enumerator::ArithmeticSequence`, etc.
+
+              Maybe you mistyped `step_aware_enumerator` instead of `step_aware_enumerable`?
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator`" do
+            expect { command_result }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator)
+              .with_message(exception_message)
           end
         end
 
@@ -243,10 +326,21 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
           end
 
           let(:object) { klass.new([:foo, :bar]) }
-          let(:step_aware_enumerable) { ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable.new(**arguments) }
 
-          it "returns step aware enumerable" do
-            expect(command_result).to eq(step_aware_enumerable)
+          let(:exception_message) do
+            <<~TEXT
+              Object of class `#{ConvenientService::Utils::Class.display_name(object.class)}` is NOT enumerator.
+
+              Valid enumerator examples are `Enumerator`, `Enumerator::Lazy`, `Enumerator::Chain`, `Enumerator::ArithmeticSequence`, etc.
+
+              Maybe you mistyped `step_aware_enumerator` instead of `step_aware_enumerable`?
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator`" do
+            expect { command_result }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerator)
+              .with_message(exception_message)
           end
         end
 

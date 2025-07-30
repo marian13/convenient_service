@@ -12,6 +12,19 @@ module ConvenientService
         module Commands
           class CastStepAwareEnumerable < Support::Command
             ##
+            # @return [Hash{Class => Class}]
+            #
+            RUBY_CLASS_TO_STEP_AWARE_CLASS_MAP = {
+              ::Array => Entities::StepAwareEnumerables::Array,
+              ::Hash => Entities::StepAwareEnumerables::Hash,
+              ::Set => Entities::StepAwareEnumerables::Set,
+              ::Enumerator => Entities::StepAwareEnumerables::Enumerator,
+              ::Enumerator::Lazy => Entities::StepAwareEnumerables::LazyEnumerator,
+              ::Enumerator::Chain => Entities::StepAwareEnumerables::ChainEnumerator,
+              ::Enumerator::ArithmeticSequence => Entities::StepAwareEnumerables::ArithmeticSequenceEnumerator
+            }
+
+            ##
             # @!attribute [r] object
             #   @return [Object] Can be any type.
             #
@@ -46,9 +59,32 @@ module ConvenientService
             # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::ObjectIsNotEnumerable]
             #
             def call
-              ::ConvenientService.raise Exceptions::ObjectIsNotEnumerable.new(object: object) unless object.is_a?(::Enumerable)
+              step_aware_enumerable_klass&.new(**attributes) || ::ConvenientService.raise(Exceptions::ObjectIsNotEnumerable.new(object: object))
+            end
 
-              Entities::StepAwareEnumerables::Enumerable.new(object: object, organizer: organizer, propagated_result: propagated_result)
+            private
+
+            ##
+            # @return [Class]
+            #
+            def step_aware_enumerable_klass
+              klass = RUBY_CLASS_TO_STEP_AWARE_CLASS_MAP[object.class]
+
+              return klass if klass
+
+              case object
+              when ::Enumerator::Lazy then Entities::StepAwareEnumerables::LazyEnumerator
+              when ::Enumerator::Chain then Entities::StepAwareEnumerables::ChainEnumerator
+              when ::Enumerator then Entities::StepAwareEnumerables::Enumerator
+              when ::Enumerable then Entities::StepAwareEnumerables::Enumerable
+              end
+            end
+
+            ##
+            # @return [Hash]
+            #
+            def attributes
+              {object: object, organizer: organizer, propagated_result: propagated_result}
             end
           end
         end
