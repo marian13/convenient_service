@@ -114,7 +114,7 @@
   <h2>Instance Attribute Summary</h2>
   
   <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Base.html" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base (class)">Base</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Base.html#modifiers-instance_method" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base#modifiers (method)">#modifiers</a></span>, <span class='object_link'><a href="Base.html#object-instance_method" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base#object (method)">#object</a></span>, <span class='object_link'><a href="Base.html#organizer-instance_method" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base#organizer (method)">#organizer</a></span>, <span class='object_link'><a href="Base.html#propagated_result-instance_method" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base#propagated_result (method)">#propagated_result</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Base.html#object-instance_method" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base#object (method)">#object</a></span>, <span class='object_link'><a href="Base.html#organizer-instance_method" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base#organizer (method)">#organizer</a></span>, <span class='object_link'><a href="Base.html#propagated_result-instance_method" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base#propagated_result (method)">#propagated_result</a></span></p>
 
 
   
@@ -1218,28 +1218,6 @@
   
   
   
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#select_exactly-instance_method" title="#select_exactly (instance method)">#<strong>select_exactly</strong>(n, &amp;iteration_block)  &#x21d2; ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable, ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'></div></span>
@@ -6164,104 +6142,6 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="select_exactly-instance_method">
-  
-    #<strong>select_exactly</strong>(n, &amp;iteration_block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable (class)">ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable</a></span></tt>, <tt><span class='object_link'><a href="Enumerator.html" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator (class)">ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p class="note private">
-  <strong>This method is part of a private API.</strong>
-  You should avoid using this method if possible, as it may be removed or be changed in the future.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>n</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>)</span>
-      
-      
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>iteration_block</span>
-      
-      
-        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable (class)">ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerable</a></span></tt>, <tt><span class='object_link'><a href="Enumerator.html" title="ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator (class)">ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Enumerator</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-1115
-1116
-1117
-1118
-1119
-1120
-1121
-1122
-1123
-1124
-1125</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_step_aware_enumerables/entities/step_aware_enumerables/enumerable.rb', line 1115</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_select_exactly'>select_exactly</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_iteration_block'>iteration_block</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_iteration_block'>iteration_block</span>
-    <span class='id identifier rubyid_with_processing_return_value_as_exactly_enumerable'>with_processing_return_value_as_exactly_enumerable</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span><span class='comma'>,</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_iteration_block'>iteration_block</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='op'>&amp;</span><span class='id identifier rubyid_step_aware_iteration_block'>step_aware_iteration_block</span><span class='op'>|</span>
-      <span class='id identifier rubyid_enumerable'>enumerable</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_step_aware_iteration_block'>step_aware_iteration_block</span><span class='rparen'>)</span>
-    <span class='kw'>end</span>
-  <span class='kw'>else</span>
-    <span class='id identifier rubyid_with_processing_return_value_as_exactly_enumerator'>with_processing_return_value_as_exactly_enumerator</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_n'>n</span><span class='op'>|</span>
-      <span class='id identifier rubyid_to_enum'>to_enum</span><span class='lparen'>(</span><span class='symbol'>:_select_exactly</span><span class='comma'>,</span> <span class='id identifier rubyid_n'>n</span><span class='rparen'>)</span>
-    <span class='kw'>end</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
   <h3 class="signature " id="slice_after-instance_method">
   
     
@@ -7624,7 +7504,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jul 30 03:38:36 2025 by
+  Generated on Wed Jul 30 15:19:24 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
