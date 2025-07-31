@@ -47,6 +47,16 @@ module ConvenientService
                   boolean ? success : failure
                 end
               end
+
+              private
+
+              ##
+              # @param value [Symbol, String, Proc, nil]
+              # @return [Proc]
+              #
+              def cast_evaluate_by_block(value)
+                proc { |enumerable| enumerable }
+              end
             end
           end
         end

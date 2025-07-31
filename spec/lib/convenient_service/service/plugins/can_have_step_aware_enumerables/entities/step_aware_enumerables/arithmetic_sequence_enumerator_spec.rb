@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
     end
   end
 
-  let(:object) { [:foo, :bar].lazy }
+  let(:object) { (0..5).step(1) }
   let(:organizer) { service.new }
   let(:propagated_result) { service.error(code: "from propagated result") }
 
