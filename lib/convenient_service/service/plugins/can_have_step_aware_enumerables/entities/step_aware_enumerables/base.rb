@@ -410,12 +410,13 @@ module ConvenientService
               ##
               # @param value [Symbol, String, Proc, nil]
               # @return [Proc]
+              # @raise [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::InvalidEvaluateByValue]
               #
               def cast_evaluate_by_block(value)
                 return proc { |enumerable| enumerable.public_send(value) } if value.instance_of?(::Symbol)
                 return proc { |enumerable| enumerable.public_send(value) } if value.instance_of?(::String)
                 return value if value.instance_of?(::Proc)
-                return proc { |enumerable| value.call(value) } if value.respond_to?(:call)
+                return proc { |enumerable| value.call(enumerable) } if value.respond_to?(:call)
                 return proc { |enumerable| enumerable } if value.nil?
 
                 ::ConvenientService.raise Exceptions::InvalidEvaluateByValue.new(value: value)

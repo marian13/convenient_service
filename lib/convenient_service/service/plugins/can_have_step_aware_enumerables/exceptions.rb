@@ -79,7 +79,7 @@ module ConvenientService
                   # Object that respond to `call`.
                   class Evaluator
                     def self.call(enumerable)
-                      enumerable.join
+                      enumerable.to_s
                     end
                   end
 

@@ -11,6 +11,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base, type: :standard do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::Results
 
@@ -96,6 +98,172 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
             expect { result }
               .to delegate_to(object, step_aware_descendant.default_evaluate_by)
               .without_arguments
+          end
+        end
+
+        example_group "`evaluate_by` option" do
+          context "when `evaluate_by` is NOT valid" do
+            let(:evaluate_by) { 42 }
+
+            let(:exception_message) do
+              <<~TEXT
+                `evaluate_by` value `#{evaluate_by}` is NOT supported.
+
+                Here are some examples of valid values:
+                  # `Symbol` value.
+                  .result(evaluate_by: :to_a)
+
+                  # `String` value.
+                  .result(evaluate_by: "to_h")
+
+                  # `Proc` value.
+                  .result(evaluate_by: ->(enumerable) { enumerable.to_set })
+
+                  # Object that respond to `call`.
+                  class Evaluator
+                    def self.call(enumerable)
+                      enumerable.to_s
+                    end
+                  end
+
+                  .result(evaluate_by: Evaluator)
+
+                  # Pass `nil` to skip evaluation (NOT recommended for enumerators).
+                  .result(evaluate_by: nil)
+              TEXT
+            end
+
+            it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::InvalidEvaluateByValue`" do
+              expect { result }
+                .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::InvalidEvaluateByValue)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::InvalidEvaluateByValue) { result } }
+                .to delegate_to(ConvenientService, :raise)
+            end
+          end
+
+          context "when `evaluate_by` is valid" do
+            context "when `evaluate_by` is string" do
+              context "when that string is public method name" do
+                let(:evaluate_by) { "to_s" }
+
+                it "calls that public method on `object`" do
+                  expect(result).to be_success.with_data(data_key => object.to_s)
+                end
+              end
+
+              context "when that string is private method name" do
+                let(:evaluate_by) { "puts" }
+
+                it "raises `NoMethodError`" do
+                  expect { result }.to raise_error(NoMethodError).with_message(/private/)
+                end
+              end
+            end
+
+            context "when `evaluate_by` is symbol" do
+              context "when that string is public method name" do
+                let(:evaluate_by) { :to_s }
+
+                it "calls that public method on `object`" do
+                  expect(result).to be_success.with_data(data_key => object.to_s)
+                end
+              end
+
+              context "when that string is private method name" do
+                let(:evaluate_by) { :puts }
+
+                it "raises `NoMethodError`" do
+                  expect { result }.to raise_error(NoMethodError).with_message(/private/)
+                end
+              end
+            end
+
+            context "when `evaluate_by` is proc" do
+              let(:evaluate_by) { proc { |collection| collection.to_s } }
+
+              it "calls that proc with `object`" do
+                expect(result).to be_success.with_data(data_key => object.to_s)
+              end
+            end
+
+            context "when `evaluate_by` is object that responds to `:call`" do
+              context "when that object responds to public `:call`" do
+                let(:evaluate_by) do
+                  Class.new do
+                    def self.call(collection)
+                      collection.to_s
+                    end
+                  end
+                end
+
+                it "calls that object with `object`" do
+                  expect(result).to be_success.with_data(data_key => object.to_s)
+                end
+              end
+
+              context "when that object responds to private `:call`" do
+                let(:evaluate_by) do
+                  Class.new do
+                    private
+
+                    def call(collection)
+                      collection.to_s
+                    end
+                  end
+                end
+
+                let(:exception_message) do
+                  <<~TEXT
+                    `evaluate_by` value `#{evaluate_by}` is NOT supported.
+
+                    Here are some examples of valid values:
+                      # `Symbol` value.
+                      .result(evaluate_by: :to_a)
+
+                      # `String` value.
+                      .result(evaluate_by: "to_h")
+
+                      # `Proc` value.
+                      .result(evaluate_by: ->(enumerable) { enumerable.to_set })
+
+                      # Object that respond to `call`.
+                      class Evaluator
+                        def self.call(enumerable)
+                          enumerable.to_s
+                        end
+                      end
+
+                      .result(evaluate_by: Evaluator)
+
+                      # Pass `nil` to skip evaluation (NOT recommended for enumerators).
+                      .result(evaluate_by: nil)
+                  TEXT
+                end
+
+                it "raises `ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::InvalidEvaluateByValue`" do
+                  expect { result }
+                    .to raise_error(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::InvalidEvaluateByValue)
+                    .with_message(exception_message)
+                end
+
+                specify do
+                  expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Exceptions::InvalidEvaluateByValue) { result } }
+                    .to delegate_to(ConvenientService, :raise)
+                end
+              end
+            end
+
+            context "when `evaluate_by` is `nil`" do
+              let(:evaluate_by) { nil }
+
+              it "does NOT call anything on `object`" do
+                expect(result).to be_success.with_data(data_key => object)
+              end
+            end
           end
         end
       end
