@@ -44,13 +44,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
 
     describe "#default_data_key" do
       it "returns `:values`" do
-        expect(step_aware_hash.default_data_key).to eq(:values)
+        expect(step_aware_array.default_data_key).to eq(:values)
       end
     end
 
     describe "#default_evaluate_by" do
       it "returns `:to_a`" do
-        expect(step_aware_hash.default_evaluate_by).to eq(:to_a)
+        expect(step_aware_array.default_evaluate_by).to eq(:to_a)
       end
     end
   end

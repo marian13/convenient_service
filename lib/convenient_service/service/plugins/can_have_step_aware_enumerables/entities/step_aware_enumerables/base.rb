@@ -393,13 +393,6 @@ module ConvenientService
               end
 
               ##
-              # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-              #
-              def error(...)
-                organizer.error(...)
-              end
-
-              ##
               # @return [ConvenientService::Support::Arguments]
               #
               def arguments(...)
@@ -441,10 +434,7 @@ module ConvenientService
 
                 evaluate_by_block = cast_evaluate_by_block(evaluate_by)
 
-                response =
-                  catch(:propagated_result) do
-                    {object: evaluate_by_block.call(object)}
-                  end
+                response = catch(:propagated_result) { {object: evaluate_by_block.call(object)} }
 
                 return response[:propagated_result] if response.has_key?(:propagated_result)
 
@@ -457,13 +447,13 @@ module ConvenientService
               # @param with_processing_return_value_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
+              # @internal
+              #   NOTE: `catch` is used to support lazy enumerators, `chunk`, and `chunk_while`.
+              #
               def with_processing_return_value(iterator_arguments, iterator_block, &with_processing_return_value_block)
                 return yield(Support::UNDEFINED, propagated_result) if propagated_result
 
-                response =
-                  catch(:propagated_result) do
-                    {object: iterator_block.call(*iterator_arguments.args, **iterator_arguments.kwargs, &step_aware_iteration_block_from(iterator_arguments.block))}
-                  end
+                response = catch(:propagated_result) { {object: iterator_block.call(*iterator_arguments.args, **iterator_arguments.kwargs, &step_aware_iteration_block_from(iterator_arguments.block))} }
 
                 return yield(Support::UNDEFINED, response[:propagated_result]) if response.has_key?(:propagated_result)
 
