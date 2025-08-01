@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
 
     subject { described_class }
 
-    it { is_expected.to be_descendant_of(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Base) }
+    it { is_expected.to be_descendant_of(ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object) }
   end
 
   example_group "instance methods" do
