@@ -173,6 +173,12 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if true
+          #   1
+          # end
+          ##
+
           if_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
           do
@@ -203,6 +209,12 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if true
+          #   1
+          # end
+          ##
 
           if_step_group :success_method,
             in: [index: -> { 0 }] \
@@ -235,6 +247,12 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !true
+          #   1
+          # end
+          ##
+
           if_not_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
           do
@@ -264,6 +282,12 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !true
+          #   1
+          # end
+          ##
 
           if_not_step_group :success_method,
             in: [index: -> { 0 }] \
@@ -295,6 +319,12 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if false
+          #   1
+          # end
+          ##
+
           if_step_group services[:FailureService],
             in: [index: -> { 0 }] \
           do
@@ -325,6 +355,12 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if false
+          #   1
+          # end
+          ##
+
           if_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -354,6 +390,12 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !false
+          #   1
+          # end
+          ##
 
           if_not_step_group services[:FailureService],
             in: [index: -> { 0 }] \
@@ -386,6 +428,12 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !false
+          #   1
+          # end
+          ##
+
           if_not_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -417,6 +465,12 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if raise
+          #   1
+          # end
+          ##
+
           if_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -446,6 +500,12 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if raise
+          #   1
+          # end
+          ##
 
           if_step_group :error_method,
             in: [index: -> { 0 }] \
@@ -477,6 +537,12 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !raise
+          #   1
+          # end
+          ##
+
           if_not_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -507,6 +573,12 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !raise
+          #   1
+          # end
+          ##
+
           if_not_step_group :error_method,
             in: [index: -> { 0 }] \
           do
@@ -536,6 +608,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if true
+          #   1
+          # else
+          #   2
+          # end
+          ##
 
           if_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
@@ -573,6 +653,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if true
+          #   1
+          # else
+          #   2
+          # end
+          ##
+
           if_step_group :success_method,
             in: [index: -> { 0 }] \
           do
@@ -608,6 +696,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !true
+          #   1
+          # else
+          #   2
+          # end
+          ##
 
           if_not_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
@@ -645,6 +741,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !true
+          #   1
+          # else
+          #   2
+          # end
+          ##
+
           if_not_step_group :success_method,
             in: [index: -> { 0 }] \
           do
@@ -680,6 +784,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if false
+          #   1
+          # else
+          #   2
+          # end
+          ##
 
           if_step_group services[:FailureService],
             in: [index: -> { 0 }] \
@@ -717,6 +829,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if false
+          #   1
+          # else
+          #   2
+          # end
+          ##
+
           if_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -752,6 +872,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !false
+          #   1
+          # else
+          #   2
+          # end
+          ##
 
           if_not_step_group services[:FailureService],
             in: [index: -> { 0 }] \
@@ -789,6 +917,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !false
+          #   1
+          # else
+          #   2
+          # end
+          ##
+
           if_not_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -825,6 +961,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if raise
+          #   1
+          # else
+          #   2
+          # end
+          ##
+
           if_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -859,6 +1003,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if raise
+          #   1
+          # else
+          #   2
+          # end
+          ##
 
           if_step_group :error_method,
             in: [index: -> { 0 }] \
@@ -895,6 +1047,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !raise
+          #   1
+          # else
+          #   2
+          # end
+          ##
+
           if_not_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -930,6 +1090,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !raise
+          #   1
+          # else
+          #   2
+          # end
+          ##
+
           if_not_step_group :error_method,
             in: [index: -> { 0 }] \
           do
@@ -964,6 +1132,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if true
+          #   1
+          # elsif true
+          #   3
+          # end
+          ##
 
           if_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
@@ -1002,6 +1178,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if true
+          #   1
+          # elsif true
+          #   3
+          # end
+          ##
 
           if_step_group :success_method,
             in: [index: -> { 0 }] \
@@ -1041,6 +1225,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !true
+          #   1
+          # elsif true
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
           do
@@ -1079,6 +1271,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !true
+          #   1
+          # elsif true
+          #   3
+          # end
+          ##
 
           if_not_step_group :success_method,
             in: [index: -> { 0 }] \
@@ -1119,6 +1319,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if true
+          #   1
+          # elsif !true
+          #   3
+          # end
+          ##
+
           if_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
           do
@@ -1157,6 +1365,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if true
+          #   1
+          # elsif !true
+          #   3
+          # end
+          ##
+
           if_step_group :success_method,
             in: [index: -> { 0 }] \
           do
@@ -1194,6 +1410,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !true
+          #   1
+          # elsif !true
+          #   3
+          # end
+          ##
 
           if_not_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
@@ -1233,6 +1457,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !true
+          #   1
+          # elsif !true
+          #   3
+          # end
+          ##
+
           if_not_step_group :success_method,
             in: [index: -> { 0 }] \
           do
@@ -1271,6 +1503,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if true
+          #   1
+          # elsif false
+          #   3
+          # end
+          ##
+
           if_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
           do
@@ -1309,6 +1549,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if true
+          #   1
+          # elsif false
+          #   3
+          # end
+          ##
+
           if_step_group :success_method,
             in: [index: -> { 0 }] \
           do
@@ -1346,6 +1594,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !true
+          #   1
+          # elsif false
+          #   3
+          # end
+          ##
 
           if_not_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
@@ -1385,6 +1641,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !true
+          #   1
+          # elsif false
+          #   3
+          # end
+          ##
+
           if_not_step_group :success_method,
             in: [index: -> { 0 }] \
           do
@@ -1422,6 +1686,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if true
+          #   1
+          # elsif !false
+          #   3
+          # end
+          ##
 
           if_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
@@ -1461,6 +1733,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if true
+          #   1
+          # elsif !false
+          #   3
+          # end
+          ##
+
           if_step_group :success_method,
             in: [index: -> { 0 }] \
           do
@@ -1498,6 +1778,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !true
+          #   1
+          # elsif !false
+          #   3
+          # end
+          ##
 
           if_not_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
@@ -1538,6 +1826,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !true
+          #   1
+          # elsif !false
+          #   3
+          # end
+          ##
+
           if_not_step_group :success_method,
             in: [index: -> { 0 }] \
           do
@@ -1577,6 +1873,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if true
+          #   1
+          # elsif raise
+          #   3
+          # end
+          ##
+
           if_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
           do
@@ -1614,6 +1918,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if true
+          #   1
+          # elsif raise
+          #   3
+          # end
+          ##
 
           if_step_group :success_method,
             in: [index: -> { 0 }] \
@@ -1653,6 +1965,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !true
+          #   1
+          # elsif raise
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
           do
@@ -1690,6 +2010,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !true
+          #   1
+          # elsif raise
+          #   3
+          # end
+          ##
 
           if_not_step_group :success_method,
             in: [index: -> { 0 }] \
@@ -1729,6 +2057,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if true
+          #   1
+          # elsif !raise
+          #   3
+          # end
+          ##
+
           if_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
           do
@@ -1766,6 +2102,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if true
+          #   1
+          # elsif !raise
+          #   3
+          # end
+          ##
 
           if_step_group :success_method,
             in: [index: -> { 0 }] \
@@ -1805,6 +2149,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !true
+          #   1
+          # elsif !raise
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:SuccessService],
             in: [index: -> { 0 }] \
           do
@@ -1843,6 +2195,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !true
+          #   1
+          # elsif !raise
+          #   3
+          # end
+          ##
+
           if_not_step_group :success_method,
             in: [index: -> { 0 }] \
           do
@@ -1880,6 +2240,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if false
+          #   1
+          # elsif true
+          #   3
+          # end
+          ##
 
           if_step_group services[:FailureService],
             in: [index: -> { 0 }] \
@@ -1920,6 +2288,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if false
+          #   1
+          # elsif true
+          #   3
+          # end
+          ##
+
           if_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -1959,6 +2335,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !false
+          #   1
+          # elsif true
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:FailureService],
             in: [index: -> { 0 }] \
           do
@@ -1997,6 +2381,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !false
+          #   1
+          # elsif true
+          #   3
+          # end
+          ##
+
           if_not_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -2034,6 +2426,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if false
+          #   1
+          # elsif !true
+          #   3
+          # end
+          ##
 
           if_step_group services[:FailureService],
             in: [index: -> { 0 }] \
@@ -2073,6 +2473,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if false
+          #   1
+          # elsif !true
+          #   3
+          # end
+          ##
+
           if_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -2111,6 +2519,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !false
+          #   1
+          # elsif !true
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:FailureService],
             in: [index: -> { 0 }] \
           do
@@ -2148,6 +2564,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !false
+          #   1
+          # elsif !true
+          #   3
+          # end
+          ##
 
           if_not_step_group :failure_method,
             in: [index: -> { 0 }] \
@@ -2187,6 +2611,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if false
+          #   1
+          # elsif false
+          #   3
+          # end
+          ##
+
           if_step_group services[:FailureService],
             in: [index: -> { 0 }] \
           do
@@ -2224,6 +2656,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if false
+          #   1
+          # elsif false
+          #   3
+          # end
+          ##
 
           if_step_group :failure_method,
             in: [index: -> { 0 }] \
@@ -2263,6 +2703,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !false
+          #   1
+          # elsif false
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:FailureService],
             in: [index: -> { 0 }] \
           do
@@ -2301,6 +2749,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !false
+          #   1
+          # elsif false
+          #   3
+          # end
+          ##
+
           if_not_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -2338,6 +2794,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if false
+          #   1
+          # elsif !false
+          #   3
+          # end
+          ##
 
           if_step_group services[:FailureService],
             in: [index: -> { 0 }] \
@@ -2378,6 +2842,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if false
+          #   1
+          # elsif !false
+          #   3
+          # end
+          ##
+
           if_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -2417,6 +2889,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !false
+          #   1
+          # elsif !false
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:FailureService],
             in: [index: -> { 0 }] \
           do
@@ -2455,6 +2935,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !false
+          #   1
+          # elsif !false
+          #   3
+          # end
+          ##
+
           if_not_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -2492,6 +2980,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if false
+          #   1
+          # elsif raise
+          #   3
+          # end
+          ##
 
           if_step_group services[:FailureService],
             in: [index: -> { 0 }] \
@@ -2531,6 +3027,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if false
+          #   1
+          # elsif raise
+          #   3
+          # end
+          ##
+
           if_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -2568,6 +3072,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !false
+          #   1
+          # elsif raise
+          #   3
+          # end
+          ##
 
           if_not_step_group services[:FailureService],
             in: [index: -> { 0 }] \
@@ -2607,6 +3119,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !false
+          #   1
+          # elsif raise
+          #   3
+          # end
+          ##
+
           if_not_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -2644,6 +3164,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if false
+          #   1
+          # elsif !raise
+          #   3
+          # end
+          ##
 
           if_step_group services[:FailureService],
             in: [index: -> { 0 }] \
@@ -2683,6 +3211,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if false
+          #   1
+          # elsif !raise
+          #   3
+          # end
+          ##
+
           if_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -2720,6 +3256,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !false
+          #   1
+          # elsif !raise
+          #   3
+          # end
+          ##
 
           if_not_step_group services[:FailureService],
             in: [index: -> { 0 }] \
@@ -2759,6 +3303,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !false
+          #   1
+          # elsif !raise
+          #   3
+          # end
+          ##
+
           if_not_step_group :failure_method,
             in: [index: -> { 0 }] \
           do
@@ -2797,6 +3349,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if raise
+          #   1
+          # elsif true
+          #   3
+          # end
+          ##
+
           if_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -2833,6 +3393,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if raise
+          #   1
+          # elsif true
+          #   3
+          # end
+          ##
 
           if_step_group :error_method,
             in: [index: -> { 0 }] \
@@ -2871,6 +3439,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !raise
+          #   1
+          # elsif true
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -2907,6 +3483,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !raise
+          #   1
+          # elsif true
+          #   3
+          # end
+          ##
 
           if_not_step_group :error_method,
             in: [index: -> { 0 }] \
@@ -2945,6 +3529,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if raise
+          #   1
+          # elsif !true
+          #   3
+          # end
+          ##
+
           if_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -2981,6 +3573,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if raise
+          #   1
+          # elsif !true
+          #   3
+          # end
+          ##
 
           if_step_group :error_method,
             in: [index: -> { 0 }] \
@@ -3019,6 +3619,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !raise
+          #   1
+          # elsif !true
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -3055,6 +3663,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !raise
+          #   1
+          # elsif !true
+          #   3
+          # end
+          ##
 
           if_not_step_group :error_method,
             in: [index: -> { 0 }] \
@@ -3093,6 +3709,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if raise
+          #   1
+          # elsif false
+          #   3
+          # end
+          ##
+
           if_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -3129,6 +3753,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if raise
+          #   1
+          # elsif false
+          #   3
+          # end
+          ##
 
           if_step_group :error_method,
             in: [index: -> { 0 }] \
@@ -3167,6 +3799,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !raise
+          #   1
+          # elsif false
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -3203,6 +3843,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !raise
+          #   1
+          # elsif false
+          #   3
+          # end
+          ##
 
           if_not_step_group :error_method,
             in: [index: -> { 0 }] \
@@ -3241,6 +3889,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if raise
+          #   1
+          # elsif !false
+          #   3
+          # end
+          ##
+
           if_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -3277,6 +3933,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if raise
+          #   1
+          # elsif !false
+          #   3
+          # end
+          ##
 
           if_step_group :error_method,
             in: [index: -> { 0 }] \
@@ -3315,6 +3979,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !raise
+          #   1
+          # elsif !false
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -3351,6 +4023,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !raise
+          #   1
+          # elsif !false
+          #   3
+          # end
+          ##
 
           if_not_step_group :error_method,
             in: [index: -> { 0 }] \
@@ -3389,6 +4069,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if raise
+          #   1
+          # elsif raise
+          #   3
+          # end
+          ##
+
           if_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -3425,6 +4113,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if raise
+          #   1
+          # elsif raise
+          #   3
+          # end
+          ##
 
           if_step_group :error_method,
             in: [index: -> { 0 }] \
@@ -3463,6 +4159,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !raise
+          #   1
+          # elsif raise
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -3500,6 +4204,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !raise
+          #   1
+          # elsif raise
+          #   3
+          # end
+          ##
+
           if_not_step_group :error_method,
             in: [index: -> { 0 }] \
           do
@@ -3536,6 +4248,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if raise
+          #   1
+          # elsif !raise
+          #   3
+          # end
+          ##
 
           if_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
@@ -3573,6 +4293,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if raise
+          #   1
+          # elsif !raise
+          #   3
+          # end
+          ##
 
           if_step_group :error_method,
             in: [index: -> { 0 }] \
@@ -3611,6 +4339,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
           include ConvenientService::Standard::Config
           include concern
 
+          ##
+          # if !raise
+          #   1
+          # elsif !raise
+          #   3
+          # end
+          ##
+
           if_not_step_group services[:ErrorService],
             in: [index: -> { 0 }] \
           do
@@ -3647,6 +4383,14 @@ RSpec.describe "If steps", type: [:standard, :e2e] do
         klass.class_exec(concern) do |concern|
           include ConvenientService::Standard::Config
           include concern
+
+          ##
+          # if !raise
+          #   1
+          # elsif !raise
+          #   3
+          # end
+          ##
 
           if_not_step_group :error_method,
             in: [index: -> { 0 }] \

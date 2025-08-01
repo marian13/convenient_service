@@ -102,6 +102,24 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
         expect(expression.empty?).to eq(false)
       end
     end
+
+    describe "#if?" do
+      it "returns `false`" do
+        expect(expression.if?).to eq(false)
+      end
+    end
+
+    describe "#else?" do
+      it "returns `false`" do
+        expect(expression.else?).to eq(false)
+      end
+    end
+
+    describe "#complex_if?" do
+      it "returns `false`" do
+        expect(expression.complex_if?).to eq(false)
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
