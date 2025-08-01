@@ -34,7 +34,6 @@ module ConvenientService
             :type_safety,
             :exception_services_trace,
             :per_instance_caching,
-            :mermaid_flowchart,
             :backtrace_cleaner,
             # :active_model_validations,
             # :dry_initializer,
@@ -85,7 +84,6 @@ module ConvenientService
             use ConvenientService::Plugins::Common::HasMemoization::UsingMemoWise::Concern if options.enabled?(:memo_wise)
             use ConvenientService::Plugins::Common::CanHaveNotPassedArguments::Concern if options.enabled?(:not_passed_arguments)
             use ConvenientService::Plugins::Common::CanUtilizeFiniteLoop::Concern if options.enabled?(:finite_loop)
-            use ConvenientService::Plugins::Service::HasMermaidFlowchart::Concern if options.enabled?(:mermaid_flowchart)
           end
 
           middlewares :initialize do

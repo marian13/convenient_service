@@ -58,8 +58,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Service::Plugins::CanHaveRecalculations::Concern,
               ConvenientService::Service::Plugins::CanNotBeInherited::Concern,
               ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Concern,
-              ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern,
-              ConvenientService::Service::Plugins::HasMermaidFlowchart::Concern
+              ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern
             ]
           end
 
@@ -772,7 +771,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               :type_safety,
               :exception_services_trace,
               :per_instance_caching,
-              :mermaid_flowchart,
               :backtrace_cleaner,
               :rspec
             ]

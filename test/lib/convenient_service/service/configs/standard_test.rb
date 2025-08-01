@@ -31,7 +31,6 @@ class ConvenientService::Service::Configs::StandardTest < Minitest::Test
               :type_safety,
               :exception_services_trace,
               :per_instance_caching,
-              :mermaid_flowchart,
               :backtrace_cleaner,
               rspec: false
             ]

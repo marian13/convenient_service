@@ -34,7 +34,6 @@ require_relative "plugins/forbids_convenient_service_entities_as_constructor_arg
 require_relative "plugins/has_inspect"
 require_relative "plugins/has_j_send_result_short_syntax"
 require_relative "plugins/has_j_send_result_status_check_short_syntax"
-require_relative "plugins/has_mermaid_flowchart"
 require_relative "plugins/raises_on_not_result_return_value"
 require_relative "plugins/raises_on_double_result"
 require_relative "plugins/rescues_result_unhandled_exceptions"
