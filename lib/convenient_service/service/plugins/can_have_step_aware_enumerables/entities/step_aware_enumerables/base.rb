@@ -294,7 +294,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
               def step_aware_object_or_nil_from(object, propagated_result)
-                Entities::StepAwareEnumerables::Object.new(object: object, organizer: organizer, propagated_result: propagated_result || (failure unless object))
+                Entities::StepAwareEnumerables::ObjectOrNil.new(object: object, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##
@@ -303,7 +303,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Entities::StepAwareEnumerables::Object]
               #
               def step_aware_boolean_from(boolean, propagated_result)
-                Entities::StepAwareEnumerables::Boolean.new(object: boolean, organizer: organizer, propagated_result: propagated_result || (failure unless object))
+                Entities::StepAwareEnumerables::Boolean.new(object: boolean, organizer: organizer, propagated_result: propagated_result)
               end
 
               ##

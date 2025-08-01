@@ -8,6 +8,7 @@
 require_relative "step_aware_enumerables/base"
 
 require_relative "step_aware_enumerables/object"
+require_relative "step_aware_enumerables/object_or_nil"
 require_relative "step_aware_enumerables/enumerable"
 require_relative "step_aware_enumerables/enumerator"
 require_relative "step_aware_enumerables/lazy_enumerator"
