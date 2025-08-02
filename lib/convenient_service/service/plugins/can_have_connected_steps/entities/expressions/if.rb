@@ -53,21 +53,19 @@ module ConvenientService
               #
               def failure?
                 return true if condition_expression.failure?
+                return false if condition_expression.error?
 
-                return then_expression.failure? if condition_expression.success?
-
-                false
+                then_expression.failure?
               end
 
               ##
               # @return [Boolean]
               #
               def error?
+                return false if condition_expression.failure?
                 return true if condition_expression.error?
 
-                return then_expression.error? if condition_expression.success?
-
-                false
+                then_expression.error?
               end
 
               ##
