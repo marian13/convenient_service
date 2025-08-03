@@ -13,14 +13,20 @@ module ConvenientService
           module Expressions
             class ComplexIf < Entities::Expressions::Base
               ##
-              # @!attribute [r] if_expressions
-              #   @return [Array<ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base>]
+              # @!attribute [r] if_expression
+              #   @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If]
               #
-              attr_reader :if_expressions
+              attr_reader :if_expression
+
+              ##
+              # @!attribute [r] elsif_expressions
+              #   @return [Array<ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If>]
+              #
+              attr_reader :elsif_expressions
 
               ##
               # @!attribute [r] else_expression
-              #   @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+              #   @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Else]
               #
               attr_reader :else_expression
 
@@ -30,12 +36,14 @@ module ConvenientService
               attr_accessor :organizer
 
               ##
-              # @param if_expressions [Array<ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base>]
-              # @param else_expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base, nil]
+              # @param if_expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If]
+              # @param elsif_expressions [Array<ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If>]
+              # @param else_expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Else, nil]
               # @return [void]
               #
-              def initialize(if_expressions, else_expression = nil)
-                @if_expressions = if_expressions
+              def initialize(if_expression, elsif_expressions, else_expression)
+                @if_expression = if_expression
+                @elsif_expressions = elsif_expressions
                 @else_expression = else_expression
               end
 
@@ -43,9 +51,12 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               #
               def result
-                if_expressions.each do |if_expression|
-                  return if_expression.condition_expression.result if if_expression.condition_expression.error?
-                  return if_expression.then_expression.result if if_expression.condition_expression.success?
+                return if_expression.condition_expression.result if if_expression.condition_expression.error?
+                return if_expression.then_expression.result if if_expression.condition_expression.success?
+
+                elsif_expressions.each do |elsif_expression|
+                  return elsif_expression.condition_expression.result if elsif_expression.condition_expression.error?
+                  return elsif_expression.then_expression.result if elsif_expression.condition_expression.success?
                 end
 
                 else_expression ? else_expression.result : organizer.success
@@ -55,9 +66,12 @@ module ConvenientService
               # @return [Boolean]
               #
               def success?
-                if_expressions.each do |if_expression|
-                  return false if if_expression.condition_expression.error?
-                  return if_expression.then_expression.success? if if_expression.condition_expression.success?
+                return false if if_expression.condition_expression.error?
+                return if_expression.then_expression.success? if if_expression.condition_expression.success?
+
+                elsif_expressions.each do |elsif_expression|
+                  return false if elsif_expression.condition_expression.error?
+                  return elsif_expression.then_expression.success? if elsif_expression.condition_expression.success?
                 end
 
                 else_expression ? else_expression.success? : true
@@ -67,9 +81,12 @@ module ConvenientService
               # @return [Boolean]
               #
               def failure?
-                if_expressions.each do |if_expression|
-                  return false if if_expression.condition_expression.error?
-                  return if_expression.then_expression.failure? if if_expression.condition_expression.success?
+                return false if if_expression.condition_expression.error?
+                return if_expression.then_expression.failure? if if_expression.condition_expression.success?
+
+                elsif_expressions.each do |elsif_expression|
+                  return false if elsif_expression.condition_expression.error?
+                  return elsif_expression.then_expression.failure? if elsif_expression.condition_expression.success?
                 end
 
                 else_expression ? else_expression.failure? : false
@@ -79,9 +96,12 @@ module ConvenientService
               # @return [Boolean]
               #
               def error?
-                if_expressions.each do |if_expression|
-                  return true if if_expression.condition_expression.error?
-                  return if_expression.then_expression.error? if if_expression.condition_expression.success?
+                return true if if_expression.condition_expression.error?
+                return if_expression.then_expression.error? if if_expression.condition_expression.success?
+
+                elsif_expressions.each do |elsif_expression|
+                  return true if elsif_expression.condition_expression.error?
+                  return elsif_expression.then_expression.error? if elsif_expression.condition_expression.success?
                 end
 
                 else_expression ? else_expression.error? : false
@@ -92,7 +112,11 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
               #
               def each_step(&block)
-                if_expressions.each { |if_expression| if_expression.each_step(&block) }
+                if_expression.each_step(&block)
+
+                elsif_expressions.each do |elsif_expression|
+                  elsif_expression.each_step(&block)
+                end
 
                 else_expression&.each_step(&block)
 
@@ -105,11 +129,16 @@ module ConvenientService
               #
               # rubocop:disable Lint/NonLocalExitFromIterator
               def each_evaluated_step(&block)
-                if_expressions.each do |if_expression|
-                  if_expression.condition_expression.each_evaluated_step(&block)
+                if_expression.condition_expression.each_evaluated_step(&block)
 
-                  return if if_expression.condition_expression.error?
-                  return if_expression.then_expression.each_evaluated_step(&block) if if_expression.condition_expression.success?
+                return if if_expression.condition_expression.error?
+                return if_expression.then_expression.each_evaluated_step(&block) if if_expression.condition_expression.success?
+
+                elsif_expressions.each do |elsif_expression|
+                  elsif_expression.condition_expression.each_evaluated_step(&block)
+
+                  return if elsif_expression.condition_expression.error?
+                  return elsif_expression.then_expression.each_evaluated_step(&block) if elsif_expression.condition_expression.success?
                 end
 
                 else_expression&.each_evaluated_step(&block)
@@ -123,7 +152,15 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Not]
               #
               def with_organizer(organizer)
-                copy(overrides: {args: {0 => if_expressions.map { |if_expression| if_expression.with_organizer(organizer) }, 1 => else_expression&.with_organizer(organizer)}})
+                copy(
+                  overrides: {
+                    args: {
+                      0 => if_expression.with_organizer(organizer),
+                      1 => elsif_expressions.map { |elsif_expression| elsif_expression.with_organizer(organizer) },
+                      2 => else_expression&.with_organizer(organizer)
+                    }
+                  }
+                )
                   .tap { |complex_if| complex_if.organizer = organizer }
               end
 
@@ -131,12 +168,19 @@ module ConvenientService
               # @return [String]
               #
               def inspect
-                [
-                  "if #{if_expressions.first.condition_expression.inspect} then #{if_expressions.first.then_expression.inspect}",
-                  *if_expressions[1..].map { |if_expression| "elsif #{if_expression.condition_expression.inspect} then #{if_expression.then_expression.inspect}" },
-                  "end"
+                parts = [
+                  "if #{if_expression.condition_expression.inspect} then #{if_expression.then_expression.inspect}"
                 ]
-                  .join(" ")
+
+                elsif_expressions.each do |elsif_expression|
+                  parts << "elsif #{elsif_expression.condition_expression.inspect} then #{elsif_expression.then_expression.inspect}"
+                end
+
+                parts << "else #{else_expression.expression.inspect}" if else_expression
+
+                parts << "end"
+
+                parts.join(" ")
               end
 
               ##
@@ -153,7 +197,8 @@ module ConvenientService
               def ==(other)
                 return unless other.instance_of?(self.class)
 
-                return false if if_expressions != other.if_expressions
+                return false if if_expression != other.if_expression
+                return false if elsif_expressions != other.elsif_expressions
                 return false if else_expression != other.else_expression
 
                 true
@@ -163,7 +208,7 @@ module ConvenientService
               # @return [ConvenientService::Support::Arguments]
               #
               def to_arguments
-                Support::Arguments.new(if_expressions, else_expression)
+                Support::Arguments.new(if_expression, elsif_expressions, else_expression)
               end
             end
           end

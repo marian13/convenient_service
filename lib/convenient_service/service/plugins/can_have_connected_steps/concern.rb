@@ -454,7 +454,15 @@ module ConvenientService
             end
 
             ##
-            # or_if_step_group
+            # @api public
+            #
+            # @param args [Array<Object>]
+            # @param kwargs [Hash{Symbol => Object}]
+            # @param block [Proc, nil]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            # @internal
+            #   TODO: `or_if_step_group`.
             #
             def if_step_group(*args, **kwargs, &block)
               previous_expression = steps.expression
@@ -472,23 +480,23 @@ module ConvenientService
               steps.expression =
                 if previous_expression.empty?
                   Entities::Expressions::ComplexIf.new(
-                    [
-                      Entities::Expressions::If.new(
-                        Entities::Expressions::Scalar.new(new_step),
-                        current_expression
-                      )
-                    ]
+                    Entities::Expressions::If.new(
+                      Entities::Expressions::Scalar.new(new_step),
+                      current_expression
+                    ),
+                    [],
+                    nil
                   )
                 else
                   Entities::Expressions::And.new(
                     previous_expression,
                     Entities::Expressions::ComplexIf.new(
-                      [
-                        Entities::Expressions::If.new(
-                          Entities::Expressions::Scalar.new(new_step),
-                          current_expression
-                        )
-                      ]
+                      Entities::Expressions::If.new(
+                        Entities::Expressions::Scalar.new(new_step),
+                        current_expression
+                      ),
+                      [],
+                      nil
                     )
                   )
                 end
@@ -513,27 +521,27 @@ module ConvenientService
               steps.expression =
                 if previous_expression.empty?
                   Entities::Expressions::ComplexIf.new(
-                    [
-                      Entities::Expressions::If.new(
-                        Entities::Expressions::Not.new(
-                          Entities::Expressions::Scalar.new(new_step)
-                        ),
-                        current_expression
-                      )
-                    ]
+                    Entities::Expressions::If.new(
+                      Entities::Expressions::Not.new(
+                        Entities::Expressions::Scalar.new(new_step)
+                      ),
+                      current_expression
+                    ),
+                    [],
+                    nil
                   )
                 else
                   Entities::Expressions::And.new(
                     previous_expression,
                     Entities::Expressions::ComplexIf.new(
-                      [
-                        Entities::Expressions::If.new(
-                          Entities::Expressions::Not.new(
-                            Entities::Expressions::Scalar.new(new_step)
-                          ),
-                          current_expression
-                        )
-                      ]
+                      Entities::Expressions::If.new(
+                        Entities::Expressions::Not.new(
+                          Entities::Expressions::Scalar.new(new_step)
+                        ),
+                        current_expression
+                      ),
+                      [],
+                      nil
                     )
                   )
                 end
@@ -564,13 +572,15 @@ module ConvenientService
 
               steps.expression =
                 Entities::Expressions::ComplexIf.new(
+                  previous_expression.if_expression,
                   [
-                    *previous_expression.if_expressions,
+                    *previous_expression.elsif_expressions,
                     Entities::Expressions::If.new(
                       Entities::Expressions::Scalar.new(new_step),
                       current_expression
                     )
-                  ]
+                  ],
+                  nil
                 )
             end
 
@@ -596,15 +606,17 @@ module ConvenientService
 
               steps.expression =
                 Entities::Expressions::ComplexIf.new(
+                  previous_expression.if_expression,
                   [
-                    *previous_expression.if_expressions,
+                    *previous_expression.elsif_expressions,
                     Entities::Expressions::If.new(
                       Entities::Expressions::Not.new(
                         Entities::Expressions::Scalar.new(new_step)
                       ),
                       current_expression
                     )
-                  ]
+                  ],
+                  nil
                 )
             end
 
@@ -628,9 +640,8 @@ module ConvenientService
 
               steps.expression =
                 Entities::Expressions::ComplexIf.new(
-                  [
-                    *previous_expression.if_expressions
-                  ],
+                  previous_expression.if_expression,
+                  previous_expression.elsif_expressions,
                   Entities::Expressions::Else.new(current_expression)
                 )
             end
