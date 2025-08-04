@@ -192,32 +192,6 @@
 </li>
 
     
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#organizer-instance_method" title="#organizer (instance method)">#<strong>organizer</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute organizer.</p>
-</div></span>
-  
-</li>
-
-    
   </ul>
 
 
@@ -392,6 +366,28 @@
   <span class="summary_signature">
     
       <a href="#inspect-instance_method" title="#inspect (instance method)">#<strong>inspect</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#organizer-instance_method" title="#organizer (instance method)">#<strong>organizer</strong>  &#x21d2; ConvenientService::Service </a>
     
 
     
@@ -604,14 +600,14 @@
       <pre class="lines">
 
 
-44
-45
-46
-47
-48</pre>
+39
+40
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_if_expression'>if_expression</span><span class='comma'>,</span> <span class='id identifier rubyid_elsif_expressions'>elsif_expressions</span><span class='comma'>,</span> <span class='id identifier rubyid_else_expression'>else_expression</span><span class='rparen'>)</span>
   <span class='ivar'>@if_expression</span> <span class='op'>=</span> <span class='id identifier rubyid_if_expression'>if_expression</span>
@@ -754,48 +750,6 @@
 </table>
 </div>
     
-      
-      <span id="organizer=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="organizer-instance_method">
-  
-    #<strong>organizer</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns the value of attribute organizer.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-36
-37
-38</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 36</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_organizer'>organizer</span>
-  <span class='ivar'>@organizer</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
   </div>
 
 
@@ -859,7 +813,6 @@
       <pre class="lines">
 
 
-197
 198
 199
 200
@@ -867,10 +820,11 @@
 202
 203
 204
-205</pre>
+205
+206</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 197</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 198</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -923,12 +877,12 @@
       <pre class="lines">
 
 
-189
 190
-191</pre>
+191
+192</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 189</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 190</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_complex_if?'>complex_if?</span>
   <span class='kw'>true</span>
@@ -991,8 +945,6 @@
       <pre class="lines">
 
 
-131
-132
 133
 134
 135
@@ -1007,10 +959,12 @@
 144
 145
 146
-147</pre>
+147
+148
+149</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 131</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each_evaluated_step'>each_evaluated_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_if_expression'>if_expression</span><span class='period'>.</span><span class='id identifier rubyid_condition_expression'>condition_expression</span><span class='period'>.</span><span class='id identifier rubyid_each_evaluated_step'>each_evaluated_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1086,8 +1040,6 @@
       <pre class="lines">
 
 
-114
-115
 116
 117
 118
@@ -1096,10 +1048,12 @@
 121
 122
 123
-124</pre>
+124
+125
+126</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 114</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each_step'>each_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_if_expression'>if_expression</span><span class='period'>.</span><span class='id identifier rubyid_each_step'>each_step</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1154,8 +1108,6 @@
       <pre class="lines">
 
 
-98
-99
 100
 101
 102
@@ -1164,10 +1116,12 @@
 105
 106
 107
-108</pre>
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error?'>error?</span>
   <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_if_expression'>if_expression</span><span class='period'>.</span><span class='id identifier rubyid_condition_expression'>condition_expression</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
@@ -1222,8 +1176,6 @@
       <pre class="lines">
 
 
-83
-84
 85
 86
 87
@@ -1232,10 +1184,12 @@
 90
 91
 92
-93</pre>
+93
+94
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 83</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_failure?'>failure?</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_if_expression'>if_expression</span><span class='period'>.</span><span class='id identifier rubyid_condition_expression'>condition_expression</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
@@ -1290,7 +1244,6 @@
       <pre class="lines">
 
 
-170
 171
 172
 173
@@ -1304,10 +1257,11 @@
 181
 182
 183
-184</pre>
+184
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 170</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 171</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
   <span class='id identifier rubyid_parts'>parts</span> <span class='op'>=</span> <span class='lbracket'>[</span>
@@ -1323,6 +1277,58 @@
   <span class='id identifier rubyid_parts'>parts</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>end</span><span class='tstring_end'>&quot;</span></span>
 
   <span class='id identifier rubyid_parts'>parts</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="organizer-instance_method">
+  
+    #<strong>organizer</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../../../Service.html" title="ConvenientService::Service (module)">ConvenientService::Service</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../../Service.html" title="ConvenientService::Service (module)">ConvenientService::Service</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_organizer'>organizer</span>
+  <span class='id identifier rubyid_if_expression'>if_expression</span><span class='period'>.</span><span class='id identifier rubyid_organizer'>organizer</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1366,20 +1372,20 @@
       <pre class="lines">
 
 
+48
+49
+50
+51
+52
 53
 54
 55
 56
 57
-58
-59
-60
-61
-62
-63</pre>
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_if_expression'>if_expression</span><span class='period'>.</span><span class='id identifier rubyid_condition_expression'>condition_expression</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span> <span class='kw'>if</span> <span class='id identifier rubyid_if_expression'>if_expression</span><span class='period'>.</span><span class='id identifier rubyid_condition_expression'>condition_expression</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
@@ -1434,8 +1440,6 @@
       <pre class="lines">
 
 
-68
-69
 70
 71
 72
@@ -1444,10 +1448,12 @@
 75
 76
 77
-78</pre>
+78
+79
+80</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_success?'>success?</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_if_expression'>if_expression</span><span class='period'>.</span><span class='id identifier rubyid_condition_expression'>condition_expression</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
@@ -1502,12 +1508,12 @@
       <pre class="lines">
 
 
-210
 211
-212</pre>
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 210</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 211</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_arguments'>to_arguments</span>
   <span class='const'><span class='object_link'><a href="../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../Support/Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_if_expression'>if_expression</span><span class='comma'>,</span> <span class='id identifier rubyid_elsif_expressions'>elsif_expressions</span><span class='comma'>,</span> <span class='id identifier rubyid_else_expression'>else_expression</span><span class='rparen'>)</span>
@@ -1569,8 +1575,6 @@
       <pre class="lines">
 
 
-154
-155
 156
 157
 158
@@ -1580,10 +1584,11 @@
 162
 163
 164
-165</pre>
+165
+166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/entities/expressions/complex_if.rb', line 156</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_organizer'>with_organizer</span><span class='lparen'>(</span><span class='id identifier rubyid_organizer'>organizer</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span>
@@ -1595,7 +1600,6 @@
       <span class='rbrace'>}</span>
     <span class='rbrace'>}</span>
   <span class='rparen'>)</span>
-    <span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_complex_if'>complex_if</span><span class='op'>|</span> <span class='id identifier rubyid_complex_if'>complex_if</span><span class='period'>.</span><span class='id identifier rubyid_organizer'>organizer</span> <span class='op'>=</span> <span class='id identifier rubyid_organizer'>organizer</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1607,7 +1611,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Aug  4 15:17:01 2025 by
+  Generated on Mon Aug  4 19:17:32 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
