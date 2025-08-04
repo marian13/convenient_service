@@ -196,6 +196,1746 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       end
     end
 
+    describe "#result" do
+      context "when `if_expression.condition_expression` is `error`" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+            step :bar
+            step :baz
+            step :qux
+            step :quux
+            step :quuz
+            step :cargo
+
+            def foo
+              error(data: {from: :foo})
+            end
+
+            def bar
+              success(data: {from: :bar})
+            end
+
+            def baz
+              success(data: {from: :baz})
+            end
+
+            def qux
+              success(data: {from: :qux})
+            end
+
+            def quux
+              success(data: {from: :quux})
+            end
+
+            def quuz
+              success(data: {from: :quuz})
+            end
+
+            def cargo
+              success(data: {from: :cargo})
+            end
+          end
+        end
+
+        specify do
+          expect { expression.result }
+            .to delegate_to(if_expression.condition_expression, :result)
+            .without_arguments
+            .and_return_its_value
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+          #
+          expect { expression.result }.not_to delegate_to(if_expression.then_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.condition_expression` is NOT evaluated.
+          #
+          expect { expression.result }.not_to delegate_to(elsif_expressions.first.condition_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+          #
+          expect { expression.result }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+          #
+          expect { expression.result }.not_to delegate_to(else_expression.expression, :result)
+        end
+      end
+
+      context "when `if_expression.condition_expression` is `failure`" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+            step :bar
+            step :baz
+            step :qux
+            step :quux
+            step :quuz
+            step :cargo
+
+            def foo
+              failure(data: {from: :foo})
+            end
+
+            def bar
+              success(data: {from: :bar})
+            end
+
+            def baz
+              success(data: {from: :baz})
+            end
+
+            def qux
+              success(data: {from: :qux})
+            end
+
+            def quux
+              success(data: {from: :quux})
+            end
+
+            def quuz
+              success(data: {from: :quuz})
+            end
+
+            def cargo
+              success(data: {from: :cargo})
+            end
+          end
+        end
+
+        context "when `elsif_expressions.first.condition_expression` is `error`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              step :foo
+              step :bar
+              step :baz
+              step :qux
+              step :quux
+              step :quuz
+              step :cargo
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+
+              def baz
+                error(data: {from: :baz})
+              end
+
+              def qux
+                success(data: {from: :qux})
+              end
+
+              def quux
+                success(data: {from: :quux})
+              end
+
+              def quuz
+                success(data: {from: :quuz})
+              end
+
+              def cargo
+                success(data: {from: :cargo})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.result }
+              .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+            #
+            expect { expression.result }.not_to delegate_to(if_expression.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.result }
+              .to delegate_to(elsif_expressions.first.condition_expression, :result)
+              .without_arguments
+              .and_return_its_value
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+            #
+            expect { expression.result }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+            #
+            expect { expression.result }.not_to delegate_to(else_expression.expression, :result)
+          end
+        end
+
+        context "when `elsif_expressions.first.condition_expression` is `failure`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              step :foo
+              step :bar
+              step :baz
+              step :qux
+              step :quux
+              step :quuz
+              step :cargo
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+
+              def baz
+                failure(data: {from: :baz})
+              end
+
+              def qux
+                success(data: {from: :qux})
+              end
+
+              def quux
+                success(data: {from: :quux})
+              end
+
+              def quuz
+                success(data: {from: :quuz})
+              end
+
+              def cargo
+                success(data: {from: :cargo})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.result }
+              .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+            #
+            expect { expression.result }.not_to delegate_to(if_expression.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.result }
+              .to delegate_to(elsif_expressions.first.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+            #
+            expect { expression.result }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.result }
+              .to delegate_to(else_expression.expression, :result)
+              .without_arguments
+              .and_return_its_value
+          end
+        end
+
+        context "when `elsif_expressions.first.condition_expression` is `success`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              step :foo
+              step :bar
+              step :baz
+              step :qux
+              step :quux
+              step :quuz
+              step :cargo
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+
+              def baz
+                success(data: {from: :baz})
+              end
+
+              def qux
+                success(data: {from: :qux})
+              end
+
+              def quux
+                success(data: {from: :quux})
+              end
+
+              def quuz
+                success(data: {from: :quuz})
+              end
+
+              def cargo
+                success(data: {from: :cargo})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.result }
+              .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+            #
+            expect { expression.result }.not_to delegate_to(if_expression.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.result }
+              .to delegate_to(elsif_expressions.first.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            expect { expression.result }
+              .to delegate_to(elsif_expressions.first.then_expression, :result)
+              .without_arguments
+              .and_return_its_value
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+            #
+            expect { expression.result }.not_to delegate_to(else_expression.expression, :result)
+          end
+        end
+      end
+
+      context "when `if_expression.condition_expression` is `success`" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+            step :bar
+            step :baz
+            step :qux
+            step :quux
+            step :quuz
+            step :cargo
+
+            def foo
+              success(data: {from: :foo})
+            end
+
+            def bar
+              success(data: {from: :bar})
+            end
+
+            def baz
+              success(data: {from: :baz})
+            end
+
+            def qux
+              success(data: {from: :qux})
+            end
+
+            def quux
+              success(data: {from: :quux})
+            end
+
+            def quuz
+              success(data: {from: :quuz})
+            end
+
+            def cargo
+              success(data: {from: :cargo})
+            end
+          end
+        end
+
+        specify do
+          expect { expression.result }
+            .to delegate_to(if_expression.condition_expression, :result)
+            .without_arguments
+        end
+
+        specify do
+          expect { expression.result }
+            .to delegate_to(if_expression.then_expression, :result)
+            .without_arguments
+            .and_return_its_value
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.condition_expression` is NOT evaluated.
+          #
+          expect { expression.result }.not_to delegate_to(elsif_expressions.first.condition_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+          #
+          expect { expression.result }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+          #
+          expect { expression.result }.not_to delegate_to(else_expression.expression, :result)
+        end
+      end
+    end
+
+    describe "#success?" do
+      context "when `if_expression.condition_expression` is `error`" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+            step :bar
+            step :baz
+            step :qux
+            step :quux
+            step :quuz
+            step :cargo
+
+            def foo
+              error(data: {from: :foo})
+            end
+
+            def bar
+              success(data: {from: :bar})
+            end
+
+            def baz
+              success(data: {from: :baz})
+            end
+
+            def qux
+              success(data: {from: :qux})
+            end
+
+            def quux
+              success(data: {from: :quux})
+            end
+
+            def quuz
+              success(data: {from: :quuz})
+            end
+
+            def cargo
+              success(data: {from: :cargo})
+            end
+          end
+        end
+
+        specify do
+          expect { expression.success? }
+            .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+              .and_return { false }
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+          #
+          expect { expression.success? }.not_to delegate_to(if_expression.then_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.condition_expression` is NOT evaluated.
+          #
+          expect { expression.success? }.not_to delegate_to(elsif_expressions.first.condition_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+          #
+          expect { expression.success? }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+          #
+          expect { expression.success? }.not_to delegate_to(else_expression.expression, :result)
+        end
+      end
+
+      context "when `if_expression.condition_expression` is `failure`" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+            step :bar
+            step :baz
+            step :qux
+            step :quux
+            step :quuz
+            step :cargo
+
+            def foo
+              failure(data: {from: :foo})
+            end
+
+            def bar
+              success(data: {from: :bar})
+            end
+
+            def baz
+              success(data: {from: :baz})
+            end
+
+            def qux
+              success(data: {from: :qux})
+            end
+
+            def quux
+              success(data: {from: :quux})
+            end
+
+            def quuz
+              success(data: {from: :quuz})
+            end
+
+            def cargo
+              success(data: {from: :cargo})
+            end
+          end
+        end
+
+        context "when `elsif_expressions.first.condition_expression` is `error`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              step :foo
+              step :bar
+              step :baz
+              step :qux
+              step :quux
+              step :quuz
+              step :cargo
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+
+              def baz
+                error(data: {from: :baz})
+              end
+
+              def qux
+                success(data: {from: :qux})
+              end
+
+              def quux
+                success(data: {from: :quux})
+              end
+
+              def quuz
+                success(data: {from: :quuz})
+              end
+
+              def cargo
+                success(data: {from: :cargo})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+            #
+            expect { expression.success? }.not_to delegate_to(if_expression.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(elsif_expressions.first.condition_expression, :result)
+                .without_arguments
+                .and_return { false }
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+            #
+            expect { expression.success? }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+            #
+            expect { expression.success? }.not_to delegate_to(else_expression.expression, :result)
+          end
+        end
+
+        context "when `elsif_expressions.first.condition_expression` is `failure`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              step :foo
+              step :bar
+              step :baz
+              step :qux
+              step :quux
+              step :quuz
+              step :cargo
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+
+              def baz
+                failure(data: {from: :baz})
+              end
+
+              def qux
+                success(data: {from: :qux})
+              end
+
+              def quux
+                success(data: {from: :quux})
+              end
+
+              def quuz
+                success(data: {from: :quuz})
+              end
+
+              def cargo
+                success(data: {from: :cargo})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+            #
+            expect { expression.success? }.not_to delegate_to(if_expression.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(elsif_expressions.first.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+            #
+            expect { expression.success? }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(else_expression.expression, :success?)
+              .without_arguments
+              .and_return_its_value
+          end
+        end
+
+        context "when `elsif_expressions.first.condition_expression` is `success`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              step :foo
+              step :bar
+              step :baz
+              step :qux
+              step :quux
+              step :quuz
+              step :cargo
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+
+              def baz
+                success(data: {from: :baz})
+              end
+
+              def qux
+                success(data: {from: :qux})
+              end
+
+              def quux
+                success(data: {from: :quux})
+              end
+
+              def quuz
+                success(data: {from: :quuz})
+              end
+
+              def cargo
+                success(data: {from: :cargo})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+            #
+            expect { expression.success? }.not_to delegate_to(if_expression.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(elsif_expressions.first.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            expect { expression.success? }
+              .to delegate_to(elsif_expressions.first.then_expression, :success?)
+              .without_arguments
+              .and_return_its_value
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+            #
+            expect { expression.success? }.not_to delegate_to(else_expression.expression, :result)
+          end
+        end
+      end
+
+      context "when `if_expression.condition_expression` is `success`" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+            step :bar
+            step :baz
+            step :qux
+            step :quux
+            step :quuz
+            step :cargo
+
+            def foo
+              success(data: {from: :foo})
+            end
+
+            def bar
+              success(data: {from: :bar})
+            end
+
+            def baz
+              success(data: {from: :baz})
+            end
+
+            def qux
+              success(data: {from: :qux})
+            end
+
+            def quux
+              success(data: {from: :quux})
+            end
+
+            def quuz
+              success(data: {from: :quuz})
+            end
+
+            def cargo
+              success(data: {from: :cargo})
+            end
+          end
+        end
+
+        specify do
+          expect { expression.success? }
+            .to delegate_to(if_expression.condition_expression, :result)
+            .without_arguments
+        end
+
+        specify do
+          expect { expression.success? }
+            .to delegate_to(if_expression.then_expression, :success?)
+            .without_arguments
+            .and_return_its_value
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.condition_expression` is NOT evaluated.
+          #
+          expect { expression.success? }.not_to delegate_to(elsif_expressions.first.condition_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+          #
+          expect { expression.success? }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+          #
+          expect { expression.success? }.not_to delegate_to(else_expression.expression, :result)
+        end
+      end
+    end
+
+    describe "#failure?" do
+      context "when `if_expression.condition_expression` is `error`" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+            step :bar
+            step :baz
+            step :qux
+            step :quux
+            step :quuz
+            step :cargo
+
+            def foo
+              error(data: {from: :foo})
+            end
+
+            def bar
+              success(data: {from: :bar})
+            end
+
+            def baz
+              success(data: {from: :baz})
+            end
+
+            def qux
+              success(data: {from: :qux})
+            end
+
+            def quux
+              success(data: {from: :quux})
+            end
+
+            def quuz
+              success(data: {from: :quuz})
+            end
+
+            def cargo
+              success(data: {from: :cargo})
+            end
+          end
+        end
+
+        specify do
+          expect { expression.failure? }
+            .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+              .and_return { false }
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+          #
+          expect { expression.failure? }.not_to delegate_to(if_expression.then_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.condition_expression` is NOT evaluated.
+          #
+          expect { expression.failure? }.not_to delegate_to(elsif_expressions.first.condition_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+          #
+          expect { expression.failure? }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+          #
+          expect { expression.failure? }.not_to delegate_to(else_expression.expression, :result)
+        end
+      end
+
+      context "when `if_expression.condition_expression` is `failure`" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+            step :bar
+            step :baz
+            step :qux
+            step :quux
+            step :quuz
+            step :cargo
+
+            def foo
+              failure(data: {from: :foo})
+            end
+
+            def bar
+              success(data: {from: :bar})
+            end
+
+            def baz
+              success(data: {from: :baz})
+            end
+
+            def qux
+              success(data: {from: :qux})
+            end
+
+            def quux
+              success(data: {from: :quux})
+            end
+
+            def quuz
+              success(data: {from: :quuz})
+            end
+
+            def cargo
+              success(data: {from: :cargo})
+            end
+          end
+        end
+
+        context "when `elsif_expressions.first.condition_expression` is `error`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              step :foo
+              step :bar
+              step :baz
+              step :qux
+              step :quux
+              step :quuz
+              step :cargo
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+
+              def baz
+                error(data: {from: :baz})
+              end
+
+              def qux
+                success(data: {from: :qux})
+              end
+
+              def quux
+                success(data: {from: :quux})
+              end
+
+              def quuz
+                success(data: {from: :quuz})
+              end
+
+              def cargo
+                success(data: {from: :cargo})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.failure? }
+              .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+            #
+            expect { expression.failure? }.not_to delegate_to(if_expression.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.failure? }
+              .to delegate_to(elsif_expressions.first.condition_expression, :result)
+                .without_arguments
+                .and_return { false }
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+            #
+            expect { expression.failure? }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+            #
+            expect { expression.failure? }.not_to delegate_to(else_expression.expression, :result)
+          end
+        end
+
+        context "when `elsif_expressions.first.condition_expression` is `failure`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              step :foo
+              step :bar
+              step :baz
+              step :qux
+              step :quux
+              step :quuz
+              step :cargo
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+
+              def baz
+                failure(data: {from: :baz})
+              end
+
+              def qux
+                success(data: {from: :qux})
+              end
+
+              def quux
+                success(data: {from: :quux})
+              end
+
+              def quuz
+                success(data: {from: :quuz})
+              end
+
+              def cargo
+                success(data: {from: :cargo})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.failure? }
+              .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+            #
+            expect { expression.failure? }.not_to delegate_to(if_expression.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.failure? }
+              .to delegate_to(elsif_expressions.first.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+            #
+            expect { expression.failure? }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.failure? }
+              .to delegate_to(else_expression.expression, :failure?)
+              .without_arguments
+              .and_return_its_value
+          end
+        end
+
+        context "when `elsif_expressions.first.condition_expression` is `success`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              step :foo
+              step :bar
+              step :baz
+              step :qux
+              step :quux
+              step :quuz
+              step :cargo
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+
+              def baz
+                success(data: {from: :baz})
+              end
+
+              def qux
+                success(data: {from: :qux})
+              end
+
+              def quux
+                success(data: {from: :quux})
+              end
+
+              def quuz
+                success(data: {from: :quuz})
+              end
+
+              def cargo
+                success(data: {from: :cargo})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.failure? }
+              .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+            #
+            expect { expression.failure? }.not_to delegate_to(if_expression.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.failure? }
+              .to delegate_to(elsif_expressions.first.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            expect { expression.failure? }
+              .to delegate_to(elsif_expressions.first.then_expression, :failure?)
+              .without_arguments
+              .and_return_its_value
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+            #
+            expect { expression.failure? }.not_to delegate_to(else_expression.expression, :result)
+          end
+        end
+      end
+
+      context "when `if_expression.condition_expression` is `success`" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+            step :bar
+            step :baz
+            step :qux
+            step :quux
+            step :quuz
+            step :cargo
+
+            def foo
+              success(data: {from: :foo})
+            end
+
+            def bar
+              success(data: {from: :bar})
+            end
+
+            def baz
+              success(data: {from: :baz})
+            end
+
+            def qux
+              success(data: {from: :qux})
+            end
+
+            def quux
+              success(data: {from: :quux})
+            end
+
+            def quuz
+              success(data: {from: :quuz})
+            end
+
+            def cargo
+              success(data: {from: :cargo})
+            end
+          end
+        end
+
+        specify do
+          expect { expression.failure? }
+            .to delegate_to(if_expression.condition_expression, :result)
+            .without_arguments
+        end
+
+        specify do
+          expect { expression.failure? }
+            .to delegate_to(if_expression.then_expression, :failure?)
+            .without_arguments
+            .and_return_its_value
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.condition_expression` is NOT evaluated.
+          #
+          expect { expression.failure? }.not_to delegate_to(elsif_expressions.first.condition_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+          #
+          expect { expression.failure? }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+          #
+          expect { expression.failure? }.not_to delegate_to(else_expression.expression, :result)
+        end
+      end
+    end
+
+    describe "#error?" do
+      context "when `if_expression.condition_expression` is `error`" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+            step :bar
+            step :baz
+            step :qux
+            step :quux
+            step :quuz
+            step :cargo
+
+            def foo
+              error(data: {from: :foo})
+            end
+
+            def bar
+              success(data: {from: :bar})
+            end
+
+            def baz
+              success(data: {from: :baz})
+            end
+
+            def qux
+              success(data: {from: :qux})
+            end
+
+            def quux
+              success(data: {from: :quux})
+            end
+
+            def quuz
+              success(data: {from: :quuz})
+            end
+
+            def cargo
+              success(data: {from: :cargo})
+            end
+          end
+        end
+
+        specify do
+          expect { expression.error? }
+            .to delegate_to(if_expression.condition_expression, :error?)
+              .without_arguments
+              .and_return { true }
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+          #
+          expect { expression.error? }.not_to delegate_to(if_expression.then_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.condition_expression` is NOT evaluated.
+          #
+          expect { expression.error? }.not_to delegate_to(elsif_expressions.first.condition_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+          #
+          expect { expression.error? }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+          #
+          expect { expression.error? }.not_to delegate_to(else_expression.expression, :result)
+        end
+      end
+
+      context "when `if_expression.condition_expression` is `failure`" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+            step :bar
+            step :baz
+            step :qux
+            step :quux
+            step :quuz
+            step :cargo
+
+            def foo
+              failure(data: {from: :foo})
+            end
+
+            def bar
+              success(data: {from: :bar})
+            end
+
+            def baz
+              success(data: {from: :baz})
+            end
+
+            def qux
+              success(data: {from: :qux})
+            end
+
+            def quux
+              success(data: {from: :quux})
+            end
+
+            def quuz
+              success(data: {from: :quuz})
+            end
+
+            def cargo
+              success(data: {from: :cargo})
+            end
+          end
+        end
+
+        context "when `elsif_expressions.first.condition_expression` is `error`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              step :foo
+              step :bar
+              step :baz
+              step :qux
+              step :quux
+              step :quuz
+              step :cargo
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+
+              def baz
+                error(data: {from: :baz})
+              end
+
+              def qux
+                success(data: {from: :qux})
+              end
+
+              def quux
+                success(data: {from: :quux})
+              end
+
+              def quuz
+                success(data: {from: :quuz})
+              end
+
+              def cargo
+                success(data: {from: :cargo})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.error? }
+              .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+            #
+            expect { expression.error? }.not_to delegate_to(if_expression.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.error? }
+              .to delegate_to(elsif_expressions.first.condition_expression, :error?)
+                .without_arguments
+                .and_return { true }
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+            #
+            expect { expression.error? }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+            #
+            expect { expression.error? }.not_to delegate_to(else_expression.expression, :result)
+          end
+        end
+
+        context "when `elsif_expressions.first.condition_expression` is `failure`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              step :foo
+              step :bar
+              step :baz
+              step :qux
+              step :quux
+              step :quuz
+              step :cargo
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+
+              def baz
+                failure(data: {from: :baz})
+              end
+
+              def qux
+                success(data: {from: :qux})
+              end
+
+              def quux
+                success(data: {from: :quux})
+              end
+
+              def quuz
+                success(data: {from: :quuz})
+              end
+
+              def cargo
+                success(data: {from: :cargo})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.error? }
+              .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+            #
+            expect { expression.error? }.not_to delegate_to(if_expression.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.error? }
+              .to delegate_to(elsif_expressions.first.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+            #
+            expect { expression.error? }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.error? }
+              .to delegate_to(else_expression.expression, :error?)
+              .without_arguments
+              .and_return_its_value
+          end
+        end
+
+        context "when `elsif_expressions.first.condition_expression` is `success`" do
+          let(:container) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              step :foo
+              step :bar
+              step :baz
+              step :qux
+              step :quux
+              step :quuz
+              step :cargo
+
+              def foo
+                failure(data: {from: :foo})
+              end
+
+              def bar
+                success(data: {from: :bar})
+              end
+
+              def baz
+                success(data: {from: :baz})
+              end
+
+              def qux
+                success(data: {from: :qux})
+              end
+
+              def quux
+                success(data: {from: :quux})
+              end
+
+              def quuz
+                success(data: {from: :quuz})
+              end
+
+              def cargo
+                success(data: {from: :cargo})
+              end
+            end
+          end
+
+          specify do
+            expect { expression.error? }
+              .to delegate_to(if_expression.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `if_expression.then_expression` is NOT evaluated.
+            #
+            expect { expression.error? }.not_to delegate_to(if_expression.then_expression, :result)
+          end
+
+          specify do
+            expect { expression.error? }
+              .to delegate_to(elsif_expressions.first.condition_expression, :result)
+              .without_arguments
+          end
+
+          specify do
+            expect { expression.error? }
+              .to delegate_to(elsif_expressions.first.then_expression, :error?)
+              .without_arguments
+              .and_return_its_value
+          end
+
+          specify do
+            ##
+            # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+            #
+            expect { expression.error? }.not_to delegate_to(else_expression.expression, :result)
+          end
+        end
+      end
+
+      context "when `if_expression.condition_expression` is `success`" do
+        let(:container) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            step :foo
+            step :bar
+            step :baz
+            step :qux
+            step :quux
+            step :quuz
+            step :cargo
+
+            def foo
+              success(data: {from: :foo})
+            end
+
+            def bar
+              success(data: {from: :bar})
+            end
+
+            def baz
+              success(data: {from: :baz})
+            end
+
+            def qux
+              success(data: {from: :qux})
+            end
+
+            def quux
+              success(data: {from: :quux})
+            end
+
+            def quuz
+              success(data: {from: :quuz})
+            end
+
+            def cargo
+              success(data: {from: :cargo})
+            end
+          end
+        end
+
+        specify do
+          expect { expression.error? }
+            .to delegate_to(if_expression.condition_expression, :result)
+            .without_arguments
+        end
+
+        specify do
+          expect { expression.error? }
+            .to delegate_to(if_expression.then_expression, :error?)
+            .without_arguments
+            .and_return_its_value
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.condition_expression` is NOT evaluated.
+          #
+          expect { expression.error? }.not_to delegate_to(elsif_expressions.first.condition_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `elsif_expressions.first.then_expression` is NOT evaluated.
+          #
+          expect { expression.error? }.not_to delegate_to(elsif_expressions.first.then_expression, :result)
+        end
+
+        specify do
+          ##
+          # NOTE: Ensures that `else_expression.expression` is NOT evaluated.
+          #
+          expect { expression.error? }.not_to delegate_to(else_expression.expression, :result)
+        end
+      end
+    end
+
     describe "#each_step" do
       let(:block) { proc { |step| step.index } }
 
