@@ -45,6 +45,13 @@ module ConvenientService
               end
 
               ##
+              # @return [ConvenientService::Service]
+              #
+              def organizer
+                left_expression.organizer
+              end
+
+              ##
               # @return [Boolean]
               #
               # @internal

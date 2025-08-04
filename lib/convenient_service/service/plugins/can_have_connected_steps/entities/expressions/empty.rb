@@ -26,6 +26,13 @@ module ConvenientService
               end
 
               ##
+              # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoOrganizer]
+              #
+              def organizer
+                ::ConvenientService.raise Exceptions::EmptyExpressionHasNoOrganizer.new
+              end
+
+              ##
               # @raise [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoStatus]
               #
               def success?

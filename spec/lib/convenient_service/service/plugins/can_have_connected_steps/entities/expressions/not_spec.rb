@@ -74,6 +74,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       end
     end
 
+    describe "#organizer" do
+      specify do
+        expect { expression.organizer }
+          .to delegate_to(sub_expression, :organizer)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     describe "#success?" do
       specify do
         expect { expression.success? }

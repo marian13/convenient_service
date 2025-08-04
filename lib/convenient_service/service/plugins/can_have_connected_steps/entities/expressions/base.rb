@@ -26,6 +26,11 @@ module ConvenientService
               abstract_method :result
 
               ##
+              # @return [ConvenientService::Service]
+              #
+              abstract_method :organizer
+
+              ##
               # @return [Boolean]
               #
               abstract_method :success?

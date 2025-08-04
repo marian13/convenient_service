@@ -32,6 +32,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
       it { is_expected.to have_abstract_method(:initialize) }
       it { is_expected.to have_abstract_method(:result) }
+      it { is_expected.to have_abstract_method(:organizer) }
       it { is_expected.to have_abstract_method(:success?) }
       it { is_expected.to have_abstract_method(:failure?) }
       it { is_expected.to have_abstract_method(:error?) }

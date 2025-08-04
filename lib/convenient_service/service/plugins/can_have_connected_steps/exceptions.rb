@@ -81,6 +81,19 @@ module ConvenientService
             end
           end
 
+          class EmptyExpressionHasNoOrganizer < ::ConvenientService::Exception
+            ##
+            # @return [void]
+            #
+            def initialize_without_arguments
+              message = <<~TEXT
+                Empty expression has NO organizer.
+              TEXT
+
+              initialize(message)
+            end
+          end
+
           class EmptyExpressionHasNoStatus < ::ConvenientService::Exception
             ##
             # @return [void]

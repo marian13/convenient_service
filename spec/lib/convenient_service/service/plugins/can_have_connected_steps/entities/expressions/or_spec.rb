@@ -202,6 +202,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       end
     end
 
+    describe "#organizer" do
+      specify do
+        expect { expression.organizer }
+          .to delegate_to(left_sub_expression, :organizer)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     describe "#success?" do
       context "when `left_sub_expression` is NOT `success`" do
         context "when `left_sub_expression` is `failure`" do

@@ -31,11 +31,6 @@ module ConvenientService
               attr_reader :else_expression
 
               ##
-              #
-              #
-              attr_accessor :organizer
-
-              ##
               # @param if_expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If]
               # @param elsif_expressions [Array<ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If>]
               # @param else_expression [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Else, nil]
@@ -60,6 +55,13 @@ module ConvenientService
                 end
 
                 else_expression ? else_expression.result : organizer.success
+              end
+
+              ##
+              # @return [ConvenientService::Service]
+              #
+              def organizer
+                if_expression.organizer
               end
 
               ##
@@ -161,7 +163,6 @@ module ConvenientService
                     }
                   }
                 )
-                  .tap { |complex_if| complex_if.organizer = organizer }
               end
 
               ##

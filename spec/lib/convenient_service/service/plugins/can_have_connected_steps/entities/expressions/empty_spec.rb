@@ -71,6 +71,25 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
       end
     end
 
+    describe "#organizer" do
+      let(:exception_message) do
+        <<~TEXT
+          Empty expression has NO organizer.
+        TEXT
+      end
+
+      it "raises `ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoOrganizer`" do
+        expect { expression.organizer }
+          .to raise_error(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoOrganizer)
+          .with_message(exception_message)
+      end
+
+      specify do
+        expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Exceptions::EmptyExpressionHasNoOrganizer) { expression.organizer } }
+          .to delegate_to(ConvenientService, :raise)
+      end
+    end
+
     describe "#success?" do
       let(:exception_message) do
         <<~TEXT

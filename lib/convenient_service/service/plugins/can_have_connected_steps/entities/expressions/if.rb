@@ -42,6 +42,13 @@ module ConvenientService
               end
 
               ##
+              # @return [ConvenientService::Service]
+              #
+              def organizer
+                condition_expression.organizer
+              end
+
+              ##
               # @return [Boolean]
               #
               def success?
