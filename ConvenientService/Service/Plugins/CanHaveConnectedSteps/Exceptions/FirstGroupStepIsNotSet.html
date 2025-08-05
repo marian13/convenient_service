@@ -191,6 +191,17 @@
       
     </li>
   
+    <li>
+      
+        <span class='name'>method</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
 </ul>
 
 
@@ -200,6 +211,9 @@
       <pre class="lines">
 
 
+45
+46
+47
 48
 49
 50
@@ -219,19 +233,20 @@
 64
 65
 66
-67
-68</pre>
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/exceptions.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_connected_steps/exceptions.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize_with_kwargs'>initialize_with_kwargs</span><span class='lparen'>(</span><span class='label'>container:</span><span class='comma'>,</span> <span class='label'>method:</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_printable_container'>printable_container</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Utils/Class.html" title="ConvenientService::Utils::Class (module)">Class</a></span></span><span class='period'>.</span><span class='id identifier rubyid_display_name'><span class='object_link'><a href="../../../../Utils/Class.html#display_name-class_method" title="ConvenientService::Utils::Class.display_name (method)">display_name</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_container'>container</span><span class='rparen'>)</span>
+
   <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='heredoc_beg'>&lt;&lt;~TEXT</span>
-<span class='tstring_content'>    First step of `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_method'>method</span><span class='embexpr_end'>}</span><span class='tstring_content'>` from `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_container'>container</span><span class='embexpr_end'>}</span><span class='tstring_content'>` is NOT set.
+<span class='tstring_content'>    First step of `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_method'>method</span><span class='embexpr_end'>}</span><span class='tstring_content'>` from `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable_container'>printable_container</span><span class='embexpr_end'>}</span><span class='tstring_content'>` is NOT set.
 </span><span class='tstring_content'>
 </span><span class='tstring_content'>    Did you forget to use `step`? For example:
 </span><span class='tstring_content'>
-</span><span class='tstring_content'>    class </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_container'>container</span><span class='embexpr_end'>}</span><span class='tstring_content'>
+</span><span class='tstring_content'>    class </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_printable_container'>printable_container</span><span class='embexpr_end'>}</span><span class='tstring_content'>
 </span><span class='tstring_content'>      # ...
 </span><span class='tstring_content'>
 </span><span class='tstring_content'>      </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_method'>method</span><span class='embexpr_end'>}</span><span class='tstring_content'> do
@@ -256,7 +271,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Aug  5 15:12:56 2025 by
+  Generated on Tue Aug  5 22:51:38 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
