@@ -1158,57 +1158,55 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
 
           context "when `block` adds some steps" do
-            context "when `block` adds some steps" do
-              context "when `previous expression` is NOT `and expression`" do
-                let(:block) { proc { service_class.step(*args, **kwargs) } }
+            context "when `previous expression` is NOT `and expression`" do
+              let(:block) { proc { service_class.step(*args, **kwargs) } }
 
-                let(:new_expression) do
-                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Or.new(
-                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
-                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Not.new(
-                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
-                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
-                      )
+              let(:new_expression) do
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Or.new(
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Not.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
                     )
                   )
-                end
-
-                it "returns `new expression` that includes `previous expression`" do
-                  expect(service_class.or_not_group(&block)).to eq(new_expression)
-                end
+                )
               end
 
-              context "when `previous expression` is `and expression`" do
-                let(:block) { proc { service_class.step(*args, **kwargs) } }
+              it "returns `new expression` that includes `previous expression`" do
+                expect(service_class.or_not_group(&block)).to eq(new_expression)
+              end
+            end
 
-                let(:previous_expression) do
-                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
-                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
-                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
-                  )
-                end
+            context "when `previous expression` is `and expression`" do
+              let(:block) { proc { service_class.step(*args, **kwargs) } }
 
-                let(:new_expression) do
-                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
-                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
-                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Or.new(
-                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step),
-                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Not.new(
-                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
-                          ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(third_step)
-                        )
+              let(:previous_expression) do
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                )
+              end
+
+              let(:new_expression) do
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Or.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step),
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Not.new(
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Group.new(
+                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(third_step)
                       )
                     )
                   )
-                end
+                )
+              end
 
-                before do
-                  service_class.and_step(*args, **kwargs)
-                end
+              before do
+                service_class.and_step(*args, **kwargs)
+              end
 
-                it "returns `new expression` that includes `previous expression`" do
-                  expect(service_class.or_not_group(&block)).to eq(new_expression)
-                end
+              it "returns `new expression` that includes `previous expression`" do
+                expect(service_class.or_not_group(&block)).to eq(new_expression)
               end
             end
           end
