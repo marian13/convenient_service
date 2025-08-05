@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern, type: :s
     describe "#result" do
       let(:exception_message) do
         <<~TEXT
-          Result method (#result) of `#{service_class}` is NOT overridden.
+          Result method (#result) of `#{ConvenientService::Utils::Class.display_name(service_class)}` is NOT overridden.
         TEXT
       end
 

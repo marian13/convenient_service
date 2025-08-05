@@ -15,16 +15,15 @@ module ConvenientService
             # @param container [Class<ConvenientService::Service>]
             # @return [void]
             #
-            # @internal
-            #   TODO: Use `display_name`.
-            #
             def initialize_with_kwargs(container:)
+              printable_container = Utils::Class.display_name(container)
+
               message = <<~TEXT
-                First step of `#{container}` is NOT set.
+                First step of `#{printable_container}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{container}
+                class #{printable_container}
                   # ...
 
                   step SomeService
@@ -40,18 +39,18 @@ module ConvenientService
           class FirstGroupStepIsNotSet < ::ConvenientService::Exception
             ##
             # @param container [Class<ConvenientService::Service>]
+            # @param method [Symbol]
             # @return [void]
             #
-            # @internal
-            #   TODO: Use `display_name`.
-            #
             def initialize_with_kwargs(container:, method:)
+              printable_container = Utils::Class.display_name(container)
+
               message = <<~TEXT
-                First step of `#{method}` from `#{container}` is NOT set.
+                First step of `#{method}` from `#{printable_container}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{container}
+                class #{printable_container}
                   # ...
 
                   #{method} do
@@ -71,18 +70,18 @@ module ConvenientService
           class FirstConditionalGroupStepIsNotSet < ::ConvenientService::Exception
             ##
             # @param container [Class<ConvenientService::Service>]
+            # @param method [Symbol]
             # @return [void]
             #
-            # @internal
-            #   TODO: Use `display_name`.
-            #
             def initialize_with_kwargs(container:, method:)
+              printable_container = Utils::Class.display_name(container)
+
               message = <<~TEXT
-                First step of `#{method}` from `#{container}` is NOT set.
+                First step of `#{method}` from `#{printable_container}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{container}
+                class #{printable_container}
                   # ...
 
                   #{method} SomeService do
@@ -93,6 +92,54 @@ module ConvenientService
 
                   # ...
                 end
+              TEXT
+
+              initialize(message)
+            end
+          end
+
+          class ElseWithoutIf < ::ConvenientService::Exception
+            ##
+            # @param container [Class<ConvenientService::Service>]
+            # @param method [Symbol]
+            # @return [void]
+            #
+            def initialize_with_kwargs(container:, method:)
+              printable_container = Utils::Class.display_name(container)
+
+              message = <<~TEXT
+                First step of `#{method}` from `#{printable_container}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{printable_container}
+                  # ...
+
+                  #{method} SomeService do
+                    step SomeOtherService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+
+              initialize(message)
+            end
+          end
+
+          class ElseIfAfterElse < ::ConvenientService::Exception
+            ##
+            # @param container [Class<ConvenientService::Service>]
+            # @param method [Symbol]
+            # @return [void]
+            #
+            def initialize_with_kwargs(container:, method:)
+              printable_container = Utils::Class.display_name(container)
+
+              message = <<~TEXT
+                `#{method}` is called after `else_group` in `#{printable_container}`.
               TEXT
 
               initialize(message)

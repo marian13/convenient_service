@@ -24,11 +24,16 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
   let(:service_instance) { service_class.new }
 
+  let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
+
   let(:step) { first_step }
 
   let(:first_step) { service_class.step_class.new(*args, **kwargs.merge(index: 0)) }
   let(:second_step) { service_class.step_class.new(*args, **kwargs.merge(index: 1)) }
   let(:third_step) { service_class.step_class.new(*args, **kwargs.merge(index: 2)) }
+  let(:fourth_step) { service_class.step_class.new(*args, **kwargs.merge(index: 3)) }
+  let(:fifth_step) { service_class.step_class.new(*args, **kwargs.merge(index: 4)) }
+  let(:sixth_step) { service_class.step_class.new(*args, **kwargs.merge(index: 5)) }
 
   let(:args) { [Class.new] }
   let(:kwargs) { {in: :foo, out: :bar, container: service_class} }
@@ -171,11 +176,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       context "when `previous expression is empty`" do
         let(:exception_message) do
           <<~TEXT
-            First step of `#{service_class}` is NOT set.
+            First step of `#{printable_service_class}` is NOT set.
 
             Did you forget to use `step`? For example:
 
-            class #{service_class}
+            class #{printable_service_class}
               # ...
 
               step SomeService
@@ -230,11 +235,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       context "when `previous expression is empty`" do
         let(:exception_message) do
           <<~TEXT
-            First step of `#{service_class}` is NOT set.
+            First step of `#{printable_service_class}` is NOT set.
 
             Did you forget to use `step`? For example:
 
-            class #{service_class}
+            class #{printable_service_class}
               # ...
 
               step SomeService
@@ -316,11 +321,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       context "when `previous expression is empty`" do
         let(:exception_message) do
           <<~TEXT
-            First step of `#{service_class}` is NOT set.
+            First step of `#{printable_service_class}` is NOT set.
 
             Did you forget to use `step`? For example:
 
-            class #{service_class}
+            class #{printable_service_class}
               # ...
 
               step SomeService
@@ -406,11 +411,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       context "when `previous expression is empty`" do
         let(:exception_message) do
           <<~TEXT
-            First step of `#{service_class}` is NOT set.
+            First step of `#{printable_service_class}` is NOT set.
 
             Did you forget to use `step`? For example:
 
-            class #{service_class}
+            class #{printable_service_class}
               # ...
 
               step SomeService
@@ -446,11 +451,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
         context "when `block` is NOT passed" do
           let(:exception_message) do
             <<~TEXT
-              First step of `group` from `#{service_class}` is NOT set.
+              First step of `group` from `#{printable_service_class}` is NOT set.
 
               Did you forget to use `step`? For example:
 
-              class #{service_class}
+              class #{printable_service_class}
                 # ...
 
                 group do
@@ -482,11 +487,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             let(:exception_message) do
               <<~TEXT
-                First step of `group` from `#{service_class}` is NOT set.
+                First step of `group` from `#{printable_service_class}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{service_class}
+                class #{printable_service_class}
                   # ...
 
                   group do
@@ -557,11 +562,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
         context "when `block` is NOT passed" do
           let(:exception_message) do
             <<~TEXT
-              First step of `not_group` from `#{service_class}` is NOT set.
+              First step of `not_group` from `#{printable_service_class}` is NOT set.
 
               Did you forget to use `step`? For example:
 
-              class #{service_class}
+              class #{printable_service_class}
                 # ...
 
                 not_group do
@@ -593,11 +598,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             let(:exception_message) do
               <<~TEXT
-                First step of `not_group` from `#{service_class}` is NOT set.
+                First step of `not_group` from `#{printable_service_class}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{service_class}
+                class #{printable_service_class}
                   # ...
 
                   not_group do
@@ -672,11 +677,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
         context "when `block` is NOT passed" do
           let(:exception_message) do
             <<~TEXT
-              First step of `and_group` from `#{service_class}` is NOT set.
+              First step of `and_group` from `#{printable_service_class}` is NOT set.
 
               Did you forget to use `step`? For example:
 
-              class #{service_class}
+              class #{printable_service_class}
                 # ...
 
                 and_group do
@@ -708,11 +713,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             let(:exception_message) do
               <<~TEXT
-                First step of `and_group` from `#{service_class}` is NOT set.
+                First step of `and_group` from `#{printable_service_class}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{service_class}
+                class #{printable_service_class}
                   # ...
 
                   and_group do
@@ -760,11 +765,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       context "when `previous expression is empty`" do
         let(:exception_message) do
           <<~TEXT
-            First step of `#{service_class}` is NOT set.
+            First step of `#{printable_service_class}` is NOT set.
 
             Did you forget to use `step`? For example:
 
-            class #{service_class}
+            class #{printable_service_class}
               # ...
 
               step SomeService
@@ -800,11 +805,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
         context "when `block` is NOT passed" do
           let(:exception_message) do
             <<~TEXT
-              First step of `and_not_group` from `#{service_class}` is NOT set.
+              First step of `and_not_group` from `#{printable_service_class}` is NOT set.
 
               Did you forget to use `step`? For example:
 
-              class #{service_class}
+              class #{printable_service_class}
                 # ...
 
                 and_not_group do
@@ -836,11 +841,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             let(:exception_message) do
               <<~TEXT
-                First step of `and_not_group` from `#{service_class}` is NOT set.
+                First step of `and_not_group` from `#{printable_service_class}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{service_class}
+                class #{printable_service_class}
                   # ...
 
                   and_not_group do
@@ -890,11 +895,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       context "when `previous expression is empty`" do
         let(:exception_message) do
           <<~TEXT
-            First step of `#{service_class}` is NOT set.
+            First step of `#{printable_service_class}` is NOT set.
 
             Did you forget to use `step`? For example:
 
-            class #{service_class}
+            class #{printable_service_class}
               # ...
 
               step SomeService
@@ -930,11 +935,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
         context "when `block` is NOT passed" do
           let(:exception_message) do
             <<~TEXT
-              First step of `or_group` from `#{service_class}` is NOT set.
+              First step of `or_group` from `#{printable_service_class}` is NOT set.
 
               Did you forget to use `step`? For example:
 
-              class #{service_class}
+              class #{printable_service_class}
                 # ...
 
                 or_group do
@@ -966,11 +971,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             let(:exception_message) do
               <<~TEXT
-                First step of `or_group` from `#{service_class}` is NOT set.
+                First step of `or_group` from `#{printable_service_class}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{service_class}
+                class #{printable_service_class}
                   # ...
 
                   or_group do
@@ -1051,11 +1056,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       context "when `previous expression is empty`" do
         let(:exception_message) do
           <<~TEXT
-            First step of `#{service_class}` is NOT set.
+            First step of `#{printable_service_class}` is NOT set.
 
             Did you forget to use `step`? For example:
 
-            class #{service_class}
+            class #{printable_service_class}
               # ...
 
               step SomeService
@@ -1091,11 +1096,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
         context "when `block` is NOT passed" do
           let(:exception_message) do
             <<~TEXT
-              First step of `or_not_group` from `#{service_class}` is NOT set.
+              First step of `or_not_group` from `#{printable_service_class}` is NOT set.
 
               Did you forget to use `step`? For example:
 
-              class #{service_class}
+              class #{printable_service_class}
                 # ...
 
                 or_not_group do
@@ -1127,11 +1132,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             let(:exception_message) do
               <<~TEXT
-                First step of `or_not_group` from `#{service_class}` is NOT set.
+                First step of `or_not_group` from `#{printable_service_class}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{service_class}
+                class #{printable_service_class}
                   # ...
 
                   or_not_group do
@@ -1216,11 +1221,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       context "when `previous expression is empty`" do
         let(:exception_message) do
           <<~TEXT
-            First step of `#{service_class}` is NOT set.
+            First step of `#{printable_service_class}` is NOT set.
 
             Did you forget to use `step`? For example:
 
-            class #{service_class}
+            class #{printable_service_class}
               # ...
 
               step SomeService
@@ -1254,11 +1259,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
         context "when `block` is NOT passed" do
           let(:exception_message) do
             <<~TEXT
-              First step of `if_step_group` from `#{service_class}` is NOT set.
+              First step of `if_step_group` from `#{printable_service_class}` is NOT set.
 
               Did you forget to use `step`? For example:
 
-              class #{service_class}
+              class #{printable_service_class}
                 # ...
 
                 if_step_group SomeService do
@@ -1290,11 +1295,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             let(:exception_message) do
               <<~TEXT
-                First step of `if_step_group` from `#{service_class}` is NOT set.
+                First step of `if_step_group` from `#{printable_service_class}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{service_class}
+                class #{printable_service_class}
                   # ...
 
                   if_step_group SomeService do
@@ -1348,11 +1353,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
         context "when `block` is NOT passed" do
           let(:exception_message) do
             <<~TEXT
-              First step of `if_step_group` from `#{service_class}` is NOT set.
+              First step of `if_step_group` from `#{printable_service_class}` is NOT set.
 
               Did you forget to use `step`? For example:
 
-              class #{service_class}
+              class #{printable_service_class}
                 # ...
 
                 if_step_group SomeService do
@@ -1384,11 +1389,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             let(:exception_message) do
               <<~TEXT
-                First step of `if_step_group` from `#{service_class}` is NOT set.
+                First step of `if_step_group` from `#{printable_service_class}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{service_class}
+                class #{printable_service_class}
                   # ...
 
                   if_step_group SomeService do
@@ -1447,11 +1452,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
         context "when `block` is NOT passed" do
           let(:exception_message) do
             <<~TEXT
-              First step of `if_not_step_group` from `#{service_class}` is NOT set.
+              First step of `if_not_step_group` from `#{printable_service_class}` is NOT set.
 
               Did you forget to use `step`? For example:
 
-              class #{service_class}
+              class #{printable_service_class}
                 # ...
 
                 if_not_step_group SomeService do
@@ -1483,11 +1488,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             let(:exception_message) do
               <<~TEXT
-                First step of `if_not_step_group` from `#{service_class}` is NOT set.
+                First step of `if_not_step_group` from `#{printable_service_class}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{service_class}
+                class #{printable_service_class}
                   # ...
 
                   if_not_step_group SomeService do
@@ -1543,11 +1548,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
         context "when `block` is NOT passed" do
           let(:exception_message) do
             <<~TEXT
-              First step of `if_not_step_group` from `#{service_class}` is NOT set.
+              First step of `if_not_step_group` from `#{printable_service_class}` is NOT set.
 
               Did you forget to use `step`? For example:
 
-              class #{service_class}
+              class #{printable_service_class}
                 # ...
 
                 if_not_step_group SomeService do
@@ -1579,11 +1584,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             let(:exception_message) do
               <<~TEXT
-                First step of `if_not_step_group` from `#{service_class}` is NOT set.
+                First step of `if_not_step_group` from `#{printable_service_class}` is NOT set.
 
                 Did you forget to use `step`? For example:
 
-                class #{service_class}
+                class #{printable_service_class}
                   # ...
 
                   if_not_step_group SomeService do
@@ -1627,6 +1632,453 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             it "returns `new expression` that includes `previous expression`" do
               expect(service_class.if_not_step_group(*args, **kwargs, &block)).to eq(new_expression)
+            end
+          end
+        end
+      end
+    end
+
+    describe ".elsif_step_group" do
+      context "when `previous expression` is NOT empty" do
+        context "when `block` is NOT passed" do
+          let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
+
+          let(:exception_message) do
+            <<~TEXT
+              First step of `elsif_step_group` from `#{printable_service_class}` is NOT set.
+
+              Did you forget to use `step`? For example:
+
+              class #{printable_service_class}
+                # ...
+
+                elsif_step_group SomeService do
+                  step SomeOtherService
+
+                  # ...
+                end
+
+                # ...
+              end
+            TEXT
+          end
+
+          before do
+            service_class.step(*args, **kwargs)
+          end
+
+          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf`" do
+            expect { service_class.elsif_step_group(*args, **kwargs) }
+              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf)
+              .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf) { service_class.elsif_step_group(*args, **kwargs) } }
+              .to delegate_to(ConvenientService, :raise)
+          end
+        end
+
+        context "when `block` is passed" do
+          context "when previous expression is NOT complex if expression" do
+            context "when `block` does NOT add any steps" do
+              let(:block) { proc {} }
+
+              let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  First step of `elsif_step_group` from `#{printable_service_class}` is NOT set.
+
+                  Did you forget to use `step`? For example:
+
+                  class #{printable_service_class}
+                    # ...
+
+                    elsif_step_group SomeService do
+                      step SomeOtherService
+
+                      # ...
+                    end
+
+                    # ...
+                  end
+                TEXT
+              end
+
+              before do
+                service_class.step(*args, **kwargs)
+              end
+
+              it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf`" do
+                expect { service_class.elsif_step_group(*args, **kwargs, &block) }
+                  .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf) { service_class.elsif_step_group(*args, **kwargs, &block) } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when `block` adds some steps" do
+              let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+              let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  First step of `elsif_step_group` from `#{printable_service_class}` is NOT set.
+
+                  Did you forget to use `step`? For example:
+
+                  class #{printable_service_class}
+                    # ...
+
+                    elsif_step_group SomeService do
+                      step SomeOtherService
+
+                      # ...
+                    end
+
+                    # ...
+                  end
+                TEXT
+              end
+
+              before do
+                service_class.step(*args, **kwargs)
+              end
+
+              it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf`" do
+                expect { service_class.elsif_step_group(*args, **kwargs, &block) }
+                  .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf) { service_class.elsif_step_group(*args, **kwargs, &block) } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+          end
+
+          context "when previous expression is complex if expression" do
+            context "when previous expression is complex if expression without else expression" do
+              context "when `block` does NOT add any steps" do
+                let(:block) { proc {} }
+
+                let(:exception_message) do
+                  <<~TEXT
+                    First step of `elsif_step_group` from `#{printable_service_class}` is NOT set.
+
+                    Did you forget to use `step`? For example:
+
+                    class #{printable_service_class}
+                      # ...
+
+                      elsif_step_group SomeService do
+                        step SomeOtherService
+
+                        # ...
+                      end
+
+                      # ...
+                    end
+                  TEXT
+                end
+
+                before do
+                  service_class.if_step_group(*args, **kwargs) do
+                    service_class.step(*args, **kwargs)
+                  end
+                end
+
+                it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet`" do
+                  expect { service_class.elsif_step_group(*args, **kwargs, &block) }
+                    .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet)
+                    .with_message(exception_message)
+                end
+
+                specify do
+                  expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet) { service_class.elsif_step_group(*args, **kwargs, &block) } }
+                    .to delegate_to(ConvenientService, :raise)
+                end
+              end
+
+              context "when `block` adds some steps" do
+                let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+                let(:new_expression) do
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::ComplexIf.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::If.new(
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                    ),
+                    [
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::If.new(
+                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(third_step),
+                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(fourth_step)
+                      )
+                    ],
+                    nil
+                  )
+                end
+
+                before do
+                  service_class.if_step_group(*args, **kwargs) do
+                    service_class.step(*args, **kwargs)
+                  end
+                end
+
+                it "returns `new expression` that includes `previous expression`" do
+                  expect(service_class.elsif_step_group(*args, **kwargs, &block)).to eq(new_expression)
+                end
+              end
+
+              context "when previous expression is complex if expression with elsif expression without else expression" do
+                context "when `block` does NOT add any steps" do
+                  let(:block) { proc {} }
+
+                  let(:exception_message) do
+                    <<~TEXT
+                      First step of `elsif_step_group` from `#{printable_service_class}` is NOT set.
+
+                      Did you forget to use `step`? For example:
+
+                      class #{printable_service_class}
+                        # ...
+
+                        elsif_step_group SomeService do
+                          step SomeOtherService
+
+                          # ...
+                        end
+
+                        # ...
+                      end
+                    TEXT
+                  end
+
+                  before do
+                    service_class.if_step_group(*args, **kwargs) do
+                      service_class.step(*args, **kwargs)
+                    end
+
+                    service_class.elsif_step_group(*args, **kwargs) do
+                      service_class.step(*args, **kwargs)
+                    end
+                  end
+
+                  it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet`" do
+                    expect { service_class.elsif_step_group(*args, **kwargs, &block) }
+                      .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet)
+                      .with_message(exception_message)
+                  end
+
+                  specify do
+                    expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet) { service_class.elsif_step_group(*args, **kwargs, &block) } }
+                      .to delegate_to(ConvenientService, :raise)
+                  end
+                end
+
+                context "when `block` adds some steps" do
+                  let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+                  let(:new_expression) do
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::ComplexIf.new(
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::If.new(
+                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                      ),
+                      [
+                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::If.new(
+                          ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(third_step),
+                          ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(fourth_step)
+                        ),
+                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::If.new(
+                          ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(fifth_step),
+                          ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(sixth_step)
+                        )
+                      ],
+                      nil
+                    )
+                  end
+
+                  before do
+                    service_class.if_step_group(*args, **kwargs) do
+                      service_class.step(*args, **kwargs)
+                    end
+
+                    service_class.elsif_step_group(*args, **kwargs) do
+                      service_class.step(*args, **kwargs)
+                    end
+                  end
+
+                  it "returns `new expression` that includes `previous expression`" do
+                    expect(service_class.elsif_step_group(*args, **kwargs, &block)).to eq(new_expression)
+                  end
+                end
+              end
+            end
+
+            context "when previous expression is complex if expression with else expression" do
+              context "when `block` does NOT add any steps" do
+                let(:block) { proc {} }
+
+                let(:exception_message) do
+                  <<~TEXT
+                    `elsif_step_group` is called after `else_group` in `#{printable_service_class}`.
+                  TEXT
+                end
+
+                before do
+                  service_class.if_step_group(*args, **kwargs) do
+                    service_class.step(*args, **kwargs)
+                  end
+
+                  service_class.else_group do
+                    service_class.step(*args, **kwargs)
+                  end
+                end
+
+                it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseIfAfterElse`" do
+                  expect { service_class.elsif_step_group(*args, **kwargs, &block) }
+                    .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseIfAfterElse)
+                    .with_message(exception_message)
+                end
+
+                specify do
+                  expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseIfAfterElse) { service_class.elsif_step_group(*args, **kwargs, &block) } }
+                    .to delegate_to(ConvenientService, :raise)
+                end
+              end
+
+              context "when `block` adds some steps" do
+                let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+                let(:new_expression) do
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::ComplexIf.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::If.new(
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                    ),
+                    [
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::If.new(
+                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(third_step),
+                        ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(fourth_step)
+                      )
+                    ],
+                    nil
+                  )
+                end
+
+                before do
+                  service_class.if_step_group(*args, **kwargs) do
+                    service_class.step(*args, **kwargs)
+                  end
+                end
+
+                it "returns `new expression` that includes `previous expression`" do
+                  expect(service_class.elsif_step_group(*args, **kwargs, &block)).to eq(new_expression)
+                end
+              end
+            end
+          end
+        end
+      end
+
+      context "when `previous expression` is empty" do
+        context "when `block` is NOT passed" do
+          let(:exception_message) do
+            <<~TEXT
+              First step of `#{printable_service_class}` is NOT set.
+
+              Did you forget to use `step`? For example:
+
+              class #{printable_service_class}
+                # ...
+
+                step SomeService
+
+                # ...
+              end
+            TEXT
+          end
+
+          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet`" do
+            expect { service_class.elsif_step_group(*args, **kwargs) }
+              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
+              .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet) { service_class.elsif_step_group(*args, **kwargs) } }
+              .to delegate_to(ConvenientService, :raise)
+          end
+        end
+
+        context "when `block` is passed" do
+          context "when `block` does NOT add any steps" do
+            let(:block) { proc {} }
+
+            let(:exception_message) do
+              <<~TEXT
+                First step of `#{printable_service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{printable_service_class}
+                  # ...
+
+                  step SomeService
+
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet`" do
+              expect { service_class.elsif_step_group(*args, **kwargs, &block) }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet) { service_class.elsif_step_group(*args, **kwargs, &block) } }
+                .to delegate_to(ConvenientService, :raise)
+            end
+          end
+
+          context "when `block` adds some steps" do
+            let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+            let(:exception_message) do
+              <<~TEXT
+                First step of `#{printable_service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{printable_service_class}
+                  # ...
+
+                  step SomeService
+
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet`" do
+              expect { service_class.elsif_step_group(*args, **kwargs, &block) }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstStepIsNotSet) { service_class.elsif_step_group(*args, **kwargs, &block) } }
+                .to delegate_to(ConvenientService, :raise)
             end
           end
         end
@@ -1681,7 +2133,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
         let(:exception_message) do
           <<~TEXT
-            Result method (#result) of `#{service_class}` is NOT overridden.
+            Result method (#result) of `#{printable_service_class}` is NOT overridden.
           TEXT
         end
 

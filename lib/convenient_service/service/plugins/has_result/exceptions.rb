@@ -13,7 +13,7 @@ module ConvenientService
           class ResultIsNotOverridden < ::ConvenientService::Exception
             def initialize_with_kwargs(service:)
               message = <<~TEXT
-                Result method (#result) of `#{service.class}` is NOT overridden.
+                Result method (#result) of `#{Utils::Class.display_name(service.class)}` is NOT overridden.
               TEXT
 
               initialize(message)

@@ -556,17 +556,19 @@ module ConvenientService
             end
 
             ##
+            # @api public
             #
+            # @param args [Array<Object>]
+            # @param kwargs [Hash{Symbol => Object}]
+            # @param block [Proc, nil]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
             def elsif_step_group(*args, **kwargs, &block)
-              # require "debug"; binding.break
-
               previous_expression = steps.expression
 
               ::ConvenientService.raise Exceptions::FirstStepIsNotSet.new(container: self) if previous_expression.empty?
-
-              # `and` or `or`.
-              # ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) unless previous_expression.complex_if?
+              ::ConvenientService.raise Exceptions::ElseWithoutIf.new(container: self, method: __method__) unless previous_expression.complex_if?
+              ::ConvenientService.raise Exceptions::ElseIfAfterElse.new(container: self, method: __method__) if previous_expression.else_expression
 
               new_step = steps.create(*args, **kwargs)
 
@@ -576,7 +578,7 @@ module ConvenientService
 
               current_expression = steps.expression
 
-              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstConditionalGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
 
               steps.expression =
                 Entities::Expressions::ComplexIf.new(
