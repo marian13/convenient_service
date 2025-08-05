@@ -475,7 +475,7 @@ module ConvenientService
 
               current_expression = steps.expression
 
-              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstConditionalGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
 
               steps.expression =
                 if previous_expression.empty?

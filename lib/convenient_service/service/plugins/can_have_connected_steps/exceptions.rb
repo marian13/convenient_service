@@ -68,6 +68,37 @@ module ConvenientService
             end
           end
 
+          class FirstConditionalGroupStepIsNotSet < ::ConvenientService::Exception
+            ##
+            # @param container [Class<ConvenientService::Service>]
+            # @return [void]
+            #
+            # @internal
+            #   TODO: Use `display_name`.
+            #
+            def initialize_with_kwargs(container:, method:)
+              message = <<~TEXT
+                First step of `#{method}` from `#{container}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{container}
+                  # ...
+
+                  #{method} SomeService do
+                    step SomeOtherService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+
+              initialize(message)
+            end
+          end
+
           class EmptyExpressionHasNoResult < ::ConvenientService::Exception
             ##
             # @return [void]
