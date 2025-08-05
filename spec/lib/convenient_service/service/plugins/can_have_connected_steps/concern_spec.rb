@@ -1436,6 +1436,203 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
       end
     end
 
+    describe ".if_not_step_group" do
+      context "when `previous expression` is NOT empty" do
+        let(:previous_expression) { ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step) }
+
+        before do
+          service_class.step(*args, **kwargs)
+        end
+
+        context "when `block` is NOT passed" do
+          let(:exception_message) do
+            <<~TEXT
+              First step of `if_not_step_group` from `#{service_class}` is NOT set.
+
+              Did you forget to use `step`? For example:
+
+              class #{service_class}
+                # ...
+
+                if_not_step_group SomeService do
+                  step SomeOtherService
+
+                  # ...
+                end
+
+                # ...
+              end
+            TEXT
+          end
+
+          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet`" do
+            expect { service_class.if_not_step_group }
+              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet)
+              .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet) { service_class.if_not_step_group } }
+              .to delegate_to(ConvenientService, :raise)
+          end
+        end
+
+        context "when `block` is passed" do
+          context "when `block` does NOT add any steps" do
+            let(:block) { proc {} }
+
+            let(:exception_message) do
+              <<~TEXT
+                First step of `if_not_step_group` from `#{service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{service_class}
+                  # ...
+
+                  if_not_step_group SomeService do
+                    step SomeOtherService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet`" do
+              expect { service_class.if_not_step_group {} }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet) { service_class.if_not_step_group {} } }
+                .to delegate_to(ConvenientService, :raise)
+            end
+          end
+
+          context "when `block` adds some steps" do
+            let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+            let(:new_expression) do
+              ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::And.new(
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step),
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::ComplexIf.new(
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::If.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Not.new(
+                      ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                    ),
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(third_step)
+                  ),
+                  [],
+                  nil
+                )
+              )
+            end
+
+            it "returns `new expression` that includes `previous expression`" do
+              expect(service_class.if_not_step_group(*args, **kwargs, &block)).to eq(new_expression)
+            end
+          end
+        end
+      end
+
+      context "when `previous expression` is empty" do
+        context "when `block` is NOT passed" do
+          let(:exception_message) do
+            <<~TEXT
+              First step of `if_not_step_group` from `#{service_class}` is NOT set.
+
+              Did you forget to use `step`? For example:
+
+              class #{service_class}
+                # ...
+
+                if_not_step_group SomeService do
+                  step SomeOtherService
+
+                  # ...
+                end
+
+                # ...
+              end
+            TEXT
+          end
+
+          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet`" do
+            expect { service_class.if_not_step_group }
+              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet)
+              .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet) { service_class.if_not_step_group } }
+              .to delegate_to(ConvenientService, :raise)
+          end
+        end
+
+        context "when `block` is passed" do
+          context "when `block` does NOT add any steps" do
+            let(:block) { proc {} }
+
+            let(:exception_message) do
+              <<~TEXT
+                First step of `if_not_step_group` from `#{service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{service_class}
+                  # ...
+
+                  if_not_step_group SomeService do
+                    step SomeOtherService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet`" do
+              expect { service_class.if_not_step_group {} }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet) { service_class.if_not_step_group {} } }
+                .to delegate_to(ConvenientService, :raise)
+            end
+          end
+
+          context "when `block` adds some steps" do
+            let(:block) { proc { service_class.step(*args, **kwargs) } }
+
+            let(:new_expression) do
+              ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::ComplexIf.new(
+                ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::If.new(
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Not.new(
+                    ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step)
+                  ),
+                  ConvenientService::Plugins::Service::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step)
+                ),
+                [],
+                nil
+              )
+            end
+
+            it "returns `new expression` that includes `previous expression`" do
+              expect(service_class.if_not_step_group(*args, **kwargs, &block)).to eq(new_expression)
+            end
+          end
+        end
+      end
+    end
+
     describe ".steps" do
       specify do
         expect { service_class.steps }

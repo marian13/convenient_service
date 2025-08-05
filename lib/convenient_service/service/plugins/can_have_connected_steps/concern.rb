@@ -503,7 +503,15 @@ module ConvenientService
             end
 
             ##
+            # @api public
             #
+            # @param args [Array<Object>]
+            # @param kwargs [Hash{Symbol => Object}]
+            # @param block [Proc, nil]
+            # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
+            #
+            # @internal
+            #   TODO: `or_if_not_step_group`.
             #
             def if_not_step_group(*args, **kwargs, &block)
               previous_expression = steps.expression
@@ -516,7 +524,7 @@ module ConvenientService
 
               current_expression = steps.expression
 
-              ::ConvenientService.raise Exceptions::FirstGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
+              ::ConvenientService.raise Exceptions::FirstConditionalGroupStepIsNotSet.new(container: self, method: __method__) if current_expression.empty?
 
               steps.expression =
                 if previous_expression.empty?
