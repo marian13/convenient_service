@@ -188,13 +188,19 @@
 
 22
 23
-24</pre>
+24
+25
+26
+27</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/has_internals/concern.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_internals_class'>internals_class</span>
-  <span class='ivar'>@internals_class</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Commands.html" title="ConvenientService::Common::Plugins::HasInternals::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Commands/CreateInternalsClass.html" title="ConvenientService::Common::Plugins::HasInternals::Commands::CreateInternalsClass (class)">CreateInternalsClass</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Commands/CreateInternalsClass.html#call-instance_method" title="ConvenientService::Common::Plugins::HasInternals::Commands::CreateInternalsClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>entity_class:</span> <span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='ivar'>@internals_class</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../Common.html" title="ConvenientService::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Plugins.html" title="ConvenientService::Common::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../CanHaveUserProvidedEntity.html" title="ConvenientService::Common::Plugins::CanHaveUserProvidedEntity (module)">CanHaveUserProvidedEntity</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../CanHaveUserProvidedEntity/Commands.html" title="ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../CanHaveUserProvidedEntity/Commands/FindOrCreateEntity.html" title="ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity (class)">FindOrCreateEntity</a></span></span><span class='lbracket'>[</span>
+    <span class='label'>namespace:</span> <span class='kw'>self</span><span class='comma'>,</span>
+    <span class='label'>proto_entity:</span> <span class='const'><span class='object_link'><a href="Entities.html" title="ConvenientService::Common::Plugins::HasInternals::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Entities/Internals.html" title="ConvenientService::Common::Plugins::HasInternals::Entities::Internals (class)">Internals</a></span></span>
+  <span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -242,7 +248,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug  7 21:08:54 2025 by
+  Generated on Thu Aug  7 23:49:22 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>

@@ -87,11 +87,6 @@
   
   
   
-  <dl>
-      <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="../../../../../Support/DependencyContainer/Import.html" title="ConvenientService::Support::DependencyContainer::Import (module)">Support::DependencyContainer::Import</a></span></dd>
-  </dl>
-  
   
 
   
@@ -256,24 +251,7 @@
     </ul>
   
 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../../../Support/DependencyContainer/Import.html" title="ConvenientService::Support::DependencyContainer::Import (module)">Support::DependencyContainer::Import</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../../../../../Support/DependencyContainer/Import.html#import-class_method" title="ConvenientService::Support::DependencyContainer::Import.import (method)">import</a></span></p>
-
-  
-  
-  
-  
-  
-  <div id="constructor_details" class="method_details_list">
+<div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
     <div class="method_details first">
@@ -315,13 +293,13 @@
       <pre class="lines">
 
 
+22
+23
 24
-25
-26
-27</pre>
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>service_class:</span><span class='rparen'>)</span>
   <span class='ivar'>@service_class</span> <span class='op'>=</span> <span class='id identifier rubyid_service_class'>service_class</span>
@@ -395,18 +373,18 @@
       <pre class="lines">
 
 
+75
+76
 77
 78
 79
 80
 81
 82
-83
-84
-85</pre>
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -474,18 +452,18 @@
       <pre class="lines">
 
 
+61
+62
 63
 64
 65
 66
 67
 68
-69
-70
-71</pre>
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb', line 61</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to'>to</span><span class='lparen'>(</span><span class='id identifier rubyid_result_spec'>result_spec</span><span class='rparen'>)</span>
   <span class='ivar'>@result_spec</span> <span class='op'>=</span> <span class='id identifier rubyid_result_spec'>result_spec</span>
@@ -538,14 +516,14 @@
       <pre class="lines">
 
 
+33
+34
 35
 36
-37
-38
-39</pre>
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_any_arguments'>with_any_arguments</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='ivar'>@arguments</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -594,14 +572,14 @@
       <pre class="lines">
 
 
+42
+43
 44
 45
-46
-47
-48</pre>
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_arguments'>with_arguments</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='ivar'>@arguments</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../Support/Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
@@ -650,14 +628,14 @@
       <pre class="lines">
 
 
+51
+52
 53
 54
-55
-56
-57</pre>
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_without_arguments'>without_arguments</span>
   <span class='ivar'>@arguments</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Support/Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_null_arguments'><span class='object_link'><a href="../../../../../Support/Arguments.html#null_arguments-class_method" title="ConvenientService::Support::Arguments.null_arguments (method)">null_arguments</a></span></span>
@@ -674,7 +652,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug  7 21:09:04 2025 by
+  Generated on Thu Aug  7 23:49:32 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
