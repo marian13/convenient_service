@@ -15,18 +15,6 @@ module ConvenientService
               include Support::DependencyContainer::Import
 
               ##
-              # @internal
-              #   TODO: Implement shorter form in the following way:
-              #
-              #   import \
-              #     command: :SetServiceStubbedResult,
-              #     from: ConvenientService::Service::Plugins::CanHaveStubbedResults
-              #
-              import \
-                :"commands.SetServiceStubbedResult",
-                from: ConvenientService::Service::Plugins::CanHaveStubbedResults::Container
-
-              ##
               # @param service_class [Class]
               # @return [void]
               #
@@ -77,7 +65,7 @@ module ConvenientService
 
                 service_class.commit_config!(trigger: Constants::Triggers::STUB_SERVICE)
 
-                commands.SetServiceStubbedResult[service: service_class, arguments: arguments, result: result]
+                Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult[service: service_class, arguments: arguments, result: result]
 
                 self
               end

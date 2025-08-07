@@ -21,6 +21,8 @@ module ConvenientService
             #   - https://github.com/rspec/rspec-support/blob/v3.12.0/lib/rspec/support.rb#L92
             #   - https://relishapp.com/rspec/rspec-core/docs/metadata/current-example
             #
+            #   TODO: Abstract RSpec-specific code.
+            #
             def call
               if Dependencies.rspec.current_example
                 Utils::Object.memoize_including_falsy_values(Dependencies.rspec.current_example, :@__convenient_service_stubbed_results__) { Support::Cache.backed_by(:thread_safe_hash).new }
