@@ -64,8 +64,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Concern, type:
     describe ".step_class" do
       specify do
         expect { service_class.step_class }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Commands::CreateStepClass, :call)
-          .with_arguments(service_class: service_class)
+          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity, :call)
+          .with_arguments(namespace: service_class, proto_entity: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step)
           .and_return_its_value
       end
 

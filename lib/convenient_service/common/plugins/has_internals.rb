@@ -5,6 +5,5 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "has_internals/commands"
 require_relative "has_internals/concern"
 require_relative "has_internals/entities"

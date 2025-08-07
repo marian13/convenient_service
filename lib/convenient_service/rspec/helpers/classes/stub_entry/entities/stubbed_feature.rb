@@ -67,7 +67,7 @@ module ConvenientService
 
                 feature_class.commit_config!(trigger: Constants::Triggers::STUB_ENTRY)
 
-                ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments, value: value]
+                Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments, value: value]
 
                 self
               end

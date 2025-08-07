@@ -5,5 +5,4 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "commands/create_result_class"
 require_relative "commands/is_result"

@@ -82,11 +82,13 @@ module ConvenientService
             # @return [Class]
             #
             # @internal
-            #   NOTE: A command instead of `import` is used in order to NOT pollute the public interface.
             #   TODO: Specs that prevent public interface accidental pollution.
             #
             def result_class
-              @result_class ||= Commands::CreateResultClass.call(service_class: self)
+              @result_class ||= Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity[
+                namespace: self,
+                proto_entity: Entities::Result
+              ]
             end
           end
         end
