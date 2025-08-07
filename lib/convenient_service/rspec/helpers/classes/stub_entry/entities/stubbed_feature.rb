@@ -15,18 +15,6 @@ module ConvenientService
               include Support::DependencyContainer::Import
 
               ##
-              # @internal
-              #   TODO: Implement shorter form in the following way:
-              #
-              #   import \
-              #     command: :SetFeatureStubbedEntry,
-              #     from: ConvenientService::Feature::Plugins::CanHaveStubbedEntries
-              #
-              import \
-                :"commands.SetFeatureStubbedEntry",
-                from: ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Container
-
-              ##
               # @param feature_class [ConvenientService::Feature]
               # @param entry_name [Symbol, String]
               # @return [void]
@@ -79,7 +67,7 @@ module ConvenientService
 
                 feature_class.commit_config!(trigger: Constants::Triggers::STUB_ENTRY)
 
-                commands.SetFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments, value: value]
+                ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments, value: value]
 
                 self
               end
