@@ -17,7 +17,6 @@ module ConvenientService
                   module Commands
                     class GenerateGotJsendAttributesPart < Support::Command
                       include Support::Delegate
-                      include Support::DependencyContainer::Import
 
                       ##
                       # @api private
@@ -40,13 +39,6 @@ module ConvenientService
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       delegate :result, to: :printer
-
-                      ##
-                      # @api private
-                      #
-                      # @return [Symbol]
-                      #
-                      import :"constants.DEFAULT_FAILURE_CODE", from: Service::Plugins::HasJSendResult::Container
 
                       ##
                       # @api private
@@ -98,7 +90,7 @@ module ConvenientService
                       # @return [String]
                       #
                       def code_part
-                        (code == constants.DEFAULT_FAILURE_CODE) ? "" : "with code `#{code}`"
+                        (code == Service::Plugins::HasJSendResult::Constants::DEFAULT_FAILURE_CODE) ? "" : "with code `#{code}`"
                       end
 
                       ##

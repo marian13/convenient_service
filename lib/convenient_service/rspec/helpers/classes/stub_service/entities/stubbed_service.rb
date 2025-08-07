@@ -12,8 +12,6 @@ module ConvenientService
         class StubService < Support::Command
           module Entities
             class StubbedService
-              include Support::DependencyContainer::Import
-
               ##
               # @param service_class [Class]
               # @return [void]

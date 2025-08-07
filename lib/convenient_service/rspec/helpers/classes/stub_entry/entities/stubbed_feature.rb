@@ -12,8 +12,6 @@ module ConvenientService
         class StubEntry < Support::Command
           module Entities
             class StubbedFeature
-              include Support::DependencyContainer::Import
-
               ##
               # @param feature_class [ConvenientService::Feature]
               # @param entry_name [Symbol, String]

@@ -10,18 +10,12 @@ module ConvenientService
     module Matchers
       module Classes
         class Export
-          include ConvenientService::DependencyContainer::Import
-
-          import :"constants.DEFAULT_SCOPE", from: ConvenientService::Support::DependencyContainer::Container
-          import :"commands.AssertValidContainer", from: ConvenientService::Support::DependencyContainer::Container
-          import :"commands.AssertValidScope", from: ConvenientService::Support::DependencyContainer::Container
-
           ##
           # @param slug [Symbol, String]
           # @param scope [Symbol]
           # @return [void]
           #
-          def initialize(slug, scope: constants.DEFAULT_SCOPE)
+          def initialize(slug, scope: Support::DependencyContainer::Constants::DEFAULT_SCOPE)
             @slug = slug
             @scope = scope
           end
@@ -33,9 +27,8 @@ module ConvenientService
           def matches?(container)
             @container = container
 
-            commands.AssertValidContainer.call(container: container)
-
-            commands.AssertValidScope.call(scope: scope)
+            Support::DependencyContainer::Commands::AssertValidContainer[container: container]
+            Support::DependencyContainer::Commands::AssertValidScope[scope: scope]
 
             Utils.to_bool(container.exported_methods.find_by(slug: slug, scope: scope))
           end

@@ -16,7 +16,6 @@ module ConvenientService
                 module Commands
                   class ValidateResultType < Support::Command
                     include Support::Delegate
-                    include Support::DependencyContainer::Import
 
                     ##
                     # @api private
@@ -55,11 +54,6 @@ module ConvenientService
                     delegate :step, to: :chain
 
                     ##
-                    # @return [Boolean]
-                    #
-                    import :"commands.is_result?", from: Service::Plugins::HasJSendResult::Container
-
-                    ##
                     # @api private
                     #
                     # @param validator [ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Validator]
@@ -74,13 +68,10 @@ module ConvenientService
                     #
                     # @return [Boolean]
                     #
-                    # @internal
-                    #   TODO: `commands.IsResult`.
-                    #
                     def call
-                      return false unless matcher.result
+                      return false unless result
 
-                      commands.is_result?(result)
+                      Service::Plugins::HasJSendResult::Commands::IsResult[result: result]
                     end
                   end
                 end

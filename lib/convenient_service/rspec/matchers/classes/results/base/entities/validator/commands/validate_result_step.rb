@@ -76,9 +76,6 @@ module ConvenientService
                     # @return [Boolean]
                     # @raise [ConvenientService::RSpec::Matchers::Classes::Results::Base::Exceptions::InvalidStep]
                     #
-                    # @internal
-                    #   TODO: Import via commands.
-                    #
                     def call
                       return false unless matcher.result
 

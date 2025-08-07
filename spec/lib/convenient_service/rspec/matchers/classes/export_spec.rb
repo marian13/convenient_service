@@ -36,14 +36,6 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Export, type: :stand
     end
   end
 
-  example_group "modules" do
-    include ConvenientService::RSpec::Matchers::IncludeModule
-
-    subject { described_class }
-
-    it { is_expected.to include_module(ConvenientService::DependencyContainer::Import) }
-  end
-
   example_group "instance methods" do
     describe "#matches?" do
       specify do
