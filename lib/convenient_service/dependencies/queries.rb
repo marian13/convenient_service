@@ -408,6 +408,8 @@ module ConvenientService
         #
         require "tempfile"
 
+        require "convenient_service/debug/convenient_service"
+
         require "convenient_service/debug/b" if support_byebug?
         require "convenient_service/debug/byebug_syntax_highlighting" if support_byebug?
         require "convenient_service/debug/bb" if ruby.mri?
