@@ -1641,8 +1641,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
     describe ".elsif_step_group" do
       context "when `previous expression` is NOT empty" do
         context "when `block` is NOT passed" do
-          let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
-
           let(:exception_message) do
             <<~TEXT
               First step of `elsif_step_group` from `#{printable_service_class}` is NOT set.
@@ -1684,8 +1682,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             context "when `block` does NOT add any steps" do
               let(:block) { proc {} }
 
-              let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
-
               let(:exception_message) do
                 <<~TEXT
                   First step of `elsif_step_group` from `#{printable_service_class}` is NOT set.
@@ -1724,8 +1720,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             context "when `block` adds some steps" do
               let(:block) { proc { service_class.step(*args, **kwargs) } }
-
-              let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
 
               let(:exception_message) do
                 <<~TEXT
@@ -2088,8 +2082,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
     describe ".elsif_not_step_group" do
       context "when `previous expression` is NOT empty" do
         context "when `block` is NOT passed" do
-          let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
-
           let(:exception_message) do
             <<~TEXT
               First step of `elsif_not_step_group` from `#{printable_service_class}` is NOT set.
@@ -2131,8 +2123,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             context "when `block` does NOT add any steps" do
               let(:block) { proc {} }
 
-              let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
-
               let(:exception_message) do
                 <<~TEXT
                   First step of `elsif_not_step_group` from `#{printable_service_class}` is NOT set.
@@ -2171,8 +2161,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             context "when `block` adds some steps" do
               let(:block) { proc { service_class.step(*args, **kwargs) } }
-
-              let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
 
               let(:exception_message) do
                 <<~TEXT
@@ -2543,41 +2531,80 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
     describe ".else_group" do
       context "when `previous expression` is NOT empty" do
         context "when `block` is NOT passed" do
-          let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
+          context "when previous expression is NOT complex if expression" do
+            let(:exception_message) do
+              <<~TEXT
+                First step of `else_group` from `#{printable_service_class}` is NOT set.
 
-          let(:exception_message) do
-            <<~TEXT
-              First step of `else_group` from `#{printable_service_class}` is NOT set.
+                Did you forget to use `step`? For example:
 
-              Did you forget to use `step`? For example:
+                class #{printable_service_class}
+                  # ...
 
-              class #{printable_service_class}
-                # ...
+                  else_group SomeService do
+                    step SomeOtherService
 
-                else_group SomeService do
-                  step SomeOtherService
+                    # ...
+                  end
 
                   # ...
                 end
+              TEXT
+            end
 
-                # ...
+            before do
+              service_class.step(*args, **kwargs)
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf`" do
+              expect { service_class.else_group }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf) { service_class.else_group } }
+                .to delegate_to(ConvenientService, :raise)
+            end
+          end
+
+          context "when previous expression is complex if expression" do
+            let(:exception_message) do
+              <<~TEXT
+                First step of `else_group` from `#{printable_service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{printable_service_class}
+                  # ...
+
+                  else_group SomeService do
+                    step SomeOtherService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+            end
+
+            before do
+              service_class.if_step_group(*args, **kwargs) do
+                service_class.step(*args, **kwargs)
               end
-            TEXT
-          end
+            end
 
-          before do
-            service_class.step(*args, **kwargs)
-          end
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet`" do
+              expect { service_class.else_group }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet)
+                .with_message(exception_message)
+            end
 
-          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf`" do
-            expect { service_class.else_group }
-              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf)
-              .with_message(exception_message)
-          end
-
-          specify do
-            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf) { service_class.else_group } }
-              .to delegate_to(ConvenientService, :raise)
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet) { service_class.else_group } }
+                .to delegate_to(ConvenientService, :raise)
+            end
           end
         end
 
@@ -2585,8 +2612,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           context "when previous expression is NOT complex if expression" do
             context "when `block` does NOT add any steps" do
               let(:block) { proc {} }
-
-              let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
 
               let(:exception_message) do
                 <<~TEXT
@@ -2626,8 +2651,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
             context "when `block` adds some steps" do
               let(:block) { proc { service_class.step(*args, **kwargs) } }
-
-              let(:printable_service_class) { ConvenientService::Utils::Class.display_name(service_class) }
 
               let(:exception_message) do
                 <<~TEXT
