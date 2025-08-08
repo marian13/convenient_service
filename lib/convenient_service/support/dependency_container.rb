@@ -12,5 +12,3 @@ require_relative "dependency_container/exceptions"
 
 require_relative "dependency_container/export"
 require_relative "dependency_container/import"
-
-require_relative "dependency_container/container"
