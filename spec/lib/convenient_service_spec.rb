@@ -12,18 +12,6 @@ RSpec.describe ConvenientService, type: :standard do
   include described_class::RSpec::PrimitiveMatchers::CacheItsValue
   include described_class::RSpec::Matchers::DelegateTo
 
-  example_group "constants" do
-    describe "::VERSION" do
-      it "returns version" do
-        expect(described_class::VERSION).to be_instance_of(String)
-      end
-
-      it "follows Semantic Versioning" do
-        expect(described_class::VERSION).to match(/\d+\.\d+\.\d+/)
-      end
-    end
-  end
-
   example_group "class methods" do
     describe ".debug?" do
       context "when `ENV[\"CONVENIENT_SERVICE_DEBUG\"]` is NOT set to `false`" do

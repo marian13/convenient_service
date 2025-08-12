@@ -82,7 +82,7 @@ module ConvenientService
           # @return [Class]
           #
           def duck_class
-            @duck_class ||= ConvenientService::Utils::Object.duck_class(object)
+            @duck_class ||= Utils::Object.duck_class(object)
           end
 
           ##
