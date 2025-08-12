@@ -12,8 +12,6 @@ require "convenient_service"
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Utils, type: :standard do
   example_group "class methods" do
-    include ConvenientService::RSpec::Matchers::DelegateTo
-
     describe ".to_bool" do
       let(:object) { :foo }
 
