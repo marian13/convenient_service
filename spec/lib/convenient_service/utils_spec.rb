@@ -17,10 +17,6 @@ RSpec.describe ConvenientService::Utils, type: :standard do
     describe ".to_bool" do
       let(:object) { :foo }
 
-      ##
-      # TODO: Create Utils copy for Matchers.
-      # https://github.com/marian13/convenient_service/wiki/Docs:-Components
-      #
       it "delegates to `ConvenientService::Utils::Bool::ToBool.call`" do
         allow(described_class::Bool::ToBool).to receive(:call).with(object).and_call_original
 
@@ -50,11 +46,18 @@ RSpec.describe ConvenientService::Utils, type: :standard do
       let(:kwargs) { {foo: :bar} }
       let(:block) { proc { :foo } }
 
-      specify do
-        expect { described_class.safe_send(object, method, *args, **kwargs, &block) }
-          .to delegate_to(described_class::Object::SafeSend, :call)
-          .with_arguments(object, method, *args, **kwargs, &block)
-          .and_return_its_value
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `ConvenientService::Utils::Object::SafeSend.call`" do
+        expect(described_class::Object::SafeSend)
+          .to receive(:call)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object, method, *args], kwargs, block]) }
+
+        described_class.safe_send(object, method, *args, **kwargs, &block)
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `ConvenientService::Utils::Object::SafeSend.call` value" do
+        expect(described_class.safe_send(object, method, *args, **kwargs, &block)).to eq(described_class::Object::SafeSend.call(object, method, *args, **kwargs, &block))
       end
     end
 
@@ -63,22 +66,36 @@ RSpec.describe ConvenientService::Utils, type: :standard do
       let(:ivar_name) { :@foo }
       let(:value_block) { proc { false } }
 
-      specify do
-        expect { described_class.memoize_including_falsy_values(object, ivar_name, &value_block) }
-          .to delegate_to(described_class::Object::MemoizeIncludingFalsyValues, :call)
-          .with_arguments(object, ivar_name, &value_block)
-          .and_return_its_value
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `ConvenientService::Utils::Object::MemoizeIncludingFalsyValues.call`" do
+        expect(described_class::Object::MemoizeIncludingFalsyValues)
+          .to receive(:call)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, value_block]) }
+
+        described_class.memoize_including_falsy_values(object, ivar_name, &value_block)
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `ConvenientService::Utils::Object::MemoizeIncludingFalsyValues.call` value" do
+        expect(described_class.memoize_including_falsy_values(object, ivar_name, &value_block)).to eq(described_class::Object::MemoizeIncludingFalsyValues.call(object, ivar_name, &value_block))
       end
     end
 
     describe ".with_one_time_object" do
       let(:block) { proc { |one_time_object| :foo } }
 
-      specify do
-        expect { described_class.with_one_time_object(&block) }
-          .to delegate_to(described_class::Object::WithOneTimeObject, :call)
-          .with_arguments(&block)
-          .and_return_its_value
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `ConvenientService::Utils::Object::WithOneTimeObject.call`" do
+        expect(described_class::Object::WithOneTimeObject)
+          .to receive(:call)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, block]) }
+
+        described_class.with_one_time_object(&block)
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `ConvenientService::Utils::Object::WithOneTimeObject.call` value" do
+        expect(described_class.with_one_time_object(&block)).to eq(described_class::Object::WithOneTimeObject.call(&block))
       end
     end
   end

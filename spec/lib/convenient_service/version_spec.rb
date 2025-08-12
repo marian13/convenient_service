@@ -7,18 +7,18 @@
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService, type: :standard do
+# rubocop:disable RSpec/DescribeClass, RSpec/NestedGroups
+RSpec.describe "convenient_service/version", type: :standard do
   example_group "constants" do
     describe "::VERSION" do
       it "returns version" do
-        expect(described_class::VERSION).to be_instance_of(String)
+        expect(ConvenientService::VERSION).to be_instance_of(String)
       end
 
       it "follows Semantic Versioning" do
-        expect(described_class::VERSION).to match(/\d+\.\d+\.\d+/)
+        expect(ConvenientService::VERSION).to match(/\d+\.\d+\.\d+/)
       end
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/DescribeClass, RSpec/NestedGroups
