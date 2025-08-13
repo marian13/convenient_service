@@ -1641,39 +1641,80 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
     describe ".elsif_step_group" do
       context "when `previous expression` is NOT empty" do
         context "when `block` is NOT passed" do
-          let(:exception_message) do
-            <<~TEXT
-              First step of `elsif_step_group` from `#{printable_service_class}` is NOT set.
+          context "when previous expression is NOT complex if expression" do
+            let(:exception_message) do
+              <<~TEXT
+                First step of `elsif_step_group` from `#{printable_service_class}` is NOT set.
 
-              Did you forget to use `step`? For example:
+                Did you forget to use `step`? For example:
 
-              class #{printable_service_class}
-                # ...
+                class #{printable_service_class}
+                  # ...
 
-                elsif_step_group SomeService do
-                  step SomeOtherService
+                  elsif_step_group SomeService do
+                    step SomeOtherService
+
+                    # ...
+                  end
 
                   # ...
                 end
+              TEXT
+            end
 
-                # ...
+            before do
+              service_class.step(*args, **kwargs)
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf`" do
+              expect { service_class.elsif_step_group(*args, **kwargs) }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf) { service_class.elsif_step_group(*args, **kwargs) } }
+                .to delegate_to(ConvenientService, :raise)
+            end
+          end
+
+          context "when previous expression is complex if expression" do
+            let(:exception_message) do
+              <<~TEXT
+                First step of `elsif_step_group` from `#{printable_service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{printable_service_class}
+                  # ...
+
+                  elsif_step_group SomeService do
+                    step SomeOtherService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+            end
+
+            before do
+              service_class.if_step_group(*args, **kwargs) do
+                service_class.step(*args, **kwargs)
               end
-            TEXT
-          end
+            end
 
-          before do
-            service_class.step(*args, **kwargs)
-          end
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet`" do
+              expect { service_class.elsif_step_group(*args, **kwargs) }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet)
+                .with_message(exception_message)
+            end
 
-          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf`" do
-            expect { service_class.elsif_step_group(*args, **kwargs) }
-              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf)
-              .with_message(exception_message)
-          end
-
-          specify do
-            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf) { service_class.elsif_step_group(*args, **kwargs) } }
-              .to delegate_to(ConvenientService, :raise)
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet) { service_class.elsif_step_group(*args, **kwargs) } }
+                .to delegate_to(ConvenientService, :raise)
+            end
           end
         end
 
@@ -2082,39 +2123,80 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
     describe ".elsif_not_step_group" do
       context "when `previous expression` is NOT empty" do
         context "when `block` is NOT passed" do
-          let(:exception_message) do
-            <<~TEXT
-              First step of `elsif_not_step_group` from `#{printable_service_class}` is NOT set.
+          context "when previous expression is NOT complex if expression" do
+            let(:exception_message) do
+              <<~TEXT
+                First step of `elsif_not_step_group` from `#{printable_service_class}` is NOT set.
 
-              Did you forget to use `step`? For example:
+                Did you forget to use `step`? For example:
 
-              class #{printable_service_class}
-                # ...
+                class #{printable_service_class}
+                  # ...
 
-                elsif_not_step_group SomeService do
-                  step SomeOtherService
+                  elsif_not_step_group SomeService do
+                    step SomeOtherService
+
+                    # ...
+                  end
 
                   # ...
                 end
+              TEXT
+            end
 
-                # ...
+            before do
+              service_class.step(*args, **kwargs)
+            end
+
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf`" do
+              expect { service_class.elsif_not_step_group(*args, **kwargs) }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf)
+                .with_message(exception_message)
+            end
+
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf) { service_class.elsif_not_step_group(*args, **kwargs) } }
+                .to delegate_to(ConvenientService, :raise)
+            end
+          end
+
+          context "when previous expression is complex if expression" do
+            let(:exception_message) do
+              <<~TEXT
+                First step of `elsif_not_step_group` from `#{printable_service_class}` is NOT set.
+
+                Did you forget to use `step`? For example:
+
+                class #{printable_service_class}
+                  # ...
+
+                  elsif_not_step_group SomeService do
+                    step SomeOtherService
+
+                    # ...
+                  end
+
+                  # ...
+                end
+              TEXT
+            end
+
+            before do
+              service_class.if_step_group(*args, **kwargs) do
+                service_class.step(*args, **kwargs)
               end
-            TEXT
-          end
+            end
 
-          before do
-            service_class.step(*args, **kwargs)
-          end
+            it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet`" do
+              expect { service_class.elsif_not_step_group(*args, **kwargs) }
+                .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet)
+                .with_message(exception_message)
+            end
 
-          it "raises `ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf`" do
-            expect { service_class.elsif_not_step_group(*args, **kwargs) }
-              .to raise_error(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf)
-              .with_message(exception_message)
-          end
-
-          specify do
-            expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::ElseWithoutIf) { service_class.elsif_not_step_group(*args, **kwargs) } }
-              .to delegate_to(ConvenientService, :raise)
+            specify do
+              expect { ignoring_exception(ConvenientService::Plugins::Service::CanHaveConnectedSteps::Exceptions::FirstConditionalGroupStepIsNotSet) { service_class.elsif_not_step_group(*args, **kwargs) } }
+                .to delegate_to(ConvenientService, :raise)
+            end
           end
         end
 
