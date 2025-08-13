@@ -10,28 +10,40 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Class, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   describe ".display_name" do
     let(:klass) { Class.new }
 
-    specify do
-      expect { described_class.display_name(klass) }
-        .to delegate_to(described_class::DisplayName, :call)
-        .with_arguments(klass)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Class::DisplayName.call`" do
+      expect(described_class::DisplayName)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[klass], {}, nil]) }
+
+      described_class.display_name(klass)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Class::DisplayName.call` value" do
+      expect(described_class.display_name(klass)).to eq(described_class::DisplayName.call(klass))
     end
   end
 
   if ConvenientService::Dependencies.ruby.version >= 3.2
-    describe ".display_name" do
+    describe ".attached_object" do
       let(:klass) { String.singleton_class }
 
-      specify do
-        expect { described_class.attached_object(klass) }
-          .to delegate_to(described_class::GetAttachedObject, :call)
-          .with_arguments(klass)
-          .and_return_its_value
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `ConvenientService::Utils::Class::GetAttachedObject.call`" do
+        expect(described_class::GetAttachedObject)
+          .to receive(:call)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[klass], {}, nil]) }
+
+        described_class.attached_object(klass)
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `ConvenientService::Utils::Class::GetAttachedObject.call` value" do
+        expect(described_class.attached_object(klass)).to eq(described_class::GetAttachedObject.call(klass))
       end
     end
   end

@@ -10,29 +10,41 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Module, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   describe ".fetch_own_const" do
     let(:mod) { Class.new }
     let(:const_name) { :NotExistingConst }
     let(:fallback_block) { proc { 42 } }
 
-    specify do
-      expect { described_class.fetch_own_const(mod, const_name, &fallback_block) }
-        .to delegate_to(described_class::FetchOwnConst, :call)
-        .with_arguments(mod, const_name, &fallback_block)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Module::FetchOwnConst.call`" do
+      expect(described_class::FetchOwnConst)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[mod, const_name], {}, fallback_block]) }
+
+      described_class.fetch_own_const(mod, const_name, &fallback_block)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Module::FetchOwnConst.call` value" do
+      expect(described_class.fetch_own_const(mod, const_name, &fallback_block)).to eq(described_class::FetchOwnConst.call(mod, const_name, &fallback_block))
     end
   end
 
   describe ".get_namespace" do
     let(:mod) { Enumerator::Lazy }
 
-    specify do
-      expect { described_class.get_namespace(mod) }
-        .to delegate_to(described_class::GetNamespace, :call)
-        .with_arguments(mod)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Module::GetNamespace.call`" do
+      expect(described_class::GetNamespace)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[mod], {}, nil]) }
+
+      described_class.get_namespace(mod)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Module::GetNamespace.call` value" do
+      expect(described_class.get_namespace(mod)).to eq(described_class::GetNamespace.call(mod))
     end
   end
 
@@ -40,11 +52,18 @@ RSpec.describe ConvenientService::Utils::Module, type: :standard do
     let(:mod) { Class.new }
     let(:const_name) { :NotExistingConst }
 
-    specify do
-      expect { described_class.get_own_const(mod, const_name) }
-        .to delegate_to(described_class::GetOwnConst, :call)
-        .with_arguments(mod, const_name)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Module::GetOwnConst.call`" do
+      expect(described_class::GetOwnConst)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[mod, const_name], {}, nil]) }
+
+      described_class.get_own_const(mod, const_name)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Module::GetOwnConst.call` value" do
+      expect(described_class.get_own_const(mod, const_name)).to eq(described_class::GetOwnConst.call(mod, const_name))
     end
   end
 
@@ -52,11 +71,18 @@ RSpec.describe ConvenientService::Utils::Module, type: :standard do
     let(:mod) { Class.new }
     let(:method_name) { :result }
 
-    specify do
-      expect { described_class.get_own_instance_method(mod, method_name) }
-        .to delegate_to(described_class::GetOwnInstanceMethod, :call)
-        .with_arguments(mod, method_name)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Module::GetOwnInstanceMethod.call`" do
+      expect(described_class::GetOwnInstanceMethod)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[mod, method_name], {}, nil]) }
+
+      described_class.get_own_instance_method(mod, method_name)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Module::GetOwnInstanceMethod.call` value" do
+      expect(described_class.get_own_instance_method(mod, method_name)).to eq(described_class::GetOwnInstanceMethod.call(mod, method_name))
     end
   end
 
@@ -64,11 +90,18 @@ RSpec.describe ConvenientService::Utils::Module, type: :standard do
     let(:mod) { Class.new }
     let(:other_mod) { Module.new }
 
-    specify do
-      expect { described_class.include_module?(mod, other_mod) }
-        .to delegate_to(described_class::IncludeModule, :call)
-        .with_arguments(mod, other_mod)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Module::IncludeModule.call`" do
+      expect(described_class::IncludeModule)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[mod, other_mod], {}, nil]) }
+
+      described_class.include_module?(mod, other_mod)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Module::IncludeModule.call` value" do
+      expect(described_class.include_module?(mod, other_mod)).to eq(described_class::IncludeModule.call(mod, other_mod))
     end
   end
 
@@ -76,11 +109,18 @@ RSpec.describe ConvenientService::Utils::Module, type: :standard do
     let(:mod) { Class.new }
     let(:method_name) { :foo }
 
-    specify do
-      expect { described_class.has_own_instance_method?(mod, method_name) }
-        .to delegate_to(described_class::HasOwnInstanceMethod, :call)
-        .with_arguments(mod, method_name)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Module::HasOwnInstanceMethod.call`" do
+      expect(described_class::HasOwnInstanceMethod)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[mod, method_name], {}, nil]) }
+
+      described_class.has_own_instance_method?(mod, method_name)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Module::HasOwnInstanceMethod.call` value" do
+      expect(described_class.has_own_instance_method?(mod, method_name)).to eq(described_class::HasOwnInstanceMethod.call(mod, method_name))
     end
   end
 end

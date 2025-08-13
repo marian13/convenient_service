@@ -10,27 +10,39 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Proc, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   describe ".conjunct" do
     let(:procs) { [->(item) { item[:valid] }] }
 
-    specify do
-      expect { described_class.conjunct(procs) }
-        .to delegate_to(described_class::Conjunct, :call)
-        .with_arguments(procs)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Proc::Conjunct.call`" do
+      expect(described_class::Conjunct)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[procs], {}, nil]) }
+
+      described_class.conjunct(procs)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Proc::Conjunct.call` value" do
+      expect(described_class.conjunct(procs)).to eq(described_class::Conjunct.call(procs))
     end
   end
 
   describe ".display" do
     let(:proc) { -> { :foo } }
 
-    specify do
-      expect { described_class.display(proc) }
-        .to delegate_to(described_class::Display, :call)
-        .with_arguments(proc)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Proc::Display.call`" do
+      expect(described_class::Display)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[proc], {}, nil]) }
+
+      described_class.display(proc)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Proc::Display.call` value" do
+      expect(described_class.display(proc)).to eq(described_class::Display.call(proc))
     end
   end
 
@@ -38,11 +50,18 @@ RSpec.describe ConvenientService::Utils::Proc, type: :standard do
     let(:proc) { ->(object) { object.reverse } }
     let(:object) { "abc" }
 
-    specify do
-      expect { described_class.exec_config(proc, object) }
-        .to delegate_to(described_class::ExecConfig, :call)
-        .with_arguments(proc, object)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Proc::ExecConfig.call`" do
+      expect(described_class::ExecConfig)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[proc, object], {}, nil]) }
+
+      described_class.exec_config(proc, object)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Proc::ExecConfig.call` value" do
+      expect(described_class.exec_config(proc, object)).to eq(described_class::ExecConfig.call(proc, object))
     end
   end
 end

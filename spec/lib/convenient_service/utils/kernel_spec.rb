@@ -10,8 +10,6 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Kernel, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   describe ".silence_warnings" do
     let(:namespace) { Module.new }
     let(:klass) { Class.new }
@@ -23,11 +21,18 @@ RSpec.describe ConvenientService::Utils::Kernel, type: :standard do
       end
     end
 
-    specify do
-      expect { described_class.silence_warnings(&block) }
-        .to delegate_to(described_class::SilenceWarnings, :call)
-        .with_arguments(&block)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Kernel::SilenceWarnings.call`" do
+      expect(described_class::SilenceWarnings)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, block]) }
+
+      described_class.silence_warnings(&block)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Kernel::SilenceWarnings.call` value" do
+      expect(described_class.silence_warnings(&block)).to eq(described_class::SilenceWarnings.call(&block))
     end
   end
 end

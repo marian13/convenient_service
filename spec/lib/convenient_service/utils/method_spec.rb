@@ -10,8 +10,6 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Method, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   describe ".defined?" do
     let(:method) { :foo }
     let(:klass) { Class.new }
@@ -20,11 +18,18 @@ RSpec.describe ConvenientService::Utils::Method, type: :standard do
     let(:protected) { true }
     let(:private) { true }
 
-    specify do
-      expect { described_class.defined?(method, klass, public: public, protected: protected, private: private) }
-        .to delegate_to(described_class::Defined, :call)
-        .with_arguments(method, klass, public: public, protected: protected, private: private)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Method::Defined.call`" do
+      expect(described_class::Defined)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[method, klass], {public: public, protected: protected, private: private}, nil]) }
+
+      described_class.defined?(method, klass, public: public, protected: protected, private: private)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Method::Defined.call` value" do
+      expect(described_class.defined?(method, klass, public: public, protected: protected, private: private)).to eq(described_class::Defined.call(method, klass, public: public, protected: protected, private: private))
     end
   end
 
@@ -42,16 +47,23 @@ RSpec.describe ConvenientService::Utils::Method, type: :standard do
     let(:protected) { true }
     let(:private) { true }
 
-    specify do
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Method::Remove.call`" do
+      expect(described_class::Remove)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[method, klass], {public: public, protected: protected, private: private}, nil]) }
+
+      described_class.remove(method, klass, public: public, protected: protected, private: private)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Method::Remove.call` value" do
       ##
       # NOTE: Returns `true` when called for the first time, `false` for all the subsequent calls.
       #
       described_class.remove(method, klass, public: public, protected: protected, private: private)
 
-      expect { described_class.remove(method, klass, public: public, protected: protected, private: private) }
-        .to delegate_to(described_class::Remove, :call)
-        .with_arguments(method, klass, public: public, protected: protected, private: private)
-        .and_return_its_value
+      expect(described_class.remove(method, klass, public: public, protected: protected, private: private)).to eq(described_class::Remove.call(method, klass, public: public, protected: protected, private: private))
     end
   end
 end
