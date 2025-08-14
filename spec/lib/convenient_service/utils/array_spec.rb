@@ -36,17 +36,20 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
   end
 
   describe ".drop_while" do
-    let(:array) { [1, 2, 3, 4, 5] }
-    let(:condition_block) { proc { |item| item != 3 } }
+    let(:array) { [1, 2, 3, 4, 5].freeze }
     let(:inclusively) { true }
+    let(:condition_block) { proc { |item| item != 3 } }
 
+    ##
+    # HACK: RSpec passes `array.first` as `_original` when `inclusively` kwargs is passed. That is why `inclusively` is skipped here. But its usage is still verified by the `returns` spec.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Array::DropWhile.call`" do
       expect(described_class::DropWhile)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[array], {inclusively: inclusively}, condition_block]) }
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[array], {}, condition_block]) }
 
-      described_class.drop_while(array, inclusively: inclusively, &condition_block)
+      described_class.drop_while(array, &condition_block)
     end
     # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
 

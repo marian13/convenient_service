@@ -35,9 +35,7 @@ RSpec.describe ConvenientService::Utils::Hash, type: :standard do
 
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Hash::TripleEqualityCompare.call`" do
-      expect(described_class::TripleEqualityCompare)
-        .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[hash, other_hash], {}, nil]) }
+      expect(described_class::TripleEqualityCompare).to receive(:call).with(hash, other_hash).and_call_original
 
       described_class.triple_equality_compare(hash, other_hash)
     end
