@@ -12,11 +12,10 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::NotPassed, type: :standard do
   example_group "inheritance" do
-    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
-
-    subject { described_class }
-
-    it { is_expected.to be_descendant_of(ConvenientService::Support::UniqueValue) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class < ConvenientService::Support::UniqueValue).to eq(true) }
   end
 
   example_group "instance methods" do

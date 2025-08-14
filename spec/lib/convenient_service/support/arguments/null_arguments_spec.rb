@@ -14,11 +14,10 @@ RSpec.describe ConvenientService::Support::Arguments::NullArguments, type: :stan
   let(:null_arguments) { described_class.new }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
-
-    subject { described_class }
-
-    it { is_expected.to be_descendant_of(ConvenientService::Support::Arguments) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class < ConvenientService::Support::Arguments).to eq(true) }
   end
 
   example_group "instance methods" do

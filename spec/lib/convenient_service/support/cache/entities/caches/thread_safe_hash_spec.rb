@@ -14,11 +14,10 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeHa
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
-
-    subject { described_class }
-
-    it { is_expected.to be_descendant_of(ConvenientService::Support::Cache::Entities::Caches::Base) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class < ConvenientService::Support::Cache::Entities::Caches::Base).to eq(true) }
   end
 
   example_group "class methods" do

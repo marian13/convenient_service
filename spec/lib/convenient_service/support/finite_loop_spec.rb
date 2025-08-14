@@ -24,10 +24,11 @@ RSpec.describe ConvenientService::Support::FiniteLoop, type: :standard do
   end
 
   example_group "exceptions" do
-    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
-
-    specify { expect(described_class::Exceptions::MaxIterationCountExceeded).to be_descendant_of(ConvenientService::Exception) }
-    specify { expect(described_class::Exceptions::NoBlockGiven).to be_descendant_of(ConvenientService::Exception) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class::Exceptions::MaxIterationCountExceeded < ConvenientService::Exception).to eq(true) }
+    specify { expect(described_class::Exceptions::NoBlockGiven < ConvenientService::Exception).to eq(true) }
   end
 
   example_group "instance methods" do

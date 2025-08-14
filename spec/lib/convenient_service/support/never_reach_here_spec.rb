@@ -12,11 +12,10 @@ require "convenient_service"
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::NeverReachHere, type: :standard do
   example_group "inheritance" do
-    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
-
-    subject { described_class }
-
-    it { is_expected.to be_descendant_of(ConvenientService::Exception) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class < ConvenientService::Exception).to eq(true) }
   end
 
   example_group "instance methods" do

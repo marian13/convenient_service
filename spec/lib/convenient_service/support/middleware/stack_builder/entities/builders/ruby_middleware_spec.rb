@@ -24,11 +24,10 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
   let(:block) { proc { :foo } }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
-
-    subject { described_class }
-
-    it { is_expected.to be_descendant_of(ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Builder) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class < ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Builder).to eq(true) }
   end
 
   example_group "class methods" do

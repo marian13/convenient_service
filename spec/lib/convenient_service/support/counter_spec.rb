@@ -22,10 +22,11 @@ RSpec.describe ConvenientService::Support::Counter, type: :standard do
   let(:n) { 1_000 }
 
   example_group "exceptions" do
-    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
-
-    specify { expect(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue).to be_descendant_of(ConvenientService::Exception) }
-    specify { expect(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue).to be_descendant_of(ConvenientService::Exception) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue < ConvenientService::Exception).to eq(true) }
+    specify { expect(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue < ConvenientService::Exception).to eq(true) }
   end
 
   example_group "attributes" do
