@@ -10,17 +10,22 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Method::Name, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   describe ".append" do
     let(:method_name) { :foo }
     let(:suffix) { "_without_middlewares" }
 
-    specify do
-      expect { described_class.append(method_name, suffix) }
-        .to delegate_to(described_class::Append, :call)
-        .with_arguments(method_name, suffix)
-        .and_return_its_value
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    it "delegates to `ConvenientService::Utils::Method::Name::Append.call`" do
+      expect(described_class::Append)
+        .to receive(:call)
+          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, suffix], {}, nil]) }
+
+      described_class.append(method_name, suffix)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+    it "returns `ConvenientService::Utils::Method::Name::Append.call` value" do
+      expect(described_class.append(method_name, suffix)).to eq(described_class::Append.call(method_name, suffix))
     end
   end
 end

@@ -68,11 +68,13 @@ RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
               .with_message(exception_message)
           end
 
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
           specify do
             expect(ConvenientService).to receive(:raise).and_call_original
 
             expect { util_result }.to raise_error(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex)
           end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
         end
 
         context "when `raise_on_non_integer_index` is NOT passed" do
@@ -84,11 +86,13 @@ RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
               .with_message(exception_message)
           end
 
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
           specify do
             expect(ConvenientService).to receive(:raise).and_call_original
 
             expect { util_result }.to raise_error(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex)
           end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
         end
       end
     end

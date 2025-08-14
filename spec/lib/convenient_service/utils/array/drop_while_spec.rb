@@ -47,19 +47,19 @@ RSpec.describe ConvenientService::Utils::Array::DropWhile, type: :standard do
       context "when `inclusively` is `true`" do
         let(:inclusively) { true }
 
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         it "delegates to `ConvenientService::Utils::Array::FindYield.call`" do
           expect(array)
             .to receive(:drop_while)
-            .and_wrap_original do |original, *actual_args, **actual_kwargs, &actual_block|
-            expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, condition_block])
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                  expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, condition_block])
 
-            original.call(*actual_args, **actual_kwargs, &actual_block)
-          end
+                  original.call(*actual_args, **actual_kwargs, &actual_block)
+                }
 
           util_result
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
         it "returns array without items until condition is met for the first time" do
           expect(util_result).to eq([4, 5])
