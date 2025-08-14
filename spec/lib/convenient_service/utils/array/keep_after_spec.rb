@@ -11,13 +11,13 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Array::KeepAfter, type: :standard do
   describe ".call" do
-    subject(:result) { described_class.call(array, :bar) }
+    subject(:util_result) { described_class.call(array, :bar) }
 
     context "when array does NOT contain item to find" do
       let(:array) { [:foo] }
 
       it "returns empty array" do
-        expect(result).to eq([])
+        expect(util_result).to eq([])
       end
     end
 
@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Utils::Array::KeepAfter, type: :standard do
       let(:array) { [:foo, :bar, :baz] }
 
       it "returns items after that item exclusively" do
-        expect(result).to eq([:baz])
+        expect(util_result).to eq([:baz])
       end
     end
 
@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Utils::Array::KeepAfter, type: :standard do
       let(:array) { [:foo, :bar, :foo, :bar] }
 
       it "returns items after first item from those found items exclusively" do
-        expect(result).to eq([:foo, :bar])
+        expect(util_result).to eq([:foo, :bar])
       end
     end
   end

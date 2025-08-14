@@ -12,13 +12,13 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Utils::Array::Wrap, type: :standard do
   describe ".call" do
-    subject(:result) { described_class.call(object) }
+    subject(:util_result) { described_class.call(object) }
 
     context "when object is `nil`" do
       let(:object) { nil }
 
       it "returns empty array" do
-        expect(result).to eq([])
+        expect(util_result).to eq([])
       end
     end
 
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Utils::Array::Wrap, type: :standard do
         let(:value) { nil }
 
         it "returns object inside array" do
-          expect(result).to eq([object])
+          expect(util_result).to eq([object])
         end
       end
 
@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Utils::Array::Wrap, type: :standard do
         let(:value) { [1, 2, 3] }
 
         it "returns that truthy value" do
-          expect(result).to eq(value)
+          expect(util_result).to eq(value)
         end
       end
     end
@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Utils::Array::Wrap, type: :standard do
       let(:object) { "string" }
 
       it "returns object inside array" do
-        expect(result).to eq([object])
+        expect(util_result).to eq([object])
       end
     end
   end

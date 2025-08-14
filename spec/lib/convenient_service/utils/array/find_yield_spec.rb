@@ -11,7 +11,7 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Array::FindYield, type: :standard do
   describe ".call" do
-    subject(:result) { described_class.call(array) { |string| string.match(regex) } }
+    subject(:util_result) { described_class.call(array) { |string| string.match(regex) } }
 
     let(:regex) { /bar/ }
 
@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Utils::Array::FindYield, type: :standard do
       let(:array) { ["foo"] }
 
       it "returns `nil`" do
-        expect(result).to be_nil
+        expect(util_result).to be_nil
       end
     end
 
@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Utils::Array::FindYield, type: :standard do
       let(:match_data) { "bar".match(regex) }
 
       it "returns block value for that one found item" do
-        expect(result).to eq(match_data)
+        expect(util_result).to eq(match_data)
       end
     end
 
@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Utils::Array::FindYield, type: :standard do
       let(:match_data) { "bar first".match(regex) }
 
       it "returns block value for first item from those found items" do
-        expect(result).to eq(match_data)
+        expect(util_result).to eq(match_data)
       end
     end
   end

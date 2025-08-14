@@ -12,7 +12,7 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard do
   describe ".call" do
-    subject(:result) { described_class.call(first_array, second_array) }
+    subject(:util_result) { described_class.call(first_array, second_array) }
 
     context "when `first_array` contains same elements as `second_array`" do
       context "when those elements do NOT have same positions" do
@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
         let(:second_array) { [2, 3, 1] }
 
         it "returns true" do
-          expect(result).to eq(true)
+          expect(util_result).to eq(true)
         end
       end
 
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
         let(:second_array) { [1, 2, 3] }
 
         it "returns true" do
-          expect(result).to eq(true)
+          expect(util_result).to eq(true)
         end
       end
 
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
           let(:second_array) { [1, 1, 2, 3] }
 
           it "returns false" do
-            expect(result).to eq(false)
+            expect(util_result).to eq(false)
           end
         end
 
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
           let(:second_array) { [1, 1, 2, 2] }
 
           it "returns true" do
-            expect(result).to eq(true)
+            expect(util_result).to eq(true)
           end
         end
       end
@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
       let(:second_array) { [2, 3, 4] }
 
       it "returns false" do
-        expect(result).to eq(false)
+        expect(util_result).to eq(false)
       end
     end
 
@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
         end
 
         it "returns false" do
-          expect(result).to eq(false)
+          expect(util_result).to eq(false)
         end
       end
 
@@ -111,7 +111,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
         end
 
         it "returns true" do
-          expect(result).to eq(true)
+          expect(util_result).to eq(true)
         end
       end
     end

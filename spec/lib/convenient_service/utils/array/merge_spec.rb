@@ -11,12 +11,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   describe ".call" do
-    subject(:result) { described_class.call(array, overrides, raise_on_non_integer_index: raise_on_non_integer_index) }
+    subject(:util_result) { described_class.call(array, overrides, raise_on_non_integer_index: raise_on_non_integer_index) }
 
     let(:array) { [:a, :b, :c] }
     let(:raise_on_non_integer_index) { true }
@@ -26,11 +22,11 @@ RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
         let(:overrides) { {0 => :foo} }
 
         it "sets `value` by `index` in `array` for that pair" do
-          expect(result).to eq([:foo, :b, :c])
+          expect(util_result).to eq([:foo, :b, :c])
         end
 
         it "returns `array` copy" do
-          expect(result.object_id).not_to eq(array.object_id)
+          expect(util_result.object_id).not_to eq(array.object_id)
         end
       end
 
@@ -38,11 +34,11 @@ RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
         let(:overrides) { {0 => :foo, 1 => :bar} }
 
         it "sets `value` by `index` in `array` for those pairs" do
-          expect(result).to eq([:foo, :bar, :c])
+          expect(util_result).to eq([:foo, :bar, :c])
         end
 
         it "returns `array` copy" do
-          expect(result.object_id).not_to eq(array.object_id)
+          expect(util_result.object_id).not_to eq(array.object_id)
         end
       end
 
@@ -59,7 +55,7 @@ RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
           let(:raise_on_non_integer_index) { false }
 
           it "skips those non integer keys" do
-            expect(result).to eq([:a, :bar, :c])
+            expect(util_result).to eq([:a, :bar, :c])
           end
         end
 
@@ -67,29 +63,31 @@ RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
           let(:raise_on_non_integer_index) { true }
 
           it "raises `ConvenientService::Utils::Array::Exceptions::NonIntegerIndex`" do
-            expect { result }
+            expect { util_result }
               .to raise_error(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex) { result } }
-              .to delegate_to(ConvenientService, :raise)
+            expect(ConvenientService).to receive(:raise).and_call_original
+
+            expect { util_result }.to raise_error(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex)
           end
         end
 
         context "when `raise_on_non_integer_index` is NOT passed" do
-          subject(:result) { described_class.call(array, overrides) }
+          subject(:util_result) { described_class.call(array, overrides) }
 
           it "raises `ConvenientService::Utils::Array::Exceptions::NonIntegerIndex`" do
-            expect { result }
+            expect { util_result }
               .to raise_error(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex)
               .with_message(exception_message)
           end
 
           specify do
-            expect { ignoring_exception(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex) { result } }
-              .to delegate_to(ConvenientService, :raise)
+            expect(ConvenientService).to receive(:raise).and_call_original
+
+            expect { util_result }.to raise_error(ConvenientService::Utils::Array::Exceptions::NonIntegerIndex)
           end
         end
       end
@@ -99,7 +97,7 @@ RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
       let(:overrides) { {} }
 
       it "returns `array` copy" do
-        expect(result.object_id).not_to eq(array.object_id)
+        expect(util_result.object_id).not_to eq(array.object_id)
       end
     end
   end

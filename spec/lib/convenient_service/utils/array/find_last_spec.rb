@@ -11,13 +11,13 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Array::FindLast, type: :standard do
   describe ".call" do
-    subject(:result) { described_class.call(array) { |item| item[0] == "b" } }
+    subject(:util_result) { described_class.call(array) { |item| item[0] == "b" } }
 
     context "when `array` does NOT contain `item` to find" do
       let(:array) { ["foo"] }
 
       it "returns `nil`" do
-        expect(result).to be_nil
+        expect(util_result).to be_nil
       end
     end
 
@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Utils::Array::FindLast, type: :standard do
       let(:array) { ["foo", "bar"] }
 
       it "returns that found `item`" do
-        expect(result).to eq("bar")
+        expect(util_result).to eq("bar")
       end
     end
 
@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Utils::Array::FindLast, type: :standard do
       let(:array) { ["foo", "bar", "baz"] }
 
       it "returns last from those found `items`" do
-        expect(result).to eq("baz")
+        expect(util_result).to eq("baz")
       end
     end
 
@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Utils::Array::FindLast, type: :standard do
       let(:array) { klass.new }
 
       it "does NOT use `Array` methods" do
-        expect(result).to eq("baz")
+        expect(util_result).to eq("baz")
       end
     end
   end
