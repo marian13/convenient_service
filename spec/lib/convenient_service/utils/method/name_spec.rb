@@ -14,6 +14,9 @@ RSpec.describe ConvenientService::Utils::Method::Name, type: :standard do
     let(:method_name) { :foo }
     let(:suffix) { "_without_middlewares" }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Method::Name::Append.call`" do
       expect(described_class::Append)

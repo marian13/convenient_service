@@ -29,6 +29,9 @@ RSpec.describe ConvenientService::Utils::Array::DropWhile, type: :standard do
       context "when `inclusively` is `false`" do
         let(:inclusively) { false }
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
         # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         it "delegates to `ConvenientService::Utils::Array::FindYield.call`" do
           expect(array)
@@ -47,6 +50,9 @@ RSpec.describe ConvenientService::Utils::Array::DropWhile, type: :standard do
       context "when `inclusively` is `true`" do
         let(:inclusively) { true }
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
         # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         it "delegates to `ConvenientService::Utils::Array::FindYield.call`" do
           expect(array)

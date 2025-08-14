@@ -28,6 +28,9 @@ RSpec.describe ConvenientService::Utils::Module::InstanceMethodDefined, type: :s
       let(:protected) { false }
       let(:private) { false }
 
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
       # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
       it "delegates to `ConvenientService::Utils::Method.defined?`" do
         expect(ConvenientService::Utils::Method)
@@ -45,6 +48,9 @@ RSpec.describe ConvenientService::Utils::Module::InstanceMethodDefined, type: :s
       context "when `public` is NOT passed" do
         let(:util_result) { described_class.call(mod, method_name, protected: protected, private: private) }
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
         # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         it "delegates to `ConvenientService::Utils::Method.defined?`" do
           expect(ConvenientService::Utils::Method)
@@ -63,6 +69,9 @@ RSpec.describe ConvenientService::Utils::Module::InstanceMethodDefined, type: :s
       context "when `protected` is NOT passed" do
         let(:util_result) { described_class.call(mod, method_name, public: public, private: private) }
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
         # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         it "delegates to `ConvenientService::Utils::Method.defined?`" do
           expect(ConvenientService::Utils::Method)
@@ -81,6 +90,9 @@ RSpec.describe ConvenientService::Utils::Module::InstanceMethodDefined, type: :s
       context "when `private` is NOT passed" do
         let(:util_result) { described_class.call(mod, method_name, public: public, protected: protected) }
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
         # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         it "delegates to `ConvenientService::Utils::Method.defined?`" do
           expect(ConvenientService::Utils::Method)

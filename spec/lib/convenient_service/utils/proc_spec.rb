@@ -13,6 +13,9 @@ RSpec.describe ConvenientService::Utils::Proc, type: :standard do
   describe ".conjunct" do
     let(:procs) { [->(item) { item[:valid] }] }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Proc::Conjunct.call`" do
       expect(described_class::Conjunct)
@@ -31,6 +34,9 @@ RSpec.describe ConvenientService::Utils::Proc, type: :standard do
   describe ".display" do
     let(:proc) { -> { :foo } }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Proc::Display.call`" do
       expect(described_class::Display)
@@ -50,6 +56,9 @@ RSpec.describe ConvenientService::Utils::Proc, type: :standard do
     let(:proc) { ->(object) { object.reverse } }
     let(:object) { "abc" }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Proc::ExecConfig.call`" do
       expect(described_class::ExecConfig)

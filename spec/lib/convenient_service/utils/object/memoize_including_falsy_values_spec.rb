@@ -17,6 +17,9 @@ RSpec.describe ConvenientService::Utils::Object::MemoizeIncludingFalsyValues, ty
     let(:ivar_name) { :@foo }
     let(:value_block) { proc { false } }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Object::InstanceVariableFetch.call`" do
       expect(ConvenientService::Utils::Object::InstanceVariableFetch)

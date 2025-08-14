@@ -13,6 +13,9 @@ RSpec.describe ConvenientService::Utils::String, type: :standard do
   describe ".camelize" do
     let(:string) { "foo" }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::String::Camelize.call`" do
       expect(described_class::Camelize)
@@ -31,6 +34,9 @@ RSpec.describe ConvenientService::Utils::String, type: :standard do
   describe ".demodulize" do
     let(:string) { "Inflections" }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::String::Demodulize.call`" do
       expect(described_class::Demodulize)
@@ -50,6 +56,9 @@ RSpec.describe ConvenientService::Utils::String, type: :standard do
     let(:string) { "foo.bar" }
     let(:delimiters) { "." }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::String::Split.call`" do
       expect(described_class::Split)
@@ -70,6 +79,9 @@ RSpec.describe ConvenientService::Utils::String, type: :standard do
     let(:truncate_at) { 4 }
     let(:omission) { "..." }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::String::Truncate.call`" do
       expect(described_class::Truncate)

@@ -13,6 +13,9 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
   describe ".clamp_class" do
     let(:object) { :foo }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Module::ClampClass.call`" do
       expect(described_class::ClampClass)
@@ -31,6 +34,9 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
   describe ".duck_class" do
     let(:object) { :foo }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Object::DuckClass.call`" do
       expect(described_class::DuckClass)
@@ -50,6 +56,9 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
     let(:object) { Object.new }
     let(:ivar_name) { :@foo }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Object::InstanceVariableDelete.call`" do
       expect(described_class::InstanceVariableDelete)
@@ -70,6 +79,9 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
     let(:ivar_name) { :@foo }
     let(:fallback_block) { proc { :bar } }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Object::InstanceVariableFetch.call`" do
       expect(described_class::InstanceVariableFetch)
@@ -90,6 +102,9 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
     let(:ivar_name) { :@foo }
     let(:value_block) { proc { false } }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Object::MemoizeIncludingFalsyValues.call`" do
       expect(described_class::MemoizeIncludingFalsyValues)
@@ -108,6 +123,9 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
   describe ".resolve_type" do
     let(:object) { Kernel }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Object::ResolveType.call`" do
       expect(described_class::ResolveType)
@@ -137,6 +155,9 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
     let(:kwargs) { {foo: :bar} }
     let(:block) { proc { :foo } }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Object::SafeSend.call`" do
       expect(described_class::SafeSend)
@@ -155,6 +176,9 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
   describe ".with_one_time_object" do
     let(:block) { proc { |one_time_object| :foo } }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Object::WithOneTimeObject.call`" do
       expect(described_class::WithOneTimeObject)

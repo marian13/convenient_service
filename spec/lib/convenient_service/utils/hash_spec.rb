@@ -14,6 +14,9 @@ RSpec.describe ConvenientService::Utils::Hash, type: :standard do
     let(:hash) { {foo: "foo", bar: "bar", baz: "baz"} }
     let(:keys) { [:qux] }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Hash::Except.call`" do
       expect(described_class::Except)
@@ -33,6 +36,9 @@ RSpec.describe ConvenientService::Utils::Hash, type: :standard do
     let(:hash) { {foo: (1..10), bar: /bar/} }
     let(:other_hash) { {foo: 5, bar: "bar"} }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Hash::TripleEqualityCompare.call`" do
       expect(described_class::TripleEqualityCompare).to receive(:call).with(hash, other_hash).and_call_original

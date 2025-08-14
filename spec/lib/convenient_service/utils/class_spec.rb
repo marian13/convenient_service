@@ -13,6 +13,9 @@ RSpec.describe ConvenientService::Utils::Class, type: :standard do
   describe ".display_name" do
     let(:klass) { Class.new }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Class::DisplayName.call`" do
       expect(described_class::DisplayName)
@@ -32,6 +35,9 @@ RSpec.describe ConvenientService::Utils::Class, type: :standard do
     describe ".attached_object" do
       let(:klass) { String.singleton_class }
 
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
       # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
       it "delegates to `ConvenientService::Utils::Class::GetAttachedObject.call`" do
         expect(described_class::GetAttachedObject)

@@ -19,6 +19,9 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
       let(:ivar_name) { :@foo }
       let(:value_block) { proc { false } }
 
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
       # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
       it "delegates to `ConvenientService::Utils::Array::ContainExactly.call`" do
         expect(described_class::ContainExactly)
@@ -43,6 +46,9 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     ##
     # HACK: RSpec passes `array.first` as `_original` when `inclusively` kwargs is passed. That is why `inclusively` is skipped here. But its usage is still verified by the `returns` spec.
     #
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Array::DropWhile.call`" do
       expect(described_class::DropWhile)
@@ -62,6 +68,9 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     let(:array) { ["foo bar"] }
     let(:block) { proc { |item| item.match(/\w+/) } }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Array::FindYield.call`" do
       expect(described_class::FindYield)
@@ -81,6 +90,9 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     let(:array) { ["foo"] }
     let(:block) { proc { |item| item[0] == "b" } }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Array::FindLast.call`" do
       expect(described_class::FindLast)
@@ -100,6 +112,9 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     let(:array) { [:foo, :bar, :baz] }
     let(:object) { :bar }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Array::KeepAfter.call`" do
       expect(described_class::KeepAfter)
@@ -120,6 +135,9 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     let(:object) { :baz }
     let(:limit) { 10 }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Array::LimitedPush.call`" do
       expect(described_class::LimitedPush)
@@ -140,6 +158,9 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     let(:overrides) { {0 => :foo} }
     let(:raise_on_non_integer_index) { true }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Array::Merge.call`" do
       expect(described_class::Merge)
@@ -160,6 +181,9 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     let(:size) { 1 }
     let(:pad) { :x }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Array::Rjust.call`" do
       expect(described_class::Rjust)
@@ -178,6 +202,9 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
   describe ".wrap" do
     let(:object) { 42 }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Array::Wrap.call`" do
       expect(described_class::Wrap)

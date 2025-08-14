@@ -10,7 +10,10 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Support::Arguments::Exceptions, type: :standard do
-  include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
-
-  specify { expect(described_class::InvalidKeyType).to be_descendant_of(ConvenientService::Exception) }
+  example_group "inheritance" do
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class::InvalidKeyType < ConvenientService::Exception).to eq(true) }
+  end
 end

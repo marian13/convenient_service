@@ -68,6 +68,9 @@ RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
               .with_message(exception_message)
           end
 
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
           # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
           specify do
             expect(ConvenientService).to receive(:raise).and_call_original
@@ -86,6 +89,9 @@ RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
               .with_message(exception_message)
           end
 
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
           # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
           specify do
             expect(ConvenientService).to receive(:raise).and_call_original

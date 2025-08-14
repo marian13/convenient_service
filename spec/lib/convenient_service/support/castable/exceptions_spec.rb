@@ -10,7 +10,10 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Support::Castable::Exceptions, type: :standard do
-  include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
-
-  specify { expect(described_class::FailedToCast).to be_descendant_of(ConvenientService::Exception) }
+  example_group "inheritance" do
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class::FailedToCast < ConvenientService::Exception).to eq(true) }
+  end
 end

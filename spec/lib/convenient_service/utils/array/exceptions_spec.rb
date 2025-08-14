@@ -11,6 +11,9 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Array::Exceptions, type: :standard do
   example_group "inheritance" do
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     specify { expect(described_class::NonIntegerIndex < ConvenientService::Exception).to eq(true) }
   end
 end

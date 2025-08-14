@@ -15,6 +15,9 @@ RSpec.describe ConvenientService::Utils::Module, type: :standard do
     let(:const_name) { :NotExistingConst }
     let(:fallback_block) { proc { 42 } }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Module::FetchOwnConst.call`" do
       expect(described_class::FetchOwnConst)
@@ -33,6 +36,9 @@ RSpec.describe ConvenientService::Utils::Module, type: :standard do
   describe ".get_namespace" do
     let(:mod) { Enumerator::Lazy }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Module::GetNamespace.call`" do
       expect(described_class::GetNamespace)
@@ -52,6 +58,9 @@ RSpec.describe ConvenientService::Utils::Module, type: :standard do
     let(:mod) { Class.new }
     let(:const_name) { :NotExistingConst }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Module::GetOwnConst.call`" do
       expect(described_class::GetOwnConst)
@@ -71,6 +80,9 @@ RSpec.describe ConvenientService::Utils::Module, type: :standard do
     let(:mod) { Class.new }
     let(:method_name) { :result }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Module::GetOwnInstanceMethod.call`" do
       expect(described_class::GetOwnInstanceMethod)
@@ -90,6 +102,9 @@ RSpec.describe ConvenientService::Utils::Module, type: :standard do
     let(:mod) { Class.new }
     let(:other_mod) { Module.new }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Module::IncludeModule.call`" do
       expect(described_class::IncludeModule)
@@ -109,6 +124,9 @@ RSpec.describe ConvenientService::Utils::Module, type: :standard do
     let(:mod) { Class.new }
     let(:method_name) { :foo }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Module::HasOwnInstanceMethod.call`" do
       expect(described_class::HasOwnInstanceMethod)

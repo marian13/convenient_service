@@ -18,6 +18,9 @@ RSpec.describe ConvenientService::Utils::Method, type: :standard do
     let(:protected) { true }
     let(:private) { true }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Method::Defined.call`" do
       expect(described_class::Defined)
@@ -47,6 +50,9 @@ RSpec.describe ConvenientService::Utils::Method, type: :standard do
     let(:protected) { true }
     let(:private) { true }
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Method::Remove.call`" do
       expect(described_class::Remove)

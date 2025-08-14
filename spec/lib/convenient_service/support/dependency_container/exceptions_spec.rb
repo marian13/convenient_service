@@ -10,10 +10,13 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Support::DependencyContainer::Exceptions, type: :standard do
-  include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
-
-  specify { expect(described_class::InvalidScope).to be_descendant_of(ConvenientService::Exception) }
-  specify { expect(described_class::NotExportableModule).to be_descendant_of(ConvenientService::Exception) }
-  specify { expect(described_class::NotExportedMethod).to be_descendant_of(ConvenientService::Exception) }
-  specify { expect(described_class::NotModule).to be_descendant_of(ConvenientService::Exception) }
+  example_group "inheritance" do
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class::InvalidScope < ConvenientService::Exception).to eq(true) }
+    specify { expect(described_class::NotExportableModule < ConvenientService::Exception).to eq(true) }
+    specify { expect(described_class::NotExportedMethod < ConvenientService::Exception).to eq(true) }
+    specify { expect(described_class::NotModule < ConvenientService::Exception).to eq(true) }
+  end
 end

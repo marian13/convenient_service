@@ -21,6 +21,9 @@ RSpec.describe ConvenientService::Utils::Kernel, type: :standard do
       end
     end
 
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
     # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
     it "delegates to `ConvenientService::Utils::Kernel::SilenceWarnings.call`" do
       expect(described_class::SilenceWarnings)
