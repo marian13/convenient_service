@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::DependencyContainer::Export, type: :standard do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:container) do
@@ -59,10 +57,16 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export, type: :s
             .with_message(exception_message)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         specify do
-          expect { ignoring_exception(ConvenientService::Support::DependencyContainer::Exceptions::NotModule) { include_module_result } }
-            .to delegate_to(ConvenientService, :raise)
+          expect(ConvenientService).to receive(:raise).and_call_original
+
+          expect { include_module_result }.to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::NotModule)
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
       end
     end
   end

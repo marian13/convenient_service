@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Command, type: :standard do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:command_class) { Class.new(described_class) }
@@ -33,10 +31,16 @@ RSpec.describe ConvenientService::Support::Command, type: :standard do
           .with_message(exception_message)
       end
 
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
       specify do
-        expect { ignoring_exception(described_class::Exceptions::CallIsNotOverridden) { command_instance.call } }
-          .to delegate_to(ConvenientService, :raise)
+        expect(ConvenientService).to receive(:raise).and_call_original
+
+        expect { command_instance.call }.to raise_error(described_class::Exceptions::CallIsNotOverridden)
       end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
     end
   end
 

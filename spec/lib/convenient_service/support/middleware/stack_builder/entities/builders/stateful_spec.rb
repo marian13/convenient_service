@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful, type: :standard do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:stack_builder) { described_class.new(name: name, stack: stack) }
@@ -208,10 +206,16 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
               .with_message(exception_message)
           end
 
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
           specify do
-            expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware) { stack_builder.insert(middleware, other_middleware) } }
-              .to delegate_to(ConvenientService, :raise)
+            expect(ConvenientService).to receive(:raise).and_call_original
+
+            expect { stack_builder.insert(middleware, other_middleware) }.to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware)
           end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
         end
 
         context "when that middleware is found in stack" do
@@ -257,10 +261,16 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
               .with_message(exception_message)
           end
 
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
           specify do
-            expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware) { stack_builder.insert_before(middleware, other_middleware) } }
-              .to delegate_to(ConvenientService, :raise)
+            expect(ConvenientService).to receive(:raise).and_call_original
+
+            expect { stack_builder.insert_before(middleware, other_middleware) }.to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware)
           end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
         end
 
         context "when that middleware is found in stack" do
@@ -306,10 +316,16 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
               .with_message(exception_message)
           end
 
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
           specify do
-            expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware) { stack_builder.insert_after(middleware, other_middleware) } }
-              .to delegate_to(ConvenientService, :raise)
+            expect(ConvenientService).to receive(:raise).and_call_original
+
+            expect { stack_builder.insert_after(middleware, other_middleware) }.to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware)
           end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
         end
 
         context "when that middleware is found in stack" do
@@ -389,10 +405,16 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
               .with_message(exception_message)
           end
 
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
           specify do
-            expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware) { stack_builder.replace(middleware, other_middleware) } }
-              .to delegate_to(ConvenientService, :raise)
+            expect(ConvenientService).to receive(:raise).and_call_original
+
+            expect { stack_builder.replace(middleware, other_middleware) }.to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware)
           end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
         end
 
         context "when that middleware is found in stack" do
@@ -428,10 +450,16 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
             .with_message(exception_message)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         specify do
-          expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware) { stack_builder.delete(middleware) } }
-            .to delegate_to(ConvenientService, :raise)
+          expect(ConvenientService).to receive(:raise).and_call_original
+
+          expect { stack_builder.delete(middleware) }.to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware)
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
       end
 
       context "when stack does has middleware" do
@@ -469,10 +497,16 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
             .with_message(exception_message)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         specify do
-          expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware) { stack_builder.remove(middleware) } }
-            .to delegate_to(ConvenientService, :raise)
+          expect(ConvenientService).to receive(:raise).and_call_original
+
+          expect { stack_builder.remove(middleware) }.to raise_error(ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful::Exceptions::MissingMiddleware)
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
       end
 
       context "when stack does has middleware" do

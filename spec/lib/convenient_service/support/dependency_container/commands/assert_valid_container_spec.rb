@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer, type: :standard do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do
@@ -36,10 +34,16 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
             .with_message(exception_message)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         specify do
-          expect { ignoring_exception(ConvenientService::Support::DependencyContainer::Exceptions::NotExportableModule) { command_result } }
-            .to delegate_to(ConvenientService, :raise)
+          expect(ConvenientService).to receive(:raise).and_call_original
+
+          expect { command_result }.to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::NotExportableModule)
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
       end
 
       context "when `container` includes `ConvenientService::DependencyContainer::Export`" do

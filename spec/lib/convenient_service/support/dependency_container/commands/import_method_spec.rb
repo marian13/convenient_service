@@ -13,8 +13,6 @@ require "convenient_service"
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::ImportMethod, type: :standard do
   example_group "class methods" do
     describe ".call" do
-      include ConvenientService::RSpec::Helpers::IgnoringException
-
       include ConvenientService::RSpec::Matchers::DelegateTo
       include ConvenientService::RSpec::Matchers::IncludeModule
       include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
@@ -52,10 +50,16 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
             .with_message(exception_message)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         specify do
-          expect { ignoring_exception(ConvenientService::Support::DependencyContainer::Exceptions::InvalidScope) { command_result } }
-            .to delegate_to(ConvenientService, :raise)
+          expect(ConvenientService).to receive(:raise).and_call_original
+
+          expect { command_result }.to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::InvalidScope)
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
       end
 
       context "when `scope` is `instance`" do

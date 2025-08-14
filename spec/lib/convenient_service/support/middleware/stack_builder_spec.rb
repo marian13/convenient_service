@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Middleware::StackBuilder, type: :standard do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do
@@ -54,10 +52,16 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder, type: :stan
             .with_message(exception_message)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         specify do
-          expect { ignoring_exception(ConvenientService::Support::Middleware::StackBuilder::Exceptions::NotSupportedBackend) { described_class.backed_by(backend) } }
-            .to delegate_to(ConvenientService, :raise)
+          expect(ConvenientService).to receive(:raise).and_call_original
+
+          expect { described_class.backed_by(backend) }.to raise_error(ConvenientService::Support::Middleware::StackBuilder::Exceptions::NotSupportedBackend)
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
       end
 
       context "when `backend` is valid" do

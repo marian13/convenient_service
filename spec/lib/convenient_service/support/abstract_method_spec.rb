@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::AbstractMethod, type: :standard do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "modules" do
@@ -99,10 +97,16 @@ RSpec.describe ConvenientService::Support::AbstractMethod, type: :standard do
               .with_message(exception_message)
           end
 
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
           specify do
-            expect { ignoring_exception(described_class::Exceptions::AbstractMethodNotOverridden) { instance.foo } }
-              .to delegate_to(ConvenientService, :raise)
+            expect(ConvenientService).to receive(:raise).and_call_original
+
+            expect { instance.foo }.to raise_error(described_class::Exceptions::AbstractMethodNotOverridden)
           end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
         end
 
         context "when instance is descandant of class" do
@@ -128,10 +132,16 @@ RSpec.describe ConvenientService::Support::AbstractMethod, type: :standard do
               .with_message(exception_message)
           end
 
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
           specify do
-            expect { ignoring_exception(described_class::Exceptions::AbstractMethodNotOverridden) { klass.foo } }
-              .to delegate_to(ConvenientService, :raise)
+            expect(ConvenientService).to receive(:raise).and_call_original
+
+            expect { klass.foo }.to raise_error(described_class::Exceptions::AbstractMethodNotOverridden)
           end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
         end
       end
     end

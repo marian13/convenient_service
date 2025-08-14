@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::RubyMiddleware, type: :standard do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:stack_builder) { described_class.new(name: name, stack: stack) }
@@ -195,11 +193,16 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
 
         ##
         # NOTE: `TypeError` exception is raised by `Array#index` from `ruby_middleware` gem. That is why is NOT processed by `ConvenientService.raise`.
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # specify do
-        #   expect { ignoring_exception(TypeError) { stack_builder.delete(middleware) } }
-        #     .to delegate_to(ConvenientService, :raise)
-        # end
+        #   # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        #   specify do
+        #     expect(ConvenientService).to receive(:raise).and_call_original
+        #
+        #     expect { stack_builder.delete(middleware) }.to raise_error(TypeError)
+        #   end
+        #   # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        ##
       end
 
       context "when stack has middleware" do
@@ -239,11 +242,16 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
 
         ##
         # NOTE: `TypeError` exception is raised by `Array#index` from `ruby_middleware` gem. That is why is NOT processed by `ConvenientService.raise`.
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # specify do
-        #   expect { ignoring_exception(TypeError) { stack_builder.delete(middleware) } }
-        #     .to delegate_to(ConvenientService, :raise)
-        # end
+        #   # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        #   specify do
+        #     expect(ConvenientService).to receive(:raise).and_call_original
+        #
+        #     expect { stack_builder.delete(middleware) }.to raise_error(TypeError)
+        #   end
+        #   # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        ##
       end
 
       context "when stack does has middleware" do

@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::Arguments, type: :standard do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:arguments) { described_class.new(*args, **kwargs, &block) }
@@ -153,10 +151,16 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
             .with_message(exception_message)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         specify do
-          expect { ignoring_exception(ConvenientService::Support::Arguments::Exceptions::InvalidKeyType) { arguments[key] } }
-            .to delegate_to(ConvenientService, :raise)
+          expect(ConvenientService).to receive(:raise).and_call_original
+
+          expect { arguments[key] }.to raise_error(ConvenientService::Support::Arguments::Exceptions::InvalidKeyType)
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
       end
 
       context "when `key` is valid" do

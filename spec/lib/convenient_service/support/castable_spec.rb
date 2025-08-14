@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Castable, type: :standard do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:klass) do
@@ -58,16 +56,20 @@ RSpec.describe ConvenientService::Support::Castable, type: :standard do
           .with_message(exception_message)
       end
 
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
       specify do
-        expect { ignoring_exception(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) { klass.cast(other) } }
-          .to delegate_to(ConvenientService, :raise)
+        expect(ConvenientService).to receive(:raise).and_call_original
+
+        expect { klass.cast(other) }.to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden)
       end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
     end
 
     describe ".cast!" do
       context "when `other` is NOT castable" do
-        include ConvenientService::RSpec::Helpers::IgnoringException
-
         let(:message) do
           <<~TEXT
             Failed to cast `#{other.inspect}` into `#{klass}`.
@@ -78,15 +80,19 @@ RSpec.describe ConvenientService::Support::Castable, type: :standard do
           allow(klass).to receive(:cast).and_return(nil)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations
         it "delegates to `.cast`" do
           ##
           # NOTE: Error is NOT the purpose of this spec. That is why it is caught.
           # But if it is NOT caught, the spec should fail.
-          #
-          ignoring_exception(described_class::Exceptions::FailedToCast) { klass.cast!(other) }
+          expect { klass.cast!(other) }.to raise_error(described_class::Exceptions::FailedToCast)
 
           expect(klass).to have_received(:cast).with(other)
         end
+        # rubocop:enable RSpec/MultipleExpectations
 
         it "raises `ConvenientService::Support::Castable::Exceptions::FailedToCast`" do
           expect { klass.cast!(other) }
@@ -94,10 +100,16 @@ RSpec.describe ConvenientService::Support::Castable, type: :standard do
             .with_message(message)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         specify do
-          expect { ignoring_exception(described_class::Exceptions::FailedToCast) { klass.cast!(other) } }
-            .to delegate_to(ConvenientService, :raise)
+          expect(ConvenientService).to receive(:raise).and_call_original
+
+          expect { klass.cast!(other) }.to raise_error(described_class::Exceptions::FailedToCast)
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
       end
 
       context "when `other` is castable" do

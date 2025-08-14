@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::Counter, type: :standard do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:counter) { described_class.new(initial_value: initial_value, min_value: min_value, max_value: max_value) }
@@ -148,13 +146,22 @@ RSpec.describe ConvenientService::Support::Counter, type: :standard do
             .with_message(exception_message)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         specify do
-          expect { ignoring_exception(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }
-            .to delegate_to(ConvenientService, :raise)
+          expect(ConvenientService).to receive(:raise).and_call_original
+
+          expect { counter.increment!(n) }.to raise_error(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue)
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
 
         it "does NOT changes current value" do
-          expect { ignoring_exception(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          expect { counter.increment!(n) }.to raise_error(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue).and(change(counter, :current_value).by(0))
         end
       end
     end
@@ -249,13 +256,22 @@ RSpec.describe ConvenientService::Support::Counter, type: :standard do
             .with_message(exception_message)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
         specify do
-          expect { ignoring_exception(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }
-            .to delegate_to(ConvenientService, :raise)
+          expect(ConvenientService).to receive(:raise).and_call_original
+
+          expect { counter.decrement!(n) }.to raise_error(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue)
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
 
         it "does NOT changes current value" do
-          expect { ignoring_exception(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          expect { counter.decrement!(n) }.to raise_error(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue).and(change(counter, :current_value).by(0))
         end
       end
     end

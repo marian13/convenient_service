@@ -158,7 +158,10 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter, type: :standard do
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_exception(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue) { counter.increment!(n) } }.not_to change(counter, :current_value)
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          expect { counter.increment!(n) }.to raise_error(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue).and(change(counter, :current_value).by(0))
         end
       end
 
@@ -275,7 +278,10 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter, type: :standard do
         end
 
         it "does NOT changes current value" do
-          expect { ignoring_exception(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue) { counter.decrement!(n) } }.not_to change(counter, :current_value)
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          expect { counter.decrement!(n) }.to raise_error(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue).and(change(counter, :current_value).by(0))
         end
       end
 
