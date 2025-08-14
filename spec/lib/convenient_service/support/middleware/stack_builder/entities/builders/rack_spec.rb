@@ -45,12 +45,13 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
     let(:index) { 0 }
 
     example_group "attributes" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
-
       subject { stack_builder }
 
-      it { is_expected.to have_attr_reader(:name) }
-      it { is_expected.to have_attr_reader(:stack) }
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      it { is_expected.to respond_to(:name) }
+      it { is_expected.to respond_to(:stack) }
     end
 
     describe "#has?" do

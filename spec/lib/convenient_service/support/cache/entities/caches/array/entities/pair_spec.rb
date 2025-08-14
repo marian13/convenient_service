@@ -17,12 +17,13 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array::Entit
   let(:value) { :bar }
 
   example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
-
     subject { pair }
 
-    it { is_expected.to have_attr_reader(:key) }
-    it { is_expected.to have_attr_reader(:value) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    it { is_expected.to respond_to(:key) }
+    it { is_expected.to respond_to(:value) }
   end
 
   example_group "comparison" do

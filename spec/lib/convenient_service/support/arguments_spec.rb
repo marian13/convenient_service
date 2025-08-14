@@ -22,13 +22,14 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
   let(:block) { proc { :foo } }
 
   example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
-
     subject { arguments }
 
-    it { is_expected.to have_attr_reader(:args) }
-    it { is_expected.to have_attr_reader(:kwargs) }
-    it { is_expected.to have_attr_reader(:block) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    it { is_expected.to respond_to(:args) }
+    it { is_expected.to respond_to(:kwargs) }
+    it { is_expected.to respond_to(:block) }
   end
 
   example_group "class methods" do

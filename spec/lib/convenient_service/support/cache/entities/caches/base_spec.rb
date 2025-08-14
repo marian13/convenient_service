@@ -74,14 +74,15 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
 
   example_group "instance methods" do
     example_group "attributes" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
-
       subject { cache }
 
-      it { is_expected.to have_attr_reader(:store) }
-      it { is_expected.to have_attr_reader(:default) }
-      it { is_expected.to have_attr_reader(:parent) }
-      it { is_expected.to have_attr_reader(:key) }
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      it { is_expected.to respond_to(:store) }
+      it { is_expected.to respond_to(:default) }
+      it { is_expected.to respond_to(:parent) }
+      it { is_expected.to respond_to(:key) }
     end
 
     example_group "abstract methods" do

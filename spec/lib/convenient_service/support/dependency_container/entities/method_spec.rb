@@ -31,14 +31,15 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
   end
 
   example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
-
     subject { method }
 
-    it { is_expected.to have_attr_reader(:slug) }
-    it { is_expected.to have_attr_reader(:scope) }
-    it { is_expected.to have_attr_reader(:body) }
-    it { is_expected.to have_attr_reader(:alias_slug) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    it { is_expected.to respond_to(:slug) }
+    it { is_expected.to respond_to(:scope) }
+    it { is_expected.to respond_to(:body) }
+    it { is_expected.to respond_to(:alias_slug) }
   end
 
   example_group "instance methods" do

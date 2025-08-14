@@ -28,14 +28,15 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter, type: :standard do
   end
 
   example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
-
     subject { counter }
 
-    it { is_expected.to have_attr_reader(:initial_value) }
-    it { is_expected.to have_attr_reader(:current_value) }
-    it { is_expected.to have_attr_reader(:min_value) }
-    it { is_expected.to have_attr_reader(:max_value) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    it { is_expected.to respond_to(:initial_value) }
+    it { is_expected.to respond_to(:current_value) }
+    it { is_expected.to respond_to(:min_value) }
+    it { is_expected.to respond_to(:max_value) }
   end
 
   example_group "class methods" do

@@ -16,11 +16,12 @@ RSpec.describe ConvenientService::Support::Value, type: :standard do
   let(:default_label) { "value" }
 
   example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
-
     subject { value }
 
-    it { is_expected.to have_attr_reader(:label) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    it { is_expected.to respond_to(:label) }
   end
 
   example_group "class methods" do
