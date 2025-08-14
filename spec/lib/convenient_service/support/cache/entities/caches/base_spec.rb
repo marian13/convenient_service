@@ -86,20 +86,19 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
     end
 
     example_group "abstract methods" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAbstractMethod
-
-      subject { cache }
-
-      it { is_expected.to have_abstract_method(:empty?) }
-      it { is_expected.to have_abstract_method(:exist?) }
-      it { is_expected.to have_abstract_method(:read) }
-      it { is_expected.to have_abstract_method(:write) }
-      it { is_expected.to have_abstract_method(:fetch) }
-      it { is_expected.to have_abstract_method(:delete) }
-      it { is_expected.to have_abstract_method(:clear) }
-      it { is_expected.to have_abstract_method(:scope) }
-      it { is_expected.to have_abstract_method(:scope!) }
-      it { is_expected.to have_abstract_method(:default=) }
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      specify { expect { cache.empty? }.to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) }
+      specify { expect { cache.exist? }.to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) }
+      specify { expect { cache.read }.to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) }
+      specify { expect { cache.write }.to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) }
+      specify { expect { cache.fetch }.to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) }
+      specify { expect { cache.delete }.to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) }
+      specify { expect { cache.clear }.to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) }
+      specify { expect { cache.scope }.to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) }
+      specify { expect { cache.scope! }.to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) }
+      specify { expect { cache.default = 42 }.to raise_error(ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden) }
     end
 
     describe "#keygen" do
