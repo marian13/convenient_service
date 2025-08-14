@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Module::Exceptions, type: :standard do
-  include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
-
-  specify { expect(described_class::NestingUnderAnonymousNamespace).to be_descendant_of(ConvenientService::Exception) }
+  example_group "inheritance" do
+    specify { expect(described_class::NestingUnderAnonymousNamespace < ConvenientService::Exception).to eq(true) }
+  end
 end

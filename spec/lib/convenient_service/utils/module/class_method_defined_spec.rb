@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Utils::Module::ClassMethodDefined, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   example_group "class methhods" do
     describe ".call" do
       let(:util_result) { described_class.call(mod, method_name, public: public, protected: protected, private: private) }

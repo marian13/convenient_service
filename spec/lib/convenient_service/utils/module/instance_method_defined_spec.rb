@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Utils::Module::InstanceMethodDefined, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   example_group "class methhods" do
     describe ".call" do
       let(:util_result) { described_class.call(mod, method_name, public: public, protected: protected, private: private) }
@@ -30,43 +28,71 @@ RSpec.describe ConvenientService::Utils::Module::InstanceMethodDefined, type: :s
       let(:protected) { false }
       let(:private) { false }
 
-      specify do
-        expect { util_result }
-          .to delegate_to(ConvenientService::Utils::Method, :defined?)
-          .with_arguments(method_name, mod, public: public, protected: protected, private: private)
-          .and_return_its_value
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `ConvenientService::Utils::Method.defined?`" do
+        expect(ConvenientService::Utils::Method)
+          .to receive(:defined?)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, mod], {public: public, protected: protected, private: private}, nil]) }
+
+        util_result
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `ConvenientService::Utils::Method.defined?` value" do
+        expect(util_result).to eq(ConvenientService::Utils::Method.defined?(method_name, mod, public: public, protected: protected, private: private))
       end
 
       context "when `public` is NOT passed" do
         let(:util_result) { described_class.call(mod, method_name, protected: protected, private: private) }
 
-        specify do
-          expect { util_result }
-            .to delegate_to(ConvenientService::Utils::Method, :defined?)
-            .with_arguments(method_name, mod, public: true, protected: protected, private: private)
-            .and_return_its_value
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        it "delegates to `ConvenientService::Utils::Method.defined?`" do
+          expect(ConvenientService::Utils::Method)
+            .to receive(:defined?)
+              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, mod], {public: true, protected: protected, private: private}, nil]) }
+
+          util_result
+        end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+        it "returns `ConvenientService::Utils::Method.defined?` value" do
+          expect(util_result).to eq(ConvenientService::Utils::Method.defined?(method_name, mod, public: true, protected: protected, private: private))
         end
       end
 
       context "when `protected` is NOT passed" do
         let(:util_result) { described_class.call(mod, method_name, public: public, private: private) }
 
-        specify do
-          expect { util_result }
-            .to delegate_to(ConvenientService::Utils::Method, :defined?)
-            .with_arguments(method_name, mod, public: public, protected: true, private: private)
-            .and_return_its_value
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        it "delegates to `ConvenientService::Utils::Method.defined?`" do
+          expect(ConvenientService::Utils::Method)
+            .to receive(:defined?)
+              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, mod], {public: public, protected: true, private: private}, nil]) }
+
+          util_result
+        end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+        it "returns `ConvenientService::Utils::Method.defined?` value" do
+          expect(util_result).to eq(ConvenientService::Utils::Method.defined?(method_name, mod, public: public, protected: true, private: private))
         end
       end
 
       context "when `private` is NOT passed" do
         let(:util_result) { described_class.call(mod, method_name, public: public, protected: protected) }
 
-        specify do
-          expect { util_result }
-            .to delegate_to(ConvenientService::Utils::Method, :defined?)
-            .with_arguments(method_name, mod, public: public, protected: protected, private: false)
-            .and_return_its_value
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        it "delegates to `ConvenientService::Utils::Method.defined?`" do
+          expect(ConvenientService::Utils::Method)
+            .to receive(:defined?)
+              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, mod], {public: public, protected: protected, private: false}, nil]) }
+
+          util_result
+        end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+        it "returns `ConvenientService::Utils::Method.defined?` value" do
+          expect(util_result).to eq(ConvenientService::Utils::Method.defined?(method_name, mod, public: public, protected: protected, private: false))
         end
       end
     end

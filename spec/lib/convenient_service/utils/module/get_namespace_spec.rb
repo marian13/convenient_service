@@ -11,10 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Utils::Module::GetNamespace, type: :standard do
-  include ConvenientService::RSpec::Helpers::IgnoringException
-
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   example_group "class methhods" do
     describe ".call" do
       let(:mod) { Class.new }
@@ -78,10 +74,13 @@ RSpec.describe ConvenientService::Utils::Module::GetNamespace, type: :standard d
               .with_message(exception_message)
           end
 
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
           specify do
-            expect { ignoring_exception(ConvenientService::Utils::Module::Exceptions::NestingUnderAnonymousNamespace) { util_result } }
-              .to delegate_to(ConvenientService, :raise)
+            expect(ConvenientService).to receive(:raise).and_call_original
+
+            expect { util_result }.to raise_error(ConvenientService::Utils::Module::Exceptions::NestingUnderAnonymousNamespace)
           end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
         end
 
         context "when `mod` has nested namespace" do
@@ -126,10 +125,13 @@ RSpec.describe ConvenientService::Utils::Module::GetNamespace, type: :standard d
                 .with_message(exception_message)
             end
 
+            # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
             specify do
-              expect { ignoring_exception(ConvenientService::Utils::Module::Exceptions::NestingUnderAnonymousNamespace) { util_result } }
-                .to delegate_to(ConvenientService, :raise)
+              expect(ConvenientService).to receive(:raise).and_call_original
+
+              expect { util_result }.to raise_error(ConvenientService::Utils::Module::Exceptions::NestingUnderAnonymousNamespace)
             end
+            # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
           end
 
           ##
