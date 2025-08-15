@@ -306,9 +306,31 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
           .and_return_its_value
       end
 
-      specify { expect { stack_builder.dup }.to delegate_to(name, :dup) }
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `name#dup`" do
+        expect(name)
+          .to receive(:dup)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil]) }
 
-      specify { expect { stack_builder.dup }.to delegate_to(stack, :dup) }
+        stack_builder.dup
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `stack#dup`" do
+        expect(stack)
+          .to receive(:dup)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil]) }
+
+        stack_builder.dup
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
     end
 
     example_group "comparison" do

@@ -15,11 +15,22 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder, type: :stan
 
   example_group "class methods" do
     describe ".new" do
-      specify do
-        expect { described_class.new }
-          .to delegate_to(described_class, :backed_by)
-          .with_arguments(ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::DEFAULT)
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+      it "delegates to `ConvenientService::Support::Middleware::StackBuilder.backed_by`" do
+        expect(described_class)
+          .to receive(:backed_by)
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::DEFAULT], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
+
+        described_class.new
       end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `ConvenientService::Support::Middleware::StackBuilder.backed_by(ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::DEFAULT)` instance" do
         expect(described_class.new).to eq(described_class.backed_by(ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::DEFAULT).new)
