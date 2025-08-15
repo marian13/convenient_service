@@ -142,11 +142,21 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
     end
 
     describe "#unshift" do
-      specify do
-        expect { stack_builder.unshift(middleware, *args, &block) }
-          .to delegate_to(stack, :unshift)
-            .with_arguments([middleware, args, block])
-            .and_return { stack_builder }
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `stack#unshift`" do
+        expect(stack)
+          .to receive(:unshift)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[[middleware, args, block]], {}, nil]) }
+
+        stack_builder.unshift(middleware, *args, &block)
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `stack_builder` value" do
+        expect(stack_builder.unshift(middleware, *args, &block)).to eq(stack_builder)
       end
     end
 

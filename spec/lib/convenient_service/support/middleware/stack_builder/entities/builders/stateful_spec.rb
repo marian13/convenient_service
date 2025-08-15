@@ -220,21 +220,41 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
     end
 
     describe "#append" do
-      specify do
-        expect { stack_builder.append(middleware) }
-          .to delegate_to(stack, :<<)
-            .with_arguments(middleware)
-            .and_return { stack_builder }
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `stack#<<`" do
+        expect(stack)
+          .to receive(:<<)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[middleware], {}, nil]) }
+
+        stack_builder.append(middleware)
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `stack_builder` value" do
+        expect(stack_builder.append(middleware)).to eq(stack_builder)
       end
     end
 
     describe "#insert" do
       context "when `index_or_middleware` is integer" do
-        specify do
-          expect { stack_builder.insert(index, other_middleware) }
-            .to delegate_to(stack, :insert)
-              .with_arguments(index, other_middleware)
-              .and_return { stack_builder }
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        it "delegates to `stack#insert`" do
+          expect(stack)
+            .to receive(:insert)
+              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[index, other_middleware], {}, nil]) }
+
+          stack_builder.insert(index, other_middleware)
+        end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+        it "returns `stack_builder` value" do
+          expect(stack_builder.insert(index, other_middleware)).to eq(stack_builder)
         end
       end
 
@@ -273,11 +293,21 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
             stack_builder.use(middleware)
           end
 
-          specify do
-            expect { stack_builder.insert(middleware, other_middleware) }
-              .to delegate_to(stack, :insert)
-                .with_arguments(index, other_middleware)
-                .and_return { stack_builder }
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+          it "delegates to `stack#insert`" do
+            expect(stack)
+              .to receive(:insert)
+                .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[index, other_middleware], {}, nil]) }
+
+            stack_builder.insert(middleware, other_middleware)
+          end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+          it "returns `stack_builder` value" do
+            expect(stack_builder.insert(middleware, other_middleware)).to eq(stack_builder)
           end
         end
       end
@@ -285,11 +315,21 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
 
     describe "#insert_before" do
       context "when `index_or_middleware` is integer" do
-        specify do
-          expect { stack_builder.insert_before(index, other_middleware) }
-            .to delegate_to(stack, :insert)
-              .with_arguments(index, other_middleware)
-              .and_return { stack_builder }
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        it "delegates to `stack#insert`" do
+          expect(stack)
+            .to receive(:insert)
+              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[index, other_middleware], {}, nil]) }
+
+          stack_builder.insert_before(index, other_middleware)
+        end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+        it "returns `stack_builder` value" do
+          expect(stack_builder.insert_before(index, other_middleware)).to eq(stack_builder)
         end
       end
 
@@ -328,11 +368,21 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
             stack_builder.use(middleware)
           end
 
-          specify do
-            expect { stack_builder.insert_before(middleware, other_middleware) }
-              .to delegate_to(stack, :insert)
-                .with_arguments(index, other_middleware)
-                .and_return { stack_builder }
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+          it "delegates to `stack#insert`" do
+            expect(stack)
+              .to receive(:insert)
+                .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[index, other_middleware], {}, nil]) }
+
+            stack_builder.insert_before(middleware, other_middleware)
+          end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+          it "returns `stack_builder` value" do
+            expect(stack_builder.insert_before(middleware, other_middleware)).to eq(stack_builder)
           end
         end
       end
@@ -340,11 +390,21 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
 
     describe "#insert_after" do
       context "when `index_or_middleware` is integer" do
-        specify do
-          expect { stack_builder.insert_after(index, other_middleware) }
-            .to delegate_to(stack, :insert)
-              .with_arguments(index + 1, other_middleware)
-              .and_return { stack_builder }
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        it "delegates to `stack#insert`" do
+          expect(stack)
+            .to receive(:insert)
+              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[index + 1, other_middleware], {}, nil]) }
+
+          stack_builder.insert_after(index, other_middleware)
+        end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+        it "returns `stack_builder` value" do
+          expect(stack_builder.insert_after(index, other_middleware)).to eq(stack_builder)
         end
       end
 
@@ -383,11 +443,21 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
             stack_builder.use(middleware)
           end
 
-          specify do
-            expect { stack_builder.insert_after(middleware, other_middleware) }
-              .to delegate_to(stack, :insert)
-                .with_arguments(index + 1, other_middleware)
-                .and_return { stack_builder }
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+          it "delegates to `stack#insert`" do
+            expect(stack)
+              .to receive(:insert)
+                .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[index + 1, other_middleware], {}, nil]) }
+
+            stack_builder.insert_after(middleware, other_middleware)
+          end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+          it "returns `stack_builder` value" do
+            expect(stack_builder.insert_after(middleware, other_middleware)).to eq(stack_builder)
           end
         end
       end
@@ -429,11 +499,21 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
 
     describe "#replace" do
       context "when `index_or_middleware` is integer" do
-        specify do
-          expect { stack_builder.replace(index, other_middleware) }
-            .to delegate_to(stack, :[]=)
-              .with_arguments(index, other_middleware)
-              .and_return { stack_builder }
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        it "delegates to `stack#[]=`" do
+          expect(stack)
+            .to receive(:[]=)
+              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[index, other_middleware], {}, nil]) }
+
+          stack_builder.replace(index, other_middleware)
+        end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+        it "returns `stack_builder` value" do
+          expect(stack_builder.replace(index, other_middleware)).to eq(stack_builder)
         end
       end
 
@@ -472,11 +552,21 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
             stack_builder.use(middleware)
           end
 
-          specify do
-            expect { stack_builder.replace(middleware, other_middleware) }
-              .to delegate_to(stack, :[]=)
-                .with_arguments(index, other_middleware)
-                .and_return { stack_builder }
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+          it "delegates to `stack#[]=`" do
+            expect(stack)
+              .to receive(:[]=)
+                .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[index, other_middleware], {}, nil]) }
+
+            stack_builder.replace(middleware, other_middleware)
+          end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+          it "returns `stack_builder` value" do
+            expect(stack_builder.replace(middleware, other_middleware)).to eq(stack_builder)
           end
         end
       end
