@@ -22,15 +22,19 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Utils::Array::ContainExactly.call`" do
         expect(described_class::ContainExactly)
           .to receive(:call)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[first_array, second_array], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+              expect([actual_args, actual_kwargs, actual_block]).to eq([[first_array, second_array], {}, nil])
+
+              original.call(*actual_args, **actual_kwargs, &actual_block)
+            }
 
         described_class.contain_exactly?(first_array, second_array)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `ConvenientService::Utils::Array::ContainExactly.call` value" do
         expect(described_class.contain_exactly?(first_array, second_array)).to eq(described_class::ContainExactly.call(first_array, second_array))
@@ -49,15 +53,19 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Array::DropWhile.call`" do
       expect(described_class::DropWhile)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[array], {}, condition_block]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[array], {}, condition_block])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.drop_while(array, &condition_block)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Array::DropWhile.call` value" do
       expect(described_class.drop_while(array, inclusively: inclusively, &condition_block)).to eq(described_class::DropWhile.call(array, inclusively: inclusively, &condition_block))
@@ -71,15 +79,19 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Array::FindYield.call`" do
       expect(described_class::FindYield)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[array], {}, block]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[array], {}, block])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.find_yield(array, &block)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Array::FindYield.call` value" do
       expect(described_class.find_yield(array, &block)).to eq(described_class::FindYield.call(array, &block))
@@ -93,15 +105,19 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Array::FindLast.call`" do
       expect(described_class::FindLast)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[array], {}, block]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[array], {}, block])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.find_last(array, &block)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Array::FindLast.call` value" do
       expect(described_class.find_last(array, &block)).to eq(described_class::FindLast.call(array, &block))
@@ -115,15 +131,19 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Array::KeepAfter.call`" do
       expect(described_class::KeepAfter)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[array, object], {}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[array, object], {}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.keep_after(array, object)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Array::KeepAfter.call` value" do
       expect(described_class.keep_after(array, object)).to eq(described_class::KeepAfter.call(array, object))
@@ -138,15 +158,19 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Array::LimitedPush.call`" do
       expect(described_class::LimitedPush)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[array, object], {limit: limit}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[array, object], {limit: limit}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.limited_push(array, object, limit: limit)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Array::LimitedPush.call` value" do
       expect(described_class.limited_push(array, object, limit: limit)).to eq(described_class::LimitedPush.call(array, object, limit: limit))
@@ -161,15 +185,19 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Array::Merge.call`" do
       expect(described_class::Merge)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[array, overrides], {raise_on_non_integer_index: raise_on_non_integer_index}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[array, overrides], {raise_on_non_integer_index: raise_on_non_integer_index}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.merge(array, overrides, raise_on_non_integer_index: raise_on_non_integer_index)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Array::Merge.call` value" do
       expect(described_class.merge(array, overrides, raise_on_non_integer_index: raise_on_non_integer_index)).to eq(described_class::Merge.call(array, overrides, raise_on_non_integer_index: raise_on_non_integer_index))
@@ -184,15 +212,19 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Array::Rjust.call`" do
       expect(described_class::Rjust)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[array, size, pad], {}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[array, size, pad], {}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.rjust(array, size, pad)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Array::Rjust.call` value" do
       expect(described_class.rjust(array, size, pad)).to eq(described_class::Rjust.call(array, size, pad))
@@ -205,15 +237,19 @@ RSpec.describe ConvenientService::Utils::Array, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Array::Wrap.call`" do
       expect(described_class::Wrap)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object], {}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[object], {}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.wrap(object)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Array::Wrap.call` value" do
       expect(described_class.wrap(object)).to eq(described_class::Wrap.call(object))

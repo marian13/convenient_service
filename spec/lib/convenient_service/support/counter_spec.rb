@@ -149,13 +149,13 @@ RSpec.describe ConvenientService::Support::Counter, type: :standard do
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         specify do
           expect(ConvenientService).to receive(:raise).and_call_original
 
           expect { counter.increment!(n) }.to raise_error(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue)
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
         it "does NOT changes current value" do
           ##
@@ -259,13 +259,13 @@ RSpec.describe ConvenientService::Support::Counter, type: :standard do
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         specify do
           expect(ConvenientService).to receive(:raise).and_call_original
 
           expect { counter.decrement!(n) }.to raise_error(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue)
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
         it "does NOT changes current value" do
           ##

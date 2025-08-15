@@ -24,15 +24,19 @@ RSpec.describe ConvenientService::Utils::Kernel, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Kernel::SilenceWarnings.call`" do
       expect(described_class::SilenceWarnings)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, block]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, block])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.silence_warnings(&block)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Kernel::SilenceWarnings.call` value" do
       expect(described_class.silence_warnings(&block)).to eq(described_class::SilenceWarnings.call(&block))

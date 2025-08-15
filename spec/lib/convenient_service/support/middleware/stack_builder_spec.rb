@@ -66,13 +66,13 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder, type: :stan
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         specify do
           expect(ConvenientService).to receive(:raise).and_call_original
 
           expect { described_class.backed_by(backend) }.to raise_error(ConvenientService::Support::Middleware::StackBuilder::Exceptions::NotSupportedBackend)
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       end
 
       context "when `backend` is valid" do

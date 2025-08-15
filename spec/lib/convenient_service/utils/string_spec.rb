@@ -16,15 +16,19 @@ RSpec.describe ConvenientService::Utils::String, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::String::Camelize.call`" do
       expect(described_class::Camelize)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[string], {}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[string], {}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.camelize(string)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::String::Camelize.call` value" do
       expect(described_class.camelize(string)).to eq(described_class::Camelize.call(string))
@@ -37,15 +41,19 @@ RSpec.describe ConvenientService::Utils::String, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::String::Demodulize.call`" do
       expect(described_class::Demodulize)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[string], {}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[string], {}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.demodulize(string)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::String::Demodulize.call` value" do
       expect(described_class.demodulize(string)).to eq(described_class::Demodulize.call(string))
@@ -59,15 +67,19 @@ RSpec.describe ConvenientService::Utils::String, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::String::Split.call`" do
       expect(described_class::Split)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[string, *delimiters], {}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[string, *delimiters], {}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.split(string, *delimiters)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::String::Split.call` value" do
       expect(described_class.split(string, *delimiters)).to eq(described_class::Split.call(string, *delimiters))
@@ -82,15 +94,19 @@ RSpec.describe ConvenientService::Utils::String, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::String::Truncate.call`" do
       expect(described_class::Truncate)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[string, truncate_at], {omission: omission}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[string, truncate_at], {omission: omission}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.truncate(string, truncate_at, omission: omission)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::String::Truncate.call` value" do
       expect(described_class.truncate(string, truncate_at, omission: omission)).to eq(described_class::Truncate.call(string, truncate_at, omission: omission))

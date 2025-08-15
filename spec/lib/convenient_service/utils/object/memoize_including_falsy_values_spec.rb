@@ -20,15 +20,19 @@ RSpec.describe ConvenientService::Utils::Object::MemoizeIncludingFalsyValues, ty
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Object::InstanceVariableFetch.call`" do
       expect(ConvenientService::Utils::Object::InstanceVariableFetch)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, value_block]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, value_block])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       util_result
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Object::InstanceVariableFetch.call` value" do
       expect(util_result).to eq(ConvenientService::Utils::Object::InstanceVariableFetch.call(object, ivar_name, &value_block))

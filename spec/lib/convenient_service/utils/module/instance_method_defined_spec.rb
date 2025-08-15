@@ -31,15 +31,19 @@ RSpec.describe ConvenientService::Utils::Module::InstanceMethodDefined, type: :s
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Utils::Method.defined?`" do
         expect(ConvenientService::Utils::Method)
           .to receive(:defined?)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, mod], {public: public, protected: protected, private: private}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+              expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, mod], {public: public, protected: protected, private: private}, nil])
+
+              original.call(*actual_args, **actual_kwargs, &actual_block)
+            }
 
         util_result
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `ConvenientService::Utils::Method.defined?` value" do
         expect(util_result).to eq(ConvenientService::Utils::Method.defined?(method_name, mod, public: public, protected: protected, private: private))
@@ -51,15 +55,19 @@ RSpec.describe ConvenientService::Utils::Module::InstanceMethodDefined, type: :s
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         it "delegates to `ConvenientService::Utils::Method.defined?`" do
           expect(ConvenientService::Utils::Method)
             .to receive(:defined?)
-              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, mod], {public: true, protected: protected, private: private}, nil]) }
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, mod], {public: true, protected: protected, private: private}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
           util_result
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
         it "returns `ConvenientService::Utils::Method.defined?` value" do
           expect(util_result).to eq(ConvenientService::Utils::Method.defined?(method_name, mod, public: true, protected: protected, private: private))
@@ -72,15 +80,19 @@ RSpec.describe ConvenientService::Utils::Module::InstanceMethodDefined, type: :s
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         it "delegates to `ConvenientService::Utils::Method.defined?`" do
           expect(ConvenientService::Utils::Method)
             .to receive(:defined?)
-              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, mod], {public: public, protected: true, private: private}, nil]) }
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, mod], {public: public, protected: true, private: private}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
           util_result
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
         it "returns `ConvenientService::Utils::Method.defined?` value" do
           expect(util_result).to eq(ConvenientService::Utils::Method.defined?(method_name, mod, public: public, protected: true, private: private))
@@ -93,15 +105,19 @@ RSpec.describe ConvenientService::Utils::Module::InstanceMethodDefined, type: :s
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         it "delegates to `ConvenientService::Utils::Method.defined?`" do
           expect(ConvenientService::Utils::Method)
             .to receive(:defined?)
-              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, mod], {public: public, protected: protected, private: false}, nil]) }
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[method_name, mod], {public: public, protected: protected, private: false}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
           util_result
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
         it "returns `ConvenientService::Utils::Method.defined?` value" do
           expect(util_result).to eq(ConvenientService::Utils::Method.defined?(method_name, mod, public: public, protected: protected, private: false))

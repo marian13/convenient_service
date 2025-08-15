@@ -93,13 +93,13 @@ RSpec.describe ConvenientService::Support::FiniteLoop, type: :standard do
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         specify do
           expect(ConvenientService).to receive(:raise).and_call_original
 
           expect { instance.foo }.to raise_error(described_class::Exceptions::NoBlockGiven)
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       end
 
       context "when `max_iteration_count` is NOT exceeded" do
@@ -153,13 +153,13 @@ RSpec.describe ConvenientService::Support::FiniteLoop, type: :standard do
           ##
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
-          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
           specify do
             expect(ConvenientService).to receive(:raise).and_call_original
 
             expect { instance.foo }.to raise_error(described_class::Exceptions::MaxIterationCountExceeded)
           end
-          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         end
 
         context "when `raise_on_exceedance` is set to `false`" do
@@ -225,13 +225,13 @@ RSpec.describe ConvenientService::Support::FiniteLoop, type: :standard do
           ##
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
-          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
           specify do
             expect(ConvenientService).to receive(:raise).and_call_original
 
             expect { instance.foo }.to raise_error(described_class::Exceptions::MaxIterationCountExceeded)
           end
-          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         end
       end
 
@@ -306,13 +306,13 @@ RSpec.describe ConvenientService::Support::FiniteLoop, type: :standard do
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         specify do
           expect(ConvenientService).to receive(:raise).and_call_original
 
           expect { loop_result }.to raise_error(described_class::Exceptions::NoBlockGiven)
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       end
 
       context "when `max_iteration_count` is NOT exceeded" do
@@ -352,13 +352,13 @@ RSpec.describe ConvenientService::Support::FiniteLoop, type: :standard do
           ##
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
-          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
           specify do
             expect(ConvenientService).to receive(:raise).and_call_original
 
             expect { loop_result }.to raise_error(described_class::Exceptions::MaxIterationCountExceeded)
           end
-          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         end
 
         context "when `raise_on_exceedance` is set to `false`" do
@@ -403,13 +403,13 @@ RSpec.describe ConvenientService::Support::FiniteLoop, type: :standard do
           ##
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
-          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
           specify do
             expect(ConvenientService).to receive(:raise).and_call_original
 
             expect { loop_result }.to raise_error(described_class::Exceptions::MaxIterationCountExceeded)
           end
-          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         end
       end
 

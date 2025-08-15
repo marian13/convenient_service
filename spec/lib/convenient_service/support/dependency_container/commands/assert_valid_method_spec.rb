@@ -50,13 +50,13 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Assert
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         specify do
           expect(ConvenientService).to receive(:raise).and_call_original
 
           expect { command_result }.to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::NotExportedMethod)
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       end
 
       context "when `method` is exported" do

@@ -16,15 +16,19 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Module::ClampClass.call`" do
       expect(described_class::ClampClass)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object], {}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[object], {}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.clamp_class(object)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Module::ClampClass.call` value" do
       expect(described_class.clamp_class(object)).to eq(described_class::ClampClass.call(object))
@@ -37,15 +41,19 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Object::DuckClass.call`" do
       expect(described_class::DuckClass)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object], {}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[object], {}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.duck_class(object)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Object::DuckClass.call` value" do
       expect(described_class.duck_class(object)).to eq(described_class::DuckClass.call(object))
@@ -59,15 +67,19 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Object::InstanceVariableDelete.call`" do
       expect(described_class::InstanceVariableDelete)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.instance_variable_delete(object, ivar_name)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Object::InstanceVariableDelete.call` value" do
       expect(described_class.instance_variable_delete(object, ivar_name)).to eq(described_class::InstanceVariableDelete.call(object, ivar_name))
@@ -82,15 +94,19 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Object::InstanceVariableFetch.call`" do
       expect(described_class::InstanceVariableFetch)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, fallback_block]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, fallback_block])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.instance_variable_fetch(object, ivar_name, &fallback_block)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Object::InstanceVariableFetch.call` value" do
       expect(described_class.instance_variable_fetch(object, ivar_name, &fallback_block)).to eq(described_class::InstanceVariableFetch.call(object, ivar_name, &fallback_block))
@@ -105,15 +121,19 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Object::MemoizeIncludingFalsyValues.call`" do
       expect(described_class::MemoizeIncludingFalsyValues)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, value_block]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, value_block])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.memoize_including_falsy_values(object, ivar_name, &value_block)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Object::MemoizeIncludingFalsyValues.call` value" do
       expect(described_class.memoize_including_falsy_values(object, ivar_name, &value_block)).to eq(described_class::MemoizeIncludingFalsyValues.call(object, ivar_name, &value_block))
@@ -126,15 +146,19 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Object::ResolveType.call`" do
       expect(described_class::ResolveType)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object], {}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[object], {}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.resolve_type(object)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Object::ResolveType.call` value" do
       expect(described_class.resolve_type(object)).to eq(described_class::ResolveType.call(object))
@@ -158,15 +182,19 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Object::SafeSend.call`" do
       expect(described_class::SafeSend)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object, method, *args], kwargs, block]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[object, method, *args], kwargs, block])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.safe_send(object, method, *args, **kwargs, &block)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Object::SafeSend.call` value" do
       expect(described_class.safe_send(object, method, *args, **kwargs, &block)).to eq(described_class::SafeSend.call(object, method, *args, **kwargs, &block))
@@ -179,15 +207,19 @@ RSpec.describe ConvenientService::Utils::Object, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Object::WithOneTimeObject.call`" do
       expect(described_class::WithOneTimeObject)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, block]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, block])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.with_one_time_object(&block)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Object::WithOneTimeObject.call` value" do
       expect(described_class.with_one_time_object(&block)).to eq(described_class::WithOneTimeObject.call(&block))

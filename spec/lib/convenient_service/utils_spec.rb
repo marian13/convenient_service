@@ -47,15 +47,19 @@ RSpec.describe ConvenientService::Utils, type: :standard do
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Utils::Object::SafeSend.call`" do
         expect(described_class::Object::SafeSend)
           .to receive(:call)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object, method, *args], kwargs, block]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+              expect([actual_args, actual_kwargs, actual_block]).to eq([[object, method, *args], kwargs, block])
+
+              original.call(*actual_args, **actual_kwargs, &actual_block)
+            }
 
         described_class.safe_send(object, method, *args, **kwargs, &block)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `ConvenientService::Utils::Object::SafeSend.call` value" do
         expect(described_class.safe_send(object, method, *args, **kwargs, &block)).to eq(described_class::Object::SafeSend.call(object, method, *args, **kwargs, &block))
@@ -70,15 +74,19 @@ RSpec.describe ConvenientService::Utils, type: :standard do
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Utils::Object::MemoizeIncludingFalsyValues.call`" do
         expect(described_class::Object::MemoizeIncludingFalsyValues)
           .to receive(:call)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, value_block]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+              expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, value_block])
+
+              original.call(*actual_args, **actual_kwargs, &actual_block)
+            }
 
         described_class.memoize_including_falsy_values(object, ivar_name, &value_block)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `ConvenientService::Utils::Object::MemoizeIncludingFalsyValues.call` value" do
         expect(described_class.memoize_including_falsy_values(object, ivar_name, &value_block)).to eq(described_class::Object::MemoizeIncludingFalsyValues.call(object, ivar_name, &value_block))
@@ -91,15 +99,19 @@ RSpec.describe ConvenientService::Utils, type: :standard do
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Utils::Object::WithOneTimeObject.call`" do
         expect(described_class::Object::WithOneTimeObject)
           .to receive(:call)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, block]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+              expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, block])
+
+              original.call(*actual_args, **actual_kwargs, &actual_block)
+            }
 
         described_class.with_one_time_object(&block)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `ConvenientService::Utils::Object::WithOneTimeObject.call` value" do
         expect(described_class.with_one_time_object(&block)).to eq(described_class::Object::WithOneTimeObject.call(&block))

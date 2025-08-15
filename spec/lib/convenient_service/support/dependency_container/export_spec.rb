@@ -60,13 +60,13 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export, type: :s
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         specify do
           expect(ConvenientService).to receive(:raise).and_call_original
 
           expect { include_module_result }.to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::NotModule)
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       end
     end
   end
@@ -76,15 +76,19 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export, type: :s
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Support::DependencyContainer::Commands::AssertValidScope.call`" do
         expect(ConvenientService::Support::DependencyContainer::Commands::AssertValidScope)
           .to receive(:call)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {scope: scope}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {scope: scope}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         export
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns method" do
         expect(export).to eq(method)

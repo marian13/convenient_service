@@ -77,15 +77,19 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `stack#empty?`" do
         expect(stack)
           .to receive(:empty?)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         stack_builder.empty?
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `stack#empty?` value" do
         expect(stack_builder.empty?).to eq(stack.empty?)
@@ -96,15 +100,19 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `stack#clear`" do
         expect(stack)
           .to receive(:clear)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         stack_builder.clear
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `stack_builder` value" do
         expect(stack_builder.clear).to eq(stack_builder)
@@ -165,15 +173,19 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `stack#unshift`" do
         expect(stack)
           .to receive(:unshift)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[[middleware, args, block]], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[[middleware, args, block]], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         stack_builder.unshift(middleware, *args, &block)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `stack_builder` value" do
         expect(stack_builder.unshift(middleware, *args, &block)).to eq(stack_builder)
@@ -184,15 +196,19 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `stack#unshift`" do
         expect(stack)
           .to receive(:unshift)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[[middleware, args, block]], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[[middleware, args, block]], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         stack_builder.prepend(middleware, *args, &block)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `stack_builder` value" do
         expect(stack_builder.prepend(middleware, *args, &block)).to eq(stack_builder)
@@ -203,15 +219,19 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `stack#<<`" do
         expect(stack)
           .to receive(:<<)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[[middleware, args, block]], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[[middleware, args, block]], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         stack_builder.use(middleware, *args, &block)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `stack_builder` value" do
         expect(stack_builder.use(middleware, *args, &block)).to eq(stack_builder)
@@ -222,15 +242,19 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `stack#<<`" do
         expect(stack)
           .to receive(:<<)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[[middleware, args, block]], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[[middleware, args, block]], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         stack_builder.append(middleware, *args, &block)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `stack_builder` value" do
         expect(stack_builder.append(middleware, *args, &block)).to eq(stack_builder)
@@ -255,13 +279,13 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         # NOTE: `TypeError` exception is raised by `Array#index` from `ruby_middleware` gem. That is why is NOT processed by `ConvenientService.raise`.
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        #   # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        #   # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         #   specify do
         #     expect(ConvenientService).to receive(:raise).and_call_original
         #
         #     expect { stack_builder.delete(middleware) }.to raise_error(TypeError)
         #   end
-        #   # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        #   # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         ##
       end
 
@@ -304,13 +328,13 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         # NOTE: `TypeError` exception is raised by `Array#index` from `ruby_middleware` gem. That is why is NOT processed by `ConvenientService.raise`.
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        #   # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        #   # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         #   specify do
         #     expect(ConvenientService).to receive(:raise).and_call_original
         #
         #     expect { stack_builder.delete(middleware) }.to raise_error(TypeError)
         #   end
-        #   # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        #   # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         ##
       end
 
@@ -362,15 +386,19 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::RubyMiddleware.new`" do
         expect(described_class)
           .to receive(:new)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {name: name, stack: stack, runner_class: ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Runner}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {name: name, stack: stack, runner_class: ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Runner}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         stack_builder.dup
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::RubyMiddleware.new` value" do
         expect(stack_builder.dup).to eq(described_class.new(name: name, stack: stack, runner_class: ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Runner))
@@ -379,28 +407,36 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `name#dup`" do
         expect(name)
           .to receive(:dup)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         stack_builder.dup
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `stack#dup`" do
         expect(stack)
           .to receive(:dup)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         stack_builder.dup
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     end
 
     example_group "comparison" do

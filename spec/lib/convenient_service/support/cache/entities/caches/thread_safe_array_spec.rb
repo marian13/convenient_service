@@ -476,15 +476,19 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `cache#read`" do
         expect(cache)
           .to receive(:read)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         cache[key]
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `cache#read` value" do
         expect(cache[key]).to eq(cache.read(key))
@@ -497,15 +501,19 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `cache#read`" do
         expect(cache)
           .to receive(:read)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         cache.get(key)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `cache#read` value" do
         expect(cache.get(key)).to eq(cache.read(key))
@@ -519,15 +527,19 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `cache#write`" do
         expect(cache)
           .to receive(:write)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[key, value], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[key, value], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         cache[key] = value
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `cache#write` value" do
         expect(cache[key] = value).to eq(cache.write(key, value))
@@ -541,15 +553,19 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `cache#write`" do
         expect(cache)
           .to receive(:write)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[key, value], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[key, value], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         cache.set(key, value)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `cache#write` value" do
         expect(cache.set(key, value)).to eq(cache.write(key, value))

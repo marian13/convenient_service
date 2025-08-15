@@ -66,15 +66,19 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Support::Cache::Entities::Key.new`" do
         expect(ConvenientService::Support::Cache::Entities::Key)
           .to receive(:new)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([args, kwargs, block]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([args, kwargs, block])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         described_class.keygen(*args, **kwargs, &block)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `ConvenientService::Support::Cache::Entities::Key#keygen` value" do
         expect(described_class.keygen(*args, **kwargs, &block)).to eq(ConvenientService::Support::Cache::Entities::Key.new(*args, **kwargs, &block))
@@ -119,15 +123,19 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `cache.class#keygen`" do
         expect(cache.class)
           .to receive(:keygen)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([args, kwargs, block]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([args, kwargs, block])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         cache.keygen(*args, **kwargs, &block)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `cache.class#keygen` value" do
         expect(cache.keygen(*args, **kwargs, &block)).to eq(cache.class.keygen(*args, **kwargs, &block))

@@ -53,13 +53,13 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         specify do
           expect(ConvenientService).to receive(:raise).and_call_original
 
           expect { command_result }.to raise_error(ConvenientService::Support::DependencyContainer::Exceptions::InvalidScope)
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       end
 
       context "when `scope` is `instance`" do
@@ -77,7 +77,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
           ##
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
-          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
           it "delegates to `exported_method#define_in_module!`" do
             ##
             # NOTE: `described_class...` is called to define `importing_module::ImportedIncludedInstanceMethods` before it is used by `and_wrap_original`.
@@ -86,11 +86,15 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
 
             expect(exported_method)
               .to receive(:define_in_module!)
-                .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[importing_module::ImportedIncludedInstanceMethods], {}, nil]) }
+                .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                    expect([actual_args, actual_kwargs, actual_block]).to eq([[importing_module::ImportedIncludedInstanceMethods], {}, nil])
+
+                    original.call(*actual_args, **actual_kwargs, &actual_block)
+                  }
 
             command_result
           end
-          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
           it "returns `exported_method#define_in_module!` value" do
             expect(command_result).to eq(exported_method.define_in_module!(importing_module::ImportedIncludedInstanceMethods))
@@ -117,7 +121,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
           ##
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
-          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
           it "delegates to `exported_method#define_in_module!`" do
             ##
             # NOTE: `described_class...` is called to define `importing_module::ImportedIncludedInstanceMethods` before it is used by `and_wrap_original`.
@@ -126,11 +130,15 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
 
             expect(exported_method)
               .to receive(:define_in_module!)
-                .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[importing_module::ImportedPrependedInstanceMethods], {}, nil]) }
+                .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                    expect([actual_args, actual_kwargs, actual_block]).to eq([[importing_module::ImportedPrependedInstanceMethods], {}, nil])
+
+                    original.call(*actual_args, **actual_kwargs, &actual_block)
+                  }
 
             command_result
           end
-          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
           it "returns `exported_method#define_in_module!` value" do
             expect(command_result).to eq(exported_method.define_in_module!(importing_module::ImportedPrependedInstanceMethods))
@@ -164,7 +172,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
           ##
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
-          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
           it "delegates to `exported_method#define_in_module!`" do
             ##
             # NOTE: `described_class...` is called to define `importing_module::ImportedIncludedInstanceMethods` before it is used by `and_wrap_original`.
@@ -173,11 +181,15 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
 
             expect(exported_method)
               .to receive(:define_in_module!)
-                .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[importing_module::ImportedIncludedClassMethods], {}, nil]) }
+                .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                    expect([actual_args, actual_kwargs, actual_block]).to eq([[importing_module::ImportedIncludedClassMethods], {}, nil])
+
+                    original.call(*actual_args, **actual_kwargs, &actual_block)
+                  }
 
             command_result
           end
-          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
           it "returns `exported_method#define_in_module!` value" do
             expect(command_result).to eq(exported_method.define_in_module!(importing_module::ImportedIncludedClassMethods))
@@ -204,7 +216,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
           ##
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
-          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
           it "delegates to `exported_method#define_in_module!`" do
             ##
             # NOTE: `described_class...` is called to define `importing_module::ImportedIncludedInstanceMethods` before it is used by `and_wrap_original`.
@@ -213,11 +225,15 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
 
             expect(exported_method)
               .to receive(:define_in_module!)
-                .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[importing_module::ImportedPrependedClassMethods], {}, nil]) }
+                .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                    expect([actual_args, actual_kwargs, actual_block]).to eq([[importing_module::ImportedPrependedClassMethods], {}, nil])
+
+                    original.call(*actual_args, **actual_kwargs, &actual_block)
+                  }
 
             command_result
           end
-          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
           it "returns `exported_method#define_in_module!` value" do
             expect(command_result).to eq(exported_method.define_in_module!(importing_module::ImportedPrependedClassMethods))

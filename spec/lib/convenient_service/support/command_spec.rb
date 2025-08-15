@@ -34,13 +34,13 @@ RSpec.describe ConvenientService::Support::Command, type: :standard do
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       specify do
         expect(ConvenientService).to receive(:raise).and_call_original
 
         expect { command_instance.call }.to raise_error(described_class::Exceptions::CallIsNotOverridden)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     end
   end
 

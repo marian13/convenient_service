@@ -16,15 +16,19 @@ RSpec.describe ConvenientService::Utils::Class, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
     it "delegates to `ConvenientService::Utils::Class::DisplayName.call`" do
       expect(described_class::DisplayName)
         .to receive(:call)
-          .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[klass], {}, nil]) }
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[klass], {}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
 
       described_class.display_name(klass)
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
     it "returns `ConvenientService::Utils::Class::DisplayName.call` value" do
       expect(described_class.display_name(klass)).to eq(described_class::DisplayName.call(klass))
@@ -38,15 +42,19 @@ RSpec.describe ConvenientService::Utils::Class, type: :standard do
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Utils::Class::GetAttachedObject.call`" do
         expect(described_class::GetAttachedObject)
           .to receive(:call)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[klass], {}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+              expect([actual_args, actual_kwargs, actual_block]).to eq([[klass], {}, nil])
+
+              original.call(*actual_args, **actual_kwargs, &actual_block)
+            }
 
         described_class.attached_object(klass)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `ConvenientService::Utils::Class::GetAttachedObject.call` value" do
         expect(described_class.attached_object(klass)).to eq(described_class::GetAttachedObject.call(klass))

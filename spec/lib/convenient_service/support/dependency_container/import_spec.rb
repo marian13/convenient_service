@@ -54,56 +54,72 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import, type: :s
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Support::DependencyContainer::Commands::AssertValidScope.call`" do
         container
 
         expect(ConvenientService::Support::DependencyContainer::Commands::AssertValidScope)
           .to receive(:call)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {scope: scope}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {scope: scope}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         import
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer.call`" do
         expect(ConvenientService::Support::DependencyContainer::Commands::AssertValidContainer)
           .to receive(:call)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {container: container}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {container: container}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         import
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Support::DependencyContainer::Commands::AssertValidMethod.call`" do
         expect(ConvenientService::Support::DependencyContainer::Commands::AssertValidMethod)
           .to receive(:call)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {slug: slug, scope: scope, container: container}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {slug: slug, scope: scope, container: container}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         import
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       it "delegates to `ConvenientService::Support::DependencyContainer::Commands::ImportMethod.call`" do
         expect(ConvenientService::Support::DependencyContainer::Commands::ImportMethod)
           .to receive(:call)
-            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {importing_module: user, exported_method: method, prepend: prepend}, nil]) }
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {importing_module: user, exported_method: method, prepend: prepend}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
         import
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `ConvenientService::Support::DependencyContainer::Commands::ImportMethod.call` value" do
         expect(import).to eq(ConvenientService::Support::DependencyContainer::Commands::ImportMethod.call(importing_module: user, exported_method: method, prepend: prepend))
@@ -120,15 +136,19 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import, type: :s
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         it "delegates to `ConvenientService::Support::DependencyContainer::Commands::ImportMethod#call`" do
           expect(ConvenientService::Support::DependencyContainer::Commands::ImportMethod)
             .to receive(:call)
-              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {importing_module: user, exported_method: method_copy, prepend: prepend}, nil]) }
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                  expect([actual_args, actual_kwargs, actual_block]).to eq([[], {importing_module: user, exported_method: method_copy, prepend: prepend}, nil])
+
+                  original.call(*actual_args, **actual_kwargs, &actual_block)
+                }
 
           import
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
         it "returns `ConvenientService::Support::DependencyContainer::Commands::ImportMethod#call` value" do
           expect(import).to eq(ConvenientService::Support::DependencyContainer::Commands::ImportMethod.call(importing_module: user, exported_method: method_copy, prepend: prepend))
@@ -144,15 +164,19 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import, type: :s
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         it "delegates to `ConvenientService::Support::DependencyContainer::Commands::ImportMethod#call`" do
           expect(ConvenientService::Support::DependencyContainer::Commands::ImportMethod)
             .to receive(:call)
-              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {importing_module: user, exported_method: method, prepend: prepend}, nil]) }
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                  expect([actual_args, actual_kwargs, actual_block]).to eq([[], {importing_module: user, exported_method: method, prepend: prepend}, nil])
+
+                  original.call(*actual_args, **actual_kwargs, &actual_block)
+                }
 
           import
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
         it "returns `ConvenientService::Support::DependencyContainer::Commands::ImportMethod#call` value" do
           expect(import).to eq(ConvenientService::Support::DependencyContainer::Commands::ImportMethod.call(importing_module: user, exported_method: method, prepend: prepend))
@@ -168,15 +192,19 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import, type: :s
         ##
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
-        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
         it "delegates to `ConvenientService::Support::DependencyContainer::Commands::ImportMethod#call`" do
           expect(ConvenientService::Support::DependencyContainer::Commands::ImportMethod)
             .to receive(:call)
-              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {importing_module: user, exported_method: method, prepend: ConvenientService::Support::DependencyContainer::Constants::DEFAULT_PREPEND}, nil]) }
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                  expect([actual_args, actual_kwargs, actual_block]).to eq([[], {importing_module: user, exported_method: method, prepend: ConvenientService::Support::DependencyContainer::Constants::DEFAULT_PREPEND}, nil])
+
+                  original.call(*actual_args, **actual_kwargs, &actual_block)
+                }
 
           import
         end
-        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
         it "returns `ConvenientService::Support::DependencyContainer::Commands::ImportMethod#call` value" do
           expect(import).to eq(ConvenientService::Support::DependencyContainer::Commands::ImportMethod.call(importing_module: user, exported_method: method, prepend: ConvenientService::Support::DependencyContainer::Constants::DEFAULT_PREPEND))

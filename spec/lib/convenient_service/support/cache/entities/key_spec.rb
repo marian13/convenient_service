@@ -302,7 +302,11 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
         it "delegates to `other_key#eql?`" do
           expect(other_key)
             .to receive(:eql?)
-              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil]) }
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                  expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil])
+
+                  original.call(*actual_args, **actual_kwargs, &actual_block)
+                }
 
           command
         end
