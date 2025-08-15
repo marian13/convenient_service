@@ -417,22 +417,42 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
     describe "#[]" do
       let(:key) { :foo }
 
-      specify do
-        expect { cache[key] }
-          .to delegate_to(cache, :read)
-          .with_arguments(key)
-          .and_return_its_value
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `cache#read`" do
+        expect(cache)
+          .to receive(:read)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil]) }
+
+        cache[key]
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `cache#read` value" do
+        expect(cache[key]).to eq(cache.read(key))
       end
     end
 
     describe "#get" do
       let(:key) { :foo }
 
-      specify do
-        expect { cache.get(key) }
-          .to delegate_to(cache, :read)
-          .with_arguments(key)
-          .and_return_its_value
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `cache#read`" do
+        expect(cache)
+          .to receive(:read)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil]) }
+
+        cache.get(key)
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `cache#read` value" do
+        expect(cache.get(key)).to eq(cache.read(key))
       end
     end
 
@@ -440,11 +460,21 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
       let(:key) { :foo }
       let(:value) { :foo }
 
-      specify do
-        expect { cache[key] = value }
-          .to delegate_to(cache, :write)
-          .with_arguments(key, value)
-          .and_return_its_value
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `cache#write`" do
+        expect(cache)
+          .to receive(:write)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[key, value], {}, nil]) }
+
+        cache[key] = value
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `cache#write` value" do
+        expect(cache[key] = value).to eq(cache.write(key, value))
       end
     end
 
@@ -452,11 +482,21 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
       let(:key) { :foo }
       let(:value) { :foo }
 
-      specify do
-        expect { cache.set(key, value) }
-          .to delegate_to(cache, :write)
-          .with_arguments(key, value)
-          .and_return_its_value
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `cache#write`" do
+        expect(cache)
+          .to receive(:write)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[key, value], {}, nil]) }
+
+        cache.set(key, value)
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `cache#write` value" do
+        expect(cache.set(key, value)).to eq(cache.write(key, value))
       end
     end
 

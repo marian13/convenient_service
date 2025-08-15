@@ -73,11 +73,18 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export, type: :s
 
   example_group "class methods" do
     describe "#export" do
-      specify do
-        expect { export }
-          .to delegate_to(ConvenientService::Support::DependencyContainer::Commands::AssertValidScope, :call)
-          .with_arguments(scope: scope)
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `ConvenientService::Support::DependencyContainer::Commands::AssertValidScope.call`" do
+        expect(ConvenientService::Support::DependencyContainer::Commands::AssertValidScope)
+          .to receive(:call)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {scope: scope}, nil]) }
+
+        export
       end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
 
       it "returns method" do
         expect(export).to eq(method)

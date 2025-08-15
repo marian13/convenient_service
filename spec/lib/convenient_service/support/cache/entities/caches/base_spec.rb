@@ -59,15 +59,25 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
     end
 
     describe ".keygen" do
-      let(:args) { :foo }
+      let(:args) { [:foo] }
       let(:kwargs) { {foo: :bar} }
       let(:block) { proc { :foo } }
 
-      specify do
-        expect { described_class.keygen(*args, **kwargs, &block) }
-          .to delegate_to(ConvenientService::Support::Cache::Entities::Key, :new)
-          .with_arguments(*args, **kwargs, &block)
-          .and_return_its_value
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `ConvenientService::Support::Cache::Entities::Key.new`" do
+        expect(ConvenientService::Support::Cache::Entities::Key)
+          .to receive(:new)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([args, kwargs, block]) }
+
+        described_class.keygen(*args, **kwargs, &block)
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `ConvenientService::Support::Cache::Entities::Key#keygen` value" do
+        expect(described_class.keygen(*args, **kwargs, &block)).to eq(ConvenientService::Support::Cache::Entities::Key.new(*args, **kwargs, &block))
       end
     end
   end
@@ -102,15 +112,25 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
     end
 
     describe "#keygen" do
-      let(:args) { :foo }
+      let(:args) { [:foo] }
       let(:kwargs) { {foo: :bar} }
       let(:block) { proc { :foo } }
 
-      specify do
-        expect { cache.keygen(*args, **kwargs, &block) }
-          .to delegate_to(cache.class, :keygen)
-          .with_arguments(*args, **kwargs, &block)
-          .and_return_its_value
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+      it "delegates to `cache.class#keygen`" do
+        expect(cache.class)
+          .to receive(:keygen)
+            .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([args, kwargs, block]) }
+
+        cache.keygen(*args, **kwargs, &block)
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+      it "returns `cache.class#keygen` value" do
+        expect(cache.keygen(*args, **kwargs, &block)).to eq(cache.class.keygen(*args, **kwargs, &block))
       end
     end
 
