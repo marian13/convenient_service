@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   example_group "inheritance" do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.

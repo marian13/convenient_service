@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Castable, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   let(:klass) do
     Class.new.tap do |klass|
       klass.class_exec(described_class) do |mod|

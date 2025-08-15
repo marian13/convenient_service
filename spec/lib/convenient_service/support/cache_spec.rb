@@ -11,15 +11,24 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Cache, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   example_group "class methods" do
     describe ".new" do
-      specify do
-        expect { described_class.new }
-          .to delegate_to(described_class, :backed_by)
-          .with_arguments(ConvenientService::Support::Cache::Constants::Backends::DEFAULT)
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+      it "delegates to `ConvenientService::Support::Cache.backed_by`" do
+        expect(described_class)
+          .to receive(:backed_by)
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+              expect([actual_args, actual_kwargs, actual_block]).to eq([[ConvenientService::Support::Cache::Constants::Backends::DEFAULT], {}, nil])
+
+              original.call(*actual_args, **actual_kwargs, &actual_block)
+            }
+
+        described_class.new
       end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
       it "returns `ConvenientService::Support::Cache.backed_by(ConvenientService::Support::Cache::Constants::Backends::DEFAULT)` instance" do
         expect(described_class.new).to eq(described_class.backed_by(ConvenientService::Support::Cache::Constants::Backends::DEFAULT).new)

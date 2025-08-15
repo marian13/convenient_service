@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }

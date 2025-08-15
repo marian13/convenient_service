@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::AbstractMethod, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   example_group "modules" do
     it "extends `ConvenientService::Support::Concern`" do
       expect(described_class.included_modules).to include(ConvenientService::Support::Concern)

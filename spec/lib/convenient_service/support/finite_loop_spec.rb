@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::FiniteLoop, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   example_group "constants" do
     describe "::MAX_ITERATION_COUNT" do
       it "is equal to 1000" do

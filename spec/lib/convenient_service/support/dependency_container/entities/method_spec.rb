@@ -43,8 +43,6 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
   end
 
   example_group "instance methods" do
-    include ConvenientService::RSpec::Matchers::DelegateTo
-
     describe "#name" do
       context "when method does NOT have `alias_slug`" do
         context "when `slug` has NO namespaces" do

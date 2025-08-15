@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::DependencyContainer::Import, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   let(:user) do
     Class.new.tap do |klass|
       klass.class_exec(described_class) do |mod|

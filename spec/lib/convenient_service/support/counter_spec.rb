@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::Counter, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   let(:counter) { described_class.new(initial_value: initial_value, min_value: min_value, max_value: max_value) }
   let(:initial_value) { 0 }
   let(:min_value) { -1_000_000 }

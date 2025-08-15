@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::RubyMiddleware, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   let(:stack_builder) { described_class.new(name: name, stack: stack) }
 
   let(:stack) { [] }

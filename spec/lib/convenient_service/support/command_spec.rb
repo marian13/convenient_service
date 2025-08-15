@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Command, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   let(:command_class) { Class.new(described_class) }
   let(:command_instance) { command_class.new(*arguments.args, **arguments.kwargs, &arguments.block) }
   let(:arguments) { ConvenientService::Support::Arguments.new(:foo, foo: :bar) { :foo } }
@@ -62,19 +60,44 @@ RSpec.describe ConvenientService::Support::Command, type: :standard do
 
       let(:command_instance) { command_class.allocate }
 
-      specify do
-        expect { command_class.call(*arguments.args, **arguments.kwargs, &arguments.block) }
-          .to delegate_to(command_class, :new)
-          .with_arguments(*arguments.args, **arguments.kwargs, &arguments.block)
-      end
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+      it "delegates to `ConvenientService::Support::Command.new`" do
+        expect(command_class)
+          .to receive(:new)
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([arguments.args, arguments.kwargs, arguments.block])
 
-      specify do
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
+
+        command_class.call(*arguments.args, **arguments.kwargs, &arguments.block)
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+      it "delegates to `ConvenientService::Support::Command#call`" do
         allow(command_class).to receive(:new).and_return(command_instance)
 
-        expect { command_class.call(*arguments.args, **arguments.kwargs, &arguments.block) }
-          .to delegate_to(command_instance, :call)
-          .without_arguments
-          .and_return_its_value
+        expect(command_instance)
+          .to receive(:call)
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
+
+        command_class.call(*arguments.args, **arguments.kwargs, &arguments.block)
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+
+      it "returns `ConvenientService::Support::Command#call` value" do
+        expect(command_class.call(*arguments.args, **arguments.kwargs, &arguments.block)).to eq(command_instance.call)
       end
     end
 
@@ -87,11 +110,25 @@ RSpec.describe ConvenientService::Support::Command, type: :standard do
         end
       end
 
-      specify do
-        expect { command_class[*arguments.args, **arguments.kwargs, &arguments.block] }
-          .to delegate_to(command_class, :call)
-          .with_arguments(*arguments.args, **arguments.kwargs, &arguments.block)
-          .and_return_its_value
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+      it "delegates to `ConvenientService::Support::Command.call`" do
+        expect(command_class)
+          .to receive(:call)
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([arguments.args, arguments.kwargs, arguments.block])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
+
+        command_class[*arguments.args, **arguments.kwargs, &arguments.block]
+      end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+
+      it "returns `ConvenientService::Support::Command#call` value" do
+        expect(command_class[*arguments.args, **arguments.kwargs, &arguments.block]).to eq(command_class.call(*arguments.args, **arguments.kwargs, &arguments.block))
       end
     end
   end

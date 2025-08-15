@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Middleware::StackBuilder, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   example_group "class methods" do
     describe ".new" do
       ##

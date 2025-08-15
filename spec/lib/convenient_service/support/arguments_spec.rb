@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::Arguments, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   let(:arguments) { described_class.new(*args, **kwargs, &block) }
 
   let(:args) { [:foo] }
@@ -167,22 +165,50 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         context "when `key` is integer" do
           let(:key) { 0 }
 
-          specify do
-            expect { arguments[key] }
-              .to delegate_to(arguments.args, :[])
-              .with_arguments(key)
-              .and_return_its_value
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+          it "delegates to `arguments.args#[]`" do
+            expect(arguments.args)
+              .to receive(:[])
+                .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                    expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil])
+
+                    original.call(*actual_args, **actual_kwargs, &actual_block)
+                  }
+
+            arguments[key]
+          end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+
+          it "returns `arguments.args#call` value" do
+            expect(arguments[key]).to eq(arguments.args[key])
           end
         end
 
         context "when `key` is symbol" do
           let(:key) { :foo }
 
-          specify do
-            expect { arguments[key] }
-              .to delegate_to(arguments.kwargs, :[])
-              .with_arguments(key)
-              .and_return_its_value
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+          it "delegates to `arguments.kwargs#[]`" do
+            expect(arguments.kwargs)
+              .to receive(:[])
+                .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                    expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil])
+
+                    original.call(*actual_args, **actual_kwargs, &actual_block)
+                  }
+
+            arguments[key]
+          end
+          # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+
+          it "returns `arguments.kwargs#call` value" do
+            expect(arguments[key]).to eq(arguments.kwargs[key])
           end
         end
       end

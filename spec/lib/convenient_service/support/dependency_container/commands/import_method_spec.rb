@@ -13,7 +13,6 @@ require "convenient_service"
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::ImportMethod, type: :standard do
   example_group "class methods" do
     describe ".call" do
-      include ConvenientService::RSpec::Matchers::DelegateTo
       include ConvenientService::RSpec::Matchers::IncludeModule
       include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
       include ConvenientService::RSpec::PrimitiveMatchers::PrependModule

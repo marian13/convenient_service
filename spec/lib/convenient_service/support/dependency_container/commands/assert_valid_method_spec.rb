@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::AssertValidMethod, type: :standard do
-  include ConvenientService::RSpec::Matchers::DelegateTo
-
   example_group "class methods" do
     describe ".call" do
       subject(:command_result) { described_class.call(slug: slug, scope: scope, container: container) }
