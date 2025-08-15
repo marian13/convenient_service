@@ -171,58 +171,142 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
         let(:key) { described_class.new(:foo) }
         let(:other_key) { described_class.new(:bar) }
 
-        specify do
-          expect { command }
-            .to delegate_to(key, :hash)
-            .without_arguments
-        end
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+        it "delegates to `key#hash`" do
+          expect(key)
+            .to receive(:hash)
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil])
 
-        specify do
-          expect { command }
-            .to delegate_to(other_key, :hash)
-            .without_arguments
-        end
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
-        specify do
-          expect { command }
-            .not_to delegate_to(key, :eql?)
-            .with_any_arguments
+          command
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
-        specify do
-          expect { command }
-            .not_to delegate_to(other_key, :eql?)
-            .with_any_arguments, "Flaky collision found: key.object_id - `#{key.object_id}`, other_key.object_id - `#{other_key.object_id}`, key.hash - `#{key.hash}`, other_key.hash - `#{other_key.hash}`."
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+        it "delegates to `other_key#hash`" do
+          expect(other_key)
+            .to receive(:hash)
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
+
+          command
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+        it "does NOT delegate to `key#eql?`" do
+          expect(key)
+            .not_to receive(:eql?)
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
+
+          command
+        end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+        it "delegates to `other_key#eql?`" do
+          expect(other_key)
+            .not_to receive(:eql?)
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }, "Flaky collision found: key.object_id - `#{key.object_id}`, other_key.object_id - `#{other_key.object_id}`, key.hash - `#{key.hash}`, other_key.hash - `#{other_key.hash}`."
+
+          command
+        end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
       end
 
       context "when those keys cause collision (calling `#hash` returns same numbers)" do
         let(:key) { described_class.new(:foo) }
         let(:other_key) { described_class.new(:foo) }
 
-        specify do
-          expect { command }
-            .to delegate_to(key, :hash)
-            .without_arguments
-        end
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+        it "delegates to `key#hash`" do
+          expect(key)
+            .to receive(:hash)
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil])
 
-        specify do
-          expect { command }
-            .to delegate_to(other_key, :hash)
-            .without_arguments
-        end
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
 
-        specify do
-          expect { command }
-            .not_to delegate_to(key, :eql?)
-            .with_any_arguments
+          command
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
-        specify do
-          expect { command }
-            .to delegate_to(other_key, :eql?)
-            .with_arguments(key)
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+        it "delegates to `other_key#hash`" do
+          expect(other_key)
+            .to receive(:hash)
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
+
+          command
         end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+        it "does NOT delegate to `key#eql?`" do
+          expect(key)
+            .not_to receive(:eql?)
+              .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+                expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil])
+
+                original.call(*actual_args, **actual_kwargs, &actual_block)
+              }
+
+          command
+        end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+        it "delegates to `other_key#eql?`" do
+          expect(other_key)
+            .to receive(:eql?)
+              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[key], {}, nil]) }
+
+          command
+        end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
         context "when those keys are NOT equal in `#eql?` terms" do
           let(:collision_hash) { 42 }
