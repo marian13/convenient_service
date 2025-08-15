@@ -321,13 +321,23 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
       let(:kwargs) { {slug: slug, scope: scope, body: body, alias_slug: alias_slug} }
 
       describe "#to_kwargs" do
-        specify do
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
+        # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies
+        it "delegates to `method#to_arguments#kwargs`" do
           allow(method).to receive(:to_arguments).and_return(arguments)
 
-          expect { method.to_kwargs }
-            .to delegate_to(method.to_arguments, :kwargs)
-            .without_arguments
-            .and_return_its_value
+          expect(method.to_arguments)
+            .to receive(:kwargs)
+              .and_wrap_original { |_original, *actual_args, **actual_kwargs, &actual_block| expect([actual_args, actual_kwargs, actual_block]).to eq([[], {}, nil]) }
+
+          method.to_kwargs
+        end
+        # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies
+
+        it "returns `method#to_arguments#kwargs` value" do
+          expect(method.to_kwargs).to eq(method.to_arguments.kwargs)
         end
       end
 
