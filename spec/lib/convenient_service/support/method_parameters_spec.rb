@@ -11,8 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::MethodParameters, type: :standard do
-  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
-
   example_group "constants" do
     describe "::Constants::Types::REQUIRED_KEYWORD" do
       it "is equal to `:keyreq`" do
@@ -50,8 +48,11 @@ RSpec.describe ConvenientService::Support::MethodParameters, type: :standard do
           expect(method_parameters.has_rest_kwargs?).to eq(false)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
         specify do
-          expect { method_parameters.has_rest_kwargs? }.to cache_its_value
+          expect(method_parameters.has_rest_kwargs?.object_id).to eq(method_parameters.has_rest_kwargs?.object_id)
         end
       end
 
@@ -67,8 +68,11 @@ RSpec.describe ConvenientService::Support::MethodParameters, type: :standard do
           expect(method_parameters.has_rest_kwargs?).to eq(true)
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
         specify do
-          expect { method_parameters.has_rest_kwargs? }.to cache_its_value
+          expect(method_parameters.has_rest_kwargs?.object_id).to eq(method_parameters.has_rest_kwargs?.object_id)
         end
       end
     end

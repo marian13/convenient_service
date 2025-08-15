@@ -517,15 +517,16 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
     end
 
     describe "#scope" do
-      include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
-
       it "returns sub cache" do
         expect(cache.scope(:foo)).to eq(described_class.new)
       end
 
       context "when NO values were written to sub cache" do
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
         specify do
-          expect { cache.scope(:foo) }.not_to cache_its_value
+          expect(cache.scope(:foo).object_id).not_to eq(cache.scope(:foo).object_id)
         end
       end
 
@@ -534,8 +535,11 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
           cache.scope(:foo)[:bar] = :baz
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
         specify do
-          expect { cache.scope(:foo) }.to cache_its_value
+          expect(cache.scope(:foo).object_id).to eq(cache.scope(:foo).object_id)
         end
       end
 
@@ -545,8 +549,11 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
         end
 
         context "when NO values were written to nested sub cache" do
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
           specify do
-            expect { cache.scope(:foo).scope(:bar) }.not_to cache_its_value
+            expect(cache.scope(:foo).scope(:bar).object_id).not_to eq(cache.scope(:foo).scope(:bar).object_id)
           end
         end
 
@@ -555,8 +562,11 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
             cache.scope(:foo).scope(:bar)[:baz] = :qux
           end
 
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
           specify do
-            expect { cache.scope(:foo).scope(:bar) }.to cache_its_value
+            expect(cache.scope(:foo).scope(:bar).object_id).to eq(cache.scope(:foo).scope(:bar).object_id)
           end
         end
       end
@@ -609,15 +619,16 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
     end
 
     describe "#scope!" do
-      include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
-
       it "returns sub cache" do
         expect(cache.scope!(:foo)).to eq(described_class.new)
       end
 
       context "when NO values were written to sub cache" do
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
         specify do
-          expect { cache.scope!(:foo) }.to cache_its_value
+          expect(cache.scope!(:foo).scope(:bar).object_id).not_to eq(cache.scope!(:foo).scope(:bar).object_id)
         end
       end
 
@@ -626,8 +637,11 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
           cache.scope!(:foo)[:bar] = :baz
         end
 
+        ##
+        # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+        #
         specify do
-          expect { cache.scope!(:foo) }.to cache_its_value
+          expect(cache.scope!(:foo).scope(:bar).object_id).to eq(cache.scope!(:foo).scope(:bar).object_id)
         end
       end
 
@@ -637,8 +651,11 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
         end
 
         context "when NO values were written to nested sub cache" do
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
           specify do
-            expect { cache.scope!(:foo).scope!(:bar) }.to cache_its_value
+            expect(cache.scope!(:foo).scope!(:bar).object_id).to eq(cache.scope!(:foo).scope!(:bar).object_id)
           end
         end
 
@@ -647,8 +664,11 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::ThreadSafeAr
             cache.scope!(:foo).scope!(:bar)[:baz] = :qux
           end
 
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
           specify do
-            expect { cache.scope!(:foo).scope!(:bar) }.to cache_its_value
+            expect(cache.scope!(:foo).scope!(:bar).object_id).to eq(cache.scope!(:foo).scope!(:bar).object_id)
           end
         end
       end

@@ -137,6 +137,11 @@ module ConvenientService
               @silencers = @silencers.dup
             end
 
+            ##
+            # @internal
+            #   NOTE: `gems_paths` can NOT be empty, even theoretically.
+            #   TODO: Contribute.
+            #
             def add_gem_filter
               gems_paths = (Gem.path | [Gem.default_dir]).map { |p| Regexp.escape(p) }
               return if gems_paths.empty?
