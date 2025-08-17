@@ -73,7 +73,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="Helpers/IgnoringException.html" title="ConvenientService::RSpec::Helpers::IgnoringException (module)">IgnoringException</a></span>, <span class='object_link'><a href="Helpers/StubEntry.html" title="ConvenientService::RSpec::Helpers::StubEntry (module)">StubEntry</a></span>, <span class='object_link'><a href="Helpers/StubService.html" title="ConvenientService::RSpec::Helpers::StubService (module)">StubService</a></span>, <span class='object_link'><a href="Helpers/WrapMethod.html" title="ConvenientService::RSpec::Helpers::WrapMethod (module)">WrapMethod</a></span>, <span class='object_link'><a href="../Support/Concern.html" title="ConvenientService::Support::Concern (module)">Support::Concern</a></span></dd>
+      <dd><span class='object_link'><a href="Helpers/IgnoringException.html" title="ConvenientService::RSpec::Helpers::IgnoringException (module)">IgnoringException</a></span>, <span class='object_link'><a href="Helpers/InThreads.html" title="ConvenientService::RSpec::Helpers::InThreads (module)">InThreads</a></span>, <span class='object_link'><a href="Helpers/StubEntry.html" title="ConvenientService::RSpec::Helpers::StubEntry (module)">StubEntry</a></span>, <span class='object_link'><a href="Helpers/StubService.html" title="ConvenientService::RSpec::Helpers::StubService (module)">StubService</a></span>, <span class='object_link'><a href="Helpers/WrapMethod.html" title="ConvenientService::RSpec::Helpers::WrapMethod (module)">WrapMethod</a></span>, <span class='object_link'><a href="../Support/Concern.html" title="ConvenientService::Support::Concern (module)">Support::Concern</a></span></dd>
   </dl>
   
   
@@ -84,7 +84,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/rspec/helpers.rb<span class="defines">,<br />
-  lib/convenient_service/rspec/helpers/stub_entry.rb,<br /> lib/convenient_service/rspec/helpers/wrap_method.rb,<br /> lib/convenient_service/rspec/helpers/stub_service.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_entry.rb,<br /> lib/convenient_service/rspec/helpers/ignoring_exception.rb,<br /> lib/convenient_service/rspec/helpers/classes/wrap_method.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_service.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_entry/constants.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_service/constants.rb,<br /> lib/convenient_service/rspec/helpers/classes/wrap_method/exceptions.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_entry/entities/value_spec.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_entry/entities/stubbed_feature.rb,<br /> lib/convenient_service/rspec/helpers/classes/wrap_method/entities/wrapped_method.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb</span>
+  lib/convenient_service/rspec/helpers/in_threads.rb,<br /> lib/convenient_service/rspec/helpers/stub_entry.rb,<br /> lib/convenient_service/rspec/helpers/wrap_method.rb,<br /> lib/convenient_service/rspec/helpers/stub_service.rb,<br /> lib/convenient_service/rspec/helpers/classes/in_threads.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_entry.rb,<br /> lib/convenient_service/rspec/helpers/ignoring_exception.rb,<br /> lib/convenient_service/rspec/helpers/classes/wrap_method.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_service.rb,<br /> lib/convenient_service/rspec/helpers/classes/ignoring_exception.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_entry/constants.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_service/constants.rb,<br /> lib/convenient_service/rspec/helpers/classes/wrap_method/exceptions.rb,<br /> lib/convenient_service/rspec/helpers/classes/ignoring_exception/exceptions.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_entry/entities/value_spec.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_service/entities/result_spec.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_entry/entities/stubbed_feature.rb,<br /> lib/convenient_service/rspec/helpers/classes/wrap_method/entities/wrapped_method.rb,<br /> lib/convenient_service/rspec/helpers/classes/stub_service/entities/stubbed_service.rb</span>
 </dd>
   </dl>
   
@@ -94,7 +94,7 @@
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Helpers/Classes.html" title="ConvenientService::RSpec::Helpers::Classes (module)">Classes</a></span>, <span class='object_link'><a href="Helpers/IgnoringException.html" title="ConvenientService::RSpec::Helpers::IgnoringException (module)">IgnoringException</a></span>, <span class='object_link'><a href="Helpers/StubEntry.html" title="ConvenientService::RSpec::Helpers::StubEntry (module)">StubEntry</a></span>, <span class='object_link'><a href="Helpers/StubService.html" title="ConvenientService::RSpec::Helpers::StubService (module)">StubService</a></span>, <span class='object_link'><a href="Helpers/WrapMethod.html" title="ConvenientService::RSpec::Helpers::WrapMethod (module)">WrapMethod</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Helpers/Classes.html" title="ConvenientService::RSpec::Helpers::Classes (module)">Classes</a></span>, <span class='object_link'><a href="Helpers/IgnoringException.html" title="ConvenientService::RSpec::Helpers::IgnoringException (module)">IgnoringException</a></span>, <span class='object_link'><a href="Helpers/InThreads.html" title="ConvenientService::RSpec::Helpers::InThreads (module)">InThreads</a></span>, <span class='object_link'><a href="Helpers/StubEntry.html" title="ConvenientService::RSpec::Helpers::StubEntry (module)">StubEntry</a></span>, <span class='object_link'><a href="Helpers/StubService.html" title="ConvenientService::RSpec::Helpers::StubService (module)">StubService</a></span>, <span class='object_link'><a href="Helpers/WrapMethod.html" title="ConvenientService::RSpec::Helpers::WrapMethod (module)">WrapMethod</a></span>
     
   
     
@@ -158,11 +158,22 @@
   
   
   
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Helpers/InThreads.html" title="ConvenientService::RSpec::Helpers::InThreads (module)">InThreads</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Helpers/InThreads.html#in_threads-instance_method" title="ConvenientService::RSpec::Helpers::InThreads#in_threads (method)">#in_threads</a></span></p>
+
+  
+  
+  
+  
+  
+  
 
 </div>
 
       <div id="footer">
-  Generated on Sun Aug 17 18:17:44 2025 by
+  Generated on Sun Aug 17 18:51:48 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
