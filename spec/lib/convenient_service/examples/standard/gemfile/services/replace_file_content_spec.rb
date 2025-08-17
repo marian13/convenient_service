@@ -14,7 +14,7 @@ return unless defined? ConvenientService::Examples::Standard
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Standard::Gemfile::Services::ReplaceFileContent, type: :standard do
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+  include ConvenientService::RSpec::Matchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
 
   example_group "modules" do

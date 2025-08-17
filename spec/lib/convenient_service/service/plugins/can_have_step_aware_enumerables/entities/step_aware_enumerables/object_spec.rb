@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
   let(:propagated_result) { service.error(code: "from propagated result") }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
+    include ConvenientService::RSpec::Matchers::BeDescendantOf
 
     subject { described_class }
 

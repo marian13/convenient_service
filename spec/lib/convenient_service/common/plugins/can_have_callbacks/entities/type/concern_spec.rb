@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
+    include ConvenientService::RSpec::Matchers::ExtendModule
 
     subject { described_class }
 

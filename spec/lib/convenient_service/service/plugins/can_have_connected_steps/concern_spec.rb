@@ -13,7 +13,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Concern, type: :standard do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
-  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+  include ConvenientService::RSpec::Matchers::CacheItsValue
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:service_class) do
@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
+    include ConvenientService::RSpec::Matchers::ExtendModule
 
     subject { described_class }
 

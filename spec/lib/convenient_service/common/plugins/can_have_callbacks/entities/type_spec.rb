@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
   end
 
   example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+    include ConvenientService::RSpec::Matchers::HaveAttrReader
 
     subject { described_class.new(value: :before) }
 

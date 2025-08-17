@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::RSpec::Helpers::IgnoringException, type: :standard do
-  include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
+  include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "instance methods" do
     describe "#ignoring_exception" do
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::IgnoringException, type: :stan
 
       specify do
         expect { instance.ignoring_exception(exception, &block) }
-          .to delegate_to(ConvenientService::RSpec::PrimitiveHelpers::Classes::IgnoringException, :new)
+          .to delegate_to(ConvenientService::RSpec::Helpers::Classes::IgnoringException, :new)
           .with_arguments(exception, &block)
       end
     end

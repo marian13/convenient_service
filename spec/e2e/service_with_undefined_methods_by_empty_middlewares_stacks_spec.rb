@@ -11,7 +11,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass
 RSpec.describe "Service with undefined methods by empty middlewares stacks", type: [:standard, :e2e] do
-  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+  include ConvenientService::RSpec::Matchers::CacheItsValue
 
   let(:service_class) do
     Class.new do

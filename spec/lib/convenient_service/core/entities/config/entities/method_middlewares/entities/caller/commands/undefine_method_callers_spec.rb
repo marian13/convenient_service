@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   let(:prefix) { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Constants::INSTANCE_PREFIX }
 
   example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+    include ConvenientService::RSpec::Matchers::HaveAttrReader
 
     subject { command_instance }
 
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
   example_group "class methods" do
     describe ".call" do
-      include ConvenientService::RSpec::PrimitiveMatchers::PrependModule
+      include ConvenientService::RSpec::Matchers::PrependModule
 
       context "when `scope` is `:instance`" do
         let(:scope) { :instance }

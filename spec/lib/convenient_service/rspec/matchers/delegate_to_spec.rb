@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::RSpec::Matchers::DelegateTo, type: :standard do
-  include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
+  include described_class
 
   example_group "instance methods" do
     describe "#delegate_to" do
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::DelegateTo, type: :standard d
 
       specify do
         expect { instance.delegate_to(object, method) }
-          .to delegate_to(ConvenientService::RSpec::PrimitiveMatchers::Classes::DelegateTo, :new)
+          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::DelegateTo, :new)
           .with_arguments(object, method)
       end
     end

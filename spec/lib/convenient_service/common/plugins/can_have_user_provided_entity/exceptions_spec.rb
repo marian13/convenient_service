@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Exceptions, type: :standard do
-  include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
+  include ConvenientService::RSpec::Matchers::BeDescendantOf
 
   specify { expect(described_class::ProtoEntityHasNoName).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::ProtoEntityHasNoConcern).to be_descendant_of(ConvenientService::Exception) }

@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard do
-  include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
+  include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "instance methods" do
     let(:klass) do

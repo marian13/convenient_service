@@ -13,7 +13,7 @@ return unless defined? ConvenientService::Service::Plugins::HasAwesomePrintInspe
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasAwesomePrintInspect::Concern, type: :awesome_print do
-  include ConvenientService::RSpec::PrimitiveMatchers::IncludeInOrder
+  include ConvenientService::RSpec::Matchers::IncludeInOrder
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule

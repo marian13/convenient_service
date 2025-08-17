@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
   let(:block) { proc { :foo } }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
+    include ConvenientService::RSpec::Matchers::BeDescendantOf
 
     subject { described_class }
 
@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
+    include ConvenientService::RSpec::Matchers::ExtendModule
 
     subject { described_class }
 
@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
   end
 
   example_group "class abstract methods" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAbstractMethod
+    include ConvenientService::RSpec::Matchers::HaveAbstractMethod
 
     subject { described_class }
 

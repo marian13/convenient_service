@@ -13,7 +13,7 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base::Commands::CreateObservableMiddleware, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
-  include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
+  include ConvenientService::RSpec::Matchers::BeDescendantOf
 
   let(:command_result) { described_class.call(middleware: middleware) }
 

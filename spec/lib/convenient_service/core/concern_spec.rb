@@ -12,12 +12,12 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Concern, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
+    include ConvenientService::RSpec::Matchers::ExtendModule
 
     ##
     # TODO: Uncomment.
     #
-    # include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
+    # include ConvenientService::RSpec::Matchers::HaveAliasMethod
 
     subject { described_class }
 

@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::Config::Entities::Option, type: :standard do
 
   example_group "instance methods" do
     example_group "attributes" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+      include ConvenientService::RSpec::Matchers::HaveAttrReader
 
       subject { option }
 

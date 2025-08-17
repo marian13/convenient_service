@@ -28,6 +28,19 @@ RSpec.describe ConvenientService::RSpec::Matchers, type: :standard do
         end
       end
 
+      it { is_expected.to include_module(described_class::BeDescendantOf) }
+      it { is_expected.to include_module(described_class::BeDirectDescendantOf) }
+      it { is_expected.to include_module(described_class::CacheItsValue) }
+      it { is_expected.to include_module(described_class::ExtendModule) }
+      it { is_expected.to include_module(described_class::HaveAbstractMethod) }
+      it { is_expected.to include_module(described_class::HaveAliasMethod) }
+      it { is_expected.to include_module(described_class::HaveAttrAccessor) }
+      it { is_expected.to include_module(described_class::HaveAttrReader) }
+      it { is_expected.to include_module(described_class::HaveAttrWriter) }
+      it { is_expected.to include_module(described_class::IncludeInOrder) }
+      it { is_expected.to include_module(described_class::PrependModule) }
+      it { is_expected.to include_module(described_class::SingletonPrependModule) }
+
       it { is_expected.to include_module(described_class::CallChainNext) }
       it { is_expected.to include_module(described_class::DelegateTo) }
       it { is_expected.to include_module(described_class::Export) }

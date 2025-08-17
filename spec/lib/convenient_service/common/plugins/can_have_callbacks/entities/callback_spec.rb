@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+    include ConvenientService::RSpec::Matchers::HaveAttrReader
 
     subject { described_class.new(types: [:foo, :bar], block: proc { :foo }, source_location: "source_location") }
 
@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
   end
 
   example_group "instance alias methods" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
+    include ConvenientService::RSpec::Matchers::HaveAliasMethod
 
     subject { described_class.new(types: [], block: proc { :foo }, source_location: ["/source_location", 1]) }
 

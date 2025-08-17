@@ -8,6 +8,8 @@
 require_relative "helpers/classes"
 
 require_relative "helpers/ignoring_exception"
+require_relative "helpers/in_threads"
+
 require_relative "helpers/stub_service"
 require_relative "helpers/stub_entry"
 require_relative "helpers/wrap_method"
@@ -18,6 +20,8 @@ module ConvenientService
       include Support::Concern
 
       included do
+        include InThreads
+
         include IgnoringException
         include StubService
         include StubEntry

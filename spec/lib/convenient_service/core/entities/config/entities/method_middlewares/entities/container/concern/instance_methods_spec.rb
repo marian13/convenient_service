@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
   end
 
   example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+    include ConvenientService::RSpec::Matchers::HaveAttrReader
 
     subject { container }
 

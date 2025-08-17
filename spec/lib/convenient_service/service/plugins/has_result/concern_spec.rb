@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasResult::Concern, type: :s
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
+    include ConvenientService::RSpec::Matchers::ExtendModule
 
     subject { described_class }
 

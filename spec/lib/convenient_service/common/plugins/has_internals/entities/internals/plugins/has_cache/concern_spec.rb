@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Inter
 
   example_group "class methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
-    include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+    include ConvenientService::RSpec::Matchers::CacheItsValue
 
     describe ".cache" do
       cache = ConvenientService::Support::Cache.backed_by(:thread_safe_hash).new
@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Inter
 
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
-    include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+    include ConvenientService::RSpec::Matchers::CacheItsValue
 
     describe "#cache" do
       let(:internals) { internals_instance }

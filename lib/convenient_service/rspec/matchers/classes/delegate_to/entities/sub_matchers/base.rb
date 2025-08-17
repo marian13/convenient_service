@@ -1,0 +1,104 @@
+# frozen_string_literal: true
+
+##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+module ConvenientService
+  module RSpec
+    module Matchers
+      module Classes
+        class DelegateTo
+          module Entities
+            module SubMatchers
+              class Base
+                ##
+                # @!attribute [r] block_expectation_value
+                #   @return [Object] Can be any type.
+                #
+                attr_reader :block_expectation_value
+
+                ##
+                # @!attribute [r] matcher
+                #   @return [ConvenientService::RSpec::Matchers::Classes::DelegateTo]
+                #
+                attr_reader :matcher
+
+                ##
+                # @overload initialize(matcher:)
+                #   @param matcher [ConvenientService::RSpec::Matchers::Classes::DelegateTo]
+                #   @return [void]
+                #
+                # @overload initialize(matcher:, block_expectation_value:)
+                #   @param matcher [ConvenientService::RSpec::Matchers::Classes::DelegateTo]
+                #   @param block_expectation_value [Object] Can be any type.
+                #   @return [void]
+                #   @api private
+                #
+                def initialize(matcher:, block_expectation_value: nil)
+                  @matcher = matcher
+                  @block_expectation_value = block_expectation_value
+                end
+
+                ##
+                # @return [void]
+                #
+                def apply_stubs!
+                end
+
+                ##
+                # @param block_expectation_value [Object] Can be any type.
+                # @return [Boolean]
+                #
+                def matches?(block_expectation_value)
+                  @block_expectation_value = block_expectation_value
+
+                  false
+                end
+
+                ##
+                # @param block_expectation_value [Object] Can be any type.
+                # @return [Boolean]
+                #
+                def does_not_match?(block_expectation_value)
+                  !matches?(block_expectation_value)
+                end
+
+                ##
+                # @return [String]
+                #
+                def failure_message
+                  ""
+                end
+
+                ##
+                # @return [String]
+                #
+                def failure_message_when_negated
+                  ""
+                end
+
+                private
+
+                ##
+                # @return [ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::Inputs]
+                #
+                def inputs
+                  matcher.inputs
+                end
+
+                ##
+                # @return [ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::Inputs]
+                #
+                def outputs
+                  matcher.outputs
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

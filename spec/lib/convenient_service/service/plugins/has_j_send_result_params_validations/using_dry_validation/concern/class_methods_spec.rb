@@ -15,7 +15,7 @@ return unless defined? ConvenientService::Service::Plugins::HasJSendResultParams
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Concern::ClassMethods, type: :standard do
   example_group "class methods" do
     describe ".contract" do
-      include ConvenientService::RSpec::PrimitiveMatchers::BeDirectDescendantOf
+      include ConvenientService::RSpec::Matchers::BeDirectDescendantOf
 
       let(:service_class) do
         Class.new.tap do |klass|

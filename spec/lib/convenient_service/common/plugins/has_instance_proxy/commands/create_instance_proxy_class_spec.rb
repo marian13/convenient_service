@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Commands::C
 
   example_group "class methods" do
     describe ".call" do
-      include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
+      include ConvenientService::RSpec::Matchers::BeDescendantOf
 
       subject(:command_result) { described_class.call(target_class: target_class) }
 
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Commands::C
         let(:instance_proxy_class) { described_class.call(target_class: target_class) }
 
         example_group "inheritance" do
-          include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
+          include ConvenientService::RSpec::Matchers::BeDescendantOf
 
           subject { instance_proxy_class }
 

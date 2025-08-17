@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Concern, ty
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
+    include ConvenientService::RSpec::Matchers::ExtendModule
 
     subject { described_class }
 
@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Concern, ty
 
   example_group "class methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
-    include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+    include ConvenientService::RSpec::Matchers::CacheItsValue
 
     describe "#instance_proxy_class" do
       let(:klass) do

@@ -11,7 +11,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Config::Exceptions, type: :standard do
-  include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
+  include ConvenientService::RSpec::Matchers::BeDescendantOf
 
   specify { expect(described_class::OptionCanNotBeNormalized).to be_descendant_of(ConvenientService::Exception) }
 end

@@ -9,7 +9,7 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService, type: :standard do
-  include described_class::RSpec::PrimitiveMatchers::CacheItsValue
+  include described_class::RSpec::Matchers::CacheItsValue
   include described_class::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do

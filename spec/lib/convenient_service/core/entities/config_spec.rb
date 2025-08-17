@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
   include ConvenientService::RSpec::Matchers::DelegateTo
-  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+  include ConvenientService::RSpec::Matchers::CacheItsValue
 
   let(:config) { described_class.new(klass: service_class) }
 
@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
   end
 
   example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+    include ConvenientService::RSpec::Matchers::HaveAttrReader
 
     subject { config }
 

@@ -16,7 +16,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   let(:middleware) { described_class }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
+    include ConvenientService::RSpec::Matchers::BeDescendantOf
 
     subject { middleware }
 

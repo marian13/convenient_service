@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
+    include ConvenientService::RSpec::Matchers::ExtendModule
 
     subject { described_class }
 
@@ -202,7 +202,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
     describe "#create_data!" do
       ##
-      # NOTE: If this spec fails on JRuby, it is probably due to a version constraint in `lib/convenient_service/rspec/primitive_matchers/classes/delegate_to/entities/inputs.rb`.
+      # NOTE: If this spec fails on JRuby, it is probably due to a version constraint in `lib/convenient_service/rspec/matchers/classes/delegate_to/entities/inputs.rb`.
       # IMPORTANT: If the logic behind this spec becomes stale someday, do not delete it; instead, write a similar one to still catch the JRuby issue.
       #
       specify do

@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::Cowsay::Services::Prin
   end
 
   example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+    include ConvenientService::RSpec::Matchers::HaveAttrReader
 
     subject { service }
 

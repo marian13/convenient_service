@@ -14,8 +14,8 @@ RSpec.describe ConvenientService::Config, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Helpers::IgnoringException
 
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
-    include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+    include ConvenientService::RSpec::Matchers::ExtendModule
+    include ConvenientService::RSpec::Matchers::CacheItsValue
 
     include ConvenientService::RSpec::Matchers::IncludeModule
     include ConvenientService::RSpec::Matchers::DelegateTo

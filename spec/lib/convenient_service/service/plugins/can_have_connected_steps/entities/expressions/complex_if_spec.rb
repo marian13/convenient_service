@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
   let(:seventh_step) { organizer.steps[6] }
 
   example_group "inheritance" do
-    include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
+    include ConvenientService::RSpec::Matchers::BeDescendantOf
 
     subject { described_class }
 

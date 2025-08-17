@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::Service::Plugins::HasNegatedResult::Exceptions, type: :standard do
-  include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
+  include ConvenientService::RSpec::Matchers::BeDescendantOf
 
   specify { expect(described_class::NegatedResultIsNotOverridden).to be_descendant_of(ConvenientService::Exception) }
 end

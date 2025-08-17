@@ -14,7 +14,7 @@ return unless defined? ConvenientService::Common::Plugins::AssignsAttributesInCo
 RSpec.describe ConvenientService::Common::Plugins::AssignsAttributesInConstructor::UsingDryInitializer::Concern, type: :dry do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
+    include ConvenientService::RSpec::Matchers::ExtendModule
 
     subject { described_class }
 

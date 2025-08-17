@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveEntries::Concern, typ
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
+    include ConvenientService::RSpec::Matchers::ExtendModule
 
     subject { described_class }
 

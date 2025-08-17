@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::R
   end
 
   example_group "attributes" do
-    include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+    include ConvenientService::RSpec::Matchers::HaveAttrReader
 
     subject { request }
 

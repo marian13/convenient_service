@@ -77,7 +77,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
   example_group "instance methods" do
     example_group "alias methods" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAliasMethod
+      include ConvenientService::RSpec::Matchers::HaveAliasMethod
 
       subject { stack }
 
@@ -85,7 +85,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     end
 
     example_group "attributes" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+      include ConvenientService::RSpec::Matchers::HaveAttrReader
 
       subject { stack }
 

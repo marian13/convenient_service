@@ -60,11 +60,11 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   end
 
   example_group "instance methods" do
-    include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+    include ConvenientService::RSpec::Matchers::CacheItsValue
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     example_group "attributes" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+      include ConvenientService::RSpec::Matchers::HaveAttrReader
 
       subject { method_instance }
 

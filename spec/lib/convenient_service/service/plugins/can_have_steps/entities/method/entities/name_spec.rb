@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     example_group "attributes" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+      include ConvenientService::RSpec::Matchers::HaveAttrReader
 
       subject { name }
 

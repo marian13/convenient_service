@@ -10,7 +10,7 @@ module ConvenientService
     module Matchers
       module IncludeModule
         def include_module(...)
-          RSpec::PrimitiveMatchers::Classes::IncludeModule.new(...)
+          Classes::IncludeModule.new(...)
         end
       end
     end

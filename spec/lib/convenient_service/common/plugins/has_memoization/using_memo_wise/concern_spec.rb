@@ -14,7 +14,7 @@ return unless defined? ConvenientService::Common::Plugins::HasMemoization::Using
 RSpec.describe ConvenientService::Common::Plugins::HasMemoization::UsingMemoWise::Concern, type: :memo_wise do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::PrependModule
+    include ConvenientService::RSpec::Matchers::PrependModule
 
     subject { described_class }
 

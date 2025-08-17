@@ -13,7 +13,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Concern::InstanceMethods, type: :standard do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
-  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+  include ConvenientService::RSpec::Matchers::CacheItsValue
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:step_service_klass) do
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
+    include ConvenientService::RSpec::Matchers::ExtendModule
 
     subject { described_class }
 
@@ -71,12 +71,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   end
 
   example_group "instance methods" do
-    include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+    include ConvenientService::RSpec::Matchers::CacheItsValue
     include ConvenientService::RSpec::Matchers::DelegateTo
     include ConvenientService::RSpec::Matchers::Results
 
     example_group "attributes" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+      include ConvenientService::RSpec::Matchers::HaveAttrReader
 
       subject { step }
 

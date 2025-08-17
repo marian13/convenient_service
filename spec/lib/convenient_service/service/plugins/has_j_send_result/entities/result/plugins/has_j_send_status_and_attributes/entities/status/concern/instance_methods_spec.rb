@@ -13,7 +13,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Concern::InstanceMethods, type: :standard do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
-  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+  include ConvenientService::RSpec::Matchers::CacheItsValue
 
   let(:status) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: value, result: result) }
   let(:value) { :foo }
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     include ConvenientService::RSpec::Matchers::DelegateTo
 
     example_group "attributes" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+      include ConvenientService::RSpec::Matchers::HaveAttrReader
 
       subject { status }
 

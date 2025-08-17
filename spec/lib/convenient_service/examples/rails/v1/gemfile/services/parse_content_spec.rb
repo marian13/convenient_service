@@ -15,7 +15,7 @@ return unless defined? ConvenientService::Examples::Rails
 RSpec.describe ConvenientService::Examples::Rails::V1::Gemfile::Services::ParseContent, type: :rails do
   include ConvenientService::RSpec::Helpers::StubService
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrAccessor
+  include ConvenientService::RSpec::Matchers::HaveAttrAccessor
   include ConvenientService::RSpec::Matchers::IncludeModule
 
   ##

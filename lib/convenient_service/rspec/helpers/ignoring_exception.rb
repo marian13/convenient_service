@@ -10,7 +10,7 @@ module ConvenientService
     module Helpers
       module IgnoringException
         def ignoring_exception(...)
-          RSpec::PrimitiveHelpers::Classes::IgnoringException.call(...)
+          Classes::IgnoringException.call(...)
         end
       end
     end

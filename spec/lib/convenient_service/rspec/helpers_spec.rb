@@ -28,6 +28,8 @@ RSpec.describe ConvenientService::RSpec::Helpers, type: :standard do
         end
       end
 
+      it { is_expected.to include_module(described_class::InThreads) }
+
       it { is_expected.to include_module(described_class::IgnoringException) }
       it { is_expected.to include_module(described_class::StubService) }
       it { is_expected.to include_module(described_class::StubEntry) }

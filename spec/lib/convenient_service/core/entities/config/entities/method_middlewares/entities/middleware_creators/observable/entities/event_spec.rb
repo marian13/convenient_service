@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
   example_group "instance methods" do
     example_group "attributes" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+      include ConvenientService::RSpec::Matchers::HaveAttrReader
 
       subject { event }
 

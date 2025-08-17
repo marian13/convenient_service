@@ -11,7 +11,7 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::RSpec::Matchers::Results, type: :standard do
   example_group "modules" do
-    include ConvenientService::RSpec::PrimitiveMatchers::IncludeModule
+    include ConvenientService::RSpec::Matchers::IncludeModule
 
     subject { described_class }
 

@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities:
 
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+  include ConvenientService::RSpec::Matchers::CacheItsValue
 
   subject(:method) { described_class.new(entity: entity, method: method_name, observe_middleware: middleware) }
 

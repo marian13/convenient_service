@@ -14,7 +14,7 @@ return unless defined? ConvenientService::Examples::Rails
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::MergeSections, type: :rails do
   include ConvenientService::RSpec::Matchers::Results
-  include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+  include ConvenientService::RSpec::Matchers::HaveAttrReader
   include ConvenientService::RSpec::Matchers::IncludeModule
 
   example_group "modules" do

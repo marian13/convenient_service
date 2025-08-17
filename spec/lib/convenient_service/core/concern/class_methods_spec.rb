@@ -14,7 +14,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
   include ConvenientService::RSpec::Helpers::IgnoringException
 
   include ConvenientService::RSpec::Matchers::DelegateTo
-  include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+  include ConvenientService::RSpec::Matchers::CacheItsValue
 
   let(:service_class) do
     Class.new do

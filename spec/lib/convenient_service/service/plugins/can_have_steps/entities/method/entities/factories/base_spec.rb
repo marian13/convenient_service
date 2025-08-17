@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
   example_group "instance methods" do
     example_group "attributes" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAttrReader
+      include ConvenientService::RSpec::Matchers::HaveAttrReader
 
       subject { factory }
 
@@ -32,7 +32,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
     end
 
     example_group "abstract methods" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAbstractMethod
+      include ConvenientService::RSpec::Matchers::HaveAbstractMethod
 
       subject { factory }
 

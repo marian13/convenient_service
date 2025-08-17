@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 RSpec.describe ConvenientService::RSpec::Matchers::IncludeModule, type: :standard do
-  include ConvenientService::RSpec::PrimitiveMatchers::DelegateTo
+  include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "instance methods" do
     describe "#include_module" do
@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::IncludeModule, type: :standar
 
       specify do
         expect { instance.include_module(mod) }
-          .to delegate_to(ConvenientService::RSpec::PrimitiveMatchers::Classes::IncludeModule, :new)
+          .to delegate_to(ConvenientService::RSpec::Matchers::Classes::IncludeModule, :new)
           .with_arguments(mod)
       end
     end

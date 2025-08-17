@@ -13,7 +13,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Concern::InstanceMethods, type: :standard do
   example_group "instance methods" do
     include ConvenientService::RSpec::Matchers::DelegateTo
-    include ConvenientService::RSpec::PrimitiveMatchers::CacheItsValue
+    include ConvenientService::RSpec::Matchers::CacheItsValue
 
     let(:middleware_result) { middleware_instance.call(env) }
     let(:middleware_instance) { middleware_class.new(stack) }
@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     let(:block) { proc { :foo } }
 
     example_group "abstract methods" do
-      include ConvenientService::RSpec::PrimitiveMatchers::HaveAbstractMethod
+      include ConvenientService::RSpec::Matchers::HaveAbstractMethod
 
       subject { ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain.new(stack) }
 

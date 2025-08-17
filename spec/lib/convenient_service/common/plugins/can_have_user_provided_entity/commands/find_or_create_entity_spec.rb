@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Co
 
   example_group "class methods" do
     describe ".call" do
-      include ConvenientService::RSpec::PrimitiveMatchers::BeDescendantOf
+      include ConvenientService::RSpec::Matchers::BeDescendantOf
       include ConvenientService::RSpec::Matchers::IncludeModule
 
       subject(:command_result) { described_class.call(namespace: namespace, proto_entity: proto_entity) }
