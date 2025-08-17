@@ -64,6 +64,7 @@ AllCops:
     # - https://github.com/rubocop/rubocop/issues/9832#issuecomment-873398952
     #
     - vendor/**/*
+    - console/seeds.rb
     - TODO/**/*
 
     ##

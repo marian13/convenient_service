@@ -5,7 +5,6 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-# rubocop:disable all
 # ConvenientService.backtrace_cleaner.remove_silencers!
 
 class CalculateSquare
@@ -35,4 +34,3 @@ class GreaterThanNine
     (number > 9) ? success : failure
   end
 end
-# rubocop:enable all
