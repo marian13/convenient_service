@@ -11,9 +11,6 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Support::ThreadSafeCounter, type: :standard do
-  include ConvenientService::RSpec::PrimitiveHelpers::IgnoringException
-  include ConvenientService::RSpec::PrimitiveHelpers::InThreads
-
   let(:counter) { described_class.new(initial_value: initial_value, min_value: min_value, max_value: max_value) }
   let(:initial_value) { 0 }
   let(:min_value) { -1_000_000 }
@@ -118,7 +115,10 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter, type: :standard do
 
       example_group "thread-safety" do
         it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.increment }.sort).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          expect(Array.new(10) { Thread.new(counter) { |counter| counter.increment } }.map(&:value).sort).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
         end
       end
     end
@@ -167,7 +167,10 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter, type: :standard do
 
       example_group "thread-safety" do
         it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.increment! }.sort).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          expect(Array.new(10) { Thread.new(counter) { |counter| counter.increment! } }.map(&:value).sort).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
         end
       end
     end
@@ -204,7 +207,10 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter, type: :standard do
         let(:max_value) { 10 }
 
         it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.bincrement }.tally).to eq({true => 5, false => 5})
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          expect(Array.new(10) { Thread.new(counter) { |counter| counter.bincrement } }.map(&:value).tally).to eq({true => 5, false => 5})
         end
       end
     end
@@ -238,7 +244,10 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter, type: :standard do
 
       example_group "thread-safety" do
         it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.decrement }.sort).to eq([-10, -9, -8, -7, -6, -5, -4, -3, -2, -1])
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          expect(Array.new(10) { Thread.new(counter) { |counter| counter.decrement } }.map(&:value).sort).to eq([-10, -9, -8, -7, -6, -5, -4, -3, -2, -1])
         end
       end
     end
@@ -287,7 +296,10 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter, type: :standard do
 
       example_group "thread-safety" do
         it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.decrement! }.sort).to eq([-10, -9, -8, -7, -6, -5, -4, -3, -2, -1])
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          expect(Array.new(10) { Thread.new(counter) { |counter| counter.decrement! } }.map(&:value).sort).to eq([-10, -9, -8, -7, -6, -5, -4, -3, -2, -1])
         end
       end
     end
@@ -324,7 +336,10 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter, type: :standard do
         let(:min_value) { -10 }
 
         it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.bdecrement }.tally).to eq({true => 5, false => 5})
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          expect(Array.new(10) { Thread.new(counter) { |counter| counter.bdecrement } }.map(&:value).tally).to eq({true => 5, false => 5})
         end
       end
     end
@@ -344,7 +359,10 @@ RSpec.describe ConvenientService::Support::ThreadSafeCounter, type: :standard do
 
       example_group "thread-safety" do
         it "is thread-safe" do
-          expect(in_threads(10, counter) { |counter| counter.increment && counter.reset }.uniq).to eq([0])
+          ##
+          # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+          #
+          expect(Array.new(10) { Thread.new(counter) { |counter| counter.increment && counter.reset } }.map(&:value).uniq).to eq([0])
         end
       end
     end

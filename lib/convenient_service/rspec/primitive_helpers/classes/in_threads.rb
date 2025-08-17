@@ -9,9 +9,6 @@ module ConvenientService
   module RSpec
     module PrimitiveHelpers
       module Classes
-        # @internal
-        #   TODO: Specs.
-        #
         class InThreads < Support::Command
           ##
           # @!attribute [r] n
