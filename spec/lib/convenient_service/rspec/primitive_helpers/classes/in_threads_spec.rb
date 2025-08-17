@@ -33,15 +33,18 @@ RSpec.describe ConvenientService::RSpec::PrimitiveHelpers::Classes::InThreads, t
 
       let(:instance) { klass.new }
 
+      ##
+      # NOTE: This is a happy path spec, that is why `sort` is called.
+      #
       it "returns values of threads" do
         expect(command_result.sort).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
       end
 
       ##
-      # NOTE: Operation inside block must take more than 10ms for Ruby to try to jump between threads.
+      # NOTE: Operation inside block must take more than 100ms for Ruby to try to jump between threads.
       # - https://github.com/ruby/ruby/blob/v3_5_0_preview1/thread.c#L115
       #
-      # NOTE: Operation inside block must have so-called safe-points for Ruby to try to jump between threads..
+      # NOTE: Operation inside block must have so-called safe-points for Ruby to try to jump between threads.
       # - https://github.com/ruby/ruby/blob/v3_5_0_preview1/thread.c#L2385
       #
       # NOTE: This spec actually verifies that matcher can catch thread-safety issues.
@@ -60,7 +63,7 @@ RSpec.describe ConvenientService::RSpec::PrimitiveHelpers::Classes::InThreads, t
         end
 
         it "catches thread-safety issues" do
-          expect(command_result.last).not_to eq(n)
+          expect(command_result).not_to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
         end
       end
     end

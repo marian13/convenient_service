@@ -14,11 +14,10 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
   let(:cache) { described_class.new }
 
   example_group "modules" do
-    include ConvenientService::RSpec::Matchers::IncludeModule
-
-    subject { described_class }
-
-    it { is_expected.to include_module(ConvenientService::Support::AbstractMethod) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::AbstractMethod)).to eq(true) }
   end
 
   example_group "class methods" do

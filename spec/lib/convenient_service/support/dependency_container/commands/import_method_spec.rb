@@ -13,11 +13,6 @@ require "convenient_service"
 RSpec.describe ConvenientService::Support::DependencyContainer::Commands::ImportMethod, type: :standard do
   example_group "class methods" do
     describe ".call" do
-      include ConvenientService::RSpec::Matchers::IncludeModule
-      include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
-      include ConvenientService::RSpec::PrimitiveMatchers::PrependModule
-      include ConvenientService::RSpec::PrimitiveMatchers::SingletonPrependModule
-
       subject(:command_result) { described_class.call(importing_module: importing_module, exported_method: exported_method, prepend: prepend) }
 
       let(:importing_module) { ConvenientService::Support::DependencyContainer::Commands::CreateMethodsModule.call }
@@ -70,7 +65,10 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
           it "includes `ImportedIncludedInstanceMethods` module to importing module" do
             command_result
 
-            expect(importing_module).to include_module(importing_module::ImportedIncludedInstanceMethods)
+            ##
+            # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+            #
+            expect(importing_module.ancestors.drop_while { |ancestor| ancestor != importing_module }.include?(importing_module::ImportedIncludedInstanceMethods)).to eq(true)
           end
 
           ##
@@ -114,7 +112,10 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
           it "prepends `ImportedPrependedInstanceMethods` module to importing module" do
             command_result
 
-            expect(importing_module).to prepend_module(importing_module::ImportedPrependedInstanceMethods)
+            ##
+            # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+            #
+            expect(importing_module.ancestors.take_while { |ancestor| ancestor != importing_module }.include?(importing_module::ImportedPrependedInstanceMethods)).to eq(true)
           end
 
           ##
@@ -165,7 +166,10 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
           it "extends `ImportedIncludedClassMethods` module to importing module" do
             command_result
 
-            expect(importing_module).to extend_module(importing_module::ImportedIncludedClassMethods)
+            ##
+            # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+            #
+            expect(importing_module.singleton_class.ancestors.drop_while { |ancestor| ancestor != importing_module.singleton_class }.include?(importing_module::ImportedIncludedClassMethods)).to eq(true)
           end
 
           ##
@@ -209,7 +213,10 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
           it "singleton prepends `ImportedPrependedClassMethods` module to importing module" do
             command_result
 
-            expect(importing_module).to singleton_prepend_module(importing_module::ImportedPrependedClassMethods)
+            ##
+            # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+            #
+            expect(importing_module.singleton_class.ancestors.take_while { |ancestor| ancestor != importing_module.singleton_class }.include?(importing_module::ImportedPrependedClassMethods)).to eq(true)
           end
 
           ##

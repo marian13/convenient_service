@@ -25,18 +25,19 @@ RSpec.describe ConvenientService::Support::Castable, type: :standard do
   let(:casted) { double }
 
   example_group "modules" do
-    include ConvenientService::RSpec::Matchers::IncludeModule
-    include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
-
-    subject { described_class }
-
-    it { is_expected.to include_module(ConvenientService::Support::Concern) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::Concern)).to eq(true) }
 
     context "when included" do
       subject { klass }
 
-      it { is_expected.to include_module(described_class::InstanceMethods) }
-      it { is_expected.to extend_module(described_class::ClassMethods) }
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      specify { expect(klass.ancestors.drop_while { |ancestor| ancestor != klass }.include?(described_class::InstanceMethods)).to eq(true) }
+      specify { expect(klass.singleton_class.ancestors.drop_while { |ancestor| ancestor != klass.singleton_class }.include?(described_class::ClassMethods)).to eq(true) }
     end
   end
 

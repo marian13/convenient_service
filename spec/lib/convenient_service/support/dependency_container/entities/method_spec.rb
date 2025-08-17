@@ -23,11 +23,10 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
   let(:block) { proc { :foo } }
 
   example_group "modules" do
-    include ConvenientService::RSpec::Matchers::IncludeModule
-
-    subject { described_class }
-
-    it { is_expected.to include_module(ConvenientService::Support::Copyable) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::Copyable)).to eq(true) }
   end
 
   example_group "attributes" do

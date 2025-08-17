@@ -11,17 +11,15 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Support::Delegate, type: :standard do
-  include ConvenientService::RSpec::Matchers::IncludeModule
-  include ConvenientService::RSpec::PrimitiveMatchers::ExtendModule
-
   example_group "modules" do
-    subject { described_class }
-
-    it { is_expected.to include_module(ConvenientService::Support::Concern) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::Concern)).to eq(true) }
   end
 
   example_group "when included" do
-    subject do
+    let(:klass) do
       Class.new.tap do |klass|
         klass.class_exec(described_class) do |mod|
           include mod
@@ -29,8 +27,11 @@ RSpec.describe ConvenientService::Support::Delegate, type: :standard do
       end
     end
 
-    it { is_expected.to extend_module(::Forwardable) }
-    it { is_expected.to extend_module(described_class::ClassMethodsForForwardable) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(klass.singleton_class.ancestors.drop_while { |ancestor| ancestor != klass.singleton_class }.include?(Forwardable)).to eq(true) }
+    specify { expect(klass.singleton_class.ancestors.drop_while { |ancestor| ancestor != klass.singleton_class }.include?(described_class::ClassMethodsForForwardable)).to eq(true) }
   end
 
   example_group "class methods" do

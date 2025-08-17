@@ -30,11 +30,10 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Export, type: :s
   let(:body) { proc { :bar } }
 
   example_group "modules" do
-    include ConvenientService::RSpec::Matchers::IncludeModule
-
-    subject { described_class }
-
-    it { is_expected.to include_module(ConvenientService::Support::Concern) }
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::Concern)).to eq(true) }
   end
 
   example_group "hook methods" do
