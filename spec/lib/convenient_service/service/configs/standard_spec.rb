@@ -124,7 +124,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
             [
               ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
-              ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware,
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware,
               ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
@@ -271,7 +270,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         example_group ".result middlewares" do
           let(:class_result_middlewares) do
             [
-              ConvenientService::Service::Plugins::CountsStubbedResultsInvocations::Middleware,
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware
             ]
           end
@@ -311,7 +309,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeOwnResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeStubbedResult::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasStubbedResultInvocationsCounter::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Concern,
                 ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern
               ]
@@ -325,7 +322,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
           example_group "#initialize middlewares" do
             let(:initialize_middlewares) do
               [
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasStubbedResultInvocationsCounter::Middleware, ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
               ]
             end
 
@@ -739,7 +736,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
       # - https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(9)
+        expect(service_class.middlewares(:result).to_a.size).to eq(8)
       end
     end
   end

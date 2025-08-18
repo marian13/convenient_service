@@ -97,7 +97,6 @@ module ConvenientService
           middlewares :result do
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.enabled?(:per_instance_caching)
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware if options.enabled?(:exception_services_trace)
-            use ConvenientService::Plugins::Service::CountsStubbedResultsInvocations::Middleware if options.enabled?(:rspec)
             use ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware if options.enabled?(:rspec)
             use ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware if options.enabled?(:callbacks)
             use ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware if options.enabled?(:rollbacks)
@@ -166,7 +165,6 @@ module ConvenientService
           end
 
           middlewares :result, scope: :class do
-            use ConvenientService::Plugins::Service::CountsStubbedResultsInvocations::Middleware if options.enabled?(:rspec)
             use ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware if options.enabled?(:rspec)
             use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance)
           end
@@ -200,14 +198,12 @@ module ConvenientService
               use ConvenientService::Plugins::Result::CanBeOwnResult::Concern if options.enabled?(:result_parents_trace)
               use ConvenientService::Plugins::Result::CanHaveParentResult::Concern if options.enabled?(:result_parents_trace)
               use ConvenientService::Plugins::Result::CanBeStubbedResult::Concern if options.enabled?(:rspec)
-              use ConvenientService::Plugins::Result::HasStubbedResultInvocationsCounter::Concern if options.enabled?(:rspec)
               use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Concern if options.enabled?(:code_review_automation)
               use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern if options.enabled?(:short_syntax)
               # use ConvenientService::Plugins::Result::HelpsToLearnSimilaritiesWithCommonObjects::Concern
             end
 
             middlewares :initialize do
-              use ConvenientService::Plugins::Result::HasStubbedResultInvocationsCounter::Middleware if options.enabled?(:rspec)
               use ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Middleware if options.enabled?(:essential)
             end
 
