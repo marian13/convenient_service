@@ -6,6 +6,8 @@
 ##
 
 require "bundler/setup"
+
+# require "convenient_service/dependencies/only_development_tools"
 require "service_actor"
 require "interactor"
 require "trailblazer/operation"

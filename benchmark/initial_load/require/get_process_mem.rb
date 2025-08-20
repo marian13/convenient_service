@@ -12,6 +12,7 @@
 #
 require "bundler/setup"
 
+# require "convenient_service/dependencies/only_development_tools"
 require "get_process_mem"
 
 mem = GetProcessMem.new
