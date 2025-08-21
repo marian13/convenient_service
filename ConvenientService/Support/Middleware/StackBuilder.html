@@ -95,7 +95,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/support/middleware/stack_builder.rb<span class="defines">,<br />
-  lib/convenient_service/support/middleware/stack_builder/constants.rb,<br /> lib/convenient_service/support/middleware/stack_builder/exceptions.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/rack.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/stateful.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/rack/exceptions.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/stateful/exceptions.rb</span>
+  lib/convenient_service/support/middleware/stack_builder/constants.rb,<br /> lib/convenient_service/support/middleware/stack_builder/exceptions.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/rack.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/naive.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/stateful.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/naive/constants.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/rack/exceptions.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/naive/exceptions.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/stateful/exceptions.rb,<br /> lib/convenient_service/support/middleware/stack_builder/entities/builders/naive/entities/proc_with_new.rb</span>
 </dd>
   </dl>
   
@@ -255,7 +255,9 @@
 37
 38
 39
-40</pre>
+40
+41
+42</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder.rb', line 29</span>
@@ -268,6 +270,8 @@
     <span class='const'><span class='object_link'><a href="StackBuilder/Entities.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StackBuilder/Entities/Builders.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders (module)">Builders</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StackBuilder/Entities/Builders/Rack.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack (class)">Rack</a></span></span>
   <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="StackBuilder/Constants.html" title="ConvenientService::Support::Middleware::StackBuilder::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StackBuilder/Constants/Backends.html" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StackBuilder/Constants/Backends.html#STATEFUL-constant" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::STATEFUL (constant)">STATEFUL</a></span></span>
     <span class='const'><span class='object_link'><a href="StackBuilder/Entities.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StackBuilder/Entities/Builders.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders (module)">Builders</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StackBuilder/Entities/Builders/Stateful.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful (class)">Stateful</a></span></span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="StackBuilder/Constants.html" title="ConvenientService::Support::Middleware::StackBuilder::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StackBuilder/Constants/Backends.html" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StackBuilder/Constants/Backends.html#NAIVE-constant" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::NAIVE (constant)">NAIVE</a></span></span>
+    <span class='const'><span class='object_link'><a href="StackBuilder/Entities.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StackBuilder/Entities/Builders.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders (module)">Builders</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StackBuilder/Entities/Builders/Naive.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Naive (class)">Naive</a></span></span>
   <span class='kw'>else</span>
     <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../ConvenientService.html#raise-class_method" title="ConvenientService.raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="StackBuilder/Exceptions.html" title="ConvenientService::Support::Middleware::StackBuilder::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StackBuilder/Exceptions/NotSupportedBackend.html" title="ConvenientService::Support::Middleware::StackBuilder::Exceptions::NotSupportedBackend (class)">NotSupportedBackend</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>backend:</span> <span class='id identifier rubyid_backend'>backend</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
@@ -334,7 +338,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Aug 20 00:14:32 2025 by
+  Generated on Thu Aug 21 17:43:25 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
