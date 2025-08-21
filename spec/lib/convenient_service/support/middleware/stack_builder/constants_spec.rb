@@ -30,9 +30,15 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Constants, 
       end
     end
 
+    describe "::Backends::NAIVE" do
+      it "returns `:naive`" do
+        expect(described_class::Backends::NAIVE).to eq(:naive)
+      end
+    end
+
     describe "::Backends::ALL" do
-      it "returns `[:ruby_middleware, :rack]`" do
-        expect(described_class::Backends::ALL).to eq([described_class::Backends::RUBY_MIDDLEWARE, described_class::Backends::RACK, described_class::Backends::STATEFUL])
+      it "returns `[:ruby_middleware, :rack, :stateful, :naive]`" do
+        expect(described_class::Backends::ALL).to eq([described_class::Backends::RUBY_MIDDLEWARE, described_class::Backends::RACK, described_class::Backends::STATEFUL, described_class::Backends::NAIVE])
       end
     end
 

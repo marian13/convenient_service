@@ -110,7 +110,7 @@ module ConvenientService
             #   TODO: Measure before any rewrite.
             #
             def call(env, original_method)
-              stack.dup.use(original_method).call(env.merge(method: method))
+              stack.call_with_original(env.merge(method: method), original_method)
             end
 
             ##

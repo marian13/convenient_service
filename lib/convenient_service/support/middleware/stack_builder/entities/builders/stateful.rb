@@ -62,6 +62,18 @@ module ConvenientService
 
               ##
               # @param env [Hash{Symbol => Object}]
+              # @param original [Proc]
+              # @return [Object] Can be any type.
+              #
+              # @internal
+              #   TODO: Direct specs.
+              #
+              def call_with_original(env, original)
+                dup.use(original).call(env)
+              end
+
+              ##
+              # @param env [Hash{Symbol => Object}]
               # @return [Object] Can be any type.
               #
               # @internal

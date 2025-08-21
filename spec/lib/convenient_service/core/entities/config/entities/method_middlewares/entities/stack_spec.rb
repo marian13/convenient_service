@@ -35,6 +35,8 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     end
   end
 
+  let(:original) { proc { :foo } }
+
   let(:other_middleware) do
     Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain) do
       def next(...)
@@ -53,9 +55,9 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         # NOTE: Since `plain_stack` reader is protected, indirect expectation is used.
         #
         it "uses passed `plain_stack` as `plain_stack`" do
-          expect { stack.call(env) }
-            .to delegate_to(custom_plain_stack, :call)
-            .with_arguments(env)
+          expect { stack.call_with_original(env, original) }
+            .to delegate_to(custom_plain_stack, :call_with_original)
+            .with_arguments(env, original)
         end
       end
 
@@ -135,11 +137,11 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
       specify { expect { stack.dup }.to delegate_to(plain_stack, :dup) }
     end
 
-    describe "#call" do
+    describe "#call_with_original" do
       specify do
-        expect { stack.call(env) }
-          .to delegate_to(plain_stack, :call)
-          .with_arguments(env)
+        expect { stack.call_with_original(env, original) }
+          .to delegate_to(plain_stack, :call_with_original)
+          .with_arguments(env, original)
           .and_return_its_value
       end
     end

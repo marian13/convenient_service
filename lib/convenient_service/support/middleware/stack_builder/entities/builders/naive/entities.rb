@@ -5,7 +5,4 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "builders/ruby_middleware"
-require_relative "builders/rack"
-require_relative "builders/stateful"
-require_relative "builders/naive"
+require_relative "entities/proc_with_new"

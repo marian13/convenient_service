@@ -62,12 +62,13 @@ module ConvenientService
 
                 ##
                 # @param env [Hash]
+                # @param original [Proc]
                 # @return [Object] Can be any type.
                 #
                 # @see https://github.com/marian13/ruby-middleware/blob/v0.4.2/lib/middleware/builder.rb#L132
                 #
-                def call(env)
-                  plain_stack.call(env)
+                def call_with_original(env, original)
+                  plain_stack.call_with_original(env, original)
                 end
 
                 ##

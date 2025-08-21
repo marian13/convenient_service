@@ -5,7 +5,9 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "rack/exceptions"
+require_relative "naive/constants"
+require_relative "naive/entities"
+require_relative "naive/exceptions"
 
 module ConvenientService
   module Support
@@ -13,7 +15,7 @@ module ConvenientService
       class StackBuilder
         module Entities
           module Builders
-            class Rack
+            class Naive
               ##
               # @!attribute [r] stack
               #   @return [Array<#call<Hash>>]
@@ -68,7 +70,7 @@ module ConvenientService
               #   TODO: Direct specs.
               #
               def call_with_original(env, original)
-                dup.use(original).call(env)
+                dup.use(Entities::ProcWithNew.new(original)).call(env)
               end
 
               ##
@@ -87,13 +89,9 @@ module ConvenientService
               def call(env)
                 return env if stack.empty?
 
-                run = stack[-1]
+                app = Constants::INITIAL_MIDDLEWARE
 
-                app =
-                  stack[0..-2]
-                    .map { |middleware| proc { |app| middleware.new(app) } }
-                    .reverse
-                    .reduce(run) { |a, e| e[a] }
+                stack.reverse_each { |middleware| app = middleware.new(app) }
 
                 app.call(env)
               end

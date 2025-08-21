@@ -34,6 +34,8 @@ module ConvenientService
               Entities::Builders::Rack
             when Constants::Backends::STATEFUL
               Entities::Builders::Stateful
+            when Constants::Backends::NAIVE
+              Entities::Builders::Naive
             else
               ::ConvenientService.raise Exceptions::NotSupportedBackend.new(backend: backend)
             end
