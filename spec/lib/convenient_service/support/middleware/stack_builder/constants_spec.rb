@@ -43,8 +43,8 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Constants, 
     end
 
     describe "::Backends::DEFAULT" do
-      it "returns `ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::RUBY_MIDDLEWARE`" do
-        expect(described_class::Backends::DEFAULT).to eq(described_class::Backends::RUBY_MIDDLEWARE)
+      it "returns `ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::NAIVE`" do
+        expect(described_class::Backends::DEFAULT).to eq(described_class::Backends::NAIVE)
       end
     end
   end

@@ -32,7 +32,7 @@ module ConvenientService
                 #
                 def initialize(klass:, name: nil, plain_stack: nil)
                   @klass = klass
-                  @plain_stack = plain_stack || Support::Middleware::StackBuilder.backed_by(Support::Middleware::StackBuilder::Constants::Backends::RUBY_MIDDLEWARE).new(name: name)
+                  @plain_stack = plain_stack || Support::Middleware::StackBuilder.new(name: name)
                 end
 
                 ##

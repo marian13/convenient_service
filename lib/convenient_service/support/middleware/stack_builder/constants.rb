@@ -39,7 +39,7 @@ module ConvenientService
             ##
             # @return [Symbol]
             #
-            DEFAULT = RUBY_MIDDLEWARE
+            DEFAULT = NAIVE
           end
         end
       end

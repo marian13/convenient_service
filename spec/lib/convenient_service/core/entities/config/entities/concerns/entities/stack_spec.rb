@@ -57,8 +57,8 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
         #
         it "defaults to stack builder backed by `ruby_middleware`" do
           expect { stack }
-            .to delegate_to(ConvenientService::Support::Middleware::StackBuilder, :backed_by)
-            .with_arguments(ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::RUBY_MIDDLEWARE)
+            .to delegate_to(ConvenientService::Support::Middleware::StackBuilder, :new)
+            .with_arguments(name: name)
         end
       end
     end
