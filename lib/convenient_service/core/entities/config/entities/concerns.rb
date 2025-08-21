@@ -96,7 +96,9 @@ module ConvenientService
             def include!
               return false if included?
 
-              stack.dup.insert_before(0, Entities::DefaultConcern).call(klass: klass)
+              klass.include(Entities::DefaultConcern)
+
+              stack.call(klass: klass)
 
               true
             end
