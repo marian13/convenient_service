@@ -6,6 +6,8 @@
 ##
 
 require_relative "builders/ruby_middleware"
+
+require_relative "builders/custom"
 require_relative "builders/rack"
 require_relative "builders/stateful"
 require_relative "builders/naive"

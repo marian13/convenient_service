@@ -9,7 +9,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Naive::Exceptions, type: :standard do
+RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Exceptions, type: :standard do
   example_group "inheritance" do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.

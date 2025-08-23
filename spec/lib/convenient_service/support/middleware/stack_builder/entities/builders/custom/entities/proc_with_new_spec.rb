@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Naive::Entities::ProcWithNew, type: :standard do
+RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Entities::ProcWithNew, type: :standard do
   let(:proc_wrapper) { described_class.new(proc) }
 
   # rubocop:disable Style/Proc

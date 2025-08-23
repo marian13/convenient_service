@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/DescribeClass
-RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Naive::Constants, type: :standard do
+RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Constants, type: :standard do
   example_group "constants" do
     describe "::INITIAL_MIDDLEWARE" do
       it "returns `Proc` object" do

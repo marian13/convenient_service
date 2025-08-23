@@ -11,7 +11,7 @@ module ConvenientService
       class StackBuilder
         module Entities
           module Builders
-            class Naive
+            class Custom
               module Entities
                 ##
                 # @internal
