@@ -75,7 +75,7 @@ module ConvenientService
 
               ##
               # @param middleware [#call<Hash>]
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
               #
               def unshift(middleware)
                 stack.unshift(middleware)
@@ -84,13 +84,13 @@ module ConvenientService
               end
 
               ##
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
               #
               alias_method :prepend, :unshift
 
               ##
               # @param middleware [#call<Hash>]
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
               #
               def use(middleware)
                 stack << middleware
@@ -99,15 +99,15 @@ module ConvenientService
               end
 
               ##
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
               #
               alias_method :append, :use
 
               ##
               # @param index_or_middleware [Integer, #call<Hash>]
               # @param other_middleware [#call<Hash>]
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
-              # @raise [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
+              # @raise [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Exceptions::MissingMiddleware]
               #
               def insert(index_or_middleware, other_middleware)
                 index = cast_index(index_or_middleware)
@@ -118,15 +118,15 @@ module ConvenientService
               end
 
               ##
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
               #
               alias_method :insert_before, :insert
 
               ##
               # @param index_or_middleware [Integer, #call<Hash>]
               # @param other_middleware [#call<Hash>]
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
-              # @raise [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
+              # @raise [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Exceptions::MissingMiddleware]
               #
               def insert_after(index_or_middleware, other_middleware)
                 index = cast_index(index_or_middleware)
@@ -138,7 +138,7 @@ module ConvenientService
 
               ##
               # @param other_middleware [#call<Hash>]
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
               #
               def insert_before_each(other_middleware)
                 @stack = stack.reduce([]) { |stack, middleware| stack.push(other_middleware, middleware) }
@@ -148,7 +148,7 @@ module ConvenientService
 
               ##
               # @param other_middleware [#call<Hash>]
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
               #
               def insert_after_each(other_middleware)
                 @stack = stack.reduce([]) { |stack, middleware| stack.push(middleware, other_middleware) }
@@ -159,8 +159,8 @@ module ConvenientService
               ##
               # @param index_or_middleware [Integer, #call<Hash>]
               # @param other_middleware [#call<Hash>]
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
-              # @raise [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
+              # @raise [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Exceptions::MissingMiddleware]
               #
               def replace(index_or_middleware, other_middleware)
                 index = cast_index(index_or_middleware)
@@ -172,8 +172,8 @@ module ConvenientService
 
               ##
               # @param index_or_middleware [Integer, #call<Hash>]
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
-              # @raise [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
+              # @raise [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Exceptions::MissingMiddleware]
               #
               def delete(index_or_middleware)
                 index = cast_index(index_or_middleware)
@@ -184,7 +184,7 @@ module ConvenientService
               end
 
               ##
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
               #
               alias_method :remove, :delete
 
@@ -209,7 +209,7 @@ module ConvenientService
               end
 
               ##
-              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack]
+              # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom]
               #
               def dup
                 self.class.new(name: name.dup, stack: stack.dup)
@@ -220,7 +220,7 @@ module ConvenientService
               ##
               # @param index_or_middleware [Integer, #call<Hash>]
               # @return [Integer]
-              # @raise [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Rack::Exceptions::MissingMiddleware]
+              # @raise [ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Exceptions::MissingMiddleware]
               #
               def cast_index(index_or_middleware)
                 return index_or_middleware if index_or_middleware.instance_of?(Integer)
