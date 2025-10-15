@@ -24,7 +24,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def initialize
-                raise StandardError, "exception from `#initialize`"
+                raise ZeroDivisionError, "exception from `#initialize`"
               end
             end
           end
@@ -47,9 +47,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def initialize
-                raise StandardError, "exception from `#initialize`"
+                raise ZeroDivisionError, "exception from `#initialize`"
               rescue
-                raise StandardError, "reraised exception from `#initialize`"
+                raise ZeroDivisionError, "reraised exception from `#initialize`"
               end
             end
           end
@@ -74,7 +74,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def result
-                raise StandardError, "exception from `#result`"
+                raise ZeroDivisionError, "exception from `#result`"
               end
             end
           end
@@ -97,9 +97,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def result
-                raise StandardError, "exception from `#result`"
+                raise ZeroDivisionError, "exception from `#result`"
               rescue
-                raise StandardError, "reraised exception from `#result`"
+                raise ZeroDivisionError, "reraised exception from `#result`"
               end
             end
           end
@@ -124,7 +124,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def negated_result
-                raise StandardError, "exception from `#negated_result`"
+                raise ZeroDivisionError, "exception from `#negated_result`"
               end
             end
           end
@@ -147,9 +147,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def negated_result
-                raise StandardError, "exception from `#negated_result`"
+                raise ZeroDivisionError, "exception from `#negated_result`"
               rescue
-                raise StandardError, "reraised exception from `#negated_result`"
+                raise ZeroDivisionError, "reraised exception from `#negated_result`"
               end
             end
           end
@@ -174,7 +174,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def fallback_failure_result
-                raise StandardError, "exception from `#fallback_failure_result`"
+                raise ZeroDivisionError, "exception from `#fallback_failure_result`"
               end
             end
           end
@@ -197,9 +197,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def fallback_failure_result
-                raise StandardError, "exception from `#fallback_failure_result`"
+                raise ZeroDivisionError, "exception from `#fallback_failure_result`"
               rescue
-                raise StandardError, "reraised exception from `#fallback_failure_result`"
+                raise ZeroDivisionError, "reraised exception from `#fallback_failure_result`"
               end
             end
           end
@@ -224,7 +224,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def fallback_error_result
-                raise StandardError, "exception from `#fallback_error_result`"
+                raise ZeroDivisionError, "exception from `#fallback_error_result`"
               end
             end
           end
@@ -247,9 +247,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def fallback_error_result
-                raise StandardError, "exception from `#fallback_error_result`"
+                raise ZeroDivisionError, "exception from `#fallback_error_result`"
               rescue
-                raise StandardError, "reraised exception from `#fallback_error_result`"
+                raise ZeroDivisionError, "reraised exception from `#fallback_error_result`"
               end
             end
           end
@@ -274,7 +274,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def fallback_result
-                raise StandardError, "exception from `#fallback_result`"
+                raise ZeroDivisionError, "exception from `#fallback_result`"
               end
             end
           end
@@ -297,9 +297,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def fallback_result
-                raise StandardError, "exception from `#fallback_result`"
+                raise ZeroDivisionError, "exception from `#fallback_result`"
               rescue
-                raise StandardError, "reraised exception from `#fallback_result`"
+                raise ZeroDivisionError, "reraised exception from `#fallback_result`"
               end
             end
           end
@@ -324,7 +324,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def rollback_result
-                raise StandardError, "exception from `#rollback_result`"
+                raise ZeroDivisionError, "exception from `#rollback_result`"
               end
             end
           end
@@ -345,9 +345,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
               include ConvenientService::Standard::Config
 
               def rollback_result
-                raise StandardError, "exception from `#rollback_result`"
+                raise ZeroDivisionError, "exception from `#rollback_result`"
               rescue
-                raise StandardError, "reraised exception from `#rollback_result`"
+                raise ZeroDivisionError, "reraised exception from `#rollback_result`"
               end
             end
           end
@@ -383,7 +383,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception from service step"
+              raise ZeroDivisionError, "exception from service step"
             end
 
             def self.name
@@ -423,9 +423,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception from service step"
+              raise ZeroDivisionError, "exception from service step"
             rescue
-              raise StandardError, "reraised exception from service step"
+              raise ZeroDivisionError, "reraised exception from service step"
             end
           end
         end
@@ -452,7 +452,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             step :method_step
 
             def method_step
-              raise StandardError, "exception from method step"
+              raise ZeroDivisionError, "exception from method step"
             end
           end
         end
@@ -477,9 +477,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             step :method_step
 
             def method_step
-              raise StandardError, "exception from method step"
+              raise ZeroDivisionError, "exception from method step"
             rescue
-              raise StandardError, "reraised exception from service step"
+              raise ZeroDivisionError, "reraised exception from service step"
             end
           end
         end
@@ -514,7 +514,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception from foreign service"
+              raise ZeroDivisionError, "exception from foreign service"
             end
           end
         end
@@ -550,9 +550,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception from foreign service"
+              raise ZeroDivisionError, "exception from foreign service"
             rescue
-              raise StandardError, "reraised exception from foreign service"
+              raise ZeroDivisionError, "reraised exception from foreign service"
             end
           end
         end
@@ -589,7 +589,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception from foreign service"
+              raise ZeroDivisionError, "exception from foreign service"
             end
           end
         end
@@ -627,9 +627,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception from foreign service"
+              raise ZeroDivisionError, "exception from foreign service"
             rescue
-              raise StandardError, "reraised exception from foreign service"
+              raise ZeroDivisionError, "reraised exception from foreign service"
             end
           end
         end
@@ -671,7 +671,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             end
 
             def fallback_failure_result
-              raise StandardError, "exception from fallback failure result from service step"
+              raise ZeroDivisionError, "exception from fallback failure result from service step"
             end
 
             def self.name
@@ -715,9 +715,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             end
 
             def fallback_failure_result
-              raise StandardError, "exception from fallback failure result from service step"
+              raise ZeroDivisionError, "exception from fallback failure result from service step"
             rescue
-              raise StandardError, "reraised exception from fallback failure result from service step"
+              raise ZeroDivisionError, "reraised exception from fallback failure result from service step"
             end
           end
         end
@@ -756,7 +756,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             end
 
             def fallback_error_result
-              raise StandardError, "exception from fallback error result from service step"
+              raise ZeroDivisionError, "exception from fallback error result from service step"
             end
 
             def self.name
@@ -800,9 +800,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             end
 
             def fallback_error_result
-              raise StandardError, "exception from fallback error result from service step"
+              raise ZeroDivisionError, "exception from fallback error result from service step"
             rescue
-              raise StandardError, "reraised exception from fallback error result from service step"
+              raise ZeroDivisionError, "reraised exception from fallback error result from service step"
             end
           end
         end
@@ -841,7 +841,7 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             end
 
             def fallback_result
-              raise StandardError, "exception from fallback result from service step"
+              raise ZeroDivisionError, "exception from fallback result from service step"
             end
 
             def self.name
@@ -885,9 +885,9 @@ RSpec.describe "Exception services trace", type: [:standard, :e2e] do
             end
 
             def fallback_result
-              raise StandardError, "exception from fallback result from service step"
+              raise ZeroDivisionError, "exception from fallback result from service step"
             rescue
-              raise StandardError, "reraised exception from fallback result from service step"
+              raise ZeroDivisionError, "reraised exception from fallback result from service step"
             end
           end
         end

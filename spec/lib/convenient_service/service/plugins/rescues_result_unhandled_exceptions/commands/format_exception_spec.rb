@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           include ConvenientService::Standard::Config
 
           def result
-            raise StandardError, "exception message"
+            raise ZeroDivisionError, "exception message"
           end
         end
       end
@@ -75,10 +75,10 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               #   - https://github.com/jruby/jruby/issues/4467
               #
               # NOTE: Check the following tricky behaviour, it explains why an empty array is passed.
-              #   `raise StandardError, "exception message", nil` ignores `nil` and still generates full backtrace.
-              #   `raise StandardError, "exception message", []` generates no backtrace, but `exception.backtrace` returns `nil`.
+              #   `raise ZeroDivisionError, "exception message", nil` ignores `nil` and still generates full backtrace.
+              #   `raise ZeroDivisionError, "exception message", []` generates no backtrace, but `exception.backtrace` returns `nil`.
               #
-              raise StandardError, "exception message", []
+              raise ZeroDivisionError, "exception message", []
             end
           end
         end
@@ -101,7 +101,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception message", caller.take(5).map { |line| line.prepend("/end_user") }
+              raise ZeroDivisionError, "exception message", caller.take(5).map { |line| line.prepend("/end_user") }
             end
           end
         end
@@ -125,7 +125,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception message", caller.map { |line| line.prepend("/end_user") } + ["# /line.rb:1:in `foo'"] * 5
+              raise ZeroDivisionError, "exception message", caller.map { |line| line.prepend("/end_user") } + ["# /line.rb:1:in `foo'"] * 5
             end
           end
         end
@@ -150,7 +150,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, nil, caller.map { |line| line.prepend("/end_user") }
+              raise ZeroDivisionError, nil, caller.map { |line| line.prepend("/end_user") }
             end
           end
         end
@@ -184,7 +184,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                 exception message second line
               TEXT
 
-              raise StandardError, message, caller.map { |line| line.prepend("/end_user") }
+              raise ZeroDivisionError, message, caller.map { |line| line.prepend("/end_user") }
             end
           end
         end
@@ -209,9 +209,9 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "cause message"
+              raise ZeroDivisionError, "cause message"
             rescue
-              raise StandardError, "exception message"
+              raise ZeroDivisionError, "exception message"
             end
           end
         end
@@ -246,12 +246,12 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                 #   - https://github.com/jruby/jruby/issues/4467
                 #
                 # NOTE: Check the following tricky behaviour, it explains why an empty array is passed.
-                #   `raise StandardError, "exception message", nil` ignores `nil` and still generates full backtrace.
-                #   `raise StandardError, "exception message", []` generates no backtrace, but `exception.backtrace` returns `nil`.
+                #   `raise ZeroDivisionError, "exception message", nil` ignores `nil` and still generates full backtrace.
+                #   `raise ZeroDivisionError, "exception message", []` generates no backtrace, but `exception.backtrace` returns `nil`.
                 #
-                raise StandardError, "cause message", []
+                raise ZeroDivisionError, "cause message", []
               rescue
-                raise StandardError, "exception message"
+                raise ZeroDivisionError, "exception message"
               end
             end
           end
@@ -283,7 +283,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception message", caller.map { |line| line.prepend("/end_user") } + ["# /line.rb:1:in `foo'"] * 10
+              raise ZeroDivisionError, "exception message", caller.map { |line| line.prepend("/end_user") } + ["# /line.rb:1:in `foo'"] * 10
             end
           end
         end

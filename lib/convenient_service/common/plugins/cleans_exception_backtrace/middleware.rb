@@ -37,8 +37,8 @@ module ConvenientService
           #   - https://github.com/jruby/jruby/issues/4467
           #
           #   NOTE: Check the following tricky behaviour, it explains why an empty array is passed.
-          #     `raise StandardError, "exception message", nil` ignores `nil` and still generates full backtrace.
-          #     `raise StandardError, "exception message", []` generates no backtrace, but `exception.backtrace` returns `nil`.
+          #     `raise ZeroDivisionError, "exception message", nil` ignores `nil` and still generates full backtrace.
+          #     `raise ZeroDivisionError, "exception message", []` generates no backtrace, but `exception.backtrace` returns `nil`.
           #
           def clean_backtrace!(exception)
             return unless exception.backtrace

@@ -216,15 +216,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
                 #   - https://github.com/jruby/jruby/issues/4467
                 #
                 # NOTE: Check the following tricky behaviour, it explains why an empty array is passed.
-                #   `raise StandardError, "exception message", nil` ignores `nil` and still generates full backtrace.
-                #   `raise StandardError, "exception message", []` generates no backtrace, but `exception.backtrace` returns `nil`.
+                #   `raise ZeroDivisionError, "exception message", nil` ignores `nil` and still generates full backtrace.
+                #   `raise ZeroDivisionError, "exception message", []` generates no backtrace, but `exception.backtrace` returns `nil`.
                 #
-                raise StandardError, "exception message", []
+                raise ZeroDivisionError, "exception message", []
               end
             end
           end
 
-          let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "StandardError:", "  exception message", ":backtrace", "[]"] }
+          let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "ZeroDivisionError:", "  exception message", ":backtrace", "[]"] }
 
           it "includes empty backtrace into `inspect` representation of result" do
             expect(result.inspect).to include_in_order(keywords)
@@ -244,12 +244,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
                 end
 
                 def result
-                  raise StandardError, "exception message", ["# /line.rb:1:in `foo'"] * 5
+                  raise ZeroDivisionError, "exception message", ["# /line.rb:1:in `foo'"] * 5
                 end
               end
             end
 
-            let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "StandardError:", "  exception message", ":backtrace", *exception.backtrace.take(5)] }
+            let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "ZeroDivisionError:", "  exception message", ":backtrace", *exception.backtrace.take(5)] }
 
             it "includes backtrace into `inspect` representation of result" do
               expect(result.inspect).to include_in_order(keywords)
@@ -266,12 +266,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
                 end
 
                 def result
-                  raise StandardError, "exception message", ["# /line.rb:1:in `foo'"] * 15
+                  raise ZeroDivisionError, "exception message", ["# /line.rb:1:in `foo'"] * 15
                 end
               end
             end
 
-            let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "StandardError:", "  exception message", ":backtrace", *exception.backtrace.take(10), "..."] }
+            let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "ZeroDivisionError:", "  exception message", ":backtrace", *exception.backtrace.take(10), "..."] }
 
             it "includes backtrace with omission into `inspect` representation of result" do
               expect(result.inspect).to include_in_order(keywords)

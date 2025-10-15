@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             include ConvenientService::Standard::Config.with(:fault_tolerance)
 
             def result
-              raise StandardError, "exception message", caller.take(5)
+              raise ZeroDivisionError, "exception message", caller.take(5)
             end
           end
         end
@@ -95,7 +95,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             include ConvenientService::Standard::Config.with(:fault_tolerance)
 
             def result
-              raise StandardError, "exception message", caller.take(5)
+              raise ZeroDivisionError, "exception message", caller.take(5)
             end
           end
         end

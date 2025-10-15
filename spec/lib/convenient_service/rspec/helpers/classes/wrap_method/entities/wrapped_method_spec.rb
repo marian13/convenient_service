@@ -267,7 +267,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities:
             end
 
             def result(&block)
-              raise StandardError, "exception message"
+              raise ZeroDivisionError, "exception message"
             end
           end
         end
