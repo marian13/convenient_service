@@ -5,18 +5,15 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "result/concern"
-require_relative "result/plugins"
-
-require_relative "result/aliases"
-
 module ConvenientService
   module Service
     module Plugins
       module HasJSendResult
         module Entities
           class Result
-            include Concern
+            module Exceptions
+              ErrorResultIsCalled = ::ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeCalled::Exceptions::ErrorResultIsCalled
+            end
           end
         end
       end
