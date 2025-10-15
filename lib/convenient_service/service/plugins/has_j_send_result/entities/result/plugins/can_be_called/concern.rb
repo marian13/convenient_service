@@ -27,7 +27,7 @@ module ConvenientService
                     # @return [Hash{Symbol => Object}, nil]
                     # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeCalled::Exceptions::ErrorResultIsCalled]
                     #
-                    # @note `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeCalled::Exceptions::ErrorResultIsCalled` is aliases as `ConvenientService::Result::Exceptions::ErrorResultIsCalled`.
+                    # @note `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeCalled::Exceptions::ErrorResultIsCalled` is aliased as `ConvenientService::Result::Exceptions::ErrorResultIsCalled`.
                     #
                     def call
                       case status.to_sym

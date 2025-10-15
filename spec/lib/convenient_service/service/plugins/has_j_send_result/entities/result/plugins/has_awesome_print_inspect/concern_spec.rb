@@ -271,7 +271,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               end
             end
 
-            let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ZeroDivisionError", ":status", ":error", ":message", "StandardError:", "  exception message", ":backtrace", *exception.backtrace.take(10), "..."] }
+            let(:keywords) { ["ConvenientService", ":entity", "Result", ":service", "ImportantService", ":status", ":error", ":message", "ZeroDivisionError:", "  exception message", ":backtrace", *exception.backtrace.take(10), "..."] }
 
             it "includes backtrace with omission into `inspect` representation of result" do
               expect(result.inspect).to include_in_order(keywords)
