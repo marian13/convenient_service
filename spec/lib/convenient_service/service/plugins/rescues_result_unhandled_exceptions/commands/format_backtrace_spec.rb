@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception message", caller.take(5).map { |line| line.prepend("/end_user/") }
+              raise StandardError, "exception message", caller.take(5).map { |line| line.prepend("/end_user") }
             end
           end
         end
@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception message", caller.map { |line| line.prepend("/end_user/") } + ["# /line.rb:1:in `foo'"] * 10
+              raise StandardError, "exception message", caller.map { |line| line.prepend("/end_user") } + ["# /line.rb:1:in `foo'"] * 10
             end
           end
         end
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
             include ConvenientService::Standard::Config
 
             def result
-              raise StandardError, "exception message", caller.map { |line| line.prepend("/end_user/") } + ["# /line.rb:1:in `foo'"] * 10
+              raise StandardError, "exception message", caller.map { |line| line.prepend("/end_user") } + ["# /line.rb:1:in `foo'"] * 10
             end
           end
         end
