@@ -120,7 +120,7 @@ Gem::Specification.new do |spec|
   # - https://github.com/deivid-rodriguez/byebug/tree/master/ext/byebug
   # - https://github.com/deivid-rodriguez/byebug/issues/179#issuecomment-152727003
   #
-  spec.add_development_dependency "byebug", "~> 10.0" if ConvenientService::Dependencies.ruby.mri?
+  spec.add_development_dependency "byebug", "~> 10.0" if ConvenientService::Dependencies.support_byebug?
 
   ##
   # Used for parsing Markdown in YARD docs.
