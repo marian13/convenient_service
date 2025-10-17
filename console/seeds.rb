@@ -34,3 +34,5 @@ class GreaterThanNine
     (number > 9) ? success : failure
   end
 end
+
+puts "5 * 5 = #{CalculateSquare.(number: 5)[:square]}"

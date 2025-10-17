@@ -46,6 +46,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveSequentialSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Concern,
+              ConvenientService::Service::Plugins::CanBeCalled::Concern,
               ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
               ConvenientService::Service::Plugins::HasInspect::Concern,
               ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,

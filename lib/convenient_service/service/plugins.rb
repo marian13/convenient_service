@@ -20,6 +20,8 @@ require_relative "plugins/can_have_sequential_steps"
 require_relative "plugins/can_have_connected_steps"
 require_relative "plugins/can_have_step_aware_enumerables"
 
+require_relative "plugins/can_be_called"
+
 require_relative "plugins/can_have_after_step_callbacks"
 require_relative "plugins/can_have_around_step_callbacks"
 require_relative "plugins/can_have_before_step_callbacks"

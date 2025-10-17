@@ -68,6 +68,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CanHaveSteps::Concern if options.enabled?(:essential)
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern if options.enabled?(:essential)
             use ConvenientService::Plugins::Service::CanHaveStepAwareEnumerables::Concern if options.enabled?(:essential)
+            use ConvenientService::Plugins::Service::CanBeCalled::Concern if options.enabled?(:essential)
             use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern if options.enabled?(:callbacks)
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern if options.enabled?(:fallbacks)
             use ConvenientService::Plugins::Service::HasInspect::Concern if options.enabled?(:inspect)
