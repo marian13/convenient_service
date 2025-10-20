@@ -20,29 +20,29 @@ module ConvenientService
                     ##
                     # @return [Boolean]
                     #
-                    def fallback_failure_result?
+                    def from_fallback_failure_result?
                       Utils.to_bool(extra_kwargs[:fallback_failure_result])
                     end
 
                     ##
                     # @return [Boolean]
                     #
-                    def fallback_error_result?
+                    def from_fallback_error_result?
                       Utils.to_bool(extra_kwargs[:fallback_error_result])
                     end
 
                     ##
                     # @return [Boolean]
                     #
-                    def fallback_result?
+                    def from_fallback_result?
                       Utils.to_bool(extra_kwargs[:fallback_result])
                     end
 
                     ##
                     # @return [Boolean]
                     #
-                    def fallback?
-                      fallback_failure_result? || fallback_error_result? || fallback_result?
+                    def from_fallback?
+                      from_fallback_failure_result? || from_fallback_error_result? || from_fallback_result?
                     end
                   end
                 end
