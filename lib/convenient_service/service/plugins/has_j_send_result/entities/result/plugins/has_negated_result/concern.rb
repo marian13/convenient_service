@@ -28,8 +28,6 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                     #
                     # @internal
-                    #   NOTE: `original_result = result` is used to cache `result` independently, without relying on `CachesReturnValue` plugin.
-                    #
                     #   TODO: `Utils::String.concat_if`? How?
                     #   - https://stackoverflow.com/a/28648594/12201472
                     #

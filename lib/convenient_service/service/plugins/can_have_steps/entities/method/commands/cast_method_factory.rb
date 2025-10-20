@@ -78,6 +78,9 @@ module ConvenientService
                 def cast_hash
                   return unless other.keys.one?
 
+                  ##
+                  # TODO: Add `other.keys.first.is_a?(Integer)` and `other.keys.first == Support::BLOCK` to support args and block via `step`?
+                  #
                   value = other.values.first
 
                   case value

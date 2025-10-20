@@ -180,6 +180,9 @@ module ConvenientService
                 # @return [Hash{Symbol => Object}]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
+                # @internal
+                #   TODO: Refactor to `input_arguments` to support args and block via `step`?
+                #
                 def input_values
                   @input_values ||= calculate_input_values
                 end
