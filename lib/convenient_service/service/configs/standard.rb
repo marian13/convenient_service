@@ -193,6 +193,7 @@ module ConvenientService
               use ConvenientService::Plugins::Result::HasNegatedResult::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Result::HasPatternMatchingSupport::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Result::CanBeFromFallback::Concern if options.enabled?(:fallbacks)
+              use ConvenientService::Plugins::Result::CanHaveFallbacks::Concern if options.enabled?(:fallbacks)
               use ConvenientService::Plugins::Result::CanBeFromException::Concern if options.enabled?(:fault_tolerance)
               use ConvenientService::Plugins::Result::HasInspect::Concern if options.enabled?(:inspect)
               use ConvenientService::Plugins::Result::HasAwesomePrintInspect::Concern if options.enabled?(:awesome_print_inspect)

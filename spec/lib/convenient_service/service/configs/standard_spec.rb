@@ -307,6 +307,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasNegatedResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasPatternMatchingSupport::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromFallback::Concern,
+                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallbacks::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeOwnResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
@@ -681,8 +682,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
 
           example_group "service result" do
             example_group "concerns" do
-              it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromException::Concern` after `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromFallback::Concern` to service result concerns" do
-                expect(service_class::Result.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromFallback::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromException::Concern }).not_to be_nil
+              it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromException::Concern` after `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallbacks::Concern` to service result concerns" do
+                expect(service_class::Result.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveFallbacks::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromException::Concern }).not_to be_nil
               end
             end
           end

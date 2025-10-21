@@ -1238,6 +1238,94 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
         end
       end
+
+      example_group "extra service object allocation" do
+        context "when failure fallback is applicable" do
+          let(:container) do
+            Class.new.tap do |klass|
+              klass.class_exec(first_step, middleware) do |first_step, middleware|
+                include ConvenientService::Standard::Config
+
+                step first_step, fallback: :failure
+              end
+            end
+          end
+
+          let(:first_step) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              attr_accessor :counter
+
+              def initialize
+                @counter = 0
+              end
+
+              def result
+                self.counter += 1
+
+                failure(from: :result)
+              end
+
+              ##
+              # NOTE: `counter` will be `0` if a new service instance is instantiated.
+              #
+              def fallback_result
+                raise if counter != 1
+
+                success(from: :fallback_result)
+              end
+            end
+          end
+
+          it "does NOT instantiate extra service object" do
+            expect { container.result }.not_to raise_error
+          end
+        end
+
+        context "when error fallback is applicable" do
+          let(:container) do
+            Class.new.tap do |klass|
+              klass.class_exec(first_step, middleware) do |first_step, middleware|
+                include ConvenientService::Standard::Config
+
+                step first_step, fallback: :error
+              end
+            end
+          end
+
+          let(:first_step) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              attr_accessor :counter
+
+              def initialize
+                @counter = 0
+              end
+
+              def result
+                self.counter += 1
+
+                error(from: :result)
+              end
+
+              ##
+              # NOTE: `counter` will be `0` if a new service instance is instantiated.
+              #
+              def fallback_result
+                raise if counter != 1
+
+                success(from: :fallback_result)
+              end
+            end
+          end
+
+          it "does NOT instantiate extra service object" do
+            expect { container.result }.not_to raise_error
+          end
+        end
+      end
     end
   end
 end

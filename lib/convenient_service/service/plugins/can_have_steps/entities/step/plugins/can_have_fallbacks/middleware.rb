@@ -31,9 +31,9 @@ module ConvenientService
                     when :success
                       result
                     when :failure
-                      fallback_failure_step? ? fallback_failure_result(...) : result
+                      fallback_failure_step? ? fallback_failure_result(result) : result
                     else # :error
-                      fallback_error_step? ? fallback_error_result(...) : result
+                      fallback_error_step? ? fallback_error_result(result) : result
                     end
                   end
 
@@ -75,51 +75,25 @@ module ConvenientService
                   end
 
                   ##
-                  # @param args [Array<Object>]
-                  # @param kwargs [Hash{Symbol => Object}]
-                  # @param block [Proc, nil]
                   # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                   # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback]
-                  #
-                  def fallback_failure_result(*args, **kwargs, &block)
-                    refute_method_step!
-
-                    return service.__send__(:fallback_failure_result, *args, **kwargs, &block) if Utils::Module.has_own_instance_method?(service_class, :fallback_failure_result, private: true)
-
-                    return service.__send__(:fallback_result, *args, **kwargs, &block) if Utils::Module.has_own_instance_method?(service_class, :fallback_result, private: true)
-
-                    ::ConvenientService.raise(Exceptions::FallbackResultIsNotOverridden.new(step: step, service: service, status: :failure))
-                  end
-
-                  ##
-                  # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                  # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback]
-                  #
-                  def fallback_error_result(*args, **kwargs, &block)
-                    refute_method_step!
-
-                    return service.__send__(:fallback_error_result, *args, **kwargs, &block) if Utils::Module.has_own_instance_method?(service_class, :fallback_error_result, private: true)
-
-                    return service.__send__(:fallback_result, *args, **kwargs, &block) if Utils::Module.has_own_instance_method?(service_class, :fallback_result, private: true)
-
-                    ::ConvenientService.raise(Exceptions::FallbackResultIsNotOverridden.new(step: step, service: service, status: :error))
-                  end
-
-                  ##
-                  # @return [ConvenientService::Service]
                   #
                   # @internal
-                  #   IMPORTANT: `step.service_class.new(**input_values)` is the reason, why services should have only kwargs as arguments.
+                  #   IMPORTANT: `fallback` MUST NOT create new service instance, otherwise memoized instance variables will NOT be reused.
                   #
-                  def service
-                    @service ||= service_class.new(**step.input_values)
+                  def fallback_failure_result(result)
+                    refute_method_step! || result.with_failure_fallback(raise_when_missing: false) || ::ConvenientService.raise(Exceptions::FallbackResultIsNotOverridden.new(step: step, service: result.service, status: :failure))
                   end
 
                   ##
-                  # @return [Class<ConvenientService::Service>]
+                  # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                  # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::FallbackResultIsNotOverridden, ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Exceptions::MethodStepCanNotHaveFallback]
                   #
-                  def service_class
-                    step.service_class
+                  # @internal
+                  #   IMPORTANT: `fallback` MUST NOT create new service instance, otherwise memoized instance variables will NOT be reused.
+                  #
+                  def fallback_error_result(result)
+                    refute_method_step! || result.with_error_fallback(raise_when_missing: false) || ::ConvenientService.raise(Exceptions::FallbackResultIsNotOverridden.new(step: step, service: result.service, status: :error))
                   end
 
                   ##
@@ -130,9 +104,7 @@ module ConvenientService
                   #   TODO: Consider to move this assertion to the build time.
                   #
                   def refute_method_step!
-                    return unless step.method_step?
-
-                    ::ConvenientService.raise Exceptions::MethodStepCanNotHaveFallback.new(step: step)
+                    ::ConvenientService.raise Exceptions::MethodStepCanNotHaveFallback.new(step: step) if step.method_step?
                   end
                 end
               end
