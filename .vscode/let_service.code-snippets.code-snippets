@@ -17,10 +17,12 @@
       "  Class.new do",
       "    include ConvenientService::Standard::Config",
       "",
-      "    step first_step",
+      "    def result",
+      "      success",
+      "    end",
       "  end",
       "end"
     ],
-    "description": "`let(:service_with_steps)` - RSpec `let` with minimal service"
+    "description": "`let(:service)` - RSpec `let` with minimal service"
   }
 }
