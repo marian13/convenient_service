@@ -194,7 +194,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
       end
 
       specify do
-        expect(public_class_methods_of(service_class)).to eq( [
+        expect(public_class_methods_of(service_class)).to eq([
           :[], # public
           :__convenient_service_config__, # private
           :after, # public
@@ -286,7 +286,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
   example_group "result class" do
     context "when result class config is NOT committed" do
       specify do
-        expect(public_instance_methods_of(result_class)).to eq([:code,
+        expect(public_instance_methods_of(result_class)).to eq([
+          :code, # public
           :code_without_middlewares, # private
           :data, # public
           :data_without_middlewares, # private
@@ -308,7 +309,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
       end
 
       specify do
-        expect(public_class_methods_of(result_class)).to eq([:__convenient_service_config__,
+        expect(public_class_methods_of(result_class)).to eq([
+          :__convenient_service_config__, # private
           :commit_config!, # public
           :concerns, # public
           :entity, # public
