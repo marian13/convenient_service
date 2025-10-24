@@ -63,4 +63,15 @@ if ConvenientService::Dependencies.ruby.version < 3.2 && ConvenientService::Depe
   exit(0)
 end
 
+if ConvenientService::Dependencies.ruby.version < 3.2 && ConvenientService::Dependencies.appraisal_name.include?("rails_8.1")
+  puts <<~TEXT
+    Rails 8.1 does NOT support Rubies lower than 3.2.
+    - https://github.com/rails/rails/blob/v8.1.0/activemodel/activemodel.gemspec
+
+    So this appraisal is skipped with the zero exit code.
+  TEXT
+
+  exit(0)
+end
+
 load Gem.bin_path("appraisal", "appraisal")
