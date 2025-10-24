@@ -32,7 +32,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
   end
 
   def private_class_methods_of(klass)
-    klass.private_methods - Class.private_methods
+    (klass.private_methods - Class.private_methods).sort
   end
 
   def public_singleton_class_methods_of(klass)
@@ -58,6 +58,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
   end
 
   let(:result_class) { service_class.result_class }
+
+  let(:data_class) { result_class.data_class }
 
   example_group "service class" do
     context "when service class config is NOT committed" do
@@ -501,6 +503,172 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
 
       specify do
         expect(private_singleton_class_methods_of(result_class)).to eq([])
+      end
+    end
+  end
+
+  example_group "data class" do
+    context "when data class config is NOT committed" do
+      specify do
+        expect(public_instance_methods_of(data_class)).to eq([
+          :[], # public
+          :__empty__?, # public
+          :__has_attribute__?, # public
+          :__keys__, # public
+          :__result__, # private
+          :__value__, # private
+          :copy, # private
+          :empty?, # public
+          :has_attribute?, # public
+          :keys, # public
+          :result, # private
+          :to_arguments, # private
+          :to_h, # public
+          :to_kwargs, # private
+          :value # private
+        ])
+      end
+
+      specify do
+        expect(protected_instance_methods_of(data_class)).to eq([])
+      end
+
+      specify do
+        expect(private_instance_methods_of(data_class)).to eq([
+          :initialize_without_middlewares # private
+        ])
+      end
+
+      specify do
+        expect(public_class_methods_of(data_class)).to eq([
+          :__convenient_service_config__, # private
+          :cast, # private
+          :cast!, # private
+          :commit_config!, # public
+          :concerns, # public
+          :entity, # public
+          :has_committed_config?, # public
+          :middlewares, # public
+          :namespace, # private
+          :new_without_commit_config, # private
+          :options, # public
+          :proto_entity # private
+        ])
+      end
+
+      specify do
+        expect(protected_class_methods_of(data_class)).to eq([])
+      end
+
+      if ConvenientService::Dependencies.ruby.jruby?
+        specify do
+          expect(private_class_methods_of(data_class)).to eq([
+            :method_missing # private
+          ])
+        end
+      else
+        specify do
+          expect(private_class_methods_of(data_class)).to eq([])
+        end
+      end
+
+      specify do
+        expect(public_singleton_class_methods_of(data_class)).to eq([
+          :__convenient_service_config__ # private
+        ])
+      end
+
+      specify do
+        expect(protected_singleton_class_methods_of(data_class)).to eq([])
+      end
+
+      specify do
+        expect(private_singleton_class_methods_of(data_class)).to eq([])
+      end
+    end
+
+    context "when data class config is committed" do
+      before do
+        data_class.commit_config!
+      end
+
+      specify do
+        expect(public_instance_methods_of(data_class)).to eq(
+          [
+            :[], # public
+            :__empty__?, # public
+            :__has_attribute__?, # public
+            :__keys__, # public
+            :__result__, # private
+            :__value__, # private
+            :copy, # private
+            :empty?, # public
+            :has_attribute?, # public
+            :keys, # public
+            :result, # private
+            :to_arguments, # private
+            :to_h, # public
+            :to_kwargs, # private
+            :value # private
+          ]
+        )
+      end
+
+      specify do
+        expect(protected_instance_methods_of(data_class)).to eq([])
+      end
+
+      specify do
+        expect(private_instance_methods_of(data_class)).to eq([
+          :initialize_without_middlewares # private
+        ])
+      end
+
+      specify do
+        expect(public_class_methods_of(data_class)).to eq([
+          :__convenient_service_config__, # private
+          :cast, # private
+          :cast!, # private
+          :commit_config!, # public
+          :concerns, # public
+          :entity, # public
+          :has_committed_config?, # public
+          :middlewares, # public
+          :namespace, # private
+          :new_without_commit_config, # private
+          :options, # public
+          :proto_entity # private
+        ])
+      end
+
+      specify do
+        expect(protected_class_methods_of(data_class)).to eq([])
+      end
+
+      if ConvenientService::Dependencies.ruby.jruby?
+        specify do
+          expect(private_class_methods_of(data_class)).to eq([
+            :method_missing # private
+          ])
+        end
+      else
+        specify do
+          expect(private_class_methods_of(data_class)).to eq([])
+        end
+      end
+
+      specify do
+        expect(public_singleton_class_methods_of(data_class)).to eq([
+          :__convenient_service_config__ # private
+        ])
+      end
+
+      specify do
+        expect(protected_singleton_class_methods_of(data_class)).to eq([])
+      end
+
+      specify do
+        expect(private_singleton_class_methods_of(data_class)).to eq([])
       end
     end
   end
