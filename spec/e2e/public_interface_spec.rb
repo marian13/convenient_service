@@ -1145,8 +1145,283 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
     end
   end
 
-  ##
-  # TODO: Step, ...
-  ##
+  example_group "step class" do
+    ##
+    # NOTE: `let(:service_class)` is NOT lifted to the top context to avoid accidental typos inside specs like `message_class` instead of `result_class`.
+    #
+    let(:service_class) do
+      Class.new do
+        include ConvenientService::Standard::Config
+
+        def result
+          success
+        end
+      end
+    end
+
+    let(:step_class) { service_class.step_class }
+
+    context "when step class config is NOT committed" do
+      specify do
+        expect(public_instance_methods_of(step_class)).to eq([
+          :==, # public
+          :action, # public
+          :args, # private
+          :code, # public
+          :container, # public
+          :copy, # private
+          :data, # public
+          :define!, # private
+          :error?, # public
+          :extra_kwargs, # private
+          :failure?, # public
+          :has_organizer?, # private
+          :index, # public
+          :input_values, # public
+          :inputs, # private
+          :kwargs, # private
+          :message, # public
+          :method_result, # public
+          :method_result_without_middlewares, # private
+          :not_error?, # public
+          :not_failure?, # public
+          :not_success?, # public
+          :organizer, # public
+          :output_values, # public
+          :outputs, # private
+          :params, # private
+          :printable_action, # private
+          :printable_container, # private
+          :result, # public
+          :result_without_middlewares, # private
+          :save_outputs_in_organizer!, # private
+          :service_result, # public
+          :service_result_without_middlewares, # private
+          :status, # public
+          :strict?, # public
+          :success?, # public
+          :to_args, # private
+          :to_arguments, # private
+          :to_kwargs, # private
+          :to_s, # public
+          :unsafe_code, # public
+          :unsafe_data, # public
+          :unsafe_message, # public
+          :with_organizer # private
+        ])
+      end
+
+      specify do
+        expect(protected_instance_methods_of(step_class)).to eq([])
+      end
+
+      specify do
+        expect(private_instance_methods_of(step_class)).to eq([
+          :calculate_input_values, # private # TODO: Remove.
+          :calculate_output_values, # private # TODO: Remove.
+          :initialize, # public*
+          :method_missing, # public*
+          :resolve_params, # private # TODO: Remove.
+          :respond_to_missing? # public*
+        ])
+      end
+
+      specify do
+        expect(public_class_methods_of(step_class)).to eq([
+          :==, # public,
+          :__convenient_service_config__, # private
+          :commit_config!, # public
+          :concerns, # public
+          :entity, # public
+          :has_committed_config?, # public
+          :middlewares, # public
+          :namespace, # private
+          :new, # private
+          :new_without_commit_config, # private
+          :options, # public
+          :proto_entity # private
+        ])
+      end
+
+      specify do
+        expect(protected_class_methods_of(step_class)).to eq([])
+      end
+
+      if ConvenientService::Dependencies.ruby.jruby?
+        specify do
+          expect(private_class_methods_of(step_class)).to eq([
+            :method_missing # private
+          ])
+        end
+      else
+        specify do
+          expect(private_class_methods_of(step_class)).to eq([
+            :method_missing, # public*
+            :respond_to_missing? # public*
+          ])
+        end
+      end
+
+      specify do
+        expect(public_singleton_class_methods_of(step_class)).to eq([
+          :__convenient_service_config__ # private
+        ])
+      end
+
+      specify do
+        expect(protected_singleton_class_methods_of(step_class)).to eq([])
+      end
+
+      specify do
+        expect(private_singleton_class_methods_of(step_class)).to eq([])
+      end
+    end
+
+    context "when step class config is committed" do
+      before do
+        step_class.commit_config!
+      end
+
+      specify do
+        expect(public_instance_methods_of(step_class)).to eq([
+          :==, # public
+          :[],  # public
+          :action,  # public
+          :args, # private
+          :code, # public
+          :container, # public
+          :copy, # private
+          :data, # public
+          :define!, # private
+          :error?, # public
+          :evaluated?, # private
+          :extra_kwargs, # private
+          :failure?, # public
+          :fallback_error_step?, # public
+          :fallback_failure_step?, # public
+          :fallback_step?, # public
+          :fallback_true_step?, # public
+          :has_organizer?, # private
+          :index, # public
+          :input_values, # public
+          :inputs, # private
+          :inspect, # public
+          :internals, # private
+          :kwargs, # private
+          :mark_as_evaluated!, # private
+          :message, # public
+          :method, # public
+          :method_result, # public
+          :method_result_without_middlewares, # private
+          :method_step?, # public
+          :not_error?, # public
+          :not_evaluated?, # private
+          :not_failure?, # public
+          :not_ok?, # public
+          :not_success?, # public
+          :ok?, # public
+          :organizer, # public
+          :output_values, # public
+          :outputs, # private
+          :params, # private
+          :printable_action, # private
+          :printable_container, # private
+          :result, # public
+          :result_step?, # public
+          :result_without_middlewares, # private
+          :save_outputs_in_organizer!, # private
+          :service_class, # private
+          :service_result, # public
+          :service_result_without_middlewares, # private
+          :service_step?, # public
+          :status, # public
+          :strict?, # public
+          :success?, # public
+          :to_args, # private
+          :to_arguments, # private
+          :to_kwargs, # private
+          :to_s, # public
+          :uc, # public
+          :ud, # public
+          :um, # public
+          :unsafe_code, # public
+          :unsafe_data, # public
+          :unsafe_message, # public
+          :with_organizer # private
+        ])
+      end
+
+      specify do
+        expect(protected_instance_methods_of(step_class)).to eq([])
+      end
+
+      specify do
+        expect(private_instance_methods_of(step_class)).to eq([
+          :calculate_input_values, # private # TODO: Remove.
+          :calculate_output_values, # private # TODO: Remove.
+          :initialize, # public*
+          :method_missing, # public*
+          :resolve_params, # private # TODO: Remove.
+          :respond_to_missing? # public*
+        ])
+      end
+
+      specify do
+        expect(public_class_methods_of(step_class)).to eq([
+          :==, # public
+          :__convenient_service_config__, # private
+          :after, # public
+          :around, # public
+          :before, # public
+          :callback, # TODO: Remove `callback`, it should NOT be exposed.
+          :callbacks,
+          :commit_config!, # public
+          :concerns, # public
+          :entity, # public
+          :has_committed_config?, # public
+          :internals_class, # private
+          :middlewares, # public
+          :namespace, # private
+          :new, # public
+          :new_without_commit_config, # private
+          :options, # public
+          :proto_entity # private
+        ])
+      end
+
+      specify do
+        expect(protected_class_methods_of(step_class)).to eq([])
+      end
+
+      if ConvenientService::Dependencies.ruby.jruby?
+        specify do
+          expect(private_class_methods_of(step_class)).to eq([
+            :method_missing # private
+          ])
+        end
+      else
+        specify do
+          expect(private_class_methods_of(step_class)).to eq([
+            :method_missing, # public*
+            :respond_to_missing? # public*
+          ])
+        end
+      end
+
+      specify do
+        expect(public_singleton_class_methods_of(step_class)).to eq([
+          :__convenient_service_config__ # private
+        ])
+      end
+
+      specify do
+        expect(protected_singleton_class_methods_of(step_class)).to eq([])
+      end
+
+      specify do
+        expect(private_singleton_class_methods_of(step_class)).to eq([])
+      end
+    end
+  end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass, RSpec/ExampleLength
