@@ -5,6 +5,7 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
+
 require "spec_helper"
 
 require "convenient_service"
@@ -23,17 +24,30 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
     klass.private_instance_methods.reject { |method_name| Object.ancestors.include?(klass.instance_method(method_name).owner) }.sort
   end
 
-  ##
-  # NOTE: The `yaml_tag` method is added to `Object.singleton_class` by `Psych`.
-  #
-  def public_class_methods_of(klass)
-    klass.public_methods.reject { |method_name| [*Class.ancestors, Object.singleton_class].include?(klass.method(method_name).owner) }.sort
+  if ConvenientService::Dependencies.ruby.jruby?
+    ##
+    # NOTE: JRuby also returns `[:singleton_method_added, :singleton_method_removed, :singleton_method_undefined]` as public class methods.
+    # NOTE: The `yaml_tag` method is added to `Object.singleton_class` by `Psych`.
+    #
+    def public_class_methods_of(klass)
+      (klass.public_methods - [:singleton_method_added, :singleton_method_removed, :singleton_method_undefined]).reject { |method_name| [*Class.ancestors, Object.singleton_class].include?(klass.method(method_name).owner) }.sort
+    end
+  else
+    ##
+    # NOTE: The `yaml_tag` method is added to `Object.singleton_class` by `Psych`.
+    #
+    def public_class_methods_of(klass)
+      klass.public_methods.reject { |method_name| [*Class.ancestors, Object.singleton_class].include?(klass.method(method_name).owner) }.sort
+    end
   end
 
   def protected_class_methods_of(klass)
     klass.protected_methods.reject { |method_name| Class.ancestors.include?(klass.method(method_name).owner) }.sort
   end
 
+  ##
+  # NOTE: `service_class.private_methods - Class.private_methods` return `[]` in CRuby and [:method_missing] in JRuby.
+  #
   def private_class_methods_of(klass)
     klass.private_methods.reject { |method_name| Class.ancestors.include?(klass.method(method_name).owner) }.sort
   end
@@ -129,19 +143,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(protected_class_methods_of(service_class)).to eq([])
       end
 
-      if ConvenientService::Dependencies.ruby.jruby?
-        specify do
-          expect(private_class_methods_of(service_class)).to eq([
-            :method_missing # private
-          ])
-        end
-      else
-        specify do
-          expect(private_class_methods_of(service_class)).to eq([
-            :method_missing, # public*
-            :respond_to_missing? # public*
-          ])
-        end
+      specify do
+        expect(private_class_methods_of(service_class)).to eq([
+          :method_missing, # public*
+          :respond_to_missing? # public*
+        ])
       end
 
       specify do
@@ -286,19 +292,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(protected_class_methods_of(service_class)).to eq([])
       end
 
-      if ConvenientService::Dependencies.ruby.jruby?
-        specify do
-          expect(private_class_methods_of(service_class)).to eq([
-            :method_missing # private
-          ])
-        end
-      else
-        specify do
-          expect(private_class_methods_of(service_class)).to eq([
-            :method_missing, # public*
-            :respond_to_missing? # public*
-          ])
-        end
+      specify do
+        expect(private_class_methods_of(service_class)).to eq([
+          :method_missing, # public*
+          :respond_to_missing? # public*
+        ])
       end
 
       specify do
@@ -381,19 +379,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(protected_class_methods_of(result_class)).to eq([])
       end
 
-      if ConvenientService::Dependencies.ruby.jruby?
-        specify do
-          expect(private_class_methods_of(result_class)).to eq([
-            :method_missing # private
-          ])
-        end
-      else
-        specify do
-          expect(private_class_methods_of(result_class)).to eq([
-            :method_missing, # public*
-            :respond_to_missing? # public*
-          ])
-        end
+      specify do
+        expect(private_class_methods_of(result_class)).to eq([
+          :method_missing, # public*
+          :respond_to_missing? # public*
+        ])
       end
 
       specify do
@@ -525,19 +515,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(protected_class_methods_of(result_class)).to eq([])
       end
 
-      if ConvenientService::Dependencies.ruby.jruby?
-        specify do
-          expect(private_class_methods_of(result_class)).to eq([
-            :method_missing # private
-          ])
-        end
-      else
-        specify do
-          expect(private_class_methods_of(result_class)).to eq([
-            :method_missing, # public*
-            :respond_to_missing? # public*
-          ])
-        end
+      specify do
+        expect(private_class_methods_of(result_class)).to eq([
+          :method_missing, # public*
+          :respond_to_missing? # public*
+        ])
       end
 
       specify do
@@ -636,19 +618,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(protected_class_methods_of(data_class)).to eq([])
       end
 
-      if ConvenientService::Dependencies.ruby.jruby?
-        specify do
-          expect(private_class_methods_of(data_class)).to eq([
-            :method_missing # private
-          ])
-        end
-      else
-        specify do
-          expect(private_class_methods_of(data_class)).to eq([
-            :method_missing, # public*
-            :respond_to_missing? # public*
-          ])
-        end
+      specify do
+        expect(private_class_methods_of(data_class)).to eq([
+          :method_missing, # public*
+          :respond_to_missing? # public*
+        ])
       end
 
       specify do
@@ -736,19 +710,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(protected_class_methods_of(data_class)).to eq([])
       end
 
-      if ConvenientService::Dependencies.ruby.jruby?
-        specify do
-          expect(private_class_methods_of(data_class)).to eq([
-            :method_missing # private
-          ])
-        end
-      else
-        specify do
-          expect(private_class_methods_of(data_class)).to eq([
-            :method_missing, # public*
-            :respond_to_missing? # public*
-          ])
-        end
+      specify do
+        expect(private_class_methods_of(data_class)).to eq([
+          :method_missing, # public*
+          :respond_to_missing? # public*
+        ])
       end
 
       specify do
@@ -837,19 +803,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(protected_class_methods_of(message_class)).to eq([])
       end
 
-      if ConvenientService::Dependencies.ruby.jruby?
-        specify do
-          expect(private_class_methods_of(message_class)).to eq([
-            :method_missing # private
-          ])
-        end
-      else
-        specify do
-          expect(private_class_methods_of(message_class)).to eq([
-            :method_missing, # public*
-            :respond_to_missing? # public*
-          ])
-        end
+      specify do
+        expect(private_class_methods_of(message_class)).to eq([
+          :method_missing, # public*
+          :respond_to_missing? # public*
+        ])
       end
 
       specify do
@@ -925,19 +883,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(protected_class_methods_of(message_class)).to eq([])
       end
 
-      if ConvenientService::Dependencies.ruby.jruby?
-        specify do
-          expect(private_class_methods_of(message_class)).to eq([
-            :method_missing # private
-          ])
-        end
-      else
-        specify do
-          expect(private_class_methods_of(message_class)).to eq([
-            :method_missing, # public*
-            :respond_to_missing? # public*
-          ])
-        end
+      specify do
+        expect(private_class_methods_of(message_class)).to eq([
+          :method_missing, # public*
+          :respond_to_missing? # public*
+        ])
       end
 
       specify do
@@ -1026,19 +976,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(protected_class_methods_of(code_class)).to eq([])
       end
 
-      if ConvenientService::Dependencies.ruby.jruby?
-        specify do
-          expect(private_class_methods_of(code_class)).to eq([
-            :method_missing # private
-          ])
-        end
-      else
-        specify do
-          expect(private_class_methods_of(code_class)).to eq([
-            :method_missing, # public*
-            :respond_to_missing? # public*
-          ])
-        end
+      specify do
+        expect(private_class_methods_of(code_class)).to eq([
+          :method_missing, # public*
+          :respond_to_missing? # public*
+        ])
       end
 
       specify do
@@ -1114,19 +1056,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(protected_class_methods_of(code_class)).to eq([])
       end
 
-      if ConvenientService::Dependencies.ruby.jruby?
-        specify do
-          expect(private_class_methods_of(code_class)).to eq([
-            :method_missing # private
-          ])
-        end
-      else
-        specify do
-          expect(private_class_methods_of(code_class)).to eq([
-            :method_missing, # public*
-            :respond_to_missing? # public*
-          ])
-        end
+      specify do
+        expect(private_class_methods_of(code_class)).to eq([
+          :method_missing, # public*
+          :respond_to_missing? # public*
+        ])
       end
 
       specify do
@@ -1247,19 +1181,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(protected_class_methods_of(step_class)).to eq([])
       end
 
-      if ConvenientService::Dependencies.ruby.jruby?
-        specify do
-          expect(private_class_methods_of(step_class)).to eq([
-            :method_missing # private
-          ])
-        end
-      else
-        specify do
-          expect(private_class_methods_of(step_class)).to eq([
-            :method_missing, # public*
-            :respond_to_missing? # public*
-          ])
-        end
+      specify do
+        expect(private_class_methods_of(step_class)).to eq([
+          :method_missing, # public*
+          :respond_to_missing? # public*
+        ])
       end
 
       specify do
@@ -1393,19 +1319,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(protected_class_methods_of(step_class)).to eq([])
       end
 
-      if ConvenientService::Dependencies.ruby.jruby?
-        specify do
-          expect(private_class_methods_of(step_class)).to eq([
-            :method_missing # private
-          ])
-        end
-      else
-        specify do
-          expect(private_class_methods_of(step_class)).to eq([
-            :method_missing, # public*
-            :respond_to_missing? # public*
-          ])
-        end
+      specify do
+        expect(private_class_methods_of(step_class)).to eq([
+          :method_missing, # public*
+          :respond_to_missing? # public*
+        ])
       end
 
       specify do
