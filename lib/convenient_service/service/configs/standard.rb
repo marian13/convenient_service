@@ -35,9 +35,10 @@ module ConvenientService
             :exception_services_trace,
             :per_instance_caching,
             :backtrace_cleaner,
-            # :active_model_validations,
             # :active_model_attribute_assignment,
             # :dry_initializer,
+            # :active_model_attributes,
+            # :active_model_validations,
             # :memo_wise,
             # :not_passed_arguments,
             # :finite_loop,
@@ -81,9 +82,10 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CanNotBeInherited::Concern if options.enabled?(:code_review_automation)
             use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Concern if options.enabled?(:short_syntax)
             use ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern if options.enabled?(:short_syntax)
-            use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern if options.enabled?(:active_model_validations)
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern if options.enabled?(:active_model_attribute_assignment)
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern if options.enabled?(:dry_initializer)
+            use ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern if options.enabled?(:active_model_attributes)
+            use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern if options.enabled?(:active_model_validations)
             use ConvenientService::Plugins::Common::HasMemoization::UsingMemoWise::Concern if options.enabled?(:memo_wise)
             use ConvenientService::Plugins::Common::CanHaveNotPassedArguments::Concern if options.enabled?(:not_passed_arguments)
             use ConvenientService::Plugins::Common::CanUtilizeFiniteLoop::Concern if options.enabled?(:finite_loop)
