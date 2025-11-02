@@ -1061,6 +1061,30 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :dry do
           end
         end
       end
+
+      context "when `:dry_validation` option is passed" do
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(described_class) do |mod|
+              include mod.with(:dry_validation)
+            end
+          end
+        end
+
+        example_group "service" do
+          example_group "concerns" do
+            it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Concern` after `ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern` to service concerns" do
+              expect(service_class.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Concern }).not_to be_nil
+            end
+          end
+
+          example_group "#result middlewares" do
+            it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Middleware` after `ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware` to service middlewares for `#result`" do
+              expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Middleware }).not_to be_nil
+            end
+          end
+        end
+      end
     end
   end
 end

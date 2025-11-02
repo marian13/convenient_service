@@ -39,6 +39,7 @@ module ConvenientService
             # :dry_initializer,
             # :active_model_attributes,
             # :active_model_validations,
+            # :dry_validation,
             # :memo_wise,
             # :not_passed_arguments,
             # :finite_loop,
@@ -86,6 +87,7 @@ module ConvenientService
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern if options.enabled?(:dry_initializer)
             use ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern if options.enabled?(:active_model_attributes)
             use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern if options.enabled?(:active_model_validations)
+            use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Concern if options.enabled?(:dry_validation)
             use ConvenientService::Plugins::Common::HasMemoization::UsingMemoWise::Concern if options.enabled?(:memo_wise)
             use ConvenientService::Plugins::Common::CanHaveNotPassedArguments::Concern if options.enabled?(:not_passed_arguments)
             use ConvenientService::Plugins::Common::CanUtilizeFiniteLoop::Concern if options.enabled?(:finite_loop)
@@ -111,6 +113,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance)
             use ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware if options.enabled?(:backtrace_cleaner)
             use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware if options.enabled?(:active_model_validations)
+            use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Middleware if options.enabled?(:dry_validation)
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware if options.enabled?(:essential)
           end
 
