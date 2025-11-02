@@ -545,9 +545,6 @@ like <span class='object_link'><a href="#use-instance_method" title="ConvenientS
       <pre class="lines">
 
 
-63
-64
-65
 66
 67
 68
@@ -557,10 +554,13 @@ like <span class='object_link'><a href="#use-instance_method" title="ConvenientS
 72
 73
 74
-75</pre>
+75
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_opts'>opts</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -612,12 +612,12 @@ like <span class='object_link'><a href="#use-instance_method" title="ConvenientS
       <pre class="lines">
 
 
-152
-153
-154</pre>
+155
+156
+157</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 152</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_to_app'>to_app</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
@@ -652,13 +652,13 @@ like <span class='object_link'><a href="#use-instance_method" title="ConvenientS
       <pre class="lines">
 
 
-146
-147
-148
-149</pre>
+149
+150
+151
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 149</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_index'>index</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_index'>index</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Integer</span><span class='rparen'>)</span>
@@ -696,14 +696,14 @@ of being treated as a separate single middleware.</p>
       <pre class="lines">
 
 
-85
-86
-87
 88
-89</pre>
+89
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_flatten'>flatten</span>
   <span class='id identifier rubyid_lambda'>lambda</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_env'>env</span><span class='op'>|</span>
@@ -730,17 +730,17 @@ of being treated as a separate single middleware.</p>
       <pre class="lines">
 
 
-163
-164
-165
 166
-167</pre>
+167
+168
+169
+170</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 163</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 166</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_inject_logger'>inject_logger</span> <span class='id identifier rubyid_logger'><span class='object_link'><a href="../../../../../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span>
-  <span class='id identifier rubyid_insert_before_each'>insert_before_each</span> <span class='const'><span class='object_link'><a href="../Middleware.html" title="ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware (module)">Middleware</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Logger.html" title="ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Logger (class)">Logger</a></span></span><span class='comma'>,</span> <span class='id identifier rubyid_logger'><span class='object_link'><a href="../../../../../top-level-namespace.html#logger-instance_method" title="#logger (method)">logger</a></span></span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_inject_logger'>inject_logger</span> <span class='id identifier rubyid_logger'>logger</span>
+  <span class='id identifier rubyid_insert_before_each'>insert_before_each</span> <span class='const'><span class='object_link'><a href="../Middleware.html" title="ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware (module)">Middleware</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Logger.html" title="ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Logger (class)">Logger</a></span></span><span class='comma'>,</span> <span class='id identifier rubyid_logger'>logger</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -778,14 +778,14 @@ of being treated as a separate single middleware.</p>
       <pre class="lines">
 
 
-108
-109
-110
 111
-112</pre>
+112
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert'>insert</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_index'>index</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_index'>index</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Integer</span><span class='rparen'>)</span>
@@ -822,14 +822,14 @@ of being treated as a separate single middleware.</p>
       <pre class="lines">
 
 
-117
-118
-119
 120
-121</pre>
+121
+122
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 120</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_after'>insert_after</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_index'>index</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_index'>index</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Integer</span><span class='rparen'>)</span>
@@ -866,14 +866,14 @@ of being treated as a separate single middleware.</p>
       <pre class="lines">
 
 
-131
-132
-133
 134
-135</pre>
+135
+136
+137
+138</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 131</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 134</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_after_each'>insert_after_each</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_stack'>stack</span> <span class='op'>=</span> <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_carry'>carry</span><span class='comma'>,</span> <span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
@@ -910,14 +910,14 @@ of being treated as a separate single middleware.</p>
       <pre class="lines">
 
 
-124
-125
-126
 127
-128</pre>
+128
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_before_each'>insert_before_each</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_stack'>stack</span> <span class='op'>=</span> <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_carry'>carry</span><span class='comma'>,</span> <span class='id identifier rubyid_item'>item</span><span class='op'>|</span>
@@ -944,15 +944,15 @@ of being treated as a separate single middleware.</p>
       <pre class="lines">
 
 
-156
-157
-158
 159
 160
-161</pre>
+161
+162
+163
+164</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 156</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
   <span class='id identifier rubyid_name'>name</span><span class='op'>+</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>[</span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_middleware'>middleware</span><span class='op'>|</span>
@@ -990,12 +990,12 @@ of being treated as a separate single middleware.</p>
       <pre class="lines">
 
 
-78
-79
-80</pre>
+81
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
   <span class='ivar'>@middleware_name</span>
@@ -1030,15 +1030,15 @@ of being treated as a separate single middleware.</p>
       <pre class="lines">
 
 
-138
-139
-140
 141
 142
-143</pre>
+143
+144
+145
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 138</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 141</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_index'>index</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span> <span class='id identifier rubyid_index'>index</span> <span class='kw'>unless</span> <span class='id identifier rubyid_index'>index</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Integer</span>
@@ -1097,19 +1097,19 @@ of the middleware.</p>
       <pre class="lines">
 
 
-96
-97
-98
 99
 100
 101
 102
 103
 104
-105</pre>
+105
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/extractions/ruby_middleware/middleware/builder.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Builder (class)">Builder</a></span></span><span class='rparen'>)</span>
@@ -1131,7 +1131,7 @@ of the middleware.</p>
 </div>
 
       <div id="footer">
-  Generated on Sun Nov  2 02:13:18 2025 by
+  Generated on Sun Nov  2 03:04:48 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
