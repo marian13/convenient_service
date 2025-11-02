@@ -25,10 +25,10 @@
 ##
 # NOTE: Ignores `Gemfile` amd `Gemfile.lock` used in docker containers.
 #
-# NOTE: `Gemfile*` matches all files that start with Gemfile in any nesting.
-# NOTE: `/Gemfile*` matches all files that start with Gemfile only from root folder.
+# NOTE: `Gemfile.*` matches all files that start with Gemfile in any nesting.
+# NOTE: `/Gemfile.*` matches all files that start with Gemfile only from root folder.
 #
-/Gemfile*
+/Gemfile.*
 
 ##
 # NOTE: Ignores `gemfiles` content, but NOT the folder.
