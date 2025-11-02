@@ -11,6 +11,8 @@
 #   - https://github.com/rubygems/rubygems
 #   - https://github.com/rubygems/rubygems/blob/master/lib/rubygems/version.rb
 #
+# @!visibility private
+#
 require "rubygems"
 
 ##
@@ -18,6 +20,8 @@ require "rubygems"
 #
 # @internal
 #   https://github.com/marian13/convenient_service/wiki/Docs:-Dependencies
+#
+# @!visibility private
 #
 require_relative "queries"
 

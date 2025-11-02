@@ -8,8 +8,9 @@
 ##
 # NOTE: This file is loaded by `require "convenient_service/extras/plugins/has_memoization/using_memo_wise"`.
 # NOTE: This file is expected to be called from app entry points like `initializers` in Rails.
-##
-
+#
+# @!visibility private
+#
 require "convenient_service"
 
 ConvenientService::Dependencies.require_has_memoization_using_memo_wise_plugin

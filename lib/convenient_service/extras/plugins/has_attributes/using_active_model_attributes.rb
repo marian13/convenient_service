@@ -8,8 +8,9 @@
 ##
 # NOTE: This file is loaded by `require "convenient_service/extras/plugins/has_attributes/using_active_model_attributes"`.
 # NOTE: This file is expected to be called from app entry points like `initializers` in Rails.
-##
-
+#
+# @!visibility private
+#
 require "convenient_service"
 
 ConvenientService::Dependencies.require_has_attributes_using_active_model_attributes_plugin

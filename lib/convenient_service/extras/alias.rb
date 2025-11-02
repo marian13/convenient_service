@@ -10,6 +10,9 @@
 # NOTE: This file is expected to be called from app entry points like `initializers` in Rails.
 ##
 
+##
+# @!visibility private
+#
 require "convenient_service"
 
 ConvenientService::Dependencies.require_alias

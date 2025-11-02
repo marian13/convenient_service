@@ -8,8 +8,9 @@
 ##
 # NOTE: This file is loaded by `require "convenient_service/extras/plugins/assigns_attributes_in_constructor/using_dry_initializer"`.
 # NOTE: This file is expected to be called from app entry points like `initializers` in Rails.
-##
-
+#
+# @!visibility private
+#
 require "convenient_service"
 
 ConvenientService::Dependencies.require_assigns_attributes_in_constructor_using_dry_initializer_plugin

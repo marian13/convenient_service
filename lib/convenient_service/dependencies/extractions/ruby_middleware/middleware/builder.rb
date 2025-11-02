@@ -5,6 +5,9 @@
 # @see https://github.com/Ibsciss/ruby-middleware
 ##
 
+##
+# @!visibility private
+#
 require_relative 'logger'
 
 module ConvenientService

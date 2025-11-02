@@ -17,6 +17,8 @@
 #   - https://ruby-doc.org/stdlib-2.7.0/libdoc/pathname/rdoc/Pathname.html
 #   - https://github.com/ruby/pathname
 #
+# @!visibility private
+#
 require "pathname"
 
 ##
@@ -24,19 +26,16 @@ require "pathname"
 #   - https://ruby-doc.org/stdlib-2.7.0/libdoc/forwardable/rdoc/Forwardable.html
 #   - https://github.com/ruby/forwardable
 #
-require "forwardable"
-
-##
-# @internal
-#   - https://ruby-doc.org/stdlib-2.7.0/libdoc/erb/rdoc/ERB.html
-#   - https://github.com/ruby/erb
+# @!visibility private
 #
-require "erb"
+require "forwardable"
 
 ##
 # @internal
 #   - https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html
 #   - https://github.com/ruby/logger
+#
+# @!visibility private
 #
 require "logger"
 
@@ -46,6 +45,8 @@ require "logger"
 #   - https://github.com/rubygems/rubygems
 #   - https://github.com/rubygems/rubygems/blob/master/lib/rubygems/version.rb
 #
+# @!visibility private
+#
 require "rubygems"
 
 ##
@@ -53,11 +54,15 @@ require "rubygems"
 #   - https://ruby-doc.org/stdlib-2.7.0/libdoc/singleton/rdoc/Singleton.html
 #   - https://github.com/ruby/singleton
 #
+# @!visibility private
+#
 require "singleton"
 
 ##
 # @internal
 #   - https://ruby-doc.org/core-2.7.0/Mutex.html
 #   - https://docs.ruby-lang.org/en/2.1.0/Mutex.html
+#
+# @!visibility private
 #
 require "thread"
