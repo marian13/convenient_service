@@ -35,10 +35,11 @@ module ConvenientService
                   def next(...)
                     result = chain.next(...)
 
+                    result = result.strict if step.strict?
+
                     result.copy(
                       overrides: {
                         kwargs: {
-                          status: extract_status(result),
                           data: extract_data(result),
                           step: step,
                           service: step.organizer,
@@ -76,17 +77,6 @@ module ConvenientService
                     custom_values = custom_outputs.reduce({}) { |values, output| values.merge(output.name.to_sym => output.value) }
 
                     result_values.merge(custom_values)
-                  end
-
-                  ##
-                  # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                  # @return [Symbol]
-                  #
-                  def extract_status(result)
-                    return result.status.to_sym unless result.status.unsafe_failure?
-                    return result.status.to_sym unless step.strict?
-
-                    :error
                   end
                 end
               end

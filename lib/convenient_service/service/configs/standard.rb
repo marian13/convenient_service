@@ -198,6 +198,7 @@ module ConvenientService
               use ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Result::CanHaveStep::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Result::CanBeCalled::Concern if options.enabled?(:essential)
+              use ConvenientService::Plugins::Result::CanBeStrict::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Result::HasNegatedResult::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Result::HasPatternMatchingSupport::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Result::CanBeFromFallback::Concern if options.enabled?(:fallbacks)

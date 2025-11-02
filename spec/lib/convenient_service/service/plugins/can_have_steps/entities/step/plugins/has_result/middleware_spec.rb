@@ -498,6 +498,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           it "returns service result with original data keys, but with error status" do
             expect(step.result).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz).of_step(first_step).of_service(container).of_original_service(first_step)
           end
+
+          it "returns strict result" do
+            expect(step.result.strict?).to eq(true)
+          end
         end
       end
 

@@ -456,6 +456,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :service, # public
           :status, # public
           :step, # public
+          :strict, # public
+          :strict?, # public
           :stubbed_result?, # public
           :success?, # public
           :to_arguments, # public
