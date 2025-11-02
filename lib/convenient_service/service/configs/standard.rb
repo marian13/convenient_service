@@ -36,6 +36,7 @@ module ConvenientService
             :per_instance_caching,
             :backtrace_cleaner,
             # :active_model_validations,
+            # :active_model_attribute_assignment,
             # :dry_initializer,
             # :memo_wise,
             # :not_passed_arguments,
@@ -81,6 +82,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Concern if options.enabled?(:short_syntax)
             use ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern if options.enabled?(:short_syntax)
             use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern if options.enabled?(:active_model_validations)
+            use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern if options.enabled?(:active_model_attribute_assignment)
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern if options.enabled?(:dry_initializer)
             use ConvenientService::Plugins::Common::HasMemoization::UsingMemoWise::Concern if options.enabled?(:memo_wise)
             use ConvenientService::Plugins::Common::CanHaveNotPassedArguments::Concern if options.enabled?(:not_passed_arguments)
