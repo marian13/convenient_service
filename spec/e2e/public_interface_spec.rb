@@ -173,7 +173,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         expect(public_instance_methods_of(service_class)).to eq([
           :call, # public
           :constructor_arguments, # public
-          :copy, # public
+          :copy, # private
           :error, # public
           :error_without_middlewares, # private
           :failure, # public

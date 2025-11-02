@@ -6,6 +6,7 @@
 --hide-tag internal
 --tag license
 --hide-tag license
+--exclude lib/convenient_service/debug/**/*
 --plugin convenient_service_concern
 --plugin convenient_service_exclude_self_classes
 'lib/**/*.rb'
