@@ -209,7 +209,8 @@
 46
 47
 48
-49</pre>
+49
+50</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_result/middleware.rb', line 35</span>
@@ -217,10 +218,11 @@
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_strict'>strict</span> <span class='kw'>if</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_strict?'>strict?</span>
+
   <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span>
     <span class='label'>overrides:</span> <span class='lbrace'>{</span>
       <span class='label'>kwargs:</span> <span class='lbrace'>{</span>
-        <span class='label'>status:</span> <span class='id identifier rubyid_extract_status'>extract_status</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='comma'>,</span>
         <span class='label'>data:</span> <span class='id identifier rubyid_extract_data'>extract_data</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='comma'>,</span>
         <span class='label'>step:</span> <span class='id identifier rubyid_step'>step</span><span class='comma'>,</span>
         <span class='label'>service:</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_organizer'>organizer</span><span class='comma'>,</span>
@@ -239,7 +241,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Nov  2 17:56:22 2025 by
+  Generated on Sun Nov  2 19:18:01 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
