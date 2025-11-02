@@ -5,7 +5,7 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-puts "TIP: Comment `return` in `spec/support/timeout_debug.rb` to debug `Timeout.timeout`."
+puts "TIP: Comment `return` in `lib/convenient_service/debug/timeout.rb` to debug `Timeout.timeout`."
 
 return
 

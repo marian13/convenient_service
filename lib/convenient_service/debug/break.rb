@@ -6,7 +6,7 @@
 ##
 
 ##
-# NOTE: `JRUBY_OPTS='--debug'` helps to avoid the follwing warning.
+# NOTE: `JRUBY_OPTS='--debug'` helps to avoid the following warning.
 #   /usr/local/bundle/gems/break-0.40.0/lib/break/commands/tracepoint_command.rb:26: warning: tracing (e.g. set_trace_func) will not capture all events without --debug flag
 #
 # - https://github.com/gsamokovarov/break
