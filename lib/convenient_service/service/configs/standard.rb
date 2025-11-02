@@ -96,6 +96,7 @@ module ConvenientService
             use ConvenientService::Plugins::Common::CachesConstructorArguments::Middleware if options.enabled?(:recalculation)
             use ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware if options.enabled?(:backtrace_cleaner)
             use ConvenientService::Plugins::Service::CanHaveSteps::Middleware if options.enabled?(:essential)
+            use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware if options.enabled?(:active_model_attribute_assignment)
             use ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware if options.enabled?(:code_review_automation)
           end
 

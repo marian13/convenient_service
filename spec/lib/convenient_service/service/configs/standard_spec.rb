@@ -987,6 +987,12 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :rails do
               expect(service_class.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern && current_middleware == ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern }).not_to be_nil
             end
           end
+
+          example_group "#initialize middlewares" do
+            it "adds `ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware` after `ConvenientService::Plugins::Service::CanHaveSteps::Middleware` to service middlewares for `#initialize`" do
+              expect(service_class.middlewares(:initialize).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::CanHaveSteps::Middleware && current_middleware == ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware }).not_to be_nil
+            end
+          end
         end
       end
 
