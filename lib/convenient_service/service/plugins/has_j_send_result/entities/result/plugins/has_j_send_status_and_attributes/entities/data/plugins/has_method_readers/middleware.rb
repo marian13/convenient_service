@@ -18,7 +18,7 @@ module ConvenientService
                     module Plugins
                       module HasMethodReaders
                         class Middleware < MethodChainMiddleware
-                          intended_for :initiliaze, entity: :data
+                          intended_for :initialize, entity: :data
 
                           ##
                           # @return [void]
@@ -29,8 +29,6 @@ module ConvenientService
                           #
                           #   NOTE: Hashie has similar behaviour.
                           #   - https://github.com/hashie/hashie/blob/master/lib/hashie/extensions/method_access.rb#L29
-                          #
-                          #   TODO: Specs.
                           #
                           def next(*args, **kwargs, &block)
                             chain.next(*args, **kwargs, &block)

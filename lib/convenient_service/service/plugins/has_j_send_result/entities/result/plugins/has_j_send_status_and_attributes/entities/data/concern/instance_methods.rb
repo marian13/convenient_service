@@ -21,7 +21,7 @@ module ConvenientService
 
                         ##
                         # @!attribute [r] value
-                        #   @return [Hash]
+                        #   @return [Hash{Symbol => Object}]
                         #
                         # @internal
                         #   NOTE: This method can be overridden by the end-user when the `HasMethodReaders` plugin is utilized. Prefer to rely on `__value__` inside the library code.
@@ -29,7 +29,7 @@ module ConvenientService
                         attr_reader :value
 
                         ##
-                        # @return [Hash]
+                        # @return [Hash{Symbol => Object}]
                         #
                         alias_method :__value__, :value
 
@@ -101,6 +101,18 @@ module ConvenientService
                         alias_method :__has_attribute__?, :has_attribute?
 
                         ##
+                        # @return [Hash{Symbol => Object}]
+                        #
+                        def attributes
+                          __value__
+                        end
+
+                        ##
+                        # @return [Hash{Symbol => Object}]
+                        #
+                        alias_method :__attributes__, :attributes
+
+                        ##
                         # @return [Array<Symbol>]
                         #
                         # @internal
@@ -114,6 +126,18 @@ module ConvenientService
                         # @return [Array<Symbol>]
                         #
                         alias_method :__keys__, :keys
+
+                        ##
+                        # @return [Struct]
+                        #
+                        def struct
+                          @struct ||= ::Struct.new(*__value__.keys, keyword_init: true).new(__value__)
+                        end
+
+                        ##
+                        # @return [Array<Symbol>]
+                        #
+                        alias_method :__struct__, :struct
 
                         ##
                         # @param other [Object] Can be any type.
@@ -209,7 +233,7 @@ module ConvenientService
                         end
 
                         ##
-                        # @return [Hash]
+                        # @return [Hash{Symbol => Object}]
                         #
                         def to_h
                           @to_h ||= __value__.to_h
@@ -219,7 +243,7 @@ module ConvenientService
                         # @return [String]
                         #
                         def to_s
-                          @to_s ||= to_h.to_s
+                          @to_s ||= __value__.to_h.to_s
                         end
                       end
                     end

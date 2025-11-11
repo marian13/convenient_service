@@ -182,6 +182,26 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
     end
 
+    describe "#attributes" do
+      it "returns value" do
+        expect(data.attributes).to eq(value)
+      end
+
+      specify do
+        expect { data.attributes }.to cache_its_value
+      end
+    end
+
+    describe "#__attributes__" do
+      it "returns value" do
+        expect(data.__attributes__).to eq(value)
+      end
+
+      specify do
+        expect { data.__attributes__ }.to cache_its_value
+      end
+    end
+
     describe "#keys" do
       specify do
         expect { data.keys }
@@ -197,6 +217,70 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           .to delegate_to(data.__value__, :keys)
           .without_arguments
           .and_return_its_value
+      end
+    end
+
+    describe "#struct" do
+      specify do
+        expect { data.struct }.to cache_its_value
+      end
+
+      it "returns `Struct` instance" do
+        expect(data.struct).to be_kind_of(Struct)
+      end
+
+      example_group "`Struct` instance" do
+        let(:value) { {foo: :foo, bar: :bar} }
+
+        it "has defined methods for each data attribute" do
+          expect(value.keys.all? { |key| data.struct.respond_to?(key) }).to eq(true)
+        end
+
+        example_group "method" do
+          it "returns corresponding value" do
+            expect([data.struct.foo, data.struct.bar]).to eq(data.to_h.values)
+          end
+        end
+
+        context "when data has NOT attributes" do
+          let(:value) { {foo: :foo, bar: :bar} }
+
+          it "does NOT raise" do
+            expect { data.struct }.not_to raise_error
+          end
+        end
+      end
+    end
+
+    describe "#__struct__" do
+      specify do
+        expect { data.__struct__ }.to cache_its_value
+      end
+
+      it "returns `Struct` instance" do
+        expect(data.__struct__).to be_kind_of(Struct)
+      end
+
+      example_group "`Struct` instance" do
+        let(:value) { {foo: :foo, bar: :bar} }
+
+        it "has defined methods for each data attribute" do
+          expect(value.keys.all? { |key| data.__struct__.respond_to?(key) }).to eq(true)
+        end
+
+        example_group "method" do
+          it "returns corresponding value" do
+            expect([data.__struct__.foo, data.__struct__.bar]).to eq(data.to_h.values)
+          end
+        end
+
+        context "when data has NOT attributes" do
+          let(:value) { {foo: :foo, bar: :bar} }
+
+          it "does NOT raise" do
+            expect { data.__struct__ }.not_to raise_error
+          end
+        end
       end
     end
 
@@ -627,7 +711,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       describe "#to_s" do
         it "returns string representation of `data`" do
           expect { data.to_s }
-            .to delegate_to(data.to_h, :to_s)
+            .to delegate_to(data.__value__, :to_s)
             .without_arguments
             .and_return_its_value
         end
