@@ -562,16 +562,20 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :==, # public
           :===, # public
           :[], # public
+          :__attributes__, # public
           :__empty__?, # public
           :__has_attribute__?, # public
           :__keys__, # public
           :__result__, # private
+          :__struct__, # public
           :__value__, # private
+          :attributes, # public
           :copy, # private
           :empty?, # public
           :has_attribute?, # public
           :keys, # public
           :result, # private
+          :struct, # public
           :to_arguments, # private
           :to_h, # public
           :to_kwargs, # private
@@ -652,17 +656,21 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
             :==, # public
             :===, # public
             :[], # public
+            :__attributes__, # public
             :__empty__?, # public
             :__has_attribute__?, # public
             :__keys__, # public
             :__result__, # private
+            :__struct__, # public
             :__value__, # private
+            :attributes, # public
             :copy, # private
             :empty?, # public
             :has_attribute?, # public
             :inspect, # public
             :keys, # public
             :result, # private
+            :struct, # public
             :to_arguments, # private
             :to_h, # public
             :to_kwargs, # private
@@ -1340,6 +1348,42 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
       specify do
         expect(private_singleton_class_methods_of(step_class)).to eq([])
       end
+    end
+  end
+
+  example_group "Convenient Service module" do
+    specify do
+      expect(public_instance_methods_of(ConvenientService)).to eq([])
+    end
+
+    specify do
+      expect(protected_instance_methods_of(ConvenientService)).to eq([])
+    end
+
+    specify do
+      expect(private_instance_methods_of(ConvenientService)).to eq([])
+    end
+
+    specify do
+      expect(public_class_methods_of(ConvenientService)).to eq([
+        :backtrace_cleaner, # public
+        :debug?, # private
+        :examples_root, # private
+        :lib_root, # private
+        :logger, # public
+        :raise, # public
+        :reraise, # public
+        :root, # public
+        :spec_root # private
+      ])
+    end
+
+    specify do
+      expect(protected_class_methods_of(ConvenientService)).to eq([])
+    end
+
+    specify do
+      expect(private_class_methods_of(ConvenientService)).to eq([])
     end
   end
 end

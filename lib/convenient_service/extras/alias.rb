@@ -16,3 +16,12 @@
 require "convenient_service"
 
 ConvenientService::Dependencies.require_alias
+
+##
+# `CS` is just an alias for `ConvenientService`. It becames available by `require "convenient_service/alias"`.
+#
+# @internal
+#   NOTE: Added for visibility in YARD docs.
+#
+module CS
+end
