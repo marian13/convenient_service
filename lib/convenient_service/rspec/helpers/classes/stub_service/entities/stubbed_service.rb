@@ -63,7 +63,7 @@ module ConvenientService
 
                 service_class.commit_config!(trigger: Constants::Triggers::STUB_SERVICE)
 
-                Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult[service: service_class, arguments: arguments, result: result]
+                Service::Plugins::CanHaveStubbedResults.set_service_stubbed_result(service_class, arguments, result)
 
                 self
               end

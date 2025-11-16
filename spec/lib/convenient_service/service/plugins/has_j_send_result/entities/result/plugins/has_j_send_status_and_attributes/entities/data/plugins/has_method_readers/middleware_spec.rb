@@ -73,8 +73,11 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       let(:result) { service.result }
       let(:data) { result.unsafe_data }
 
+      ##
+      # NOTE: Newer Rubies return `[:foo, :bar]`, older - `[:bar, :foo]`. That is why `sort` is added.
+      #
       specify do
-        expect { method_value }.to change(data, :singleton_methods).from([]).to([:foo, :bar])
+        expect { method_value }.to change { data.singleton_methods.sort }.from([]).to([:bar, :foo])
       end
 
       specify do

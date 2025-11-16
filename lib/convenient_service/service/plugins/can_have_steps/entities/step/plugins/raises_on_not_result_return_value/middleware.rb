@@ -19,7 +19,7 @@ module ConvenientService
                   def next(...)
                     original_result = chain.next(...)
 
-                    return original_result if ConvenientService::Service::Plugins::HasJSendResult::Commands::IsResult[result: original_result]
+                    return original_result if ConvenientService::Service::Plugins::HasJSendResult.result?(original_result)
 
                     ::ConvenientService.raise Exceptions::ReturnValueNotKindOfResult.new(step: entity, result: original_result)
                   end
