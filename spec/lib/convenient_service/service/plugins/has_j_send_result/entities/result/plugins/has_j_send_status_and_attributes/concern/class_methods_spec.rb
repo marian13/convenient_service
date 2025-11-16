@@ -36,8 +36,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe ".code_class" do
       specify do
         expect { result_class.code_class }
-          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity, :call)
-          .with_arguments(namespace: result_class, proto_entity: ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code)
+          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity, :find_or_create_entity)
+          .with_arguments(result_class, ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code)
           .and_return_its_value
       end
 
@@ -49,8 +49,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe ".data_class" do
       specify do
         expect { result_class.data_class }
-          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity, :call)
-          .with_arguments(namespace: result_class, proto_entity: ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data)
+          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity, :find_or_create_entity)
+          .with_arguments(result_class, ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data)
           .and_return_its_value
       end
 
@@ -62,8 +62,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe ".message_class" do
       specify do
         expect { result_class.message_class }
-          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity, :call)
-          .with_arguments(namespace: result_class, proto_entity: ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message)
+          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity, :find_or_create_entity)
+          .with_arguments(result_class, ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message)
           .and_return_its_value
       end
 
@@ -75,8 +75,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe ".status_class" do
       specify do
         expect { result_class.status_class }
-          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity, :call)
-          .with_arguments(namespace: result_class, proto_entity: ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status)
+          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity, :find_or_create_entity)
+          .with_arguments(result_class, ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status)
           .and_return_its_value
       end
 

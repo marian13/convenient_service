@@ -85,10 +85,7 @@ module ConvenientService
             #   TODO: Specs that prevent public interface accidental pollution.
             #
             def result_class
-              @result_class ||= Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity[
-                namespace: self,
-                proto_entity: Entities::Result
-              ]
+              @result_class ||= Common::Plugins::CanHaveUserProvidedEntity.find_or_create_entity(self, Entities::Result)
             end
           end
         end

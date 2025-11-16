@@ -20,10 +20,7 @@ module ConvenientService
                     # @return [Class]
                     #
                     def code_class
-                      @code_class ||= Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity[
-                        namespace: self,
-                        proto_entity: Entities::Code
-                      ]
+                      @code_class ||= Common::Plugins::CanHaveUserProvidedEntity.find_or_create_entity(self, Entities::Code)
                     end
 
                     ##
@@ -31,10 +28,7 @@ module ConvenientService
                     # @return [Class]
                     #
                     def data_class
-                      @data_class ||= Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity[
-                        namespace: self,
-                        proto_entity: Entities::Data
-                      ]
+                      @data_class ||= Common::Plugins::CanHaveUserProvidedEntity.find_or_create_entity(self, Entities::Data)
                     end
 
                     ##
@@ -42,10 +36,7 @@ module ConvenientService
                     # @return [Class]
                     #
                     def message_class
-                      @message_class ||= Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity[
-                        namespace: self,
-                        proto_entity: Entities::Message
-                      ]
+                      @message_class ||= Common::Plugins::CanHaveUserProvidedEntity.find_or_create_entity(self, Entities::Message)
                     end
 
                     ##
@@ -53,10 +44,7 @@ module ConvenientService
                     # @return [Class]
                     #
                     def status_class
-                      @status_class ||= Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity[
-                        namespace: self,
-                        proto_entity: Entities::Status
-                      ]
+                      @status_class ||= Common::Plugins::CanHaveUserProvidedEntity.find_or_create_entity(self, Entities::Status)
                     end
                   end
                 end

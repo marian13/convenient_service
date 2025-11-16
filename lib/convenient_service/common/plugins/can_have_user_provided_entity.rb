@@ -7,3 +7,17 @@
 
 require_relative "can_have_user_provided_entity/commands"
 require_relative "can_have_user_provided_entity/exceptions"
+
+module ConvenientService
+  module Common
+    module Plugins
+      module CanHaveUserProvidedEntity
+        class << self
+          def find_or_create_entity(namespace, proto_entity)
+            Commands::FindOrCreateEntity[namespace: namespace, proto_entity: proto_entity]
+          end
+        end
+      end
+    end
+  end
+end

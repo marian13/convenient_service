@@ -212,8 +212,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Concern::Cla
     describe ".result_class" do
       specify do
         expect { service_class.result_class }
-          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity, :call)
-          .with_arguments(namespace: service_class, proto_entity: ConvenientService::Service::Plugins::HasJSendResult::Entities::Result)
+          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity, :find_or_create_entity)
+          .with_arguments(service_class, ConvenientService::Service::Plugins::HasJSendResult::Entities::Result)
           .and_return_its_value
       end
 

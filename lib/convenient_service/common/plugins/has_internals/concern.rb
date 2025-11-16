@@ -20,10 +20,7 @@ module ConvenientService
 
           class_methods do
             def internals_class
-              @internals_class ||= Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity[
-                namespace: self,
-                proto_entity: Entities::Internals
-              ]
+              @internals_class ||= Common::Plugins::CanHaveUserProvidedEntity.find_or_create_entity(self, Entities::Internals)
             end
           end
         end

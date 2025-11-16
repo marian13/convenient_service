@@ -49,8 +49,8 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Concern, type: 
     describe ".internals_class" do
       specify do
         expect { entity_class.internals_class }
-          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity, :call)
-          .with_arguments(namespace: entity_class, proto_entity: ConvenientService::Common::Plugins::HasInternals::Entities::Internals)
+          .to delegate_to(ConvenientService::Common::Plugins::CanHaveUserProvidedEntity, :find_or_create_entity)
+          .with_arguments(entity_class, ConvenientService::Common::Plugins::HasInternals::Entities::Internals)
           .and_return_its_value
       end
 

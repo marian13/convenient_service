@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
               config.eval_included_block(klass)
 
-              expect(klass.options).to eq(ConvenientService::Config.empty_options)
+              expect(klass.options).to eq(described_class.empty_options)
             end
 
             context "when `included` block raises exception" do
@@ -139,7 +139,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
                 ignoring_exception(ArgumentError) { config.eval_included_block(klass) }
 
-                expect(klass.options).to eq(ConvenientService::Config.empty_options)
+                expect(klass.options).to eq(described_class.empty_options)
               end
             end
           end
@@ -363,7 +363,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
               describe ".options" do
                 it "returns original empty `options`" do
-                  expect(config_copy.options).to eq(ConvenientService::Config.empty_options)
+                  expect(config_copy.options).to eq(described_class.empty_options)
                 end
               end
             end

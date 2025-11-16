@@ -37,10 +37,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
             def step_class
-              @step_class ||= Common::Plugins::CanHaveUserProvidedEntity::Commands::FindOrCreateEntity[
-                namespace: self,
-                proto_entity: Entities::Step
-              ]
+              @step_class ||= Common::Plugins::CanHaveUserProvidedEntity.find_or_create_entity(self, Entities::Step)
             end
           end
         end
