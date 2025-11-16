@@ -121,8 +121,8 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
 
       specify do
         expect { helper.to(value_spec) }
-          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
-          .with_arguments(feature: feature_class, entry: entry_name, arguments: nil, value: value)
+          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries, :set_feature_stubbed_entry)
+          .with_arguments(feature_class, entry_name, nil, value)
       end
 
       context "when used with `with_arguments`" do
@@ -130,8 +130,8 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
 
         specify do
           expect { helper.with_arguments(*args, **kwargs, &block).to(value_spec) }
-            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
-            .with_arguments(feature: feature_class, entry: entry_name, arguments: ConvenientService::Support::Arguments.new(*args, **kwargs, &block), value: value)
+            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries, :set_feature_stubbed_entry)
+            .with_arguments(feature_class, entry_name, ConvenientService::Support::Arguments.new(*args, **kwargs, &block), value)
         end
       end
 
@@ -140,8 +140,8 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
 
         specify do
           expect { helper.without_arguments.to(value_spec) }
-            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
-            .with_arguments(feature: feature_class, entry: entry_name, arguments: ConvenientService::Support::Arguments.null_arguments, value: value)
+            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries, :set_feature_stubbed_entry)
+            .with_arguments(feature_class, entry_name, ConvenientService::Support::Arguments.null_arguments, value)
         end
       end
     end
