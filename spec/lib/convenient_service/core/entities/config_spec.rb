@@ -708,7 +708,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                 service_options = options
 
                 example.instance_exec(service_options) do |service_options|
-                  expect(service_options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
+                  expect(service_options).to eq(ConvenientService::Config.empty_options)
                 end
 
                 mod = Module.new do
@@ -824,8 +824,8 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
             end
           end
 
-          it "returns empty set" do
-            expect(service_config.options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
+          it "returns empty options" do
+            expect(service_config.options).to eq(ConvenientService::Config.empty_options)
           end
 
           specify do
@@ -845,7 +845,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                   result_options = options
 
                   example.instance_exec(result_options) do |result_options|
-                    expect(result_options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
+                    expect(result_options).to eq(ConvenientService::Config.empty_options)
                   end
                 end
 
@@ -1023,11 +1023,11 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
             end
           end
 
-          it "returns empty set" do
-            expect(result_config.options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
+          it "returns empty options" do
+            expect(result_config.options).to eq(ConvenientService::Config.empty_options)
           end
 
-          it "returns same set as `entity`" do
+          it "returns same options as `entity`" do
             expect(result_config.options.object_id).to eq(service_config.options.object_id)
           end
 
@@ -1049,7 +1049,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                     data_options = options
 
                     example.instance_exec(data_options) do |data_options|
-                      expect(data_options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
+                      expect(data_options).to eq(ConvenientService::Config.empty_options)
                     end
                   end
                 end
@@ -1302,15 +1302,15 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
             end
           end
 
-          it "returns empty set" do
-            expect(data_config.options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
+          it "returns empty options" do
+            expect(data_config.options).to eq(ConvenientService::Config.empty_options)
           end
 
-          it "returns same set as one time nested `entity`" do
+          it "returns same options as one time nested `entity`" do
             expect(data_config.options.object_id).to eq(result_config.options.object_id)
           end
 
-          it "returns same set as `entity`" do
+          it "returns same options as `entity`" do
             expect(data_config.options.object_id).to eq(service_config.options.object_id)
           end
 

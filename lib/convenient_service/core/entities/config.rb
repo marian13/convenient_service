@@ -141,7 +141,7 @@ module ConvenientService
         #   NOTE: `namespace` is defined only for classes that were created by `Config#entity`.
         #
         def options
-          @options ||= Utils.safe_send(klass, :namespace)&.__convenient_service_config__&.options || ConvenientService::Config::Entities::OptionCollection.new
+          @options ||= Utils.safe_send(klass, :namespace)&.__convenient_service_config__&.options || ConvenientService::Config.empty_options
         end
 
         ##

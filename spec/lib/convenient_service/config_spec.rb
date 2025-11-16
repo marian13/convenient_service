@@ -35,6 +35,20 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
       it { is_expected.to extend_module(ConvenientService::Dependencies::Extractions::ActiveSupportConcern::Concern) }
 
+      example_group "class methods" do
+        describe ".empty_options" do
+          let(:config) { described_class }
+
+          it "returns empty options" do
+            expect(config.empty_options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
+          end
+
+          specify do
+            expect { config.empty_options }.not_to cache_its_value
+          end
+        end
+      end
+
       example_group "generated methods" do
         example_group "class methods" do
           # rubocop:disable RSpec/ExampleLength
@@ -103,7 +117,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
               config.eval_included_block(klass)
 
-              expect(klass.options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
+              expect(klass.options).to eq(ConvenientService::Config.empty_options)
             end
 
             context "when `included` block raises exception" do
@@ -125,7 +139,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
                 ignoring_exception(ArgumentError) { config.eval_included_block(klass) }
 
-                expect(klass.options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
+                expect(klass.options).to eq(ConvenientService::Config.empty_options)
               end
             end
           end
@@ -349,7 +363,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
               describe ".options" do
                 it "returns original empty `options`" do
-                  expect(config_copy.options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
+                  expect(config_copy.options).to eq(ConvenientService::Config.empty_options)
                 end
               end
             end
@@ -395,7 +409,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
             context "when `block` is NOT passed" do
               it "returns empty options" do
-                expect(config.default_options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
+                expect(config.default_options).to eq(config.empty_options)
               end
 
               specify do
@@ -419,6 +433,24 @@ RSpec.describe ConvenientService::Config, type: :standard do
 
                 expect(config.default_options).to eq(ConvenientService::Config::Commands::NormalizeOptions.call(options: options))
               end
+            end
+          end
+
+          describe ".empty_options" do
+            let(:config) do
+              Module.new.tap do |mod|
+                mod.module_exec(described_class) do |mod|
+                  include mod
+                end
+              end
+            end
+
+            it "returns empty options" do
+              expect(config.empty_options).to eq(ConvenientService::Config::Entities::OptionCollection.new)
+            end
+
+            specify do
+              expect { config.empty_options }.not_to cache_its_value
             end
           end
 
