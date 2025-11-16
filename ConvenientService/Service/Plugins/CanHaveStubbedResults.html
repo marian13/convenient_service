@@ -78,8 +78,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/service/plugins/can_have_stubbed_results/concern.rb<span class="defines">,<br />
-  lib/convenient_service/service/plugins/can_have_stubbed_results/middleware.rb,<br /> lib/convenient_service/service/plugins/can_have_stubbed_results/commands/set_service_stubbed_result.rb,<br /> lib/convenient_service/service/plugins/can_have_stubbed_results/commands/fetch_service_stubbed_results_cache.rb,<br /> lib/convenient_service/service/plugins/can_have_stubbed_results/commands/fetch_all_services_stubbed_results_cache.rb</span>
+    <dd>lib/convenient_service/service/plugins/can_have_stubbed_results.rb<span class="defines">,<br />
+  lib/convenient_service/service/plugins/can_have_stubbed_results/concern.rb,<br /> lib/convenient_service/service/plugins/can_have_stubbed_results/middleware.rb,<br /> lib/convenient_service/service/plugins/can_have_stubbed_results/commands/set_service_stubbed_result.rb,<br /> lib/convenient_service/service/plugins/can_have_stubbed_results/commands/fetch_service_stubbed_results_cache.rb,<br /> lib/convenient_service/service/plugins/can_have_stubbed_results/commands/fetch_all_services_stubbed_results_cache.rb</span>
 </dd>
   </dl>
   
@@ -104,12 +104,81 @@
 
 
 
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
 
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_service_stubbed_result-class_method" title="set_service_stubbed_result (class method)">.<strong>set_service_stubbed_result</strong>(service, arguments, result)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="set_service_stubbed_result-class_method">
+  
+    .<strong>set_service_stubbed_result</strong>(service, arguments, result)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_service_stubbed_result'>set_service_stubbed_result</span><span class='lparen'>(</span><span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="CanHaveStubbedResults/Commands.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="CanHaveStubbedResults/Commands/SetServiceStubbedResult.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult (class)">SetServiceStubbedResult</a></span></span><span class='lbracket'>[</span><span class='label'>service:</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Tue Nov 11 01:44:46 2025 by
+  Generated on Sun Nov 16 22:36:28 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>

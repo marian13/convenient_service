@@ -118,6 +118,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#empty_options-class_method" title="empty_options (class method)">.<strong>empty_options</strong>  &#x21d2; ConvenientService::Config::Entities::OptionCollection </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#included-class_method" title="included (class method)">.<strong>included</strong>(mod)  &#x21d2; void </a>
     
 
@@ -147,7 +169,59 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="included-class_method">
+  <h3 class="signature first" id="empty_options-class_method">
+  
+    .<strong>empty_options</strong>  &#x21d2; <tt><span class='object_link'><a href="Config/Entities/OptionCollection.html" title="ConvenientService::Config::Entities::OptionCollection (class)">ConvenientService::Config::Entities::OptionCollection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Config/Entities/OptionCollection.html" title="ConvenientService::Config::Entities::OptionCollection (class)">ConvenientService::Config::Entities::OptionCollection</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+176
+177
+178</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config.rb', line 176</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_empty_options'>empty_options</span>
+  <span class='const'><span class='object_link'><a href="Config/Entities.html" title="ConvenientService::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Entities/OptionCollection.html" title="ConvenientService::Config::Entities::OptionCollection (class)">OptionCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/OptionCollection.html#initialize-instance_method" title="ConvenientService::Config::Entities::OptionCollection#initialize (method)">new</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="included-class_method">
   
     .<strong>included</strong>(mod)  &#x21d2; <tt>void</tt> 
   
@@ -185,7 +259,6 @@
       <pre class="lines">
 
 
-18
 19
 20
 21
@@ -330,12 +403,20 @@
 160
 161
 162
-163</pre>
+163
+164
+165
+166
+167
+168
+169
+170
+171</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config.rb', line 19</span>
 
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_included'>included</span><span class='lparen'>(</span><span class='id identifier rubyid_mod'>mod</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_mod'>mod</span><span class='period'>.</span><span class='id identifier rubyid_extend'>extend</span> <span class='const'><span class='object_link'><a href="Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Dependencies/Extractions.html" title="ConvenientService::Dependencies::Extractions (module)">Extractions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Dependencies/Extractions/ActiveSupportConcern.html" title="ConvenientService::Dependencies::Extractions::ActiveSupportConcern (module)">ActiveSupportConcern</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Dependencies/Extractions/ActiveSupportConcern/Concern.html" title="ConvenientService::Dependencies::Extractions::ActiveSupportConcern::Concern (module)">Concern</a></span></span>
 
   <span class='id identifier rubyid_mod'>mod</span><span class='period'>.</span><span class='id identifier rubyid_module_exec'>module_exec</span> <span class='kw'>do</span>
@@ -453,7 +534,14 @@
 </span>      <span class='comment'># @return [ConvenientService::Config::Entities::OptionCollection]
 </span>      <span class='comment'>#
 </span>      <span class='kw'>def</span> <span class='id identifier rubyid_default_options'>default_options</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-        <span class='id identifier rubyid_block'>block</span> <span class='op'>?</span> <span class='ivar'>@default_options</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Config/Commands.html" title="ConvenientService::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Commands/NormalizeOptions.html" title="ConvenientService::Config::Commands::NormalizeOptions (class)">NormalizeOptions</a></span></span><span class='lbracket'>[</span><span class='label'>options:</span> <span class='kw'>yield</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='ivar'>@default_options</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Config/Entities.html" title="ConvenientService::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Entities/OptionCollection.html" title="ConvenientService::Config::Entities::OptionCollection (class)">OptionCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/OptionCollection.html#initialize-instance_method" title="ConvenientService::Config::Entities::OptionCollection#initialize (method)">new</a></span></span>
+        <span class='id identifier rubyid_block'>block</span> <span class='op'>?</span> <span class='ivar'>@default_options</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Config/Commands.html" title="ConvenientService::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Commands/NormalizeOptions.html" title="ConvenientService::Config::Commands::NormalizeOptions (class)">NormalizeOptions</a></span></span><span class='lbracket'>[</span><span class='label'>options:</span> <span class='kw'>yield</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='ivar'>@default_options</span> <span class='op'>||=</span> <span class='id identifier rubyid_empty_options'>empty_options</span>
+      <span class='kw'>end</span>
+
+      <span class='comment'>##
+</span>      <span class='comment'># @return [ConvenientService::Config::Entities::OptionCollection]
+</span>      <span class='comment'>#
+</span>      <span class='kw'>def</span> <span class='id identifier rubyid_empty_options'>empty_options</span>
+        <span class='const'><span class='object_link'><a href="Config/Entities.html" title="ConvenientService::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Entities/OptionCollection.html" title="ConvenientService::Config::Entities::OptionCollection (class)">OptionCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/OptionCollection.html#initialize-instance_method" title="ConvenientService::Config::Entities::OptionCollection#initialize (method)">new</a></span></span>
       <span class='kw'>end</span>
 
       <span class='comment'>##
@@ -491,7 +579,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Nov 11 01:44:44 2025 by
+  Generated on Sun Nov 16 22:36:27 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
