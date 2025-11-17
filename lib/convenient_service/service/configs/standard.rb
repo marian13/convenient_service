@@ -162,15 +162,15 @@ module ConvenientService
           end
 
           middlewares :success do
-            use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Success::Middleware if options.enabled?(:short_syntax)
+            use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Middleware if options.enabled?(:short_syntax)
           end
 
           middlewares :failure do
-            use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Failure::Middleware if options.enabled?(:short_syntax)
+            use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Middleware if options.enabled?(:short_syntax)
           end
 
           middlewares :error do
-            use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Error::Middleware if options.enabled?(:short_syntax)
+            use ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Middleware if options.enabled?(:short_syntax)
           end
 
           middlewares :result, scope: :class do

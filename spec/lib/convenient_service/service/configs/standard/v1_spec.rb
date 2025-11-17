@@ -216,7 +216,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         example_group "#success middlewares" do
           let(:success_middlewares) do
             [
-              ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Success::Middleware
+              ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Middleware
             ]
           end
 
@@ -228,7 +228,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         example_group "#failure middlewares" do
           let(:failure_middlewares) do
             [
-              ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Failure::Middleware
+              ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Middleware
             ]
           end
 
@@ -240,7 +240,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         example_group "#error middlewares" do
           let(:error_middlewares) do
             [
-              ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Error::Middleware
+              ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Middleware
             ]
           end
 

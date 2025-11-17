@@ -6,6 +6,5 @@
 ##
 
 require_relative "has_j_send_result_short_syntax/concern"
-require_relative "has_j_send_result_short_syntax/success"
-require_relative "has_j_send_result_short_syntax/failure"
-require_relative "has_j_send_result_short_syntax/error"
+require_relative "has_j_send_result_short_syntax/exceptions"
+require_relative "has_j_send_result_short_syntax/middleware"

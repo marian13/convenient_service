@@ -32,4 +32,31 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultShortSyntax::C
       it { is_expected.to extend_module(described_class::ClassMethods) }
     end
   end
+
+  example_group "class methods" do
+    describe "#[]" do
+      include ConvenientService::RSpec::Matchers::DelegateTo
+
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          def result
+            success
+          end
+        end
+      end
+
+      let(:args) { [:foo] }
+      let(:kwargs) { {foo: :bar} }
+      let(:block) { proc { :foo } }
+
+      specify do
+        expect { service_class[*args, **kwargs, &block] }
+          .to delegate_to(service_class, :result)
+          .with_arguments(*args, **kwargs, &block)
+          .and_return_its_value
+      end
+    end
+  end
 end
