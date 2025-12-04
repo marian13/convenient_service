@@ -50,6 +50,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         it "returns copy of `other`" do
           expect(casted).to eq(data)
         end
+
+        ##
+        # NOTE: Ensures `ConvenientService::Plugins::Data::HasMethodReaders::Middleware` does NOT break `success(value: some_value)`.
+        #
+        specify do
+          expect { casted }
+            .to delegate_to(other, :__value__)
+            .without_arguments
+        end
       end
     end
 

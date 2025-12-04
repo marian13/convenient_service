@@ -26,7 +26,7 @@ module ConvenientService
                           when ::Hash
                             new(value: other.transform_keys(&:to_sym))
                           when Data
-                            new(value: other.value)
+                            new(value: other.__value__)
                           end
                         end
 
