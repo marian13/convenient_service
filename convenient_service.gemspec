@@ -120,7 +120,13 @@ Gem::Specification.new do |spec|
   # - https://github.com/deivid-rodriguez/byebug/tree/master/ext/byebug
   # - https://github.com/deivid-rodriguez/byebug/issues/179#issuecomment-152727003
   #
-  spec.add_development_dependency "byebug", "~> 10.0" if ConvenientService::Dependencies.support_byebug?
+  if ConvenientService::Dependencies.support_byebug?
+    if ConvenientService::Dependencies.ruby.version >= 3.4
+      spec.add_development_dependency "byebug", "~> 12.0"
+    else
+      spec.add_development_dependency "byebug", "~> 10.0"
+    end
+  end
 
   ##
   # Used for parsing Markdown in YARD docs.
