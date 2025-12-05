@@ -14,6 +14,86 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do
+    describe ".status_class?" do
+      let(:klass) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status }
+
+      context "when `status` is NOT class" do
+        let(:status_class) { 42 }
+
+        it "returns `false`" do
+          expect(klass.status_class?(status_class)).to eq(false)
+        end
+      end
+
+      context "when `status` is class" do
+        context "when `status` is NOT status class" do
+          let(:status_class) { Class.new }
+
+          it "returns `false`" do
+            expect(klass.status_class?(status_class)).to eq(false)
+          end
+
+          context "when `status` is entity class" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Standard::Config
+
+                def result
+                  success
+                end
+              end
+            end
+
+            it "returns `false`" do
+              expect(klass.status_class?(service_class)).to eq(false)
+            end
+          end
+        end
+
+        context "when `status` is status class" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success
+              end
+            end
+          end
+
+          let(:status_class) { service_class.new.result.status.class }
+
+          it "returns `true`" do
+            expect(klass.status_class?(status_class)).to eq(true)
+          end
+        end
+      end
+    end
+
+    describe ".status?" do
+      let(:klass) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status }
+
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          def result
+            success
+          end
+        end
+      end
+
+      let(:status_class) { service_class.result_class.status_class }
+      let(:data_instance) { service_class.result.status }
+
+      specify do
+        expect { klass.status?(data_instance) }
+          .to delegate_to(klass, :status_class?)
+          .with_arguments(status_class)
+          .and_return_its_value
+      end
+    end
+
     describe ".cast" do
       let(:casted) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.cast(other) }
 
@@ -60,15 +140,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       specify do
         expect { status_class === other }
-          .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Commands::IsStatus, :call)
-          .with_arguments(status: other)
+          .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status, :status?)
+          .with_arguments(other)
       end
 
       it "returns `false`" do
         expect(status_class === other).to eq(false)
       end
 
-      context "when `other` is status instance in terms of `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Commands::IsStatus`" do
+      context "when `other` is status instance in terms of `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.status?`" do
         let(:service) do
           Class.new do
             include ConvenientService::Standard::Config
@@ -83,8 +163,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
         specify do
           expect { status_class === other }
-            .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Commands::IsStatus, :call)
-            .with_arguments(status: other)
+            .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status, :status?)
+            .with_arguments(other)
         end
 
         it "returns `true`" do

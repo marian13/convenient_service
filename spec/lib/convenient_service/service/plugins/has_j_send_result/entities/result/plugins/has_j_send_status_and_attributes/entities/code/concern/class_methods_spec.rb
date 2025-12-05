@@ -141,7 +141,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       specify do
         expect { code_class === other }
           .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code, :code?)
-          .with_arguments(code: other)
+          .with_arguments(other)
       end
 
       it "returns `false`" do
@@ -164,7 +164,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         specify do
           expect { code_class === other }
             .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code, :code?)
-            .with_arguments(code: other)
+            .with_arguments(other)
         end
 
         it "returns `true`" do

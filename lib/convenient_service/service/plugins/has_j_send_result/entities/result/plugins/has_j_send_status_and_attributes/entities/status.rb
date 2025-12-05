@@ -5,7 +5,6 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "status/commands"
 require_relative "status/concern"
 require_relative "status/plugins"
 
