@@ -14,6 +14,86 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do
+    describe ".code_class?" do
+      let(:klass) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code }
+
+      context "when `code` is NOT class" do
+        let(:code_class) { 42 }
+
+        it "returns `false`" do
+          expect(klass.code_class?(code_class)).to eq(false)
+        end
+      end
+
+      context "when `code` is class" do
+        context "when `code` is NOT code class" do
+          let(:code_class) { Class.new }
+
+          it "returns `false`" do
+            expect(klass.code_class?(code_class)).to eq(false)
+          end
+
+          context "when `code` is entity class" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Standard::Config
+
+                def result
+                  success
+                end
+              end
+            end
+
+            it "returns `false`" do
+              expect(klass.code_class?(service_class)).to eq(false)
+            end
+          end
+        end
+
+        context "when `code` is code class" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success
+              end
+            end
+          end
+
+          let(:code_class) { service_class.new.result.unsafe_code.class }
+
+          it "returns `true`" do
+            expect(klass.code_class?(code_class)).to eq(true)
+          end
+        end
+      end
+    end
+
+    describe ".code?" do
+      let(:klass) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code }
+
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          def result
+            success
+          end
+        end
+      end
+
+      let(:code_class) { service_class.result_class.code_class }
+      let(:data_instance) { service_class.result.unsafe_code }
+
+      specify do
+        expect { klass.code?(data_instance) }
+          .to delegate_to(klass, :code_class?)
+          .with_arguments(code_class)
+          .and_return_its_value
+      end
+    end
+
     describe ".cast" do
       let(:casted) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(other) }
 
@@ -60,7 +140,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       specify do
         expect { code_class === other }
-          .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Commands::IsCode, :call)
+          .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code, :code?)
           .with_arguments(code: other)
       end
 
@@ -68,7 +148,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         expect(code_class === other).to eq(false)
       end
 
-      context "when `other` is code instance in terms of `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Commands::IsCode`" do
+      context "when `other` is code instance in terms of `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.code?`" do
         let(:service) do
           Class.new do
             include ConvenientService::Standard::Config
@@ -83,7 +163,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
         specify do
           expect { code_class === other }
-            .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Commands::IsCode, :call)
+            .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code, :code?)
             .with_arguments(code: other)
         end
 

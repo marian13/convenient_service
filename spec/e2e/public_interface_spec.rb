@@ -976,6 +976,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :__convenient_service_config__, # private
           :cast, # private
           :cast!, # private
+          :code?, # public
+          :code_class?, # public
           :commit_config!, # public
           :concerns, # public
           :entity, # public
@@ -1056,6 +1058,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :__convenient_service_config__, # private
           :cast, # private
           :cast!, # private
+          :code?, # public
+          :code_class?, # public
           :commit_config!, # public
           :concerns, # public
           :entity, # public

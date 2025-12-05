@@ -18,6 +18,80 @@ module ConvenientService
                     module Concern
                       module ClassMethods
                         ##
+                        # Checks whether an object is a code class.
+                        #
+                        # @api public
+                        #
+                        # @param code_class [Object] Can be any type.
+                        # @return [Boolean]
+                        #
+                        # @example Simple usage.
+                        #   class Service
+                        #     include ConvenientService::Standard::Config
+                        #
+                        #     def result
+                        #       success
+                        #     end
+                        #   end
+                        #
+                        #   result = Service.result
+                        #
+                        #   result.success?
+                        #
+                        #   code = result.code
+                        #
+                        #   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.data_class?(code.class)
+                        #   # => true
+                        #
+                        #   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.data_class?(code)
+                        #   # => false
+                        #
+                        #   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.data_class?(42)
+                        #   # => false
+                        #
+                        def code_class?(code_class)
+                          return false unless code_class.instance_of?(::Class)
+
+                          code_class.include?(Entities::Code::Concern)
+                        end
+
+                        ##
+                        # Checks whether an object is a code instance.
+                        #
+                        # @api public
+                        #
+                        # @param code [Object] Can be any type.
+                        # @return [Boolean]
+                        #
+                        # @example Simple usage.
+                        #   class Service
+                        #     include ConvenientService::Standard::Config
+                        #
+                        #     def result
+                        #       success
+                        #     end
+                        #   end
+                        #
+                        #   result = Service.result
+                        #
+                        #   result.success?
+                        #
+                        #   code = result.code
+                        #
+                        #   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.code?(code)
+                        #   # => true
+                        #
+                        #   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.code?(code.class)
+                        #   # => false
+                        #
+                        #   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.code?(42)
+                        #   # => false
+                        #
+                        def code?(code)
+                          code_class?(code.class)
+                        end
+
+                        ##
                         # @param other [Object] Can be any type.
                         # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code, nil]
                         #
@@ -41,7 +115,7 @@ module ConvenientService
                         #   - https://ruby-doc.org/core-2.7.0/Module.html#method-i-3D-3D-3D
                         #
                         def ===(other)
-                          Commands::IsCode.call(code: other) || super
+                          code?(other) || super
                         end
                       end
                     end
