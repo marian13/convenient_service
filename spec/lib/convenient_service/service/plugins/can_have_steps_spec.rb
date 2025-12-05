@@ -42,10 +42,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps, type: :standar
               end
             end
 
-            let(:step_class) { service_class }
-
             it "returns `false`" do
-              expect(described_class.step_class?(step_class)).to eq(false)
+              expect(described_class.step_class?(service_class)).to eq(false)
             end
           end
         end

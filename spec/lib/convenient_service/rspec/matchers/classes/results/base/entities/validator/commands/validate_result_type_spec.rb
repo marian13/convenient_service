@@ -43,8 +43,8 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
 
         specify do
           expect { command_result }
-            .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Commands::IsResult, :call)
-            .with_arguments(result: result)
+            .to delegate_to(ConvenientService::Service::Plugins::HasJSendResult, :result?)
+            .with_arguments(result)
             .and_return_its_value
         end
       end

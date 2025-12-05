@@ -75,7 +75,7 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue
       end
 
       specify do
-        expect { method_value }.to delegate_to(ConvenientService::Service::Plugins::HasJSendResult::Commands::IsResult, :call)
+        expect { method_value }.to delegate_to(ConvenientService::Service::Plugins::HasJSendResult, :result?)
       end
 
       context "when `result` is NOT result" do

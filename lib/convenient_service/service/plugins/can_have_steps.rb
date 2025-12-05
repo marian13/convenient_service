@@ -15,7 +15,7 @@ module ConvenientService
       module CanHaveSteps
         class << self
           ##
-          # Checks whether an object is a step instance.
+          # Checks whether an object is a step class.
           #
           # @api public
           #

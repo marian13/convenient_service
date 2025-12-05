@@ -71,7 +71,7 @@ module ConvenientService
                     def call
                       return false unless result
 
-                      Service::Plugins::HasJSendResult::Commands::IsResult[result: result]
+                      Service::Plugins::HasJSendResult.result?(result)
                     end
                   end
                 end

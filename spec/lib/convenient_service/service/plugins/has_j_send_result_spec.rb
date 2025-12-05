@@ -14,19 +14,78 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult, type: :stand
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do
-    describe ".result?" do
-      let(:service) do
-        Class.new do
-          include ConvenientService::Standard::Config
+    describe ".result_class?" do
+      context "when `result` is NOT class" do
+        let(:result_class) { 42 }
+
+        it "returns `false`" do
+          expect(described_class.result_class?(result_class)).to eq(false)
         end
       end
 
-      let(:result) { service.success }
+      context "when `result` is class" do
+        context "when `result` is NOT result class" do
+          let(:result_class) { Class.new }
+
+          it "returns `false`" do
+            expect(described_class.result_class?(result_class)).to eq(false)
+          end
+
+          context "when `result` is entity class" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Standard::Config
+
+                def result
+                  success
+                end
+              end
+            end
+
+            it "returns `false`" do
+              expect(described_class.result_class?(service_class)).to eq(false)
+            end
+          end
+        end
+
+        context "when `result` is result class" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success
+              end
+            end
+          end
+
+          let(:result_class) { service_class.new.result.class }
+
+          it "returns `true`" do
+            expect(described_class.result_class?(result_class)).to eq(true)
+          end
+        end
+      end
+    end
+
+    describe ".result?" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          def result
+            success
+          end
+        end
+      end
+
+      let(:result_class) { service_class.result_class }
+      let(:result_instance) { service_class.result }
 
       specify do
-        expect { described_class.result?(result) }
-          .to delegate_to(described_class::Commands::IsResult, :call)
-          .with_arguments(result: result)
+        expect { described_class.result?(result_instance) }
+          .to delegate_to(described_class, :result_class?)
+          .with_arguments(result_class)
           .and_return_its_value
       end
     end
