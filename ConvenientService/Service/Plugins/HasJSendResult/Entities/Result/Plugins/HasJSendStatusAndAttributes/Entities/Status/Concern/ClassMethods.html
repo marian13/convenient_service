@@ -142,6 +142,52 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status%3F-instance_method" title="#status? (instance method)">#<strong>status?</strong>(status)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether an object is a status instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status_class%3F-instance_method" title="#status_class? (instance method)">#<strong>status_class?</strong>(status_class)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether an object is a status class.</p>
+</div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -207,15 +253,15 @@
       <pre class="lines">
 
 
-43
-44
-45</pre>
+117
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/class_methods.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/class_methods.rb', line 117</span>
 
 <span class='kw'>def</span> <span class='op'>===</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/IsStatus.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Commands::IsStatus (class)">IsStatus</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="../Commands/IsStatus.html#call-instance_method" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Commands::IsStatus#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>status:</span> <span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='kw'>super</span>
+  <span class='id identifier rubyid_status?'>status?</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='kw'>super</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -278,19 +324,19 @@
       <pre class="lines">
 
 
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33</pre>
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/class_methods.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/class_methods.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cast'>cast</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>case</span> <span class='id identifier rubyid_other'>other</span>
@@ -307,12 +353,224 @@
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="status?-instance_method">
+  
+    #<strong>status?</strong>(status)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether an object is a status instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Simple usage.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_success'>success</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span>
+
+<span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_success?'>success?</span>
+
+<span class='id identifier rubyid_status'>status</span> <span class='op'>=</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span>
+
+<span class='const'><span class='object_link'><a href="../../../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../HasJSendResult.html" title="ConvenientService::Service::Plugins::HasJSendResult (module)">HasJSendResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../HasJSendStatusAndAttributes.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes (module)">HasJSendStatusAndAttributes</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Status.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status (class)">Status</a></span></span><span class='period'>.</span><span class='id identifier rubyid_status?'>status?</span><span class='lparen'>(</span><span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; true
+</span>
+<span class='const'><span class='object_link'><a href="../../../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../HasJSendResult.html" title="ConvenientService::Service::Plugins::HasJSendResult (module)">HasJSendResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../HasJSendStatusAndAttributes.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes (module)">HasJSendStatusAndAttributes</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Status.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status (class)">Status</a></span></span><span class='period'>.</span><span class='id identifier rubyid_status?'>status?</span><span class='lparen'>(</span><span class='id identifier rubyid_status'>status</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; false
+</span>
+<span class='const'><span class='object_link'><a href="../../../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../HasJSendResult.html" title="ConvenientService::Service::Plugins::HasJSendResult (module)">HasJSendResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../HasJSendStatusAndAttributes.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes (module)">HasJSendStatusAndAttributes</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Status.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status (class)">Status</a></span></span><span class='period'>.</span><span class='id identifier rubyid_status?'>status?</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; false</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>status</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/class_methods.rb', line 90</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_status?'>status?</span><span class='lparen'>(</span><span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_status_class?'>status_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_status'>status</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="status_class?-instance_method">
+  
+    #<strong>status_class?</strong>(status_class)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether an object is a status class.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Simple usage.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_success'>success</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span>
+
+<span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_success?'>success?</span>
+
+<span class='id identifier rubyid_status'>status</span> <span class='op'>=</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span>
+
+<span class='const'><span class='object_link'><a href="../../../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../HasJSendResult.html" title="ConvenientService::Service::Plugins::HasJSendResult (module)">HasJSendResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../HasJSendStatusAndAttributes.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes (module)">HasJSendStatusAndAttributes</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Status.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status (class)">Status</a></span></span><span class='period'>.</span><span class='id identifier rubyid_data_class?'>data_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_status'>status</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; true
+</span>
+<span class='const'><span class='object_link'><a href="../../../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../HasJSendResult.html" title="ConvenientService::Service::Plugins::HasJSendResult (module)">HasJSendResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../HasJSendStatusAndAttributes.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes (module)">HasJSendStatusAndAttributes</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Status.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status (class)">Status</a></span></span><span class='period'>.</span><span class='id identifier rubyid_data_class?'>data_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; false
+</span>
+<span class='const'><span class='object_link'><a href="../../../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../HasJSendResult.html" title="ConvenientService::Service::Plugins::HasJSendResult (module)">HasJSendResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../HasJSendStatusAndAttributes.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes (module)">HasJSendStatusAndAttributes</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Status.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status (class)">Status</a></span></span><span class='period'>.</span><span class='id identifier rubyid_data_class?'>data_class?</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; false</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>status_class</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+52
+53
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/concern/class_methods.rb', line 52</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_status_class?'>status_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_status_class'>status_class</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_status_class'>status_class</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Class</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_status_class'>status_class</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Status.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status (class)">Status</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Concern.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Concern (module)">Concern</a></span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Fri Dec  5 18:29:08 2025 by
+  Generated on Fri Dec  5 18:44:27 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.9).
 </div>
