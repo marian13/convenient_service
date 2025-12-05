@@ -18,6 +18,80 @@ module ConvenientService
                     module Concern
                       module ClassMethods
                         ##
+                        # Checks whether an object is a message class.
+                        #
+                        # @api public
+                        #
+                        # @param message_class [Object] Can be any type.
+                        # @return [Boolean]
+                        #
+                        # @example Simple usage.
+                        #   class Service
+                        #     include ConvenientService::Standard::Config
+                        #
+                        #     def result
+                        #       success
+                        #     end
+                        #   end
+                        #
+                        #   result = Service.result
+                        #
+                        #   result.success?
+                        #
+                        #   message = result.message
+                        #
+                        #   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.data_class?(message.class)
+                        #   # => true
+                        #
+                        #   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.data_class?(message)
+                        #   # => false
+                        #
+                        #   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.data_class?(42)
+                        #   # => false
+                        #
+                        def message_class?(message_class)
+                          return false unless message_class.instance_of?(::Class)
+
+                          message_class.include?(Entities::Message::Concern)
+                        end
+
+                        ##
+                        # Checks whether an object is a message instance.
+                        #
+                        # @api public
+                        #
+                        # @param message [Object] Can be any type.
+                        # @return [Boolean]
+                        #
+                        # @example Simple usage.
+                        #   class Service
+                        #     include ConvenientService::Standard::Config
+                        #
+                        #     def result
+                        #       success
+                        #     end
+                        #   end
+                        #
+                        #   result = Service.result
+                        #
+                        #   result.success?
+                        #
+                        #   message = result.message
+                        #
+                        #   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.message?(message)
+                        #   # => true
+                        #
+                        #   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.message?(message.class)
+                        #   # => false
+                        #
+                        #   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.message?(42)
+                        #   # => false
+                        #
+                        def message?(message)
+                          message_class?(message.class)
+                        end
+
+                        ##
                         # @param other [Object] Can be any type.
                         # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message, nil]
                         #
@@ -41,7 +115,7 @@ module ConvenientService
                         #   - https://ruby-doc.org/core-2.7.0/Module.html#method-i-3D-3D-3D
                         #
                         def ===(other)
-                          Commands::IsMessage.call(message: other) || super
+                          message?(other) || super
                         end
                       end
                     end

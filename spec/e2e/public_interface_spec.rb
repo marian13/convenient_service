@@ -803,6 +803,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :concerns, # public
           :entity, # public
           :has_committed_config?, # public
+          :message?, # public
+          :message_class?, # public
           :middlewares, # public
           :namespace, # private
           :new, # private
@@ -883,6 +885,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :concerns, # public
           :entity, # public
           :has_committed_config?, # public
+          :message?, # public
+          :message_class?, # public
           :middlewares, # public
           :namespace, # private
           :new, # private
