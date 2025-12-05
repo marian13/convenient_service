@@ -55,7 +55,7 @@ module ConvenientService
       #   ConvenientService::Core.entity_class?(service)
       #   # => false
       #
-      #   ConvenientService::Core.entity?(42)
+      #   ConvenientService::Core.entity_class?(42)
       #   # => false
       #
       def entity_class?(entity_class)
