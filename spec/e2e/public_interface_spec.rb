@@ -608,6 +608,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :cast!, # private
           :commit_config!, # public
           :concerns, # public
+          :data?, # public
+          :data_class?, # public
           :entity, # public
           :has_committed_config?, # public
           :middlewares, # public
@@ -704,6 +706,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :cast!, # private
           :commit_config!, # public
           :concerns, # public
+          :data?, # public
+          :data_class?, # public
           :entity, # public
           :has_committed_config?, # public
           :middlewares, # public
