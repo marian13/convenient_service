@@ -6,7 +6,7 @@
 <title>
   Module: ConvenientService::Support::FiniteLoop
   
-    &mdash; Documentation by YARD 0.9.37
+    &mdash; Documentation by YARD 0.9.38
   
 </title>
 
@@ -143,14 +143,188 @@
 
 
 
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
 
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#finite_loop-class_method" title="finite_loop (class method)">.<strong>finite_loop</strong>(default: nil, max_iteration_count: MAX_ITERATION_COUNT, raise_on_exceedance: true, &amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="finite_loop-class_method">
+  
+    .<strong>finite_loop</strong>(default: nil, max_iteration_count: MAX_ITERATION_COUNT, raise_on_exceedance: true, &amp;block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Can be any type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'>Person</span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Support::FiniteLoop (module)">FiniteLoop</a></span></span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_foo'>foo</span>
+    <span class='id identifier rubyid_finite_loop'>finite_loop</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_index'>index</span><span class='op'>|</span>
+      <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_index'>index</span> <span class='op'>&gt;</span> <span class='int'>3</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>max_iteration_count</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>MAX_ITERATION_COUNT</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>raise_on_exceedance</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/finite_loop.rb', line 74</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_finite_loop'>finite_loop</span><span class='lparen'>(</span><span class='label'>default:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max_iteration_count:</span> <span class='const'><span class='object_link'><a href="#MAX_ITERATION_COUNT-constant" title="ConvenientService::Support::FiniteLoop::MAX_ITERATION_COUNT (constant)">MAX_ITERATION_COUNT</a></span></span><span class='comma'>,</span> <span class='label'>raise_on_exceedance:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../ConvenientService.html#raise-class_method" title="ConvenientService.raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="FiniteLoop/Exceptions.html" title="ConvenientService::Support::FiniteLoop::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="FiniteLoop/Exceptions/NoBlockGiven.html" title="ConvenientService::Support::FiniteLoop::Exceptions::NoBlockGiven (class)">NoBlockGiven</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_block'>block</span>
+
+  <span class='id identifier rubyid_loop'>loop</span><span class='period'>.</span><span class='id identifier rubyid_with_index'>with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_index'>index</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_index'>index</span> <span class='op'>&gt;=</span> <span class='id identifier rubyid_max_iteration_count'>max_iteration_count</span>
+      <span class='kw'>break</span> <span class='id identifier rubyid_default'>default</span> <span class='kw'>unless</span> <span class='id identifier rubyid_raise_on_exceedance'>raise_on_exceedance</span>
+
+      <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../ConvenientService.html#raise-class_method" title="ConvenientService.raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="FiniteLoop/Exceptions.html" title="ConvenientService::Support::FiniteLoop::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="FiniteLoop/Exceptions/MaxIterationCountExceeded.html" title="ConvenientService::Support::FiniteLoop::Exceptions::MaxIterationCountExceeded (class)">MaxIterationCountExceeded</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>limit:</span> <span class='id identifier rubyid_max_iteration_count'>max_iteration_count</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Fri Dec  5 18:44:24 2025 by
+  Generated on Sat Dec  6 15:28:04 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.9).
+  0.9.38 (ruby-3.2.9).
 </div>
 
     </div>
