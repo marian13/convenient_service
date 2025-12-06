@@ -47,7 +47,7 @@ Yet another approach to revisit the service object pattern, but this time focusi
 <!-- warning:start -->
 ## ❗❗❗ WARNING ❗❗❗
 
-This library is under heavy development. Most of the public API is polished, but it still may be subject to change. It has already been successfully used in production environments for more than a year, but the first major version is planned for the second quarter of 2025. Use the current version at your own risk. Ruby 2.7+, JRuby 9.4+ (TruffleRuby support is planned as well). Thanks.
+This library is on the final stage of development before the v1.0.0 version. 90% of the public API is polished, but it still may be subject to change. It has already been successfully used in production environments for more than two years. The stable release is planned rather sooner than later. Less and less breaking changes are expected. Use the current version at your own risk. Ruby 2.7+, JRuby 9.4+ (TruffleRuby support is planned as well). Thanks.
 <!-- warning:end -->
 
 <!-- links:start -->
