@@ -11,16 +11,16 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass, RSpec/ExampleLength
 RSpec.describe "Public interface", type: [:standard, :e2e] do
-  def public_instance_methods_of(klass)
-    klass.public_instance_methods.reject { |method_name| Object.ancestors.include?(klass.instance_method(method_name).owner) }.sort
+  def public_instance_methods_of(klass, included_modules: [], parent: Object)
+    klass.public_instance_methods.reject { |method_name| (included_modules + parent.ancestors).include?(klass.instance_method(method_name).owner) }.sort
   end
 
-  def protected_instance_methods_of(klass)
-    klass.protected_instance_methods.reject { |method_name| Object.ancestors.include?(klass.instance_method(method_name).owner) }.sort
+  def protected_instance_methods_of(klass, included_modules: [], parent: Object)
+    klass.protected_instance_methods.reject { |method_name| (included_modules + parent.ancestors).include?(klass.instance_method(method_name).owner) }.sort
   end
 
-  def private_instance_methods_of(klass)
-    klass.private_instance_methods.reject { |method_name| Object.ancestors.include?(klass.instance_method(method_name).owner) }.sort
+  def private_instance_methods_of(klass, included_modules: [], parent: Object)
+    klass.private_instance_methods.reject { |method_name| (included_modules + parent.ancestors).include?(klass.instance_method(method_name).owner) }.sort
   end
 
   if ConvenientService::Dependencies.ruby.jruby?
@@ -28,27 +28,27 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
     # NOTE: JRuby also returns `[:singleton_method_added, :singleton_method_removed, :singleton_method_undefined]` as public class methods.
     # NOTE: The `yaml_tag` method is added to `Object.singleton_class` by `Psych`.
     #
-    def public_class_methods_of(klass)
-      (klass.public_methods - [:singleton_method_added, :singleton_method_removed, :singleton_method_undefined]).reject { |method_name| [*Class.ancestors, Object.singleton_class].include?(klass.method(method_name).owner) }.sort
+    def public_class_methods_of(klass, extended_modules: [])
+      (klass.public_methods - [:singleton_method_added, :singleton_method_removed, :singleton_method_undefined]).reject { |method_name| [*extended_modules, *Class.ancestors, Object.singleton_class].include?(klass.method(method_name).owner) }.sort
     end
   else
     ##
     # NOTE: The `yaml_tag` method is added to `Object.singleton_class` by `Psych`.
     #
-    def public_class_methods_of(klass)
-      klass.public_methods.reject { |method_name| [*Class.ancestors, Object.singleton_class].include?(klass.method(method_name).owner) }.sort
+    def public_class_methods_of(klass, extended_modules: [])
+      klass.public_methods.reject { |method_name| [*extended_modules, *Class.ancestors, Object.singleton_class].include?(klass.method(method_name).owner) }.sort
     end
   end
 
-  def protected_class_methods_of(klass)
-    klass.protected_methods.reject { |method_name| Class.ancestors.include?(klass.method(method_name).owner) }.sort
+  def protected_class_methods_of(klass, extended_modules: [])
+    klass.protected_methods.reject { |method_name| (extended_modules + Class.ancestors).include?(klass.method(method_name).owner) }.sort
   end
 
   ##
   # NOTE: `service_class.private_methods - Class.private_methods` return `[]` in CRuby and [:method_missing] in JRuby.
   #
-  def private_class_methods_of(klass)
-    klass.private_methods.reject { |method_name| Class.ancestors.include?(klass.method(method_name).owner) }.sort
+  def private_class_methods_of(klass, extended_modules: [])
+    klass.private_methods.reject { |method_name| (extended_modules + Class.ancestors).include?(klass.method(method_name).owner) }.sort
   end
 
   def public_singleton_class_methods_of(klass)
@@ -1363,7 +1363,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
     end
   end
 
-  example_group "Convenient Service module" do
+  example_group "Convenient Service" do
     specify do
       expect(public_instance_methods_of(ConvenientService)).to eq([])
     end
@@ -1396,6 +1396,98 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
 
     specify do
       expect(private_class_methods_of(ConvenientService)).to eq([])
+    end
+  end
+
+  example_group "Convenient Service Dependencies" do
+    specify do
+      expect(public_instance_methods_of(ConvenientService::Dependencies)).to eq([])
+    end
+
+    specify do
+      expect(protected_instance_methods_of(ConvenientService::Dependencies)).to eq([])
+    end
+
+    specify do
+      expect(private_instance_methods_of(ConvenientService::Dependencies)).to eq([])
+    end
+
+    specify do
+      expect(public_class_methods_of(ConvenientService::Dependencies)).to eq([
+        :active_model, # private
+        :appraisal_name, # private
+        :appraisal_name_for_coverage, # private
+        :logger, # private
+        :paint, # private
+        :require_active_model_validations_standard_config_option, # public
+        :require_alias, # public
+        :require_amazing_print_inspect_standard_config_option, # public
+        :require_assigns_attributes_in_constructor_using_active_model_attribute_assignment_plugin, # public
+        :require_assigns_attributes_in_constructor_using_dry_initializer_plugin, # public
+        :require_awesome_print_inspect_standard_config_option, # public
+        :require_development_tools, # private
+        :require_dry_examples, # private
+        :require_dry_initializer_standard_config_option, # public
+        :require_has_attributes_using_active_model_attributes_plugin, # public
+        :require_has_j_send_result_params_validations_using_active_model_validations_plugin, # public
+        :require_has_j_send_result_params_validations_using_dry_validation_plugin, # public
+        :require_has_memoization_using_memo_wise_plugin, # public
+        :require_memo_wise_standard_config_option, # public
+        :require_rails_examples, # private
+        :require_rspec_extentions, # public
+        :require_standard_examples, # private
+        :require_test_tools, # private
+        :require_wraps_result_in_db_transaction_using_active_record_base_transaction_plugin, # public
+        :rspec, # private
+        :ruby, # private
+        :support_byebug?, # private
+        :support_has_j_send_result_params_validations_using_active_model_validations_plugin?, # private
+        :support_logger_non_integer_levels? # private
+      ])
+    end
+
+    specify do
+      expect(protected_class_methods_of(ConvenientService::Dependencies)).to eq([])
+    end
+
+    specify do
+      expect(private_class_methods_of(ConvenientService::Dependencies)).to eq([])
+    end
+  end
+
+  example_group "Convenient Service Logger" do
+    specify do
+      expect(public_instance_methods_of(ConvenientService::Logger, included_modules: [Singleton::SingletonInstanceMethods, Singleton], parent: Logger)).to eq([:level=])
+    end
+
+    specify do
+      expect(protected_instance_methods_of(ConvenientService::Logger, included_modules: [Singleton::SingletonInstanceMethods, Singleton], parent: Logger)).to eq([])
+    end
+
+    specify do
+      expect(private_instance_methods_of(ConvenientService::Logger, included_modules: [Singleton::SingletonInstanceMethods, Singleton], parent: Logger)).to eq([])
+    end
+
+    specify do
+      expect(public_class_methods_of(ConvenientService::Logger, extended_modules: [Singleton::SingletonClassMethods])).to eq([
+        :colored_formatter, # public
+        :new, # private
+        :original_formatter # public
+      ])
+    end
+
+    specify do
+      expect(protected_class_methods_of(ConvenientService::Logger, extended_modules: [Singleton::SingletonClassMethods])).to eq([])
+    end
+
+    specify do
+      expect(private_class_methods_of(ConvenientService::Logger, extended_modules: [Singleton::SingletonClassMethods])).to eq([
+        ##
+        # NOTE: `allocate` is dynamically added by `Singleton.included`.
+        # - https://github.com/ruby/singleton/blob/v0.3.0/lib/singleton.rb#L182
+        #
+        :allocate # private
+      ])
     end
   end
 end
