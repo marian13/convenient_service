@@ -63,6 +63,10 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
     klass.singleton_class.private_methods.reject { |method_name| Class.singleton_class.ancestors.include?(klass.singleton_class.method(method_name).owner) }.sort
   end
 
+  def x(class_name)
+    defined
+  end
+
   example_group "service class" do
     ##
     # NOTE: `let(:service_class)` is NOT lifted to the top context to avoid accidental typos inside specs like `message_class` instead of `result_class`.
@@ -1456,17 +1460,19 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
   end
 
   example_group "Convenient Service Logger" do
+    # rubocop:disable Style/RescueModifier
     specify do
-      expect(public_instance_methods_of(ConvenientService::Logger, included_modules: [Singleton::SingletonInstanceMethods, Singleton], parent: Logger)).to eq([:level=])
+      expect(public_instance_methods_of(ConvenientService::Logger, included_modules: [(Object.const_get("Singleton::SingletonInstanceMethods") rescue nil), Singleton].compact, parent: Logger)).to eq([:level=])
     end
 
     specify do
-      expect(protected_instance_methods_of(ConvenientService::Logger, included_modules: [Singleton::SingletonInstanceMethods, Singleton], parent: Logger)).to eq([])
+      expect(protected_instance_methods_of(ConvenientService::Logger, included_modules: [(Object.const_get("Singleton::SingletonInstanceMethods") rescue nil), Singleton].compact, parent: Logger)).to eq([])
     end
 
     specify do
-      expect(private_instance_methods_of(ConvenientService::Logger, included_modules: [Singleton::SingletonInstanceMethods, Singleton], parent: Logger)).to eq([])
+      expect(private_instance_methods_of(ConvenientService::Logger, included_modules: [(Object.const_get("Singleton::SingletonInstanceMethods") rescue nil), Singleton].compact, parent: Logger)).to eq([])
     end
+    # rubocop:enable Style/RescueModifier
 
     specify do
       expect(public_class_methods_of(ConvenientService::Logger, extended_modules: [Singleton::SingletonClassMethods])).to eq([
