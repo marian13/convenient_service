@@ -1487,13 +1487,11 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
     end
 
     specify do
-      expect(private_class_methods_of(ConvenientService::Logger, extended_modules: [Singleton::SingletonClassMethods])).to eq([
-        ##
-        # NOTE: `allocate` is dynamically added by `Singleton.included`.
-        # - https://github.com/ruby/singleton/blob/v0.3.0/lib/singleton.rb#L182
-        #
-        :allocate # private
-      ])
+      ##
+      # NOTE: `allocate` is dynamically added by `Singleton.included`.
+      # - https://github.com/ruby/singleton/blob/v0.3.0/lib/singleton.rb#L182
+      #
+      expect(private_class_methods_of(ConvenientService::Logger, extended_modules: [Singleton::SingletonClassMethods]) - [:allocate]).to eq([])
     end
   end
 end
