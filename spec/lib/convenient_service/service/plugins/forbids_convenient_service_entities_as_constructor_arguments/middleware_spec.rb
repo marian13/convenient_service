@@ -188,6 +188,106 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
               end
             end
 
+            context "when one of those args is data" do
+              let(:service) { service_class.new(:foo, result.unsafe_data) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Data of `#{ConvenientService::Utils::Class.display_name(result.service.class)}` result is passed as constructor argument `args[1]` to `#{ConvenientService::Utils::Class.display_name(service_class)}`.
+
+                  It is an antipattern. It neglects the idea of steps.
+
+                  Please, convert it to hash or try to reorganize `#{ConvenientService::Utils::Class.display_name(service_class)}` service.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::DataPassedAsConstructorArgument`" do
+                expect { service }
+                  .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::DataPassedAsConstructorArgument)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::DataPassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when one of those args is message" do
+              let(:service) { service_class.new(:foo, result.unsafe_message) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Message of `#{ConvenientService::Utils::Class.display_name(result.service.class)}` result is passed as constructor argument `args[1]` to `#{ConvenientService::Utils::Class.display_name(service_class)}`.
+
+                  It is an antipattern. It neglects the idea of steps.
+
+                  Please, convert it to string or try to reorganize `#{ConvenientService::Utils::Class.display_name(service_class)}` service.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::MessagePassedAsConstructorArgument`" do
+                expect { service }
+                  .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::MessagePassedAsConstructorArgument)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::MessagePassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when one of those args is code" do
+              let(:service) { service_class.new(:foo, result.unsafe_code) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Code of `#{ConvenientService::Utils::Class.display_name(result.service.class)}` result is passed as constructor argument `args[1]` to `#{ConvenientService::Utils::Class.display_name(service_class)}`.
+
+                  It is an antipattern. It neglects the idea of steps.
+
+                  Please, convert it to symbol or try to reorganize `#{ConvenientService::Utils::Class.display_name(service_class)}` service.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::CodePassedAsConstructorArgument`" do
+                expect { service }
+                  .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::CodePassedAsConstructorArgument)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::CodePassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when one of those args is status" do
+              let(:service) { service_class.new(:foo, result.status) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Status of `#{ConvenientService::Utils::Class.display_name(result.service.class)}` result is passed as constructor argument `args[1]` to `#{ConvenientService::Utils::Class.display_name(service_class)}`.
+
+                  It is an antipattern. It neglects the idea of steps.
+
+                  Please, convert it to symbol or try to reorganize `#{ConvenientService::Utils::Class.display_name(service_class)}` service.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StatusPassedAsConstructorArgument`" do
+                expect { service }
+                  .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StatusPassedAsConstructorArgument)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StatusPassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
             context "when one of those args is step" do
               let(:service) { service_class.new(:foo, step) }
 
@@ -209,6 +309,43 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
 
               specify do
                 expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StepPassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when one of those args is Convenient Service entity" do
+              let(:entity_class) do
+                Class.new do
+                  include ConvenientService::Core
+
+                  def self.name
+                    "CustomEntity"
+                  end
+                end
+              end
+
+              let(:entity) { entity_class.new }
+
+              let(:service) { service_class.new(:foo, entity) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Convenient Service entity `CustomEntity` is passed as constructor argument `args[1]` to `#{ConvenientService::Utils::Class.display_name(service_class)}`.
+
+                  It is an antipattern. It neglects the idea of steps.
+
+                  Please, try to reorganize `#{ConvenientService::Utils::Class.display_name(service_class)}` service.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::EntityPassedAsConstructorArgument`" do
+                expect { service }
+                  .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::EntityPassedAsConstructorArgument)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::EntityPassedAsConstructorArgument) { service } }
                   .to delegate_to(ConvenientService, :raise)
               end
             end
@@ -298,6 +435,106 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
               end
             end
 
+            context "when one of those kwargs is data" do
+              let(:service) { service_class.new(foo: :bar, baz: result.unsafe_data) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Data of `#{ConvenientService::Utils::Class.display_name(result.service.class)}` result is passed as constructor argument `kwargs[:baz]` to `#{ConvenientService::Utils::Class.display_name(service_class)}`.
+
+                  It is an antipattern. It neglects the idea of steps.
+
+                  Please, convert it to hash or try to reorganize `#{ConvenientService::Utils::Class.display_name(service_class)}` service.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::DataPassedAsConstructorArgument`" do
+                expect { service }
+                  .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::DataPassedAsConstructorArgument)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::DataPassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when one of those kwargs is message" do
+              let(:service) { service_class.new(foo: :bar, baz: result.unsafe_message) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Message of `#{ConvenientService::Utils::Class.display_name(result.service.class)}` result is passed as constructor argument `kwargs[:baz]` to `#{ConvenientService::Utils::Class.display_name(service_class)}`.
+
+                  It is an antipattern. It neglects the idea of steps.
+
+                  Please, convert it to string or try to reorganize `#{ConvenientService::Utils::Class.display_name(service_class)}` service.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::MessagePassedAsConstructorArgument`" do
+                expect { service }
+                  .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::MessagePassedAsConstructorArgument)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::MessagePassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when one of those kwargs is code" do
+              let(:service) { service_class.new(foo: :bar, baz: result.unsafe_code) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Code of `#{ConvenientService::Utils::Class.display_name(result.service.class)}` result is passed as constructor argument `kwargs[:baz]` to `#{ConvenientService::Utils::Class.display_name(service_class)}`.
+
+                  It is an antipattern. It neglects the idea of steps.
+
+                  Please, convert it to symbol or try to reorganize `#{ConvenientService::Utils::Class.display_name(service_class)}` service.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::CodePassedAsConstructorArgument`" do
+                expect { service }
+                  .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::CodePassedAsConstructorArgument)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::CodePassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when one of those kwargs is status" do
+              let(:service) { service_class.new(foo: :bar, baz: result.status) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Status of `#{ConvenientService::Utils::Class.display_name(result.service.class)}` result is passed as constructor argument `kwargs[:baz]` to `#{ConvenientService::Utils::Class.display_name(service_class)}`.
+
+                  It is an antipattern. It neglects the idea of steps.
+
+                  Please, convert it to symbol or try to reorganize `#{ConvenientService::Utils::Class.display_name(service_class)}` service.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StatusPassedAsConstructorArgument`" do
+                expect { service }
+                  .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StatusPassedAsConstructorArgument)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StatusPassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
             context "when one of those kwargs is step" do
               let(:service) { service_class.new(foo: :bar, baz: step) }
 
@@ -319,6 +556,43 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
 
               specify do
                 expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StepPassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when one of those kwargs is Convenient Service entity" do
+              let(:entity_class) do
+                Class.new do
+                  include ConvenientService::Core
+
+                  def self.name
+                    "CustomEntity"
+                  end
+                end
+              end
+
+              let(:entity) { entity_class.new }
+
+              let(:service) { service_class.new(foo: :bar, baz: entity) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Convenient Service entity `CustomEntity` is passed as constructor argument `kwargs[:baz]` to `#{ConvenientService::Utils::Class.display_name(service_class)}`.
+
+                  It is an antipattern. It neglects the idea of steps.
+
+                  Please, try to reorganize `#{ConvenientService::Utils::Class.display_name(service_class)}` service.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::EntityPassedAsConstructorArgument`" do
+                expect { service }
+                  .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::EntityPassedAsConstructorArgument)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::EntityPassedAsConstructorArgument) { service } }
                   .to delegate_to(ConvenientService, :raise)
               end
             end
