@@ -70,6 +70,8 @@ module ConvenientService
         ##
         # @return [Object] Can be any type.
         #
+        # @note `SafeSend` is similar to `JSON::SafeParse` in a sense that it never raises exceptions.
+        #
         # @internal
         #   NOTE: `true` in `respond_to?(method, true)` means to look for protected and private methods as well.
         #   - https://ruby-doc.org/core-2.7.0/Object.html#method-i-respond_to-3F

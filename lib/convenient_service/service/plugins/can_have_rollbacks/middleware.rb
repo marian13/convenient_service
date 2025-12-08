@@ -37,17 +37,48 @@ module ConvenientService
           end
 
           ##
-          # Calls service own rollback.
+          # Calls service rollback.
           #
           # @param service [ConvenientService::Service]
           # @return [void]
+          #
+          # @note All rollback exceptions are automatically rescued. That is done to NOT skip the rest of rollbacks just because one of them raises exception. Such skipping usually leads to the worse and even more inconsistent system state.
+          #
+          # @note Rollback exception log.
+          #   class Service
+          #     include ConvenientService::Standard::Config.with(:rollbacks)
+          #
+          #     step OtherService
+          #
+          #     def rollback_result
+          #       puts "Hello from `Service` rollback!" # Still executed although `OtherService` rollback raises exception.
+          #     end
+          #   end
+          #
+          #   class OtherService
+          #     include ConvenientService::Standard::Config.with(:rollbacks)
+          #
+          #     def result
+          #       16 / 0 # Service raises `ZeroDivisionError` exception to trigger rollback.
+          #
+          #       success
+          #     end
+          #
+          #     def rollback_result
+          #       [].keys # Rollback raises `NoMethodError` exception that is ignored by other rollbacks, but still can be logged by the end-user in `rescue` statement.
+          #     rescue => exception
+          #       puts exception.class
+          #       puts exception.message
+          #       puts exception.backtrace.to_a.take(10)
+          #     end
+          #   end
           #
           def rollback_service(service)
             Utils::Object.safe_send(service, :rollback_result)
           end
 
           ##
-          # Calls organizer own rollback.
+          # Calls organizer rollback.
           # Then calls organizer steps rollbacks with nestings in the reverse order.
           #
           # @param organizer [ConvenientService::Service]
