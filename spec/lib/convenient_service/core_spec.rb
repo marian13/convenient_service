@@ -99,6 +99,20 @@ RSpec.describe ConvenientService::Core, type: :standard do
 
         let(:service_instance) { service_class.new }
 
+        let(:feature_class) do
+          Class.new do
+            include ConvenientService::Feature::Standard::Config
+
+            entry :main
+
+            def main
+              :main_entry_value
+            end
+          end
+        end
+
+        let(:feature_instance) { feature_class.new }
+
         specify { expect(described_class.entity_class?(service_class)).to eq(true) }
         specify { expect(described_class.entity_class?(service_class.result_class)).to eq(true) }
         specify { expect(described_class.entity_class?(service_class.result_class.data_class)).to eq(true) }
@@ -106,6 +120,7 @@ RSpec.describe ConvenientService::Core, type: :standard do
         specify { expect(described_class.entity_class?(service_class.result_class.code_class)).to eq(true) }
         specify { expect(described_class.entity_class?(service_class.result_class.status_class)).to eq(true) }
         specify { expect(described_class.entity_class?(service_class.step_class)).to eq(true) }
+        specify { expect(described_class.entity_class?(feature_class)).to eq(true) }
 
         specify { expect(described_class.entity_class?(service_instance)).to eq(false) }
         specify { expect(described_class.entity_class?(service_instance.result)).to eq(false) }
@@ -114,6 +129,7 @@ RSpec.describe ConvenientService::Core, type: :standard do
         specify { expect(described_class.entity_class?(service_instance.result.unsafe_code)).to eq(false) }
         specify { expect(described_class.entity_class?(service_instance.result.status)).to eq(false) }
         specify { expect(described_class.entity_class?(service_instance.steps.first)).to eq(false) }
+        specify { expect(described_class.entity_class?(feature_instance)).to eq(false) }
       end
     end
 

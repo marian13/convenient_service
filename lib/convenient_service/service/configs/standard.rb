@@ -5,8 +5,6 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "standard/commands"
-
 require_relative "standard/v1"
 require_relative "standard/aliases"
 
@@ -55,7 +53,6 @@ module ConvenientService
         #   That is why `entity :Result do` is used.
         #   - https://stackoverflow.com/a/51965126/12201472
         #
-        # rubocop:disable Lint/ConstantDefinitionInBlock
         included do
           include ConvenientService::Service::Core
 
@@ -364,7 +361,6 @@ module ConvenientService
           #   use ConvenientService::Plugins::Service::RaisesOnDoubleResult::Middleware
           # end
         end
-        # rubocop:enable Lint/ConstantDefinitionInBlock
 
         class << self
           ##
@@ -387,11 +383,16 @@ module ConvenientService
           #   ConvenientService::Service::Configs::Standard.service_class?(Service)
           #   # => true
           #
+          #   ConvenientService::Service::Configs::Standard.service_class?(Service.new)
+          #   # => false
+          #
           #   ConvenientService::Service::Configs::Standard.service_class?(42)
           #   # => false
           #
           def service_class?(service_class)
-            Commands::IsServiceClass[service_class: service_class]
+            return false unless service_class.instance_of?(::Class)
+
+            service_class.include?(Service::Core)
           end
 
           ##
@@ -411,16 +412,17 @@ module ConvenientService
           #     end
           #   end
           #
-          #   service = Service.new
-          #
-          #   ConvenientService::Service::Configs::Standard.service?(service)
+          #   ConvenientService::Service::Configs::Standard.service?(Service.new)
           #   # => true
+          #
+          #   ConvenientService::Service::Configs::Standard.service?(Service)
+          #   # => false
           #
           #   ConvenientService::Service::Configs::Standard.service?(42)
           #   # => false
           #
           def service?(service)
-            Commands::IsService[service: service]
+            service_class?(service.class)
           end
         end
       end

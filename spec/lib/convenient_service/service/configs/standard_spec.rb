@@ -785,21 +785,56 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
     end
 
     describe ".service_class?" do
-      let(:service_class) do
-        Class.new do
-          include ConvenientService::Standard::Config
+      context "when `service` is NOT class" do
+        let(:service_class) { 42 }
 
-          def result
-            success
-          end
+        it "returns `false`" do
+          expect(described_class.service_class?(service_class)).to eq(false)
         end
       end
 
-      specify do
-        expect { described_class.service_class?(service_class) }
-          .to delegate_to(ConvenientService::Service::Configs::Standard::Commands::IsServiceClass, :call)
-          .with_arguments(service_class: service_class)
-          .and_return_its_value
+      context "when `service` is class" do
+        context "when `service` is NOT service class" do
+          let(:service_class) { Class.new }
+
+          it "returns `false`" do
+            expect(described_class.service_class?(service_class)).to eq(false)
+          end
+
+          context "when `service` is entity class" do
+            let(:feature_class) do
+              Class.new do
+                include ConvenientService::Feature::Standard::Config
+
+                entry :main
+
+                def main
+                  :main_entry_value
+                end
+              end
+            end
+
+            it "returns `false`" do
+              expect(described_class.service_class?(feature_class)).to eq(false)
+            end
+          end
+        end
+
+        context "when `service` is service class" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(described_class.service_class?(service_class)).to eq(true)
+          end
+        end
       end
     end
 
@@ -814,12 +849,12 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
         end
       end
 
-      let(:service) { service_class.new }
+      let(:service_instance) { service_class.new }
 
       specify do
-        expect { described_class.service?(service) }
-          .to delegate_to(ConvenientService::Service::Configs::Standard::Commands::IsService, :call)
-          .with_arguments(service: service)
+        expect { described_class.service?(service_instance) }
+          .to delegate_to(described_class, :service_class?)
+          .with_arguments(service_class)
           .and_return_its_value
       end
     end
