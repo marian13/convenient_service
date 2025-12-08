@@ -1475,7 +1475,10 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
     # rubocop:enable Style/RescueModifier
 
     specify do
-      expect(public_class_methods_of(ConvenientService::Logger, extended_modules: [Singleton::SingletonClassMethods])).to eq([
+      ##
+      # NOTE: `:method_missing` is returned by JRuby.
+      #
+      expect(public_class_methods_of(ConvenientService::Logger, extended_modules: [Singleton::SingletonClassMethods]) - [:method_missing]).to eq([
         :colored_formatter, # public
         :new, # private
         :original_formatter # public
