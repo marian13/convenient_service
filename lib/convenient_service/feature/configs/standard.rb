@@ -5,8 +5,6 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "standard/commands"
-
 module ConvenientService
   module Feature
     module Configs
@@ -65,14 +63,19 @@ module ConvenientService
           #     end
           #   end
           #
-          #    ConvenientService::Feature::Configs::Standard.feature_class?(Feature)
+          #   ConvenientService::Feature::Configs::Standard.feature_class?(Feature)
+          #   # => false
+          #
+          #   ConvenientService::Feature::Configs::Standard.feature_class?(Feature.new)
           #   # => true
           #
-          #    ConvenientService::Feature::Configs::Standard.feature_class?(42)
+          #   ConvenientService::Feature::Configs::Standard.feature_class?(42)
           #   # => false
           #
           def feature_class?(feature_class)
-            Commands::IsFeatureClass[feature_class: feature_class]
+            return false unless feature_class.instance_of?(::Class)
+
+            feature_class.include?(Feature::Core)
           end
 
           ##
@@ -94,16 +97,17 @@ module ConvenientService
           #     end
           #   end
           #
-          #   feature = Feature.new
-          #
-          #    ConvenientService::Feature::Configs::Standard.feature?(feature)
+          #   ConvenientService::Feature::Configs::Standard.feature?(Feature.new)
           #   # => true
           #
-          #    ConvenientService::Feature::Configs::Standard.feature?(42)
+          #   ConvenientService::Feature::Configs::Standard.feature?(Feature)
+          #   # => false
+          #
+          #   ConvenientService::Feature::Configs::Standard.feature?(42)
           #   # => false
           #
           def feature?(feature)
-            Commands::IsFeature[feature: feature]
+            feature_class?(feature.class)
           end
         end
       end

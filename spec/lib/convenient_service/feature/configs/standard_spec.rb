@@ -127,23 +127,56 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
     end
 
     describe ".feature_class?" do
-      let(:feature_class) do
-        Class.new do
-          include ConvenientService::Feature::Standard::Config
+      context "when `feature` is NOT class" do
+        let(:feature_class) { 42 }
 
-          entry :main
-
-          def main
-            :main_entry_value
-          end
+        it "returns `false`" do
+          expect(described_class.feature_class?(feature_class)).to eq(false)
         end
       end
 
-      specify do
-        expect { described_class.feature_class?(feature_class) }
-          .to delegate_to(ConvenientService::Feature::Configs::Standard::Commands::IsFeatureClass, :call)
-          .with_arguments(feature_class: feature_class)
-          .and_return_its_value
+      context "when `feature` is class" do
+        context "when `feature` is NOT feature class" do
+          let(:feature_class) { Class.new }
+
+          it "returns `false`" do
+            expect(described_class.feature_class?(feature_class)).to eq(false)
+          end
+
+          context "when `feature` is entity class" do
+            let(:service_class) do
+              Class.new do
+                include ConvenientService::Standard::Config
+
+                def feature
+                  success
+                end
+              end
+            end
+
+            it "returns `false`" do
+              expect(described_class.feature_class?(service_class)).to eq(false)
+            end
+          end
+        end
+
+        context "when `feature` is feature class" do
+          let(:feature_class) do
+            Class.new do
+              include ConvenientService::Feature::Standard::Config
+
+              entry :main
+
+              def main
+                :main_entry_value
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(described_class.feature_class?(feature_class)).to eq(true)
+          end
+        end
       end
     end
 
@@ -160,12 +193,12 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
         end
       end
 
-      let(:feature) { feature_class.new }
+      let(:feature_instance) { feature_class.new }
 
       specify do
-        expect { described_class.feature?(feature) }
-          .to delegate_to(ConvenientService::Feature::Configs::Standard::Commands::IsFeature, :call)
-          .with_arguments(feature: feature)
+        expect { described_class.feature?(feature_instance) }
+          .to delegate_to(described_class, :feature_class?)
+          .with_arguments(feature_class)
           .and_return_its_value
       end
     end
