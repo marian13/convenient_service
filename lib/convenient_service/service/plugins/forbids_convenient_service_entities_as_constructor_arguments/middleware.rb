@@ -37,7 +37,7 @@ module ConvenientService
           ##
           # @param key [Integer, Symbol]
           # @param value [Object] Can be any type.
-          # @raise [ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ServicePassedAsConstructorArgument, ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ResultPassedAsConstructorArgument, ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StepPassedAsConstructorArgument]
+          # @raise [ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ServicePassedAsConstructorArgument, ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::ResultPassedAsConstructorArgument, ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StatusPassedAsConstructorArgument, ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::DataPassedAsConstructorArgument, ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::MessagePassedAsConstructorArgument, ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::CodePassedAsConstructorArgument, ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StepPassedAsConstructorArgument, ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::FeaturePassedAsConstructorArgument]
           # @return [void]
           #
           def validate!(key, value)
@@ -50,6 +50,7 @@ module ConvenientService
             refute_code!(key, value)
             refute_status!(key, value)
             refute_step!(key, value)
+            refute_feature!(key, value)
 
             ::ConvenientService.raise Exceptions::EntityPassedAsConstructorArgument.new(selector: selector_from(key), service: service, entity: value)
           end
@@ -136,6 +137,18 @@ module ConvenientService
             return unless ::ConvenientService::Plugins::Service::CanHaveSteps.step?(value)
 
             ::ConvenientService.raise Exceptions::StepPassedAsConstructorArgument.new(selector: selector_from(key), service: service, step: value)
+          end
+
+          ##
+          # @param key [Integer, Symbol]
+          # @param value [Object] Can be any type.
+          # @raise [ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::FeaturePassedAsConstructorArgument]
+          # @return [void]
+          #
+          def refute_feature!(key, value)
+            return unless ::ConvenientService::Feature::Standard::Config.feature?(value)
+
+            ::ConvenientService.raise Exceptions::FeaturePassedAsConstructorArgument.new(selector: selector_from(key), service: service, feature: value)
           end
 
           ##

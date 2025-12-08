@@ -19,5 +19,6 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
   specify { expect(described_class::MessagePassedAsConstructorArgument).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::CodePassedAsConstructorArgument).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::StepPassedAsConstructorArgument).to be_descendant_of(ConvenientService::Exception) }
+  specify { expect(described_class::FeaturePassedAsConstructorArgument).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::EntityPassedAsConstructorArgument).to be_descendant_of(ConvenientService::Exception) }
 end

@@ -120,6 +120,20 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
         let(:result) { other_service_class.result }
         let(:step) { other_service_class.new.steps.first }
 
+        let(:feature_class) do
+          Class.new do
+            include ConvenientService::Feature::Standard::Config
+
+            entry :main
+
+            def main
+              :main_entry_value
+            end
+          end
+        end
+
+        let(:feature) { feature_class.new }
+
         context "when NO arguments passed to service constructor" do
           let(:service) { service_class.new }
 
@@ -134,6 +148,10 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
 
             it "does NOT raise" do
               expect { service }.not_to raise_error
+            end
+
+            specify do
+              expect { service }.to delegate_to(ConvenientService::Core, :entity?)
             end
           end
 
@@ -284,6 +302,31 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
 
               specify do
                 expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StatusPassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when one of those args is feature" do
+              let(:service) { service_class.new(:foo, feature) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Feature `#{ConvenientService::Utils::Class.display_name(feature_class)}` is passed as constructor argument `args[1]` to `#{ConvenientService::Utils::Class.display_name(service_class)}`.
+
+                  It is an antipattern. It neglects the idea of steps.
+
+                  Please, try to reorganize `#{ConvenientService::Utils::Class.display_name(service_class)}` service.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::FeaturePassedAsConstructorArgument`" do
+                expect { service }
+                  .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::FeaturePassedAsConstructorArgument)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::FeaturePassedAsConstructorArgument) { service } }
                   .to delegate_to(ConvenientService, :raise)
               end
             end
@@ -556,6 +599,31 @@ RSpec.describe ConvenientService::Service::Plugins::ForbidsConvenientServiceEnti
 
               specify do
                 expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::StepPassedAsConstructorArgument) { service } }
+                  .to delegate_to(ConvenientService, :raise)
+              end
+            end
+
+            context "when one of those kwargs is feature" do
+              let(:service) { service_class.new(foo: :bar, baz: feature) }
+
+              let(:exception_message) do
+                <<~TEXT
+                  Feature `#{ConvenientService::Utils::Class.display_name(feature_class)}` is passed as constructor argument `kwargs[:baz]` to `#{ConvenientService::Utils::Class.display_name(service_class)}`.
+
+                  It is an antipattern. It neglects the idea of steps.
+
+                  Please, try to reorganize `#{ConvenientService::Utils::Class.display_name(service_class)}` service.
+                TEXT
+              end
+
+              it "raises `ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::FeaturePassedAsConstructorArgument`" do
+                expect { service }
+                  .to raise_error(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::FeaturePassedAsConstructorArgument)
+                  .with_message(exception_message)
+              end
+
+              specify do
+                expect { ignoring_exception(ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Exceptions::FeaturePassedAsConstructorArgument) { service } }
                   .to delegate_to(ConvenientService, :raise)
               end
             end

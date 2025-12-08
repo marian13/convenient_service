@@ -94,6 +94,20 @@ module ConvenientService
             end
           end
 
+          class FeaturePassedAsConstructorArgument < ::ConvenientService::Exception
+            def initialize_with_kwargs(selector:, service:, feature:)
+              message = <<~TEXT
+                Feature `#{Utils::Class.display_name(feature.class)}` is passed as constructor argument `#{selector}` to `#{Utils::Class.display_name(service.class)}`.
+
+                It is an antipattern. It neglects the idea of steps.
+
+                Please, try to reorganize `#{Utils::Class.display_name(service.class)}` service.
+              TEXT
+
+              initialize(message)
+            end
+          end
+
           class EntityPassedAsConstructorArgument < ::ConvenientService::Exception
             def initialize_with_kwargs(selector:, service:, entity:)
               message = <<~TEXT

@@ -39,7 +39,7 @@ module ConvenientService
         end
 
         ##
-        # @return [Class]
+        # @return [Method]
         #
         # @internal
         #   NOTE: `own_method.bind(object).call` is logically the same as `own_method.bind_call(object)`.
