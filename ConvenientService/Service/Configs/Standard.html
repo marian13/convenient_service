@@ -89,7 +89,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/convenient_service/service/configs/standard.rb<span class="defines">,<br />
-  lib/convenient_service/service/configs/standard/v1.rb,<br /> lib/convenient_service/service/configs/standard/commands/is_service.rb,<br /> lib/convenient_service/service/configs/standard/commands/is_service_class.rb</span>
+  lib/convenient_service/service/configs/standard/v1.rb</span>
 </dd>
   </dl>
   
@@ -109,7 +109,7 @@
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Standard/Commands.html" title="ConvenientService::Service::Configs::Standard::Commands (module)">Commands</a></span>, <span class='object_link'><a href="Standard/V1.html" title="ConvenientService::Service::Configs::Standard::V1 (module)">V1</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Standard/V1.html" title="ConvenientService::Service::Configs::Standard::V1 (module)">V1</a></span>
     
   
     
@@ -258,10 +258,11 @@
   <span class='kw'>end</span>
 <span class='kw'>end</span>
 
-<span class='id identifier rubyid_service'>service</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-
-<span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Configs.html" title="ConvenientService::Service::Configs (module)">Configs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Service::Configs::Standard (module)">Standard</a></span></span><span class='period'>.</span><span class='id identifier rubyid_service?'>service?</span><span class='lparen'>(</span><span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Configs.html" title="ConvenientService::Service::Configs (module)">Configs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Service::Configs::Standard (module)">Standard</a></span></span><span class='period'>.</span><span class='id identifier rubyid_service?'>service?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rparen'>)</span>
 <span class='comment'># =&gt; true
+</span>
+<span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Configs.html" title="ConvenientService::Service::Configs (module)">Configs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Service::Configs::Standard (module)">Standard</a></span></span><span class='period'>.</span><span class='id identifier rubyid_service?'>service?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='rparen'>)</span>
+<span class='comment'># =&gt; false
 </span>
 <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Configs.html" title="ConvenientService::Service::Configs (module)">Configs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Service::Configs::Standard (module)">Standard</a></span></span><span class='period'>.</span><span class='id identifier rubyid_service?'>service?</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
 <span class='comment'># =&gt; false</span></code></pre>
@@ -307,15 +308,15 @@
       <pre class="lines">
 
 
-422
-423
-424</pre>
+424
+425
+426</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/configs/standard.rb', line 422</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/configs/standard.rb', line 424</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_service?'>service?</span><span class='lparen'>(</span><span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Standard/Commands.html" title="ConvenientService::Service::Configs::Standard::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Standard/Commands/IsService.html" title="ConvenientService::Service::Configs::Standard::Commands::IsService (class)">IsService</a></span></span><span class='lbracket'>[</span><span class='label'>service:</span> <span class='id identifier rubyid_service'>service</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_service_class?'>service_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -357,6 +358,9 @@
 
 <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Configs.html" title="ConvenientService::Service::Configs (module)">Configs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Service::Configs::Standard (module)">Standard</a></span></span><span class='period'>.</span><span class='id identifier rubyid_service_class?'>service_class?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='rparen'>)</span>
 <span class='comment'># =&gt; true
+</span>
+<span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Configs.html" title="ConvenientService::Service::Configs (module)">Configs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Service::Configs::Standard (module)">Standard</a></span></span><span class='period'>.</span><span class='id identifier rubyid_service_class?'>service_class?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; false
 </span>
 <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Configs.html" title="ConvenientService::Service::Configs (module)">Configs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Service::Configs::Standard (module)">Standard</a></span></span><span class='period'>.</span><span class='id identifier rubyid_service_class?'>service_class?</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
 <span class='comment'># =&gt; false</span></code></pre>
@@ -402,15 +406,19 @@
       <pre class="lines">
 
 
+392
 393
 394
-395</pre>
+395
+396</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/configs/standard.rb', line 393</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/configs/standard.rb', line 392</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_service_class?'>service_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Standard/Commands.html" title="ConvenientService::Service::Configs::Standard::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Standard/Commands/IsServiceClass.html" title="ConvenientService::Service::Configs::Standard::Commands::IsServiceClass (class)">IsServiceClass</a></span></span><span class='lbracket'>[</span><span class='label'>service_class:</span> <span class='id identifier rubyid_service_class'>service_class</span><span class='rbracket'>]</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Class</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Core.html" title="ConvenientService::Service::Core (module)">Core</a></span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -422,7 +430,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Dec  8 00:47:47 2025 by
+  Generated on Mon Dec  8 16:03:44 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>
