@@ -62,7 +62,7 @@
       <div id="content"><h1>Class: ConvenientService::Support::BacktraceCleaner
   
   
-  
+  <span class="private note title">Private</span>
 </h1>
 <div class="box_info">
   
@@ -103,7 +103,18 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Rails v7.1.2 Backtrace Cleaner descendant.
+    <p class="note private">
+  <strong>This class is part of a private API.</strong>
+  You should avoid using this class if possible, as it may be removed or be changed in the future.
+</p>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Other gems are also trying to integrate with Rails Backtrace Cleaner.</p>
+</div>
+  </div>
+
+<p>Rails v7.1.2 Backtrace Cleaner descendant.
 Has Convenient Service specific silencer - <code>add_convenient_service_silencer</code>.
 By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenient_service_silencer</code>.</p>
 
@@ -124,7 +135,28 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
     
       <li><a href="https://stackoverflow.com/questions/22727219/using-backtracecleaner-in-rails-console" target="_parent" title="https://stackoverflow.com/questions/22727219/using-backtracecleaner-in-rails-console">https://stackoverflow.com/questions/22727219/using-backtracecleaner-in-rails-console</a></li>
     
+      <li><a href="https://github.com/sidekiq/sidekiq/pull/5796" target="_parent" title="https://github.com/sidekiq/sidekiq/pull/5796">https://github.com/sidekiq/sidekiq/pull/5796</a></li>
+    
+      <li><a href="https://github.com/sidekiq/sidekiq/issues/5589" target="_parent" title="https://github.com/sidekiq/sidekiq/issues/5589">https://github.com/sidekiq/sidekiq/issues/5589</a></li>
+    
+      <li><a href="https://github.com/appsignal/appsignal-ruby/issues/380" target="_parent" title="https://github.com/appsignal/appsignal-ruby/issues/380">https://github.com/appsignal/appsignal-ruby/issues/380</a></li>
+    
   </ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
 
@@ -155,7 +187,7 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'><p>Since Convenient Service is using middleware chains under the hood, exception backtraces may be huge.</p>
@@ -178,7 +210,7 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'><p>Works exactly in the same way as the original <code>clean</code>, except it falls back to the original backtrace in case of any exceptions inside filters or silencers.</p>
@@ -203,7 +235,7 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'></div></span>
@@ -239,7 +271,11 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
   <div class="note notetag">
     <strong>Note:</strong>
     <div class='inline'><p><code>ConvenientService::Support::BacktraceCleaner</code> intentionally does NOT exclude external gems lines from backtrace.</p>
@@ -261,6 +297,21 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
       <li><a href="https://github.com/rails/rails/blob/v7.1.2/activesupport/lib/active_support/backtrace_cleaner.rb#L34" target="_parent" title="https://github.com/rails/rails/blob/v7.1.2/activesupport/lib/active_support/backtrace_cleaner.rb#L34">https://github.com/rails/rails/blob/v7.1.2/activesupport/lib/active_support/backtrace_cleaner.rb#L34</a></li>
     
   </ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -331,7 +382,11 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
   <div class="note notetag">
     <strong>Note:</strong>
     <div class='inline'><p>To bring back Convenient Service lines to backtraces, use the <code>remove_silencers</code> or check the <code>CleansExceptionBacktrace</code> plugin.</p>
@@ -347,6 +402,21 @@ This silencer removes all Convenient Service lines from backtraces.</p>
 </div>
 <div class="tags">
   
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -390,7 +460,11 @@ This silencer removes all Convenient Service lines from backtraces.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Works exactly in the same way as the original <code>clean</code>, except it falls back to the original backtrace in case of any exceptions inside filters or silencers.
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+<p>Works exactly in the same way as the original <code>clean</code>, except it falls back to the original backtrace in case of any exceptions inside filters or silencers.
 Also returns an empty array, when <code>backtrace</code> is <code>nil</code>.</p>
 
 
@@ -418,6 +492,21 @@ Also returns an empty array, when <code>backtrace</code> is <code>nil</code>.</p
       <li><a href="https://api.rubyonrails.org/classes/ActiveSupport/BacktraceCleaner.html#method-i-clean" target="_parent" title="https://api.rubyonrails.org/classes/ActiveSupport/BacktraceCleaner.html#method-i-clean">https://api.rubyonrails.org/classes/ActiveSupport/BacktraceCleaner.html#method-i-clean</a></li>
     
   </ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -469,7 +558,7 @@ Also returns an empty array, when <code>backtrace</code> is <code>nil</code>.</p
 </div>
 
       <div id="footer">
-  Generated on Mon Dec  8 19:29:49 2025 by
+  Generated on Fri Dec 12 18:57:42 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

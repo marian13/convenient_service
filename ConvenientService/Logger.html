@@ -106,7 +106,39 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
 
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Usage.</p>
+</div></h5>
+      
+      <pre class="example code"><code>
+<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'>Logger</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'>Logger</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>WARN</span>
+<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'>Logger</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>log message</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span></code></pre>
+    
+  </div>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html" target="_parent" title="https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html">https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html</a></li>
+    
+      <li><a href="https://newbedev.com/ruby-create-singleton-with-parameters" target="_parent" title="https://newbedev.com/ruby-create-singleton-with-parameters">https://newbedev.com/ruby-create-singleton-with-parameters</a></li>
+    
+  </ul>
+
+</div>
 
 
 
@@ -268,6 +300,7 @@
       <pre class="lines">
 
 
+79
 80
 81
 82
@@ -283,11 +316,10 @@
 92
 93
 94
-95
-96</pre>
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_colored_formatter'>colored_formatter</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_original_formatter'>original_formatter</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_paint'><span class='object_link'><a href="Dependencies/Queries.html#paint-instance_method" title="ConvenientService::Dependencies::Queries#paint (method)">paint</a></span></span><span class='period'>.</span><span class='id identifier rubyid_loaded?'><span class='object_link'><a href="Dependencies/Queries/Gems/Paint.html#loaded%3F-class_method" title="ConvenientService::Dependencies::Queries::Gems::Paint.loaded? (method)">loaded?</a></span></span>
@@ -349,6 +381,7 @@
       <pre class="lines">
 
 
+46
 47
 48
 49
@@ -361,11 +394,10 @@
 56
 57
 58
-59
-60</pre>
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>STDOUT</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_logger'>logger</span><span class='op'>|</span>
@@ -423,12 +455,12 @@
       <pre class="lines">
 
 
+65
 66
-67
-68</pre>
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_original_formatter'>original_formatter</span>
   <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>Formatter</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -469,6 +501,7 @@
       <pre class="lines">
 
 
+115
 116
 117
 118
@@ -482,11 +515,10 @@
 126
 127
 128
-129
-130</pre>
+129</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_level='>level=</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_support_logger_non_integer_levels?'><span class='object_link'><a href="Dependencies/Queries.html#support_logger_non_integer_levels%3F-instance_method" title="ConvenientService::Dependencies::Queries#support_logger_non_integer_levels? (method)">support_logger_non_integer_levels?</a></span></span>
@@ -513,7 +545,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Dec  8 19:29:47 2025 by
+  Generated on Fri Dec 12 18:57:40 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

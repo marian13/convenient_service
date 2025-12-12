@@ -85,7 +85,32 @@
   
 </div>
 
-<h2>Defined Under Namespace</h2>
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Intermediate module to access <code>ConvenientService::Standard::Config</code> by the end-users.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><h2>Defined Under Namespace</h2>
 <p class="children">
   
     
@@ -105,7 +130,76 @@
     <dl class="constants">
       
         <dt id="Config-constant" class="">Config =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>See <code>ConvenientService::Standard::Config.default_options</code> for default options.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>See <code>ConvenientService::Standard::Config.available_options</code> for all available options.</p>
+</div>
+  </div>
+
+<p>Convenient Service main entrypoint.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Allows to define services.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'>Config</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_success'>success</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Can be customized by <code>with</code>, <code>without</code>, <code>with_defaults</code>, <code>without_defaults</code> options.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'>Config</span>
+    <span class='period'>.</span><span class='id identifier rubyid_with'>with</span><span class='lparen'>(</span><span class='symbol'>:fault_tolerance</span><span class='rparen'>)</span>
+    <span class='period'>.</span><span class='id identifier rubyid_without'>without</span><span class='lparen'>(</span><span class='symbol'>:short_syntax</span><span class='rparen'>)</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_success'>success</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Service/Configs.html" title="ConvenientService::Service::Configs (module)">Configs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Service/Configs/Standard.html" title="ConvenientService::Service::Configs::Standard (module)">Standard</a></span></span></pre></dd>
       
@@ -123,7 +217,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Dec  8 19:29:43 2025 by
+  Generated on Fri Dec 12 18:57:36 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>
