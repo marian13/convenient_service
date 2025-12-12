@@ -17,13 +17,13 @@ module ConvenientService
       module Standard
         include ConvenientService::Config
 
-        default_options do
+        available_options do
           [
             :essential,
             :callbacks,
             :fallbacks,
-            # :rollbacks,
-            # :fault_tolerance,
+            :rollbacks,
+            :fault_tolerance,
             :inspect,
             :recalculation,
             :result_parents_trace,
@@ -33,14 +33,32 @@ module ConvenientService
             :exception_services_trace,
             :per_instance_caching,
             :backtrace_cleaner,
-            # :active_model_attribute_assignment,
-            # :dry_initializer,
-            # :active_model_attributes,
-            # :active_model_validations,
-            # :dry_validation,
-            # :memo_wise,
-            # :not_passed_arguments,
-            # :finite_loop,
+            :active_model_attribute_assignment,
+            :dry_initializer,
+            :active_model_attributes,
+            :active_model_validations,
+            :dry_validation,
+            :memo_wise,
+            :not_passed_arguments,
+            :finite_loop,
+            :rspec
+          ]
+        end
+
+        default_options do
+          [
+            :essential,
+            :callbacks,
+            :fallbacks,
+            :inspect,
+            :recalculation,
+            :result_parents_trace,
+            :code_review_automation,
+            :short_syntax,
+            :type_safety,
+            :exception_services_trace,
+            :per_instance_caching,
+            :backtrace_cleaner,
             rspec: Dependencies.rspec.loaded?
           ]
         end

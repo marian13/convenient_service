@@ -15,6 +15,23 @@ module ConvenientService
         module V1
           include ConvenientService::Config
 
+          available_options do
+            [
+              :essential,
+              :callbacks,
+              :inspect,
+              :recalculation,
+              :result_parents_trace,
+              :code_review_automation,
+              :short_syntax,
+              :type_safety,
+              :exception_services_trace,
+              :per_instance_caching,
+              :backtrace_cleaner,
+              :rspec
+            ]
+          end
+
           default_options do
             [
               :essential,

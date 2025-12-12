@@ -625,6 +625,31 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
   end
 
   example_group "class methods" do
+    describe ".available_options" do
+      let(:available_options) do
+        ConvenientService::Config::Commands::NormalizeOptions.call(
+          options: [
+            :essential,
+            :callbacks,
+            :inspect,
+            :recalculation,
+            :result_parents_trace,
+            :code_review_automation,
+            :short_syntax,
+            :type_safety,
+            :exception_services_trace,
+            :per_instance_caching,
+            :backtrace_cleaner,
+            :rspec
+          ]
+        )
+      end
+
+      it "returns available options" do
+        expect(described_class.available_options).to eq(available_options)
+      end
+    end
+
     describe ".default_options" do
       context "when `RSpec` is loaded" do
         let(:default_options) do
@@ -651,6 +676,14 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         end
       end
     end
+  end
+
+  example_group "comprehensive suite" do
+    let(:available_options) { described_class.available_options }
+    let(:default_options) { described_class.default_options }
+
+    specify { expect(available_options.dup.subtract(default_options).to_a.map(&:name)).to eq([]) }
+    specify { expect(default_options.dup.subtract(available_options).to_a.map(&:name)).to eq([]) }
   end
 end
 

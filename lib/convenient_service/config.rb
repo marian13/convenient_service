@@ -133,6 +133,14 @@ module ConvenientService
             # @param block [Proc, nil]
             # @return [ConvenientService::Config::Entities::OptionCollection]
             #
+            def available_options(&block)
+              block ? @available_options = Commands::NormalizeOptions[options: yield] : @available_options ||= empty_options
+            end
+
+            ##
+            # @param block [Proc, nil]
+            # @return [ConvenientService::Config::Entities::OptionCollection]
+            #
             def default_options(&block)
               block ? @default_options = Commands::NormalizeOptions[options: yield] : @default_options ||= empty_options
             end

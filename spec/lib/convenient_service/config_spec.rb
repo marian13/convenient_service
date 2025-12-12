@@ -398,6 +398,44 @@ RSpec.describe ConvenientService::Config, type: :standard do
             end
           end
 
+          describe ".available_options" do
+            let(:config) do
+              Module.new.tap do |mod|
+                mod.module_exec(described_class) do |mod|
+                  include mod
+                end
+              end
+            end
+
+            context "when `block` is NOT passed" do
+              it "returns empty options" do
+                expect(config.available_options).to eq(config.empty_options)
+              end
+
+              specify do
+                expect { config.available_options }.to cache_its_value
+              end
+            end
+
+            context "when `block` is passed" do
+              let(:options) { [:foo, :bar] }
+              let(:block) { proc { options } }
+
+              specify do
+                expect { config.available_options(&block) }
+                  .to delegate_to(ConvenientService::Config::Commands::NormalizeOptions, :call)
+                  .with_arguments(options: options)
+                  .and_return_its_value
+              end
+
+              it "sets available options" do
+                config.available_options(&block)
+
+                expect(config.available_options).to eq(ConvenientService::Config::Commands::NormalizeOptions.call(options: options))
+              end
+            end
+          end
+
           describe ".default_options" do
             let(:config) do
               Module.new.tap do |mod|

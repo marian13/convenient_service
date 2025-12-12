@@ -746,6 +746,42 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
   end
 
   example_group "class methods" do
+    describe ".available_options" do
+      let(:available_options) do
+        ConvenientService::Config::Commands::NormalizeOptions.call(
+          options: [
+            :essential,
+            :callbacks,
+            :fallbacks,
+            :rollbacks,
+            :fault_tolerance,
+            :inspect,
+            :recalculation,
+            :result_parents_trace,
+            :code_review_automation,
+            :short_syntax,
+            :type_safety,
+            :exception_services_trace,
+            :per_instance_caching,
+            :backtrace_cleaner,
+            :active_model_attribute_assignment,
+            :dry_initializer,
+            :active_model_attributes,
+            :active_model_validations,
+            :dry_validation,
+            :memo_wise,
+            :not_passed_arguments,
+            :finite_loop,
+            :rspec
+          ]
+        )
+      end
+
+      it "returns available options" do
+        expect(described_class.available_options).to eq(available_options)
+      end
+    end
+
     describe ".default_options" do
       ##
       # NOTE: It tested by `test/lib/convenient_service/service/configs/standard_test.rb`.
@@ -858,6 +894,29 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
           .and_return_its_value
       end
     end
+  end
+
+  example_group "comprehensive suite" do
+    let(:available_options) { described_class.available_options }
+    let(:default_options) { described_class.default_options }
+
+    let(:diff) do
+      [
+        :rollbacks,
+        :fault_tolerance,
+        :active_model_attribute_assignment,
+        :dry_initializer,
+        :active_model_attributes,
+        :active_model_validations,
+        :dry_validation,
+        :memo_wise,
+        :not_passed_arguments,
+        :finite_loop
+      ]
+    end
+
+    specify { expect(available_options.dup.subtract(default_options).to_a.map(&:name)).to eq(diff) }
+    specify { expect(default_options.dup.subtract(available_options).to_a.map(&:name)).to eq([]) }
   end
 end
 
