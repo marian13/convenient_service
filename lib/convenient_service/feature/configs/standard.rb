@@ -14,6 +14,13 @@ module ConvenientService
       module Standard
         include ConvenientService::Config
 
+        available_options do
+          [
+            :essential,
+            :rspec
+          ]
+        end
+
         default_options do
           [
             :essential,

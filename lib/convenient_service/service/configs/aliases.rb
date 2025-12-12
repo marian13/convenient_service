@@ -18,6 +18,10 @@ module ConvenientService
     #
     # @api public
     # @since 1.0.0
+    #
+    # @note See `ConvenientService::Standard::Config.default_options` for default options.
+    # @note See `ConvenientService::Standard::Config.available_options` for all available options.
+    #
     # @example Allows to define services.
     #   class Service
     #     include ConvenientService::Standard::Config
@@ -26,6 +30,7 @@ module ConvenientService
     #       success
     #     end
     #   end
+    #
     # @example Can be customized by `with`, `without`, `with_defaults`, `without_defaults` options.
     #   class Service
     #     include ConvenientService::Standard::Config
@@ -36,8 +41,13 @@ module ConvenientService
     #       success
     #     end
     #   end
-    # @note See `ConvenientService::Standard::Config.default_options` for default options.
-    # @note See `ConvenientService::Standard::Config.available_options` for all available options.
+    #
+    # @example Can be tested in RSpec.
+    #   RSpec.describe Service do
+    #     include ConvenientService::RSpec::Matchers::IncludeConfig
+    #
+    #     specify { expect(Service).to include_module(ConvenientService::Config.with(:fault_tolerance).without(:short_syntax)) }
+    #   end
     #
     Config = ::ConvenientService::Service::Configs::Standard
   end

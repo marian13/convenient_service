@@ -106,6 +106,18 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
   end
 
   example_group "class methods" do
+    describe ".available_options" do
+      let(:available_options) { ConvenientService::Config::Commands::NormalizeOptions.call(options: [:essential, :rspec]) }
+
+      it "returns available options with `:rspec`" do
+        expect(described_class.available_options).to eq(available_options)
+      end
+
+      it "returns only enabled options" do
+        expect(described_class.available_options.to_a.all?(&:enabled?)).to eq(true)
+      end
+    end
+
     describe ".default_options" do
       ##
       # NOTE: It tested by `test/lib/convenient_service/feature/configs/standard_test.rb`.
@@ -122,6 +134,10 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
 
         it "returns default options with `:rspec`" do
           expect(described_class.default_options).to eq(default_options)
+        end
+
+        it "returns only enabled options" do
+          expect(described_class.default_options.to_a.all?(&:enabled?)).to eq(true)
         end
       end
     end
@@ -202,6 +218,14 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
           .and_return_its_value
       end
     end
+  end
+
+  example_group "comprehensive suite" do
+    let(:available_options) { described_class.available_options }
+    let(:default_options) { described_class.default_options }
+
+    specify { expect(available_options.dup.subtract(default_options).to_a.map(&:name)).to eq([]) }
+    specify { expect(default_options.dup.subtract(available_options).to_a.map(&:name)).to eq([]) }
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

@@ -22,6 +22,19 @@ class ConvenientService::Feature::Configs::StandardTest < Minitest::Test
 
           assert_equal(default_options, ConvenientService::Feature::Configs::Standard.default_options)
         end
+
+        should "return enabled options with disabled `:rspec` option" do
+          assert_equal(
+            [
+              true,
+              false
+            ],
+            [
+              ConvenientService::Service::Feature::Configs::Standard.default_options.dup.subtract(:rspec).to_a.all?(&:enabled?),
+              ConvenientService::Service::Feature::Configs::Standard.default_options.enabled?(:rspec)
+            ]
+          )
+        end
       end
     end
   end

@@ -46,7 +46,7 @@ class ConvenientService::Service::Configs::StandardTest < Minitest::Test
               false
             ],
             [
-              ConvenientService::Service::Configs::Standard.default_options.subtract(:rspec).to_a.all?(&:enabled?),
+              ConvenientService::Service::Configs::Standard.default_options.dup.subtract(:rspec).to_a.all?(&:enabled?),
               ConvenientService::Service::Configs::Standard.default_options.enabled?(:rspec)
             ]
           )
