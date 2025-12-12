@@ -244,12 +244,12 @@
       <pre class="lines">
 
 
-176
-177
-178</pre>
+184
+185
+186</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/config.rb', line 176</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/config.rb', line 184</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_empty_options'>empty_options</span>
   <span class='const'><span class='object_link'><a href="Config/Entities.html" title="ConvenientService::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Entities/OptionCollection.html" title="ConvenientService::Config::Entities::OptionCollection (class)">OptionCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/OptionCollection.html#initialize-instance_method" title="ConvenientService::Config::Entities::OptionCollection#initialize (method)">new</a></span></span>
@@ -465,7 +465,15 @@
 168
 169
 170
-171</pre>
+171
+172
+173
+174
+175
+176
+177
+178
+179</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/config.rb', line 19</span>
@@ -587,6 +595,14 @@
 </span>      <span class='comment'># @param block [Proc, nil]
 </span>      <span class='comment'># @return [ConvenientService::Config::Entities::OptionCollection]
 </span>      <span class='comment'>#
+</span>      <span class='kw'>def</span> <span class='id identifier rubyid_available_options'>available_options</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_block'>block</span> <span class='op'>?</span> <span class='ivar'>@available_options</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Config/Commands.html" title="ConvenientService::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Commands/NormalizeOptions.html" title="ConvenientService::Config::Commands::NormalizeOptions (class)">NormalizeOptions</a></span></span><span class='lbracket'>[</span><span class='label'>options:</span> <span class='kw'>yield</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='ivar'>@available_options</span> <span class='op'>||=</span> <span class='id identifier rubyid_empty_options'>empty_options</span>
+      <span class='kw'>end</span>
+
+      <span class='comment'>##
+</span>      <span class='comment'># @param block [Proc, nil]
+</span>      <span class='comment'># @return [ConvenientService::Config::Entities::OptionCollection]
+</span>      <span class='comment'>#
 </span>      <span class='kw'>def</span> <span class='id identifier rubyid_default_options'>default_options</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
         <span class='id identifier rubyid_block'>block</span> <span class='op'>?</span> <span class='ivar'>@default_options</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Config/Commands.html" title="ConvenientService::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config/Commands/NormalizeOptions.html" title="ConvenientService::Config::Commands::NormalizeOptions (class)">NormalizeOptions</a></span></span><span class='lbracket'>[</span><span class='label'>options:</span> <span class='kw'>yield</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='ivar'>@default_options</span> <span class='op'>||=</span> <span class='id identifier rubyid_empty_options'>empty_options</span>
       <span class='kw'>end</span>
@@ -633,7 +649,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Dec 12 19:13:40 2025 by
+  Generated on Fri Dec 12 19:57:20 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>
