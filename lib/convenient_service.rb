@@ -66,7 +66,7 @@ require_relative "convenient_service/aliases"
 # @note This module is NOT expected to be included or extended by the end-user classes and modules. See {ConvenientService::Standard::Config} as the main entrypoint.
 #
 # @internal
-#   NOTE: Is it NOT clear yet from where YARD take empty `ConvenientService` docstring, that is why `@!parse` is used.
+#   NOTE: Is it NOT clear yet from where YARD take empty `ConvenientService` docstring, that is why `!parse` directive is used.
 #
 module ConvenientService
   class << self
