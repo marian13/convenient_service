@@ -5,13 +5,14 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-##
-# @example
-#   ConvenientService::Utils::Hash::Except.call({foo: :bar, baz: :qux}, [:foo])
-#
 module ConvenientService
   module Utils
     module Hash
+      ##
+      # @example Common usage.
+      #   ConvenientService::Utils::Hash::Except.call({foo: :bar, baz: :qux}, [:foo])
+      #   # => {baz: :qux}
+      #
       class Except < Support::Command
         ##
         # @!attribute [r] hash

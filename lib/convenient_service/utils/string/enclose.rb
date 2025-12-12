@@ -5,20 +5,20 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-##
-# @example Common usage.
-#   ConvenientService::Utils::String::Enclose.call("foo", "_")
-#   # => "_foo_"
-#
-#   ConvenientService::Utils::String::Enclose.call("", "_")
-#   # => "_"
-#
-#   ConvenientService::Utils::String::Enclose.call(nil, "_")
-#   # => "_"
-#
 module ConvenientService
   module Utils
     module String
+      ##
+      # @example Common usage.
+      #   ConvenientService::Utils::String::Enclose.call("foo", "_")
+      #   # => "_foo_"
+      #
+      #   ConvenientService::Utils::String::Enclose.call("", "_")
+      #   # => "_"
+      #
+      #   ConvenientService::Utils::String::Enclose.call(nil, "_")
+      #   # => "_"
+      #
       class Enclose < Support::Command
         ##
         # @!attribute [r] string

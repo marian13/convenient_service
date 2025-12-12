@@ -25,12 +25,6 @@ require "rubygems"
 #
 require_relative "queries"
 
-##
-# `ConvenientService::Dependencies` can dynamically require plugins/extensions that have external dependencies.
-#
-# @internal
-#   https://github.com/marian13/convenient_service/wiki/Docs:-Dependencies
-#
 module ConvenientService
   module Dependencies
     extend Queries

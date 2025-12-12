@@ -26,7 +26,7 @@ if ENV["CONVENIENT_SERVICE_MUTANT_LICENCE_KEY"]
 end
 
 ##
-# Specify your gem's dependencies in `convenient_service.gemspec`.
+# NOTE: Specify your gem's dependencies in `convenient_service.gemspec`.
 # - https://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/
 #
 gemspec

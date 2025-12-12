@@ -57,6 +57,13 @@ require_relative "convenient_service/feature"
 #
 require_relative "convenient_service/aliases"
 
+##
+# Convenient Service module/namespace.
+#
+# @api public
+# @since 1.0.0
+# @note This module is NOT expected to be included or extended by the end-user classes and modules. See `ConvenientService::Standard::Config` as the main entrypoint.
+#
 module ConvenientService
   class << self
     ##

@@ -5,13 +5,13 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-##
-# @example
-#   ConvenientService::Utils::Hash::AssertValidKeys.call({foo: "foo", bar: "bar"}, [:foo, :bar])
-#
 module ConvenientService
   module Utils
     module Hash
+      ##
+      # @example Common usage.
+      #   ConvenientService::Utils::Hash::AssertValidKeys.call({foo: "foo", bar: "bar"}, [:foo, :bar])
+      #
       class AssertValidKeys < Support::Command
         ##
         # @!attribute [r] hash

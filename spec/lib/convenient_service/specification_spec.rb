@@ -17,7 +17,6 @@ require "convenient_service"
 #
 return if ConvenientService::Dependencies.ruby.jruby?
 
-# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Specification, type: :standard do
   example_group "constants" do
     describe "::VERSION" do
@@ -49,7 +48,7 @@ RSpec.describe ConvenientService::Specification, type: :standard do
       it "returns summary" do
         expect(described_class::SUMMARY).to eq(
           <<~TEXT
-            Ruby Service Objects with Steps.
+            Ruby Service Objects with Steps and more.
           TEXT
         )
       end
@@ -58,16 +57,21 @@ RSpec.describe ConvenientService::Specification, type: :standard do
     end
 
     describe "::DESCRIPTION" do
+      # rubocop:disable RSpec/ExampleLength
       it "returns description" do
         expect(described_class::DESCRIPTION).to eq(
           <<~TEXT
-            Yet another approach to revisit the service object pattern in Ruby, but this time focusing on the unique, opinionated, moderately obtrusive, but not mandatory features.
+            Manage complex business logic in Ruby applications using Service Objects with Results and Steps.
+
+            Hide technical details with Configs, Concerns and Middlewares.
+
+            Group related code with Features and Entries.
           TEXT
         )
       end
+      # rubocop:enable RSpec/ExampleLength
 
       specify { expect(described_class::DESCRIPTION).to be_frozen }
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers

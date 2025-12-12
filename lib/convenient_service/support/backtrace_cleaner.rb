@@ -5,12 +5,6 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-##
-# @note Other gems are also trying to integrate with Rails Backtrace Cleaner.
-# @see https://github.com/sidekiq/sidekiq/pull/5796
-# @see https://github.com/sidekiq/sidekiq/issues/5589
-# @see https://github.com/appsignal/appsignal-ruby/issues/380
-#
 module ConvenientService
   module Support
     ##
@@ -22,6 +16,12 @@ module ConvenientService
     # @see https://medium.com/one-medical-technology/filtering-ruby-backtraces-for-debugging-4df75133ab71
     # @see https://twitter.com/websebdev/status/1375831554518360065?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1375831554518360065%7Ctwgr%5E459595174e71c0f1aa3826c89f2ffca0c3da6ea3%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fwww.redditmedia.com%2Fmediaembed%2Fmegii9%2F%3Fresponsive%3Dtrueis_nightmode%3Dtrue
     # @see https://stackoverflow.com/questions/22727219/using-backtracecleaner-in-rails-console
+    #
+    #
+    # @note Other gems are also trying to integrate with Rails Backtrace Cleaner.
+    # @see https://github.com/sidekiq/sidekiq/pull/5796
+    # @see https://github.com/sidekiq/sidekiq/issues/5589
+    # @see https://github.com/appsignal/appsignal-ruby/issues/380
     #
     class BacktraceCleaner < Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner
       ##

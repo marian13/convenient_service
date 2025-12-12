@@ -5,17 +5,17 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-##
-# @example
-#   {foo: (1..10), bar: /abc/} == {foo: 5, bar: :abc}
-#   # => false, since values are compared by `#==` under the hood.
-#
-#   ConvenientService::Utils::Hash::TripleEqualityCompare.call({foo: (1..10), bar: /abc/}, {foo: 5, bar: :abc})
-#   # => true, since values are compared by `#===` under the hood.
-#
 module ConvenientService
   module Utils
     module Hash
+      ##
+      # @example Common usage.
+      #   {foo: (1..10), bar: /abc/} == {foo: 5, bar: :abc}
+      #   # => false, since values are compared by `#==` under the hood.
+      #
+      #   ConvenientService::Utils::Hash::TripleEqualityCompare.call({foo: (1..10), bar: /abc/}, {foo: 5, bar: :abc})
+      #   # => true, since values are compared by `#===` under the hood.
+      #
       class TripleEqualityCompare < Support::Command
         ##
         # @!attribute [r] hash

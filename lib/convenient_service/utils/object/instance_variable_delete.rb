@@ -5,9 +5,6 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-##
-#
-#
 module ConvenientService
   module Utils
     module Object

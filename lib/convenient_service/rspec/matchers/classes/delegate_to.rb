@@ -9,11 +9,6 @@ require_relative "delegate_to/commands"
 require_relative "delegate_to/entities"
 require_relative "delegate_to/exceptions"
 
-##
-# @internal
-#   IMPORTANT: This matcher has a dedicated end-user doc. Do NOT forget to update it when needed.
-#   - https://github.com/marian13/convenient_service_docs/blob/main/docs/api/tests/rspec/matchers/delegate_to.mdx
-#
 module ConvenientService
   module RSpec
     module Matchers
@@ -36,6 +31,9 @@ module ConvenientService
         #
         #   NOTE: A similar (with different behaviour) matcher exists in `saharspec`.
         #   - https://github.com/zverok/saharspec#send_messageobject-method-matcher
+        #
+        #   IMPORTANT: This matcher has a dedicated end-user doc. Do NOT forget to update it when needed.
+        #   - https://github.com/marian13/convenient_service_docs/blob/main/docs/api/tests/rspec/matchers/delegate_to.mdx
         #
         class DelegateTo
           ##

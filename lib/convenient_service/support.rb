@@ -30,3 +30,16 @@ require_relative "support/middleware"
 require_relative "support/raw_value"
 require_relative "support/safe_method"
 require_relative "support/thread_safe_counter"
+
+module ConvenientService
+  ##
+  # Namespace for Convenient Service utilities that can NOT be expressed as "functions".
+  #
+  # @api private
+  # @since 1.0.0
+  # @note Utilities from the `Support` module are NOT expected to be used by the end-users directly, but they still may interact with them when the `Support` instances are returned from the Convenient Service public methods.
+  # @note Plugin developers usually can rely on the `Support` module, but it is always a good idea to open an issue with the corresponding usage example. This way, the custom plugin may be added to the CI pipeline. So that any breaking change is caught before the new Convenient Service release.
+  #
+  module Support
+  end
+end

@@ -5,40 +5,45 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-##
-# @example Two args form (works as GetOwnConst).
-#   module Test
-#   end
-#
-#   ConvenientService::Utils::Module::FetchOwnConst.call(Test, :File)
-#   # => nil, not File from Ruby Core.
-#
-#   module Test
-#     class File
-#     end
-#   end
-#
-#   ConvenientService::Utils::Module::FetchOwnConst.call(Test, :File)
-#   # => Test::File
-#
-# @example Two args + block form.
-#   module Test
-#   end
-#
-#   ConvenientService::Utils::Module::FetchOwnConst.call(Test, :File) { Class.new }
-#   # => Test::File, just created.
-#
-#   module Test
-#     class File
-#     end
-#   end
-#
-#   ConvenientService::Utils::Module::FetchOwnConst.call(Test, :File)
-#   # => Test::File, already existing.
-#
 module ConvenientService
   module Utils
     module Module
+      ##
+      # Returns a constant that is defined directly in module or defines it there.
+      #
+      # @api private
+      # @since 1.0.0
+      #
+      # @example Two args form (works as GetOwnConst).
+      #   module Test
+      #   end
+      #
+      #   ConvenientService::Utils::Module::FetchOwnConst.call(Test, :File)
+      #   # => nil, not File from Ruby Core.
+      #
+      #   module Test
+      #     class File
+      #     end
+      #   end
+      #
+      #   ConvenientService::Utils::Module::FetchOwnConst.call(Test, :File)
+      #   # => Test::File
+      #
+      # @example Two args + block form.
+      #   module Test
+      #   end
+      #
+      #   ConvenientService::Utils::Module::FetchOwnConst.call(Test, :File) { Class.new }
+      #   # => Test::File, just created.
+      #
+      #   module Test
+      #     class File
+      #     end
+      #   end
+      #
+      #   ConvenientService::Utils::Module::FetchOwnConst.call(Test, :File)
+      #   # => Test::File, already existing.
+      #
       class FetchOwnConst < Support::Command
         ##
         # @!attribute [r] mod

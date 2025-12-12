@@ -5,30 +5,35 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-##
-# @example
-#   module Foo
-#     module Bar
-#       class Baz
-#       end
-#     end
-#   end
-#
-#   ConvenientService::Utils::Module::GetNamespace.call(Foo)
-#   # => nil
-#
-#   ConvenientService::Utils::Module::GetNamespace.call(Foo::Bar)
-#   # => Foo
-#
-#   ConvenientService::Utils::Module::GetNamespace.call(Foo::Bar::Baz)
-#   # => Foo::Bar
-#
-#   ConvenientService::Utils::Module::GetNamespace.call(Module.new)
-#   # => nil
-#
 module ConvenientService
   module Utils
     module Module
+      ##
+      # Returns parent namespace of class or module.
+      #
+      # @api private
+      # @since 1.0.0
+      #
+      # @example Common usage.
+      #   module Foo
+      #     module Bar
+      #       class Baz
+      #       end
+      #     end
+      #   end
+      #
+      #   ConvenientService::Utils::Module::GetNamespace.call(Foo)
+      #   # => nil
+      #
+      #   ConvenientService::Utils::Module::GetNamespace.call(Foo::Bar)
+      #   # => Foo
+      #
+      #   ConvenientService::Utils::Module::GetNamespace.call(Foo::Bar::Baz)
+      #   # => Foo::Bar
+      #
+      #   ConvenientService::Utils::Module::GetNamespace.call(Module.new)
+      #   # => nil
+      #
       class GetNamespace < Support::Command
         ##
         # @!attribute [r] mod

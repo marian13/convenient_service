@@ -18,7 +18,9 @@ require "convenient_service"
 ConvenientService::Dependencies.require_alias
 
 ##
-# `CS` is just an alias for `ConvenientService`. It becames available by `require "convenient_service/alias"`.
+# `CS` is just an alias for `ConvenientService`. It becames available by `require "convenient_service/extra/alias"`.
+#
+# @since 1.0.0
 #
 # @internal
 #   NOTE: Added for visibility in YARD docs.

@@ -17,6 +17,14 @@ require_relative "utils/string"
 require_relative "utils/object"
 
 module ConvenientService
+  ##
+  # Namespace for Convenient Service utilities that can be expressed as "functions".
+  #
+  # @api private
+  # @since 1.0.0
+  # @note Utilities from the `Utils` module are NOT expected to be used by the end-users directly.
+  # @note Plugin developers usually can rely on the `Utils` module, but it is always a good idea to open an issue with the corresponding usage example. This way, the custom plugin may be added to the CI pipeline. So that any breaking change is caught before the new Convenient Service release.
+  #
   module Utils
     class << self
       ##

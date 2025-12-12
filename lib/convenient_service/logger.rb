@@ -5,18 +5,17 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-##
-# @example Usage.
-#
-#   ConvenientService::Logger.instance
-#   ConvenientService::Logger.instance.level = ::Logger::WARN
-#   ConvenientService::Logger.instance.warn { "log message" }
-#
-# @see https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html
-# @see https://newbedev.com/ruby-create-singleton-with-parameters
-#
 module ConvenientService
   ##
+  # @example Usage.
+  #
+  #   ConvenientService::Logger.instance
+  #   ConvenientService::Logger.instance.level = ::Logger::WARN
+  #   ConvenientService::Logger.instance.warn { "log message" }
+  #
+  # @see https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html
+  # @see https://newbedev.com/ruby-create-singleton-with-parameters
+  #
   # @internal
   #   TODO: Custom matcher to track log messages.
   #   TODO: Fallback for logging methods. Just like with `#clean` in backtrace cleaner.

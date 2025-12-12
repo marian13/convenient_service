@@ -5,13 +5,13 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-##
-# @example
-#   ConvenientService::Utils::Kernel::SilenceWarnings.call { String = String }
-#
 module ConvenientService
   module Utils
     module Kernel
+      ##
+      # @example Common usage.
+      #   ConvenientService::Utils::Kernel::SilenceWarnings.call { String = String }
+      #
       class SilenceWarnings < Support::Command
         ##
         # @!attribute [r] block

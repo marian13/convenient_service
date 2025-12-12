@@ -5,20 +5,22 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-##
-# @example
-#   ConvenientService::Utils::Object::ResolveType.call("foo")
-#   # => "instance"
-#
-#   ConvenientService::Utils::Object::ResolveType.call(Array)
-#   # => "class"
-#
-#   ConvenientService::Utils::Object::ResolveType.call(Kernel)
-#   # => "module"
-#
 module ConvenientService
   module Utils
     module Object
+      ##
+      # @api private
+      # @since 1.0.0
+      # @example Common usage.
+      #   ConvenientService::Utils::Object::ResolveType.call("foo")
+      #   # => "instance"
+      #
+      #   ConvenientService::Utils::Object::ResolveType.call(Array)
+      #   # => "class"
+      #
+      #   ConvenientService::Utils::Object::ResolveType.call(Kernel)
+      #   # => "module"
+      #
       class ResolveType < Support::Command
         ##
         # @!attribute [r] object

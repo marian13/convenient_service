@@ -5,18 +5,18 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-##
-# @example Usual class.
-#   ConvenientService::Utils::Class::DisplayName.call(String)
-#   # => "String"
-#
-# @example Anonymous class.
-#   ConvenientService::Utils::Class::DisplayName.call(Сlass.new)
-#   # => "AnonymousClass(#76940)"
-#
 module ConvenientService
   module Utils
     module Class
+      ##
+      # @example Usual class.
+      #   ConvenientService::Utils::Class::DisplayName.call(String)
+      #   # => "String"
+      #
+      # @example Anonymous class.
+      #   ConvenientService::Utils::Class::DisplayName.call(Сlass.new)
+      #   # => "AnonymousClass(#76940)"
+      #
       class DisplayName < Support::Command
         ##
         # @api private

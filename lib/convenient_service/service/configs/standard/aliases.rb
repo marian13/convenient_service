@@ -7,7 +7,31 @@
 
 module ConvenientService
   module Standard
+    ##
+    # Intermediate module to access `ConvenientService::Standard::V1::Config` by the end-users.
+    #
+    # @api public
+    # @since 1.0.0
+    # @deprecated Refactor your code or use a backport.
+    # @see https://userdocs.convenientservice.org/deprecations/jsend_meaning_of_failure_and_error
+    #
     module V1
+      ##
+      # Deprecated Convenient Service main entrypoint.
+      #
+      # @api public
+      # @since 1.0.0
+      # @deprecated Refactor your code or use a backport.
+      # @see https://userdocs.convenientservice.org/deprecations/jsend_meaning_of_failure_and_error
+      # @example Allows to define services.
+      #   class Service
+      #     include ConvenientService::Standard::V1::Config
+      #
+      #     def result
+      #       success
+      #     end
+      #   end
+      #
       Config = ::ConvenientService::Service::Configs::Standard::V1
     end
   end
