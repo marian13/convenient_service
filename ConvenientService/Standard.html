@@ -181,6 +181,16 @@
   <span class='kw'>end</span>
 <span class='kw'>end</span></code></pre>
     
+      
+        <h5 class="example_title"><div class='inline'><p>Can be tested in RSpec.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="RSpec.html" title="ConvenientService::RSpec (module)">RSpec</a></span></span><span class='period'>.</span><span class='id identifier rubyid_describe'>describe</span> <span class='const'><span class='object_link'><a href="Service.html" title="ConvenientService::Service (module)">Service</a></span></span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="RSpec.html" title="ConvenientService::RSpec (module)">RSpec</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="RSpec/Matchers.html" title="ConvenientService::RSpec::Matchers (module)">Matchers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="RSpec/Matchers/IncludeConfig.html" title="ConvenientService::RSpec::Matchers::IncludeConfig (module)">IncludeConfig</a></span></span>
+
+  <span class='id identifier rubyid_specify'>specify</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_include_module'>include_module</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Config.html" title="ConvenientService::Config (module)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_with'>with</span><span class='lparen'>(</span><span class='symbol'>:fault_tolerance</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_without'>without</span><span class='lparen'>(</span><span class='symbol'>:short_syntax</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></code></pre>
+    
   </div>
 
 <p class="tag_title">Since:</p>
@@ -217,7 +227,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Dec 12 21:28:22 2025 by
+  Generated on Fri Dec 12 22:05:14 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>
