@@ -56,7 +56,7 @@ end
 
 def preprocess_app_js
   code =
-    <<~JS
+    <<~'JS'
       (() => {
         const createOpenInGitHubLinks = () => {
           $('.source_code').each((_index, table) => {
