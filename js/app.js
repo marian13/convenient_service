@@ -406,7 +406,7 @@ window.addEventListener(
 
       span.style.fontSize = '0.9em';
 
-      span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
+      span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On GitHub</a>]`;
 
       table.before(span)
     })
