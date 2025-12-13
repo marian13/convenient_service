@@ -30,8 +30,17 @@ Dir.glob("#{root_dir}/**/*.html").each do |absolute_path|
     next url if url.start_with?("..")
     next url if url.start_with?("/")
 
-    File.join(host, relative_dir, url)
-      .tap { |preprocessed_url| puts %(Replaced "#{url}" by "#{preprocessed_url}" in "#{relative_path}".) }
+    preprocessed_url =
+      case
+      when url.empty? || url.start_with?("#")
+        File.join(host, relative_path, url)
+      else
+        File.join(host, relative_dir, url)
+      end
+
+    puts %(Replaced "#{url}" by "#{preprocessed_url}" in "#{relative_path}".)
+
+    preprocessed_url
   end
 
   File.write(absolute_path, content)
