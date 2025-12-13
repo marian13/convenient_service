@@ -6,29 +6,33 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-current_dir = Dir.pwd
+root_dir = "#{Dir.pwd}/docs/api"
 
 host = ENV["API_DOCS_HOST"] || "/" # "https://apidocs.convenientservice.org/" in prod.
 
 def preprocess_urls(content, &block)
   content.gsub(/href=".+"/) do |attribute|
     url = attribute.match(/href="(?<url>.+?)"/)[:url]
-    url = block.call(url)
+    url = yield url
 
-    %{href="#{url}"}
+    %(href="#{url}")
   end
 end
 
-Dir.glob("#{current_dir}/docs/api/**/*.html").each do |path|
-  content = File.read(path)
+Dir.glob("#{root_dir}/**/*.html").each do |absolute_path|
+  relative_path = absolute_path.delete_prefix(root_dir)
+  relative_dir = File.dirname(relative_path)
+
+  content = File.read(absolute_path)
 
   content = preprocess_urls(content) do |url|
     next url if url.start_with?("http")
     next url if url.start_with?("..")
     next url if url.start_with?("/")
 
-    "#{host}#{url}".tap { |url_with_host| puts %{Replaced "#{url}" by "#{url_with_host}" in "#{path}".} }
+    File.join(host, relative_dir, url)
+      .tap { |preprocessed_url| puts %(Replaced "#{url}" by "#{preprocessed_url}" in "#{relative_path}".) }
   end
 
-  File.write(path, content)
+  File.write(absolute_path, content)
 end
