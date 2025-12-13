@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../../../../css/style.css" />
+  <link rel="stylesheet" href="../../../../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../../../../css/common.css" />
+  <link rel="stylesheet" href="../../../../css/common.css" type="text/css" />
 
 <script type="text/javascript">
   pathId = "ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden";
@@ -37,7 +37,7 @@
         <div id="menu">
   
     <a href="../../../../_index.html">Index (A)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../ConvenientService.html">Exceptions</a></span></span>
+    <span class='title'><span class='object_link'><a href="../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../AbstractMethod.html" title="ConvenientService::Support::AbstractMethod (module)">AbstractMethod</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Exceptions.html" title="ConvenientService::Support::AbstractMethod::Exceptions (module)">Exceptions</a></span></span>
      &raquo; 
     <span class="title">AbstractMethodNotOverridden</span>
   
@@ -69,19 +69,19 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName"><span class='object_link'><a href="../../../Exception.html">Exception</a></span></span>
+      <span class="inheritName"><span class='object_link'><a href="../../../Exception.html" title="ConvenientService::Exception (class)">Exception</a></span></span>
       
         <ul class="fullTree">
           <li>Object</li>
           
             <li class="next">StandardError</li>
           
-            <li class="next"><span class='object_link'><a href="../../../Exception.html">Exception</a></span></li>
+            <li class="next"><span class='object_link'><a href="../../../Exception.html" title="ConvenientService::Exception (class)">Exception</a></span></li>
           
             <li class="next">ConvenientService::Support::AbstractMethod::Exceptions::AbstractMethodNotOverridden</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Support/AbstractMethod/Exceptions/AbstractMethodNotOverridden.html#">show all</a>
+        <a href="https://apidocs.convenientservice.org/ConvenientService/Support/AbstractMethod/Exceptions/AbstractMethodNotOverridden.html#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -141,7 +141,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Support/AbstractMethod/Exceptions/AbstractMethodNotOverridden.html#">collapse</a></small>
+      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Support/AbstractMethod/Exceptions/AbstractMethodNotOverridden.html#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -149,7 +149,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/AbstractMethod/Exceptions/AbstractMethodNotOverridden.html#initialize_with_kwargs-instance_method">#<strong>initialize_with_kwargs</strong>(instance:, method:)  &#x21d2; void </a>
+      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/AbstractMethod/Exceptions/AbstractMethodNotOverridden.html#initialize_with_kwargs-instance_method" title="#initialize_with_kwargs (instance method)">#<strong>initialize_with_kwargs</strong>(instance:, method:)  &#x21d2; void </a>
     
 
     
@@ -180,8 +180,8 @@
   
   
   
-  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../../Exception.html">Exception</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../../../Exception.html#new-class_method">new</a></span></p>
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../../Exception.html" title="ConvenientService::Exception (class)">Exception</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></p>
 
   
 
@@ -278,7 +278,7 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize_with_kwargs'>initialize_with_kwargs</span><span class='lparen'>(</span><span class='label'>instance:</span><span class='comma'>,</span> <span class='label'>method:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_klass'>klass</span> <span class='op'>=</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Class</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_instance'>instance</span> <span class='op'>:</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
-  <span class='id identifier rubyid_method_type'>method_type</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Utils.html">resolve_type</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_instance'>instance</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_method_type'>method_type</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Utils/Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_resolve_type'><span class='object_link'><a href="../../../Utils/Object.html#resolve_type-class_method" title="ConvenientService::Utils::Object.resolve_type (method)">resolve_type</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_instance'>instance</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='heredoc_beg'>&lt;&lt;~TEXT</span>
 <span class='tstring_content'>    `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_klass'>klass</span><span class='embexpr_end'>}</span><span class='tstring_content'>` should implement abstract </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_method_type'>method_type</span><span class='embexpr_end'>}</span><span class='tstring_content'> method `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_method'>method</span><span class='embexpr_end'>}</span><span class='tstring_content'>`.
@@ -296,8 +296,8 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 01:32:00 2025 by
-  <a href="https://yardoc.org">yard</a>
+  Generated on Sat Dec 13 01:35:51 2025 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>
 
