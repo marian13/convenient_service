@@ -398,7 +398,7 @@ window.addEventListener(
     $('.source_code').each((_index, table) => {
       const tableHTML = table.innerHTML;
 
-      const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
+      const { file, line } = /# File '(?<file>.+?)', line (?<line>\d+)/.exec(tableHTML).groups;
 
       const span = document.createElement('span')
 
