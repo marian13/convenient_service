@@ -5,6 +5,15 @@
 
 # Changelog
 
+## [0.21.0](https://github.com/marian13/convenient_service/compare/v0.20.0...v0.21.0) (2025-12-13)
+
+
+### Features
+
+* **config:** introduce Config.available_options ([e0857e5](https://github.com/marian13/convenient_service/commit/e0857e5c2caa176fc4f64e998f8e31216a1dd210))
+* **forbids_convenient_service_entities_as_constructor_arguments:** add specific exception feature ([06f2e8f](https://github.com/marian13/convenient_service/commit/06f2e8fc743476ac51502f785a15ccb85332db46))
+* **forbids_convenient_service_entities_as_constructor_arguments:** add specific exceptions for status, message, code, custom entity ([521f05d](https://github.com/marian13/convenient_service/commit/521f05db0cf78bd1579a7ae499725ca2c4d64a64))
+
 ## 0.20.0 (2025-12-06)
 
 
