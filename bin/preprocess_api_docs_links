@@ -27,7 +27,7 @@ Dir.glob("#{current_dir}/docs/api/**/*.html").each do |path|
     next url if url.start_with?("..")
     next url if url.start_with?("/")
 
-    "#{host}#{url}"
+    "#{host}#{url}".tap { |url_with_host| puts %{Replaced "#{url}" by "#{url_with_host}" in "#{path}".} }
   end
 
   File.write(path, content)
