@@ -126,7 +126,7 @@
   
     <h2>
       Class Method Summary
-      <small><a href="https://apidocs.convenientservice.org/#">collapse</a></small>
+      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Support/DependencyContainer/#">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -134,7 +134,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/#export-class_method">.<strong>export</strong>(slug, scope: Constants::DEFAULT_SCOPE, &amp;body)  &#x21d2; ConvenientService::Support::DependencyContainer::Entities::Method </a>
+      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/DependencyContainer/#export-class_method">.<strong>export</strong>(slug, scope: Constants::DEFAULT_SCOPE, &amp;body)  &#x21d2; ConvenientService::Support::DependencyContainer::Entities::Method </a>
     
 
     
@@ -156,7 +156,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/#exported_methods-class_method">.<strong>exported_methods</strong>  &#x21d2; ConvenientService::Support::DependencyContainer::Entities::MethodCollection </a>
+      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/DependencyContainer/#exported_methods-class_method">.<strong>exported_methods</strong>  &#x21d2; ConvenientService::Support::DependencyContainer::Entities::MethodCollection </a>
     
 
     
@@ -198,7 +198,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="export-class_method">
   
-    .<strong>export</strong>(slug, scope: Constants::DEFAULT_SCOPE, &amp;body)  &#x21d2; <tt><span class='object_link'><a href="https://apidocs.convenientservice.org/Entities/Method.html">ConvenientService::Support::DependencyContainer::Entities::Method</a></span></tt> 
+    .<strong>export</strong>(slug, scope: Constants::DEFAULT_SCOPE, &amp;body)  &#x21d2; <tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/DependencyContainer/Entities/Method.html">ConvenientService::Support::DependencyContainer::Entities::Method</a></span></tt> 
   
 
   
@@ -261,7 +261,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="https://apidocs.convenientservice.org/Entities/Method.html">ConvenientService::Support::DependencyContainer::Entities::Method</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/DependencyContainer/Entities/Method.html">ConvenientService::Support::DependencyContainer::Entities::Method</a></span></tt>)</span>
       
       
       
@@ -299,10 +299,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/export.rb', line 35</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_export'>export</span><span class='lparen'>(</span><span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/Constants.html">DEFAULT_SCOPE</a></span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/Commands.html">call</a></span></span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_export'>export</span><span class='lparen'>(</span><span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/DependencyContainer/Constants.html">DEFAULT_SCOPE</a></span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/DependencyContainer/Commands.html">call</a></span></span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span>
 
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/Entities.html">new</a></span></span><span class='lparen'>(</span><span class='label'>slug:</span> <span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>body:</span> <span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_method'>method</span><span class='op'>|</span> <span class='id identifier rubyid_exported_methods'>exported_methods</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_method'>method</span> <span class='rbrace'>}</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/DependencyContainer/Entities.html">new</a></span></span><span class='lparen'>(</span><span class='label'>slug:</span> <span class='id identifier rubyid_slug'>slug</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>body:</span> <span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_method'>method</span><span class='op'>|</span> <span class='id identifier rubyid_exported_methods'>exported_methods</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_method'>method</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -312,7 +312,7 @@
       <div class="method_details ">
   <h3 class="signature " id="exported_methods-class_method">
   
-    .<strong>exported_methods</strong>  &#x21d2; <tt><span class='object_link'><a href="https://apidocs.convenientservice.org/Entities/MethodCollection.html">ConvenientService::Support::DependencyContainer::Entities::MethodCollection</a></span></tt> 
+    .<strong>exported_methods</strong>  &#x21d2; <tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/DependencyContainer/Entities/MethodCollection.html">ConvenientService::Support::DependencyContainer::Entities::MethodCollection</a></span></tt> 
   
 
   
@@ -336,7 +336,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="https://apidocs.convenientservice.org/Entities/MethodCollection.html">ConvenientService::Support::DependencyContainer::Entities::MethodCollection</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/DependencyContainer/Entities/MethodCollection.html">ConvenientService::Support::DependencyContainer::Entities::MethodCollection</a></span></tt>)</span>
       
       
       
@@ -373,7 +373,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/dependency_container/export.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exported_methods'>exported_methods</span>
-  <span class='ivar'>@exported_methods</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/Entities.html">new</a></span></span>
+  <span class='ivar'>@exported_methods</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/DependencyContainer/Entities.html">new</a></span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -385,7 +385,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 01:07:54 2025 by
+  Generated on Sat Dec 13 01:23:36 2025 by
   <a href="https://yardoc.org">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

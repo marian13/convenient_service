@@ -79,7 +79,7 @@
             <li class="next">ConvenientService::Logger</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/#">show all</a>
+        <a href="https://apidocs.convenientservice.org/ConvenientService/#">show all</a>
       
     </dd>
   </dl>
@@ -148,7 +148,7 @@
   
     <h2>
       Class Method Summary
-      <small><a href="https://apidocs.convenientservice.org/#">collapse</a></small>
+      <small><a href="https://apidocs.convenientservice.org/ConvenientService/#">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -156,7 +156,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/#colored_formatter-class_method">.<strong>colored_formatter</strong>  &#x21d2; Proc </a>
+      <a href="https://apidocs.convenientservice.org/ConvenientService/#colored_formatter-class_method">.<strong>colored_formatter</strong>  &#x21d2; Proc </a>
     
 
     
@@ -178,7 +178,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/#new-class_method">.<strong>new</strong>  &#x21d2; ConvenientService::Logger </a>
+      <a href="https://apidocs.convenientservice.org/ConvenientService/#new-class_method">.<strong>new</strong>  &#x21d2; ConvenientService::Logger </a>
     
 
     
@@ -201,7 +201,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/#original_formatter-class_method">.<strong>original_formatter</strong>  &#x21d2; Logger::Formatter </a>
+      <a href="https://apidocs.convenientservice.org/ConvenientService/#original_formatter-class_method">.<strong>original_formatter</strong>  &#x21d2; Logger::Formatter </a>
     
 
     
@@ -224,7 +224,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/#">collapse</a></small>
+      <small><a href="https://apidocs.convenientservice.org/ConvenientService/#">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -232,7 +232,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/#level=-instance_method">#<strong>level=</strong>(severity)  &#x21d2; Object </a>
+      <a href="https://apidocs.convenientservice.org/ConvenientService/#level=-instance_method">#<strong>level=</strong>(severity)  &#x21d2; Object </a>
     
 
     
@@ -322,7 +322,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_colored_formatter'>colored_formatter</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_original_formatter'>original_formatter</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/Dependencies.html">loaded?</a></span></span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_original_formatter'>original_formatter</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html">loaded?</a></span></span>
 
   <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_severity'>severity</span><span class='comma'>,</span> <span class='id identifier rubyid_datetime'>datetime</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='op'>|</span>
     <span class='id identifier rubyid_log'>log</span> <span class='op'>=</span> <span class='id identifier rubyid_original_formatter'>original_formatter</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='comma'>,</span> <span class='id identifier rubyid_datetime'>datetime</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
@@ -346,7 +346,7 @@
       <div class="method_details ">
   <h3 class="signature " id="new-class_method">
   
-    .<strong>new</strong>  &#x21d2; <tt><span class='object_link'><a href="https://apidocs.convenientservice.org/" title=">ConvenientService::Logger</a></span></tt> 
+    .<strong>new</strong>  &#x21d2; <tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/" title=">ConvenientService::Logger</a></span></tt> 
   
 
   
@@ -367,7 +367,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="https://apidocs.convenientservice.org/" title=">ConvenientService::Logger</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/" title=">ConvenientService::Logger</a></span></tt>)</span>
       
       
       
@@ -521,7 +521,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_level='>level=</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/Dependencies.html">support_logger_non_integer_levels?</a></span></span>
+  <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html">support_logger_non_integer_levels?</a></span></span>
     <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span>
   <span class='kw'>elsif</span> <span class='id identifier rubyid_severity'>severity</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Integer</span><span class='rparen'>)</span>
     <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span>
@@ -529,7 +529,7 @@
     <span class='op'>::</span><span class='const'>Warning</span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span> <span class='heredoc_beg'>&lt;&lt;~MESSAGE</span>
 <span class='tstring_content'>      `ConvenientService.logger.level` is reset from `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_severity'>severity</span><span class='embexpr_end'>}</span><span class='tstring_content'>` to `Logger::INFO`.
 </span><span class='tstring_content'>
-</span><span class='tstring_content'>      Stdlib `logger` with version `</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/Dependencies.html">version</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'>` does NOT support non-integer levels.
+</span><span class='tstring_content'>      Stdlib `logger` with version `</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html">version</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'>` does NOT support non-integer levels.
 </span><span class='heredoc_end'>    MESSAGE
 </span>
     <span class='kw'>super</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>INFO</span><span class='rparen'>)</span>
@@ -545,7 +545,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 01:07:57 2025 by
+  Generated on Sat Dec 13 01:23:40 2025 by
   <a href="https://yardoc.org">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>
