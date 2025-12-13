@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+current_dir = Dir.pwd
+
+host = ENV["API_DOCS_HOST"] || "/" # "https://apidocs.convenientservice.org/" in prod.
+
+def preprocess_urls(content, &block)
+  content.gsub(/href=".+"/) do |attribute|
+    url = attribute.match(/href="(?<url>.+?)"/)[:url]
+    url = block.call(url)
+
+    %{href="#{url}"}
+  end
+end
+
+Dir.glob("#{current_dir}/docs/api/**/*.html").each do |path|
+  content = File.read(path)
+
+  content = preprocess_urls(content) do |url|
+    next url if url.start_with?("http")
+    next url if url.start_with?("..")
+    next url if url.start_with?("/")
+
+    "#{host}#{url}"
+  end
+
+  File.write(path, content)
+end

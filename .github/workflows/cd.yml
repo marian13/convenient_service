@@ -55,6 +55,9 @@ jobs:
       - name: Generate docs
         working-directory: ./
         run: task docs:generate
+      - name: Preprocess URLs
+        working-directory: ./
+        run: bin/preprocess_api_docs_links
       - name: Deploy docs to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
