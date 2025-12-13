@@ -1,0 +1,89 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+##
+# @author Marian Kostyk <mariankostyk13895@gmail.com>
+# @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
+##
+
+ROOT_DIR = "#{Dir.pwd}/docs/api"
+
+API_DOCS_HOST = ENV["API_DOCS_HOST"] || "/" # "https://apidocs.convenientservice.org/" in prod.
+
+def preprocess_html_files
+  Dir.glob("#{ROOT_DIR}/**/*.html").each do |absolute_path|
+    data = {}
+    data[:relative_path] = absolute_path.delete_prefix(ROOT_DIR)
+    data[:relative_dir] = File.dirname(data[:relative_path])
+
+    content = File.read(absolute_path)
+    content = preprocess_html_file(content, data)
+    File.write(absolute_path, content)
+  end
+end
+
+def preprocess_html_file(content, data)
+  content = preprocess_urls(content, data)
+  content = preprocess_head_element(content, data)
+
+  content
+end
+
+def preprocess_urls(content, data)
+  content.gsub(/href=".+?"/) do |attribute|
+    url = attribute.match(/href="(?<url>.+?)"/)[:url]
+    url = preprocess_url(url, data)
+
+    %(href="#{url}")
+  end
+end
+
+def preprocess_url(url, data)
+  return url if url.start_with?("http")
+  return url if url.start_with?("..")
+  return url if url.start_with?("/")
+
+  preprocessed_url =
+    if url.empty? || url.start_with?("#")
+      File.join(API_DOCS_HOST, "#{data[:relative_path]}#{url}")
+    else
+      File.join(API_DOCS_HOST, data[:relative_dir], url)
+    end
+
+  puts %(Replaced "#{url}" by "#{preprocessed_url}" in "#{data[:relative_path]}".)
+
+  preprocessed_url
+end
+
+def preprocess_head_element(content, data)
+  html =
+    <<~HTML
+      <script type="text/javascript" charset="utf-8" src="js/app.js">
+        (() => {
+          const createOpenInGitHubLinks = () => {
+            $('.method_details_list .source_code').each((_index, table) => {
+              const tableHTML = table.innerHTML;
+
+              const { file, line } = /# File '(?<file>.+?)', line (?<line>\d+)/.exec(tableHTML).groups;
+
+              const span = document.createElement('span')
+
+              span.classList.add('openInGitHub')
+
+              span.style.fontSize = '0.9em';
+
+              span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
+
+              table.before(span)
+            })
+          }
+
+          $(document).ready(() => createOpenInGitHubLinks());
+        })()
+      </script>
+    HTML
+
+  content.gsub("</head>", "#{html}</head>")
+end
+
+preprocess_html_files

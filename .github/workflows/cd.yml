@@ -52,12 +52,12 @@ jobs:
         uses: arduino/setup-task@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Generate docs
+      - name: Generate API docs
         working-directory: ./
         run: task docs:generate
-      - name: Preprocess URLs
+      - name: Preprocess API docs
         working-directory: ./
-        run: API_DOCS_HOST="https://apidocs.convenientservice.org/" bin/preprocess_api_docs_links
+        run: API_DOCS_HOST="https://apidocs.convenientservice.org/" bin/preprocess_api_docs
       - name: Deploy docs to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
