@@ -11,7 +11,7 @@ root_dir = "#{Dir.pwd}/docs/api"
 host = ENV["API_DOCS_HOST"] || "/" # "https://apidocs.convenientservice.org/" in prod.
 
 def preprocess_urls(content, &block)
-  content.gsub(/href=".+"/) do |attribute|
+  content.gsub(/href=".+?"/) do |attribute|
     url = attribute.match(/href="(?<url>.+?)"/)[:url]
     url = yield url
 
@@ -31,8 +31,7 @@ Dir.glob("#{root_dir}/**/*.html").each do |absolute_path|
     next url if url.start_with?("/")
 
     preprocessed_url =
-      case
-      when url.empty? || url.start_with?("#")
+      if url.empty? || url.start_with?("#")
         File.join(host, "#{relative_path}#{url}")
       else
         File.join(host, relative_dir, url)
