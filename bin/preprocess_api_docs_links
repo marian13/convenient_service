@@ -33,7 +33,7 @@ Dir.glob("#{root_dir}/**/*.html").each do |absolute_path|
     preprocessed_url =
       case
       when url.empty? || url.start_with?("#")
-        File.join(host, relative_path, url)
+        File.join(host, "#{relative_path}#{url}")
       else
         File.join(host, relative_dir, url)
       end
