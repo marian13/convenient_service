@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../class_list.html?1"></iframe>
@@ -158,7 +135,7 @@
   
     <h2>
       Class Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -166,7 +143,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method.html#defined%3F-class_method" title="defined? (class method)">.<strong>defined?</strong>  &#x21d2; Boolean </a>
+      <a href="#defined%3F-class_method" title="defined? (class method)">.<strong>defined?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -188,7 +165,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method.html#remove-class_method" title="remove (class method)">.<strong>remove</strong>  &#x21d2; Object </a>
+      <a href="#remove-class_method" title="remove (class method)">.<strong>remove</strong>  &#x21d2; Object </a>
     
 
     
@@ -280,7 +257,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html" title="ConvenientService::Utils::Method::Defined (class)">Defined</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#call-instance_method" title="ConvenientService::Utils::Method::Defined#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html" title="ConvenientService::Utils::Method::Defined (class)">Defined</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Method/Defined.html#call-instance_method" title="ConvenientService::Utils::Method::Defined#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -338,7 +315,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove'>remove</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Remove.html" title="ConvenientService::Utils::Method::Remove (class)">Remove</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Remove.html#call-instance_method" title="ConvenientService::Utils::Method::Remove#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Remove.html" title="ConvenientService::Utils::Method::Remove (class)">Remove</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Method/Remove.html#call-instance_method" title="ConvenientService::Utils::Method::Remove#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -350,7 +327,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:03:58 2025 by
+  Generated on Sat Dec 13 03:19:55 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

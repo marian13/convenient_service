@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../../../../../../class_list.html?1"></iframe>
@@ -102,7 +79,7 @@
             <li class="next">ConvenientService::RSpec::Matchers::Classes::Results::Base::Entities::Printers::Base::Commands::GenerateExpectedParts</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -133,13 +110,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#printer-instance_method" title="#printer (instance method)">#<strong>printer</strong>  &#x21d2; Object </a>
+      <a href="#printer-instance_method" title="#printer (instance method)">#<strong>printer</strong>  &#x21d2; Object </a>
     
 
     
@@ -171,7 +148,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -179,7 +156,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; String </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; String </a>
     
 
     
@@ -201,7 +178,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#expected_code_part-instance_method" title="#expected_code_part (instance method)">#<strong>expected_code_part</strong>  &#x21d2; String </a>
+      <a href="#expected_code_part-instance_method" title="#expected_code_part (instance method)">#<strong>expected_code_part</strong>  &#x21d2; String </a>
     
 
     
@@ -223,7 +200,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#expected_data_part-instance_method" title="#expected_data_part (instance method)">#<strong>expected_data_part</strong>  &#x21d2; String </a>
+      <a href="#expected_data_part-instance_method" title="#expected_data_part (instance method)">#<strong>expected_data_part</strong>  &#x21d2; String </a>
     
 
     
@@ -245,7 +222,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#expected_message_part-instance_method" title="#expected_message_part (instance method)">#<strong>expected_message_part</strong>  &#x21d2; String </a>
+      <a href="#expected_message_part-instance_method" title="#expected_message_part (instance method)">#<strong>expected_message_part</strong>  &#x21d2; String </a>
     
 
     
@@ -267,7 +244,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#expected_service_part-instance_method" title="#expected_service_part (instance method)">#<strong>expected_service_part</strong>  &#x21d2; String </a>
+      <a href="#expected_service_part-instance_method" title="#expected_service_part (instance method)">#<strong>expected_service_part</strong>  &#x21d2; String </a>
     
 
     
@@ -289,7 +266,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#expected_status_part-instance_method" title="#expected_status_part (instance method)">#<strong>expected_status_part</strong>  &#x21d2; String </a>
+      <a href="#expected_status_part-instance_method" title="#expected_status_part (instance method)">#<strong>expected_status_part</strong>  &#x21d2; String </a>
     
 
     
@@ -311,7 +288,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#expected_step_part-instance_method" title="#expected_step_part (instance method)">#<strong>expected_step_part</strong>  &#x21d2; String </a>
+      <a href="#expected_step_part-instance_method" title="#expected_step_part (instance method)">#<strong>expected_step_part</strong>  &#x21d2; String </a>
     
 
     
@@ -333,7 +310,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(printer:)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(printer:)  &#x21d2; void </a>
     
 
     
@@ -357,7 +334,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/Results/Base/Entities/Printers/Base/Commands/GenerateExpectedParts.html#result-instance_method" title="#result (instance method)">#<strong>result</strong>  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result </a>
+      <a href="#result-instance_method" title="#result (instance method)">#<strong>result</strong>  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result </a>
     
 
     
@@ -962,7 +939,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:13 2025 by
+  Generated on Sat Dec 13 03:20:10 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

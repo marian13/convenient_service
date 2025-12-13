@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../class_list.html?1"></iframe>
@@ -146,7 +123,7 @@
   <h2>Method Summary</h2>
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeResult.html" title="ConvenientService::RSpec::Matchers::Results::BeResult (module)">Results::BeResult</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeResult.html#be_result-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeResult#be_result (method)">#be_result</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/Results/BeResult.html#be_result-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeResult#be_result (method)">#be_result</a></span></p>
 
   
   
@@ -157,7 +134,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeNotSuccess.html" title="ConvenientService::RSpec::Matchers::Results::BeNotSuccess (module)">Results::BeNotSuccess</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeNotSuccess.html#be_not_success-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeNotSuccess#be_not_success (method)">#be_not_success</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/Results/BeNotSuccess.html#be_not_success-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeNotSuccess#be_not_success (method)">#be_not_success</a></span></p>
 
   
   
@@ -168,7 +145,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeNotFailure.html" title="ConvenientService::RSpec::Matchers::Results::BeNotFailure (module)">Results::BeNotFailure</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeNotFailure.html#be_not_failure-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeNotFailure#be_not_failure (method)">#be_not_failure</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/Results/BeNotFailure.html#be_not_failure-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeNotFailure#be_not_failure (method)">#be_not_failure</a></span></p>
 
   
   
@@ -179,7 +156,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeNotError.html" title="ConvenientService::RSpec::Matchers::Results::BeNotError (module)">Results::BeNotError</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeNotError.html#be_not_error-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeNotError#be_not_error (method)">#be_not_error</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/Results/BeNotError.html#be_not_error-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeNotError#be_not_error (method)">#be_not_error</a></span></p>
 
   
   
@@ -190,7 +167,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeSuccess.html" title="ConvenientService::RSpec::Matchers::Results::BeSuccess (module)">Results::BeSuccess</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeSuccess.html#be_success-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeSuccess#be_success (method)">#be_success</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/Results/BeSuccess.html#be_success-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeSuccess#be_success (method)">#be_success</a></span></p>
 
   
   
@@ -201,7 +178,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeFailure.html" title="ConvenientService::RSpec::Matchers::Results::BeFailure (module)">Results::BeFailure</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeFailure.html#be_failure-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeFailure#be_failure (method)">#be_failure</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/Results/BeFailure.html#be_failure-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeFailure#be_failure (method)">#be_failure</a></span></p>
 
   
   
@@ -212,7 +189,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeError.html" title="ConvenientService::RSpec::Matchers::Results::BeError (module)">Results::BeError</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeError.html#be_error-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeError#be_error (method)">#be_error</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/Results/BeError.html#be_error-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeError#be_error (method)">#be_error</a></span></p>
 
   
   
@@ -234,7 +211,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/IncludeModule.html" title="ConvenientService::RSpec::Matchers::IncludeModule (module)">IncludeModule</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/IncludeModule.html#include_module-instance_method" title="ConvenientService::RSpec::Matchers::IncludeModule#include_module (method)">#include_module</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/IncludeModule.html#include_module-instance_method" title="ConvenientService::RSpec::Matchers::IncludeModule#include_module (method)">#include_module</a></span></p>
 
   
   
@@ -245,7 +222,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/IncludeConfig.html" title="ConvenientService::RSpec::Matchers::IncludeConfig (module)">IncludeConfig</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/IncludeConfig.html#include_config-instance_method" title="ConvenientService::RSpec::Matchers::IncludeConfig#include_config (method)">#include_config</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/IncludeConfig.html#include_config-instance_method" title="ConvenientService::RSpec::Matchers::IncludeConfig#include_config (method)">#include_config</a></span></p>
 
   
   
@@ -256,7 +233,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Export.html" title="ConvenientService::RSpec::Matchers::Export (module)">Export</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Export.html#export-instance_method" title="ConvenientService::RSpec::Matchers::Export#export (method)">#export</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/Export.html#export-instance_method" title="ConvenientService::RSpec::Matchers::Export#export (method)">#export</a></span></p>
 
   
   
@@ -267,7 +244,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/DelegateTo.html" title="ConvenientService::RSpec::Matchers::DelegateTo (module)">DelegateTo</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/DelegateTo.html#delegate_to-instance_method" title="ConvenientService::RSpec::Matchers::DelegateTo#delegate_to (method)">#delegate_to</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/DelegateTo.html#delegate_to-instance_method" title="ConvenientService::RSpec::Matchers::DelegateTo#delegate_to (method)">#delegate_to</a></span></p>
 
   
   
@@ -278,7 +255,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/CallChainNext.html" title="ConvenientService::RSpec::Matchers::CallChainNext (module)">CallChainNext</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/CallChainNext.html#call_chain_next-instance_method" title="ConvenientService::RSpec::Matchers::CallChainNext#call_chain_next (method)">#call_chain_next</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/CallChainNext.html#call_chain_next-instance_method" title="ConvenientService::RSpec::Matchers::CallChainNext#call_chain_next (method)">#call_chain_next</a></span></p>
 
   
   
@@ -289,7 +266,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/SingletonPrependModule.html" title="ConvenientService::RSpec::Matchers::SingletonPrependModule (module)">SingletonPrependModule</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/SingletonPrependModule.html#singleton_prepend_module-instance_method" title="ConvenientService::RSpec::Matchers::SingletonPrependModule#singleton_prepend_module (method)">#singleton_prepend_module</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/SingletonPrependModule.html#singleton_prepend_module-instance_method" title="ConvenientService::RSpec::Matchers::SingletonPrependModule#singleton_prepend_module (method)">#singleton_prepend_module</a></span></p>
 
   
   
@@ -300,7 +277,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/PrependModule.html" title="ConvenientService::RSpec::Matchers::PrependModule (module)">PrependModule</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/PrependModule.html#prepend_module-instance_method" title="ConvenientService::RSpec::Matchers::PrependModule#prepend_module (method)">#prepend_module</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/PrependModule.html#prepend_module-instance_method" title="ConvenientService::RSpec::Matchers::PrependModule#prepend_module (method)">#prepend_module</a></span></p>
 
   
   
@@ -311,7 +288,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/IncludeInOrder.html" title="ConvenientService::RSpec::Matchers::IncludeInOrder (module)">IncludeInOrder</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/IncludeInOrder.html#include_in_order-instance_method" title="ConvenientService::RSpec::Matchers::IncludeInOrder#include_in_order (method)">#include_in_order</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/IncludeInOrder.html#include_in_order-instance_method" title="ConvenientService::RSpec::Matchers::IncludeInOrder#include_in_order (method)">#include_in_order</a></span></p>
 
   
   
@@ -322,7 +299,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/HaveAttrWriter.html" title="ConvenientService::RSpec::Matchers::HaveAttrWriter (module)">HaveAttrWriter</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/HaveAttrWriter.html#have_attr_writer-instance_method" title="ConvenientService::RSpec::Matchers::HaveAttrWriter#have_attr_writer (method)">#have_attr_writer</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/HaveAttrWriter.html#have_attr_writer-instance_method" title="ConvenientService::RSpec::Matchers::HaveAttrWriter#have_attr_writer (method)">#have_attr_writer</a></span></p>
 
   
   
@@ -333,7 +310,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/HaveAttrReader.html" title="ConvenientService::RSpec::Matchers::HaveAttrReader (module)">HaveAttrReader</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/HaveAttrReader.html#have_attr_reader-instance_method" title="ConvenientService::RSpec::Matchers::HaveAttrReader#have_attr_reader (method)">#have_attr_reader</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/HaveAttrReader.html#have_attr_reader-instance_method" title="ConvenientService::RSpec::Matchers::HaveAttrReader#have_attr_reader (method)">#have_attr_reader</a></span></p>
 
   
   
@@ -344,7 +321,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/HaveAttrAccessor.html" title="ConvenientService::RSpec::Matchers::HaveAttrAccessor (module)">HaveAttrAccessor</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/HaveAttrAccessor.html#have_attr_accessor-instance_method" title="ConvenientService::RSpec::Matchers::HaveAttrAccessor#have_attr_accessor (method)">#have_attr_accessor</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/HaveAttrAccessor.html#have_attr_accessor-instance_method" title="ConvenientService::RSpec::Matchers::HaveAttrAccessor#have_attr_accessor (method)">#have_attr_accessor</a></span></p>
 
   
   
@@ -355,7 +332,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/HaveAliasMethod.html" title="ConvenientService::RSpec::Matchers::HaveAliasMethod (module)">HaveAliasMethod</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/HaveAliasMethod.html#have_alias_method-instance_method" title="ConvenientService::RSpec::Matchers::HaveAliasMethod#have_alias_method (method)">#have_alias_method</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/HaveAliasMethod.html#have_alias_method-instance_method" title="ConvenientService::RSpec::Matchers::HaveAliasMethod#have_alias_method (method)">#have_alias_method</a></span></p>
 
   
   
@@ -366,7 +343,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/HaveAbstractMethod.html" title="ConvenientService::RSpec::Matchers::HaveAbstractMethod (module)">HaveAbstractMethod</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/HaveAbstractMethod.html#have_abstract_method-instance_method" title="ConvenientService::RSpec::Matchers::HaveAbstractMethod#have_abstract_method (method)">#have_abstract_method</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/HaveAbstractMethod.html#have_abstract_method-instance_method" title="ConvenientService::RSpec::Matchers::HaveAbstractMethod#have_abstract_method (method)">#have_abstract_method</a></span></p>
 
   
   
@@ -377,7 +354,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/ExtendModule.html" title="ConvenientService::RSpec::Matchers::ExtendModule (module)">ExtendModule</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/ExtendModule.html#extend_module-instance_method" title="ConvenientService::RSpec::Matchers::ExtendModule#extend_module (method)">#extend_module</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/ExtendModule.html#extend_module-instance_method" title="ConvenientService::RSpec::Matchers::ExtendModule#extend_module (method)">#extend_module</a></span></p>
 
   
   
@@ -388,7 +365,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/CacheItsValue.html" title="ConvenientService::RSpec::Matchers::CacheItsValue (module)">CacheItsValue</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/CacheItsValue.html#cache_its_value-instance_method" title="ConvenientService::RSpec::Matchers::CacheItsValue#cache_its_value (method)">#cache_its_value</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/CacheItsValue.html#cache_its_value-instance_method" title="ConvenientService::RSpec::Matchers::CacheItsValue#cache_its_value (method)">#cache_its_value</a></span></p>
 
   
   
@@ -399,7 +376,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/BeDirectDescendantOf.html" title="ConvenientService::RSpec::Matchers::BeDirectDescendantOf (module)">BeDirectDescendantOf</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/BeDirectDescendantOf.html#be_direct_descendant_of-instance_method" title="ConvenientService::RSpec::Matchers::BeDirectDescendantOf#be_direct_descendant_of (method)">#be_direct_descendant_of</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/BeDirectDescendantOf.html#be_direct_descendant_of-instance_method" title="ConvenientService::RSpec::Matchers::BeDirectDescendantOf#be_direct_descendant_of (method)">#be_direct_descendant_of</a></span></p>
 
   
   
@@ -410,13 +387,13 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/BeDescendantOf.html" title="ConvenientService::RSpec::Matchers::BeDescendantOf (module)">BeDescendantOf</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/BeDescendantOf.html#be_descendant_of-instance_method" title="ConvenientService::RSpec::Matchers::BeDescendantOf#be_descendant_of (method)">#be_descendant_of</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Matchers/BeDescendantOf.html#be_descendant_of-instance_method" title="ConvenientService::RSpec::Matchers::BeDescendantOf#be_descendant_of (method)">#be_descendant_of</a></span></p>
 
 
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:03:59 2025 by
+  Generated on Sat Dec 13 03:19:56 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../class_list.html?1"></iframe>
@@ -100,7 +77,7 @@
             <li class="next">ConvenientService::Core::Entities::Config</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -162,13 +139,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#klass-instance_method" title="#klass (instance method)">#<strong>klass</strong>  &#x21d2; Object </a>
+      <a href="#klass-instance_method" title="#klass (instance method)">#<strong>klass</strong>  &#x21d2; Object </a>
     
 
     
@@ -195,7 +172,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#lock-instance_method" title="#lock (instance method)">#<strong>lock</strong>  &#x21d2; Object </a>
+      <a href="#lock-instance_method" title="#lock (instance method)">#<strong>lock</strong>  &#x21d2; Object </a>
     
 
     
@@ -227,7 +204,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -235,7 +212,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#commit!-instance_method" title="#commit! (instance method)">#<strong>commit!</strong>(trigger: Constants::Triggers::USER)  &#x21d2; Boolean </a>
+      <a href="#commit!-instance_method" title="#commit! (instance method)">#<strong>commit!</strong>(trigger: Constants::Triggers::USER)  &#x21d2; Boolean </a>
     
 
     
@@ -258,7 +235,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#committed%3F-instance_method" title="#committed? (instance method)">#<strong>committed?</strong>  &#x21d2; Boolean </a>
+      <a href="#committed%3F-instance_method" title="#committed? (instance method)">#<strong>committed?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -280,7 +257,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#concerns-instance_method" title="#concerns (instance method)">#<strong>concerns</strong>(&amp;configuration_block)  &#x21d2; Object </a>
+      <a href="#concerns-instance_method" title="#concerns (instance method)">#<strong>concerns</strong>(&amp;configuration_block)  &#x21d2; Object </a>
     
 
     
@@ -303,7 +280,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#entity-instance_method" title="#entity (instance method)">#<strong>entity</strong>(name, &amp;configuration_block)  &#x21d2; Class<sup>?</sup> </a>
+      <a href="#entity-instance_method" title="#entity (instance method)">#<strong>entity</strong>(name, &amp;configuration_block)  &#x21d2; Class<sup>?</sup> </a>
     
 
     
@@ -326,7 +303,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(klass:)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(klass:)  &#x21d2; void </a>
     
 
     
@@ -350,7 +327,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#method_missing_commits_counter-instance_method" title="#method_missing_commits_counter (instance method)">#<strong>method_missing_commits_counter</strong>  &#x21d2; ConvenientService::Support::ThreadSafeCounter </a>
+      <a href="#method_missing_commits_counter-instance_method" title="#method_missing_commits_counter (instance method)">#<strong>method_missing_commits_counter</strong>  &#x21d2; ConvenientService::Support::ThreadSafeCounter </a>
     
 
     
@@ -372,7 +349,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#middlewares-instance_method" title="#middlewares (instance method)">#<strong>middlewares</strong>(method, scope: :instance, &amp;configuration_block)  &#x21d2; Object </a>
+      <a href="#middlewares-instance_method" title="#middlewares (instance method)">#<strong>middlewares</strong>(method, scope: :instance, &amp;configuration_block)  &#x21d2; Object </a>
     
 
     
@@ -395,7 +372,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html#options-instance_method" title="#options (instance method)">#<strong>options</strong>  &#x21d2; ConvenientService::Config::Entities::OptionCollection </a>
+      <a href="#options-instance_method" title="#options (instance method)">#<strong>options</strong>  &#x21d2; ConvenientService::Config::Entities::OptionCollection </a>
     
 
     
@@ -716,7 +693,7 @@ Does nothing for the subsequent calls.</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit!'>commit!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="../Constants.html" title="ConvenientService::Core::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html" title="ConvenientService::Core::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html#USER-constant" title="ConvenientService::Core::Constants::Triggers::USER (constant)">USER</a></span></span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='id identifier rubyid_committed?'>committed?</span> <span class='op'>?</span> <span class='kw'>false</span> <span class='op'>:</span> <span class='id identifier rubyid_concerns'>concerns</span><span class='period'>.</span><span class='id identifier rubyid_include!'>include!</span><span class='rparen'>)</span>
-    <span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands.html" title="ConvenientService::Core::Entities::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands/TrackMethodMissingCommitTrigger.html" title="ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger (class)">TrackMethodMissingCommitTrigger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands/TrackMethodMissingCommitTrigger.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>config:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>trigger:</span> <span class='id identifier rubyid_trigger'>trigger</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+    <span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands.html" title="ConvenientService::Core::Entities::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands/TrackMethodMissingCommitTrigger.html" title="ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger (class)">TrackMethodMissingCommitTrigger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Config/Commands/TrackMethodMissingCommitTrigger.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Commands::TrackMethodMissingCommitTrigger#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>config:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>trigger:</span> <span class='id identifier rubyid_trigger'>trigger</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -958,11 +935,11 @@ Does nothing for the subsequent calls.</p>
   <span class='kw'>if</span> <span class='id identifier rubyid_configuration_block'>configuration_block</span>
     <span class='id identifier rubyid_assert_not_committed!'>assert_not_committed!</span>
 
-    <span class='ivar'>@concerns</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/Concerns.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns (class)">Concerns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/Concerns.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::Concerns#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
+    <span class='ivar'>@concerns</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/Concerns.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns (class)">Concerns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/Concerns.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::Concerns#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
     <span class='ivar'>@concerns</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
-  <span class='ivar'>@concerns</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/Concerns.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns (class)">Concerns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/Concerns.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::Concerns#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
+  <span class='ivar'>@concerns</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/Concerns.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns (class)">Concerns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/Concerns.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::Concerns#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>klass:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1064,11 +1041,11 @@ Does nothing for the subsequent calls.</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/core/entities/config.rb', line 154</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_entity'>entity</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands.html" title="ConvenientService::Core::Entities::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands/FindEntityClass.html" title="ConvenientService::Core::Entities::Config::Commands::FindEntityClass (class)">FindEntityClass</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands/FindEntityClass.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Commands::FindEntityClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>config:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_configuration_block'>configuration_block</span>
+  <span class='kw'>return</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands.html" title="ConvenientService::Core::Entities::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands/FindEntityClass.html" title="ConvenientService::Core::Entities::Config::Commands::FindEntityClass (class)">FindEntityClass</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Config/Commands/FindEntityClass.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Commands::FindEntityClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>config:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_configuration_block'>configuration_block</span>
 
   <span class='id identifier rubyid_assert_not_committed!'>assert_not_committed!</span>
 
-  <span class='id identifier rubyid_entity_class'>entity_class</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands.html" title="ConvenientService::Core::Entities::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands/FindOrCreateEntityClass.html" title="ConvenientService::Core::Entities::Config::Commands::FindOrCreateEntityClass (class)">FindOrCreateEntityClass</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands/FindOrCreateEntityClass.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Commands::FindOrCreateEntityClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>config:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_entity_class'>entity_class</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands.html" title="ConvenientService::Core::Entities::Config::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Commands/FindOrCreateEntityClass.html" title="ConvenientService::Core::Entities::Config::Commands::FindOrCreateEntityClass (class)">FindOrCreateEntityClass</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Config/Commands/FindOrCreateEntityClass.html#call-instance_method" title="ConvenientService::Core::Entities::Config::Commands::FindOrCreateEntityClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>config:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_entity_class'>entity_class</span><span class='period'>.</span><span class='id identifier rubyid_class_exec'>class_exec</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_configuration_block'>configuration_block</span><span class='rparen'>)</span>
 
@@ -1510,7 +1487,7 @@ Does nothing for the subsequent calls.</p>
   <span class='ivar'>@middlewares</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Support/Cache.html" title="ConvenientService::Support::Cache (class)">Cache</a></span></span><span class='period'>.</span><span class='id identifier rubyid_backed_by'><span class='object_link'><a href="../../Support/Cache.html#backed_by-class_method" title="ConvenientService::Support::Cache.backed_by (method)">backed_by</a></span></span><span class='lparen'>(</span><span class='symbol'>:hash</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 
   <span class='id identifier rubyid_scoped_middlewares'>scoped_middlewares</span> <span class='op'>=</span> <span class='ivar'>@middlewares</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span><span class='lparen'>(</span><span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_method_middlewares'>method_middlewares</span> <span class='op'>=</span> <span class='id identifier rubyid_scoped_middlewares'>scoped_middlewares</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares (class)">MethodMiddlewares</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>klass:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_method_middlewares'>method_middlewares</span> <span class='op'>=</span> <span class='id identifier rubyid_scoped_middlewares'>scoped_middlewares</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares (class)">MethodMiddlewares</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Config/Entities/MethodMiddlewares.html#initialize-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='label'>klass:</span> <span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
 
   <span class='kw'>return</span> <span class='id identifier rubyid_method_middlewares'>method_middlewares</span> <span class='kw'>unless</span> <span class='id identifier rubyid_configuration_block'>configuration_block</span>
 
@@ -1608,7 +1585,7 @@ Does nothing for the subsequent calls.</p>
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:03 2025 by
+  Generated on Sat Dec 13 03:20:01 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

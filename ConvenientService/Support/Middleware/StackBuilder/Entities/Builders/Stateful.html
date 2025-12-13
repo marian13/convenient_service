@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../../class_list.html?1"></iframe>
@@ -102,7 +79,7 @@
             <li class="next">ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Stateful</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Stateful.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -161,13 +138,13 @@
   <h2>Instance Attribute Summary</h2>
   
   <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom (class)">Custom</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#name-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#name (method)">#name</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#stack-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#stack (method)">#stack</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Custom.html#name-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#name (method)">#name</a></span>, <span class='object_link'><a href="Custom.html#stack-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#stack (method)">#stack</a></span></p>
 
 
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Stateful.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -175,7 +152,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Stateful.html#call-instance_method" title="#call (instance method)">#<strong>call</strong>(env)  &#x21d2; Object </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>(env)  &#x21d2; Object </a>
     
 
     
@@ -198,7 +175,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Stateful.html#call_with_original-instance_method" title="#call_with_original (instance method)">#<strong>call_with_original</strong>(env, original)  &#x21d2; Object </a>
+      <a href="#call_with_original-instance_method" title="#call_with_original (instance method)">#<strong>call_with_original</strong>(env, original)  &#x21d2; Object </a>
     
 
     
@@ -221,7 +198,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Stateful.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(**kwargs)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(**kwargs)  &#x21d2; void </a>
     
 
     
@@ -255,7 +232,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom (class)">Custom</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#==-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#== (method)">#==</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#clear-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#clear (method)">#clear</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#delete-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#delete (method)">#delete</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#dup-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#dup (method)">#dup</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#empty%3F-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#empty? (method)">#empty?</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#has%3F-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#has? (method)">#has?</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#insert-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#insert (method)">#insert</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#insert_after-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#insert_after (method)">#insert_after</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#insert_after_each-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#insert_after_each (method)">#insert_after_each</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#insert_before_each-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#insert_before_each (method)">#insert_before_each</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#replace-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#replace (method)">#replace</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#to_a-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#to_a (method)">#to_a</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#unshift-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#unshift (method)">#unshift</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html#use-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#use (method)">#use</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Custom.html#==-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#== (method)">#==</a></span>, <span class='object_link'><a href="Custom.html#clear-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#clear (method)">#clear</a></span>, <span class='object_link'><a href="Custom.html#delete-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#delete (method)">#delete</a></span>, <span class='object_link'><a href="Custom.html#dup-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#dup (method)">#dup</a></span>, <span class='object_link'><a href="Custom.html#empty%3F-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#empty? (method)">#empty?</a></span>, <span class='object_link'><a href="Custom.html#has%3F-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#has? (method)">#has?</a></span>, <span class='object_link'><a href="Custom.html#insert-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#insert (method)">#insert</a></span>, <span class='object_link'><a href="Custom.html#insert_after-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#insert_after (method)">#insert_after</a></span>, <span class='object_link'><a href="Custom.html#insert_after_each-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#insert_after_each (method)">#insert_after_each</a></span>, <span class='object_link'><a href="Custom.html#insert_before_each-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#insert_before_each (method)">#insert_before_each</a></span>, <span class='object_link'><a href="Custom.html#replace-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#replace (method)">#replace</a></span>, <span class='object_link'><a href="Custom.html#to_a-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#to_a (method)">#to_a</a></span>, <span class='object_link'><a href="Custom.html#unshift-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#unshift (method)">#unshift</a></span>, <span class='object_link'><a href="Custom.html#use-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom#use (method)">#use</a></span></p>
 
   
   
@@ -563,7 +540,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/stateful.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call_with_original'>call_with_original</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='comma'>,</span> <span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom (class)">Custom</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom/Entities.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom/Entities/ProcWithNew.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Entities::ProcWithNew (class)">ProcWithNew</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom/Entities/ProcWithNew.html#new-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Entities::ProcWithNew#new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom (class)">Custom</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom/Entities.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Entities/Builders/Custom/Entities/ProcWithNew.html" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Entities::ProcWithNew (class)">ProcWithNew</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Custom/Entities/ProcWithNew.html#new-instance_method" title="ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom::Entities::ProcWithNew#new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -575,7 +552,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:08 2025 by
+  Generated on Sat Dec 13 03:20:06 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

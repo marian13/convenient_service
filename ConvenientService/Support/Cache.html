@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../class_list.html?1"></iframe>
@@ -100,7 +77,7 @@
             <li class="next">ConvenientService::Support::Cache</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -172,7 +149,7 @@
   
     <h2>
       Class Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -180,7 +157,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache.html#backed_by-class_method" title="backed_by (class method)">.<strong>backed_by</strong>(backend)  &#x21d2; Class&lt;ConvenientService::Support::Cache::Entities::Caches::Base&gt; </a>
+      <a href="#backed_by-class_method" title="backed_by (class method)">.<strong>backed_by</strong>(backend)  &#x21d2; Class&lt;ConvenientService::Support::Cache::Entities::Caches::Base&gt; </a>
     
 
     
@@ -202,7 +179,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache.html#new-class_method" title="new (class method)">.<strong>new</strong>  &#x21d2; ConvenientService::Support::Cache::Entities::Caches::Base </a>
+      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>  &#x21d2; ConvenientService::Support::Cache::Entities::Caches::Base </a>
     
 
     
@@ -321,13 +298,13 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_backed_by'>backed_by</span><span class='lparen'>(</span><span class='id identifier rubyid_backend'>backend</span><span class='rparen'>)</span>
   <span class='kw'>case</span> <span class='id identifier rubyid_backend'>backend</span>
-  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html#ARRAY-constant" title="ConvenientService::Support::Cache::Constants::Backends::ARRAY (constant)">ARRAY</a></span></span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html#ARRAY-constant" title="ConvenientService::Support::Cache::Constants::Backends::ARRAY (constant)">ARRAY</a></span></span>
     <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities.html" title="ConvenientService::Support::Cache::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches.html" title="ConvenientService::Support::Cache::Entities::Caches (module)">Caches</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Array.html" title="ConvenientService::Support::Cache::Entities::Caches::Array (class)">Array</a></span></span>
-  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html#HASH-constant" title="ConvenientService::Support::Cache::Constants::Backends::HASH (constant)">HASH</a></span></span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html#HASH-constant" title="ConvenientService::Support::Cache::Constants::Backends::HASH (constant)">HASH</a></span></span>
     <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities.html" title="ConvenientService::Support::Cache::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches.html" title="ConvenientService::Support::Cache::Entities::Caches (module)">Caches</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Hash.html" title="ConvenientService::Support::Cache::Entities::Caches::Hash (class)">Hash</a></span></span>
-  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html#THREAD_SAFE_ARRAY-constant" title="ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY (constant)">THREAD_SAFE_ARRAY</a></span></span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html#THREAD_SAFE_ARRAY-constant" title="ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_ARRAY (constant)">THREAD_SAFE_ARRAY</a></span></span>
     <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities.html" title="ConvenientService::Support::Cache::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches.html" title="ConvenientService::Support::Cache::Entities::Caches (module)">Caches</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html" title="ConvenientService::Support::Cache::Entities::Caches::ThreadSafeArray (class)">ThreadSafeArray</a></span></span>
-  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html#THREAD_SAFE_HASH-constant" title="ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_HASH (constant)">THREAD_SAFE_HASH</a></span></span>
+  <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html#THREAD_SAFE_HASH-constant" title="ConvenientService::Support::Cache::Constants::Backends::THREAD_SAFE_HASH (constant)">THREAD_SAFE_HASH</a></span></span>
     <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities.html" title="ConvenientService::Support::Cache::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches.html" title="ConvenientService::Support::Cache::Entities::Caches (module)">Caches</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeHash.html" title="ConvenientService::Support::Cache::Entities::Caches::ThreadSafeHash (class)">ThreadSafeHash</a></span></span>
   <span class='kw'>else</span>
     <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../ConvenientService.html#raise-class_method" title="ConvenientService.raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Exceptions.html" title="ConvenientService::Support::Cache::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Exceptions/NotSupportedBackend.html" title="ConvenientService::Support::Cache::Exceptions::NotSupportedBackend (class)">NotSupportedBackend</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>backend:</span> <span class='id identifier rubyid_backend'>backend</span><span class='rparen'>)</span>
@@ -402,7 +379,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_backed_by'>backed_by</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html#DEFAULT-constant" title="ConvenientService::Support::Cache::Constants::Backends::DEFAULT (constant)">DEFAULT</a></span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_backed_by'>backed_by</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants.html" title="ConvenientService::Support::Cache::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Constants/Backends.html" title="ConvenientService::Support::Cache::Constants::Backends (module)">Backends</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cache/Constants/Backends.html#DEFAULT-constant" title="ConvenientService::Support::Cache::Constants::Backends::DEFAULT (constant)">DEFAULT</a></span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -414,7 +391,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:03 2025 by
+  Generated on Sat Dec 13 03:20:00 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
@@ -104,7 +81,7 @@
             <li class="next">ConvenientService::Support::Cache::Entities::Caches::ThreadSafeArray</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -163,13 +140,13 @@
   <h2>Instance Attribute Summary</h2>
   
   <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html" title="ConvenientService::Support::Cache::Entities::Caches::Base (class)">Base</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html#default-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#default (method)">#default</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html#key-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#key (method)">#key</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html#parent-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#parent (method)">#parent</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html#store-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#store (method)">#store</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Base.html#default-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#default (method)">#default</a></span>, <span class='object_link'><a href="Base.html#key-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#key (method)">#key</a></span>, <span class='object_link'><a href="Base.html#parent-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#parent (method)">#parent</a></span>, <span class='object_link'><a href="Base.html#store-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#store (method)">#store</a></span></p>
 
 
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -177,7 +154,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#backend-instance_method" title="#backend (instance method)">#<strong>backend</strong>  &#x21d2; Symbol </a>
+      <a href="#backend-instance_method" title="#backend (instance method)">#<strong>backend</strong>  &#x21d2; Symbol </a>
     
 
     
@@ -199,7 +176,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#clear-instance_method" title="#clear (instance method)">#<strong>clear</strong>  &#x21d2; ConvenientService::Support::Cache::Entities::Caches::Array </a>
+      <a href="#clear-instance_method" title="#clear (instance method)">#<strong>clear</strong>  &#x21d2; ConvenientService::Support::Cache::Entities::Caches::Array </a>
     
 
     
@@ -221,7 +198,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#default=-instance_method" title="#default= (instance method)">#<strong>default=</strong>  &#x21d2; Object </a>
+      <a href="#default=-instance_method" title="#default= (instance method)">#<strong>default=</strong>  &#x21d2; Object </a>
     
 
     
@@ -244,7 +221,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#delete-instance_method" title="#delete (instance method)">#<strong>delete</strong>  &#x21d2; Object </a>
+      <a href="#delete-instance_method" title="#delete (instance method)">#<strong>delete</strong>  &#x21d2; Object </a>
     
 
     
@@ -267,7 +244,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#empty%3F-instance_method" title="#empty? (instance method)">#<strong>empty?</strong>  &#x21d2; Boolean </a>
+      <a href="#empty%3F-instance_method" title="#empty? (instance method)">#<strong>empty?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -289,7 +266,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#exist%3F-instance_method" title="#exist? (instance method)">#<strong>exist?</strong>  &#x21d2; Boolean </a>
+      <a href="#exist%3F-instance_method" title="#exist? (instance method)">#<strong>exist?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -311,7 +288,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#fetch-instance_method" title="#fetch (instance method)">#<strong>fetch</strong>  &#x21d2; Object </a>
+      <a href="#fetch-instance_method" title="#fetch (instance method)">#<strong>fetch</strong>  &#x21d2; Object </a>
     
 
     
@@ -334,7 +311,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; void </a>
     
 
     
@@ -358,7 +335,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#read-instance_method" title="#read (instance method)">#<strong>read</strong>  &#x21d2; Object </a>
+      <a href="#read-instance_method" title="#read (instance method)">#<strong>read</strong>  &#x21d2; Object </a>
     
 
     
@@ -381,7 +358,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#scope-instance_method" title="#scope (instance method)">#<strong>scope</strong>  &#x21d2; ConvenientService::Support::Cache::Entities::Caches::Array </a>
+      <a href="#scope-instance_method" title="#scope (instance method)">#<strong>scope</strong>  &#x21d2; ConvenientService::Support::Cache::Entities::Caches::Array </a>
     
 
     
@@ -403,7 +380,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#scope!-instance_method" title="#scope! (instance method)">#<strong>scope!</strong>  &#x21d2; ConvenientService::Support::Cache::Entities::Caches::Array </a>
+      <a href="#scope!-instance_method" title="#scope! (instance method)">#<strong>scope!</strong>  &#x21d2; ConvenientService::Support::Cache::Entities::Caches::Array </a>
     
 
     
@@ -425,7 +402,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/ThreadSafeArray.html#write-instance_method" title="#write (instance method)">#<strong>write</strong>  &#x21d2; Object </a>
+      <a href="#write-instance_method" title="#write (instance method)">#<strong>write</strong>  &#x21d2; Object </a>
     
 
     
@@ -464,7 +441,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html" title="ConvenientService::Support::Cache::Entities::Caches::Base (class)">Base</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html#==-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#== (method)">#==</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html#[]-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#[] (method)">#[]</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html#[]=-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#[]= (method)">#[]=</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html#get-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#get (method)">#get</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html#keygen-class_method" title="ConvenientService::Support::Cache::Entities::Caches::Base.keygen (method)">keygen</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html#keygen-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#keygen (method)">#keygen</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Cache/Entities/Caches/Base.html#set-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#set (method)">#set</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Base.html#==-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#== (method)">#==</a></span>, <span class='object_link'><a href="Base.html#[]-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#[] (method)">#[]</a></span>, <span class='object_link'><a href="Base.html#[]=-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#[]= (method)">#[]=</a></span>, <span class='object_link'><a href="Base.html#get-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#get (method)">#get</a></span>, <span class='object_link'><a href="Base.html#keygen-class_method" title="ConvenientService::Support::Cache::Entities::Caches::Base.keygen (method)">keygen</a></span>, <span class='object_link'><a href="Base.html#keygen-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#keygen (method)">#keygen</a></span>, <span class='object_link'><a href="Base.html#set-instance_method" title="ConvenientService::Support::Cache::Entities::Caches::Base#set (method)">#set</a></span></p>
 
   
   
@@ -1370,7 +1347,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:06 2025 by
+  Generated on Sat Dec 13 03:20:03 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

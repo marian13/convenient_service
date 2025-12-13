@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../class_list.html?1"></iframe>
@@ -100,7 +77,7 @@
             <li class="next">ConvenientService::Dependencies::Queries::Ruby</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Ruby.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -145,7 +122,7 @@
   
     <h2>
       Class Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Ruby.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -153,7 +130,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Ruby.html#engine-class_method" title="engine (class method)">.<strong>engine</strong>  &#x21d2; String </a>
+      <a href="#engine-class_method" title="engine (class method)">.<strong>engine</strong>  &#x21d2; String </a>
     
 
     
@@ -177,7 +154,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Ruby.html#engine_version-class_method" title="engine_version (class method)">.<strong>engine_version</strong>  &#x21d2; ConvenientService::Dependencies::Queries::Version </a>
+      <a href="#engine_version-class_method" title="engine_version (class method)">.<strong>engine_version</strong>  &#x21d2; ConvenientService::Dependencies::Queries::Version </a>
     
 
     
@@ -199,7 +176,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Ruby.html#jruby%3F-class_method" title="jruby? (class method)">.<strong>jruby?</strong>  &#x21d2; Boolean </a>
+      <a href="#jruby%3F-class_method" title="jruby? (class method)">.<strong>jruby?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -222,7 +199,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Ruby.html#match%3F-class_method" title="match? (class method)">.<strong>match?</strong>(pattern)  &#x21d2; Boolean </a>
+      <a href="#match%3F-class_method" title="match? (class method)">.<strong>match?</strong>(pattern)  &#x21d2; Boolean </a>
     
 
     
@@ -245,7 +222,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Ruby.html#mri%3F-class_method" title="mri? (class method)">.<strong>mri?</strong>  &#x21d2; Boolean </a>
+      <a href="#mri%3F-class_method" title="mri? (class method)">.<strong>mri?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -270,7 +247,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Ruby.html#truffleruby%3F-class_method" title="truffleruby? (class method)">.<strong>truffleruby?</strong>  &#x21d2; Boolean </a>
+      <a href="#truffleruby%3F-class_method" title="truffleruby? (class method)">.<strong>truffleruby?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -293,7 +270,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Ruby.html#version-class_method" title="version (class method)">.<strong>version</strong>  &#x21d2; ConvenientService::Dependencies::Queries::Version </a>
+      <a href="#version-class_method" title="version (class method)">.<strong>version</strong>  &#x21d2; ConvenientService::Dependencies::Queries::Version </a>
     
 
     
@@ -430,7 +407,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/queries/ruby.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_engine_version'>engine_version</span>
-  <span class='ivar'>@engine_version</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Version.html" title="ConvenientService::Dependencies::Queries::Version (class)">Version</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Version.html#initialize-instance_method" title="ConvenientService::Dependencies::Queries::Version#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>RUBY_ENGINE_VERSION</span><span class='rparen'>)</span>
+  <span class='ivar'>@engine_version</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Version.html" title="ConvenientService::Dependencies::Queries::Version (class)">Version</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Version.html#initialize-instance_method" title="ConvenientService::Dependencies::Queries::Version#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>RUBY_ENGINE_VERSION</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -757,7 +734,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/dependencies/queries/ruby.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_version'>version</span>
-  <span class='ivar'>@version</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Version.html" title="ConvenientService::Dependencies::Queries::Version (class)">Version</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Version.html#initialize-instance_method" title="ConvenientService::Dependencies::Queries::Version#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>RUBY_VERSION</span><span class='rparen'>)</span>
+  <span class='ivar'>@version</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Version.html" title="ConvenientService::Dependencies::Queries::Version (class)">Version</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Version.html#initialize-instance_method" title="ConvenientService::Dependencies::Queries::Version#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>RUBY_VERSION</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -769,7 +746,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:04 2025 by
+  Generated on Sat Dec 13 03:20:01 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

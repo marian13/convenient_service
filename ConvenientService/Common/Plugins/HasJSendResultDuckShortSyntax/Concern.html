@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../class_list.html?1"></iframe>
@@ -121,7 +98,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasJSendResultDuckShortSyntax/Concern.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -129,7 +106,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasJSendResultDuckShortSyntax/Concern.html#[]-instance_method" title="#[] (instance method)">#<strong>[]</strong>(key)  &#x21d2; Object </a>
+      <a href="#[]-instance_method" title="#[] (instance method)">#<strong>[]</strong>(key)  &#x21d2; Object </a>
     
 
     
@@ -152,7 +129,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasJSendResultDuckShortSyntax/Concern.html#not_ok%3F-instance_method" title="#not_ok? (instance method)">#<strong>not_ok?</strong>  &#x21d2; Boolean </a>
+      <a href="#not_ok%3F-instance_method" title="#not_ok? (instance method)">#<strong>not_ok?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -174,7 +151,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasJSendResultDuckShortSyntax/Concern.html#ok%3F-instance_method" title="#ok? (instance method)">#<strong>ok?</strong>  &#x21d2; Boolean </a>
+      <a href="#ok%3F-instance_method" title="#ok? (instance method)">#<strong>ok?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -196,7 +173,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasJSendResultDuckShortSyntax/Concern.html#uc-instance_method" title="#uc (instance method)">#<strong>uc</strong>  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code </a>
+      <a href="#uc-instance_method" title="#uc (instance method)">#<strong>uc</strong>  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code </a>
     
 
     
@@ -218,7 +195,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasJSendResultDuckShortSyntax/Concern.html#ud-instance_method" title="#ud (instance method)">#<strong>ud</strong>  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data </a>
+      <a href="#ud-instance_method" title="#ud (instance method)">#<strong>ud</strong>  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data </a>
     
 
     
@@ -240,7 +217,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasJSendResultDuckShortSyntax/Concern.html#um-instance_method" title="#um (instance method)">#<strong>um</strong>  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message </a>
+      <a href="#um-instance_method" title="#um (instance method)">#<strong>um</strong>  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message </a>
     
 
     
@@ -616,7 +593,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:00 2025 by
+  Generated on Sat Dec 13 03:19:57 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

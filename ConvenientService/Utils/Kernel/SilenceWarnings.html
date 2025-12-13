@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../class_list.html?1"></iframe>
@@ -102,7 +79,7 @@
             <li class="next">ConvenientService::Utils::Kernel::SilenceWarnings</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Kernel/SilenceWarnings.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -143,7 +120,7 @@
         <h5 class="example_title"><div class='inline'><p>Common usage.</p>
 </div></h5>
       
-      <pre class="example code"><code><span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Kernel.html" title="ConvenientService::Utils::Kernel (module)">Kernel</a></span></span><span class='op'>::</span><span class='const'>SilenceWarnings</span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Kernel/SilenceWarnings.html#call-instance_method" title="ConvenientService::Utils::Kernel::SilenceWarnings#call (method)">call</a></span></span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="../String.html" title="ConvenientService::Utils::String (module)">String</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../String.html" title="ConvenientService::Utils::String (module)">String</a></span></span> <span class='rbrace'>}</span></code></pre>
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Kernel.html" title="ConvenientService::Utils::Kernel (module)">Kernel</a></span></span><span class='op'>::</span><span class='const'>SilenceWarnings</span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="#call-instance_method" title="ConvenientService::Utils::Kernel::SilenceWarnings#call (method)">call</a></span></span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="../String.html" title="ConvenientService::Utils::String (module)">String</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../String.html" title="ConvenientService::Utils::String (module)">String</a></span></span> <span class='rbrace'>}</span></code></pre>
     
   </div>
 
@@ -167,13 +144,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Kernel/SilenceWarnings.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Kernel/SilenceWarnings.html#block-instance_method" title="#block (instance method)">#<strong>block</strong>  &#x21d2; Object </a>
+      <a href="#block-instance_method" title="#block (instance method)">#<strong>block</strong>  &#x21d2; Object </a>
     
 
     
@@ -205,7 +182,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Kernel/SilenceWarnings.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -213,7 +190,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Kernel/SilenceWarnings.html#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Hash </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Hash </a>
     
 
     
@@ -236,7 +213,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Kernel/SilenceWarnings.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(&amp;block)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(&amp;block)  &#x21d2; void </a>
     
 
     
@@ -507,7 +484,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:04 2025 by
+  Generated on Sat Dec 13 03:20:01 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

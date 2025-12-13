@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../class_list.html?1"></iframe>
@@ -102,7 +79,7 @@
             <li class="next">ConvenientService::Logger</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Logger.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -171,7 +148,7 @@
   
     <h2>
       Class Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Logger.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -179,7 +156,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Logger.html#colored_formatter-class_method" title="colored_formatter (class method)">.<strong>colored_formatter</strong>  &#x21d2; Proc </a>
+      <a href="#colored_formatter-class_method" title="colored_formatter (class method)">.<strong>colored_formatter</strong>  &#x21d2; Proc </a>
     
 
     
@@ -201,7 +178,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Logger.html#new-class_method" title="new (class method)">.<strong>new</strong>  &#x21d2; ConvenientService::Logger </a>
+      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>  &#x21d2; ConvenientService::Logger </a>
     
 
     
@@ -224,7 +201,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Logger.html#original_formatter-class_method" title="original_formatter (class method)">.<strong>original_formatter</strong>  &#x21d2; Logger::Formatter </a>
+      <a href="#original_formatter-class_method" title="original_formatter (class method)">.<strong>original_formatter</strong>  &#x21d2; Logger::Formatter </a>
     
 
     
@@ -247,7 +224,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Logger.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -255,7 +232,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Logger.html#level=-instance_method" title="#level= (instance method)">#<strong>level=</strong>(severity)  &#x21d2; Object </a>
+      <a href="#level=-instance_method" title="#level= (instance method)">#<strong>level=</strong>(severity)  &#x21d2; Object </a>
     
 
     
@@ -345,7 +322,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_colored_formatter'>colored_formatter</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_original_formatter'>original_formatter</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_paint'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#paint-instance_method" title="ConvenientService::Dependencies::Queries#paint (method)">paint</a></span></span><span class='period'>.</span><span class='id identifier rubyid_loaded?'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Gems/Paint.html#loaded%3F-class_method" title="ConvenientService::Dependencies::Queries::Gems::Paint.loaded? (method)">loaded?</a></span></span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_original_formatter'>original_formatter</span> <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_paint'><span class='object_link'><a href="Dependencies/Queries.html#paint-instance_method" title="ConvenientService::Dependencies::Queries#paint (method)">paint</a></span></span><span class='period'>.</span><span class='id identifier rubyid_loaded?'><span class='object_link'><a href="Dependencies/Queries/Gems/Paint.html#loaded%3F-class_method" title="ConvenientService::Dependencies::Queries::Gems::Paint.loaded? (method)">loaded?</a></span></span>
 
   <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_severity'>severity</span><span class='comma'>,</span> <span class='id identifier rubyid_datetime'>datetime</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='op'>|</span>
     <span class='id identifier rubyid_log'>log</span> <span class='op'>=</span> <span class='id identifier rubyid_original_formatter'>original_formatter</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='comma'>,</span> <span class='id identifier rubyid_datetime'>datetime</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
@@ -369,7 +346,7 @@
       <div class="method_details ">
   <h3 class="signature " id="new-class_method">
   
-    .<strong>new</strong>  &#x21d2; <tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/" title="ConvenientService::Logger (class)">ConvenientService::Logger</a></span></tt> 
+    .<strong>new</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Logger (class)">ConvenientService::Logger</a></span></tt> 
   
 
   
@@ -390,7 +367,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/" title="ConvenientService::Logger (class)">ConvenientService::Logger</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Logger (class)">ConvenientService::Logger</a></span></tt>)</span>
       
       
       
@@ -544,7 +521,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_level='>level=</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_support_logger_non_integer_levels?'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#support_logger_non_integer_levels%3F-instance_method" title="ConvenientService::Dependencies::Queries#support_logger_non_integer_levels? (method)">support_logger_non_integer_levels?</a></span></span>
+  <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_support_logger_non_integer_levels?'><span class='object_link'><a href="Dependencies/Queries.html#support_logger_non_integer_levels%3F-instance_method" title="ConvenientService::Dependencies::Queries#support_logger_non_integer_levels? (method)">support_logger_non_integer_levels?</a></span></span>
     <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span>
   <span class='kw'>elsif</span> <span class='id identifier rubyid_severity'>severity</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Integer</span><span class='rparen'>)</span>
     <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span>
@@ -552,7 +529,7 @@
     <span class='op'>::</span><span class='const'>Warning</span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span> <span class='heredoc_beg'>&lt;&lt;~MESSAGE</span>
 <span class='tstring_content'>      `ConvenientService.logger.level` is reset from `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_severity'>severity</span><span class='embexpr_end'>}</span><span class='tstring_content'>` to `Logger::INFO`.
 </span><span class='tstring_content'>
-</span><span class='tstring_content'>      Stdlib `logger` with version `</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_logger'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#logger-instance_method" title="ConvenientService::Dependencies::Queries#logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_version'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries/Gems/Logger.html#version-class_method" title="ConvenientService::Dependencies::Queries::Gems::Logger.version (method)">version</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'>` does NOT support non-integer levels.
+</span><span class='tstring_content'>      Stdlib `logger` with version `</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_logger'><span class='object_link'><a href="Dependencies/Queries.html#logger-instance_method" title="ConvenientService::Dependencies::Queries#logger (method)">logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_version'><span class='object_link'><a href="Dependencies/Queries/Gems/Logger.html#version-class_method" title="ConvenientService::Dependencies::Queries::Gems::Logger.version (method)">version</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'>` does NOT support non-integer levels.
 </span><span class='heredoc_end'>    MESSAGE
 </span>
     <span class='kw'>super</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>INFO</span><span class='rparen'>)</span>
@@ -568,7 +545,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:03 2025 by
+  Generated on Sat Dec 13 03:20:00 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

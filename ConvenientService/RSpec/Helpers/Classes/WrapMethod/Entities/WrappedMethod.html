@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../../class_list.html?1"></iframe>
@@ -100,7 +77,7 @@
             <li class="next">ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities::WrappedMethod</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -126,13 +103,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#entity-instance_method" title="#entity (instance method)">#<strong>entity</strong>  &#x21d2; Object </a>
+      <a href="#entity-instance_method" title="#entity (instance method)">#<strong>entity</strong>  &#x21d2; Object </a>
     
 
     
@@ -160,7 +137,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#method-instance_method" title="#method (instance method)">#<strong>method</strong>  &#x21d2; Object </a>
+      <a href="#method-instance_method" title="#method (instance method)">#<strong>method</strong>  &#x21d2; Object </a>
     
 
     
@@ -188,7 +165,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#observe_middleware-instance_method" title="#observe_middleware (instance method)">#<strong>observe_middleware</strong>  &#x21d2; Object </a>
+      <a href="#observe_middleware-instance_method" title="#observe_middleware (instance method)">#<strong>observe_middleware</strong>  &#x21d2; Object </a>
     
 
     
@@ -221,7 +198,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -229,7 +206,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
+      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
     
 
     
@@ -251,7 +228,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#call-instance_method" title="#call (instance method)">#<strong>call</strong>(*args, **kwargs, &amp;block)  &#x21d2; Object </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>(*args, **kwargs, &amp;block)  &#x21d2; Object </a>
     
 
     
@@ -274,7 +251,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#chain_args-instance_method" title="#chain_args (instance method)">#<strong>chain_args</strong>  &#x21d2; Array </a>
+      <a href="#chain_args-instance_method" title="#chain_args (instance method)">#<strong>chain_args</strong>  &#x21d2; Array </a>
     
 
     
@@ -296,7 +273,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#chain_block-instance_method" title="#chain_block (instance method)">#<strong>chain_block</strong>  &#x21d2; Proc<sup>?</sup> </a>
+      <a href="#chain_block-instance_method" title="#chain_block (instance method)">#<strong>chain_block</strong>  &#x21d2; Proc<sup>?</sup> </a>
     
 
     
@@ -318,7 +295,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#chain_called%3F-instance_method" title="#chain_called? (instance method)">#<strong>chain_called?</strong>  &#x21d2; Boolean </a>
+      <a href="#chain_called%3F-instance_method" title="#chain_called? (instance method)">#<strong>chain_called?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -340,7 +317,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#chain_exception-instance_method" title="#chain_exception (instance method)">#<strong>chain_exception</strong>  &#x21d2; StandardError<sup>?</sup> </a>
+      <a href="#chain_exception-instance_method" title="#chain_exception (instance method)">#<strong>chain_exception</strong>  &#x21d2; StandardError<sup>?</sup> </a>
     
 
     
@@ -362,7 +339,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#chain_kwargs-instance_method" title="#chain_kwargs (instance method)">#<strong>chain_kwargs</strong>  &#x21d2; Hash </a>
+      <a href="#chain_kwargs-instance_method" title="#chain_kwargs (instance method)">#<strong>chain_kwargs</strong>  &#x21d2; Hash </a>
     
 
     
@@ -384,7 +361,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#chain_value-instance_method" title="#chain_value (instance method)">#<strong>chain_value</strong>  &#x21d2; Object </a>
+      <a href="#chain_value-instance_method" title="#chain_value (instance method)">#<strong>chain_value</strong>  &#x21d2; Object </a>
     
 
     
@@ -407,7 +384,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#handle_after_chain_next-instance_method" title="#handle_after_chain_next (instance method)">#<strong>handle_after_chain_next</strong>(value, _arguments)  &#x21d2; Object </a>
+      <a href="#handle_after_chain_next-instance_method" title="#handle_after_chain_next (instance method)">#<strong>handle_after_chain_next</strong>(value, _arguments)  &#x21d2; Object </a>
     
 
     
@@ -429,7 +406,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#handle_before_chain_next-instance_method" title="#handle_before_chain_next (instance method)">#<strong>handle_before_chain_next</strong>(arguments)  &#x21d2; Object </a>
+      <a href="#handle_before_chain_next-instance_method" title="#handle_before_chain_next (instance method)">#<strong>handle_before_chain_next</strong>(arguments)  &#x21d2; Object </a>
     
 
     
@@ -451,7 +428,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(entity:, method:, observe_middleware:)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(entity:, method:, observe_middleware:)  &#x21d2; void </a>
     
 
     
@@ -475,7 +452,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#klass-instance_method" title="#klass (instance method)">#<strong>klass</strong>  &#x21d2; Class </a>
+      <a href="#klass-instance_method" title="#klass (instance method)">#<strong>klass</strong>  &#x21d2; Class </a>
     
 
     
@@ -497,7 +474,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#observable_middleware-instance_method" title="#observable_middleware (instance method)">#<strong>observable_middleware</strong>  &#x21d2; Class </a>
+      <a href="#observable_middleware-instance_method" title="#observable_middleware (instance method)">#<strong>observable_middleware</strong>  &#x21d2; Class </a>
     
 
     
@@ -519,7 +496,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#reset!-instance_method" title="#reset! (instance method)">#<strong>reset!</strong>  &#x21d2; void </a>
+      <a href="#reset!-instance_method" title="#reset! (instance method)">#<strong>reset!</strong>  &#x21d2; void </a>
     
 
     
@@ -541,7 +518,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/WrapMethod/Entities/WrappedMethod.html#scope-instance_method" title="#scope (instance method)">#<strong>scope</strong>  &#x21d2; String </a>
+      <a href="#scope-instance_method" title="#scope (instance method)">#<strong>scope</strong>  &#x21d2; String </a>
     
 
     
@@ -1663,7 +1640,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:07 2025 by
+  Generated on Sat Dec 13 03:20:05 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

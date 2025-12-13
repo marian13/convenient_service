@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../class_list.html?1"></iframe>
@@ -102,7 +79,7 @@
             <li class="next">ConvenientService::RSpec::Helpers::Classes::StubEntry</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/StubEntry.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -140,13 +117,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/StubEntry.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/StubEntry.html#entry_name-instance_method" title="#entry_name (instance method)">#<strong>entry_name</strong>  &#x21d2; Object </a>
+      <a href="#entry_name-instance_method" title="#entry_name (instance method)">#<strong>entry_name</strong>  &#x21d2; Object </a>
     
 
     
@@ -174,7 +151,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/StubEntry.html#feature_class-instance_method" title="#feature_class (instance method)">#<strong>feature_class</strong>  &#x21d2; Object </a>
+      <a href="#feature_class-instance_method" title="#feature_class (instance method)">#<strong>feature_class</strong>  &#x21d2; Object </a>
     
 
     
@@ -207,7 +184,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/StubEntry.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -215,7 +192,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/StubEntry.html#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::StubbedFeature </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::StubbedFeature </a>
     
 
     
@@ -237,7 +214,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/StubEntry.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(feature_class, entry_name)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(feature_class, entry_name)  &#x21d2; void </a>
     
 
     
@@ -483,7 +460,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/classes/stub_entry.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/StubEntry/Entities.html" title="ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/StubEntry/Entities/StubbedFeature.html" title="ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::StubbedFeature (class)">StubbedFeature</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/StubEntry/Entities/StubbedFeature.html#initialize-instance_method" title="ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::StubbedFeature#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>feature_class:</span> <span class='id identifier rubyid_feature_class'>feature_class</span><span class='comma'>,</span> <span class='label'>entry_name:</span> <span class='id identifier rubyid_entry_name'>entry_name</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/StubEntry/Entities.html" title="ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Helpers/Classes/StubEntry/Entities/StubbedFeature.html" title="ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::StubbedFeature (class)">StubbedFeature</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="StubEntry/Entities/StubbedFeature.html#initialize-instance_method" title="ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::StubbedFeature#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>feature_class:</span> <span class='id identifier rubyid_feature_class'>feature_class</span><span class='comma'>,</span> <span class='label'>entry_name:</span> <span class='id identifier rubyid_entry_name'>entry_name</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -495,7 +472,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:04 2025 by
+  Generated on Sat Dec 13 03:20:02 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../../../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../../../../../../../class_list.html?1"></iframe>
@@ -115,13 +92,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code/Concern/InstanceMethods.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code/Concern/InstanceMethods.html#result-instance_method" title="#result (instance method)">#<strong>result</strong>  &#x21d2; Object </a>
+      <a href="#result-instance_method" title="#result (instance method)">#<strong>result</strong>  &#x21d2; Object </a>
     
 
     
@@ -149,7 +126,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code/Concern/InstanceMethods.html#value-instance_method" title="#value (instance method)">#<strong>value</strong>  &#x21d2; Object </a>
+      <a href="#value-instance_method" title="#value (instance method)">#<strong>value</strong>  &#x21d2; Object </a>
     
 
     
@@ -182,7 +159,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code/Concern/InstanceMethods.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -190,7 +167,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code/Concern/InstanceMethods.html#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
+      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
     
 
     
@@ -212,7 +189,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code/Concern/InstanceMethods.html#===-instance_method" title="#=== (instance method)">#<strong>===</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
+      <a href="#===-instance_method" title="#=== (instance method)">#<strong>===</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
     
 
     
@@ -234,7 +211,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code/Concern/InstanceMethods.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(value:, result: nil)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(value:, result: nil)  &#x21d2; void </a>
     
 
     
@@ -256,7 +233,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code/Concern/InstanceMethods.html#to_arguments-instance_method" title="#to_arguments (instance method)">#<strong>to_arguments</strong>  &#x21d2; ConveninentService::Support::Arguments </a>
+      <a href="#to_arguments-instance_method" title="#to_arguments (instance method)">#<strong>to_arguments</strong>  &#x21d2; ConveninentService::Support::Arguments </a>
     
 
     
@@ -278,7 +255,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code/Concern/InstanceMethods.html#to_kwargs-instance_method" title="#to_kwargs (instance method)">#<strong>to_kwargs</strong>  &#x21d2; Hash{Symbol =&gt; Object} </a>
+      <a href="#to_kwargs-instance_method" title="#to_kwargs (instance method)">#<strong>to_kwargs</strong>  &#x21d2; Hash{Symbol =&gt; Object} </a>
     
 
     
@@ -300,7 +277,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code/Concern/InstanceMethods.html#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; String </a>
+      <a href="#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; String </a>
     
 
     
@@ -322,7 +299,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code/Concern/InstanceMethods.html#to_sym-instance_method" title="#to_sym (instance method)">#<strong>to_sym</strong>  &#x21d2; Symbol </a>
+      <a href="#to_sym-instance_method" title="#to_sym (instance method)">#<strong>to_sym</strong>  &#x21d2; Symbol </a>
     
 
     
@@ -965,7 +942,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:02 2025 by
+  Generated on Sat Dec 13 03:19:59 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

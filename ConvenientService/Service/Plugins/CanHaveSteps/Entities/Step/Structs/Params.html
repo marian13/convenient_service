@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../../../class_list.html?1"></iframe>
@@ -102,7 +79,7 @@
             <li class="next">ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Structs/Params.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -128,13 +105,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Structs/Params.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Structs/Params.html#action-instance_method" title="#action (instance method)">#<strong>action</strong>  &#x21d2; Object </a>
+      <a href="#action-instance_method" title="#action (instance method)">#<strong>action</strong>  &#x21d2; Object </a>
     
 
     
@@ -160,7 +137,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Structs/Params.html#container-instance_method" title="#container (instance method)">#<strong>container</strong>  &#x21d2; Object </a>
+      <a href="#container-instance_method" title="#container (instance method)">#<strong>container</strong>  &#x21d2; Object </a>
     
 
     
@@ -186,7 +163,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Structs/Params.html#extra_kwargs-instance_method" title="#extra_kwargs (instance method)">#<strong>extra_kwargs</strong>  &#x21d2; Object </a>
+      <a href="#extra_kwargs-instance_method" title="#extra_kwargs (instance method)">#<strong>extra_kwargs</strong>  &#x21d2; Object </a>
     
 
     
@@ -212,7 +189,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Structs/Params.html#index-instance_method" title="#index (instance method)">#<strong>index</strong>  &#x21d2; Object </a>
+      <a href="#index-instance_method" title="#index (instance method)">#<strong>index</strong>  &#x21d2; Object </a>
     
 
     
@@ -238,7 +215,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Structs/Params.html#inputs-instance_method" title="#inputs (instance method)">#<strong>inputs</strong>  &#x21d2; Object </a>
+      <a href="#inputs-instance_method" title="#inputs (instance method)">#<strong>inputs</strong>  &#x21d2; Object </a>
     
 
     
@@ -264,7 +241,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Structs/Params.html#organizer-instance_method" title="#organizer (instance method)">#<strong>organizer</strong>  &#x21d2; Object </a>
+      <a href="#organizer-instance_method" title="#organizer (instance method)">#<strong>organizer</strong>  &#x21d2; Object </a>
     
 
     
@@ -290,7 +267,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Structs/Params.html#outputs-instance_method" title="#outputs (instance method)">#<strong>outputs</strong>  &#x21d2; Object </a>
+      <a href="#outputs-instance_method" title="#outputs (instance method)">#<strong>outputs</strong>  &#x21d2; Object </a>
     
 
     
@@ -316,7 +293,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Structs/Params.html#strict-instance_method" title="#strict (instance method)">#<strong>strict</strong>  &#x21d2; Object </a>
+      <a href="#strict-instance_method" title="#strict (instance method)">#<strong>strict</strong>  &#x21d2; Object </a>
     
 
     
@@ -347,7 +324,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Structs/Params.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -355,7 +332,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Structs/Params.html#to_callback_arguments-instance_method" title="#to_callback_arguments (instance method)">#<strong>to_callback_arguments</strong>  &#x21d2; Object </a>
+      <a href="#to_callback_arguments-instance_method" title="#to_callback_arguments (instance method)">#<strong>to_callback_arguments</strong>  &#x21d2; Object </a>
     
 
     
@@ -896,7 +873,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:08 2025 by
+  Generated on Sat Dec 13 03:20:06 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

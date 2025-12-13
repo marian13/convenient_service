@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../class_list.html?1"></iframe>
@@ -162,7 +139,7 @@
   
     <h2>
       Class Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Core.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -170,7 +147,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core.html#entity%3F-class_method" title="entity? (class method)">.<strong>entity?</strong>(entity)  &#x21d2; Boolean </a>
+      <a href="#entity%3F-class_method" title="entity? (class method)">.<strong>entity?</strong>(entity)  &#x21d2; Boolean </a>
     
 
     
@@ -193,7 +170,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core.html#entity_class%3F-class_method" title="entity_class? (class method)">.<strong>entity_class?</strong>(entity_class)  &#x21d2; Boolean </a>
+      <a href="#entity_class%3F-class_method" title="entity_class? (class method)">.<strong>entity_class?</strong>(entity_class)  &#x21d2; Boolean </a>
     
 
     
@@ -232,7 +209,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Concern.html" title="ConvenientService::Support::Concern (module)">Support::Concern</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Support/Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
 
 
   <div id="class_method_details" class="method_details_list">
@@ -265,7 +242,7 @@
 </div></h5>
       
       <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
-  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
 
   <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
     <span class='id identifier rubyid_success'>success</span>
@@ -274,13 +251,13 @@
 
 <span class='id identifier rubyid_service'>service</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 
-<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/" title="ConvenientService::Core (module)">Core</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity?'>entity?</span><span class='lparen'>(</span><span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Core (module)">Core</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity?'>entity?</span><span class='lparen'>(</span><span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
 <span class='comment'># =&gt; true
 </span>
-<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/" title="ConvenientService::Core (module)">Core</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity?'>entity?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Core (module)">Core</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity?'>entity?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='rparen'>)</span>
 <span class='comment'># =&gt; false
 </span>
-<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/" title="ConvenientService::Core (module)">Core</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity?'>entity?</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Core (module)">Core</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity?'>entity?</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
 <span class='comment'># =&gt; false</span></code></pre>
     
   </div>
@@ -380,7 +357,7 @@
 </div></h5>
       
       <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
-  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
 
   <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
     <span class='id identifier rubyid_success'>success</span>
@@ -389,13 +366,13 @@
 
 <span class='id identifier rubyid_service'>service</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 
-<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/" title="ConvenientService::Core (module)">Core</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity_class?'>entity_class?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Core (module)">Core</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity_class?'>entity_class?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='rparen'>)</span>
 <span class='comment'># =&gt; true
 </span>
-<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/" title="ConvenientService::Core (module)">Core</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity_class?'>entity_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Core (module)">Core</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity_class?'>entity_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
 <span class='comment'># =&gt; false
 </span>
-<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/" title="ConvenientService::Core (module)">Core</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity_class?'>entity_class?</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Core (module)">Core</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity_class?'>entity_class?</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
 <span class='comment'># =&gt; false</span></code></pre>
     
   </div>
@@ -466,7 +443,7 @@
 <span class='kw'>def</span> <span class='id identifier rubyid_entity_class?'>entity_class?</span><span class='lparen'>(</span><span class='id identifier rubyid_entity_class'>entity_class</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_entity_class'>entity_class</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Class</span><span class='rparen'>)</span>
 
-  <span class='id identifier rubyid_entity_class'>entity_class</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/" title="ConvenientService::Core (module)">Core</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_entity_class'>entity_class</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Core (module)">Core</a></span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -478,7 +455,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:03:58 2025 by
+  Generated on Sat Dec 13 03:19:55 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

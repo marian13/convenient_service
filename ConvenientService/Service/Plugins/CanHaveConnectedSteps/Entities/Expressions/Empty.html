@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../../class_list.html?1"></iframe>
@@ -102,7 +79,7 @@
             <li class="next">ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -134,7 +111,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -142,7 +119,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
+      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
     
 
     
@@ -164,7 +141,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#each_evaluated_step-instance_method" title="#each_evaluated_step (instance method)">#<strong>each_evaluated_step</strong>(&amp;block)  &#x21d2; ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base </a>
+      <a href="#each_evaluated_step-instance_method" title="#each_evaluated_step (instance method)">#<strong>each_evaluated_step</strong>(&amp;block)  &#x21d2; ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base </a>
     
 
     
@@ -186,7 +163,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#each_step-instance_method" title="#each_step (instance method)">#<strong>each_step</strong>(&amp;block)  &#x21d2; ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base </a>
+      <a href="#each_step-instance_method" title="#each_step (instance method)">#<strong>each_step</strong>(&amp;block)  &#x21d2; ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base </a>
     
 
     
@@ -208,7 +185,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#empty%3F-instance_method" title="#empty? (instance method)">#<strong>empty?</strong>  &#x21d2; Boolean </a>
+      <a href="#empty%3F-instance_method" title="#empty? (instance method)">#<strong>empty?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -230,7 +207,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#error%3F-instance_method" title="#error? (instance method)">#<strong>error?</strong>  &#x21d2; Boolean </a>
+      <a href="#error%3F-instance_method" title="#error? (instance method)">#<strong>error?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -252,7 +229,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#failure%3F-instance_method" title="#failure? (instance method)">#<strong>failure?</strong>  &#x21d2; Boolean </a>
+      <a href="#failure%3F-instance_method" title="#failure? (instance method)">#<strong>failure?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -274,7 +251,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; void </a>
     
 
     
@@ -298,7 +275,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#inspect-instance_method" title="#inspect (instance method)">#<strong>inspect</strong>  &#x21d2; String </a>
+      <a href="#inspect-instance_method" title="#inspect (instance method)">#<strong>inspect</strong>  &#x21d2; String </a>
     
 
     
@@ -320,7 +297,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#organizer-instance_method" title="#organizer (instance method)">#<strong>organizer</strong>  &#x21d2; Object </a>
+      <a href="#organizer-instance_method" title="#organizer (instance method)">#<strong>organizer</strong>  &#x21d2; Object </a>
     
 
     
@@ -342,7 +319,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#result-instance_method" title="#result (instance method)">#<strong>result</strong>  &#x21d2; Object </a>
+      <a href="#result-instance_method" title="#result (instance method)">#<strong>result</strong>  &#x21d2; Object </a>
     
 
     
@@ -364,7 +341,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#success%3F-instance_method" title="#success? (instance method)">#<strong>success?</strong>  &#x21d2; Boolean </a>
+      <a href="#success%3F-instance_method" title="#success? (instance method)">#<strong>success?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -386,7 +363,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#to_arguments-instance_method" title="#to_arguments (instance method)">#<strong>to_arguments</strong>  &#x21d2; ConvenientService::Support::Arguments </a>
+      <a href="#to_arguments-instance_method" title="#to_arguments (instance method)">#<strong>to_arguments</strong>  &#x21d2; ConvenientService::Support::Arguments </a>
     
 
     
@@ -408,7 +385,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Empty.html#with_organizer-instance_method" title="#with_organizer (instance method)">#<strong>with_organizer</strong>(organizer)  &#x21d2; ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty </a>
+      <a href="#with_organizer-instance_method" title="#with_organizer (instance method)">#<strong>with_organizer</strong>(organizer)  &#x21d2; ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty </a>
     
 
     
@@ -440,7 +417,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Base.html" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base (class)">Base</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Base.html#and%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#and? (method)">#and?</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Base.html#complex_if%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#complex_if? (method)">#complex_if?</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Base.html#else%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#else? (method)">#else?</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Base.html#group%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#group? (method)">#group?</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Base.html#if%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#if? (method)">#if?</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Base.html#not%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#not? (method)">#not?</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Base.html#or%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#or? (method)">#or?</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Base.html#scalar%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#scalar? (method)">#scalar?</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/Base.html#steps-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#steps (method)">#steps</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Base.html#and%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#and? (method)">#and?</a></span>, <span class='object_link'><a href="Base.html#complex_if%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#complex_if? (method)">#complex_if?</a></span>, <span class='object_link'><a href="Base.html#else%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#else? (method)">#else?</a></span>, <span class='object_link'><a href="Base.html#group%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#group? (method)">#group?</a></span>, <span class='object_link'><a href="Base.html#if%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#if? (method)">#if?</a></span>, <span class='object_link'><a href="Base.html#not%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#not? (method)">#not?</a></span>, <span class='object_link'><a href="Base.html#or%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#or? (method)">#or?</a></span>, <span class='object_link'><a href="Base.html#scalar%3F-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#scalar? (method)">#scalar?</a></span>, <span class='object_link'><a href="Base.html#steps-instance_method" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base#steps (method)">#steps</a></span></p>
 
   
   
@@ -1188,7 +1165,7 @@
       <div class="method_details ">
   <h3 class="signature " id="with_organizer-instance_method">
   
-    #<strong>with_organizer</strong>(organizer)  &#x21d2; <tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty (class)">ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty</a></span></tt> 
+    #<strong>with_organizer</strong>(organizer)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty (class)">ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty</a></span></tt> 
   
 
   
@@ -1223,7 +1200,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveConnectedSteps/Entities/Expressions/" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty (class)">ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty (class)">ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Empty</a></span></tt>)</span>
       
       
       
@@ -1257,7 +1234,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:09 2025 by
+  Generated on Sat Dec 13 03:20:07 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

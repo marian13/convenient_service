@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../../../../class_list.html?1"></iframe>
@@ -121,7 +98,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Plugins/CanBeMethodStep/Concern.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -129,7 +106,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Plugins/CanBeMethodStep/Concern.html#method-instance_method" title="#method (instance method)">#<strong>method</strong>  &#x21d2; Symbol<sup>?</sup> </a>
+      <a href="#method-instance_method" title="#method (instance method)">#<strong>method</strong>  &#x21d2; Symbol<sup>?</sup> </a>
     
 
     
@@ -151,7 +128,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Plugins/CanBeMethodStep/Concern.html#method_result-instance_method" title="#method_result (instance method)">#<strong>method_result</strong>  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result </a>
+      <a href="#method_result-instance_method" title="#method_result (instance method)">#<strong>method_result</strong>  &#x21d2; ConvenientService::Service::Plugins::HasJSendResult::Entities::Result </a>
     
 
     
@@ -173,7 +150,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Plugins/CanBeMethodStep/Concern.html#method_step%3F-instance_method" title="#method_step? (instance method)">#<strong>method_step?</strong>  &#x21d2; Boolean </a>
+      <a href="#method_step%3F-instance_method" title="#method_step? (instance method)">#<strong>method_step?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -195,7 +172,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Plugins/CanBeMethodStep/Concern.html#result_step%3F-instance_method" title="#result_step? (instance method)">#<strong>result_step?</strong>  &#x21d2; Boolean </a>
+      <a href="#result_step%3F-instance_method" title="#result_step? (instance method)">#<strong>result_step?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -344,7 +321,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_method_step/concern.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_result'>method_result</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Plugins/CanBeMethodStep/Commands.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Plugins/CanBeMethodStep/Commands/CalculateMethodResult.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Commands::CalculateMethodResult (class)">CalculateMethodResult</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Plugins/CanBeMethodStep/Commands/CalculateMethodResult.html#call-instance_method" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Commands::CalculateMethodResult#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>step:</span> <span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Plugins/CanBeMethodStep/Commands.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Plugins/CanBeMethodStep/Commands/CalculateMethodResult.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Commands::CalculateMethodResult (class)">CalculateMethodResult</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Commands/CalculateMethodResult.html#call-instance_method" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Commands::CalculateMethodResult#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>step:</span> <span class='kw'>self</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -460,7 +437,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:01 2025 by
+  Generated on Sat Dec 13 03:19:58 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

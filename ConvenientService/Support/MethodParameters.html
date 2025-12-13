@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../class_list.html?1"></iframe>
@@ -100,7 +77,7 @@
             <li class="next">ConvenientService::Support::MethodParameters</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -183,13 +160,13 @@ end</p>
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters.html#method_parameters-instance_method" title="#method_parameters (instance method)">#<strong>method_parameters</strong>  &#x21d2; Object </a>
+      <a href="#method_parameters-instance_method" title="#method_parameters (instance method)">#<strong>method_parameters</strong>  &#x21d2; Object </a>
     
 
     
@@ -221,7 +198,7 @@ end</p>
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -229,7 +206,7 @@ end</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters.html#has_rest_kwargs%3F-instance_method" title="#has_rest_kwargs? (instance method)">#<strong>has_rest_kwargs?</strong>  &#x21d2; Boolean </a>
+      <a href="#has_rest_kwargs%3F-instance_method" title="#has_rest_kwargs? (instance method)">#<strong>has_rest_kwargs?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -252,7 +229,7 @@ end</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(method_parameters)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(method_parameters)  &#x21d2; void </a>
     
 
     
@@ -276,7 +253,7 @@ end</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters.html#named_kwargs_keys-instance_method" title="#named_kwargs_keys (instance method)">#<strong>named_kwargs_keys</strong>  &#x21d2; Array&lt;Symbol&gt; </a>
+      <a href="#named_kwargs_keys-instance_method" title="#named_kwargs_keys (instance method)">#<strong>named_kwargs_keys</strong>  &#x21d2; Array&lt;Symbol&gt; </a>
     
 
     
@@ -298,7 +275,7 @@ end</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters.html#optional_kwargs_keys-instance_method" title="#optional_kwargs_keys (instance method)">#<strong>optional_kwargs_keys</strong>  &#x21d2; Array&lt;Symbol&gt; </a>
+      <a href="#optional_kwargs_keys-instance_method" title="#optional_kwargs_keys (instance method)">#<strong>optional_kwargs_keys</strong>  &#x21d2; Array&lt;Symbol&gt; </a>
     
 
     
@@ -320,7 +297,7 @@ end</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters.html#required_kwargs_keys-instance_method" title="#required_kwargs_keys (instance method)">#<strong>required_kwargs_keys</strong>  &#x21d2; Array&lt;Symbol&gt; </a>
+      <a href="#required_kwargs_keys-instance_method" title="#required_kwargs_keys (instance method)">#<strong>required_kwargs_keys</strong>  &#x21d2; Array&lt;Symbol&gt; </a>
     
 
     
@@ -526,10 +503,10 @@ end</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_bar'>bar</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span> <span class='op'>=</span> <span class='int'>1</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>c:</span><span class='comma'>,</span> <span class='label'>d:</span> <span class='int'>2</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span>
 
-<span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/" title="ConvenientService::Support::MethodParameters (class)">MethodParameters</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters.html#initialize-instance_method" title="ConvenientService::Support::MethodParameters#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:foo</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_parameters'>parameters</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_has_rest_kwargs?'>has_rest_kwargs?</span>
+<span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Support::MethodParameters (class)">MethodParameters</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ConvenientService::Support::MethodParameters#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:foo</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_parameters'>parameters</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_has_rest_kwargs?'>has_rest_kwargs?</span>
 <span class='comment'># =&gt; true
 </span>
-<span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/" title="ConvenientService::Support::MethodParameters (class)">MethodParameters</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters.html#initialize-instance_method" title="ConvenientService::Support::MethodParameters#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:bar</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_parameters'>parameters</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_has_rest_kwargs?'>has_rest_kwargs?</span>
+<span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Support::MethodParameters (class)">MethodParameters</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ConvenientService::Support::MethodParameters#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:bar</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_parameters'>parameters</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_has_rest_kwargs?'>has_rest_kwargs?</span>
 <span class='comment'># =&gt; false</span></code></pre>
     
   </div>
@@ -588,7 +565,7 @@ end</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_has_rest_kwargs?'>has_rest_kwargs?</span>
   <span class='kw'>return</span> <span class='ivar'>@has_rest_kwargs</span> <span class='kw'>if</span> <span class='kw'>defined?</span> <span class='ivar'>@has_rest_kwargs</span>
 
-  <span class='ivar'>@has_rest_kwargs</span> <span class='op'>=</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid__name'>_name</span><span class='op'>|</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html#REST_KEYWORDS-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::REST_KEYWORDS (constant)">REST_KEYWORDS</a></span></span> <span class='rbrace'>}</span>
+  <span class='ivar'>@has_rest_kwargs</span> <span class='op'>=</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid__name'>_name</span><span class='op'>|</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html#REST_KEYWORDS-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::REST_KEYWORDS (constant)">REST_KEYWORDS</a></span></span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -634,7 +611,7 @@ end</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_foo'>foo</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span> <span class='op'>=</span> <span class='int'>1</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>c:</span><span class='comma'>,</span> <span class='label'>d:</span> <span class='int'>2</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span>
 
-<span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/" title="ConvenientService::Support::MethodParameters (class)">MethodParameters</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters.html#initialize-instance_method" title="ConvenientService::Support::MethodParameters#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:foo</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_parameters'>parameters</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_named_kwargs_keys'>named_kwargs_keys</span>
+<span class='const'><span class='object_link'><a href="../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Support::MethodParameters (class)">MethodParameters</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ConvenientService::Support::MethodParameters#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:foo</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_parameters'>parameters</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_named_kwargs_keys'>named_kwargs_keys</span>
 <span class='comment'># =&gt; [:c, :d]</span></code></pre>
     
   </div>
@@ -689,7 +666,7 @@ end</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_named_kwargs_keys'>named_kwargs_keys</span>
-  <span class='ivar'>@named_kwargs_keys</span> <span class='op'>||=</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid__name'>_name</span><span class='op'>|</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html#REQUIRED_KEYWORD-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::REQUIRED_KEYWORD (constant)">REQUIRED_KEYWORD</a></span></span> <span class='op'>||</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html#OPTIONAL_KEYWORD-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::OPTIONAL_KEYWORD (constant)">OPTIONAL_KEYWORD</a></span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__type'>_type</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>|</span> <span class='id identifier rubyid_name'>name</span> <span class='rbrace'>}</span>
+  <span class='ivar'>@named_kwargs_keys</span> <span class='op'>||=</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid__name'>_name</span><span class='op'>|</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html#REQUIRED_KEYWORD-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::REQUIRED_KEYWORD (constant)">REQUIRED_KEYWORD</a></span></span> <span class='op'>||</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html#OPTIONAL_KEYWORD-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::OPTIONAL_KEYWORD (constant)">OPTIONAL_KEYWORD</a></span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__type'>_type</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>|</span> <span class='id identifier rubyid_name'>name</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -778,7 +755,7 @@ end</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 121</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_optional_kwargs_keys'>optional_kwargs_keys</span>
-  <span class='ivar'>@optional_kwargs_keys</span> <span class='op'>||=</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid__name'>_name</span><span class='op'>|</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html#OPTIONAL_KEYWORD-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::OPTIONAL_KEYWORD (constant)">OPTIONAL_KEYWORD</a></span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__type'>_type</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>|</span> <span class='id identifier rubyid_name'>name</span> <span class='rbrace'>}</span>
+  <span class='ivar'>@optional_kwargs_keys</span> <span class='op'>||=</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid__name'>_name</span><span class='op'>|</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html#OPTIONAL_KEYWORD-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::OPTIONAL_KEYWORD (constant)">OPTIONAL_KEYWORD</a></span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__type'>_type</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>|</span> <span class='id identifier rubyid_name'>name</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -867,7 +844,7 @@ end</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/method_parameters.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_required_kwargs_keys'>required_kwargs_keys</span>
-  <span class='ivar'>@required_kwargs_keys</span> <span class='op'>||=</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid__name'>_name</span><span class='op'>|</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html#REQUIRED_KEYWORD-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::REQUIRED_KEYWORD (constant)">REQUIRED_KEYWORD</a></span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__type'>_type</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>|</span> <span class='id identifier rubyid_name'>name</span> <span class='rbrace'>}</span>
+  <span class='ivar'>@required_kwargs_keys</span> <span class='op'>||=</span> <span class='id identifier rubyid_method_parameters'>method_parameters</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid__name'>_name</span><span class='op'>|</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants.html" title="ConvenientService::Support::MethodParameters::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/MethodParameters/Constants/Types.html" title="ConvenientService::Support::MethodParameters::Constants::Types (module)">Types</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MethodParameters/Constants/Types.html#REQUIRED_KEYWORD-constant" title="ConvenientService::Support::MethodParameters::Constants::Types::REQUIRED_KEYWORD (constant)">REQUIRED_KEYWORD</a></span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__type'>_type</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>|</span> <span class='id identifier rubyid_name'>name</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -879,7 +856,7 @@ end</p>
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:04 2025 by
+  Generated on Sat Dec 13 03:20:01 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

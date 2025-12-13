@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../class_list.html?1"></iframe>
@@ -102,7 +79,7 @@
             <li class="next">ConvenientService::Support::BacktraceCleaner</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Support/BacktraceCleaner.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -191,7 +168,7 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Support/BacktraceCleaner.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -199,7 +176,7 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/BacktraceCleaner.html#add_convenient_service_silencer-instance_method" title="#add_convenient_service_silencer (instance method)">#<strong>add_convenient_service_silencer</strong>  &#x21d2; void </a>
+      <a href="#add_convenient_service_silencer-instance_method" title="#add_convenient_service_silencer (instance method)">#<strong>add_convenient_service_silencer</strong>  &#x21d2; void </a>
     
 
     
@@ -222,7 +199,7 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/BacktraceCleaner.html#clean-instance_method" title="#clean (instance method)">#<strong>clean</strong>(backtrace, *args)  &#x21d2; Array&lt;String&gt; </a>
+      <a href="#clean-instance_method" title="#clean (instance method)">#<strong>clean</strong>(backtrace, *args)  &#x21d2; Array&lt;String&gt; </a>
     
 
     
@@ -245,7 +222,7 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Support/BacktraceCleaner.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; void </a>
     
 
     
@@ -581,7 +558,7 @@ Also returns an empty array, when <code>backtrace</code> is <code>nil</code>.</p
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:04 2025 by
+  Generated on Sat Dec 13 03:20:01 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

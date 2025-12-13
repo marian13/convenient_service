@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
@@ -138,7 +115,7 @@
   
     <h2>
       Constant Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Constants/Backends.html#" class="constants_summary_toggle">collapse</a></small>
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
     </h2>
 
     <dl class="constants">
@@ -371,7 +348,7 @@
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='lbracket'>[</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Constants/Backends.html#RUBY_MIDDLEWARE-constant" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::RUBY_MIDDLEWARE (constant)">RUBY_MIDDLEWARE</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Constants/Backends.html#RACK-constant" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::RACK (constant)">RACK</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Constants/Backends.html#STATEFUL-constant" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::STATEFUL (constant)">STATEFUL</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Constants/Backends.html#NAIVE-constant" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::NAIVE (constant)">NAIVE</a></span></span><span class='rbracket'>]</span></pre></dd>
+        <dd><pre class="code"><span class='lbracket'>[</span><span class='const'><span class='object_link'><a href="#RUBY_MIDDLEWARE-constant" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::RUBY_MIDDLEWARE (constant)">RUBY_MIDDLEWARE</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="#RACK-constant" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::RACK (constant)">RACK</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="#STATEFUL-constant" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::STATEFUL (constant)">STATEFUL</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="#NAIVE-constant" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::NAIVE (constant)">NAIVE</a></span></span><span class='rbracket'>]</span></pre></dd>
       
         <dt id="DEFAULT-constant" class="">DEFAULT =
           <div class="docstring">
@@ -417,7 +394,7 @@
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Middleware/StackBuilder/Constants/Backends.html#NAIVE-constant" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::NAIVE (constant)">NAIVE</a></span></span></pre></dd>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="#NAIVE-constant" title="ConvenientService::Support::Middleware::StackBuilder::Constants::Backends::NAIVE (constant)">NAIVE</a></span></span></pre></dd>
       
     </dl>
   
@@ -433,7 +410,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:00 2025 by
+  Generated on Sat Dec 13 03:19:57 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

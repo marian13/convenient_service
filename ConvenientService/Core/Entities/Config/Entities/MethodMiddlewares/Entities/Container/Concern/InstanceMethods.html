@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../../../../../class_list.html?1"></iframe>
@@ -139,13 +116,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#klass-instance_method" title="#klass (instance method)">#<strong>klass</strong>  &#x21d2; Object </a>
+      <a href="#klass-instance_method" title="#klass (instance method)">#<strong>klass</strong>  &#x21d2; Object </a>
     
 
     
@@ -177,7 +154,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -185,7 +162,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
+      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
     
 
     
@@ -207,7 +184,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#ancestors-instance_method" title="#ancestors (instance method)">#<strong>ancestors</strong>  &#x21d2; Array&lt;Class, Module&gt; </a>
+      <a href="#ancestors-instance_method" title="#ancestors (instance method)">#<strong>ancestors</strong>  &#x21d2; Array&lt;Class, Module&gt; </a>
     
 
     
@@ -229,7 +206,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#ancestors_greater_than_methods_middlewares_callers-instance_method" title="#ancestors_greater_than_methods_middlewares_callers (instance method)">#<strong>ancestors_greater_than_methods_middlewares_callers</strong>  &#x21d2; Array&lt;Class, Module&gt; </a>
+      <a href="#ancestors_greater_than_methods_middlewares_callers-instance_method" title="#ancestors_greater_than_methods_middlewares_callers (instance method)">#<strong>ancestors_greater_than_methods_middlewares_callers</strong>  &#x21d2; Array&lt;Class, Module&gt; </a>
     
 
     
@@ -252,7 +229,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(klass:)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(klass:)  &#x21d2; void </a>
     
 
     
@@ -274,7 +251,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#lock-instance_method" title="#lock (instance method)">#<strong>lock</strong>  &#x21d2; Mutex </a>
+      <a href="#lock-instance_method" title="#lock (instance method)">#<strong>lock</strong>  &#x21d2; Mutex </a>
     
 
     
@@ -297,7 +274,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#methods_middlewares_callers-instance_method" title="#methods_middlewares_callers (instance method)">#<strong>methods_middlewares_callers</strong>  &#x21d2; Module </a>
+      <a href="#methods_middlewares_callers-instance_method" title="#methods_middlewares_callers (instance method)">#<strong>methods_middlewares_callers</strong>  &#x21d2; Module </a>
     
 
     
@@ -319,7 +296,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#prepend_methods_callers_to_container-instance_method" title="#prepend_methods_callers_to_container (instance method)">#<strong>prepend_methods_callers_to_container</strong>  &#x21d2; void </a>
+      <a href="#prepend_methods_callers_to_container-instance_method" title="#prepend_methods_callers_to_container (instance method)">#<strong>prepend_methods_callers_to_container</strong>  &#x21d2; void </a>
     
 
     
@@ -341,7 +318,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#resolve_super_method-instance_method" title="#resolve_super_method (instance method)">#<strong>resolve_super_method</strong>(method_name, entity)  &#x21d2; Method<sup>?</sup> </a>
+      <a href="#resolve_super_method-instance_method" title="#resolve_super_method (instance method)">#<strong>resolve_super_method</strong>(method_name, entity)  &#x21d2; Method<sup>?</sup> </a>
     
 
     
@@ -363,7 +340,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#resolve_unbound_super_method-instance_method" title="#resolve_unbound_super_method (instance method)">#<strong>resolve_unbound_super_method</strong>(method_name)  &#x21d2; UnboundMethod<sup>?</sup> </a>
+      <a href="#resolve_unbound_super_method-instance_method" title="#resolve_unbound_super_method (instance method)">#<strong>resolve_unbound_super_method</strong>(method_name)  &#x21d2; UnboundMethod<sup>?</sup> </a>
     
 
     
@@ -385,7 +362,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#super_method_defined%3F-instance_method" title="#super_method_defined? (instance method)">#<strong>super_method_defined?</strong>(method_name)  &#x21d2; UnboundMethod<sup>?</sup> </a>
+      <a href="#super_method_defined%3F-instance_method" title="#super_method_defined? (instance method)">#<strong>super_method_defined?</strong>(method_name)  &#x21d2; UnboundMethod<sup>?</sup> </a>
     
 
     
@@ -407,7 +384,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#to_arguments-instance_method" title="#to_arguments (instance method)">#<strong>to_arguments</strong>  &#x21d2; ConvenientService::Support::Arguments </a>
+      <a href="#to_arguments-instance_method" title="#to_arguments (instance method)">#<strong>to_arguments</strong>  &#x21d2; ConvenientService::Support::Arguments </a>
     
 
     
@@ -429,7 +406,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Container/Concern/InstanceMethods.html#to_kwargs-instance_method" title="#to_kwargs (instance method)">#<strong>to_kwargs</strong>  &#x21d2; Hash{Symbol =&gt; Object} </a>
+      <a href="#to_kwargs-instance_method" title="#to_kwargs (instance method)">#<strong>to_kwargs</strong>  &#x21d2; Hash{Symbol =&gt; Object} </a>
     
 
     
@@ -1560,7 +1537,7 @@ When ancestors do NOT contain <code>methods_middlewares_callers</code>, returns 
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:01 2025 by
+  Generated on Sat Dec 13 03:19:58 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

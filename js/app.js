@@ -393,3 +393,24 @@ window.addEventListener(
   },
   false
 );
+(() => {
+  const createOpenInGitHubLinks = () => {
+    $('.source_code').each((_index, table) => {
+      const tableHTML = table.innerHTML;
+
+      const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
+
+      const span = document.createElement('span')
+
+      span.classList.add('openInGitHub')
+
+      span.style.fontSize = '0.9em';
+
+      span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
+
+      table.before(span)
+    })
+  }
+
+  $(document).ready(() => createOpenInGitHubLinks());
+})()

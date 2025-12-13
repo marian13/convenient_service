@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
@@ -100,7 +77,7 @@
             <li class="next">ConvenientService::Common::Plugins::HasInternals::Entities::Internals</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasInternals/Entities/Internals.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -156,7 +133,7 @@
   <h2>Method Summary</h2>
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasInternals/Entities/Internals/Concern.html" title="ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Concern (module)">Concern</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasInternals/Entities/Internals/Concern.html#==-instance_method" title="ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Concern#== (method)">#==</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Internals/Concern.html#==-instance_method" title="ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Concern#== (method)">#==</a></span></p>
 
   
   
@@ -173,7 +150,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:06 2025 by
+  Generated on Sat Dec 13 03:20:03 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../../../../class_list.html?1"></iframe>
@@ -102,7 +79,7 @@
             <li class="next">ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/With.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -152,13 +129,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/With.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/With.html#middleware_arguments-instance_method" title="#middleware_arguments (instance method)">#<strong>middleware_arguments</strong>  &#x21d2; Object </a>
+      <a href="#middleware_arguments-instance_method" title="#middleware_arguments (instance method)">#<strong>middleware_arguments</strong>  &#x21d2; Object </a>
     
 
     
@@ -189,13 +166,13 @@
   
   
   <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/Base.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base (class)">Base</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/Base.html#middleware-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#middleware (method)">#middleware</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Base.html#middleware-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#middleware (method)">#middleware</a></span></p>
 
 
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/With.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -203,7 +180,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/With.html#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
+      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
     
 
     
@@ -225,7 +202,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/With.html#extra_kwargs-instance_method" title="#extra_kwargs (instance method)">#<strong>extra_kwargs</strong>  &#x21d2; Hash{Symbol =&gt; ConvenientService::Support::Arguments} </a>
+      <a href="#extra_kwargs-instance_method" title="#extra_kwargs (instance method)">#<strong>extra_kwargs</strong>  &#x21d2; Hash{Symbol =&gt; ConvenientService::Support::Arguments} </a>
     
 
     
@@ -247,7 +224,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/With.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(**kwargs)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(**kwargs)  &#x21d2; void </a>
     
 
     
@@ -281,7 +258,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/Base.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base (class)">Base</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/Base.html#decorated_middleware-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#decorated_middleware (method)">#decorated_middleware</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/Base.html#new-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#new (method)">#new</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/Base.html#observable-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#observable (method)">#observable</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/Base.html#to_observable_middleware-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#to_observable_middleware (method)">#to_observable_middleware</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/MiddlewareCreators/Base.html#with-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#with (method)">#with</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Base.html#decorated_middleware-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#decorated_middleware (method)">#decorated_middleware</a></span>, <span class='object_link'><a href="Base.html#new-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#new (method)">#new</a></span>, <span class='object_link'><a href="Base.html#observable-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#observable (method)">#observable</a></span>, <span class='object_link'><a href="Base.html#to_observable_middleware-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#to_observable_middleware (method)">#to_observable_middleware</a></span>, <span class='object_link'><a href="Base.html#with-instance_method" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::Base#with (method)">#with</a></span></p>
 
   
   
@@ -613,7 +590,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:11 2025 by
+  Generated on Sat Dec 13 03:20:08 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

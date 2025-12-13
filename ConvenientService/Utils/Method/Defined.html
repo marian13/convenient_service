@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../class_list.html?1"></iframe>
@@ -102,7 +79,7 @@
             <li class="next">ConvenientService::Utils::Method::Defined</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -156,7 +133,7 @@
   
     <h2>
       Constant Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#" class="constants_summary_toggle">collapse</a></small>
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
     </h2>
 
     <dl class="constants">
@@ -204,13 +181,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#klass-instance_method" title="#klass (instance method)">#<strong>klass</strong>  &#x21d2; Object </a>
+      <a href="#klass-instance_method" title="#klass (instance method)">#<strong>klass</strong>  &#x21d2; Object </a>
     
 
     
@@ -237,7 +214,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#method-instance_method" title="#method (instance method)">#<strong>method</strong>  &#x21d2; Object </a>
+      <a href="#method-instance_method" title="#method (instance method)">#<strong>method</strong>  &#x21d2; Object </a>
     
 
     
@@ -264,7 +241,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#private-instance_method" title="#private (instance method)">#<strong>private</strong>  &#x21d2; Object </a>
+      <a href="#private-instance_method" title="#private (instance method)">#<strong>private</strong>  &#x21d2; Object </a>
     
 
     
@@ -291,7 +268,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#protected-instance_method" title="#protected (instance method)">#<strong>protected</strong>  &#x21d2; Object </a>
+      <a href="#protected-instance_method" title="#protected (instance method)">#<strong>protected</strong>  &#x21d2; Object </a>
     
 
     
@@ -318,7 +295,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#public-instance_method" title="#public (instance method)">#<strong>public</strong>  &#x21d2; Object </a>
+      <a href="#public-instance_method" title="#public (instance method)">#<strong>public</strong>  &#x21d2; Object </a>
     
 
     
@@ -350,7 +327,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -358,7 +335,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; void </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; void </a>
     
 
     
@@ -380,7 +357,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(method, klass, public: true, protected: true, private: false)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(method, klass, public: true, protected: true, private: false)  &#x21d2; void </a>
     
 
     
@@ -404,7 +381,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#method_defined%3F-instance_method" title="#method_defined? (instance method)">#<strong>method_defined?</strong>(visibility)  &#x21d2; Boolean </a>
+      <a href="#method_defined%3F-instance_method" title="#method_defined? (instance method)">#<strong>method_defined?</strong>(visibility)  &#x21d2; Boolean </a>
     
 
     
@@ -426,7 +403,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#selected_visibilities-instance_method" title="#selected_visibilities (instance method)">#<strong>selected_visibilities</strong>  &#x21d2; Array&lt;Symbol&gt; </a>
+      <a href="#selected_visibilities-instance_method" title="#selected_visibilities (instance method)">#<strong>selected_visibilities</strong>  &#x21d2; Array&lt;Symbol&gt; </a>
     
 
     
@@ -1046,7 +1023,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/method/defined.rb', line 92</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_defined?'>method_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_visibility'>visibility</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Method/Defined.html#METHOD_DEFINED_CHECKERS-constant" title="ConvenientService::Utils::Method::Defined::METHOD_DEFINED_CHECKERS (constant)">METHOD_DEFINED_CHECKERS</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_visibility'>visibility</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="#METHOD_DEFINED_CHECKERS-constant" title="ConvenientService::Utils::Method::Defined::METHOD_DEFINED_CHECKERS (constant)">METHOD_DEFINED_CHECKERS</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_visibility'>visibility</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1129,7 +1106,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:03 2025 by
+  Generated on Sat Dec 13 03:20:01 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

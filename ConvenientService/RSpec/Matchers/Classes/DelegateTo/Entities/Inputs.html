@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../../class_list.html?1"></iframe>
@@ -100,7 +77,7 @@
             <li class="next">ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::Inputs</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -128,13 +105,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#values-instance_method" title="#values (instance method)">#<strong>values</strong>  &#x21d2; Object </a>
+      <a href="#values-instance_method" title="#values (instance method)">#<strong>values</strong>  &#x21d2; Object </a>
     
 
     
@@ -166,7 +143,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -174,7 +151,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
+      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
     
 
     
@@ -196,7 +173,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#block_expectation-instance_method" title="#block_expectation (instance method)">#<strong>block_expectation</strong>  &#x21d2; Proc<sup>?</sup> </a>
+      <a href="#block_expectation-instance_method" title="#block_expectation (instance method)">#<strong>block_expectation</strong>  &#x21d2; Proc<sup>?</sup> </a>
     
 
     
@@ -218,7 +195,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#block_expectation=-instance_method" title="#block_expectation= (instance method)">#<strong>block_expectation=</strong>(block)  &#x21d2; Proc </a>
+      <a href="#block_expectation=-instance_method" title="#block_expectation= (instance method)">#<strong>block_expectation=</strong>(block)  &#x21d2; Proc </a>
     
 
     
@@ -240,7 +217,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#custom_return_value-instance_method" title="#custom_return_value (instance method)">#<strong>custom_return_value</strong>  &#x21d2; Object </a>
+      <a href="#custom_return_value-instance_method" title="#custom_return_value (instance method)">#<strong>custom_return_value</strong>  &#x21d2; Object </a>
     
 
     
@@ -263,7 +240,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#delegation_value-instance_method" title="#delegation_value (instance method)">#<strong>delegation_value</strong>  &#x21d2; Object </a>
+      <a href="#delegation_value-instance_method" title="#delegation_value (instance method)">#<strong>delegation_value</strong>  &#x21d2; Object </a>
     
 
     
@@ -286,7 +263,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#expected_arguments-instance_method" title="#expected_arguments (instance method)">#<strong>expected_arguments</strong>  &#x21d2; ConvenientService::Support::Arguments </a>
+      <a href="#expected_arguments-instance_method" title="#expected_arguments (instance method)">#<strong>expected_arguments</strong>  &#x21d2; ConvenientService::Support::Arguments </a>
     
 
     
@@ -308,7 +285,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#expected_arguments=-instance_method" title="#expected_arguments= (instance method)">#<strong>expected_arguments=</strong>(arguments)  &#x21d2; ConvenientService::Support::Arguments </a>
+      <a href="#expected_arguments=-instance_method" title="#expected_arguments= (instance method)">#<strong>expected_arguments=</strong>(arguments)  &#x21d2; ConvenientService::Support::Arguments </a>
     
 
     
@@ -330,7 +307,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#expected_return_value_block-instance_method" title="#expected_return_value_block (instance method)">#<strong>expected_return_value_block</strong>  &#x21d2; Proc </a>
+      <a href="#expected_return_value_block-instance_method" title="#expected_return_value_block (instance method)">#<strong>expected_return_value_block</strong>  &#x21d2; Proc </a>
     
 
     
@@ -352,7 +329,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#has_call_original%3F-instance_method" title="#has_call_original? (instance method)">#<strong>has_call_original?</strong>  &#x21d2; Boolean </a>
+      <a href="#has_call_original%3F-instance_method" title="#has_call_original? (instance method)">#<strong>has_call_original?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -374,7 +351,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(object:, method:, block_expectation:)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(object:, method:, block_expectation:)  &#x21d2; void </a>
     
 
     
@@ -398,7 +375,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#method-instance_method" title="#method (instance method)">#<strong>method</strong>  &#x21d2; String, Symbol </a>
+      <a href="#method-instance_method" title="#method (instance method)">#<strong>method</strong>  &#x21d2; String, Symbol </a>
     
 
     
@@ -420,7 +397,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#object-instance_method" title="#object (instance method)">#<strong>object</strong>  &#x21d2; Object </a>
+      <a href="#object-instance_method" title="#object (instance method)">#<strong>object</strong>  &#x21d2; Object </a>
     
 
     
@@ -443,7 +420,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#printable_block_expectation-instance_method" title="#printable_block_expectation (instance method)">#<strong>printable_block_expectation</strong>  &#x21d2; String </a>
+      <a href="#printable_block_expectation-instance_method" title="#printable_block_expectation (instance method)">#<strong>printable_block_expectation</strong>  &#x21d2; String </a>
     
 
     
@@ -465,7 +442,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#printable_method-instance_method" title="#printable_method (instance method)">#<strong>printable_method</strong>  &#x21d2; String </a>
+      <a href="#printable_method-instance_method" title="#printable_method (instance method)">#<strong>printable_method</strong>  &#x21d2; String </a>
     
 
     
@@ -487,7 +464,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#should_call_original=-instance_method" title="#should_call_original= (instance method)">#<strong>should_call_original=</strong>(flag)  &#x21d2; Boolean </a>
+      <a href="#should_call_original=-instance_method" title="#should_call_original= (instance method)">#<strong>should_call_original=</strong>(flag)  &#x21d2; Boolean </a>
     
 
     
@@ -509,7 +486,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#should_call_original%3F-instance_method" title="#should_call_original? (instance method)">#<strong>should_call_original?</strong>  &#x21d2; Boolean </a>
+      <a href="#should_call_original%3F-instance_method" title="#should_call_original? (instance method)">#<strong>should_call_original?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -531,7 +508,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Classes/DelegateTo/Entities/Inputs.html#update_expected_return_value_block-instance_method" title="#update_expected_return_value_block (instance method)">#<strong>update_expected_return_value_block</strong>(*args, &amp;block)  &#x21d2; Proc </a>
+      <a href="#update_expected_return_value_block-instance_method" title="#update_expected_return_value_block (instance method)">#<strong>update_expected_return_value_block</strong>(*args, &amp;block)  &#x21d2; Proc </a>
     
 
     
@@ -1734,7 +1711,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:06 2025 by
+  Generated on Sat Dec 13 03:20:04 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

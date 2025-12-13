@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../class_list.html?1"></iframe>
@@ -158,7 +135,7 @@
   
     <h2>
       Class Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -166,7 +143,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module.html#class_method_defined%3F-class_method" title="class_method_defined? (class method)">.<strong>class_method_defined?</strong>  &#x21d2; Boolean </a>
+      <a href="#class_method_defined%3F-class_method" title="class_method_defined? (class method)">.<strong>class_method_defined?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -188,7 +165,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module.html#fetch_own_const-class_method" title="fetch_own_const (class method)">.<strong>fetch_own_const</strong>  &#x21d2; Object </a>
+      <a href="#fetch_own_const-class_method" title="fetch_own_const (class method)">.<strong>fetch_own_const</strong>  &#x21d2; Object </a>
     
 
     
@@ -210,7 +187,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module.html#get_namespace-class_method" title="get_namespace (class method)">.<strong>get_namespace</strong>  &#x21d2; Object </a>
+      <a href="#get_namespace-class_method" title="get_namespace (class method)">.<strong>get_namespace</strong>  &#x21d2; Object </a>
     
 
     
@@ -232,7 +209,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module.html#get_own_const-class_method" title="get_own_const (class method)">.<strong>get_own_const</strong>  &#x21d2; Object </a>
+      <a href="#get_own_const-class_method" title="get_own_const (class method)">.<strong>get_own_const</strong>  &#x21d2; Object </a>
     
 
     
@@ -254,7 +231,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module.html#get_own_instance_method-class_method" title="get_own_instance_method (class method)">.<strong>get_own_instance_method</strong>  &#x21d2; Object </a>
+      <a href="#get_own_instance_method-class_method" title="get_own_instance_method (class method)">.<strong>get_own_instance_method</strong>  &#x21d2; Object </a>
     
 
     
@@ -276,7 +253,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module.html#has_own_instance_method%3F-class_method" title="has_own_instance_method? (class method)">.<strong>has_own_instance_method?</strong>  &#x21d2; Boolean </a>
+      <a href="#has_own_instance_method%3F-class_method" title="has_own_instance_method? (class method)">.<strong>has_own_instance_method?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -298,7 +275,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module.html#include_module%3F-class_method" title="include_module? (class method)">.<strong>include_module?</strong>  &#x21d2; Boolean </a>
+      <a href="#include_module%3F-class_method" title="include_module? (class method)">.<strong>include_module?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -320,7 +297,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module.html#instance_method_defined%3F-class_method" title="instance_method_defined? (class method)">.<strong>instance_method_defined?</strong>  &#x21d2; Boolean </a>
+      <a href="#instance_method_defined%3F-class_method" title="instance_method_defined? (class method)">.<strong>instance_method_defined?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -412,7 +389,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_class_method_defined?'>class_method_defined?</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/ClassMethodDefined.html" title="ConvenientService::Utils::Module::ClassMethodDefined (class)">ClassMethodDefined</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/ClassMethodDefined.html#call-instance_method" title="ConvenientService::Utils::Module::ClassMethodDefined#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/ClassMethodDefined.html" title="ConvenientService::Utils::Module::ClassMethodDefined (class)">ClassMethodDefined</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/ClassMethodDefined.html#call-instance_method" title="ConvenientService::Utils::Module::ClassMethodDefined#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -470,7 +447,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_fetch_own_const'>fetch_own_const</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/FetchOwnConst.html" title="ConvenientService::Utils::Module::FetchOwnConst (class)">FetchOwnConst</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/FetchOwnConst.html#call-instance_method" title="ConvenientService::Utils::Module::FetchOwnConst#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/FetchOwnConst.html" title="ConvenientService::Utils::Module::FetchOwnConst (class)">FetchOwnConst</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/FetchOwnConst.html#call-instance_method" title="ConvenientService::Utils::Module::FetchOwnConst#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -528,7 +505,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_namespace'>get_namespace</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/GetNamespace.html" title="ConvenientService::Utils::Module::GetNamespace (class)">GetNamespace</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/GetNamespace.html#call-instance_method" title="ConvenientService::Utils::Module::GetNamespace#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/GetNamespace.html" title="ConvenientService::Utils::Module::GetNamespace (class)">GetNamespace</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/GetNamespace.html#call-instance_method" title="ConvenientService::Utils::Module::GetNamespace#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -586,7 +563,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_own_const'>get_own_const</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/GetOwnConst.html" title="ConvenientService::Utils::Module::GetOwnConst (class)">GetOwnConst</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/GetOwnConst.html#call-instance_method" title="ConvenientService::Utils::Module::GetOwnConst#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/GetOwnConst.html" title="ConvenientService::Utils::Module::GetOwnConst (class)">GetOwnConst</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/GetOwnConst.html#call-instance_method" title="ConvenientService::Utils::Module::GetOwnConst#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -644,7 +621,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_own_instance_method'>get_own_instance_method</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/GetOwnInstanceMethod.html" title="ConvenientService::Utils::Module::GetOwnInstanceMethod (class)">GetOwnInstanceMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/GetOwnInstanceMethod.html#call-instance_method" title="ConvenientService::Utils::Module::GetOwnInstanceMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/GetOwnInstanceMethod.html" title="ConvenientService::Utils::Module::GetOwnInstanceMethod (class)">GetOwnInstanceMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/GetOwnInstanceMethod.html#call-instance_method" title="ConvenientService::Utils::Module::GetOwnInstanceMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -715,7 +692,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_has_own_instance_method?'>has_own_instance_method?</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/HasOwnInstanceMethod.html" title="ConvenientService::Utils::Module::HasOwnInstanceMethod (class)">HasOwnInstanceMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/HasOwnInstanceMethod.html#call-instance_method" title="ConvenientService::Utils::Module::HasOwnInstanceMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/HasOwnInstanceMethod.html" title="ConvenientService::Utils::Module::HasOwnInstanceMethod (class)">HasOwnInstanceMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/HasOwnInstanceMethod.html#call-instance_method" title="ConvenientService::Utils::Module::HasOwnInstanceMethod#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -786,7 +763,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 52</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_include_module?'>include_module?</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/IncludeModule.html" title="ConvenientService::Utils::Module::IncludeModule (class)">IncludeModule</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/IncludeModule.html#call-instance_method" title="ConvenientService::Utils::Module::IncludeModule#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/IncludeModule.html" title="ConvenientService::Utils::Module::IncludeModule (class)">IncludeModule</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/IncludeModule.html#call-instance_method" title="ConvenientService::Utils::Module::IncludeModule#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -857,7 +834,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/module.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_instance_method_defined?'>instance_method_defined?</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/InstanceMethodDefined.html" title="ConvenientService::Utils::Module::InstanceMethodDefined (class)">InstanceMethodDefined</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/InstanceMethodDefined.html#call-instance_method" title="ConvenientService::Utils::Module::InstanceMethodDefined#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Utils/Module/InstanceMethodDefined.html" title="ConvenientService::Utils::Module::InstanceMethodDefined (class)">InstanceMethodDefined</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Module/InstanceMethodDefined.html#call-instance_method" title="ConvenientService::Utils::Module::InstanceMethodDefined#call (method)">call</a></span></span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -869,7 +846,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:03:59 2025 by
+  Generated on Sat Dec 13 03:19:56 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

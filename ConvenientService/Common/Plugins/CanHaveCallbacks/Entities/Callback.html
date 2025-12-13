@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
@@ -100,7 +77,7 @@
             <li class="next">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</li>
           
         </ul>
-        <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#" class="inheritanceTree">show all</a>
+        <a href="#" class="inheritanceTree">show all</a>
       
     </dd>
   </dl>
@@ -126,13 +103,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#block-instance_method" title="#block (instance method)">#<strong>block</strong>  &#x21d2; Object </a>
+      <a href="#block-instance_method" title="#block (instance method)">#<strong>block</strong>  &#x21d2; Object </a>
     
 
     
@@ -160,7 +137,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#source_location-instance_method" title="#source_location (instance method)">#<strong>source_location</strong>  &#x21d2; Object </a>
+      <a href="#source_location-instance_method" title="#source_location (instance method)">#<strong>source_location</strong>  &#x21d2; Object </a>
     
 
     
@@ -188,7 +165,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#types-instance_method" title="#types (instance method)">#<strong>types</strong>  &#x21d2; Object </a>
+      <a href="#types-instance_method" title="#types (instance method)">#<strong>types</strong>  &#x21d2; Object </a>
     
 
     
@@ -221,7 +198,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -229,7 +206,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
+      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
     
 
     
@@ -251,7 +228,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Object </a>
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Object </a>
     
 
     
@@ -276,7 +253,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#call_in_context-instance_method" title="#call_in_context (instance method)">#<strong>call_in_context</strong>(context)  &#x21d2; ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback </a>
+      <a href="#call_in_context-instance_method" title="#call_in_context (instance method)">#<strong>call_in_context</strong>(context)  &#x21d2; ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback </a>
     
 
     
@@ -298,7 +275,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#call_in_context_with_arguments-instance_method" title="#call_in_context_with_arguments (instance method)">#<strong>call_in_context_with_arguments</strong>(context, *args, **kwargs, &amp;block)  &#x21d2; ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback </a>
+      <a href="#call_in_context_with_arguments-instance_method" title="#call_in_context_with_arguments (instance method)">#<strong>call_in_context_with_arguments</strong>(context, *args, **kwargs, &amp;block)  &#x21d2; ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback </a>
     
 
     
@@ -320,7 +297,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#call_in_context_with_value_and_arguments-instance_method" title="#call_in_context_with_value_and_arguments (instance method)">#<strong>call_in_context_with_value_and_arguments</strong>(context, value, *args, **kwargs, &amp;block)  &#x21d2; ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback </a>
+      <a href="#call_in_context_with_value_and_arguments-instance_method" title="#call_in_context_with_value_and_arguments (instance method)">#<strong>call_in_context_with_value_and_arguments</strong>(context, value, *args, **kwargs, &amp;block)  &#x21d2; ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback </a>
     
 
     
@@ -342,7 +319,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(types:, block:, **extra_kwargs)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(types:, block:, **extra_kwargs)  &#x21d2; void </a>
     
 
     
@@ -366,7 +343,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#source_location_joined_by_colon-instance_method" title="#source_location_joined_by_colon (instance method)">#<strong>source_location_joined_by_colon</strong>  &#x21d2; String </a>
+      <a href="#source_location_joined_by_colon-instance_method" title="#source_location_joined_by_colon (instance method)">#<strong>source_location_joined_by_colon</strong>  &#x21d2; String </a>
     
 
     
@@ -388,7 +365,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/Callback.html#to_proc-instance_method" title="#to_proc (instance method)">#<strong>to_proc</strong>  &#x21d2; Proc </a>
+      <a href="#to_proc-instance_method" title="#to_proc (instance method)">#<strong>to_proc</strong>  &#x21d2; Proc </a>
     
 
     
@@ -484,7 +461,7 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>types:</span><span class='comma'>,</span> <span class='label'>block:</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span><span class='rparen'>)</span>
-  <span class='ivar'>@types</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/TypeCollection.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection (class)">TypeCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/TypeCollection.html#initialize-instance_method" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>types:</span> <span class='id identifier rubyid_types'>types</span><span class='rparen'>)</span>
+  <span class='ivar'>@types</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Entities.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/TypeCollection.html" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection (class)">TypeCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="TypeCollection.html#initialize-instance_method" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::TypeCollection#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>types:</span> <span class='id identifier rubyid_types'>types</span><span class='rparen'>)</span>
   <span class='ivar'>@block</span> <span class='op'>=</span> <span class='id identifier rubyid_block'>block</span>
   <span class='ivar'>@source_location</span> <span class='op'>=</span> <span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:source_location</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_source_location'>source_location</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
@@ -778,7 +755,7 @@
       <div class="method_details ">
   <h3 class="signature " id="call_in_context-instance_method">
   
-    #<strong>call_in_context</strong>(context)  &#x21d2; <tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt> 
+    #<strong>call_in_context</strong>(context)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt> 
   
 
   
@@ -817,7 +794,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt>)</span>
       
       
       
@@ -849,7 +826,7 @@
       <div class="method_details ">
   <h3 class="signature " id="call_in_context_with_arguments-instance_method">
   
-    #<strong>call_in_context_with_arguments</strong>(context, *args, **kwargs, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt> 
+    #<strong>call_in_context_with_arguments</strong>(context, *args, **kwargs, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt> 
   
 
   
@@ -921,7 +898,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt>)</span>
       
       
       
@@ -953,7 +930,7 @@
       <div class="method_details ">
   <h3 class="signature " id="call_in_context_with_value_and_arguments-instance_method">
   
-    #<strong>call_in_context_with_value_and_arguments</strong>(context, value, *args, **kwargs, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt> 
+    #<strong>call_in_context_with_value_and_arguments</strong>(context, value, *args, **kwargs, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt> 
   
 
   
@@ -1040,7 +1017,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/CanHaveCallbacks/Entities/" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="" title="ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback (class)">ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Callback</a></span></tt>)</span>
       
       
       
@@ -1178,7 +1155,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:07 2025 by
+  Generated on Sat Dec 13 03:20:04 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

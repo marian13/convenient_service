@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../class_list.html?1"></iframe>
@@ -94,7 +71,7 @@
   
   <dl>
       <dt>Extended by:</dt>
-      <dd><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/" title="ConvenientService::Dependencies::Queries (module)">Queries</a></span></dd>
+      <dd><span class='object_link'><a href="" title="ConvenientService::Dependencies::Queries (module)">Queries</a></span></dd>
   </dl>
   
   
@@ -104,7 +81,7 @@
   
   <dl>
     <dt>Included in:</dt>
-    <dd><span class='object_link'><a href="../Dependencies.html" title="ConvenientService::Dependencies (module)">ConvenientService::Dependencies</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/" title="ConvenientService::Dependencies::Queries (module)">Queries</a></span></dd>
+    <dd><span class='object_link'><a href="../Dependencies.html" title="ConvenientService::Dependencies (module)">ConvenientService::Dependencies</a></span>, <span class='object_link'><a href="" title="ConvenientService::Dependencies::Queries (module)">Queries</a></span></dd>
   </dl>
   
 
@@ -140,7 +117,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -148,7 +125,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#active_model-instance_method" title="#active_model (instance method)">#<strong>active_model</strong>  &#x21d2; ConvenientService::Dependencies::Queries::Gems::ActiveModel </a>
+      <a href="#active_model-instance_method" title="#active_model (instance method)">#<strong>active_model</strong>  &#x21d2; ConvenientService::Dependencies::Queries::Gems::ActiveModel </a>
     
 
     
@@ -170,7 +147,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#appraisal_name-instance_method" title="#appraisal_name (instance method)">#<strong>appraisal_name</strong>  &#x21d2; String </a>
+      <a href="#appraisal_name-instance_method" title="#appraisal_name (instance method)">#<strong>appraisal_name</strong>  &#x21d2; String </a>
     
 
     
@@ -192,7 +169,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#appraisal_name_for_coverage-instance_method" title="#appraisal_name_for_coverage (instance method)">#<strong>appraisal_name_for_coverage</strong>  &#x21d2; String </a>
+      <a href="#appraisal_name_for_coverage-instance_method" title="#appraisal_name_for_coverage (instance method)">#<strong>appraisal_name_for_coverage</strong>  &#x21d2; String </a>
     
 
     
@@ -214,7 +191,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#logger-instance_method" title="#logger (instance method)">#<strong>logger</strong>  &#x21d2; ConvenientService::Dependencies::Queries::Gems::Logger </a>
+      <a href="#logger-instance_method" title="#logger (instance method)">#<strong>logger</strong>  &#x21d2; ConvenientService::Dependencies::Queries::Gems::Logger </a>
     
 
     
@@ -236,7 +213,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#paint-instance_method" title="#paint (instance method)">#<strong>paint</strong>  &#x21d2; ConvenientService::Dependencies::Queries::Gems::Paint </a>
+      <a href="#paint-instance_method" title="#paint (instance method)">#<strong>paint</strong>  &#x21d2; ConvenientService::Dependencies::Queries::Gems::Paint </a>
     
 
     
@@ -258,7 +235,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_active_model_validations_standard_config_option-instance_method" title="#require_active_model_validations_standard_config_option (instance method)">#<strong>require_active_model_validations_standard_config_option</strong>  &#x21d2; Boolean </a>
+      <a href="#require_active_model_validations_standard_config_option-instance_method" title="#require_active_model_validations_standard_config_option (instance method)">#<strong>require_active_model_validations_standard_config_option</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -280,7 +257,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_alias-instance_method" title="#require_alias (instance method)">#<strong>require_alias</strong>  &#x21d2; Boolean </a>
+      <a href="#require_alias-instance_method" title="#require_alias (instance method)">#<strong>require_alias</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -302,7 +279,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_amazing_print_inspect_standard_config_option-instance_method" title="#require_amazing_print_inspect_standard_config_option (instance method)">#<strong>require_amazing_print_inspect_standard_config_option</strong>  &#x21d2; Boolean </a>
+      <a href="#require_amazing_print_inspect_standard_config_option-instance_method" title="#require_amazing_print_inspect_standard_config_option (instance method)">#<strong>require_amazing_print_inspect_standard_config_option</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -324,7 +301,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_assigns_attributes_in_constructor_using_active_model_attribute_assignment_plugin-instance_method" title="#require_assigns_attributes_in_constructor_using_active_model_attribute_assignment_plugin (instance method)">#<strong>require_assigns_attributes_in_constructor_using_active_model_attribute_assignment_plugin</strong>  &#x21d2; Boolean </a>
+      <a href="#require_assigns_attributes_in_constructor_using_active_model_attribute_assignment_plugin-instance_method" title="#require_assigns_attributes_in_constructor_using_active_model_attribute_assignment_plugin (instance method)">#<strong>require_assigns_attributes_in_constructor_using_active_model_attribute_assignment_plugin</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -346,7 +323,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_assigns_attributes_in_constructor_using_dry_initializer_plugin-instance_method" title="#require_assigns_attributes_in_constructor_using_dry_initializer_plugin (instance method)">#<strong>require_assigns_attributes_in_constructor_using_dry_initializer_plugin</strong>  &#x21d2; Boolean </a>
+      <a href="#require_assigns_attributes_in_constructor_using_dry_initializer_plugin-instance_method" title="#require_assigns_attributes_in_constructor_using_dry_initializer_plugin (instance method)">#<strong>require_assigns_attributes_in_constructor_using_dry_initializer_plugin</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -368,7 +345,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_awesome_print_inspect_standard_config_option-instance_method" title="#require_awesome_print_inspect_standard_config_option (instance method)">#<strong>require_awesome_print_inspect_standard_config_option</strong>  &#x21d2; Boolean </a>
+      <a href="#require_awesome_print_inspect_standard_config_option-instance_method" title="#require_awesome_print_inspect_standard_config_option (instance method)">#<strong>require_awesome_print_inspect_standard_config_option</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -391,7 +368,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_development_tools-instance_method" title="#require_development_tools (instance method)">#<strong>require_development_tools</strong>(amazing_print: false, awesome_print: true)  &#x21d2; Boolean </a>
+      <a href="#require_development_tools-instance_method" title="#require_development_tools (instance method)">#<strong>require_development_tools</strong>(amazing_print: false, awesome_print: true)  &#x21d2; Boolean </a>
     
 
     
@@ -413,7 +390,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_dry_examples-instance_method" title="#require_dry_examples (instance method)">#<strong>require_dry_examples</strong>(version: &quot;&quot;)  &#x21d2; Boolean </a>
+      <a href="#require_dry_examples-instance_method" title="#require_dry_examples (instance method)">#<strong>require_dry_examples</strong>(version: &quot;&quot;)  &#x21d2; Boolean </a>
     
 
     
@@ -436,7 +413,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_dry_initializer_standard_config_option-instance_method" title="#require_dry_initializer_standard_config_option (instance method)">#<strong>require_dry_initializer_standard_config_option</strong>  &#x21d2; Boolean </a>
+      <a href="#require_dry_initializer_standard_config_option-instance_method" title="#require_dry_initializer_standard_config_option (instance method)">#<strong>require_dry_initializer_standard_config_option</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -458,7 +435,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_has_attributes_using_active_model_attributes_plugin-instance_method" title="#require_has_attributes_using_active_model_attributes_plugin (instance method)">#<strong>require_has_attributes_using_active_model_attributes_plugin</strong>  &#x21d2; Boolean </a>
+      <a href="#require_has_attributes_using_active_model_attributes_plugin-instance_method" title="#require_has_attributes_using_active_model_attributes_plugin (instance method)">#<strong>require_has_attributes_using_active_model_attributes_plugin</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -480,7 +457,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_has_j_send_result_params_validations_using_active_model_validations_plugin-instance_method" title="#require_has_j_send_result_params_validations_using_active_model_validations_plugin (instance method)">#<strong>require_has_j_send_result_params_validations_using_active_model_validations_plugin</strong>  &#x21d2; Boolean </a>
+      <a href="#require_has_j_send_result_params_validations_using_active_model_validations_plugin-instance_method" title="#require_has_j_send_result_params_validations_using_active_model_validations_plugin (instance method)">#<strong>require_has_j_send_result_params_validations_using_active_model_validations_plugin</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -502,7 +479,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_has_j_send_result_params_validations_using_dry_validation_plugin-instance_method" title="#require_has_j_send_result_params_validations_using_dry_validation_plugin (instance method)">#<strong>require_has_j_send_result_params_validations_using_dry_validation_plugin</strong>  &#x21d2; Boolean </a>
+      <a href="#require_has_j_send_result_params_validations_using_dry_validation_plugin-instance_method" title="#require_has_j_send_result_params_validations_using_dry_validation_plugin (instance method)">#<strong>require_has_j_send_result_params_validations_using_dry_validation_plugin</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -524,7 +501,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_has_memoization_using_memo_wise_plugin-instance_method" title="#require_has_memoization_using_memo_wise_plugin (instance method)">#<strong>require_has_memoization_using_memo_wise_plugin</strong>  &#x21d2; Object </a>
+      <a href="#require_has_memoization_using_memo_wise_plugin-instance_method" title="#require_has_memoization_using_memo_wise_plugin (instance method)">#<strong>require_has_memoization_using_memo_wise_plugin</strong>  &#x21d2; Object </a>
     
 
     
@@ -546,7 +523,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_memo_wise_standard_config_option-instance_method" title="#require_memo_wise_standard_config_option (instance method)">#<strong>require_memo_wise_standard_config_option</strong>  &#x21d2; Boolean </a>
+      <a href="#require_memo_wise_standard_config_option-instance_method" title="#require_memo_wise_standard_config_option (instance method)">#<strong>require_memo_wise_standard_config_option</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -568,7 +545,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_rails_examples-instance_method" title="#require_rails_examples (instance method)">#<strong>require_rails_examples</strong>(version: &quot;&quot;)  &#x21d2; Boolean </a>
+      <a href="#require_rails_examples-instance_method" title="#require_rails_examples (instance method)">#<strong>require_rails_examples</strong>(version: &quot;&quot;)  &#x21d2; Boolean </a>
     
 
     
@@ -591,7 +568,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_rspec_extentions-instance_method" title="#require_rspec_extentions (instance method)">#<strong>require_rspec_extentions</strong>  &#x21d2; Boolean </a>
+      <a href="#require_rspec_extentions-instance_method" title="#require_rspec_extentions (instance method)">#<strong>require_rspec_extentions</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -614,7 +591,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_standard_examples-instance_method" title="#require_standard_examples (instance method)">#<strong>require_standard_examples</strong>(version: &quot;&quot;)  &#x21d2; Boolean </a>
+      <a href="#require_standard_examples-instance_method" title="#require_standard_examples (instance method)">#<strong>require_standard_examples</strong>(version: &quot;&quot;)  &#x21d2; Boolean </a>
     
 
     
@@ -637,7 +614,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_test_tools-instance_method" title="#require_test_tools (instance method)">#<strong>require_test_tools</strong>  &#x21d2; Boolean </a>
+      <a href="#require_test_tools-instance_method" title="#require_test_tools (instance method)">#<strong>require_test_tools</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -659,7 +636,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#require_wraps_result_in_db_transaction_using_active_record_base_transaction_plugin-instance_method" title="#require_wraps_result_in_db_transaction_using_active_record_base_transaction_plugin (instance method)">#<strong>require_wraps_result_in_db_transaction_using_active_record_base_transaction_plugin</strong>  &#x21d2; Boolean </a>
+      <a href="#require_wraps_result_in_db_transaction_using_active_record_base_transaction_plugin-instance_method" title="#require_wraps_result_in_db_transaction_using_active_record_base_transaction_plugin (instance method)">#<strong>require_wraps_result_in_db_transaction_using_active_record_base_transaction_plugin</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -681,7 +658,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#rspec-instance_method" title="#rspec (instance method)">#<strong>rspec</strong>  &#x21d2; ConvenientService::Dependencies::Queries::RSpec </a>
+      <a href="#rspec-instance_method" title="#rspec (instance method)">#<strong>rspec</strong>  &#x21d2; ConvenientService::Dependencies::Queries::RSpec </a>
     
 
     
@@ -703,7 +680,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#ruby-instance_method" title="#ruby (instance method)">#<strong>ruby</strong>  &#x21d2; ConvenientService::Dependencies::Queries::Ruby </a>
+      <a href="#ruby-instance_method" title="#ruby (instance method)">#<strong>ruby</strong>  &#x21d2; ConvenientService::Dependencies::Queries::Ruby </a>
     
 
     
@@ -725,7 +702,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#support_byebug%3F-instance_method" title="#support_byebug? (instance method)">#<strong>support_byebug?</strong>  &#x21d2; Boolean </a>
+      <a href="#support_byebug%3F-instance_method" title="#support_byebug? (instance method)">#<strong>support_byebug?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -747,7 +724,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#support_has_j_send_result_params_validations_using_active_model_validations_plugin%3F-instance_method" title="#support_has_j_send_result_params_validations_using_active_model_validations_plugin? (instance method)">#<strong>support_has_j_send_result_params_validations_using_active_model_validations_plugin?</strong>  &#x21d2; Boolean </a>
+      <a href="#support_has_j_send_result_params_validations_using_active_model_validations_plugin%3F-instance_method" title="#support_has_j_send_result_params_validations_using_active_model_validations_plugin? (instance method)">#<strong>support_has_j_send_result_params_validations_using_active_model_validations_plugin?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -769,7 +746,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies/Queries.html#support_logger_non_integer_levels%3F-instance_method" title="#support_logger_non_integer_levels? (instance method)">#<strong>support_logger_non_integer_levels?</strong>  &#x21d2; Boolean </a>
+      <a href="#support_logger_non_integer_levels%3F-instance_method" title="#support_logger_non_integer_levels? (instance method)">#<strong>support_logger_non_integer_levels?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -3060,7 +3037,7 @@ Service.result
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:03:59 2025 by
+  Generated on Sat Dec 13 03:19:56 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>

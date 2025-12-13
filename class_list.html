@@ -4,9 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" />
     
-      <link rel="stylesheet" href="https://apidocs.convenientservice.org/css/full_list.css" type="text/css" media="screen" />
+      <link rel="stylesheet" href="css/full_list.css" type="text/css" media="screen" />
     
-      <link rel="stylesheet" href="https://apidocs.convenientservice.org/css/common.css" type="text/css" media="screen" />
+      <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" />
     
 
     
@@ -17,30 +17,7 @@
 
     <title>Class List</title>
     <base id="base_target" target="_parent" />
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div id="content">
       <div class="fixed_header">

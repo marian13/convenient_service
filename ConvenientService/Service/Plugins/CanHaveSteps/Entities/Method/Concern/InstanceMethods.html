@@ -25,30 +25,7 @@
   <script type="text/javascript" charset="utf-8" src="../../../../../../../js/app.js"></script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js">
-  (() => {
-    const createOpenInGitHubLinks = () => {
-      $('.method_details_list .source_code').each((_index, table) => {
-        const tableHTML = table.innerHTML;
-
-        const { file, line } = /# File '(?<file>.+?)', line (?<line>d+)/.exec(tableHTML).groups;
-
-        const span = document.createElement('span')
-
-        span.classList.add('openInGitHub')
-
-        span.style.fontSize = '0.9em';
-
-        span.innerHTML = `[<a href="https://github.com/marian13/convenient_service/blob/main/${file}#L${line}">On Github</a>]`;
-
-        table.before(span)
-      })
-    }
-
-    $(document).ready(() => createOpenInGitHubLinks());
-  })()
-</script>
-</head>
+  </head>
   <body>
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../../../class_list.html?1"></iframe>
@@ -115,13 +92,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#caller-instance_method" title="#caller (instance method)">#<strong>caller</strong>  &#x21d2; Object </a>
+      <a href="#caller-instance_method" title="#caller (instance method)">#<strong>caller</strong>  &#x21d2; Object </a>
     
 
     
@@ -149,7 +126,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#direction-instance_method" title="#direction (instance method)">#<strong>direction</strong>  &#x21d2; Object </a>
+      <a href="#direction-instance_method" title="#direction (instance method)">#<strong>direction</strong>  &#x21d2; Object </a>
     
 
     
@@ -177,7 +154,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#key-instance_method" title="#key (instance method)">#<strong>key</strong>  &#x21d2; Object </a>
+      <a href="#key-instance_method" title="#key (instance method)">#<strong>key</strong>  &#x21d2; Object </a>
     
 
     
@@ -205,7 +182,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; Object </a>
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; Object </a>
     
 
     
@@ -238,7 +215,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#" class="summary_toggle">collapse</a></small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -246,7 +223,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
+      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean<sup>?</sup> </a>
     
 
     
@@ -268,7 +245,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#alias%3F-instance_method" title="#alias? (instance method)">#<strong>alias?</strong>  &#x21d2; Boolean </a>
+      <a href="#alias%3F-instance_method" title="#alias? (instance method)">#<strong>alias?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -290,7 +267,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#define_output_in_container!-instance_method" title="#define_output_in_container! (instance method)">#<strong>define_output_in_container!</strong>(container, index:)  &#x21d2; Boolean </a>
+      <a href="#define_output_in_container!-instance_method" title="#define_output_in_container! (instance method)">#<strong>define_output_in_container!</strong>(container, index:)  &#x21d2; Boolean </a>
     
 
     
@@ -313,7 +290,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#has_organizer%3F-instance_method" title="#has_organizer? (instance method)">#<strong>has_organizer?</strong>  &#x21d2; Boolean </a>
+      <a href="#has_organizer%3F-instance_method" title="#has_organizer? (instance method)">#<strong>has_organizer?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -335,7 +312,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(key:, name:, caller:, direction:, organizer: nil)  &#x21d2; void </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(key:, name:, caller:, direction:, organizer: nil)  &#x21d2; void </a>
     
 
     
@@ -357,7 +334,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#organizer-instance_method" title="#organizer (instance method)">#<strong>organizer</strong>(raise_when_missing: true)  &#x21d2; ConvenientService::Service<sup>?</sup> </a>
+      <a href="#organizer-instance_method" title="#organizer (instance method)">#<strong>organizer</strong>(raise_when_missing: true)  &#x21d2; ConvenientService::Service<sup>?</sup> </a>
     
 
     
@@ -379,7 +356,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#proc%3F-instance_method" title="#proc? (instance method)">#<strong>proc?</strong>  &#x21d2; Boolean </a>
+      <a href="#proc%3F-instance_method" title="#proc? (instance method)">#<strong>proc?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -401,7 +378,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#raw%3F-instance_method" title="#raw? (instance method)">#<strong>raw?</strong>  &#x21d2; Boolean </a>
+      <a href="#raw%3F-instance_method" title="#raw? (instance method)">#<strong>raw?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -423,7 +400,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#to_arguments-instance_method" title="#to_arguments (instance method)">#<strong>to_arguments</strong>  &#x21d2; ConvenientService::Support::Arguments </a>
+      <a href="#to_arguments-instance_method" title="#to_arguments (instance method)">#<strong>to_arguments</strong>  &#x21d2; ConvenientService::Support::Arguments </a>
     
 
     
@@ -445,7 +422,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#to_kwargs-instance_method" title="#to_kwargs (instance method)">#<strong>to_kwargs</strong>  &#x21d2; Hash{Symbol =&gt; Object} </a>
+      <a href="#to_kwargs-instance_method" title="#to_kwargs (instance method)">#<strong>to_kwargs</strong>  &#x21d2; Hash{Symbol =&gt; Object} </a>
     
 
     
@@ -467,7 +444,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; String </a>
+      <a href="#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; String </a>
     
 
     
@@ -489,7 +466,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#usual%3F-instance_method" title="#usual? (instance method)">#<strong>usual?</strong>  &#x21d2; Boolean </a>
+      <a href="#usual%3F-instance_method" title="#usual? (instance method)">#<strong>usual?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -511,7 +488,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Method/Concern/InstanceMethods.html#value-instance_method" title="#value (instance method)">#<strong>value</strong>  &#x21d2; Object </a>
+      <a href="#value-instance_method" title="#value (instance method)">#<strong>value</strong>  &#x21d2; Object </a>
     
 
     
@@ -1580,7 +1557,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 13 03:04:01 2025 by
+  Generated on Sat Dec 13 03:19:58 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>
