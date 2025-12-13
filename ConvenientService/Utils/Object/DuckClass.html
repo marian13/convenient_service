@@ -10,9 +10,9 @@
   
 </title>
 
-  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/style.css" />
 
-  <link rel="stylesheet" href="../../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/common.css" />
 
 <script type="text/javascript">
   pathId = "ConvenientService::Utils::Object::DuckClass";
@@ -37,7 +37,7 @@
         <div id="menu">
   
     <a href="../../../_index.html">Index (D)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span>
+    <span class='title'><span class='object_link'><a href="../../../ConvenientService.html">Object</a></span></span>
      &raquo; 
     <span class="title">DuckClass</span>
   
@@ -69,17 +69,17 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName"><span class='object_link'><a href="../../Support/Command.html" title="ConvenientService::Support::Command (class)">Support::Command</a></span></span>
+      <span class="inheritName"><span class='object_link'><a href="../../Support/Command.html">Support::Command</a></span></span>
       
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next"><span class='object_link'><a href="../../Support/Command.html" title="ConvenientService::Support::Command (class)">Support::Command</a></span></li>
+            <li class="next"><span class='object_link'><a href="../../Support/Command.html">Support::Command</a></span></li>
           
             <li class="next">ConvenientService::Utils::Object::DuckClass</li>
           
         </ul>
-        <a href="#" class="inheritanceTree">show all</a>
+        <a href="/#">show all</a>
       
     </dd>
   </dl>
@@ -124,7 +124,7 @@
       <pre class="example code"><code>
 <span class='id identifier rubyid_object'>object</span> <span class='op'>=</span> <span class='const'>Person</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='comment'># || Person
 </span>
-<span class='kw'>if</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Module.html" title="ConvenientService::Utils::Module (module)">Module</a></span></span><span class='rparen'>)</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Module.html">Module</a></span></span><span class='rparen'>)</span>
   <span class='comment'>##
 </span>  <span class='comment'># class Person
 </span>  <span class='comment'>#   def self.foo
@@ -149,7 +149,7 @@
 <span class='comment'>##
 </span><span class='comment'># With `ConvenientService::Utils::Object.duck_class` it can be rewritten in the following way:
 </span><span class='comment'>#
-</span><span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_duck_class'><span class='object_link'><a href="../Object.html#duck_class-class_method" title="ConvenientService::Utils::Object.duck_class (method)">duck_class</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_method_defined?'>method_defined?</span><span class='lparen'>(</span><span class='symbol'>:foo</span><span class='rparen'>)</span></code></pre>
+</span><span class='const'><span class='object_link'><a href="../../../ConvenientService.html">duck_class</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_method_defined?'>method_defined?</span><span class='lparen'>(</span><span class='symbol'>:foo</span><span class='rparen'>)</span></code></pre>
     
       
         <h5 class="example_title"><div class='inline'><p>Avoid <code>if</code> condition for <code>Module#define_method</code>.</p>
@@ -158,7 +158,7 @@
       <pre class="example code"><code>
 <span class='id identifier rubyid_object'>object</span> <span class='op'>=</span> <span class='const'>Person</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='comment'># || Person
 </span>
-<span class='kw'>if</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Module.html" title="ConvenientService::Utils::Module (module)">Module</a></span></span><span class='rparen'>)</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Module.html">Module</a></span></span><span class='rparen'>)</span>
   <span class='comment'>##
 </span>  <span class='comment'># Defines class method `foo` in `Person` class.
 </span>  <span class='comment'>#
@@ -173,7 +173,7 @@
 <span class='comment'>##
 </span><span class='comment'># With `ConvenientService::Utils::Object.duck_class` it can be rewritten in the following way:
 </span><span class='comment'>#
-</span><span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='period'>.</span><span class='id identifier rubyid_duck_class'><span class='object_link'><a href="../Object.html#duck_class-class_method" title="ConvenientService::Utils::Object.duck_class (method)">duck_class</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='symbol'>:foo</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='symbol'>:bar</span> <span class='rbrace'>}</span></code></pre>
+</span><span class='const'><span class='object_link'><a href="../../../ConvenientService.html">duck_class</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='symbol'>:foo</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='symbol'>:bar</span> <span class='rbrace'>}</span></code></pre>
     
       
         <h5 class="example_title"><div class='inline'><p>Possible return values.</p>
@@ -188,19 +188,19 @@
 
 <span class='id identifier rubyid_person'>person</span> <span class='op'>=</span> <span class='const'>Person</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 
-<span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='op'>::</span><span class='const'>DuckClass</span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="#call-instance_method" title="ConvenientService::Utils::Object::DuckClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="../../../ConvenientService.html">call</a></span></span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
 <span class='comment'># =&gt; Integer
 </span>
-<span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='op'>::</span><span class='const'>DuckClass</span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="#call-instance_method" title="ConvenientService::Utils::Object::DuckClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="../../../ConvenientService.html">call</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='comment'># =&gt; String
 </span>
-<span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='op'>::</span><span class='const'>DuckClass</span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="#call-instance_method" title="ConvenientService::Utils::Object::DuckClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_person'>person</span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="../../../ConvenientService.html">call</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_person'>person</span><span class='rparen'>)</span>
 <span class='comment'># =&gt; Person
 </span>
-<span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='op'>::</span><span class='const'>DuckClass</span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="#call-instance_method" title="ConvenientService::Utils::Object::DuckClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='const'>Person</span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="../../../ConvenientService.html">call</a></span></span><span class='lparen'>(</span><span class='const'>Person</span><span class='rparen'>)</span>
 <span class='comment'># =&gt; #&lt;Class:Person&gt;
 </span>
-<span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></span><span class='op'>::</span><span class='const'>DuckClass</span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="#call-instance_method" title="ConvenientService::Utils::Object::DuckClass#call (method)">call</a></span></span><span class='lparen'>(</span><span class='const'>Musician</span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="../../../ConvenientService.html">call</a></span></span><span class='lparen'>(</span><span class='const'>Musician</span><span class='rparen'>)</span>
 <span class='comment'># =&gt; #&lt;Class:Musician&gt;</span></code></pre>
     
   </div>
@@ -225,13 +225,13 @@
 
 
 
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <h2>Instance Attribute Summary <small><a href="/#">collapse</a></small></h2>
   <ul class="summary">
     
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#object-instance_method" title="#object (instance method)">#<strong>object</strong>  &#x21d2; Object </a>
+      <a href="/#object-instance_method">#<strong>object</strong>  &#x21d2; Object </a>
     
 
     
@@ -263,7 +263,7 @@
   
     <h2>
       Instance Method Summary
-      <small><a href="#" class="summary_toggle">collapse</a></small>
+      <small><a href="/#">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -271,7 +271,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>  &#x21d2; Class </a>
+      <a href="/#call-instance_method">#<strong>call</strong>  &#x21d2; Class </a>
     
 
     
@@ -293,7 +293,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(object)  &#x21d2; DuckClass </a>
+      <a href="/#initialize-instance_method">#<strong>initialize</strong>(object)  &#x21d2; DuckClass </a>
     
 
     
@@ -327,15 +327,15 @@
   
   
   
-  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../Support/Command.html" title="ConvenientService::Support::Command (class)">Support::Command</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../../Support/Command.html#[]-class_method" title="ConvenientService::Support::Command.[] (method)">[]</a></span>, <span class='object_link'><a href="../../Support/Command.html#call-class_method" title="ConvenientService::Support::Command.call (method)">call</a></span></p>
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../../Support/Command.html">Support::Command</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../../Support/Command.html#[]-class_method">call</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(object)  &#x21d2; <tt><span class='object_link'><a href="" title="ConvenientService::Utils::Object::DuckClass (class)">DuckClass</a></span></tt> 
+    #<strong>initialize</strong>(object)  &#x21d2; <tt><span class='object_link'><a href="/" title=">DuckClass</a></span></tt> 
   
 
   
@@ -361,7 +361,7 @@
         <span class='name'>object</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../Object.html">Object</a></span></tt>)</span>
       
       
       
@@ -420,7 +420,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="object-instance_method">
   
-    #<strong>object</strong>  &#x21d2; <tt><span class='object_link'><a href="../Object.html" title="ConvenientService::Utils::Object (module)">Object</a></span></tt>  <span class="extras">(readonly)</span>
+    #<strong>object</strong>  &#x21d2; <tt><span class='object_link'><a href="../Object.html">(readonly)</span>
   
 
   
@@ -485,7 +485,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="call-instance_method">
   
-    #<strong>call</strong>  &#x21d2; <tt><span class='object_link'><a href="../Class.html" title="ConvenientService::Utils::Class (module)">Class</a></span></tt> 
+    #<strong>call</strong>  &#x21d2; <tt><span class='object_link'><a href="../Class.html">Class</a></span></tt> 
   
 
   
@@ -509,7 +509,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Class.html" title="ConvenientService::Utils::Class (module)">Class</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../Class.html">Class</a></span></tt>)</span>
       
       
       
@@ -558,8 +558,8 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Dec 12 23:39:11 2025 by
-  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  Generated on Sat Dec 13 01:02:52 2025 by
+  <a href="https://yardoc.org">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>
 
