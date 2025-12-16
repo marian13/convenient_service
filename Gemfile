@@ -35,7 +35,11 @@ gemspec
 # NOTE: Specify gem's dev dependencies in `Gemfile`.
 # - https://github.com/sidekiq/sidekiq/blob/main/Gemfile
 #
+# NOTE: `require "convenient_service/dependencies/only_queries"` does NOT work inside `Gemfile`.
+#
+# rubocop:disable Packaging/RequireRelativeHardcodingLib
 require_relative "lib/convenient_service/dependencies/only_queries"
+# rubocop:enable Packaging/RequireRelativeHardcodingLib
 
 ##
 # Used for pretty printing when debugging Ruby code. `amazing_print` is `awesome_print` successor.
