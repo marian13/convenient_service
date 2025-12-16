@@ -41,7 +41,11 @@
 <!-- logo:end -->
 
 <!-- general_description:start -->
-Yet another approach to revisit the service object pattern, but this time focusing on the unique, opinionated features.
+Manage complex business logic in Ruby applications using Service Objects with Results and Steps.
+
+Hide technical details with Configs, Concerns and Middlewares.
+
+Group related code with Features and Entries.
 <!-- general_description:end -->
 
 <!-- warning:start -->
