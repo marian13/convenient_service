@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Utils::Hash::Except, type: :standard do
         end
 
         it "copies hash" do
-          expect(command_result.object_id).not_to eq(hash.object_id)
+          expect(command_result).not_to equal(hash)
         end
       end
 
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Utils::Hash::Except, type: :standard do
         end
 
         it "copies hash" do
-          expect(command_result.object_id).not_to eq(hash.object_id)
+          expect(command_result).not_to equal(hash)
         end
       end
 
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Utils::Hash::Except, type: :standard do
         end
 
         it "copies hash" do
-          expect(command_result.object_id).not_to eq(hash.object_id)
+          expect(command_result).not_to equal(hash)
         end
       end
     end

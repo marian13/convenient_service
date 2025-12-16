@@ -524,7 +524,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
         specify do
-          expect(cache.scope(:foo).object_id).not_to eq(cache.scope(:foo).object_id)
+          expect(cache.scope(:foo)).not_to equal(cache.scope(:foo))
         end
       end
 
@@ -537,7 +537,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
         specify do
-          expect(cache.scope(:foo).object_id).to eq(cache.scope(:foo).object_id)
+          expect(cache.scope(:foo)).to equal(cache.scope(:foo))
         end
       end
 
@@ -551,7 +551,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
           specify do
-            expect(cache.scope(:foo).scope(:bar).object_id).not_to eq(cache.scope(:foo).scope(:bar).object_id)
+            expect(cache.scope(:foo).scope(:bar)).not_to equal(cache.scope(:foo).scope(:bar))
           end
         end
 
@@ -564,7 +564,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
           specify do
-            expect(cache.scope(:foo).scope(:bar).object_id).to eq(cache.scope(:foo).scope(:bar).object_id)
+            expect(cache.scope(:foo).scope(:bar)).to equal(cache.scope(:foo).scope(:bar))
           end
         end
       end
@@ -618,7 +618,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
         specify do
-          expect(cache.scope!(:foo).object_id).to eq(cache.scope!(:foo).object_id)
+          expect(cache.scope!(:foo)).to equal(cache.scope!(:foo))
         end
       end
 
@@ -631,7 +631,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
         specify do
-          expect(cache.scope!(:foo).object_id).to eq(cache.scope!(:foo).object_id)
+          expect(cache.scope!(:foo)).to equal(cache.scope!(:foo))
         end
       end
 
@@ -645,7 +645,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
           specify do
-            expect(cache.scope!(:foo).scope!(:bar).object_id).to eq(cache.scope!(:foo).scope!(:bar).object_id)
+            expect(cache.scope!(:foo).scope!(:bar)).to equal(cache.scope!(:foo).scope!(:bar))
           end
         end
 
@@ -658,7 +658,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
           specify do
-            expect(cache.scope!(:foo).scope!(:bar).object_id).to eq(cache.scope!(:foo).scope!(:bar).object_id)
+            expect(cache.scope!(:foo).scope!(:bar)).to equal(cache.scope!(:foo).scope!(:bar))
           end
         end
       end

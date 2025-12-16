@@ -736,7 +736,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                 cached_service_options = options
 
                 example.instance_exec(service_options, cached_service_options) do |service_options, cached_service_options|
-                  expect(service_options.object_id).to eq(cached_service_options.object_id)
+                  expect(service_options).to equal(cached_service_options)
                 end
 
                 mod = Module.new do
@@ -796,7 +796,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                     cached_service_options = options
 
                     example.instance_exec(service_options, cached_service_options) do |service_options, cached_service_options|
-                      expect(service_options.object_id).to eq(cached_service_options.object_id)
+                      expect(service_options).to equal(cached_service_options)
                     end
                   end
                 end
@@ -876,7 +876,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                   result_options = options
 
                   example.instance_exec(service_options, result_options) do |service_options, result_options|
-                    expect(result_options.object_id).to eq(service_options.object_id)
+                    expect(result_options).to equal(service_options)
                   end
                 end
 
@@ -906,7 +906,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                   cached_result_options = options
 
                   example.instance_exec(result_options, cached_result_options) do |result_options, cached_result_options|
-                    expect(result_options.object_id).to eq(cached_result_options.object_id)
+                    expect(result_options).to equal(cached_result_options)
                   end
                 end
 
@@ -971,7 +971,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                       result_options = options
 
                       example.instance_exec(service_options, result_options) do |service_options, result_options|
-                        expect(result_options.object_id).to eq(service_options.object_id)
+                        expect(result_options).to equal(service_options)
                       end
                     end
                   end
@@ -998,7 +998,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                       cached_result_options = options
 
                       example.instance_exec(result_options, cached_result_options) do |result_options, cached_result_options|
-                        expect(result_options.object_id).to eq(cached_result_options.object_id)
+                        expect(result_options).to equal(cached_result_options)
                       end
                     end
                   end
@@ -1028,7 +1028,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
           end
 
           it "returns same options as `entity`" do
-            expect(result_config.options.object_id).to eq(service_config.options.object_id)
+            expect(result_config.options).to equal(service_config.options)
           end
 
           specify do
@@ -1082,7 +1082,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                     data_options = options
 
                     example.instance_exec(result_options, data_options) do |result_options, data_options|
-                      expect(data_options.object_id).to eq(result_options.object_id)
+                      expect(data_options).to equal(result_options)
                     end
                   end
                 end
@@ -1115,7 +1115,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                     data_options = options
 
                     example.instance_exec(service_options, data_options) do |service_options, data_options|
-                      expect(data_options.object_id).to eq(service_options.object_id)
+                      expect(data_options).to equal(service_options)
                     end
                   end
                 end
@@ -1147,7 +1147,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                     cached_data_options = options
 
                     example.instance_exec(data_options, cached_data_options) do |data_options, cached_data_options|
-                      expect(data_options.object_id).to eq(cached_data_options.object_id)
+                      expect(data_options).to equal(cached_data_options)
                     end
                   end
                 end
@@ -1216,7 +1216,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                         data_options = options
 
                         example.instance_exec(result_options, data_options) do |result_options, data_options|
-                          expect(data_options.object_id).to eq(result_options.object_id)
+                          expect(data_options).to equal(result_options)
                         end
                       end
                     end
@@ -1246,7 +1246,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                         data_options = options
 
                         example.instance_exec(service_options, data_options) do |service_options, data_options|
-                          expect(data_options.object_id).to eq(service_options.object_id)
+                          expect(data_options).to equal(service_options)
                         end
                       end
                     end
@@ -1274,7 +1274,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
                       cached_result_options = options
 
                       example.instance_exec(result_options, cached_result_options) do |result_options, cached_result_options|
-                        expect(result_options.object_id).to eq(cached_result_options.object_id)
+                        expect(result_options).to equal(cached_result_options)
                       end
                     end
                   end
@@ -1307,11 +1307,11 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
           end
 
           it "returns same options as one time nested `entity`" do
-            expect(data_config.options.object_id).to eq(result_config.options.object_id)
+            expect(data_config.options).to equal(result_config.options)
           end
 
           it "returns same options as `entity`" do
-            expect(data_config.options.object_id).to eq(service_config.options.object_id)
+            expect(data_config.options).to equal(service_config.options)
           end
 
           specify do

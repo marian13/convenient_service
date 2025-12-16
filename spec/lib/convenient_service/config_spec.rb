@@ -379,7 +379,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
             end
 
             it "returns `self`" do
-              expect(config.base.object_id).to eq(config.object_id)
+              expect(config.base).to equal(config)
             end
           end
 

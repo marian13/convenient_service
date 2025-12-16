@@ -158,7 +158,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         let(:env) { {} }
 
         it "returns `env`" do
-          expect(stack_builder.call(env).object_id).to eq(env.object_id)
+          expect(stack_builder.call(env)).to equal(env)
         end
       end
 

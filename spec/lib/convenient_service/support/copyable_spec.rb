@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Support::Copyable, type: :standard do
       end
 
       it "returns new instance" do
-        expect(instance.copy.object_id).not_to eq(instance.object_id)
+        expect(instance.copy).not_to equal(instance)
       end
 
       context "when `overrides[:args]` is passed" do

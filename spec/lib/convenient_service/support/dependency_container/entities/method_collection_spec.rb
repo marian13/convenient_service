@@ -249,7 +249,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
 
     describe "#<<" do
       it "returns self" do
-        expect((method_collection << method).object_id).to eq(method_collection.object_id)
+        expect((method_collection << method)).to equal(method_collection)
       end
 
       it "appends method to method collection" do
@@ -283,7 +283,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
 
     describe "#clear" do
       it "returns self" do
-        expect(method_collection.clear.object_id).to eq(method_collection.object_id)
+        expect(method_collection.clear).to equal(method_collection)
       end
 
       context "when method collection has methods" do

@@ -856,7 +856,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "does not instantiate intermediate results" do
-            expect(result.with_failure_fallback.object_id).to eq(result.with_failure_fallback.with_failure_fallback.object_id)
+            expect(result.with_failure_fallback).to equal(result.with_failure_fallback.with_failure_fallback)
           end
         end
 
@@ -866,7 +866,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "does not instantiate intermediate results" do
-            expect(result.with_failure_fallback.with_failure_fallback.object_id).to eq(result.with_failure_fallback.with_failure_fallback.with_failure_fallback.object_id)
+            expect(result.with_failure_fallback.with_failure_fallback).to equal(result.with_failure_fallback.with_failure_fallback.with_failure_fallback)
           end
         end
       end
@@ -1333,7 +1333,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "does not instantiate intermediate results" do
-            expect(result.with_error_fallback.object_id).to eq(result.with_error_fallback.with_error_fallback.object_id)
+            expect(result.with_error_fallback).to equal(result.with_error_fallback.with_error_fallback)
           end
         end
 
@@ -1343,7 +1343,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "does not instantiate intermediate results" do
-            expect(result.with_error_fallback.with_error_fallback.object_id).to eq(result.with_error_fallback.with_error_fallback.with_error_fallback.object_id)
+            expect(result.with_error_fallback.with_error_fallback).to equal(result.with_error_fallback.with_error_fallback.with_error_fallback)
           end
         end
       end

@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Commands::CreateEntity
         #
         it "overrides previous set sub entity class" do
           ConvenientService::Utils::Kernel.silence_warnings do
-            expect(sub_entity_class.object_id).not_to eq(overriden_sub_entity_class.object_id)
+            expect(sub_entity_class).not_to equal(overriden_sub_entity_class)
           end
         end
       end

@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Utils::Proc::Conjunct, type: :standard do
       end
 
       it "returns original proc (not copy)" do
-        expect(conjuction.object_id).to eq(first_proc.object_id)
+        expect(conjuction).to equal(first_proc)
       end
     end
 

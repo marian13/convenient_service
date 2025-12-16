@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Support::MethodParameters, type: :standard do
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
         specify do
-          expect(method_parameters.has_rest_kwargs?.object_id).to eq(method_parameters.has_rest_kwargs?.object_id)
+          expect(method_parameters.has_rest_kwargs?).to equal(method_parameters.has_rest_kwargs?)
         end
       end
 
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Support::MethodParameters, type: :standard do
         # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
         #
         specify do
-          expect(method_parameters.has_rest_kwargs?.object_id).to eq(method_parameters.has_rest_kwargs?.object_id)
+          expect(method_parameters.has_rest_kwargs?).to equal(method_parameters.has_rest_kwargs?)
         end
       end
     end

@@ -179,7 +179,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "caches its result" do
-        expect(status.to_s.object_id).to eq(status.to_s.object_id)
+        expect(status.to_s).to equal(status.to_s)
       end
     end
 
@@ -189,7 +189,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "caches its result" do
-        expect(status.to_sym.object_id).to eq(status.to_sym.object_id)
+        expect(status.to_sym).to equal(status.to_sym)
       end
     end
   end

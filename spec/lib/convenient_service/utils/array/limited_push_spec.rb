@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Utils::Array::LimitedPush, type: :standard do
         end
 
         it "returns modified original array" do
-          expect(util_result.object_id).to eq(array.object_id)
+          expect(util_result).to equal(array)
         end
       end
 
@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Utils::Array::LimitedPush, type: :standard do
         end
 
         it "returns modified original array" do
-          expect(util_result.object_id).to eq(array.object_id)
+          expect(util_result).to equal(array)
         end
       end
 
@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Utils::Array::LimitedPush, type: :standard do
         end
 
         it "returns modified original array" do
-          expect(util_result.object_id).to eq(array.object_id)
+          expect(util_result).to equal(array)
         end
       end
 

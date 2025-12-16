@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
         end
 
         it "returns `array` copy" do
-          expect(util_result.object_id).not_to eq(array.object_id)
+          expect(util_result).not_to equal(array)
         end
       end
 
@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
         end
 
         it "returns `array` copy" do
-          expect(util_result.object_id).not_to eq(array.object_id)
+          expect(util_result).not_to equal(array)
         end
       end
 
@@ -107,7 +107,7 @@ RSpec.describe ConvenientService::Utils::Array::Merge, type: :standard do
       let(:overrides) { {} }
 
       it "returns `array` copy" do
-        expect(util_result.object_id).not_to eq(array.object_id)
+        expect(util_result).not_to equal(array)
       end
     end
   end

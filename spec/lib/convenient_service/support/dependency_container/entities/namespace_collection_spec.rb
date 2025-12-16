@@ -110,7 +110,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
 
     describe "#<<" do
       it "returns self" do
-        expect((namespace_collection << namespace).object_id).to eq(namespace_collection.object_id)
+        expect((namespace_collection << namespace)).to equal(namespace_collection)
       end
 
       it "appends namespace to namespace collection" do
@@ -144,7 +144,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
 
     describe "#clear" do
       it "returns self" do
-        expect(namespace_collection.clear.object_id).to eq(namespace_collection.object_id)
+        expect(namespace_collection.clear).to equal(namespace_collection)
       end
 
       context "when namespace collection has namespaces" do

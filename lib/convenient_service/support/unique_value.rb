@@ -54,10 +54,13 @@ module ConvenientService
       #   - https://github.com/ruby/ruby/blob/v3_3_0/hash.c#L3719
       #   - https://belighted.com/blog/overriding-equals-equals
       #
+      #   NOTE: Avoid comparing object ids. Prefer `equal?`.
+      #   - https://bugs.ruby-lang.org/issues/15408
+      #
       def eql?(other)
         return unless other.instance_of?(self.class)
 
-        object_id == other.object_id
+        equal?(other)
       end
 
       ##

@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
       example_group "returned proc" do
         context "when called" do
           it "returns `self`" do
-            expect(namespace.body.call.object_id).to eq(namespace.object_id)
+            expect(namespace.body.call).to equal(namespace)
           end
         end
       end
