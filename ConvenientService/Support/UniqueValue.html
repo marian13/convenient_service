@@ -724,19 +724,19 @@
       <pre class="lines">
 
 
-57
-58
-59
 60
-61</pre>
+61
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/unique_value.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/unique_value.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_eql?'>eql?</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
 
-  <span class='id identifier rubyid_object_id'>object_id</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_object_id'>object_id</span>
+  <span class='id identifier rubyid_equal?'>equal?</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -799,12 +799,12 @@
       <pre class="lines">
 
 
-70
-71
-72</pre>
+73
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/unique_value.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/unique_value.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_hash'>hash</span>
   <span class='lbracket'>[</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='id identifier rubyid_label'>label</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_hash'>hash</span>
@@ -870,15 +870,15 @@
       <pre class="lines">
 
 
-77
-78
-79
 80
 81
-82</pre>
+82
+83
+84
+85</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/unique_value.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/unique_value.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_default_label'>default_label</span> <span class='kw'>if</span> <span class='id identifier rubyid_label'>label</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -896,7 +896,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Dec 16 20:13:57 2025 by
+  Generated on Tue Dec 16 20:54:31 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.2.9).
 </div>
