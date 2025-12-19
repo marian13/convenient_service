@@ -8,7 +8,7 @@
 # Kindly copied from `timbru31/docker-ruby-node`, but replaced `FROM`.
 # - https://github.com/timbru31/docker-ruby-node/blob/master/3.4/20/slim/Dockerfile
 #
-FROM ruby:4.0.0-preview2-slim
+FROM ruby:4.0.0-preview3-slim
 LABEL maintainer "Tim Brust <github@timbrust.de>"
 
 ARG REFRESHED_AT
