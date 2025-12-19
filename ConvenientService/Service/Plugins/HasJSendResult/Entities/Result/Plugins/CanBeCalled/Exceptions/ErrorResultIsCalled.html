@@ -216,14 +216,15 @@
 35
 36
 37
-38</pre>
+38
+39</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_called/exceptions.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize_with_kwargs'>initialize_with_kwargs</span><span class='lparen'>(</span><span class='label'>result:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='heredoc_beg'>&lt;&lt;~TEXT</span>
-<span class='tstring_content'>    An `error` result of service `</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils/Class.html" title="ConvenientService::Utils::Class (module)">Class</a></span></span><span class='period'>.</span><span class='id identifier rubyid_display_name'><span class='object_link'><a href="../../../../../../../../Utils/Class.html#display_name-class_method" title="ConvenientService::Utils::Class.display_name (method)">display_name</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>` is called.
+<span class='tstring_content'>    An `error` result of service `</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils/Class.html" title="ConvenientService::Utils::Class (module)">Class</a></span></span><span class='period'>.</span><span class='id identifier rubyid_display_name'><span class='object_link'><a href="../../../../../../../../Utils/Class.html#display_name-class_method" title="ConvenientService::Utils::Class.display_name (method)">display_name</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>` is called.
 </span><span class='tstring_content'>
 </span><span class='tstring_content'>    Only the `success` and `failure` results are expected to be called.
 </span><span class='tstring_content'>
@@ -233,7 +234,8 @@
 </span><span class='tstring_content'>
 </span><span class='tstring_content'>    If this `error` result is NOT expected, update the service logic.
 </span><span class='tstring_content'>
-</span><span class='tstring_content'>    </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_unsafe_message'>unsafe_message</span><span class='embexpr_end'>}</span><span class='tstring_content'>
+</span><span class='tstring_content'>    Original `error` result message:
+</span><span class='tstring_content'>    </span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../Utils/String.html" title="ConvenientService::Utils::String (module)">String</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tab'><span class='object_link'><a href="../../../../../../../../Utils/String.html#tab-class_method" title="ConvenientService::Utils::String.tab (method)">tab</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_unsafe_message'>unsafe_message</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>
 </span><span class='heredoc_end'>  TEXT
 </span>
   <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='rparen'>)</span>
@@ -248,7 +250,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Dec 19 14:57:53 2025 by
+  Generated on Fri Dec 19 20:50:34 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
