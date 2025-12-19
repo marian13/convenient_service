@@ -115,7 +115,10 @@ RSpec.describe "String representation", type: [:standard, :e2e] do
   end
 
   specify do
-    expect(data_instance.to_s).to eq("{foo: :bar, baz: :qux}")
+    ##
+    # NOTE: Older Rubies display hashes with rocket syntax.
+    #
+    expect(data_instance.to_s).to eq({foo: :bar, baz: :qux}.to_s)
   end
 
   specify do
