@@ -86,6 +86,32 @@ RSpec.describe ConvenientService::Utils::String, type: :standard do
     end
   end
 
+  describe ".tab" do
+    let(:string) { "foo\nbar\nbaz" }
+    let(:tab_size) { 4 }
+
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+    it "delegates to `ConvenientService::Utils::String::Tab.call`" do
+      expect(described_class::Tab)
+        .to receive(:call)
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[string], {tab_size: tab_size}, nil])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
+
+      described_class.tab(string, tab_size: tab_size)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+
+    it "returns `ConvenientService::Utils::String::Tab.call` value" do
+      expect(described_class.tab(string, tab_size: tab_size)).to eq(described_class::Tab.call(string, tab_size: tab_size))
+    end
+  end
+
   describe ".truncate" do
     let(:string) { "hello" }
     let(:truncate_at) { 4 }

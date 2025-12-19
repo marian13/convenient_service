@@ -30,7 +30,7 @@ module ConvenientService
       # @see https://github.com/deivid-rodriguez/byebug/issues/289
       #
       # @internal
-      #   NOTE: Ruby 3.5 does not ship with the `readline` by default. That is why `byebug` throws the following error:
+      #   NOTE: Ruby 4.0 does not ship with the `readline` by default. That is why `byebug` throws the following error:
       #     Sorry, you can't use byebug without Readline. To solve this, you need to
       #     rebuild Ruby with Readline support. If using Ubuntu, try `sudo apt-get
       #     install libreadline-dev` and then reinstall your Ruby.
@@ -42,7 +42,7 @@ module ConvenientService
       #   In other words, the full Docker image source should be copied, extended, and built locally.
       #
       def support_byebug?
-        ruby.mri? && ruby.version < 3.5
+        ruby.mri? && ruby.version < 4.0
       end
 
       ##

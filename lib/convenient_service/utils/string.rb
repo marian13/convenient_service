@@ -9,6 +9,7 @@ require_relative "string/camelize"
 require_relative "string/demodulize"
 require_relative "string/enclose"
 require_relative "string/split"
+require_relative "string/tab"
 require_relative "string/truncate"
 
 module ConvenientService
@@ -25,6 +26,10 @@ module ConvenientService
 
         def enclose(...)
           Enclose.call(...)
+        end
+
+        def tab(...)
+          Tab.call(...)
         end
 
         def split(...)

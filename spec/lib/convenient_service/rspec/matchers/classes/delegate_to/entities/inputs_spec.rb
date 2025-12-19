@@ -230,7 +230,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
       end
 
       it "caches its value" do
-        expect(inputs.printable_method.object_id).to eq(inputs.printable_method.object_id)
+        expect(inputs.printable_method).to equal(inputs.printable_method)
       end
     end
 
@@ -248,7 +248,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
       end
 
       it "caches its value" do
-        expect(inputs.printable_block_expectation.object_id).to eq(inputs.printable_block_expectation.object_id)
+        expect(inputs.printable_block_expectation).to equal(inputs.printable_block_expectation)
       end
     end
 

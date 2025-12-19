@@ -56,7 +56,7 @@ Gem::Specification.new do |spec|
   # Used for logging of the most critical Convenient Service parts, like config auto commitment.
   # - https://github.com/ruby/logger
   #
-  # Starting from Ruby 3.5, the `logger` is NO longer bundled with the stdlib.
+  # Starting from Ruby 4.0, the `logger` is NO longer bundled with the stdlib.
   # - https://github.com/sidekiq/sidekiq/pull/6320
   #
   spec.add_dependency "logger"

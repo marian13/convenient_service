@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Utils::String::Enclose, type: :standard do
     context "when `string` is empty" do
       let(:string) { "" }
 
-      it "returns empty array" do
+      it "returns empty string" do
         expect(util_result).to eq(char)
       end
     end
