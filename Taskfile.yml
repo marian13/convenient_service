@@ -167,7 +167,6 @@ tasks:
   #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.2
   #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.3
   #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.4
-  #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.5
   #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=4.0
   #   task docker:bash RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=9.4
   #   task docker:bash RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=10.0
@@ -208,7 +207,6 @@ tasks:
   #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.2 task docker:build
   #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.3 task docker:build
   #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.4 task docker:build
-  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.5 task docker:build
   #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=4.0 task docker:build
   #   RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=9.4 task docker:build
   #   RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=10.0 task docker:build

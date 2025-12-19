@@ -328,7 +328,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         end
 
         it "caches `method` return value" do
-          expect(method.value.object_id).to eq(method.value.object_id)
+          expect(method.value).to equal(method.value)
         end
       end
     end
