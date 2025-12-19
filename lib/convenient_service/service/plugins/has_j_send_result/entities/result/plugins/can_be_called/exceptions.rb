@@ -21,7 +21,7 @@ module ConvenientService
                     #
                     def initialize_with_kwargs(result:)
                       message = <<~TEXT
-                        An `error` result of service `#{ConvenientService::Utils::Class.display_name(result.service.class)}` is called.
+                        An `error` result of service `#{Utils::Class.display_name(result.service.class)}` is called.
 
                         Only the `success` and `failure` results are expected to be called.
 
@@ -31,7 +31,8 @@ module ConvenientService
 
                         If this `error` result is NOT expected, update the service logic.
 
-                        #{result.unsafe_message}
+                        Original `error` result message:
+                        #{Utils::String.tab(result.unsafe_message)}
                       TEXT
 
                       initialize(message)

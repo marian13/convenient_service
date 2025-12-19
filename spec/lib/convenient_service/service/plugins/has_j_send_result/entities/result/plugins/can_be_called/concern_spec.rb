@@ -127,7 +127,8 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
             If this `error` result is NOT expected, update the service logic.
 
-            #{result.unsafe_message}
+            Original `error` result message:
+              #{result.unsafe_message}
           TEXT
         end
 

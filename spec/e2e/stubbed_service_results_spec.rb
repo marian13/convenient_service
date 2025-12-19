@@ -1629,7 +1629,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
           end
         end
 
-        example_group "comparion" do
+        example_group "comparison" do
           let(:klass) do
             Class.new do
               attr_reader :id
