@@ -102,7 +102,7 @@ jobs:
     # - https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idcontinue-on-error
     # - https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#startswith
     #
-    continue-on-error: ${{ startsWith(matrix.ruby, "truffleruby") }}
+    # continue-on-error: ${{ startsWith(matrix.ruby, "truffleruby") }}
     strategy:
       matrix:
         gemfile:
