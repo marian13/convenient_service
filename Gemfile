@@ -325,7 +325,7 @@ gem "rubocop-thread_safety", "~> 0.5.1" if ConvenientService::Dependencies.ruby.
 # TODO: Add `.rubycritic` config.
 # - https://github.com/whitesmith/rubycritic
 #
-gem "rubycritic"
+gem "rubycritic" if ConvenientService::Dependencies.ruby.mri?
 
 ##
 # Used for parsing console input.
