@@ -28,7 +28,7 @@
 [![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/user?u=31435716&fan_landing=true)
 [![License: LGPL-3.0](https://img.shields.io/badge/license-LGPL--3.0-yellow.svg)](https://www.gnu.org/licenses/lgpl-3.0.html)
 
-[![GitHub Repo](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/marian13/convenient_service) [![GitLab Mirror](https://gitlab.com/marian13/convenient_service)](https://gitlab.com/marian13/convenient_service)
+[![GitHub Repo](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/marian13/convenient_service) [![GitLab Mirror](https://img.shields.io/badge/gitlab-mirror-orange?logo=gitlab)](https://gitlab.com/marian13/convenient_service) [![Codeberg Mirror](https://img.shields.io/badge/codeberg-mirror-green?logo=codeberg)](https://codeberg.org/marian13/convenient_service)
 
 <!-- NOTE: The "Visit Count" and the "Inline Docs" badges are commented since they are failing with errors most of the time -->
 <!-- ![visitors](https://visitor-badge.glitch.me/badge?page_id=marian13/convenient_service) -->
