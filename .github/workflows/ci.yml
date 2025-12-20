@@ -97,13 +97,13 @@ jobs:
     # https://github.com/ruby/setup-ruby/blob/master/ruby-builder-versions.json
     #
     runs-on: ubuntu-24.04
+    ##
+    # NOTE: Skip `truffleruby` failures.
+    # - https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idcontinue-on-error
+    # - https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#startswith
+    #
+    continue-on-error: ${{ startsWith(matrix.ruby, "truffleruby") }}
     strategy:
-      ##
-      # NOTE: Skip `truffleruby` failures.
-      # - https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idcontinue-on-error
-      # - https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#startswith
-      #
-      continue-on-error: ${{ startsWith(matrix.ruby, "truffleruby") }}
       matrix:
         gemfile:
           - Gemfile
