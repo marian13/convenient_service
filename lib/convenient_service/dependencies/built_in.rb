@@ -66,3 +66,12 @@ require "singleton"
 # @!visibility private
 #
 require "thread"
+
+##
+# @internal
+#   - https://ruby-doc.org/stdlib-2.7.0/libdoc/set/rdoc/Set.html
+#   - https://github.com/ruby/set
+#
+# @!visibility private
+#
+require "set"
