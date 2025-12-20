@@ -66,6 +66,12 @@ gem "awesome_print", "~> 1.9.2"
 gem "base64"
 
 ##
+# Used for benchmarking. See `benchmark` directory.
+# - https://github.com/ruby/benchmark
+#
+gem "benchmark", "~> 0.5.0"
+
+##
 # Used for benchmarking (iteration per second). See `benchmark` directory.
 # - https://github.com/evanphx/benchmark-ips
 # - https://www.johnnunemaker.com/how-to-benchmark-your-ruby-gem

@@ -156,7 +156,7 @@ jobs:
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
 
-    name: "Test Ruby `${{ matrix.ruby }}` with Gemfile `${{ matrix.gemfile }}`"
+    name: "Test Ruby `${{ matrix.ruby }}`"
     steps:
       - uses: actions/checkout@v2
       - name: "Set up Ruby `${{ matrix.ruby }}`"
@@ -284,7 +284,7 @@ jobs:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
       CONVENIENT_SERVICE_BENCHMARK: true
 
-    name: "Benchmark Ruby `${{ matrix.ruby }}` with Gemfile `${{ matrix.gemfile }}`"
+    name: "Benchmark Ruby `${{ matrix.ruby }}`"
     steps:
       - uses: actions/checkout@v2
       - name: "Set up Ruby `${{ matrix.ruby }}`"
@@ -300,6 +300,9 @@ jobs:
         continue-on-error: true
       - run: ruby benchmark/implementation/commit_config/profile.rb
         continue-on-error: true
+      ##
+      # TODO: Shorter output.
+      #
       # - run: ruby benchmark/implementation/empty_service/ips.rb
       #   continue-on-error: true
       - run: ruby benchmark/implementation/has_committed_config/ips.rb
@@ -310,8 +313,11 @@ jobs:
         continue-on-error: true
       - run: ruby benchmark/initial_load/require/get_process_mem.rb
         continue-on-error: true
-      - run: ruby benchmark/initial_load/require/memory_profiler_objects.rb
-        continue-on-error: true
+      ##
+      # TODO: Shorter output.
+      #
+      # - run: ruby benchmark/initial_load/require/memory_profiler_objects.rb
+      #   continue-on-error: true
       - run: ruby benchmark/load/deeply_nested_steps/bm.rb
         continue-on-error: true
       - run: ruby benchmark/load/deeply_nested_steps_with_rollbacks/bm.rb
