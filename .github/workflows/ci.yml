@@ -282,6 +282,7 @@ jobs:
           - "truffleruby-25.0"
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+      CONVENIENT_SERVICE_BENCHMARK: true
 
     name: "Benchmark Ruby `${{ matrix.ruby }}` with Gemfile `${{ matrix.gemfile }}`"
     steps:
