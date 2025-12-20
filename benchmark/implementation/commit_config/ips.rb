@@ -5,6 +5,8 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
+ENV["CONVENIENT_SERVICE_BENCHMARK"] = "true"
+
 require "bundler/setup"
 
 # require "convenient_service/dependencies/only_development_tools"

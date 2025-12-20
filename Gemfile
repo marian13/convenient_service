@@ -393,20 +393,22 @@ gem "yard", "~> 0.9.37"
 #
 gem "yard-junk", "~> 0.0.10" if ConvenientService::Dependencies.ruby.mri?
 
-##
-# The following gems are Convenient Service alternatives in some ways.
-# Used for performance comparisons.
-# See `benchmark/empty_service`.
-# - https://github.com/sunny/actor
-# - https://github.com/collectiveidea/interactor
-# - https://github.com/trailblazer/trailblazer-operation
-# - https://github.com/AaronLasseigne/active_interaction
-# - https://github.com/adomokos/light-service
-# - https://github.com/cypriss/mutations
-#
-gem "service_actor", "~> 3.7.0"
-gem "interactor", "~> 3.1.2"
-gem "trailblazer-operation", "~> 0.10.1"
-gem "active_interaction", "~> 5.5.0"
-gem "light-service", "~> 0.18.0"
-gem "mutations", "~> 0.9.1"
+if ENV["CONVENIENT_SERVICE_BENCHMARK"]
+  ##
+  # The following gems are Convenient Service alternatives in some ways.
+  # Used for performance comparisons.
+  # See `benchmark/empty_service`.
+  # - https://github.com/sunny/actor
+  # - https://github.com/collectiveidea/interactor
+  # - https://github.com/trailblazer/trailblazer-operation
+  # - https://github.com/AaronLasseigne/active_interaction
+  # - https://github.com/adomokos/light-service
+  # - https://github.com/cypriss/mutations
+  #
+  gem "service_actor", "~> 3.7.0"
+  gem "interactor", "~> 3.1.2"
+  gem "trailblazer-operation", "~> 0.10.1"
+  gem "active_interaction", "~> 5.5.0"
+  gem "light-service", "~> 0.18.0"
+  gem "mutations", "~> 0.9.1"
+end

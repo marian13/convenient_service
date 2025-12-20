@@ -5,6 +5,8 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
+ENV["CONVENIENT_SERVICE_BENCHMARK"] = "true"
+
 ##
 # - https://github.com/zombocom/get_process_mem
 # - https://github.com/zombocom/derailed_benchmarks/blob/v2.2.1/bin/derailed#L64

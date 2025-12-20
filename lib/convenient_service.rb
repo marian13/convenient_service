@@ -77,6 +77,15 @@ module ConvenientService
     end
 
     ##
+    # @api private
+    #
+    # @return [Boolean]
+    #
+    def benchmark?
+      ::ENV["CONVENIENT_SERVICE_BENCHMARK"] == "true"
+    end
+
+    ##
     # @api public
     #
     # @return [ConvenientService::Logger]

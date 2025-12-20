@@ -35,6 +35,28 @@ RSpec.describe ConvenientService, type: :standard do
       end
     end
 
+    describe ".benchmark?" do
+      context "when `ENV[\"CONVENIENT_SERVICE_BENCHMARK\"]` is NOT set to `false`" do
+        before do
+          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_BENCHMARK").and_return(nil)
+        end
+
+        it "return `false`" do
+          expect(described_class.benchmark?).to eq(false)
+        end
+      end
+
+      context "when `ENV[\"CONVENIENT_SERVICE_BENCHMARK\"]` is set to `\"true\"`" do
+        before do
+          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_BENCHMARK").and_return("true")
+        end
+
+        it "return `true`" do
+          expect(described_class.benchmark?).to eq(true)
+        end
+      end
+    end
+
     describe ".logger" do
       it "returns logger instance" do
         expect(described_class.logger).to eq(described_class::Logger.instance)

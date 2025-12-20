@@ -150,7 +150,8 @@ jobs:
           #
           # - "truffleruby-22.3"
           # - "truffleruby-24.0"
-          - ruby: "truffleruby-25.0"
+          - gemfile: Gemfile
+            ruby: "truffleruby-25.0"
             experimental: true
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
@@ -258,3 +259,73 @@ jobs:
         with:
           github-token: ${{ secrets.github_token }}
           parallel-finished: true
+
+  benchmark:
+    # needs:
+    #   - test
+    runs-on: ubuntu-24.04
+    continue-on-error: true
+    strategy:
+      matrix:
+        gemfile:
+          - Gemfile
+        ruby:
+          - 2.7
+          - "3.0"
+          - 3.1
+          - 3.2
+          - 3.3
+          - 3.4
+          - "4.0.0-preview3"
+          - "jruby-9.4"
+          - "jruby-10.0"
+          - "truffleruby-25.0"
+    env:
+      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+
+    name: "Benchmark Ruby `${{ matrix.ruby }}` with Gemfile `${{ matrix.gemfile }}`"
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Set up Ruby `${{ matrix.ruby }}`"
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Install Task (task runner)
+        uses: arduino/setup-task@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: ruby benchmark/implementation/commit_config/ips.rb
+        continue-on-error: true
+      - run: ruby benchmark/implementation/commit_config/profile.rb
+        continue-on-error: true
+      # - run: ruby benchmark/implementation/empty_service/ips.rb
+      #   continue-on-error: true
+      - run: ruby benchmark/implementation/has_committed_config/ips.rb
+        continue-on-error: true
+      - run: ruby benchmark/implementation/has_committed_config/profile.rb
+        continue-on-error: true
+      - run: ruby benchmark/implementation/regular_service/memory.rb
+        continue-on-error: true
+      - run: ruby benchmark/initial_load/require/get_process_mem.rb
+        continue-on-error: true
+      - run: ruby benchmark/initial_load/require/memory_profiler_objects.rb
+        continue-on-error: true
+      - run: ruby benchmark/load/deeply_nested_steps/bm.rb
+        continue-on-error: true
+      - run: ruby benchmark/load/deeply_nested_steps_with_rollbacks/bm.rb
+        continue-on-error: true
+      - run: ruby benchmark/load/deeply_nested_steps_without_rollbacks/bm.rb
+        continue-on-error: true
+      - run: ruby benchmark/load/many_connected_steps/bm.rb
+        continue-on-error: true
+      - run: ruby benchmark/load/many_included_modules/bm.rb
+        continue-on-error: true
+      - run: ruby benchmark/load/many_included_modules_with_missing_method/bm.rb
+        continue-on-error: true
+      - run: ruby benchmark/load/many_middlewares/bm.rb
+        continue-on-error: true
+      - run: ruby benchmark/load/many_nested_middlewares/bm.rb
+        continue-on-error: true
+      - run: ruby benchmark/load/many_sequential_steps/bm.rb
+        continue-on-error: true
