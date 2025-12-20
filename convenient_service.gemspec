@@ -60,4 +60,13 @@ Gem::Specification.new do |spec|
   # - https://github.com/sidekiq/sidekiq/pull/6320
   #
   spec.add_dependency "logger"
+
+  ##
+  # Used by step aware enumerables.
+  # - https://github.com/ruby/set
+  #
+  # Starting from Ruby 4.0, `Set` is a core class.
+  # - https://www.ruby-lang.org/en/news/2025/12/18/ruby-4-0-0-preview3-released
+  #
+  spec.add_dependency "set"
 end
