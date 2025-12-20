@@ -1383,6 +1383,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
     specify do
       expect(public_class_methods_of(ConvenientService)).to eq([
         :backtrace_cleaner, # public
+        :benchmark?, # private
         :debug?, # private
         :examples_root, # private
         :lib_root, # private
