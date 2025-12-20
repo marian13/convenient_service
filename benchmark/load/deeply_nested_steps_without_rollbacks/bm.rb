@@ -60,8 +60,7 @@ def build_service(nesting_levels, steps_per_level)
     nesting_levels.downto(1).reduce(SuccessService) do |composed_klass, nesting_level|
       Class.new.tap do |klass|
         klass.class_exec(composed_klass, nesting_level, steps_per_level) do |composed_klass, nesting_level, steps_per_level|
-          include ConvenientService::Standard::Config
-          include ConvenientService::Rollbacks::Config
+          include ConvenientService::Standard::Config.with(:rollbacks)
 
           attr_reader :nesting_level, :index
 
