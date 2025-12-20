@@ -31,26 +31,42 @@
 # - https://medium.com/swlh/alpine-slim-stretch-buster-jessie-bullseye-bookworm-what-are-the-differences-in-docker-62171ed4531d
 # - https://hub.docker.com/r/timbru31/ruby-node/tags
 #
-# NOTE: Gallium means Node.js 16.x.
-# https://github.com/nodejs/Release
-#
-FROM timbru31/ruby-node:3.0-slim-gallium
+FROM ruby:3.0-slim
 
 ##
 # NOTE: `bundle install` dependencies.
+#
+# NOTE: `curl` for `go-task`.
+# - https://taskfile.dev/docs/installation
 #
 RUN apt-get update -qq \
   && apt-get install --no-install-recommends -y git \
   && apt-get install --no-install-recommends -y make \
   && apt-get install --no-install-recommends -y gcc \
+  && apt-get install --no-install-recommends -y curl \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /gem
+##
+# NOTE: Installs `task`.
+# - https://taskfile.dev/docs/installation
+#
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/task/task/setup.deb.sh' | bash \
+  && apt install task --no-install-recommends -y \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /gem
-
-COPY . /gem
+##
+# NOTE: Intalls Node.js 20.x and `yarn`.
+# - https://github.com/timbru31/docker-ruby-node/blob/master/3.2/16/slim/Dockerfile
+#
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -\
+  && apt-get update -qq \
+  && apt-get install -qq --no-install-recommends nodejs \
+  && apt-get upgrade -qq \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*\
+  && npm install -g yarn@1
 
 ENV RUBY_ENGINE=ruby
 
@@ -64,17 +80,15 @@ ENV RUBY_ENGINE_VERSION=3.0
 ENV BUNDLE_GEMFILE=Gemfile.${RUBY_ENGINE}_${RUBY_ENGINE_VERSION}
 
 ##
-# NOTE: Installs `task`.
-# https://taskfile.dev/installation/#install-script
-#
-# NOTE: `task` is installed into `~/bin`. That is why `-b /bin` is used. See `echo ${PATH}` to debug.
-#
-RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /bin
-
-RUN task deps:install
-
-##
 # NOTE: Is used to check whether a command is executed inside a Docker container. See Rakefile for examples.
-# https://stackoverflow.com/a/65942222/12201472
+# - https://stackoverflow.com/a/65942222/12201472
 #
 ENV IN_DOCKER_CONTAINER=true
+
+RUN mkdir -p /gem
+
+WORKDIR /gem
+
+COPY . /gem
+
+RUN task deps:install

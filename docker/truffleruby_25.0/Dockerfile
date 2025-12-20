@@ -4,37 +4,39 @@
 ##
 
 ##
-# JRuby 9.4 (CRuby 3.1 compatible) with Node.js 16.x.
-# - https://www.jruby.org/download
+# TruffleRuby 25.0 (CRuby 3.3 compatible) with Node.js 16.x.
+# - https://github.com/oracle/truffleruby/releases/tag/graal-25.0.0
+# - https://github.com/graalvm/container/blob/master/truffleruby/README.md
+# - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
 #
 # NOTE: Linted by hadolint.
 #
-#   docker run --rm -i ghcr.io/hadolint/hadolint < docker/jruby_9.4/Dockerfile
+#   docker run --rm -i ghcr.io/hadolint/hadolint < docker/truffleruby_25.0/Dockerfile
 #
 # NOTE: A command to build image.
 #
 #   cd convenient_service
-#   cp Gemfile Gemfile.jruby_9.4
-#   docker build . -f docker/jruby_9.4/Dockerfile -t convenient_service:jruby_9.4
-#   # or `ENGINE=jruby RUBY_VERSION=9.4 task docker:build`
+#   cp Gemfile Gemfile.truffleruby-25.0
+#   docker build . -f docker/truffleruby-25.0/Dockerfile -t convenient_service:truffleruby-25.0
+#   # or `RUBY_ENGINE=truffleruby RUBY_VERSION=25.0 task docker:build`
 #
 # NOTE: A command to run bash in container.
 #
 #   cd convenient_service
-#   docker run --rm -it -v $(pwd):/gem convenient_service:jruby_9.4 bash
+#   docker run --rm -it -v $(pwd):/gem convenient_service:truffleruby-25.0 bash
 #   # or `task docker:bash RUBY_ENGINE=jruby RUBY_VERSION=9.4`
 #
 # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
 # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
-# `jruby:9.4` uses Ubuntu under the hood.
-# - https://hub.docker.com/_/jruby/tags
-# - https://github.com/jruby/docker-jruby/blob/master/9.4/jre8/Dockerfile
-# - https://github.com/adoptium/containers/blob/main/19/jdk/ubuntu/jammy/Dockerfile.releases.full#L20
+# - https://github.com/graalvm/container/pkgs/container/truffleruby-community/193003121?tag=25.0.0-debian
+# - https://github.com/orgs/graalvm/packages?repo_name=container
+# - https://github.com/graalvm/container/blob/master/truffleruby/Dockerfile.debian#L6
+# - https://www.graalvm.org/latest/docs/getting-started/container-images/
 #
-FROM jruby:9.4
+FROM ghcr.io/graalvm/truffleruby-community:25.0.0
 
 ##
-# NOTE: `git` is `bundle install` dependency.
+# NOTE: `git`, `make`, `gcc` are `bundle install` dependencies.
 #
 # NOTE: `curl` and `gnupg2` are Node.js 16.x dependencies.
 # - https://github.com/timbru31/docker-ruby-node/blob/master/3.2/16/slim/Dockerfile
@@ -42,37 +44,33 @@ FROM jruby:9.4
 # NOTE: `curl` for `go-task`.
 # - https://taskfile.dev/docs/installation
 #
-RUN apt-get update -qq \
-  && apt-get install --no-install-recommends -y git \
-  && apt-get install --no-install-recommends -y curl \
-  && apt-get install --no-install-recommends -y gnupg2 \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+RUN dnf install -y git \
+  && dnf install -y make \
+  && dnf install -y gcc \
+  && dnf install -y curl \
+  && dnf install -y gnupg2 \
+  && dnf clean all
 
 ##
 # NOTE: Installs `task`.
 # - https://taskfile.dev/docs/installation
 #
-RUN curl -1sLf 'https://dl.cloudsmith.io/public/task/task/setup.deb.sh' | bash \
-  && apt install task --no-install-recommends -y \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/task/task/setup.rpm.sh' | bash \
+  && dnf install -y task \
+  && dnf clean all
 
 ##
 # NOTE: Intalls Node.js 20.x and `yarn`.
 # - https://github.com/timbru31/docker-ruby-node/blob/master/3.2/16/slim/Dockerfile
 #
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -\
-  && apt-get update -qq \
-  && apt-get install -qq --no-install-recommends nodejs \
-  && apt-get upgrade -qq \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*\
+RUN curl -fsSL https://rpm.nodesource.com/setup_20.x | bash - \
+  && dnf install -y nodejs \
+  && dnf clean all \
   && npm install -g yarn@1
 
-ENV RUBY_ENGINE=jruby
+ENV RUBY_ENGINE=truffleruby
 
-ENV RUBY_ENGINE_VERSION=9.4
+ENV RUBY_ENGINE_VERSION=25.0
 
 ##
 # NOTE: Every container has its own copy of `Gemfile`. This way a developer doesn't need to delete `Gemfile.lock` all the time when changing containers.
