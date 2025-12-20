@@ -4,7 +4,7 @@
 ##
 
 ##
-# JRuby 10.0 (CRuby 3.4 compatible) with Node.js 16.x.
+# JRuby 10.0 (CRuby 3.4 compatible) with Node.js 20.x.
 # - https://www.jruby.org/download
 #
 # NOTE: Linted by hadolint.
@@ -22,7 +22,7 @@
 #
 #   cd convenient_service
 #   docker run --rm -it -v $(pwd):/gem convenient_service:jruby_10.0 bash
-#   # or `task docker:bash RUBY_ENGINE=jruby RUBY_VERSION=9.4`
+#   # or `task docker:bash RUBY_ENGINE=jruby RUBY_VERSION=10.0`
 #
 # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
 # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.

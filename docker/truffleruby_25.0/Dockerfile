@@ -4,7 +4,7 @@
 ##
 
 ##
-# TruffleRuby 25.0 (CRuby 3.3 compatible) with Node.js 16.x.
+# TruffleRuby 25.0 (CRuby 3.3 compatible) with Node.js 20.x.
 # - https://github.com/oracle/truffleruby/releases/tag/graal-25.0.0
 # - https://github.com/graalvm/container/blob/master/truffleruby/README.md
 # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
@@ -24,7 +24,7 @@
 #
 #   cd convenient_service
 #   docker run --rm -it -v $(pwd):/gem convenient_service:truffleruby-25.0 bash
-#   # or `task docker:bash RUBY_ENGINE=jruby RUBY_VERSION=9.4`
+#   # or `task docker:bash RUBY_ENGINE=truffleruby RUBY_VERSION=25.0`
 #
 # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
 # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.

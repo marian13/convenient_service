@@ -4,7 +4,7 @@
 ##
 
 ##
-# Ruby 3.0 with Node.js 16.x.
+# Ruby 3.0 with Node.js 20.x.
 #
 # NOTE: Linted by hadolint.
 #

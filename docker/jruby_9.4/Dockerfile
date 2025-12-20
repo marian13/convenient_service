@@ -4,7 +4,7 @@
 ##
 
 ##
-# JRuby 9.4 (CRuby 3.1 compatible) with Node.js 16.x.
+# JRuby 9.4 (CRuby 3.1 compatible) with Node.js 20.x.
 # - https://www.jruby.org/download
 #
 # NOTE: Linted by hadolint.
