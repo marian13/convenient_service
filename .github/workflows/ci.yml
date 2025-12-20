@@ -97,6 +97,7 @@ jobs:
     # https://github.com/ruby/setup-ruby/blob/master/ruby-builder-versions.json
     #
     runs-on: ubuntu-24.04
+    continue-on-error: ${{ startWith(matrix.ruby, "truffleruby") }}
     strategy:
       matrix:
         gemfile:
@@ -137,6 +138,7 @@ jobs:
           #
           # - "truffleruby-22.3"
           # - "truffleruby-24.0"
+          - "truffleruby-25.0"
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
 
