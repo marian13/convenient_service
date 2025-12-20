@@ -56,7 +56,7 @@ jobs:
     # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
     # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
     # That is why the well-known Ubuntu is used.
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
+    # - https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
     #
     runs-on: ubuntu-24.04
     name: Lint
@@ -74,8 +74,8 @@ jobs:
           bundler-cache: true
       ##
       # NOTE: Installs Task (task runner).
-      # https://taskfile.dev/installation/#github-actions
-      # https://github.com/go-task/task
+      # - https://taskfile.dev/installation/#github-actions
+      # - https://github.com/go-task/task
       #
       - name: Install Task (task runner)
         uses: arduino/setup-task@v1
@@ -91,18 +91,19 @@ jobs:
     # NOTE: If there are no memory, performance, or cost constraints, prefer to use as standard Linux distribution as it is possible.
     # In a general case, you simply won't have enough time to resolve all the "quirks" of more specific distributions if you are an application developer.
     # That is why the well-known Ubuntu is used.
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
+    # - https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
     #
     # NOTE: List of all possible Ruby, JRuby versions.
-    # https://github.com/ruby/setup-ruby/blob/master/ruby-builder-versions.json
+    # - https://github.com/ruby/setup-ruby/blob/master/ruby-builder-versions.json
     #
     runs-on: ubuntu-24.04
     ##
     # NOTE: Skip `truffleruby` failures.
+    # - https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations#handling-failures
     # - https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idcontinue-on-error
     # - https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#startswith
     #
-    # continue-on-error: ${{ startsWith(matrix.ruby, "truffleruby") }}
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         gemfile:
@@ -111,7 +112,7 @@ jobs:
           - 2.7
           ##
           # NOTE: 3.0 is wrapped by quotes in order to avoid misparsing it as integer.
-          # https://github.com/actions/runner/issues/849
+          # - https://github.com/actions/runner/issues/849
           #
           - "3.0"
           - 3.1
@@ -129,6 +130,12 @@ jobs:
           # - https://www.jruby.org/download
           #
           - "jruby-10.0"
+        experimental: [false]
+        ##
+        # NOTE: How to skip failures for specific Ruby versions?
+        # - https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations#handling-failures
+        #
+        include:
           ##
           # NOTE: TruffleRuby 22.3 aims CRuby 3.1 compatibility.
           # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
@@ -143,7 +150,8 @@ jobs:
           #
           # - "truffleruby-22.3"
           # - "truffleruby-24.0"
-          - "truffleruby-25.0"
+          - ruby: "truffleruby-25.0"
+            experimental: true
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
 
