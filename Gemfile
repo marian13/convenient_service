@@ -177,7 +177,7 @@ gem "gem-release"
 # Used as console/playground with loaded Convenient Service.
 # - https://github.com/ruby/irb
 #
-gem "irb", "~> 1.13.1"
+gem "irb", "~> 1.16.0"
 
 ##
 # Used to find missing documentation and to lint existing one.
