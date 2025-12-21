@@ -47,7 +47,7 @@ gemspec
 # Used for pretty printing when debugging Ruby code. `amazing_print` is `awesome_print` successor.
 # - https://github.com/amazing-print/amazing_print
 #
-gem "amazing_print", "~> 1.5.0"
+gem "amazing_print", "~> 2.0.0"
 
 ##
 # Used to run specs with multiple versions of gems.
