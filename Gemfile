@@ -35,11 +35,13 @@ gemspec
 # NOTE: Specify gem's dev dependencies in `Gemfile`.
 # - https://github.com/sidekiq/sidekiq/blob/main/Gemfile
 #
+# NOTE: Dependabot can NOT use `require "convenient_service/dependencies/only_queries"`.
 # NOTE: `require "convenient_service/dependencies/only_queries"` does NOT work inside `Gemfile`.
 #
 # rubocop:disable Packaging/RequireRelativeHardcodingLib
-require_relative "lib/convenient_service/dependencies/only_queries"
+# require_relative "lib/convenient_service/dependencies/only_queries"
 # rubocop:enable Packaging/RequireRelativeHardcodingLib
+##
 
 ##
 # Used for pretty printing when debugging Ruby code. `amazing_print` is `awesome_print` successor.
@@ -104,12 +106,12 @@ gem "break"
 # - https://github.com/deivid-rodriguez/byebug/tree/master/ext/byebug
 # - https://github.com/deivid-rodriguez/byebug/issues/179#issuecomment-152727003
 #
-if ConvenientService::Dependencies.support_byebug?
-  if ConvenientService::Dependencies.ruby.version >= 3.4
-    gem "byebug", "~> 12.0"
-  else
-    gem "byebug", "~> 10.0"
-  end
+# NOTE: Keep in sync with `ConvenientService::Dependenies.support_byebug?`.
+#
+if RUBY_VERSION < "3.4"
+  gem "byebug", "~> 10.0", platform: :mri
+elsif RUBY_VERSION < "4.0"
+  gem "byebug", "~> 12.0", platform: :mri
 end
 
 ##
@@ -121,7 +123,7 @@ end
 #
 # TODO: `commonmarker` v1 does NOT work with `yard-junk`.
 #
-gem "commonmarker", "~> 0.23.10" if ConvenientService::Dependencies.ruby.mri?
+gem "commonmarker", "~> 0.23.10", platform: :mri
 
 ##
 # Used for debugging CRuby code.
@@ -136,7 +138,7 @@ gem "commonmarker", "~> 0.23.10" if ConvenientService::Dependencies.ruby.mri?
 # NOTE: `debug` has C extensions, that is why it is NOT supported in JRuby.
 # - https://github.com/ruby/debug/tree/master/ext/debug
 #
-gem "debug" if ConvenientService::Dependencies.ruby.mri?
+gem "debug", platform: :mri
 
 ##
 # Used for measing memory of `require "convenient_service"`.
@@ -249,7 +251,7 @@ gem "pry", "~> 0.14.2"
 # - https://github.com/rack/rackup
 # - https://github.com/lsegal/yard/blob/v0.9.37/lib/yard/server/rack_adapter.rb#L6
 #
-if ConvenientService::Dependencies.ruby.version >= 3.4
+if RUBY_VERSION >= "3.4"
   gem "rackup", "~> 2.2.1"
 end
 
@@ -287,7 +289,7 @@ gem "rspec-benchmark", "~> 0.6.0"
 # Used for linting Ruby files.
 # - https://github.com/rubocop/rubocop
 #
-gem "rubocop", "~> 1.61.0" if ConvenientService::Dependencies.ruby.mri?
+gem "rubocop", "~> 1.61.0", platform: :mri
 
 ##
 # Used as a set of rules for rubocop for linting common performance issues in Ruby files.
@@ -306,32 +308,32 @@ gem "rubocop", "~> 1.61.0" if ConvenientService::Dependencies.ruby.mri?
 # - https://github.com/rubocop/rubocop-magic_numbers
 # - https://github.com/meetcleo/rubocop-magic_numbers
 #
-gem "rubocop-magic_numbers", "~> 0.4.0" if ConvenientService::Dependencies.ruby.mri?
+gem "rubocop-magic_numbers", "~> 0.4.0", platform: :mri
 
 ##
 # Used as a set of rules for rubocop for linting RSpec files.
 # - https://github.com/rubocop/rubocop-rspec
 #
-gem "rubocop-rspec", "~> 2.27.0" if ConvenientService::Dependencies.ruby.mri?
+gem "rubocop-rspec", "~> 2.27.0", platform: :mri
 
 ##
 # Used as a set of rules for rubocop for enforcing Ruby gem packaging best practices.
 # - https://github.com/utkarsh2102/rubocop-packaging
 #
-gem "rubocop-packaging", "~> 0.5.2" if ConvenientService::Dependencies.ruby.mri?
+gem "rubocop-packaging", "~> 0.5.2", platform: :mri
 
 ##
 # Used as a set of rules for rubocop for linting common thread-safety issues in Ruby files.
 # - https://github.com/rubocop/rubocop-thread_safety
 #
-gem "rubocop-thread_safety", "~> 0.5.1" if ConvenientService::Dependencies.ruby.mri?
+gem "rubocop-thread_safety", "~> 0.5.1", platform: :mri
 
 ##
 # Used for linting of Ruby files.
 # TODO: Add `.rubycritic` config.
 # - https://github.com/whitesmith/rubycritic
 #
-gem "rubycritic" if ConvenientService::Dependencies.ruby.mri?
+gem "rubycritic", platform: :mri
 
 ##
 # Used for parsing console input.
@@ -343,7 +345,7 @@ gem "tty-prompt"
 # Used as a set of rules for robocop for linting source files.
 # - https://github.com/testdouble/standard
 #
-gem "standard", "~> 1.34.0" if ConvenientService::Dependencies.ruby.mri?
+gem "standard", "~> 1.34.0", platform: :mri
 
 ##
 # Used to calculate coverage of Ruby code.
@@ -368,13 +370,13 @@ gem "shoulda-context", "~> 2.0.0"
 # - https://github.com/tmm1/stackprof
 # - https://www.johnnunemaker.com/how-to-benchmark-your-ruby-gem
 #
-gem "stackprof", "~> 0.2.25" if ConvenientService::Dependencies.ruby.mri?
+gem "stackprof", "~> 0.2.25", platform: :mri
 
 ##
 # Used inside examples (internally by Webrick).
 # - https://github.com/ruby/uri
 #
-if ConvenientService::Dependencies.ruby.version >= 3.0
+if RUBY_VERSION >= "3.0"
   gem "uri", "~> 0.13.0"
 else
   gem "uri", "0.10.0.2"
@@ -397,7 +399,7 @@ gem "yard", "~> 0.9.37"
 # Used for linting YARD docs.
 # - https://github.com/zverok/yard-junk
 #
-gem "yard-junk", "~> 0.0.10" if ConvenientService::Dependencies.ruby.mri?
+gem "yard-junk", "~> 0.0.10", platform: :mri
 
 if ENV["CONVENIENT_SERVICE_BENCHMARK"]
   ##
