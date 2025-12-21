@@ -62,7 +62,7 @@
       <div id="content"><h1>Module: ConvenientService::Common
   
   
-  
+  <span class="private note title">Private</span>
 </h1>
 <div class="box_info">
   
@@ -78,14 +78,63 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/common/plugins/can_be_copied/concern.rb<span class="defines">,<br />
-  lib/convenient_service/common/plugins/has_internals/concern.rb,<br /> lib/convenient_service/common/plugins/has_constructor/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/concern.rb,<br /> lib/convenient_service/common/plugins/has_instance_proxy/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/exceptions.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/middleware.rb,<br /> lib/convenient_service/common/plugins/can_have_user_provided_entity.rb,<br /> lib/convenient_service/common/plugins/has_instance_proxy/middleware.rb,<br /> lib/convenient_service/common/plugins/caches_return_value/middleware.rb,<br /> lib/convenient_service/common/plugins/can_utilize_finite_loop/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/entities/type.rb,<br /> lib/convenient_service/common/plugins/has_internals/entities/internals.rb,<br /> lib/convenient_service/common/plugins/can_utilize_finite_loop/constants.rb,<br /> lib/convenient_service/common/plugins/caches_constructor_arguments/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb,<br /> lib/convenient_service/common/plugins/can_have_not_passed_arguments/concern.rb,<br /> lib/convenient_service/common/plugins/cleans_exception_backtrace/middleware.rb,<br /> lib/convenient_service/common/plugins/caches_constructor_arguments/middleware.rb,<br /> lib/convenient_service/common/plugins/has_memoization/using_memo_wise/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/entities/type/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_user_provided_entity/exceptions.rb,<br /> lib/convenient_service/common/plugins/ensures_negated_j_send_result/middleware.rb,<br /> lib/convenient_service/common/plugins/has_internals/entities/internals/concern.rb,<br /> lib/convenient_service/common/plugins/has_constructor_without_initialize/concern.rb,<br /> lib/convenient_service/common/plugins/has_instance_proxy/entities/instance_proxy.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb,<br /> lib/convenient_service/common/plugins/has_j_send_result_duck_short_syntax/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/entities/callback_collection.rb,<br /> lib/convenient_service/common/plugins/has_attributes/using_active_model_attributes/concern.rb,<br /> lib/convenient_service/common/plugins/has_instance_proxy/commands/create_instance_proxy_class.rb,<br /> lib/convenient_service/common/plugins/has_internals/entities/internals/plugins/has_cache/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb,<br /> lib/convenient_service/common/plugins/assigns_attributes_in_constructor/using_dry_initializer/concern.rb,<br /> lib/convenient_service/common/plugins/has_attributes/using_active_model_attributes/patches/active_model_attributes.rb,<br /> lib/convenient_service/common/plugins/assigns_attributes_in_constructor/using_active_model_attribute_assignment/concern.rb,<br /> lib/convenient_service/common/plugins/assigns_attributes_in_constructor/using_active_model_attribute_assignment/middleware.rb</span>
+    <dd>lib/convenient_service/common.rb<span class="defines">,<br />
+  lib/convenient_service/common/plugins/can_be_copied/concern.rb,<br /> lib/convenient_service/common/plugins/has_internals/concern.rb,<br /> lib/convenient_service/common/plugins/has_constructor/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/concern.rb,<br /> lib/convenient_service/common/plugins/has_instance_proxy/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/exceptions.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/middleware.rb,<br /> lib/convenient_service/common/plugins/can_have_user_provided_entity.rb,<br /> lib/convenient_service/common/plugins/has_instance_proxy/middleware.rb,<br /> lib/convenient_service/common/plugins/caches_return_value/middleware.rb,<br /> lib/convenient_service/common/plugins/can_utilize_finite_loop/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/entities/type.rb,<br /> lib/convenient_service/common/plugins/has_internals/entities/internals.rb,<br /> lib/convenient_service/common/plugins/can_utilize_finite_loop/constants.rb,<br /> lib/convenient_service/common/plugins/caches_constructor_arguments/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/entities/callback.rb,<br /> lib/convenient_service/common/plugins/can_have_not_passed_arguments/concern.rb,<br /> lib/convenient_service/common/plugins/cleans_exception_backtrace/middleware.rb,<br /> lib/convenient_service/common/plugins/caches_constructor_arguments/middleware.rb,<br /> lib/convenient_service/common/plugins/has_memoization/using_memo_wise/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/entities/type/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_user_provided_entity/exceptions.rb,<br /> lib/convenient_service/common/plugins/ensures_negated_j_send_result/middleware.rb,<br /> lib/convenient_service/common/plugins/has_internals/entities/internals/concern.rb,<br /> lib/convenient_service/common/plugins/has_constructor_without_initialize/concern.rb,<br /> lib/convenient_service/common/plugins/has_instance_proxy/entities/instance_proxy.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/entities/type_collection.rb,<br /> lib/convenient_service/common/plugins/has_j_send_result_duck_short_syntax/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_callbacks/entities/callback_collection.rb,<br /> lib/convenient_service/common/plugins/has_attributes/using_active_model_attributes/concern.rb,<br /> lib/convenient_service/common/plugins/has_instance_proxy/commands/create_instance_proxy_class.rb,<br /> lib/convenient_service/common/plugins/has_internals/entities/internals/plugins/has_cache/concern.rb,<br /> lib/convenient_service/common/plugins/can_have_user_provided_entity/commands/find_or_create_entity.rb,<br /> lib/convenient_service/common/plugins/assigns_attributes_in_constructor/using_dry_initializer/concern.rb,<br /> lib/convenient_service/common/plugins/has_attributes/using_active_model_attributes/patches/active_model_attributes.rb,<br /> lib/convenient_service/common/plugins/assigns_attributes_in_constructor/using_active_model_attribute_assignment/concern.rb,<br /> lib/convenient_service/common/plugins/assigns_attributes_in_constructor/using_active_model_attribute_assignment/middleware.rb</span>
 </dd>
   </dl>
   
 </div>
 
-<h2>Defined Under Namespace</h2>
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This module is part of a private API.</strong>
+  You should avoid using this module if possible, as it may be removed or be changed in the future.
+</p>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Common plugins expected to be used via <span class='object_link'><a href="Plugins.html#Common-constant" title="ConvenientService::Plugins::Common (constant)">Plugins::Common</a></span> alias.</p>
+</div>
+  </div>
+
+<p>Intermediate module/namespace to access plugins that can be applied to several types of entities.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><h2>Defined Under Namespace</h2>
 <p class="children">
   
     
@@ -107,7 +156,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Dec 21 21:11:36 2025 by
+  Generated on Sun Dec 21 22:47:13 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>

@@ -85,7 +85,45 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Intermediate module/namespace to access plugins. See <code>Constant Summary</code> for examples.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
   
     <h2>
       Constant Summary
@@ -95,52 +133,482 @@
     <dl class="constants">
       
         <dt id="Common-constant" class="">Common =
-          
+          <div class="docstring">
+  <div class="discussion">
+    <p>Intermediate module/namespace to access plugins that can be applied to several types of entities.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Common plugin <code>CanHaveCallbacks</code> is used by both services and steps.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='comment'>##
+</span><span class='comment'># Since the `CanHaveCallbacks` common plugin is included by default by the standard config,
+</span><span class='comment'># the example below shows how to remove it instead of adding it.
+</span><span class='comment'>#
+</span><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='id identifier rubyid_concerns'>concerns</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_delete'>delete</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'>Common</span><span class='op'>::</span><span class='const'>CanHaveCallbacks</span><span class='op'>::</span><span class='const'>Concern</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_delete'>delete</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'>Common</span><span class='op'>::</span><span class='const'>CanHaveCallbacks</span><span class='op'>::</span><span class='const'>Middleware</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_entity'>entity</span> <span class='symbol'>:Step</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_concerns'>concerns</span> <span class='kw'>do</span>
+      <span class='id identifier rubyid_delete'>delete</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'>Common</span><span class='op'>::</span><span class='const'>CanHaveCallbacks</span><span class='op'>::</span><span class='const'>Concern</span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+      <span class='id identifier rubyid_delete'>delete</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'>Common</span><span class='op'>::</span><span class='const'>CanHaveCallbacks</span><span class='op'>::</span><span class='const'>Middleware</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Raises since `CanHaveCallbacks` is removed.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_before'>before</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_success'>success</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Shorter way to remove <code>CanHaveCallbacks</code> plugin.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='comment'>##
+</span><span class='comment'># Some common plugin groups like `:callbacks` can be removed by config option.
+</span><span class='comment'>#
+</span><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Service-constant" title="ConvenientService::Plugins::Service (constant)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_without'>without</span><span class='lparen'>(</span><span class='symbol'>:callbacks</span><span class='rparen'>)</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Raises since `CanHaveCallbacks` is removed.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_before'>before</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_success'>success</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
-        <dd><pre class="code"><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common.html" title="ConvenientService::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins.html" title="ConvenientService::Common::Plugins (module)">Plugins</a></span></span></pre></dd>
+        <dd><pre class="code"><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'>Plugins</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span></pre></dd>
       
         <dt id="Feature-constant" class="">Feature =
-          
+          <div class="docstring">
+  <div class="discussion">
+    <p>Intermediate module/namespace to access plugins that can be applied only to features.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Feature plugin <code>CanHaveEntries</code> is used for features.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='comment'>##
+</span><span class='comment'># Since the `CanHaveEntries` feature plugin is included by default by the feature standard config,
+</span><span class='comment'># the example below shows how to remove it instead of adding it.
+</span><span class='comment'>#
+</span><span class='kw'>class</span> <span class='const'>Feature</span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Feature/Standard.html" title="ConvenientService::Feature::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Feature/Standard.html#Config-constant" title="ConvenientService::Feature::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='id identifier rubyid_concerns'>concerns</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_delete'>delete</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'>Feature</span><span class='op'>::</span><span class='const'>CanHaveEntries</span><span class='op'>::</span><span class='const'>Concern</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Raises since `CanHaveEntries` is removed.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_entry'>entry</span> <span class='symbol'>:main</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_main'>main</span>
+    <span class='symbol'>:main_entry_value</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Feature/Plugins.html" title="ConvenientService::Feature::Plugins (module)">Plugins</a></span></span></pre></dd>
       
         <dt id="Service-constant" class="">Service =
-          
+          <div class="docstring">
+  <div class="discussion">
+    <p>Intermediate module/namespace to access plugins that can be applied only to services.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Service plugin <code>CanHaveRollbacks</code> can be used only by services.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'>Service</span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_insert_after'>insert_after</span> \
+      <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#Common-constant" title="ConvenientService::Plugins::Common (constant)">Common</a></span></span><span class='op'>::</span><span class='const'>CanHaveCallbacks</span><span class='op'>::</span><span class='const'>Middleware</span><span class='comma'>,</span>
+      <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'>Service</span><span class='op'>::</span><span class='const'>CanHaveRollbacks</span><span class='op'>::</span><span class='const'>Middleware</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_success'>success</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Is called in case of `failure` or `error` from `result`, since `CanHaveRollbacks` is now enabled.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_rollback_result'>rollback_result</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>from `rollback_result`</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Shorter way to add <code>CanHaveRollbacks</code> plugin.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='comment'>##
+</span><span class='comment'># Some service plugin groups like `:rollbacks` can be added by config option.
+</span><span class='comment'>#
+</span><span class='kw'>class</span> <span class='const'>Service</span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_with'>with</span><span class='lparen'>(</span><span class='symbol'>:rollbacks</span><span class='rparen'>)</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_success'>success</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Is called in case of `failure` or `error` from `result`, since `CanHaveRollbacks` is now enabled.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_rollback_result'>rollback_result</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>from `rollback_result`</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span></pre></dd>
       
         <dt id="Step-constant" class="">Step =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps.html" title="ConvenientService::Service::Plugins::CanHaveSteps (module)">CanHaveSteps</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step (class)">Step</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSteps/Entities/Step/Plugins.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins (module)">Plugins</a></span></span></pre></dd>
       
         <dt id="Internals-constant" class="">Internals =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common.html" title="ConvenientService::Common (module)">Common</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins.html" title="ConvenientService::Common::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasInternals.html" title="ConvenientService::Common::Plugins::HasInternals (module)">HasInternals</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasInternals/Entities.html" title="ConvenientService::Common::Plugins::HasInternals::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasInternals/Entities/Internals.html" title="ConvenientService::Common::Plugins::HasInternals::Entities::Internals (class)">Internals</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Common/Plugins/HasInternals/Entities/Internals/Plugins.html" title="ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins (module)">Plugins</a></span></span></pre></dd>
       
         <dt id="Result-constant" class="">Result =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult.html" title="ConvenientService::Service::Plugins::HasJSendResult (module)">HasJSendResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins (module)">Plugins</a></span></span></pre></dd>
       
         <dt id="Code-constant" class="">Code =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult.html" title="ConvenientService::Service::Plugins::HasJSendResult (module)">HasJSendResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes (module)">HasJSendStatusAndAttributes</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code (class)">Code</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Code/Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins (module)">Plugins</a></span></span></pre></dd>
       
         <dt id="Data-constant" class="">Data =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult.html" title="ConvenientService::Service::Plugins::HasJSendResult (module)">HasJSendResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes (module)">HasJSendStatusAndAttributes</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Data.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data (class)">Data</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Data/Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins (module)">Plugins</a></span></span></pre></dd>
       
         <dt id="Status-constant" class="">Status =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult.html" title="ConvenientService::Service::Plugins::HasJSendResult (module)">HasJSendResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes (module)">HasJSendStatusAndAttributes</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Status.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status (class)">Status</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Status/Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins (module)">Plugins</a></span></span></pre></dd>
       
         <dt id="Message-constant" class="">Message =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult.html" title="ConvenientService::Service::Plugins::HasJSendResult (module)">HasJSendResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">Result</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes (module)">HasJSendStatusAndAttributes</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Message.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message (class)">Message</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result/Plugins/HasJSendStatusAndAttributes/Entities/Message/Plugins.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins (module)">Plugins</a></span></span></pre></dd>
       
@@ -158,7 +626,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Dec 21 21:11:35 2025 by
+  Generated on Sun Dec 21 22:47:13 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
