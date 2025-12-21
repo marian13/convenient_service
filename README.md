@@ -86,5 +86,5 @@ This library is on the final stage of development before the v1.0.0 version. 90%
 ---
 
 <!-- author:start -->
-Copyright (c) 2022-2025 Marian Kostyk.
+Copyright (c) 2022-2026 Marian Kostyk.
 <!-- author:end -->
