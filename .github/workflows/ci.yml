@@ -225,10 +225,10 @@ jobs:
       ##
       # NOTE: `lcov-result-merger` is written in JS.
       #
-      - name: Set up Node.js 16.x
+      - name: Set up Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 20.x
       ##
       # NOTE: `lcov-result-merger` docs.
       # - https://github.com/mweibel/lcov-result-merger
