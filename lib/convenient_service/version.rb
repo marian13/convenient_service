@@ -6,5 +6,12 @@
 ##
 
 module ConvenientService
+  ##
+  # Returns current Convenient Service version.
+  #
+  # @api public
+  # @since 1.0.0
+  # @return [String]
+  #
   VERSION = "0.20.0"
 end

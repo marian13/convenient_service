@@ -11,6 +11,7 @@
 --exclude lib/convenient_service/examples/**/*
 --plugin convenient_service_concern
 --plugin convenient_service_exclude_self_classes
+'lib/convenient_service.rb'
 'lib/**/*.rb'
 -
 README.md

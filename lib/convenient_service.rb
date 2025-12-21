@@ -60,7 +60,6 @@ require_relative "convenient_service/aliases"
 ##
 # Convenient Service module/namespace.
 #
-# @!parse
 # @api public
 # @since 1.0.0
 # @note This module is NOT expected to be included or extended by the end-user classes and modules. See {ConvenientService::Standard::Config} as the main entrypoint.
@@ -68,8 +67,10 @@ require_relative "convenient_service/aliases"
 module ConvenientService
   class << self
     ##
-    # @api private
+    # Returns `true` when Convenient Service is in debug mode. In other words `$CONVENIENT_SERVICE_DEBUG` env variable is set to `true`.
     #
+    # @api private
+    # @since 1.0.0
     # @return [Boolean]
     #
     def debug?
@@ -77,8 +78,10 @@ module ConvenientService
     end
 
     ##
-    # @api private
+    # Returns `true` when Convenient Service is in benchmark mode. In other words `$CONVENIENT_SERVICE_BENCHMARK` env variable is set to `true`.
     #
+    # @api private
+    # @since 1.0.0
     # @return [Boolean]
     #
     def benchmark?
@@ -86,9 +89,18 @@ module ConvenientService
     end
 
     ##
-    # @api public
+    # Returns Convenient Service internal logger, that is an instance of Ruby stdlib logger.
+    # Useful for debugging Convenient Service internals.
     #
+    # @api public
+    # @since 1.0.0
     # @return [ConvenientService::Logger]
+    #
+    # @see https://github.com/ruby/logger
+    # @see https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html
+    #
+    # @example Set log level.
+    #   ConvenientService.logger.level = Logger::DEBUG
     #
     def logger
       Logger.instance
@@ -96,10 +108,10 @@ module ConvenientService
 
     ##
     # Returns Convenient Service root folder. Inspired by `Rails.root`.
-    # For example, it may return something like: `/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0`.
+    # For example, it may return something like: `/Users/marian/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-1.0.0`.
     #
     # @api public
-    #
+    # @since 1.0.0
     # @return [Pathname]
     #
     # @see https://ruby-doc.org/core-2.7.1/Kernel.html#method-i-__dir__
@@ -111,10 +123,10 @@ module ConvenientService
 
     ##
     # Returns Convenient Service lib folder.
-    # For example, it may return something like: `/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0/lib`.
+    # For example, it may return something like: `/Users/marian/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-1.0.0/lib`.
     #
     # @api private
-    #
+    # @since 1.0.0
     # @return [Pathname]
     #
     def lib_root
@@ -122,11 +134,11 @@ module ConvenientService
     end
 
     ##
-    # Returns Convenient Service Examples folder.
-    # For example, it may return something like: `/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0/lib/convenient_service/examples`.
+    # Returns Convenient Service examples folder.
+    # For example, it may return something like: `/Users/marian/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-1.0.0/lib/convenient_service/examples`.
     #
     # @api private
-    #
+    # @since 1.0.0
     # @return [Pathname]
     #
     def examples_root
@@ -134,11 +146,11 @@ module ConvenientService
     end
 
     ##
-    # Returns Convenient Service Specs folder.
-    # For example, it may return something like: `/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0/spec`.
+    # Returns Convenient Service specs folder.
+    # For example, it may return something like: `/Users/marian/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-1.0.0/spec`.
     #
     # @api private
-    #
+    # @since 1.0.0
     # @return [Pathname]
     #
     def spec_root
@@ -146,18 +158,50 @@ module ConvenientService
     end
 
     ##
-    # @api public
+    # Returns Convenient Service backtrace cleaner (has similar interface to Rails v8.0.2 backtrace cleaner).
+    # Useful for debugging Convenient Service internals.
     #
+    # @api public
+    # @since 1.0.0
     # @return [ConvenientService::Support::BacktraceCleaner]
+    #
+    # @see https://api.rubyonrails.org/v8.0.2/classes/ActiveSupport/BacktraceCleaner.html
+    # @see https://github.com/rails/rails/blob/v8.0.2/activesupport/lib/active_support/backtrace_cleaner.rb
+    #
+    # @example How to remove all backtrace cleaner filters?
+    #   ConvenientService.backtrace_cleaner.remove_filters!
+    #
+    # @example How to remove all backtrace cleaner silencers?
+    #   ConvenientService.backtrace_cleaner.remove_silencers!
+    #
+    # @example How to add backtrace cleaner stdlib silencer?
+    #   ConvenientService.backtrace_cleaner.add_stdlib_silencer
+    #
+    # @example How to add backtrace cleaner Convenient Service silencer?
+    #   ConvenientService.backtrace_cleaner.add_convenient_service_silencer
+    #
+    # @example Hot to clean exception backtrace?
+    #   begin
+    #     16 / 0
+    #   rescue => exception
+    #   end
+    #
+    #   ConvenientService.backtrace_cleaner.clean(exception.backtrace)
     #
     def backtrace_cleaner
       @backtrace_cleaner ||= Support::BacktraceCleaner.new
     end
 
     ##
+    # Raises Convenient Service exceptions.
+    # Cleans exception backtrace with `ConvenientService.backtrace_cleaner.clean` before delegating to `Kernel.raise`.
+    #
     # @api public
+    # @since 1.0.0
     # @param original_exception [StandardError]
     # @raise [StandardError]
+    #
+    # @note Expected to be used from Convenient Service plugins.
     #
     # @internal
     #   NOTE: `rescue ::StandardError => exception` is the same as `rescue => exception`.
@@ -169,9 +213,15 @@ module ConvenientService
     end
 
     ##
+    # Re-raises Convenient Service exceptions.
+    # Cleans exception backtrace with `ConvenientService.backtrace_cleaner.clean` before delegating to `Kernel.raise`.
+    #
     # @api public
+    # @since 1.0.0
     # @return [Object] Can be any type.
     # @raise [StandardError]
+    #
+    # @note Expected to be used from Convenient Service plugins.
     #
     # @internal
     #   NOTE: `rescue ::StandardError => exception` is the same as `rescue => exception`.
