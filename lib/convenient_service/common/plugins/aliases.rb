@@ -76,6 +76,6 @@ module ConvenientService
     #     end
     #   end
     #
-    Common = ::ConvenientService::Plugins::Common
+    Common = ::ConvenientService::Common::Plugins
   end
 end

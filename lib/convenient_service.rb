@@ -64,6 +64,146 @@ require_relative "convenient_service/aliases"
 # @since 1.0.0
 # @note This module is NOT expected to be included or extended by the end-user classes and modules. See {ConvenientService::Standard::Config} as the main entrypoint.
 #
+# @example How to load `CS` - Convenient Service alias?
+#   require "convenient_service/extras/alias"
+#
+#   class Service
+#     include CS::Standard::Config
+#
+#     def result
+#       success
+#     end
+#   end
+#
+# @example How to load RSpec extensions?
+#   ##
+#   # RSpec extensions expected to be required from RSpec entry points like `spec_helper.rb`.
+#   #
+#   require "convenient_service/extras/rspec"
+#
+#   ##
+#   # In some spec file like `service_spec.rb`
+#   #
+#   RSpec.describe Service do
+#     include ConvenientService::RSpec::Matchers::Results
+#
+#     it "returns success" do
+#       expect(Service.result).to be_success
+#     end
+#   end
+#
+#   ##
+#   # In some spec file like `other_service_spec.rb`
+#   #
+#   RSpec.describe OtherService do
+#     include ConvenientService::RSpec::Helpers::StubService
+#
+#     before do
+#       stub_service(Service).to return_success.with_data(foo: :bar)
+#     end
+#
+#     # ...
+#   end
+#
+# @example How to load `active_model_validations` standard config option?
+#   require "convenient_service/extras/standard/config/options/active_model_validations"
+#
+#   class Service
+#     include ConvenientService::Standard::Config.with(:active_model_validations)
+#
+#     attr_reader :foo
+#
+#     validates :foo, presence: true
+#
+#     def initialize(foo:)
+#       @foo = foo
+#     end
+#
+#     def result
+#       success
+#     end
+#   end
+#
+#   Service.result(foo: nil)
+#   # => <Service::Result status: :error, data_keys: [:foo], message: "foo can't be blank">
+#
+#   Service.result(foo: :bar)
+#   # => <Service::Result status: :success>
+#
+# @example How to load `amazing_print_inspect` standard config option?
+#   require "convenient_service/extras/standard/config/options/amazing_print_inspect"
+#
+#   class Service
+#     include ConvenientService::Standard::Config.with(:amazing_print_inspect)
+#
+#     def result
+#       success
+#     end
+#   end
+#
+#   ap Service.result
+#   # {
+#   #     :ConvenientService => {
+#   #          :entity => "Result",
+#   #         :service => "Service",
+#   #          :status => :success
+#   # }
+#
+# @example How to load `awesome_print_inspect` standard config option?
+#   require "convenient_service/extras/standard/config/options/awesome_print_inspect"
+#
+#   class Service
+#     include ConvenientService::Standard::Config.with(:awesome_print_inspect)
+#
+#     def result
+#       success
+#     end
+#   end
+#
+#   ap Service.result
+#   # {
+#   #     :ConvenientService => {
+#   #          :entity => "Result",
+#   #         :service => "Service",
+#   #          :status => :success
+#   # }
+#
+# @example How to load `dry_initializer` standard config option?
+#   require "convenient_service/extras/standard/config/options/dry_initializer"
+#
+#   class Service
+#     include ConvenientService::Standard::Config.with(:dry_initializer)
+#
+#     option :foo
+#
+#     def result
+#       success
+#     end
+#   end
+#
+# @example How to load `memo_wise` standard config option?
+#   require "convenient_service/extras/standard/config/options/memo_wise"
+#
+#   class Service
+#     include ConvenientService::Standard::Config.with(:memo_wise)
+#
+#     def result
+#       success(foo: foo, bar: bar)
+#     end
+#
+#     private
+#
+#     memo_wise \
+#       def foo
+#         :foo
+#       end
+#
+#     memo_wise \
+#       def bar
+#         :bar
+#       end
+#   end
+#
 module ConvenientService
   class << self
     ##

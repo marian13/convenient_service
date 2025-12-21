@@ -20,6 +20,7 @@ ConvenientService::Dependencies.require_alias
 ##
 # `CS` is just an alias for `ConvenientService`. It becames available by `require "convenient_service/extra/alias"`.
 #
+# @api public
 # @since 1.0.0
 #
 # @internal
