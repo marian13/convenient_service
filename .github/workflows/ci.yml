@@ -247,6 +247,7 @@ jobs:
       #
       - name: Merge coverage reports into single file
         run: task coverage:lcov:merge
+        continue-on-error: ${{ matrix.experimental }}
       - name: Configure coverage reports for Coveralls
         uses: coverallsapp/github-action@master
         with:
@@ -254,6 +255,7 @@ jobs:
           flag-name: run-${{ matrix.ruby }}-${{ matrix.gemfile }}
           parallel: true
           path-to-lcov: "./coverage/lcov.info"
+        continue-on-error: ${{ matrix.experimental }}
 
   coverage:
     needs:
