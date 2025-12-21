@@ -289,7 +289,7 @@ gem "rspec-benchmark", "~> 0.6.0"
 # Used for linting Ruby files.
 # - https://github.com/rubocop/rubocop
 #
-gem "rubocop", "~> 1.61.0", platform: :mri
+gem "rubocop", "~> 1.82.0", platform: :mri
 
 ##
 # Used as a set of rules for rubocop for linting common performance issues in Ruby files.
