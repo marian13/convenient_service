@@ -274,8 +274,8 @@ jobs:
           parallel-finished: true
 
   benchmark:
-    # needs:
-    #   - test
+    needs:
+      - test
     runs-on: ubuntu-24.04
     continue-on-error: true
     strategy:
