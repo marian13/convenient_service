@@ -386,7 +386,7 @@ end
 # Used inside examples.
 # - https://github.com/ruby/webrick
 #
-gem "webrick", "~> 1.8.2"
+gem "webrick", "~> 1.9.2"
 
 ##
 # Used for generation of API docs for Ruby code.
