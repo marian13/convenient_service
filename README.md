@@ -79,8 +79,6 @@ This library is on the final stage of development before the v1.0.0 version. 90%
 
 - Have a look at [Convenient Service Development Wiki](https://github.com/marian13/convenient_service/wiki) for the contribution tutorials.
 
-- [Backlog](https://github.com/marian13/convenient_service/blob/main/BACKLOG.md).
-
 <!-- links:end -->
 
 ---

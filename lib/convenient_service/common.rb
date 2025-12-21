@@ -6,3 +6,17 @@
 ##
 
 require_relative "common/plugins"
+
+module ConvenientService
+  ##
+  # Intermediate module/namespace to access plugins that can be applied to several types of entities.
+  #
+  # @api private
+  # @since 1.0.0
+  # @return [Module]
+  #
+  # @note Common plugins expected to be used via {ConvenientService::Plugins::Common} alias.
+  #
+  module Common
+  end
+end

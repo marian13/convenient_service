@@ -114,7 +114,7 @@ module ConvenientService
             use ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware if options.enabled?(:backtrace_cleaner)
             use ConvenientService::Plugins::Service::CanHaveSteps::Middleware if options.enabled?(:essential)
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Middleware if options.enabled?(:active_model_attribute_assignment)
-            use ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware if options.enabled?(:code_review_automation)
+            use ConvenientService::Plugins::Service::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware if options.enabled?(:code_review_automation)
           end
 
           middlewares :result do
@@ -122,7 +122,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware if options.enabled?(:exception_services_trace)
             use ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware if options.enabled?(:rspec)
             use ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware if options.enabled?(:callbacks)
-            use ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware if options.enabled?(:rollbacks)
+            use ConvenientService::Plugins::Service::CanHaveRollbacks::Middleware if options.enabled?(:rollbacks)
             use ConvenientService::Plugins::Service::SetsParentToForeignResult::Middleware if options.enabled?(:result_parents_trace)
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.enabled?(:type_safety)
             use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance)
