@@ -107,42 +107,545 @@
     <dl class="constants">
       
         <dt id="Command-constant" class="">Command =
-          
+          <div class="docstring">
+  <div class="discussion">
+    <p>Convenient Service command (aka operation without results and steps).
+Useful for utils that are always &quot;successful&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Common usage.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'>ToBool</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'>Command</span>
+  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:object</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span>
+    <span class='ivar'>@object</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
+    <span class='op'>!</span><span class='op'>!</span><span class='id identifier rubyid_object'>object</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='const'>ToBool</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span>
+<span class='comment'># =&gt; true
+</span>
+<span class='const'>ToBool</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; true
+</span>
+<span class='const'>ToBool</span><span class='period'>.</span><span class='lparen'>(</span><span class='int'>42</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; true
+</span>
+<span class='const'>ToBool</span><span class='lbracket'>[</span><span class='int'>42</span><span class='rbracket'>]</span>
+<span class='comment'># =&gt; true</span></code></pre>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>No need to define class <code>call</code> method.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'>Command</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'>Command</span>
+  <span class='comment'># ...
+</span>
+  <span class='comment'>##
+</span>  <span class='comment'># Class `call` method in already defined in `ConvenientService::Command` like so:
+</span>  <span class='comment'>#
+</span>  <span class='comment'># def call(...)
+</span>  <span class='comment'>#   new.call(...)
+</span>  <span class='comment'># end
+</span>  <span class='comment'>##
+</span>
+  <span class='comment'># ...
+</span><span class='kw'>end</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'>ConvenientService</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Command.html" title="ConvenientService::Support::Command (class)">Command</a></span></span></pre></dd>
       
         <dt id="Concern-constant" class="">Concern =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Expected to be used from Convenient Service plugins.</p>
+</div>
+  </div>
+
+<p>Convenient Service concern (Like Rails concern, but with some customizations).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'>ConvenientService</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Concern.html" title="ConvenientService::Support::Concern (module)">Concern</a></span></span></pre></dd>
       
         <dt id="DependencyContainer-constant" class="">DependencyContainer =
-          
+          <div class="docstring">
+  <div class="discussion">
+    <p>Convenient Service dependency container.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Common usage.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>module</span> <span class='const'>Container</span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'>DependencyContainer</span><span class='op'>::</span><span class='const'>Export</span>
+
+  <span class='id identifier rubyid_export'>export</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='op'>|</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_export'>export</span> <span class='symbol'>:bar</span> <span class='kw'>do</span> <span class='op'>|</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='op'>|</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bar</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_export'>export</span> <span class='symbol'>:baz</span> <span class='kw'>do</span> <span class='op'>|</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='op'>|</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>baz</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='kw'>class</span> <span class='const'>User</span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'>DependencyContainer</span><span class='op'>::</span><span class='const'>Import</span>
+
+  <span class='id identifier rubyid_import'>import</span> <span class='symbol'>:foo</span><span class='comma'>,</span> <span class='label'>from:</span> <span class='const'>Container</span>
+  <span class='id identifier rubyid_import'>import</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bar</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>as:</span> <span class='symbol'>:custom_bar</span><span class='comma'>,</span> <span class='label'>from:</span> <span class='const'>Container</span>
+  <span class='id identifier rubyid_import'>import</span> <span class='symbol'>:baz</span><span class='comma'>,</span> <span class='label'>as:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>namespaced.baz</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>from:</span> <span class='const'>Container</span>
+<span class='kw'>end</span>
+
+<span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_foo'>foo</span>
+<span class='comment'># =&gt; &quot;foo&quot;
+</span>
+<span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_custom_bar'>custom_bar</span>
+<span class='comment'># =&gt; &quot;bar&quot;
+</span>
+<span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_namespaced'>namespaced</span><span class='period'>.</span><span class='id identifier rubyid_baz'>baz</span>
+<span class='comment'># =&gt; &quot;baz&quot;</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'>ConvenientService</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/DependencyContainer.html" title="ConvenientService::Support::DependencyContainer (module)">DependencyContainer</a></span></span></pre></dd>
       
         <dt id="Result-constant" class="">Result =
-          
+          <div class="docstring">
+  <div class="discussion">
+    <p>Convenient Service base result class. Useful as a shortcut for result utilities.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>How to check whether an object is a result?</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='const'>ConvenintService</span><span class='op'>::</span><span class='const'>Result</span><span class='period'>.</span><span class='id identifier rubyid_result?'>result?</span><span class='lparen'>(</span><span class='id identifier rubyid_some_object'>some_object</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'>ConvenientService</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult.html" title="ConvenientService::Service::Plugins::HasJSendResult (module)">HasJSendResult</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResult/Entities/Result.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result (class)">Result</a></span></span></pre></dd>
       
         <dt id="VERSION-constant" class="">VERSION =
-          
+          <div class="docstring">
+  <div class="discussion">
+    <p>Returns current Convenient Service version.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.20.0</span><span class='tstring_end'>&quot;</span></span></pre></dd>
       
         <dt id="ConcernMiddleware-constant" class="">ConcernMiddleware =
-          
+          <div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This constant is part of a private API.</strong>
+  You should avoid using this constant if possible, as it may be removed or be changed in the future.
+</p>
+<p>Base class for concern middlewares.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'>ConvenientService</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core.html" title="ConvenientService::Core (module)">Core</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities.html" title="ConvenientService::Core::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html" title="ConvenientService::Core::Entities::Config (class)">Config</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/Concerns.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns (class)">Concerns</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/Concerns/Entities.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/Concerns/Entities/Middleware.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware (class)">Middleware</a></span></span></pre></dd>
       
         <dt id="MethodClassicMiddleware-constant" class="">MethodClassicMiddleware =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Prefer <code>ConvenientService::MethodChainMiddleware</code>.</p>
+</div>
+  </div>
+
+<p>Base class for method middlewares using classic <code>stack.call</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Common usage.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'>Middleware</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'>MethodClassicMiddleware</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_env'>env</span>
+
+    <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
+
+    <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_value'>value</span>
+
+    <span class='id identifier rubyid_value'>value</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_insert_before'>insert_before</span> <span class='int'>0</span><span class='comma'>,</span> <span class='const'>Middleware</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_success'>success</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span>
+<span class='comment'># {args: [], kwargs: {}, block: nil, entity: &lt;Service&gt;, method: :result}
+</span><span class='comment'># &lt;Service::Result status: :success&gt;
+</span><span class='comment'># =&gt; &lt;Service::Result status: :success&gt;</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'>ConvenientService</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core.html" title="ConvenientService::Core (module)">Core</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities.html" title="ConvenientService::Core::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html" title="ConvenientService::Core::Entities::Config (class)">Config</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares (class)">MethodMiddlewares</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Middlewares.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares (module)">Middlewares</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Middlewares/Classic.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Classic (class)">Classic</a></span></span></pre></dd>
       
         <dt id="MethodChainMiddleware-constant" class="">MethodChainMiddleware =
-          
+          <div class="docstring">
+  <div class="discussion">
+    <p>Base class for method middlewares using <code>chain.next</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Common usage.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'>Middleware</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'>MethodChainMiddleware</span>
+  <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_p'>p</span> <span class='lbracket'>[</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='id identifier rubyid_block'>block</span><span class='rbracket'>]</span>
+
+    <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+
+    <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_value'>value</span>
+
+    <span class='id identifier rubyid_value'>value</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ConvenientService/Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='id identifier rubyid_middlewares'>middlewares</span> <span class='symbol'>:result</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_insert_before'>insert_before</span> <span class='int'>0</span><span class='comma'>,</span> <span class='const'>Middleware</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_success'>success</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span>
+<span class='comment'># {args: [], kwargs: {}, block: nil, entity: &lt;Service&gt;, method: :result}
+</span><span class='comment'># &lt;Service::Result status: :success&gt;
+</span><span class='comment'># =&gt; &lt;Service::Result status: :success&gt;</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
         </dt>
         <dd><pre class="code"><span class='op'>::</span><span class='const'>ConvenientService</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core.html" title="ConvenientService::Core (module)">Core</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities.html" title="ConvenientService::Core::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config.html" title="ConvenientService::Core::Entities::Config (class)">Config</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities.html" title="ConvenientService::Core::Entities::Config::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares (class)">MethodMiddlewares</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Middlewares.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares (module)">Middlewares</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Core/Entities/Config/Entities/MethodMiddlewares/Entities/Middlewares/Chain.html" title="ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain (class)">Chain</a></span></span></pre></dd>
       
@@ -180,7 +683,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Returns Convenient Service backtrace cleaner (has similar interface to Rails v8.0.2 backtrace cleaner).</p>
+</div></span>
   
 </li>
 
@@ -202,7 +706,8 @@
   <span class="private note title">private</span>
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> when Convenient Service is in benchmark mode.</p>
+</div></span>
   
 </li>
 
@@ -224,7 +729,8 @@
   <span class="private note title">private</span>
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> when Convenient Service is in debug mode.</p>
+</div></span>
   
 </li>
 
@@ -246,7 +752,7 @@
   <span class="private note title">private</span>
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns Convenient Service Examples folder.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns Convenient Service examples folder.</p>
 </div></span>
   
 </li>
@@ -292,7 +798,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Returns Convenient Service internal logger, that is an instance of Ruby stdlib logger.</p>
+</div></span>
   
 </li>
 
@@ -382,7 +889,7 @@
   <span class="private note title">private</span>
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns Convenient Service Specs folder.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns Convenient Service specs folder.</p>
 </div></span>
   
 </li>
@@ -408,12 +915,54 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p>Returns Convenient Service backtrace cleaner (has similar interface to Rails v8.0.2 backtrace cleaner).
+Useful for debugging Convenient Service internals.</p>
+
 
   </div>
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>How to remove all backtrace cleaner filters?</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_backtrace_cleaner'>backtrace_cleaner</span><span class='period'>.</span><span class='id identifier rubyid_remove_filters!'><span class='object_link'><a href="ConvenientService/Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#remove_filters!-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#remove_filters! (method)">remove_filters!</a></span></span></code></pre>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>How to remove all backtrace cleaner silencers?</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_backtrace_cleaner'>backtrace_cleaner</span><span class='period'>.</span><span class='id identifier rubyid_remove_silencers!'><span class='object_link'><a href="ConvenientService/Dependencies/Extractions/ActiveSupportBacktraceCleaner/BacktraceCleaner.html#remove_silencers!-instance_method" title="ConvenientService::Dependencies::Extractions::ActiveSupportBacktraceCleaner::BacktraceCleaner#remove_silencers! (method)">remove_silencers!</a></span></span></code></pre>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>How to add backtrace cleaner stdlib silencer?</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_backtrace_cleaner'>backtrace_cleaner</span><span class='period'>.</span><span class='id identifier rubyid_add_stdlib_silencer'>add_stdlib_silencer</span></code></pre>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>How to add backtrace cleaner Convenient Service silencer?</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_backtrace_cleaner'>backtrace_cleaner</span><span class='period'>.</span><span class='id identifier rubyid_add_convenient_service_silencer'><span class='object_link'><a href="ConvenientService/Support/BacktraceCleaner.html#add_convenient_service_silencer-instance_method" title="ConvenientService::Support::BacktraceCleaner#add_convenient_service_silencer (method)">add_convenient_service_silencer</a></span></span></code></pre>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Hot to clean exception backtrace?</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>begin</span>
+  <span class='int'>16</span> <span class='op'>/</span> <span class='int'>0</span>
+<span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_exception'>exception</span>
+<span class='kw'>end</span>
+
+<span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_backtrace_cleaner'>backtrace_cleaner</span><span class='period'>.</span><span class='id identifier rubyid_clean'><span class='object_link'><a href="ConvenientService/Support/BacktraceCleaner.html#clean-instance_method" title="ConvenientService::Support::BacktraceCleaner#clean (method)">clean</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_exception'>exception</span><span class='period'>.</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -427,6 +976,15 @@
     </li>
   
 </ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://api.rubyonrails.org/v8.0.2/classes/ActiveSupport/BacktraceCleaner.html" target="_parent" title="https://api.rubyonrails.org/v8.0.2/classes/ActiveSupport/BacktraceCleaner.html">https://api.rubyonrails.org/v8.0.2/classes/ActiveSupport/BacktraceCleaner.html</a></li>
+    
+      <li><a href="https://github.com/rails/rails/blob/v8.0.2/activesupport/lib/active_support/backtrace_cleaner.rb" target="_parent" title="https://github.com/rails/rails/blob/v8.0.2/activesupport/lib/active_support/backtrace_cleaner.rb">https://github.com/rails/rails/blob/v8.0.2/activesupport/lib/active_support/backtrace_cleaner.rb</a></li>
+    
+  </ul>
 <p class="tag_title">Since:</p>
 <ul class="since">
   
@@ -449,12 +1007,12 @@
       <pre class="lines">
 
 
-153
-154
-155</pre>
+191
+192
+193</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 153</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 191</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_backtrace_cleaner'>backtrace_cleaner</span>
   <span class='ivar'>@backtrace_cleaner</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/BacktraceCleaner.html" title="ConvenientService::Support::BacktraceCleaner (class)">BacktraceCleaner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ConvenientService/Support/BacktraceCleaner.html#initialize-instance_method" title="ConvenientService::Support::BacktraceCleaner#initialize (method)">new</a></span></span>
@@ -479,6 +1037,7 @@
   <strong>This method is part of a private API.</strong>
   You should avoid using this method if possible, as it may be removed or be changed in the future.
 </p>
+<p>Returns <code>true</code> when Convenient Service is in benchmark mode. In other words <code>$CONVENIENT_SERVICE_BENCHMARK</code> env variable is set to <code>true</code>.</p>
 
 
   </div>
@@ -520,12 +1079,12 @@
       <pre class="lines">
 
 
-84
-85
-86</pre>
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_benchmark?'>benchmark?</span>
   <span class='op'>::</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CONVENIENT_SERVICE_BENCHMARK</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span>
@@ -550,6 +1109,7 @@
   <strong>This method is part of a private API.</strong>
   You should avoid using this method if possible, as it may be removed or be changed in the future.
 </p>
+<p>Returns <code>true</code> when Convenient Service is in debug mode. In other words <code>$CONVENIENT_SERVICE_DEBUG</code> env variable is set to <code>true</code>.</p>
 
 
   </div>
@@ -591,12 +1151,12 @@
       <pre class="lines">
 
 
-75
 76
-77</pre>
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_debug?'>debug?</span>
   <span class='op'>::</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CONVENIENT_SERVICE_DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span>
@@ -621,8 +1181,81 @@
   <strong>This method is part of a private API.</strong>
   You should avoid using this method if possible, as it may be removed or be changed in the future.
 </p>
-<p>Returns Convenient Service Examples folder.
-For example, it may return something like: <code>/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0/lib/convenient_service/examples</code>.</p>
+<p>Returns Convenient Service examples folder.
+For example, it may return something like: <code>/Users/marian/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-1.0.0/lib/convenient_service/examples</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Pathname</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+144
+145
+146</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 144</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_examples_root'>examples_root</span>
+  <span class='ivar'>@examples_root</span> <span class='op'>||=</span> <span class='op'>::</span><span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_root'><span class='object_link'><a href="https://apidocs.convenientservice.org/top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>convenient_service</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>examples</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lib_root-class_method">
+  
+    .<strong>lib_root</strong>  &#x21d2; <tt>Pathname</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+<p>Returns Convenient Service lib folder.
+For example, it may return something like: <code>/Users/marian/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-1.0.0/lib</code>.</p>
 
 
   </div>
@@ -671,79 +1304,6 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 132</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_examples_root'>examples_root</span>
-  <span class='ivar'>@examples_root</span> <span class='op'>||=</span> <span class='op'>::</span><span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_root'><span class='object_link'><a href="https://apidocs.convenientservice.org/top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>convenient_service</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>examples</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="lib_root-class_method">
-  
-    .<strong>lib_root</strong>  &#x21d2; <tt>Pathname</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p class="note private">
-  <strong>This method is part of a private API.</strong>
-  You should avoid using this method if possible, as it may be removed or be changed in the future.
-</p>
-<p>Returns Convenient Service lib folder.
-For example, it may return something like: <code>/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0/lib</code>.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Pathname</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>1.0.0</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-120
-121
-122</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 120</span>
-
 <span class='kw'>def</span> <span class='id identifier rubyid_lib_root'>lib_root</span>
   <span class='ivar'>@lib_root</span> <span class='op'>||=</span> <span class='op'>::</span><span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_root'><span class='object_link'><a href="https://apidocs.convenientservice.org/top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -763,12 +1323,25 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p>Returns Convenient Service internal logger, that is an instance of Ruby stdlib logger.
+Useful for debugging Convenient Service internals.</p>
+
 
   </div>
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Set log level.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Logger.html" title="ConvenientService::Logger (class)">Logger</a></span></span><span class='op'>::</span><span class='const'>DEBUG</span></code></pre>
+    
+  </div>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -782,6 +1355,15 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
     </li>
   
 </ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/ruby/logger" target="_parent" title="https://github.com/ruby/logger">https://github.com/ruby/logger</a></li>
+    
+      <li><a href="https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html" target="_parent" title="https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html">https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html</a></li>
+    
+  </ul>
 <p class="tag_title">Since:</p>
 <ul class="since">
   
@@ -804,12 +1386,12 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
       <pre class="lines">
 
 
-93
-94
-95</pre>
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span>
   <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Logger.html" title="ConvenientService::Logger (class)">Logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
@@ -886,14 +1468,14 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
       <pre class="lines">
 
 
-165
-166
-167
-168
-169</pre>
+209
+210
+211
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 209</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_raise'>raise</span><span class='lparen'>(</span><span class='id identifier rubyid_original_exception'>original_exception</span><span class='rparen'>)</span>
   <span class='op'>::</span><span class='const'>Kernel</span><span class='period'>.</span><span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_original_exception'>original_exception</span>
@@ -975,14 +1557,14 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
       <pre class="lines">
 
 
-179
-180
-181
-182
-183</pre>
+229
+230
+231
+232
+233</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 179</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 229</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reraise'>reraise</span>
   <span class='kw'>yield</span>
@@ -1006,7 +1588,7 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Convenient Service root folder. Inspired by <code>Rails.root</code>.
-For example, it may return something like: <code>/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0</code>.</p>
+For example, it may return something like: <code>/Users/marian/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-1.0.0</code>.</p>
 
 
   </div>
@@ -1057,12 +1639,12 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
       <pre class="lines">
 
 
-108
-109
-110</pre>
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 120</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_root'><span class='object_link'><a href="https://apidocs.convenientservice.org/top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span>
   <span class='ivar'>@root</span> <span class='op'>||=</span> <span class='op'>::</span><span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_expand_path'>expand_path</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>..</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1087,8 +1669,8 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
   <strong>This method is part of a private API.</strong>
   You should avoid using this method if possible, as it may be removed or be changed in the future.
 </p>
-<p>Returns Convenient Service Specs folder.
-For example, it may return something like: <code>/Users/user/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-0.16.0/spec</code>.</p>
+<p>Returns Convenient Service specs folder.
+For example, it may return something like: <code>/Users/marian/.asdf/installs/ruby/2.7.0/lib/ruby/gems/2.7.0/gems/convenient_service-1.0.0/spec</code>.</p>
 
 
   </div>
@@ -1130,12 +1712,12 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
       <pre class="lines">
 
 
-144
-145
-146</pre>
+156
+157
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 144</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 156</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_spec_root'>spec_root</span>
   <span class='ivar'>@spec_root</span> <span class='op'>||=</span> <span class='op'>::</span><span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_root'><span class='object_link'><a href="https://apidocs.convenientservice.org/top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>spec</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1150,7 +1732,7 @@ For example, it may return something like: <code>/Users/user/.asdf/installs/ruby
 </div>
 
       <div id="footer">
-  Generated on Sun Dec 21 18:57:20 2025 by
+  Generated on Sun Dec 21 21:08:42 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>

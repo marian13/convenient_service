@@ -114,7 +114,7 @@
 </div>
   </div>
 
-<p>Rails v7.1.2 Backtrace Cleaner descendant.
+<p>Rails v8.0.2 Backtrace Cleaner descendant.
 Has Convenient Service specific silencer - <code>add_convenient_service_silencer</code>.
 By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenient_service_silencer</code>.</p>
 
@@ -319,6 +319,7 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
       <pre class="lines">
 
 
+38
 39
 40
 41
@@ -335,11 +336,10 @@ By default, it uses only <code>add_stdlib_silencer</code> and <code>add_convenie
 52
 53
 54
-55
-56</pre>
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='kw'>super</span>
@@ -424,17 +424,17 @@ This silencer removes all Convenient Service lines from backtraces.</p>
       <pre class="lines">
 
 
+93
 94
 95
 96
 97
 98
 99
-100
-101</pre>
+100</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_convenient_service_silencer'>add_convenient_service_silencer</span>
   <span class='id identifier rubyid_add_silencer'>add_silencer</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_line'>line</span><span class='op'>|</span>
@@ -514,6 +514,7 @@ Also returns an empty array, when <code>backtrace</code> is <code>nil</code>.</p
       <pre class="lines">
 
 
+115
 116
 117
 118
@@ -527,11 +528,10 @@ Also returns an empty array, when <code>backtrace</code> is <code>nil</code>.</p
 126
 127
 128
-129
-130</pre>
+129</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/backtrace_cleaner.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clean'>clean</span><span class='lparen'>(</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_backtrace'>backtrace</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -558,7 +558,7 @@ Also returns an empty array, when <code>backtrace</code> is <code>nil</code>.</p
 </div>
 
       <div id="footer">
-  Generated on Sun Dec 21 18:57:26 2025 by
+  Generated on Sun Dec 21 21:08:47 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
