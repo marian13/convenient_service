@@ -294,7 +294,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Middl
   end
 
   context "when entity is service class" do
-    include_examples "verify middleware behavior" do
+    it_behaves_like "verify middleware behavior" do
       let(:entity) { service_class }
       let(:scope) { :class }
 
@@ -303,7 +303,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Middl
   end
 
   context "when entity is service instance" do
-    include_examples "verify middleware behavior" do
+    it_behaves_like "verify middleware behavior" do
       let(:entity) { service_instance }
       let(:scope) { :instance }
 

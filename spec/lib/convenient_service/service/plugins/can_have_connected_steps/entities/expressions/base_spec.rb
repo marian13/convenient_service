@@ -70,55 +70,55 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
     describe "#scalar?" do
       it "returns `false`" do
-        expect(expression.scalar?).to eq(false)
+        expect(expression.scalar?).to be(false)
       end
     end
 
     describe "#not?" do
       it "returns `false`" do
-        expect(expression.not?).to eq(false)
+        expect(expression.not?).to be(false)
       end
     end
 
     describe "#and?" do
       it "returns `false`" do
-        expect(expression.and?).to eq(false)
+        expect(expression.and?).to be(false)
       end
     end
 
     describe "#or?" do
       it "returns `false`" do
-        expect(expression.or?).to eq(false)
+        expect(expression.or?).to be(false)
       end
     end
 
     describe "#group?" do
       it "returns `false`" do
-        expect(expression.group?).to eq(false)
+        expect(expression.group?).to be(false)
       end
     end
 
     describe "#empty?" do
       it "returns `false`" do
-        expect(expression.empty?).to eq(false)
+        expect(expression.empty?).to be(false)
       end
     end
 
     describe "#if?" do
       it "returns `false`" do
-        expect(expression.if?).to eq(false)
+        expect(expression.if?).to be(false)
       end
     end
 
     describe "#else?" do
       it "returns `false`" do
-        expect(expression.else?).to eq(false)
+        expect(expression.else?).to be(false)
       end
     end
 
     describe "#complex_if?" do
       it "returns `false`" do
-        expect(expression.complex_if?).to eq(false)
+        expect(expression.complex_if?).to be(false)
       end
     end
   end

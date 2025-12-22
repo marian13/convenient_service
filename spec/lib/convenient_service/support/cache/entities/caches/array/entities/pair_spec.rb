@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array::Entit
         let(:other) { described_class.new(key: :bar, value: value) }
 
         it "returns `true`" do
-          expect(pair == other).to eq(false)
+          expect(pair == other).to be(false)
         end
       end
 
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array::Entit
         let(:other) { described_class.new(key: key, value: :foo) }
 
         it "returns `true`" do
-          expect(pair == other).to eq(false)
+          expect(pair == other).to be(false)
         end
       end
 
@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array::Entit
         let(:other) { described_class.new(key: key, value: value) }
 
         it "returns `true`" do
-          expect(pair == other).to eq(true)
+          expect(pair == other).to be(true)
         end
       end
     end

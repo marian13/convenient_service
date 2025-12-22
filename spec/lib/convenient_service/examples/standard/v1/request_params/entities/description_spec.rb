@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entitie
         let(:other) { described_class.cast("Check the API Docs") }
 
         it "returns true" do
-          expect(description == other).to eq(false)
+          expect(description == other).to be(false)
         end
       end
 
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entitie
         let(:other) { described_class.cast(value) }
 
         it "returns true" do
-          expect(description == other).to eq(true)
+          expect(description == other).to be(true)
         end
       end
     end

@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
         let(:second_array) { [2, 3, 1] }
 
         it "returns true" do
-          expect(util_result).to eq(true)
+          expect(util_result).to be(true)
         end
       end
 
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
         let(:second_array) { [1, 2, 3] }
 
         it "returns true" do
-          expect(util_result).to eq(true)
+          expect(util_result).to be(true)
         end
       end
 
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
           let(:second_array) { [1, 1, 2, 3] }
 
           it "returns false" do
-            expect(util_result).to eq(false)
+            expect(util_result).to be(false)
           end
         end
 
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
           let(:second_array) { [1, 1, 2, 2] }
 
           it "returns true" do
-            expect(util_result).to eq(true)
+            expect(util_result).to be(true)
           end
         end
       end
@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
       let(:second_array) { [2, 3, 4] }
 
       it "returns false" do
-        expect(util_result).to eq(false)
+        expect(util_result).to be(false)
       end
     end
 
@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
         end
 
         it "returns false" do
-          expect(util_result).to eq(false)
+          expect(util_result).to be(false)
         end
       end
 
@@ -111,7 +111,7 @@ RSpec.describe ConvenientService::Utils::Array::ContainExactly, type: :standard 
         end
 
         it "returns true" do
-          expect(util_result).to eq(true)
+          expect(util_result).to be(true)
         end
       end
     end

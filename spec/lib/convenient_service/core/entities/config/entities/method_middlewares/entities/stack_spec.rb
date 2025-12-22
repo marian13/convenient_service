@@ -479,7 +479,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
 
           it "returns `false`" do
-            expect(stack == other).to eq(false)
+            expect(stack == other).to be(false)
           end
         end
 
@@ -487,7 +487,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(klass: klass, plain_stack: ConvenientService::Support::Middleware::StackBuilder.new(name: name).tap { |stack| stack.use middleware }) }
 
           it "returns `false`" do
-            expect(stack == other).to eq(false)
+            expect(stack == other).to be(false)
           end
         end
 
@@ -495,7 +495,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(klass: klass, plain_stack: plain_stack) }
 
           it "returns `true`" do
-            expect(stack == other).to eq(true)
+            expect(stack == other).to be(true)
           end
         end
       end

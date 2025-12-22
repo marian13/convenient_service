@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#success?" do
       context "when `value` is NOT `:success`" do
         it "returns `false`" do
-          expect(status.success?).to eq(false)
+          expect(status.success?).to be(false)
         end
       end
 
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:value) { :success }
 
         it "returns `true`" do
-          expect(status.success?).to eq(true)
+          expect(status.success?).to be(true)
         end
       end
     end
@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#failure?" do
       context "when `value` is NOT `:failure`" do
         it "returns `false`" do
-          expect(status.failure?).to eq(false)
+          expect(status.failure?).to be(false)
         end
       end
 
@@ -78,7 +78,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:value) { :failure }
 
         it "returns `true`" do
-          expect(status.failure?).to eq(true)
+          expect(status.failure?).to be(true)
         end
       end
     end
@@ -86,7 +86,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#error?" do
       context "when `value` is NOT `:error`" do
         it "returns `false`" do
-          expect(status.error?).to eq(false)
+          expect(status.error?).to be(false)
         end
       end
 
@@ -94,7 +94,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:value) { :error }
 
         it "returns `true`" do
-          expect(status.error?).to eq(true)
+          expect(status.error?).to be(true)
         end
       end
     end
@@ -102,7 +102,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#unsafe_success?" do
       context "when `value` is NOT `:success`" do
         it "returns `false`" do
-          expect(status.unsafe_success?).to eq(false)
+          expect(status.unsafe_success?).to be(false)
         end
       end
 
@@ -110,7 +110,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:value) { :success }
 
         it "returns `true`" do
-          expect(status.unsafe_success?).to eq(true)
+          expect(status.unsafe_success?).to be(true)
         end
       end
     end
@@ -118,7 +118,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#unsafe_failure?" do
       context "when `value` is NOT `:failure`" do
         it "returns `false`" do
-          expect(status.unsafe_failure?).to eq(false)
+          expect(status.unsafe_failure?).to be(false)
         end
       end
 
@@ -126,7 +126,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:value) { :failure }
 
         it "returns `true`" do
-          expect(status.unsafe_failure?).to eq(true)
+          expect(status.unsafe_failure?).to be(true)
         end
       end
     end
@@ -134,7 +134,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#unsafe_error?" do
       context "when `value` is NOT `:error`" do
         it "returns `false`" do
-          expect(status.unsafe_error?).to eq(false)
+          expect(status.unsafe_error?).to be(false)
         end
       end
 
@@ -142,7 +142,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:value) { :error }
 
         it "returns `true`" do
-          expect(status.unsafe_error?).to eq(true)
+          expect(status.unsafe_error?).to be(true)
         end
       end
     end
@@ -150,7 +150,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#not_success?" do
       context "when `value` is NOT `:success`" do
         it "returns `true`" do
-          expect(status.not_success?).to eq(true)
+          expect(status.not_success?).to be(true)
         end
       end
 
@@ -158,7 +158,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:value) { :success }
 
         it "returns `false`" do
-          expect(status.not_success?).to eq(false)
+          expect(status.not_success?).to be(false)
         end
       end
     end
@@ -166,7 +166,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#not_failure?" do
       context "when `value` is NOT `:failure`" do
         it "returns `true`" do
-          expect(status.not_failure?).to eq(true)
+          expect(status.not_failure?).to be(true)
         end
       end
 
@@ -174,7 +174,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:value) { :failure }
 
         it "returns `false`" do
-          expect(status.not_failure?).to eq(false)
+          expect(status.not_failure?).to be(false)
         end
       end
     end
@@ -182,7 +182,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#not_error?" do
       context "when `value` is NOT `:error`" do
         it "returns `true`" do
-          expect(status.not_error?).to eq(true)
+          expect(status.not_error?).to be(true)
         end
       end
 
@@ -190,7 +190,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:value) { :error }
 
         it "returns `false`" do
-          expect(status.not_error?).to eq(false)
+          expect(status.not_error?).to be(false)
         end
       end
     end
@@ -198,7 +198,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#unsafe_not_success?" do
       context "when `value` is NOT `:success`" do
         it "returns `true`" do
-          expect(status.unsafe_not_success?).to eq(true)
+          expect(status.unsafe_not_success?).to be(true)
         end
       end
 
@@ -206,7 +206,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:value) { :success }
 
         it "returns `false`" do
-          expect(status.unsafe_not_success?).to eq(false)
+          expect(status.unsafe_not_success?).to be(false)
         end
       end
     end
@@ -214,7 +214,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#unsafe_not_failure?" do
       context "when `value` is NOT `:failure`" do
         it "returns `true`" do
-          expect(status.unsafe_not_failure?).to eq(true)
+          expect(status.unsafe_not_failure?).to be(true)
         end
       end
 
@@ -222,7 +222,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:value) { :failure }
 
         it "returns `false`" do
-          expect(status.unsafe_not_failure?).to eq(false)
+          expect(status.unsafe_not_failure?).to be(false)
         end
       end
     end
@@ -230,7 +230,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     describe "#unsafe_not_error?" do
       context "when `value` is NOT `:error`" do
         it "returns `true`" do
-          expect(status.unsafe_not_error?).to eq(true)
+          expect(status.unsafe_not_error?).to be(true)
         end
       end
 
@@ -238,7 +238,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:value) { :error }
 
         it "returns `false`" do
-          expect(status.unsafe_not_error?).to eq(false)
+          expect(status.unsafe_not_error?).to be(false)
         end
       end
     end
@@ -254,7 +254,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "returns `false`" do
-            expect(status.in?(statuses)).to eq(false)
+            expect(status.in?(statuses)).to be(false)
           end
         end
 
@@ -267,7 +267,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "returns `true`" do
-            expect(status.in?(statuses)).to eq(true)
+            expect(status.in?(statuses)).to be(true)
           end
         end
       end
@@ -276,7 +276,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:statuses) { [] }
 
         it "returns `false`" do
-          expect(status.in?(statuses)).to eq(false)
+          expect(status.in?(statuses)).to be(false)
         end
       end
     end
@@ -295,7 +295,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: :bar, result: result) }
 
           it "returns `false`" do
-            expect(status == other).to eq(false)
+            expect(status == other).to be(false)
           end
         end
 
@@ -303,7 +303,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: value, result: Object.new) }
 
           it "returns `false`" do
-            expect(status == other).to eq(false)
+            expect(status == other).to be(false)
           end
         end
 
@@ -311,7 +311,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status.new(value: value, result: result) }
 
           it "returns `true`" do
-            expect(status == other).to eq(true)
+            expect(status == other).to be(true)
           end
         end
       end

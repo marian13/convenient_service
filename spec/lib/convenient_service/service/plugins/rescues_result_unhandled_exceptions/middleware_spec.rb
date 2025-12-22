@@ -172,7 +172,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               end
 
               it "returns `failure` from exception" do
-                expect(method_value.from_unhandled_exception?).to eq(true)
+                expect(method_value.from_unhandled_exception?).to be(true)
               end
 
               it "returns `failure` with exception" do
@@ -200,7 +200,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               end
 
               it "returns `error` from exception" do
-                expect(method_value.from_unhandled_exception?).to eq(true)
+                expect(method_value.from_unhandled_exception?).to be(true)
               end
 
               it "returns `error` with exception" do
@@ -374,7 +374,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                 end
 
                 it "returns `failure` from exception" do
-                  expect(method_value.from_unhandled_exception?).to eq(true)
+                  expect(method_value.from_unhandled_exception?).to be(true)
                 end
 
                 it "returns `failure` with exception" do
@@ -402,7 +402,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
                 end
 
                 it "returns `error` from exception" do
-                  expect(method_value.from_unhandled_exception?).to eq(true)
+                  expect(method_value.from_unhandled_exception?).to be(true)
                 end
 
                 it "returns `error` with exception" do
@@ -447,14 +447,14 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
   end
 
   context "when method is instance `:result`" do
-    include_examples "verify middleware behavior" do
+    it_behaves_like "verify middleware behavior" do
       let(:scope) { :instance }
       let(:method_name) { :result }
     end
   end
 
   context "when method is instance `:negated_result`" do
-    include_examples "verify middleware behavior" do
+    it_behaves_like "verify middleware behavior" do
       let(:scope) { :instance }
       let(:method_name) { :negated_result }
     end

@@ -5568,7 +5568,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
     describe "#complex_if?" do
       it "returns `true`" do
-        expect(expression.complex_if?).to eq(true)
+        expect(expression.complex_if?).to be(true)
       end
     end
 
@@ -5588,7 +5588,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           let(:other) { described_class.new(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If.new(second_if_expression_condition_expression, second_if_expression_then_expression), elsif_expressions, else_expression) }
 
           it "returns `false`" do
-            expect(expression == other).to eq(false)
+            expect(expression == other).to be(false)
           end
         end
 
@@ -5596,7 +5596,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           let(:other) { described_class.new(if_expression, [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::If.new(first_if_expression_condition_expression, first_if_expression_then_expression)], else_expression) }
 
           it "returns `false`" do
-            expect(expression == other).to eq(false)
+            expect(expression == other).to be(false)
           end
         end
 
@@ -5604,7 +5604,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           let(:other) { described_class.new(if_expression, elsif_expressions, nil) }
 
           it "returns `false`" do
-            expect(expression == other).to eq(false)
+            expect(expression == other).to be(false)
           end
         end
 
@@ -5612,7 +5612,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           let(:other) { described_class.new(if_expression, elsif_expressions, else_expression) }
 
           it "returns `true`" do
-            expect(expression == other).to eq(true)
+            expect(expression == other).to be(true)
           end
         end
       end

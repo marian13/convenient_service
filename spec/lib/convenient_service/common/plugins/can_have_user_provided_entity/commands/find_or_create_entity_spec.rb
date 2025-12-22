@@ -187,7 +187,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Co
               let(:other) { described_class.call(namespace: namespace, proto_entity: other_proto_entity) }
 
               it "returns `false`" do
-                expect(entity == other).to eq(false)
+                expect(entity == other).to be(false)
               end
             end
 
@@ -195,7 +195,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveUserProvidedEntity::Co
               let(:other) { described_class.call(namespace: namespace, proto_entity: proto_entity) }
 
               it "returns true" do
-                expect(entity == other).to eq(true)
+                expect(entity == other).to be(true)
               end
             end
           end

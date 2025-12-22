@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `false`" do
-          expect(result.from_step?).to eq(false)
+          expect(result.from_step?).to be(false)
         end
       end
 
@@ -77,7 +77,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `true`" do
-          expect(result.from_step?).to eq(true)
+          expect(result.from_step?).to be(true)
         end
       end
     end

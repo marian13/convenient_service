@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Base, type: 
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::AbstractMethod)).to eq(true) }
+    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::AbstractMethod)).to be(true) }
   end
 
   example_group "class methods" do

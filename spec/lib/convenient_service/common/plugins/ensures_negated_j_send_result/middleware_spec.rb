@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Mi
         end
 
         it "returns negated result" do
-          expect(method_value.negated?).to eq(true)
+          expect(method_value.negated?).to be(true)
         end
       end
 
@@ -102,7 +102,7 @@ RSpec.describe ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Mi
         end
 
         it "returns negated result" do
-          expect(method_value.negated?).to eq(true)
+          expect(method_value.negated?).to be(true)
         end
       end
     end

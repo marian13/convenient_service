@@ -609,7 +609,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer) { nil }
 
         it "returns `false`" do
-          expect(step.has_organizer?).to eq(false)
+          expect(step.has_organizer?).to be(false)
         end
       end
 
@@ -617,7 +617,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:organizer) { double }
 
         it "returns `true`" do
-          expect(step.has_organizer?).to eq(true)
+          expect(step.has_organizer?).to be(true)
         end
       end
     end
@@ -751,7 +751,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
 
       it "returns `true`" do
-        expect(step.define!).to eq(true)
+        expect(step.define!).to be(true)
       end
     end
 
@@ -761,7 +761,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:other) { "string" }
 
           it "returns `nil`" do
-            expect(step == other).to eq(nil)
+            expect(step == other).to be_nil
           end
         end
 
@@ -769,7 +769,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:other) { step_class.new(Class.new, **kwargs) }
 
           it "returns `false`" do
-            expect(step == other).to eq(false)
+            expect(step == other).to be(false)
           end
         end
 
@@ -777,7 +777,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:other) { step_class.new(*args, **kwargs.merge(container: Class.new)) }
 
           it "returns `false`" do
-            expect(step == other).to eq(false)
+            expect(step == other).to be(false)
           end
         end
 
@@ -785,7 +785,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:other) { step_class.new(*args, **kwargs.merge(index: 1)) }
 
           it "returns `false`" do
-            expect(step == other).to eq(false)
+            expect(step == other).to be(false)
           end
         end
 
@@ -793,7 +793,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:other) { step_class.new(*args, **kwargs.merge(organizer: nil)) }
 
           it "returns `false`" do
-            expect(step == other).to eq(false)
+            expect(step == other).to be(false)
           end
         end
 
@@ -801,7 +801,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:other) { step_class.new(*args, **kwargs.merge(in: [])) }
 
           it "returns `false`" do
-            expect(step == other).to eq(false)
+            expect(step == other).to be(false)
           end
         end
 
@@ -809,7 +809,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:other) { step_class.new(*args, **kwargs.merge(out: [])) }
 
           it "returns `false`" do
-            expect(step == other).to eq(false)
+            expect(step == other).to be(false)
           end
         end
 
@@ -817,7 +817,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:other) { step_class.new(*args, **kwargs.merge(fallback: false)) }
 
           it "returns `false`" do
-            expect(step == other).to eq(false)
+            expect(step == other).to be(false)
           end
         end
 
@@ -825,7 +825,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           let(:other) { step_class.new(*args, **kwargs) }
 
           it "returns `true`" do
-            expect(step == other).to eq(true)
+            expect(step == other).to be(true)
           end
         end
       end

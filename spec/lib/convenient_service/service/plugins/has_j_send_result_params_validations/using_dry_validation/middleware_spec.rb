@@ -190,13 +190,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
   end
 
   context "when status is failure" do
-    include_examples "verify middleware behavior" do
+    it_behaves_like "verify middleware behavior" do
       let(:status) { :failure }
     end
   end
 
   context "when status is error" do
-    include_examples "verify middleware behavior" do
+    it_behaves_like "verify middleware behavior" do
       let(:status) { :error }
     end
   end

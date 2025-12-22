@@ -142,9 +142,14 @@ module ConvenientService
                         # @param statuses [Array<ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status>]
                         # @return [Boolean]
                         #
+                        # @internal
+                        #   NOTE: `any?(arg)` compares with `===`. For this method `==` is mandatory.
+                        #
+                        # rubocop:disable Performance/RedundantEqualityComparisonBlock
                         def in?(statuses)
                           statuses.any? { |status| self == status }
                         end
+                        # rubocop:enable Performance/RedundantEqualityComparisonBlock
 
                         ##
                         # @return [Hash{Symbol => Object}]

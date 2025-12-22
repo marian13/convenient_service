@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:other) { described_class.new.tap { |outputs| outputs.delegations << double } }
 
           it "returns `false`" do
-            expect(outputs == other).to eq(false)
+            expect(outputs == other).to be(false)
           end
         end
 
@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:other) { described_class.new }
 
           it "returns `true`" do
-            expect(outputs == other).to eq(true)
+            expect(outputs == other).to be(true)
           end
         end
       end

@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         let(:other) { described_class.new(:initialize, scope, entity) }
 
         it "returns `false`" do
-          expect(intented_method == other).to eq(false)
+          expect(intented_method == other).to be(false)
         end
       end
 
@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         let(:other) { described_class.new(method, :class, entity) }
 
         it "returns `false`" do
-          expect(intented_method == other).to eq(false)
+          expect(intented_method == other).to be(false)
         end
       end
 
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         let(:other) { described_class.new(method, scope, :result) }
 
         it "returns `false`" do
-          expect(intented_method == other).to eq(false)
+          expect(intented_method == other).to be(false)
         end
       end
 
@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         let(:other) { described_class.new(method, scope, entity) }
 
         it "returns `true`" do
-          expect(intented_method == other).to eq(true)
+          expect(intented_method == other).to be(true)
         end
       end
     end

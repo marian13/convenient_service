@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:chain) { described_class.new }
 
         it "returns `false`" do
-          expect(chain.used_data?).to eq(false)
+          expect(chain.used_data?).to be(false)
         end
       end
 
@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:data) { {foo: :bar} }
 
         it "returns `true`" do
-          expect(chain.used_data?).to eq(true)
+          expect(chain.used_data?).to be(true)
         end
       end
     end
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:chain) { described_class.new }
 
         it "returns `false`" do
-          expect(chain.used_message?).to eq(false)
+          expect(chain.used_message?).to be(false)
         end
       end
 
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:message) { "foo" }
 
         it "returns `true`" do
-          expect(chain.used_message?).to eq(true)
+          expect(chain.used_message?).to be(true)
         end
       end
     end
@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:chain) { described_class.new }
 
         it "returns `false`" do
-          expect(chain.used_code?).to eq(false)
+          expect(chain.used_code?).to be(false)
         end
       end
 
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:code) { :foo }
 
         it "returns `true`" do
-          expect(chain.used_code?).to eq(true)
+          expect(chain.used_code?).to be(true)
         end
       end
     end
@@ -74,7 +74,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:chain) { described_class.new }
 
         it "returns `false`" do
-          expect(chain.used_service?).to eq(false)
+          expect(chain.used_service?).to be(false)
         end
       end
 
@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         end
 
         it "returns `true`" do
-          expect(chain.used_service?).to eq(true)
+          expect(chain.used_service?).to be(true)
         end
       end
     end
@@ -98,7 +98,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:chain) { described_class.new }
 
         it "returns `false`" do
-          expect(chain.used_original_service?).to eq(false)
+          expect(chain.used_original_service?).to be(false)
         end
       end
 
@@ -112,7 +112,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         end
 
         it "returns `true`" do
-          expect(chain.used_original_service?).to eq(true)
+          expect(chain.used_original_service?).to be(true)
         end
       end
     end
@@ -122,7 +122,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:chain) { described_class.new }
 
         it "returns `false`" do
-          expect(chain.used_step?).to eq(false)
+          expect(chain.used_step?).to be(false)
         end
       end
 
@@ -131,7 +131,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:step) { :foo }
 
         it "returns `true`" do
-          expect(chain.used_step?).to eq(true)
+          expect(chain.used_step?).to be(true)
         end
       end
     end
@@ -141,7 +141,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:chain) { described_class.new }
 
         it "returns `false`" do
-          expect(chain.used_step_index?).to eq(false)
+          expect(chain.used_step_index?).to be(false)
         end
       end
 
@@ -150,7 +150,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:index) { 0 }
 
         it "returns `true`" do
-          expect(chain.used_step_index?).to eq(true)
+          expect(chain.used_step_index?).to be(true)
         end
       end
     end
@@ -471,7 +471,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
           let(:other) { described_class.new.tap { |chain| chain.data = {foo: :bar} } }
 
           it "returns `false`" do
-            expect(chain == other).to eq(false)
+            expect(chain == other).to be(false)
           end
         end
 
@@ -479,7 +479,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
           let(:other) { described_class.new }
 
           it "returns `true`" do
-            expect(chain == other).to eq(true)
+            expect(chain == other).to be(true)
           end
         end
       end

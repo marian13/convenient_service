@@ -14,6 +14,6 @@ RSpec.describe ConvenientService::Support::AbstractMethod::Exceptions, type: :st
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class::AbstractMethodNotOverridden < ConvenientService::Exception).to eq(true) }
+    specify { expect(described_class::AbstractMethodNotOverridden < ConvenientService::Exception).to be(true) }
   end
 end

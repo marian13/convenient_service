@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entitie
         let(:other) { described_class.cast("1") }
 
         it "returns true" do
-          expect(id == other).to eq(false)
+          expect(id == other).to be(false)
         end
       end
 
@@ -80,7 +80,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entitie
         let(:other) { described_class.cast(value) }
 
         it "returns true" do
-          expect(id == other).to eq(true)
+          expect(id == other).to be(true)
         end
       end
     end

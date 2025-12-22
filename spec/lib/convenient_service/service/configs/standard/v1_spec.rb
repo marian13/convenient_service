@@ -650,7 +650,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
       end
 
       it "returns only enabled options" do
-        expect(described_class.available_options.to_a.all?(&:enabled?)).to eq(true)
+        expect(described_class.available_options.to_a.all?(&:enabled?)).to be(true)
       end
     end
 
@@ -680,7 +680,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         end
 
         it "returns only enabled options" do
-          expect(described_class.default_options.to_a.all?(&:enabled?)).to eq(true)
+          expect(described_class.default_options.to_a.all?(&:enabled?)).to be(true)
         end
       end
     end

@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
             let(:other) { 42 }
 
             it "returns `false`" do
-              expect(generated_middleware.original_two_equals(other)).to eq(false)
+              expect(generated_middleware.original_two_equals(other)).to be(false)
             end
           end
 
@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
             let(:other) { ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware }
 
             it "returns `false`" do
-              expect(generated_middleware.original_two_equals(other)).to eq(false)
+              expect(generated_middleware.original_two_equals(other)).to be(false)
             end
           end
 
@@ -102,7 +102,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
               end
 
               it "returns `false`" do
-                expect(generated_middleware.original_two_equals(other)).to eq(false)
+                expect(generated_middleware.original_two_equals(other)).to be(false)
               end
             end
 
@@ -110,7 +110,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
               let(:other) { generated_middleware }
 
               it "returns `true`" do
-                expect(generated_middleware.original_two_equals(other)).to eq(true)
+                expect(generated_middleware.original_two_equals(other)).to be(true)
               end
             end
           end
@@ -122,7 +122,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
               let(:other) { 42 }
 
               it "returns `nil`" do
-                expect(generated_middleware == other).to eq(nil)
+                expect(generated_middleware == other).to be_nil
               end
             end
 
@@ -131,7 +131,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
                 let(:other) { Class.new }
 
                 it "returns `nil`" do
-                  expect(generated_middleware == other).to eq(nil)
+                  expect(generated_middleware == other).to be_nil
                 end
               end
 
@@ -146,7 +146,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
                   end
 
                   it "returns `false`" do
-                    expect(generated_middleware == other).to eq(false)
+                    expect(generated_middleware == other).to be(false)
                   end
                 end
 
@@ -160,7 +160,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
                   end
 
                   it "returns `true`" do
-                    expect(generated_middleware == other).to eq(true)
+                    expect(generated_middleware == other).to be(true)
                   end
                 end
               end
@@ -169,7 +169,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
 
           context "when other is `ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware`" do
             it "returns `nil`" do
-              expect(generated_middleware == ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware).to eq(nil)
+              expect(generated_middleware == ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware).to be_nil
             end
           end
         end

@@ -600,7 +600,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
                 let(:other) { Module.new }
 
                 it "returns `false`" do
-                  expect(config == other).to eq(false)
+                  expect(config == other).to be(false)
                 end
               end
 
@@ -614,7 +614,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
                 end
 
                 it "returns `false`" do
-                  expect(config == other).to eq(false)
+                  expect(config == other).to be(false)
                 end
               end
 
@@ -622,7 +622,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
                 let(:other) { config.with(:baz, :qux) }
 
                 it "returns `false`" do
-                  expect(config == other).to eq(false)
+                  expect(config == other).to be(false)
                 end
               end
 
@@ -630,7 +630,7 @@ RSpec.describe ConvenientService::Config, type: :standard do
                 let(:other) { config.with(:foo, :bar) }
 
                 it "returns `true`" do
-                  expect(config == other).to eq(true)
+                  expect(config == other).to be(true)
                 end
               end
             end

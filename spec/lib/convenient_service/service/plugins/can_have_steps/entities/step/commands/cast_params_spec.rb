@@ -187,7 +187,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             let(:strict) { 42 }
 
             it "converts `original_params.strict` to `true`" do
-              expect(command_result.strict).to eq(true)
+              expect(command_result.strict).to be(true)
             end
           end
 
@@ -195,7 +195,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             let(:strict) { nil }
 
             it "converts `original_params.strict` to `false`" do
-              expect(command_result.strict).to eq(false)
+              expect(command_result.strict).to be(false)
             end
           end
         end

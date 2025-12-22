@@ -244,7 +244,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             end
 
             it "raises exception that can be rescued by `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeCalled::Exceptions::ErrorResultIsCalled`" do
-              expect(rescued).to eq(true)
+              expect(rescued).to be(true)
             end
           end
 
@@ -258,7 +258,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             end
 
             it "raises exception that can be rescued by `ConvenientService::Result::Exceptions::ErrorResultIsCalled` alias" do
-              expect(rescued).to eq(true)
+              expect(rescued).to be(true)
             end
           end
         end

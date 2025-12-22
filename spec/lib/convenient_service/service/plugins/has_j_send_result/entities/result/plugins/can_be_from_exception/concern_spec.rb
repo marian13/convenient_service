@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       context "when result is NOT created from unhandled exception`" do
         it "returns `false`" do
-          expect(result.from_unhandled_exception?).to eq(false)
+          expect(result.from_unhandled_exception?).to be(false)
         end
       end
 
@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `true`" do
-          expect(result.from_unhandled_exception?).to eq(true)
+          expect(result.from_unhandled_exception?).to be(true)
         end
       end
     end

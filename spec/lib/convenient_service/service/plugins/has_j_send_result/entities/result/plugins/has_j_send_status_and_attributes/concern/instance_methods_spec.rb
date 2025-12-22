@@ -330,7 +330,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { "string" }
 
         it "returns `nil`" do
-          expect(result == other).to eq(nil)
+          expect(result == other).to be_nil
         end
       end
 
@@ -339,7 +339,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:other) { result_class.new(**params.merge(service: Object.new)) }
 
           it "returns `false`" do
-            expect(result == other).to eq(false)
+            expect(result == other).to be(false)
           end
         end
 
@@ -347,7 +347,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:other) { result_class.new(**params.merge(service: service_class.new)) }
 
           it "returns `false`" do
-            expect(result == other).to eq(true)
+            expect(result == other).to be(true)
           end
         end
       end
@@ -356,7 +356,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { result_class.new(**params.merge(status: :bar)) }
 
         it "returns `false`" do
-          expect(result == other).to eq(false)
+          expect(result == other).to be(false)
         end
       end
 
@@ -364,7 +364,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { result_class.new(**params.merge(data: {bar: :foo})) }
 
         it "returns `false`" do
-          expect(result == other).to eq(false)
+          expect(result == other).to be(false)
         end
       end
 
@@ -372,7 +372,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { result_class.new(**params.merge(message: "bar")) }
 
         it "returns `false`" do
-          expect(result == other).to eq(false)
+          expect(result == other).to be(false)
         end
       end
 
@@ -380,7 +380,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { result_class.new(**params.merge(code: :bar)) }
 
         it "returns `false`" do
-          expect(result == other).to eq(false)
+          expect(result == other).to be(false)
         end
       end
 
@@ -388,7 +388,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { result_class.new(**params.merge(parent: nil)) }
 
         it "ignores them" do
-          expect(result == other).to eq(true)
+          expect(result == other).to be(true)
         end
       end
 
@@ -396,7 +396,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { result_class.new(**params) }
 
         it "returns `true`" do
-          expect(result == other).to eq(true)
+          expect(result == other).to be(true)
         end
       end
     end

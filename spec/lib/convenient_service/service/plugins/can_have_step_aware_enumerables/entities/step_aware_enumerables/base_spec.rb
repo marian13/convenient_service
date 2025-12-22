@@ -307,7 +307,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
           let(:other) { described_class.new(object: {foo: :bar, baz: :qux}, organizer: organizer, propagated_result: propagated_result) }
 
           it "returns `false`" do
-            expect(step_aware_base == other).to eq(false)
+            expect(step_aware_base == other).to be(false)
           end
         end
 
@@ -315,7 +315,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
           let(:other) { described_class.new(object: object, organizer: service.new, propagated_result: propagated_result) }
 
           it "returns `false`" do
-            expect(step_aware_base == other).to eq(false)
+            expect(step_aware_base == other).to be(false)
           end
         end
 
@@ -323,7 +323,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
           let(:other) { described_class.new(object: object, organizer: organizer, propagated_result: service.failure) }
 
           it "returns `false`" do
-            expect(step_aware_base == other).to eq(false)
+            expect(step_aware_base == other).to be(false)
           end
         end
 
@@ -331,7 +331,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables:
           let(:other) { described_class.new(object: object, organizer: organizer, propagated_result: propagated_result) }
 
           it "returns `true`" do
-            expect(step_aware_base == other).to eq(true)
+            expect(step_aware_base == other).to be(true)
           end
         end
       end

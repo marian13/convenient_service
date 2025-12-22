@@ -136,7 +136,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           let(:other) { method_class.new(**method_kwargs.merge(key: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod.call(other: :bar, options: method_options).key)) }
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -144,7 +144,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           let(:other) { method_class.new(**method_kwargs.merge(name: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod.call(other: :bar, options: method_options).name)) }
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -152,7 +152,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           let(:other) { method_class.new(**method_kwargs.merge(caller: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod.call(other: :bar, options: method_options).caller)) }
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -160,7 +160,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           let(:other) { method_class.new(**method_kwargs.merge(direction: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::CastMethod.call(other: method_other, options: {direction: :output}).caller)) }
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -168,7 +168,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           let(:other) { method_class.new(**method_kwargs.merge(organizer: service_class.new)) }
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -176,7 +176,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           let(:other) { method_class.new(**method_kwargs) }
 
           it "returns `true`" do
-            expect(method == other).to eq(true)
+            expect(method == other).to be(true)
           end
         end
       end
@@ -187,7 +187,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         let(:method_instance) { method_class.new(**ConvenientService::Utils::Hash.except(method_kwargs, [:organizer])) }
 
         it "returns `false`" do
-          expect(method.has_organizer?).to eq(false)
+          expect(method.has_organizer?).to be(false)
         end
       end
 
@@ -195,7 +195,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         let(:method_instance) { method_class.new(**method_kwargs.merge(organizer: organizer)) }
 
         it "returns `true`" do
-          expect(method.has_organizer?).to eq(true)
+          expect(method.has_organizer?).to be(true)
         end
       end
     end
@@ -212,7 +212,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       let(:index) { 0 }
 
       it "returns `true`" do
-        expect(method.define_output_in_container!(container, index: index)).to eq(true)
+        expect(method.define_output_in_container!(container, index: index)).to be(true)
       end
 
       specify do

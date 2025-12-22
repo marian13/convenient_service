@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Constants, type:
 
     describe "::DEFAULT_PREPEND" do
       it "returns `false`" do
-        expect(described_class::DEFAULT_PREPEND).to eq(false)
+        expect(described_class::DEFAULT_PREPEND).to be(false)
       end
     end
   end

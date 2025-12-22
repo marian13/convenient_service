@@ -60,7 +60,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
 
       context "when NO `sub_matcher` is used" do
         it "returns `true`" do
-          expect(sub_matcher_collection.matches?(block_expectation)).to eq(true)
+          expect(sub_matcher_collection.matches?(block_expectation)).to be(true)
         end
       end
 
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:block_expectation) { proc { object } }
 
           it "returns `false`" do
-            expect(sub_matcher_collection.matches?(block_expectation)).to eq(false)
+            expect(sub_matcher_collection.matches?(block_expectation)).to be(false)
           end
         end
       end
@@ -103,7 +103,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:block_expectation) { proc { object } }
 
           it "returns `false`" do
-            expect(sub_matcher_collection.matches?(block_expectation)).to eq(false)
+            expect(sub_matcher_collection.matches?(block_expectation)).to be(false)
           end
         end
       end
@@ -119,7 +119,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:block_expectation) { proc { object } }
 
           it "returns `false`" do
-            expect(sub_matcher_collection.matches?(block_expectation)).to eq(false)
+            expect(sub_matcher_collection.matches?(block_expectation)).to be(false)
           end
         end
 
@@ -127,7 +127,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:block_expectation) { proc { object.foo } }
 
           it "returns `true`" do
-            expect(sub_matcher_collection.matches?(block_expectation)).to eq(true)
+            expect(sub_matcher_collection.matches?(block_expectation)).to be(true)
           end
         end
       end
@@ -374,7 +374,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         end
 
         it "returns `false`" do
-          expect(sub_matcher_collection.has_arguments?).to eq(false)
+          expect(sub_matcher_collection.has_arguments?).to be(false)
         end
       end
 
@@ -384,7 +384,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         end
 
         it "returns `true`" do
-          expect(sub_matcher_collection.has_arguments?).to eq(true)
+          expect(sub_matcher_collection.has_arguments?).to be(true)
         end
       end
     end
@@ -396,7 +396,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         end
 
         it "returns `false`" do
-          expect(sub_matcher_collection.has_return_value?).to eq(false)
+          expect(sub_matcher_collection.has_return_value?).to be(false)
         end
       end
 
@@ -406,7 +406,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         end
 
         it "returns `true`" do
-          expect(sub_matcher_collection.has_return_value?).to eq(true)
+          expect(sub_matcher_collection.has_return_value?).to be(true)
         end
       end
     end

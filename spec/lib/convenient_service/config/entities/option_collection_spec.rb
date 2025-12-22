@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
         end
 
         it "returns `false`" do
-          expect(option_collection.include?(:callbacks)).to eq(false)
+          expect(option_collection.include?(:callbacks)).to be(false)
         end
       end
 
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
         end
 
         it "returns `true`" do
-          expect(option_collection.include?(:callbacks)).to eq(true)
+          expect(option_collection.include?(:callbacks)).to be(true)
         end
       end
     end
@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
         end
 
         it "returns `false`" do
-          expect(option_collection.enabled?(:callbacks)).to eq(false)
+          expect(option_collection.enabled?(:callbacks)).to be(false)
         end
       end
 
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
           end
 
           it "returns `false`" do
-            expect(option_collection.enabled?(:callbacks)).to eq(false)
+            expect(option_collection.enabled?(:callbacks)).to be(false)
           end
         end
 
@@ -84,7 +84,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
           end
 
           it "returns `true`" do
-            expect(option_collection.enabled?(:callbacks)).to eq(true)
+            expect(option_collection.enabled?(:callbacks)).to be(true)
           end
         end
       end
@@ -99,7 +99,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
         end
 
         it "returns `true`" do
-          expect(option_collection.disabled?(:callbacks)).to eq(true)
+          expect(option_collection.disabled?(:callbacks)).to be(true)
         end
       end
 
@@ -112,7 +112,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
           end
 
           it "returns `true`" do
-            expect(option_collection.disabled?(:callbacks)).to eq(true)
+            expect(option_collection.disabled?(:callbacks)).to be(true)
           end
         end
 
@@ -124,7 +124,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
           end
 
           it "returns `false`" do
-            expect(option_collection.disabled?(:callbacks)).to eq(false)
+            expect(option_collection.disabled?(:callbacks)).to be(false)
           end
         end
       end
@@ -164,7 +164,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
           let(:other) { described_class.new(options: {rspec: ConvenientService::Config::Entities::Option.new(name: :rspec, enabled: true)}) }
 
           it "returns `false`" do
-            expect(option_collection == other).to eq(false)
+            expect(option_collection == other).to be(false)
           end
         end
 
@@ -172,7 +172,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
           let(:other) { described_class.new(options: options) }
 
           it "returns `true`" do
-            expect(option_collection == other).to eq(true)
+            expect(option_collection == other).to be(true)
           end
         end
       end

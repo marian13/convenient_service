@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
       subject(:type_collection) { described_class.new(types: types) }
 
       let(:types) { [:before, :result] }
-      let(:casted_types) { types.map(&ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.method(:cast!)) }
+      let(:casted_types) { types.map { |type| ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.cast!(type) } }
 
       it "casts types to `ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type` instances" do
         expect(type_collection.types).to eq(casted_types)
@@ -37,8 +37,8 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
 
     let(:types) { [:before, :result] }
     let(:other_types) { [:after, :step] }
-    let(:casted_types) { types.map(&ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.method(:cast!)) }
-    let(:casted_other_types) { other_types.map(&ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.method(:cast!)) }
+    let(:casted_types) { types.map { |type| ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.cast!(type) } }
+    let(:casted_other_types) { other_types.map { |type| ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::Type.cast!(type) } }
 
     describe "#contain_exactly?" do
       it "casts other types" do
@@ -73,7 +73,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
         let(:other) { "string" }
 
         it "returns nil" do
-          expect(type_collection == other).to eq(nil)
+          expect(type_collection == other).to be_nil
         end
       end
 
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
         let(:other) { described_class.new(types: [:after, :step]) }
 
         it "returns false" do
-          expect(type_collection == other).to eq(false)
+          expect(type_collection == other).to be(false)
         end
       end
 
@@ -89,7 +89,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
         let(:other) { described_class.new(types: types) }
 
         it "returns true" do
-          expect(type_collection == other).to eq(true)
+          expect(type_collection == other).to be(true)
         end
       end
     end

@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
           let(:other) { described_class.new(value: :stub_value, feature_class: feature_class) }
 
           it "returns `false`" do
-            expect(value_spec == other).to eq(false)
+            expect(value_spec == other).to be(false)
           end
         end
 
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
           let(:other) { described_class.new(value: value, feature_class: Class.new) }
 
           it "returns `false`" do
-            expect(value_spec == other).to eq(false)
+            expect(value_spec == other).to be(false)
           end
         end
 
@@ -80,7 +80,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
           let(:other) { described_class.new(value: value, feature_class: feature_class) }
 
           it "returns `true`" do
-            expect(value_spec == other).to eq(true)
+            expect(value_spec == other).to be(true)
           end
         end
       end

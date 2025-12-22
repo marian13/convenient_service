@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         let(:delegation) { described_class.new(object: object, method: method, args: args, kwargs: {}, block: nil) }
 
         it "returns `true`" do
-          expect(delegation.with_arguments?).to eq(true)
+          expect(delegation.with_arguments?).to be(true)
         end
       end
 
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         let(:delegation) { described_class.new(object: object, method: method, args: [], kwargs: kwargs, block: nil) }
 
         it "returns `true`" do
-          expect(delegation.with_arguments?).to eq(true)
+          expect(delegation.with_arguments?).to be(true)
         end
       end
 
@@ -74,7 +74,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         let(:delegation) { described_class.new(object: object, method: method, args: [], kwargs: {}, block: block) }
 
         it "returns `true`" do
-          expect(delegation.with_arguments?).to eq(true)
+          expect(delegation.with_arguments?).to be(true)
         end
       end
 
@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         let(:delegation) { described_class.new(object: object, method: method, args: [], kwargs: {}, block: nil) }
 
         it "returns `false`" do
-          expect(delegation.with_arguments?).to eq(false)
+          expect(delegation.with_arguments?).to be(false)
         end
       end
     end
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         let(:delegation) { described_class.new(object: object, method: method, args: args, kwargs: {}, block: nil) }
 
         it "returns `false`" do
-          expect(delegation.without_arguments?).to eq(false)
+          expect(delegation.without_arguments?).to be(false)
         end
       end
 
@@ -100,7 +100,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         let(:delegation) { described_class.new(object: object, method: method, args: [], kwargs: kwargs, block: nil) }
 
         it "returns `false`" do
-          expect(delegation.without_arguments?).to eq(false)
+          expect(delegation.without_arguments?).to be(false)
         end
       end
 
@@ -108,7 +108,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         let(:delegation) { described_class.new(object: object, method: method, args: [], kwargs: {}, block: block) }
 
         it "returns `false`" do
-          expect(delegation.without_arguments?).to eq(false)
+          expect(delegation.without_arguments?).to be(false)
         end
       end
 
@@ -116,7 +116,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         let(:delegation) { described_class.new(object: object, method: method, args: [], kwargs: {}, block: nil) }
 
         it "returns `true`" do
-          expect(delegation.without_arguments?).to eq(true)
+          expect(delegation.without_arguments?).to be(true)
         end
       end
     end
@@ -137,7 +137,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:other) { described_class.new(object: Object.new, method: method, args: args, kwargs: kwargs, block: block) }
 
           it "returns `false`" do
-            expect(delegation == other).to eq(false)
+            expect(delegation == other).to be(false)
           end
         end
 
@@ -145,7 +145,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:other) { described_class.new(object: object, method: :qux, args: args, kwargs: kwargs, block: block) }
 
           it "returns `false`" do
-            expect(delegation == other).to eq(false)
+            expect(delegation == other).to be(false)
           end
         end
 
@@ -153,7 +153,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:other) { described_class.new(object: object, method: method, args: [], kwargs: kwargs, block: block) }
 
           it "returns `false`" do
-            expect(delegation == other).to eq(false)
+            expect(delegation == other).to be(false)
           end
         end
 
@@ -161,7 +161,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:other) { described_class.new(object: object, method: method, args: args, kwargs: {}, block: block) }
 
           it "returns `false`" do
-            expect(delegation == other).to eq(false)
+            expect(delegation == other).to be(false)
           end
         end
 
@@ -169,7 +169,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:other) { described_class.new(object: object, method: method, args: args, kwargs: kwargs, block: nil) }
 
           it "returns `false`" do
-            expect(delegation == other).to eq(false)
+            expect(delegation == other).to be(false)
           end
         end
 
@@ -177,7 +177,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:other) { described_class.new(object: object, method: method, args: args, kwargs: kwargs, block: block) }
 
           it "returns `true`" do
-            expect(delegation == other).to eq(true)
+            expect(delegation == other).to be(true)
           end
         end
       end

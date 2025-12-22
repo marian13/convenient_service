@@ -85,7 +85,7 @@ RSpec.describe ConvenientService::Support::UniqueValue, type: :standard do
           let(:other) { described_class.new("bar") }
 
           it "returns `false`" do
-            expect(unique_value == other).to eq(false)
+            expect(unique_value == other).to be(false)
           end
         end
 
@@ -93,7 +93,7 @@ RSpec.describe ConvenientService::Support::UniqueValue, type: :standard do
           let(:other) { unique_value }
 
           it "returns `true`" do
-            expect(unique_value == other).to eq(true)
+            expect(unique_value == other).to be(true)
           end
         end
       end
@@ -113,7 +113,7 @@ RSpec.describe ConvenientService::Support::UniqueValue, type: :standard do
           let(:other) { described_class.new("bar") }
 
           it "returns `false`" do
-            expect(unique_value === other).to eq(false)
+            expect(unique_value === other).to be(false)
           end
         end
 
@@ -121,7 +121,7 @@ RSpec.describe ConvenientService::Support::UniqueValue, type: :standard do
           let(:other) { unique_value }
 
           it "returns `true`" do
-            expect(unique_value === other).to eq(true)
+            expect(unique_value === other).to be(true)
           end
         end
       end
@@ -141,7 +141,7 @@ RSpec.describe ConvenientService::Support::UniqueValue, type: :standard do
           let(:other) { described_class.new("bar") }
 
           it "returns `false`" do
-            expect(unique_value.eql?(other)).to eq(false)
+            expect(unique_value.eql?(other)).to be(false)
           end
         end
 
@@ -149,7 +149,7 @@ RSpec.describe ConvenientService::Support::UniqueValue, type: :standard do
           let(:other) { unique_value }
 
           it "returns `true`" do
-            expect(unique_value.eql?(other)).to eq(true)
+            expect(unique_value.eql?(other)).to be(true)
           end
         end
       end

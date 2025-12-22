@@ -14,9 +14,9 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Exceptions, type
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class::InvalidScope < ConvenientService::Exception).to eq(true) }
-    specify { expect(described_class::NotExportableModule < ConvenientService::Exception).to eq(true) }
-    specify { expect(described_class::NotExportedMethod < ConvenientService::Exception).to eq(true) }
-    specify { expect(described_class::NotModule < ConvenientService::Exception).to eq(true) }
+    specify { expect(described_class::InvalidScope < ConvenientService::Exception).to be(true) }
+    specify { expect(described_class::NotExportableModule < ConvenientService::Exception).to be(true) }
+    specify { expect(described_class::NotExportedMethod < ConvenientService::Exception).to be(true) }
+    specify { expect(described_class::NotModule < ConvenientService::Exception).to be(true) }
   end
 end

@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Export, type: :stand
         let(:scope) { :class }
 
         it "returns `false`" do
-          expect(matcher_result).to eq(false)
+          expect(matcher_result).to be(false)
         end
       end
 
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Export, type: :stand
         let(:scope) { :class }
 
         it "returns `true`" do
-          expect(matcher_result).to eq(true)
+          expect(matcher_result).to be(true)
         end
       end
 
@@ -73,7 +73,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Export, type: :stand
         let(:kwargs) { ConvenientService::Utils::Hash.except(default_kwargs, [:scope]) }
 
         it "defaults scope to `:instance`" do
-          expect(matcher_result).to eq(true)
+          expect(matcher_result).to be(true)
         end
       end
     end

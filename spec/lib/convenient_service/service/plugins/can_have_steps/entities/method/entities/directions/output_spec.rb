@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       let(:index) { 0 }
 
       it "returns `false`" do
-        expect(direction.define_output_in_container!(container, index: 0, method: method)).to eq(false)
+        expect(direction.define_output_in_container!(container, index: 0, method: method)).to be(false)
       end
     end
   end

@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Utils::Module::HasOwnInstanceMethod, type: :st
           ##
           # NOTE: Same result as in "when `private` is `false`".
           #
-          expect(util_result).to eq(false)
+          expect(util_result).to be(false)
         end
       end
 
@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Utils::Module::HasOwnInstanceMethod, type: :st
           let(:private) { false }
 
           it "returns `false`" do
-            expect(util_result).to eq(false)
+            expect(util_result).to be(false)
           end
         end
 
@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Utils::Module::HasOwnInstanceMethod, type: :st
             end
 
             it "returns `false`" do
-              expect(util_result).to eq(false)
+              expect(util_result).to be(false)
             end
           end
 
@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Utils::Module::HasOwnInstanceMethod, type: :st
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
         end
@@ -99,7 +99,7 @@ RSpec.describe ConvenientService::Utils::Module::HasOwnInstanceMethod, type: :st
       end
 
       it "returns `true`" do
-        expect(util_result).to eq(true)
+        expect(util_result).to be(true)
       end
     end
 

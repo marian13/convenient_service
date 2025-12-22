@@ -193,7 +193,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
           let(:other) { printer_class.new(matcher: be_error) }
 
           it "returns `false`" do
-            expect(printer == other).to eq(false)
+            expect(printer == other).to be(false)
           end
         end
 
@@ -201,7 +201,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
           let(:other) { printer_class.new(matcher: matcher) }
 
           it "returns `true`" do
-            expect(printer == other).to eq(true)
+            expect(printer == other).to be(true)
           end
         end
       end

@@ -500,7 +500,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns strict result" do
-            expect(step.result.strict?).to eq(true)
+            expect(step.result.strict?).to be(true)
           end
         end
       end

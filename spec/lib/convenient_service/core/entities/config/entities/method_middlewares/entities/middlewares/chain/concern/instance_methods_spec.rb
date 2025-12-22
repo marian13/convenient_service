@@ -69,7 +69,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     describe "#entity" do
       context "when middleware is NOT called" do
         it "returns `nil`" do
-          expect(middleware_instance.entity).to eq(nil)
+          expect(middleware_instance.entity).to be_nil
         end
       end
 
@@ -85,7 +85,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     describe "#method" do
       context "when middleware is NOT called" do
         it "returns `nil`" do
-          expect(middleware_instance.method).to eq(nil)
+          expect(middleware_instance.method).to be_nil
         end
       end
 

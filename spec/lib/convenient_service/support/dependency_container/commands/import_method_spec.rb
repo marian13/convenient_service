@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
             ##
             # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
             #
-            expect(importing_module.ancestors.drop_while { |ancestor| ancestor != importing_module }.include?(importing_module::ImportedIncludedInstanceMethods)).to eq(true)
+            expect(importing_module.ancestors.drop_while { |ancestor| ancestor != importing_module }.include?(importing_module::ImportedIncludedInstanceMethods)).to be(true)
           end
 
           ##
@@ -115,7 +115,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
             ##
             # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
             #
-            expect(importing_module.ancestors.take_while { |ancestor| ancestor != importing_module }.include?(importing_module::ImportedPrependedInstanceMethods)).to eq(true)
+            expect(importing_module.ancestors.take_while { |ancestor| ancestor != importing_module }.include?(importing_module::ImportedPrependedInstanceMethods)).to be(true)
           end
 
           ##
@@ -169,7 +169,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
             ##
             # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
             #
-            expect(importing_module.singleton_class.ancestors.drop_while { |ancestor| ancestor != importing_module.singleton_class }.include?(importing_module::ImportedIncludedClassMethods)).to eq(true)
+            expect(importing_module.singleton_class.ancestors.drop_while { |ancestor| ancestor != importing_module.singleton_class }.include?(importing_module::ImportedIncludedClassMethods)).to be(true)
           end
 
           ##
@@ -216,7 +216,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Commands::Import
             ##
             # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
             #
-            expect(importing_module.singleton_class.ancestors.take_while { |ancestor| ancestor != importing_module.singleton_class }.include?(importing_module::ImportedPrependedClassMethods)).to eq(true)
+            expect(importing_module.singleton_class.ancestors.take_while { |ancestor| ancestor != importing_module.singleton_class }.include?(importing_module::ImportedPrependedClassMethods)).to be(true)
           end
 
           ##

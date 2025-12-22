@@ -118,7 +118,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "defaults to `false`" do
-          expect(step.fallback_failure_step?).to eq(false)
+          expect(step.fallback_failure_step?).to be(false)
         end
       end
 
@@ -134,7 +134,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `false`" do
-          expect(step.fallback_failure_step?).to eq(false)
+          expect(step.fallback_failure_step?).to be(false)
         end
       end
 
@@ -151,7 +151,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `false`" do
-            expect(step.fallback_failure_step?).to eq(false)
+            expect(step.fallback_failure_step?).to be(false)
           end
         end
 
@@ -167,7 +167,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `false`" do
-            expect(step.fallback_failure_step?).to eq(false)
+            expect(step.fallback_failure_step?).to be(false)
           end
         end
       end
@@ -185,7 +185,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `false`" do
-            expect(step.fallback_failure_step?).to eq(false)
+            expect(step.fallback_failure_step?).to be(false)
           end
         end
 
@@ -201,7 +201,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `true`" do
-            expect(step.fallback_failure_step?).to eq(true)
+            expect(step.fallback_failure_step?).to be(true)
           end
         end
       end
@@ -219,7 +219,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `false`" do
-            expect(step.fallback_failure_step?).to eq(false)
+            expect(step.fallback_failure_step?).to be(false)
           end
         end
 
@@ -235,7 +235,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `false`" do
-            expect(step.fallback_failure_step?).to eq(false)
+            expect(step.fallback_failure_step?).to be(false)
           end
         end
 
@@ -251,7 +251,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `true`" do
-            expect(step.fallback_failure_step?).to eq(true)
+            expect(step.fallback_failure_step?).to be(true)
           end
         end
       end
@@ -286,7 +286,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "defaults to `false`" do
-          expect(step.fallback_error_step?).to eq(false)
+          expect(step.fallback_error_step?).to be(false)
         end
       end
 
@@ -302,7 +302,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `false`" do
-          expect(step.fallback_error_step?).to eq(false)
+          expect(step.fallback_error_step?).to be(false)
         end
       end
 
@@ -319,7 +319,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `false`" do
-            expect(step.fallback_error_step?).to eq(false)
+            expect(step.fallback_error_step?).to be(false)
           end
         end
 
@@ -335,7 +335,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `false`" do
-            expect(step.fallback_error_step?).to eq(false)
+            expect(step.fallback_error_step?).to be(false)
           end
         end
       end
@@ -353,7 +353,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `false`" do
-            expect(step.fallback_error_step?).to eq(false)
+            expect(step.fallback_error_step?).to be(false)
           end
         end
 
@@ -369,7 +369,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `true`" do
-            expect(step.fallback_error_step?).to eq(true)
+            expect(step.fallback_error_step?).to be(true)
           end
         end
       end
@@ -387,7 +387,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `false`" do
-            expect(step.fallback_error_step?).to eq(false)
+            expect(step.fallback_error_step?).to be(false)
           end
         end
 
@@ -403,7 +403,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `false`" do
-            expect(step.fallback_error_step?).to eq(false)
+            expect(step.fallback_error_step?).to be(false)
           end
         end
 
@@ -419,7 +419,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `true`" do
-            expect(step.fallback_error_step?).to eq(true)
+            expect(step.fallback_error_step?).to be(true)
           end
         end
       end
@@ -444,7 +444,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "defaults to `false`" do
-          expect(step.fallback_true_step?).to eq(false)
+          expect(step.fallback_true_step?).to be(false)
         end
       end
 
@@ -460,7 +460,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `false`" do
-          expect(step.fallback_true_step?).to eq(false)
+          expect(step.fallback_true_step?).to be(false)
         end
       end
 
@@ -476,7 +476,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `true`" do
-          expect(step.fallback_true_step?).to eq(true)
+          expect(step.fallback_true_step?).to be(true)
         end
       end
     end
@@ -494,7 +494,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `false`" do
-          expect(step.fallback_step?).to eq(false)
+          expect(step.fallback_step?).to be(false)
         end
       end
 
@@ -510,7 +510,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `true`" do
-          expect(step.fallback_step?).to eq(true)
+          expect(step.fallback_step?).to be(true)
         end
       end
 
@@ -526,7 +526,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `true`" do
-          expect(step.fallback_step?).to eq(true)
+          expect(step.fallback_step?).to be(true)
         end
       end
 
@@ -542,7 +542,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `true`" do
-          expect(step.fallback_step?).to eq(true)
+          expect(step.fallback_step?).to be(true)
         end
       end
     end

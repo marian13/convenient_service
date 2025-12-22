@@ -88,13 +88,13 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveNotPassedArguments::Co
 
       context "when `argument` is NOT `not_passed`" do
         it "returns `false`" do
-          expect(service_class.not_passed_public?(42)).to eq(false)
+          expect(service_class.not_passed_public?(42)).to be(false)
         end
       end
 
       context "when `argument` is `not_passed`" do
         it "returns `true`" do
-          expect(service_class.not_passed_public?(service_class.not_passed_public)).to eq(true)
+          expect(service_class.not_passed_public?(service_class.not_passed_public)).to be(true)
         end
       end
     end
@@ -145,13 +145,13 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveNotPassedArguments::Co
 
       context "when `argument` is NOT `not_passed`" do
         it "returns `false`" do
-          expect(service_instance.not_passed_public?(42)).to eq(false)
+          expect(service_instance.not_passed_public?(42)).to be(false)
         end
       end
 
       context "when `argument` is `not_passed`" do
         it "returns `true`" do
-          expect(service_instance.not_passed_public?(service_instance.not_passed_public)).to eq(true)
+          expect(service_instance.not_passed_public?(service_instance.not_passed_public)).to be(true)
         end
       end
     end

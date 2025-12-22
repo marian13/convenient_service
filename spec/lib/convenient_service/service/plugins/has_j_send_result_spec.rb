@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult, type: :stand
         let(:result_class) { 42 }
 
         it "returns `false`" do
-          expect(described_class.result_class?(result_class)).to eq(false)
+          expect(described_class.result_class?(result_class)).to be(false)
         end
       end
 
@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult, type: :stand
           let(:result_class) { Class.new }
 
           it "returns `false`" do
-            expect(described_class.result_class?(result_class)).to eq(false)
+            expect(described_class.result_class?(result_class)).to be(false)
           end
 
           context "when `result` is entity class" do
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult, type: :stand
             end
 
             it "returns `false`" do
-              expect(described_class.result_class?(service_class)).to eq(false)
+              expect(described_class.result_class?(service_class)).to be(false)
             end
           end
         end
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult, type: :stand
           let(:result_class) { service_class.new.result.class }
 
           it "returns `true`" do
-            expect(described_class.result_class?(result_class)).to eq(true)
+            expect(described_class.result_class?(result_class)).to be(true)
           end
         end
       end

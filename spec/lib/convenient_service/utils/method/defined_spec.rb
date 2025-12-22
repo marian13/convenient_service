@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         end
 
         it "defaults to `true`" do
-          expect(util_result).to eq(true)
+          expect(util_result).to be(true)
         end
       end
 
@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         end
 
         it "defaults to `true`" do
-          expect(util_result).to eq(true)
+          expect(util_result).to be(true)
         end
       end
 
@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
         end
 
         it "defaults to `false`" do
-          expect(util_result).to eq(false)
+          expect(util_result).to be(false)
         end
       end
 
@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
           let(:klass) { Class.new }
 
           it "returns `false`" do
-            expect(util_result).to eq(false)
+            expect(util_result).to be(false)
           end
         end
 
@@ -99,7 +99,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
 
@@ -114,7 +114,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `false`" do
-              expect(util_result).to eq(false)
+              expect(util_result).to be(false)
             end
           end
 
@@ -129,7 +129,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `false`" do
-              expect(util_result).to eq(false)
+              expect(util_result).to be(false)
             end
           end
         end
@@ -144,7 +144,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
           let(:klass) { Class.new }
 
           it "returns `false`" do
-            expect(util_result).to eq(false)
+            expect(util_result).to be(false)
           end
         end
 
@@ -160,7 +160,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `false`" do
-              expect(util_result).to eq(false)
+              expect(util_result).to be(false)
             end
           end
 
@@ -175,7 +175,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
 
@@ -190,7 +190,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `false`" do
-              expect(util_result).to eq(false)
+              expect(util_result).to be(false)
             end
           end
         end
@@ -205,7 +205,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
           let(:klass) { Class.new }
 
           it "returns `false`" do
-            expect(util_result).to eq(false)
+            expect(util_result).to be(false)
           end
         end
 
@@ -221,7 +221,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `false`" do
-              expect(util_result).to eq(false)
+              expect(util_result).to be(false)
             end
           end
 
@@ -236,7 +236,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `false`" do
-              expect(util_result).to eq(false)
+              expect(util_result).to be(false)
             end
           end
 
@@ -251,7 +251,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
         end
@@ -266,7 +266,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
           let(:klass) { Class.new }
 
           it "returns `false`" do
-            expect(util_result).to eq(false)
+            expect(util_result).to be(false)
           end
         end
 
@@ -282,7 +282,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
 
@@ -297,7 +297,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
 
@@ -312,7 +312,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `false`" do
-              expect(util_result).to eq(false)
+              expect(util_result).to be(false)
             end
           end
         end
@@ -327,7 +327,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
           let(:klass) { Class.new }
 
           it "returns `false`" do
-            expect(util_result).to eq(false)
+            expect(util_result).to be(false)
           end
         end
 
@@ -343,7 +343,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
 
@@ -358,7 +358,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `false`" do
-              expect(util_result).to eq(false)
+              expect(util_result).to be(false)
             end
           end
 
@@ -373,7 +373,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
         end
@@ -388,7 +388,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
           let(:klass) { Class.new }
 
           it "returns `false`" do
-            expect(util_result).to eq(false)
+            expect(util_result).to be(false)
           end
         end
 
@@ -404,7 +404,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `false`" do
-              expect(util_result).to eq(false)
+              expect(util_result).to be(false)
             end
           end
 
@@ -419,7 +419,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
 
@@ -434,7 +434,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
         end
@@ -449,7 +449,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
           let(:klass) { Class.new }
 
           it "returns `false`" do
-            expect(util_result).to eq(false)
+            expect(util_result).to be(false)
           end
         end
 
@@ -465,7 +465,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
 
@@ -480,7 +480,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
 
@@ -495,7 +495,7 @@ RSpec.describe ConvenientService::Utils::Method::Defined, type: :standard do
             end
 
             it "returns `true`" do
-              expect(util_result).to eq(true)
+              expect(util_result).to be(true)
             end
           end
         end

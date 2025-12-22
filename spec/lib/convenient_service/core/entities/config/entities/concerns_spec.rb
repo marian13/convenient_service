@@ -213,7 +213,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `false`" do
-          expect(concerns.instance_method_defined?(:result)).to eq(false)
+          expect(concerns.instance_method_defined?(:result)).to be(false)
         end
       end
 
@@ -225,7 +225,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `true`" do
-          expect(concerns.instance_method_defined?(:result)).to eq(true)
+          expect(concerns.instance_method_defined?(:result)).to be(true)
         end
       end
 
@@ -237,7 +237,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `true`" do
-          expect(concerns.instance_method_defined?(:result)).to eq(true)
+          expect(concerns.instance_method_defined?(:result)).to be(true)
         end
       end
 
@@ -251,7 +251,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `false`" do
-            expect(concerns.instance_method_defined?(:result)).to eq(false)
+            expect(concerns.instance_method_defined?(:result)).to be(false)
           end
         end
 
@@ -264,7 +264,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `true`" do
-            expect(concerns.instance_method_defined?(:result)).to eq(true)
+            expect(concerns.instance_method_defined?(:result)).to be(true)
           end
         end
       end
@@ -279,7 +279,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `false`" do
-            expect(concerns.instance_method_defined?(:result)).to eq(false)
+            expect(concerns.instance_method_defined?(:result)).to be(false)
           end
         end
 
@@ -292,7 +292,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `true`" do
-            expect(concerns.instance_method_defined?(:result)).to eq(true)
+            expect(concerns.instance_method_defined?(:result)).to be(true)
           end
         end
       end
@@ -307,7 +307,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `false`" do
-            expect(concerns.instance_method_defined?(:result)).to eq(false)
+            expect(concerns.instance_method_defined?(:result)).to be(false)
           end
         end
 
@@ -320,7 +320,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `true`" do
-            expect(concerns.instance_method_defined?(:result)).to eq(true)
+            expect(concerns.instance_method_defined?(:result)).to be(true)
           end
         end
 
@@ -333,7 +333,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `true`" do
-            expect(concerns.instance_method_defined?(:result)).to eq(true)
+            expect(concerns.instance_method_defined?(:result)).to be(true)
           end
         end
       end
@@ -346,7 +346,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `false`" do
-          expect(concerns.instance_method_defined?(:result)).to eq(false)
+          expect(concerns.instance_method_defined?(:result)).to be(false)
         end
       end
 
@@ -358,7 +358,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `false`" do
-          expect(concerns.instance_method_defined?(:result)).to eq(false)
+          expect(concerns.instance_method_defined?(:result)).to be(false)
         end
       end
     end
@@ -370,7 +370,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `false`" do
-          expect(concerns.private_instance_method_defined?(:result)).to eq(false)
+          expect(concerns.private_instance_method_defined?(:result)).to be(false)
         end
       end
 
@@ -382,7 +382,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `true`" do
-          expect(concerns.private_instance_method_defined?(:result)).to eq(true)
+          expect(concerns.private_instance_method_defined?(:result)).to be(true)
         end
       end
 
@@ -394,7 +394,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `true`" do
-          expect(concerns.private_instance_method_defined?(:result)).to eq(true)
+          expect(concerns.private_instance_method_defined?(:result)).to be(true)
         end
       end
 
@@ -408,7 +408,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `false`" do
-            expect(concerns.private_instance_method_defined?(:result)).to eq(false)
+            expect(concerns.private_instance_method_defined?(:result)).to be(false)
           end
         end
 
@@ -421,7 +421,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `true`" do
-            expect(concerns.private_instance_method_defined?(:result)).to eq(true)
+            expect(concerns.private_instance_method_defined?(:result)).to be(true)
           end
         end
       end
@@ -436,7 +436,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `false`" do
-            expect(concerns.private_instance_method_defined?(:result)).to eq(false)
+            expect(concerns.private_instance_method_defined?(:result)).to be(false)
           end
         end
 
@@ -449,7 +449,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `true`" do
-            expect(concerns.private_instance_method_defined?(:result)).to eq(true)
+            expect(concerns.private_instance_method_defined?(:result)).to be(true)
           end
         end
       end
@@ -464,7 +464,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `false`" do
-            expect(concerns.private_instance_method_defined?(:result)).to eq(false)
+            expect(concerns.private_instance_method_defined?(:result)).to be(false)
           end
         end
 
@@ -477,7 +477,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `true`" do
-            expect(concerns.private_instance_method_defined?(:result)).to eq(true)
+            expect(concerns.private_instance_method_defined?(:result)).to be(true)
           end
         end
 
@@ -490,7 +490,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `true`" do
-            expect(concerns.private_instance_method_defined?(:result)).to eq(true)
+            expect(concerns.private_instance_method_defined?(:result)).to be(true)
           end
         end
       end
@@ -503,7 +503,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `false`" do
-          expect(concerns.private_instance_method_defined?(:result)).to eq(false)
+          expect(concerns.private_instance_method_defined?(:result)).to be(false)
         end
       end
 
@@ -515,7 +515,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `false`" do
-          expect(concerns.private_instance_method_defined?(:result)).to eq(false)
+          expect(concerns.private_instance_method_defined?(:result)).to be(false)
         end
       end
     end
@@ -527,7 +527,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `false`" do
-          expect(concerns.class_method_defined?(:result)).to eq(false)
+          expect(concerns.class_method_defined?(:result)).to be(false)
         end
       end
 
@@ -539,7 +539,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `true`" do
-          expect(concerns.class_method_defined?(:result)).to eq(true)
+          expect(concerns.class_method_defined?(:result)).to be(true)
         end
       end
 
@@ -553,7 +553,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `false`" do
-            expect(concerns.class_method_defined?(:result)).to eq(false)
+            expect(concerns.class_method_defined?(:result)).to be(false)
           end
         end
 
@@ -566,7 +566,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `true`" do
-            expect(concerns.class_method_defined?(:result)).to eq(true)
+            expect(concerns.class_method_defined?(:result)).to be(true)
           end
         end
       end
@@ -579,7 +579,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `false`" do
-          expect(concerns.class_method_defined?(:result)).to eq(false)
+          expect(concerns.class_method_defined?(:result)).to be(false)
         end
       end
     end
@@ -591,7 +591,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `false`" do
-          expect(concerns.private_class_method_defined?(:result)).to eq(false)
+          expect(concerns.private_class_method_defined?(:result)).to be(false)
         end
       end
 
@@ -603,7 +603,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `true`" do
-          expect(concerns.private_class_method_defined?(:result)).to eq(true)
+          expect(concerns.private_class_method_defined?(:result)).to be(true)
         end
       end
 
@@ -617,7 +617,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `false`" do
-            expect(concerns.private_class_method_defined?(:result)).to eq(false)
+            expect(concerns.private_class_method_defined?(:result)).to be(false)
           end
         end
 
@@ -630,7 +630,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `true`" do
-            expect(concerns.private_class_method_defined?(:result)).to eq(true)
+            expect(concerns.private_class_method_defined?(:result)).to be(true)
           end
         end
       end
@@ -643,7 +643,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `false`" do
-          expect(concerns.private_class_method_defined?(:result)).to eq(false)
+          expect(concerns.private_class_method_defined?(:result)).to be(false)
         end
       end
     end
@@ -651,7 +651,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
     describe "#included?" do
       context "when default concern is NOT included into `klass`" do
         it "returns `false`" do
-          expect(concerns.included?).to eq(false)
+          expect(concerns.included?).to be(false)
         end
       end
 
@@ -661,7 +661,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `true`" do
-          expect(concerns.included?).to eq(true)
+          expect(concerns.included?).to be(true)
         end
       end
     end
@@ -753,7 +753,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
         end
 
         it "returns `false`" do
-          expect(concerns.include!).to eq(false)
+          expect(concerns.include!).to be(false)
         end
       end
 
@@ -773,7 +773,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
             end
 
             it "returns `true`" do
-              expect(concerns.include!).to eq(true)
+              expect(concerns.include!).to be(true)
             end
 
             it "copies stack to be thread-safe" do
@@ -796,7 +796,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
             end
 
             it "returns `true`" do
-              expect(concerns.include!).to eq(true)
+              expect(concerns.include!).to be(true)
             end
           end
         end
@@ -809,7 +809,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           end
 
           it "returns `true`" do
-            expect(concerns.include!).to eq(true)
+            expect(concerns.include!).to be(true)
           end
 
           it "copies stack to be thread-safe" do
@@ -854,7 +854,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           let(:other) { described_class.new(klass: Class.new) }
 
           it "returns `false`" do
-            expect(concerns == other).to eq(false)
+            expect(concerns == other).to be(false)
           end
         end
 
@@ -862,7 +862,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           let(:other) { described_class.new(klass: klass).configure { |stack| stack.use concern } }
 
           it "returns `false`" do
-            expect(concerns == other).to eq(false)
+            expect(concerns == other).to be(false)
           end
         end
 
@@ -870,7 +870,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns, ty
           let(:other) { described_class.new(klass: klass) }
 
           it "returns `true`" do
-            expect(concerns == other).to eq(true)
+            expect(concerns == other).to be(true)
           end
         end
       end

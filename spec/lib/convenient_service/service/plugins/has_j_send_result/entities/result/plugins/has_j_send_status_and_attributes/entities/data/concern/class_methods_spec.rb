@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:data_class) { 42 }
 
         it "returns `false`" do
-          expect(klass.data_class?(data_class)).to eq(false)
+          expect(klass.data_class?(data_class)).to be(false)
         end
       end
 
@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:data_class) { Class.new }
 
           it "returns `false`" do
-            expect(klass.data_class?(data_class)).to eq(false)
+            expect(klass.data_class?(data_class)).to be(false)
           end
 
           context "when `data` is entity class" do
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             end
 
             it "returns `false`" do
-              expect(klass.data_class?(service_class)).to eq(false)
+              expect(klass.data_class?(service_class)).to be(false)
             end
           end
         end
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:data_class) { service_class.new.result.unsafe_data.class }
 
           it "returns `true`" do
-            expect(klass.data_class?(data_class)).to eq(true)
+            expect(klass.data_class?(data_class)).to be(true)
           end
         end
       end
@@ -154,7 +154,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "returns `false`" do
-        expect(data_class === other).to eq(false)
+        expect(data_class === other).to be(false)
       end
 
       context "when `other` is data instance in terms of `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.data?`" do
@@ -177,7 +177,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `true`" do
-          expect(data_class === other).to eq(true)
+          expect(data_class === other).to be(true)
         end
       end
 
@@ -185,7 +185,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data.cast({foo: :bar}) }
 
         it "returns `true`" do
-          expect(data_class === other).to eq(true)
+          expect(data_class === other).to be(true)
         end
       end
 
@@ -195,7 +195,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { descendant_class.cast({foo: :bar}) }
 
         it "returns `true`" do
-          expect(data_class === other).to eq(true)
+          expect(data_class === other).to be(true)
         end
       end
     end

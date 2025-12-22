@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::Support::Undefined, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class < ConvenientService::Support::UniqueValue).to eq(true) }
+    specify { expect(described_class < ConvenientService::Support::UniqueValue).to be(true) }
   end
 
   example_group "instance methods" do
@@ -24,7 +24,7 @@ RSpec.describe ConvenientService::Support::Undefined, type: :standard do
         let(:value) { 42 }
 
         it "returns `false`" do
-          expect(ConvenientService::Support::UNDEFINED[value]).to eq(false)
+          expect(ConvenientService::Support::UNDEFINED[value]).to be(false)
         end
       end
 
@@ -32,7 +32,7 @@ RSpec.describe ConvenientService::Support::Undefined, type: :standard do
         let(:value) { ConvenientService::Support::UNDEFINED }
 
         it "returns `true`" do
-          expect(ConvenientService::Support::UNDEFINED[value]).to eq(true)
+          expect(ConvenientService::Support::UNDEFINED[value]).to be(true)
         end
       end
     end

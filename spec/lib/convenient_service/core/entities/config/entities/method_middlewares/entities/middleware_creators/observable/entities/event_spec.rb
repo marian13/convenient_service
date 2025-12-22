@@ -101,7 +101,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(type: :after_call) }
 
           it "returns `false`" do
-            expect(event == other).to eq(false)
+            expect(event == other).to be(false)
           end
         end
 
@@ -109,7 +109,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(type: type).tap { |event| event.add_observer(observer) } }
 
           it "returns `false`" do
-            expect(event == other).to eq(false)
+            expect(event == other).to be(false)
           end
         end
 
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(type: type) }
 
           it "returns `true`" do
-            expect(event == other).to eq(true)
+            expect(event == other).to be(true)
           end
         end
       end

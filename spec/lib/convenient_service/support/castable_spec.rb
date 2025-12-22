@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Support::Castable, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::Concern)).to eq(true) }
+    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::Concern)).to be(true) }
 
     context "when included" do
       subject { klass }
@@ -36,8 +36,8 @@ RSpec.describe ConvenientService::Support::Castable, type: :standard do
       ##
       # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
       #
-      specify { expect(klass.ancestors.drop_while { |ancestor| ancestor != klass }.include?(described_class::InstanceMethods)).to eq(true) }
-      specify { expect(klass.singleton_class.ancestors.drop_while { |ancestor| ancestor != klass.singleton_class }.include?(described_class::ClassMethods)).to eq(true) }
+      specify { expect(klass.ancestors.drop_while { |ancestor| ancestor != klass }.include?(described_class::InstanceMethods)).to be(true) }
+      specify { expect(klass.singleton_class.ancestors.drop_while { |ancestor| ancestor != klass.singleton_class }.include?(described_class::ClassMethods)).to be(true) }
     end
   end
 

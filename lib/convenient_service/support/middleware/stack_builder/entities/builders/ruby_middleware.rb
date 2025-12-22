@@ -49,9 +49,13 @@ module ConvenientService
               # @param some_middleware [#call<Hash>]
               # @return [Boolean]
               #
+              #   NOTE: `any?(arg)` compares with `===`. For this method `==` is mandatory.
+              #
+              # rubocop:disable Performance/RedundantEqualityComparisonBlock
               def has?(some_middleware)
                 stack.any? { |middleware| middleware == [some_middleware, [], nil] }
               end
+              # rubocop:enable Performance/RedundantEqualityComparisonBlock
 
               ##
               # @return [Boolean]

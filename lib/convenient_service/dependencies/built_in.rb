@@ -9,7 +9,10 @@
 # This file loads built-in dependencies (from Ruby standard library).
 #
 # @internal
-#   https://github.com/marian13/convenient_service/wiki/Docs:-Dependencies
+#   - https://github.com/marian13/convenient_service/wiki/Docs:-Dependencies
+#
+#   NOTE: Ensure all `require` for built-in dependencies are explicit.
+#   - https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Lint/RedundantRequireStatement
 ##
 
 ##
@@ -65,7 +68,9 @@ require "singleton"
 #
 # @!visibility private
 #
+# rubocop:disable Lint/RedundantRequireStatement
 require "thread"
+# rubocop:enable Lint/RedundantRequireStatement
 
 ##
 # @internal

@@ -47,7 +47,7 @@ RSpec.describe "Services with custom negated results", type: [:standard, :e2e] d
           end
 
           it "returns negated result" do
-            expect(service.negated_result.negated?).to eq(true)
+            expect(service.negated_result.negated?).to be(true)
           end
         end
 
@@ -85,7 +85,7 @@ RSpec.describe "Services with custom negated results", type: [:standard, :e2e] d
             end
 
             it "adds service details to that exception" do
-              expect(service.negated_result.from_unhandled_exception?).to eq(true)
+              expect(service.negated_result.from_unhandled_exception?).to be(true)
             end
           end
         end

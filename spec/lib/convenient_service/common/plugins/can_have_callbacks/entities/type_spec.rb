@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
         let(:other) { "string" }
 
         it "returns `nil`" do
-          expect(type == other).to eq(nil)
+          expect(type == other).to be_nil
         end
       end
 
@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
         let(:other) { described_class.new(value: :after) }
 
         it "returns `false`" do
-          expect(type == other).to eq(false)
+          expect(type == other).to be(false)
         end
       end
 
@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
         let(:other) { described_class.new(value: value) }
 
         it "returns `true`" do
-          expect(type == other).to eq(true)
+          expect(type == other).to be(true)
         end
       end
     end
@@ -73,7 +73,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
         let(:other) { described_class.new(value: :after) }
 
         it "returns `false`" do
-          expect(type.eql?(other)).to eq(false)
+          expect(type.eql?(other)).to be(false)
         end
       end
 
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::T
         let(:other) { described_class.new(value: value) }
 
         it "returns `true`" do
-          expect(type.eql?(other)).to eq(true)
+          expect(type.eql?(other)).to be(true)
         end
       end
     end

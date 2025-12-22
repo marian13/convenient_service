@@ -177,7 +177,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
     describe "#empty?" do
       it "returns `true`" do
-        expect(expression.empty?).to eq(true)
+        expect(expression.empty?).to be(true)
       end
     end
 
@@ -197,7 +197,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           let(:other) { described_class.new }
 
           it "returns `true`" do
-            expect(expression == other).to eq(true)
+            expect(expression == other).to be(true)
           end
         end
       end

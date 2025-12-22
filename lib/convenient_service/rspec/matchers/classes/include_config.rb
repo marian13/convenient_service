@@ -24,11 +24,15 @@ module ConvenientService
           # @internal
           #   TODO: Util `include_module?`.
           #
+          #   NOTE: `any?(arg)` compares with `===`. For this method `==` is mandatory.
+          #
+          # rubocop:disable Performance/RedundantEqualityComparisonBlock
           def matches?(klass)
             @klass = klass
 
             klass.ancestors.drop_while { |ancestor| ancestor != klass }.any? { |mod| config == mod }
           end
+          # rubocop:enable Performance/RedundantEqualityComparisonBlock
 
           ##
           # @return [String]

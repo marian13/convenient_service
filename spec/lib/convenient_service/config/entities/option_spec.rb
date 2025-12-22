@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Config::Entities::Option, type: :standard do
         let(:option) { described_class.new(name: name, **data) }
 
         it "defaults to `false`" do
-          expect(option.enabled?).to eq(false)
+          expect(option.enabled?).to be(false)
         end
       end
 
@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Config::Entities::Option, type: :standard do
         let(:enabled) { false }
 
         it "returns `false`" do
-          expect(option.enabled?).to eq(false)
+          expect(option.enabled?).to be(false)
         end
       end
 
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::Config::Entities::Option, type: :standard do
         let(:enabled) { true }
 
         it "returns `true`" do
-          expect(option.enabled?).to eq(true)
+          expect(option.enabled?).to be(true)
         end
       end
     end
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Config::Entities::Option, type: :standard do
           let(:other) { described_class.new(name: :rollbacks) }
 
           it "returns `false`" do
-            expect(option == other).to eq(false)
+            expect(option == other).to be(false)
           end
         end
 
@@ -89,7 +89,7 @@ RSpec.describe ConvenientService::Config::Entities::Option, type: :standard do
           let(:other) { described_class.new(name: name, enabled: false, **data) }
 
           it "returns `false`" do
-            expect(option == other).to eq(false)
+            expect(option == other).to be(false)
           end
         end
 
@@ -97,7 +97,7 @@ RSpec.describe ConvenientService::Config::Entities::Option, type: :standard do
           let(:other) { described_class.new(name: name, enabled: enabled, status: :error) }
 
           it "returns `false`" do
-            expect(option == other).to eq(false)
+            expect(option == other).to be(false)
           end
         end
 
@@ -105,7 +105,7 @@ RSpec.describe ConvenientService::Config::Entities::Option, type: :standard do
           let(:other) { described_class.new(name: name, enabled: enabled, **data) }
 
           it "returns `true`" do
-            expect(option == other).to eq(true)
+            expect(option == other).to be(true)
           end
         end
       end

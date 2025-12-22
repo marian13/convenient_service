@@ -141,7 +141,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
           end
 
           it "returns result with unchecked status" do
-            expect(method_value.checked?).to eq(false)
+            expect(method_value.checked?).to be(false)
           end
 
           it "does NOT evaluate results of following steps" do
@@ -237,7 +237,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
           end
 
           it "returns result with unchecked status" do
-            expect(method_value.checked?).to eq(false)
+            expect(method_value.checked?).to be(false)
           end
 
           it "saves intermediate step outputs into organizer" do

@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::Copyable)).to eq(true) }
+    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::Copyable)).to be(true) }
   end
 
   example_group "attributes" do
@@ -365,7 +365,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           let(:other) { described_class.new(slug: "bar", scope: scope, body: body) }
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -373,7 +373,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           let(:other) { described_class.new(slug: slug, scope: :class, body: body) }
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -381,7 +381,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           let(:other) { described_class.new(slug: slug, scope: scope, body: proc { :bar }) }
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -389,7 +389,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           let(:other) { described_class.new(slug: slug, scope: scope, body: body, alias_slug: :bar) }
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -397,7 +397,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           let(:other) { described_class.new(slug: slug, scope: scope, body: body) }
 
           it "returns `true`" do
-            expect(method == other).to eq(true)
+            expect(method == other).to be(true)
           end
         end
       end

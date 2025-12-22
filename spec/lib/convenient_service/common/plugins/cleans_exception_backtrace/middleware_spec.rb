@@ -98,7 +98,7 @@ RSpec.describe ConvenientService::Common::Plugins::CleansExceptionBacktrace::Mid
         it "cleans that exception backtrace" do
           expect { method_value }.to raise_error(ArgumentError) do |exception|
             expect(exception.message).to eq("exception from `#initialize`")
-            expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+            expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
           end
         end
         # rubocop:enable RSpec/MultipleExpectations
@@ -127,7 +127,7 @@ RSpec.describe ConvenientService::Common::Plugins::CleansExceptionBacktrace::Mid
         it "cleans that reraised exception backtrace" do
           expect { method_value }.to raise_error(ArgumentError) do |exception|
             expect(exception.message).to eq("reraised exception from `#initialize`")
-            expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+            expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
           end
         end
         # rubocop:enable RSpec/MultipleExpectations
@@ -136,7 +136,7 @@ RSpec.describe ConvenientService::Common::Plugins::CleansExceptionBacktrace::Mid
         it "cleans that reraised exception cause backtrace" do
           expect { method_value }.to raise_error(ArgumentError) do |exception|
             expect(exception.cause.message).to eq("exception from `#initialize`")
-            expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+            expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
           end
         end
         # rubocop:enable RSpec/MultipleExpectations

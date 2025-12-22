@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         end
 
         it "returns `true`" do
-          expect(command_result).to eq(true)
+          expect(command_result).to be(true)
         end
       end
 
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         end
 
         it "returns `true`" do
-          expect(command_result).to eq(true)
+          expect(command_result).to be(true)
         end
       end
 
@@ -99,7 +99,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
         end
 
         it "returns `false`" do
-          expect(command_result).to eq(false)
+          expect(command_result).to be(false)
         end
       end
 

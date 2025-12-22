@@ -73,7 +73,7 @@ module ConvenientService
                   when GIT_SOURCE_REGEX
                     hash[:git_source] << line
                   when GROUP_REGEX
-                    envs = line.scan(ENV_SCAN_REGEX).map(&:first).map(&:to_sym)
+                    envs = line.scan(ENV_SCAN_REGEX).map { |match| match.first.to_sym }
                   when GEM_REGEX
                     hash[:gems] << {envs: envs, line: line.lstrip}
                   when BLOCK_END_REGEX

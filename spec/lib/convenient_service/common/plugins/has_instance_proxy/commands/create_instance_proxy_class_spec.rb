@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Commands::C
               let(:other) { described_class.call(target_class: Class.new) }
 
               it "returns `false`" do
-                expect(instance_proxy_class == other).to eq(false)
+                expect(instance_proxy_class == other).to be(false)
               end
             end
 
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Commands::C
               let(:other) { described_class.call(target_class: target_class) }
 
               it "returns `true`" do
-                expect(instance_proxy_class == other).to eq(true)
+                expect(instance_proxy_class == other).to be(true)
               end
             end
           end

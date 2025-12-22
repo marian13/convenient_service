@@ -42,7 +42,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
     describe "#raw?" do
       it "returns `true`" do
-        expect(caller.raw?).to eq(true)
+        expect(caller.raw?).to be(true)
       end
     end
 
@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       let(:index) { 0 }
 
       it "returns `false`" do
-        expect(caller.define_output_in_container!(container, index: index, method: method)).to eq(false)
+        expect(caller.define_output_in_container!(container, index: index, method: method)).to be(false)
       end
     end
   end

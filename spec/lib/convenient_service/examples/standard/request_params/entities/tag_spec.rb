@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::T
         let(:other) { described_class.cast("javascript") }
 
         it "returns true" do
-          expect(tag == other).to eq(false)
+          expect(tag == other).to be(false)
         end
       end
 
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Entities::T
         let(:other) { described_class.cast(value) }
 
         it "returns true" do
-          expect(tag == other).to eq(true)
+          expect(tag == other).to be(true)
         end
       end
     end

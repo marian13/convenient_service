@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps, type: :standar
         let(:step_class) { 42 }
 
         it "returns `false`" do
-          expect(described_class.step_class?(step_class)).to eq(false)
+          expect(described_class.step_class?(step_class)).to be(false)
         end
       end
 
@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps, type: :standar
           let(:step_class) { Class.new }
 
           it "returns `false`" do
-            expect(described_class.step_class?(step_class)).to eq(false)
+            expect(described_class.step_class?(step_class)).to be(false)
           end
 
           context "when `step` is entity class" do
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps, type: :standar
             end
 
             it "returns `false`" do
-              expect(described_class.step_class?(service_class)).to eq(false)
+              expect(described_class.step_class?(service_class)).to be(false)
             end
           end
         end
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps, type: :standar
           let(:step_class) { service_class.new.steps.first.class }
 
           it "returns `true`" do
-            expect(described_class.step_class?(step_class)).to eq(true)
+            expect(described_class.step_class?(step_class)).to be(true)
           end
         end
       end

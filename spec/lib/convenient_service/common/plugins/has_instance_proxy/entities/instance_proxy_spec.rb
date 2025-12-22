@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Entities::I
           let(:other) { described_class.new(target: 42) }
 
           it "returns `false`" do
-            expect(instance_proxy == other).to eq(false)
+            expect(instance_proxy == other).to be(false)
           end
         end
 
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Entities::I
           let(:other) { described_class.new(target: target) }
 
           it "returns `true`" do
-            expect(instance_proxy == other).to eq(true)
+            expect(instance_proxy == other).to be(true)
           end
         end
       end

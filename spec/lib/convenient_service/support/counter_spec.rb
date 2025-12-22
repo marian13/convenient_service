@@ -21,8 +21,8 @@ RSpec.describe ConvenientService::Support::Counter, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue < ConvenientService::Exception).to eq(true) }
-    specify { expect(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue < ConvenientService::Exception).to eq(true) }
+    specify { expect(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue < ConvenientService::Exception).to be(true) }
+    specify { expect(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue < ConvenientService::Exception).to be(true) }
   end
 
   example_group "attributes" do
@@ -155,12 +155,14 @@ RSpec.describe ConvenientService::Support::Counter, type: :standard do
         end
         # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
+        # rubocop:disable RSpec/ChangeByZero
         it "does NOT changes current value" do
           ##
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
           expect { counter.increment!(n) }.to raise_error(described_class::Exceptions::ValueAfterIncrementIsGreaterThanMaxValue).and(change(counter, :current_value).by(0))
         end
+        # rubocop:enable RSpec/ChangeByZero
       end
     end
 
@@ -170,7 +172,7 @@ RSpec.describe ConvenientService::Support::Counter, type: :standard do
       end
 
       it "returns `true`" do
-        expect(counter.bincrement(n)).to eq(true)
+        expect(counter.bincrement(n)).to be(true)
       end
 
       context "when `n` is NOT passed" do
@@ -183,7 +185,7 @@ RSpec.describe ConvenientService::Support::Counter, type: :standard do
         let(:max_value) { 10 }
 
         it "returns `false`" do
-          expect(counter.bincrement(n)).to eq(false)
+          expect(counter.bincrement(n)).to be(false)
         end
 
         it "does NOT changes current value" do
@@ -265,12 +267,14 @@ RSpec.describe ConvenientService::Support::Counter, type: :standard do
         end
         # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
+        # rubocop:disable RSpec/ChangeByZero
         it "does NOT changes current value" do
           ##
           # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
           #
           expect { counter.decrement!(n) }.to raise_error(described_class::Exceptions::ValueAfterDecrementIsLowerThanMinValue).and(change(counter, :current_value).by(0))
         end
+        # rubocop:enable RSpec/ChangeByZero
       end
     end
 
@@ -280,7 +284,7 @@ RSpec.describe ConvenientService::Support::Counter, type: :standard do
       end
 
       it "returns `true`" do
-        expect(counter.bdecrement(n)).to eq(true)
+        expect(counter.bdecrement(n)).to be(true)
       end
 
       context "when `n` is NOT passed" do
@@ -293,7 +297,7 @@ RSpec.describe ConvenientService::Support::Counter, type: :standard do
         let(:min_value) { -10 }
 
         it "returns `false`" do
-          expect(counter.bdecrement(n)).to eq(false)
+          expect(counter.bdecrement(n)).to be(false)
         end
 
         it "does NOT changes current value" do

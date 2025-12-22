@@ -1447,7 +1447,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
         end
 
         it "returns `false`" do
-          expect(config.committed?).to eq(false)
+          expect(config.committed?).to be(false)
         end
 
         context "when called multiple times" do
@@ -1475,7 +1475,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
         end
 
         it "returns `true`" do
-          expect(config.committed?).to eq(true)
+          expect(config.committed?).to be(true)
         end
 
         context "when called multiple times" do
@@ -1510,7 +1510,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
         end
 
         it "returns `true`" do
-          expect(config.commit!).to eq(true)
+          expect(config.commit!).to be(true)
         end
 
         context "when called multiple times" do
@@ -1529,7 +1529,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
           end
 
           it "returns `false`" do
-            expect(config.commit!).to eq(false)
+            expect(config.commit!).to be(false)
           end
         end
       end
@@ -1553,7 +1553,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
         end
 
         it "returns `false`" do
-          expect(config.commit!).to eq(false)
+          expect(config.commit!).to be(false)
         end
 
         context "when called multiple times" do
@@ -1572,7 +1572,7 @@ RSpec.describe ConvenientService::Core::Entities::Config, type: :standard do
           end
 
           it "returns `false`" do
-            expect(config.commit!).to eq(false)
+            expect(config.commit!).to be(false)
           end
         end
       end

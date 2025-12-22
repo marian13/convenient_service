@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class < ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Builder).to eq(true) }
+    specify { expect(described_class < ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Builder).to be(true) }
   end
 
   example_group "class methods" do
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         # NOTE: Indirect test since `stack` is protected.
         #
         it "defaults to empty array" do
-          expect(stack_builder.empty?).to eq(true)
+          expect(stack_builder.empty?).to be(true)
         end
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         end
 
         it "returns `false`" do
-          expect(stack_builder.has?(middleware)).to eq(false)
+          expect(stack_builder.has?(middleware)).to be(false)
         end
       end
 
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         end
 
         it "returns `true`" do
-          expect(stack_builder.has?(middleware)).to eq(true)
+          expect(stack_builder.has?(middleware)).to be(true)
         end
       end
     end
@@ -149,7 +149,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         end
 
         it "runs middleware stack" do
-          expect(service.result.success?).to eq(true)
+          expect(service.result.success?).to be(true)
         end
       end
 
@@ -295,7 +295,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         it "removes that middleware from stack" do
           stack_builder.delete(middleware)
 
-          expect(stack_builder.empty?).to eq(true)
+          expect(stack_builder.empty?).to be(true)
         end
 
         ##
@@ -344,7 +344,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         it "removes that middleware from stack" do
           stack_builder.remove(middleware)
 
-          expect(stack_builder.empty?).to eq(true)
+          expect(stack_builder.empty?).to be(true)
         end
 
         ##
@@ -451,7 +451,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
           let(:other) { described_class.new(name: "OtherStack", stack: stack) }
 
           it "returns `false`" do
-            expect(stack_builder == other).to eq(false)
+            expect(stack_builder == other).to be(false)
           end
         end
 
@@ -459,7 +459,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
           let(:other) { described_class.new(name: name, stack: [[middleware, [], nil]]) }
 
           it "returns `false`" do
-            expect(stack_builder == other).to eq(false)
+            expect(stack_builder == other).to be(false)
           end
         end
 
@@ -467,7 +467,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
           let(:other) { described_class.new(name: name, stack: stack) }
 
           it "returns `true`" do
-            expect(stack_builder == other).to eq(true)
+            expect(stack_builder == other).to be(true)
           end
         end
       end

@@ -39,9 +39,9 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Inter
     include ConvenientService::RSpec::Matchers::CacheItsValue
 
     describe ".cache" do
-      cache = ConvenientService::Support::Cache.backed_by(:thread_safe_hash).new
-
       specify do
+        cache = ConvenientService::Support::Cache.backed_by(:thread_safe_hash).new
+
         expect { internals_class.cache }
           .to delegate_to(ConvenientService::Support::Cache, :backed_by)
             .with_arguments(:thread_safe_hash)

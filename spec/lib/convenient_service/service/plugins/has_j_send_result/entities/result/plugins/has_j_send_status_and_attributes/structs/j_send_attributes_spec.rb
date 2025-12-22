@@ -23,7 +23,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { described_class.new(**params.merge(service: Object.new)) }
 
         it "returns `false`" do
-          expect(jsend_attributes == other).to eq(false)
+          expect(jsend_attributes == other).to be(false)
         end
       end
 
@@ -31,7 +31,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { described_class.new(**params.merge(status: :bar)) }
 
         it "returns `false`" do
-          expect(jsend_attributes == other).to eq(false)
+          expect(jsend_attributes == other).to be(false)
         end
       end
 
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { described_class.new(**params.merge(data: {baz: :qux})) }
 
         it "returns `false`" do
-          expect(jsend_attributes == other).to eq(false)
+          expect(jsend_attributes == other).to be(false)
         end
       end
 
@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { described_class.new(**params.merge(message: "bar")) }
 
         it "returns `false`" do
-          expect(jsend_attributes == other).to eq(false)
+          expect(jsend_attributes == other).to be(false)
         end
       end
 
@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { described_class.new(**params.merge(code: :bar)) }
 
         it "returns `false`" do
-          expect(jsend_attributes == other).to eq(false)
+          expect(jsend_attributes == other).to be(false)
         end
       end
 
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { described_class.new(**params) }
 
         it "returns `true`" do
-          expect(jsend_attributes == other).to eq(true)
+          expect(jsend_attributes == other).to be(true)
         end
       end
     end

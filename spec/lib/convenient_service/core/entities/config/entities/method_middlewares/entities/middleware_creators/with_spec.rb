@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(middleware: Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain), middleware_arguments: middleware_arguments) }
 
           it "returns `false`" do
-            expect(middleware_creator == other).to eq(false)
+            expect(middleware_creator == other).to be(false)
           end
         end
 
@@ -74,7 +74,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(middleware: middleware, middleware_arguments: ConvenientService::Support::Arguments.null_arguments) }
 
           it "returns `false`" do
-            expect(middleware_creator == other).to eq(false)
+            expect(middleware_creator == other).to be(false)
           end
         end
 
@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(middleware: middleware, middleware_arguments: middleware_arguments) }
 
           it "returns `true`" do
-            expect(middleware_creator == other).to eq(true)
+            expect(middleware_creator == other).to be(true)
           end
         end
       end

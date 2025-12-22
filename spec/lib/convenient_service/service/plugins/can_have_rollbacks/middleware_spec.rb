@@ -2444,15 +2444,25 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveRollbacks::Middleware
               TEXT
             end
 
+            ##
+            # TODO: Find where is `RSpec/ExpectInLet`.
+            #
+            # rubocop:disable RSpec/ExpectInLet
             it "returns last completed step result" do
               expect(result).to be_failure.without_data.of_service(service).of_service(first_step)
             end
+            # rubocop:enable RSpec/ExpectInLet
 
+            ##
+            # TODO: Find where is `RSpec/ExpectInLet`.
+            #
+            # rubocop:disable RSpec/ExpectInLet
             it "triggers service and completed steps rollbacks in reverse order" do
               result
 
               expect(output).to eq(text)
             end
+            # rubocop:enable RSpec/ExpectInLet
           end
         end
       end

@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         let(:block_expectation) { proc { 42 } }
 
         it "returns `false`" do
-          expect(sub_matcher.matches?(block_expectation_value)).to eq(false)
+          expect(sub_matcher.matches?(block_expectation_value)).to be(false)
         end
       end
 
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         let(:block_expectation) { proc { "#{object.foo} + custom return value" } }
 
         it "returns `true`" do
-          expect(sub_matcher.matches?(block_expectation_value)).to eq(true)
+          expect(sub_matcher.matches?(block_expectation_value)).to be(true)
         end
       end
     end

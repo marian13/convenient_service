@@ -570,7 +570,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
     describe "#and?" do
       it "returns `true`" do
-        expect(expression.and?).to eq(true)
+        expect(expression.and?).to be(true)
       end
     end
 
@@ -590,7 +590,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           let(:other) { described_class.new(ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(first_step.copy(overrides: {kwargs: {index: -1}})), right_sub_expression) }
 
           it "returns `false`" do
-            expect(expression == other).to eq(false)
+            expect(expression == other).to be(false)
           end
         end
 
@@ -598,7 +598,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           let(:other) { described_class.new(left_sub_expression, ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Scalar.new(second_step.copy(overrides: {kwargs: {index: -1}}))) }
 
           it "returns `false`" do
-            expect(expression == other).to eq(false)
+            expect(expression == other).to be(false)
           end
         end
 
@@ -606,7 +606,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           let(:other) { described_class.new(left_sub_expression, right_sub_expression) }
 
           it "returns `true`" do
-            expect(expression == other).to eq(true)
+            expect(expression == other).to be(true)
           end
         end
       end

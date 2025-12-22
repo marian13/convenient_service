@@ -277,7 +277,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Middl
   end
 
   context "when entity is feature class" do
-    include_examples "verify middleware behavior" do
+    it_behaves_like "verify middleware behavior" do
       let(:entity) { feature_class }
       let(:scope) { :class }
 
@@ -286,7 +286,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Middl
   end
 
   context "when entity is feature instance" do
-    include_examples "verify middleware behavior" do
+    it_behaves_like "verify middleware behavior" do
       let(:entity) { feature_instance }
       let(:scope) { :instance }
 

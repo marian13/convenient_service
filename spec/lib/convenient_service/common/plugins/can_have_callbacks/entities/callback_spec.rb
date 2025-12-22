@@ -131,7 +131,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
         let(:other) { "string" }
 
         it "returns nil" do
-          expect(callback == other).to eq(nil)
+          expect(callback == other).to be_nil
         end
       end
 
@@ -139,7 +139,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
         let(:other) { described_class.new(**params.merge(types: [:after, :step])) }
 
         it "returns false" do
-          expect(callback == other).to eq(false)
+          expect(callback == other).to be(false)
         end
       end
 
@@ -148,7 +148,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
         let(:other_callback_block) { proc { :baz } }
 
         it "returns false" do
-          expect(callback == other).to eq(false)
+          expect(callback == other).to be(false)
         end
       end
 
@@ -156,7 +156,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
         let(:other) { described_class.new(**params.merge(source_location: ["/other_source_location", 1])) }
 
         it "returns false" do
-          expect(callback == other).to eq(false)
+          expect(callback == other).to be(false)
         end
       end
 
@@ -164,7 +164,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
         let(:other) { described_class.new(**params) }
 
         it "returns true" do
-          expect(callback == other).to eq(true)
+          expect(callback == other).to be(true)
         end
       end
     end

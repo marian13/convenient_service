@@ -133,7 +133,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { caller_class.new(prefix: double) }
 
           it "returns false" do
-            expect(caller == other).to eq(false)
+            expect(caller == other).to be(false)
           end
         end
 
@@ -141,7 +141,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { caller_class.new(prefix: ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Caller::Constants::INSTANCE_PREFIX) }
 
           it "returns true" do
-            expect(caller == other).to eq(true)
+            expect(caller == other).to be(true)
           end
         end
       end

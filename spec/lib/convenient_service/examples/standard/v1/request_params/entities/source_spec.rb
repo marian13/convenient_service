@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entitie
         let(:other) { described_class.cast("https://www.rubyguides.com/2019/07/ruby-instance-variables/") }
 
         it "returns true" do
-          expect(source == other).to eq(false)
+          expect(source == other).to be(false)
         end
       end
 
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entitie
         let(:other) { described_class.cast(value) }
 
         it "returns true" do
-          expect(source == other).to eq(true)
+          expect(source == other).to be(true)
         end
       end
     end

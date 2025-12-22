@@ -60,13 +60,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       context "when result is NOT own (is foreign) result" do
         it "returns `false`" do
-          expect(result.own_result_for?(other_service_instance)).to eq(false)
+          expect(result.own_result_for?(other_service_instance)).to be(false)
         end
       end
 
       context "when result is own result" do
         it "returns `true`" do
-          expect(result.own_result_for?(service_instance)).to eq(true)
+          expect(result.own_result_for?(service_instance)).to be(true)
         end
       end
     end
@@ -80,13 +80,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       context "when result is NOT foreign (is own) result" do
         it "returns `false`" do
-          expect(result.foreign_result_for?(service_instance)).to eq(false)
+          expect(result.foreign_result_for?(service_instance)).to be(false)
         end
       end
 
       context "when result is foreign result" do
         it "returns `true`" do
-          expect(result.foreign_result_for?(other_service_instance)).to eq(true)
+          expect(result.foreign_result_for?(other_service_instance)).to be(true)
         end
       end
     end

@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Version, type: :standar
 
     describe "#null_version?" do
       it "returns `false`" do
-        expect(version.null_version?).to eq(false)
+        expect(version.null_version?).to be(false)
       end
     end
 
@@ -60,7 +60,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Version, type: :standar
         let(:value) { "abc" }
 
         it "returns `nil`" do
-          expect(version.gem_version).to eq(nil)
+          expect(version.gem_version).to be_nil
         end
       end
 
@@ -109,7 +109,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Version, type: :standar
         #   # https://semver.org
         #
         it "respects Semantic Versioning" do
-          expect(described_class.new("3.10.1") > described_class.new("3.9.4")).to eq(true)
+          expect(described_class.new("3.10.1") > described_class.new("3.9.4")).to be(true)
         end
       end
 
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Version, type: :standar
         let(:other) { "string" }
 
         it "returns `nil`" do
-          expect(version <=> other).to eq(nil)
+          expect(version <=> other).to be_nil
         end
       end
 

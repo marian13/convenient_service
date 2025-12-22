@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         it "returns `true`" do
-          expect(method_collection.empty?).to eq(true)
+          expect(method_collection.empty?).to be(true)
         end
       end
 
@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         it "returns `false`" do
-          expect(method_collection.empty?).to eq(false)
+          expect(method_collection.empty?).to be(false)
         end
       end
     end
@@ -249,13 +249,13 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
 
     describe "#<<" do
       it "returns self" do
-        expect((method_collection << method)).to equal(method_collection)
+        expect(method_collection << method).to equal(method_collection)
       end
 
       it "appends method to method collection" do
         method_collection << method
 
-        expect(method_collection.include?(method)).to eq(true)
+        expect(method_collection.include?(method)).to be(true)
       end
     end
 
@@ -266,7 +266,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         it "returns `false`" do
-          expect(method_collection.include?(method)).to eq(false)
+          expect(method_collection.include?(method)).to be(false)
         end
       end
 
@@ -276,7 +276,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         end
 
         it "returns `true`" do
-          expect(method_collection.include?(method)).to eq(true)
+          expect(method_collection.include?(method)).to be(true)
         end
       end
     end
@@ -294,7 +294,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
         it "clears method collection" do
           method_collection.clear
 
-          expect(method_collection.empty?).to eq(true)
+          expect(method_collection.empty?).to be(true)
         end
       end
     end
@@ -322,7 +322,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           let(:other) { described_class.new(methods: []) }
 
           it "returns `false`" do
-            expect(method_collection == other).to eq(false)
+            expect(method_collection == other).to be(false)
           end
         end
 
@@ -330,7 +330,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Method
           let(:other) { described_class.new(methods: methods) }
 
           it "returns `true`" do
-            expect(method_collection == other).to eq(true)
+            expect(method_collection == other).to be(true)
           end
         end
       end

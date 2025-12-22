@@ -133,7 +133,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
           let(:other) { described_class.new(matcher: be_success) }
 
           it "returns `false`" do
-            expect(validator == other).to eq(false)
+            expect(validator == other).to be(false)
           end
         end
 
@@ -141,7 +141,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
           let(:other) { described_class.new(matcher: matcher) }
 
           it "returns `true`" do
-            expect(validator == other).to eq(true)
+            expect(validator == other).to be(true)
           end
         end
       end

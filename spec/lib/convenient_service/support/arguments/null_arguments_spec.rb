@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::Support::Arguments::NullArguments, type: :stan
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class < ConvenientService::Support::Arguments).to eq(true) }
+    specify { expect(described_class < ConvenientService::Support::Arguments).to be(true) }
   end
 
   example_group "instance methods" do
@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::Support::Arguments::NullArguments, type: :stan
 
     describe "#null_arguments?" do
       it "returns `true`" do
-        expect(null_arguments.null_arguments?).to eq(true)
+        expect(null_arguments.null_arguments?).to be(true)
       end
     end
   end

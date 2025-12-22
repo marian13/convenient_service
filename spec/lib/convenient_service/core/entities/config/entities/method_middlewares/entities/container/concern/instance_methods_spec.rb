@@ -122,7 +122,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         it "returns `false`" do
-          expect(container.super_method_defined?(method_name)).to eq(false)
+          expect(container.super_method_defined?(method_name)).to be(false)
         end
       end
 
@@ -148,7 +148,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         it "returns `true`" do
-          expect(container.super_method_defined?(method_name)).to eq(true)
+          expect(container.super_method_defined?(method_name)).to be(true)
         end
       end
     end
@@ -240,7 +240,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         it "returns `nil`" do
-          expect(container.resolve_unbound_super_method(method_name)).to eq(nil)
+          expect(container.resolve_unbound_super_method(method_name)).to be_nil
         end
       end
 
@@ -267,7 +267,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
         context "when service class config is NOT committed" do
           it "returns `nil`" do
-            expect(container.resolve_unbound_super_method(method_name)).to eq(nil)
+            expect(container.resolve_unbound_super_method(method_name)).to be_nil
           end
         end
 
@@ -319,7 +319,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
 
         context "when service class config is NOT committed" do
           it "returns `nil`" do
-            expect(container.resolve_unbound_super_method(method_name)).to eq(nil)
+            expect(container.resolve_unbound_super_method(method_name)).to be_nil
           end
         end
 
@@ -358,7 +358,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         it "returns `nil`" do
-          expect(container.resolve_super_method(method_name, entity)).to eq(nil)
+          expect(container.resolve_super_method(method_name, entity)).to be_nil
         end
       end
 
@@ -427,7 +427,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { container_class.new(klass: Class.new) }
 
           it "returns `false`" do
-            expect(container == other).to eq(false)
+            expect(container == other).to be(false)
           end
         end
 
@@ -435,7 +435,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { container_class.new(klass: klass.singleton_class) }
 
           it "returns `true`" do
-            expect(container == other).to eq(true)
+            expect(container == other).to be(true)
           end
         end
       end

@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::URL:
       let(:url) { nil }
 
       it "returns `false`" do
-        expect(described_class.call(url)).to eq(false)
+        expect(described_class.call(url)).to be(false)
       end
     end
 
@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::URL:
       let(:url) { "" }
 
       it "returns `false`" do
-        expect(described_class.call(url)).to eq(false)
+        expect(described_class.call(url)).to be(false)
       end
     end
 
@@ -33,7 +33,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::URL:
       let(:url) { "unknown_protocol://example.com" }
 
       it "returns `false`" do
-        expect(described_class.call(url)).to eq(false)
+        expect(described_class.call(url)).to be(false)
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::URL:
       let(:url) { "http://example.com" }
 
       it "returns `true`" do
-        expect(described_class.call(url)).to eq(true)
+        expect(described_class.call(url)).to be(true)
       end
     end
 
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::URL:
       let(:url) { "https://example.com" }
 
       it "returns `true`" do
-        expect(described_class.call(url)).to eq(true)
+        expect(described_class.call(url)).to be(true)
       end
     end
   end

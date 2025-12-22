@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
           it "does NOT set string key to cache" do
             command.call(feature: feature, entry: entry, arguments: arguments, value: value)
 
-            expect(feature.stubbed_entries.exist?(entry)).to eq(false)
+            expect(feature.stubbed_entries.exist?(entry)).to be(false)
           end
 
           it "sets symbol key to cache" do
@@ -111,7 +111,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
           it "does NOT set string key to cache" do
             command.call(feature: feature, entry: entry, arguments: arguments, value: value)
 
-            expect(feature.stubbed_entries.exist?(entry)).to eq(false)
+            expect(feature.stubbed_entries.exist?(entry)).to be(false)
           end
 
           it "sets symbol key to cache" do

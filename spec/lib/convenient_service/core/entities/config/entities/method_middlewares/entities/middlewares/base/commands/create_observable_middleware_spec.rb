@@ -41,7 +41,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
                 let(:other) { 42 }
 
                 it "returns `nil`" do
-                  expect(observable_middleware == other).to eq(nil)
+                  expect(observable_middleware == other).to be_nil
                 end
               end
 
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
                 let(:other) { described_class.call(middleware: Class.new(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base)) }
 
                 it "returns `false`" do
-                  expect(observable_middleware == other).to eq(false)
+                  expect(observable_middleware == other).to be(false)
                 end
               end
 
@@ -57,7 +57,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
                 let(:other) { described_class.call(middleware: middleware) }
 
                 it "returns `true`" do
-                  expect(observable_middleware == other).to eq(true)
+                  expect(observable_middleware == other).to be(true)
                 end
               end
             end

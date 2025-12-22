@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     describe "#defined?" do
       context "when methods middlewares callers do NOT contain own instance method" do
         it "returns `false`" do
-          expect(method_middlewares.defined?).to eq(false)
+          expect(method_middlewares.defined?).to be(false)
         end
       end
 
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         it "returns `true`" do
-          expect(method_middlewares.defined?).to eq(true)
+          expect(method_middlewares.defined?).to be(true)
         end
       end
     end
@@ -91,7 +91,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
 
           it "returns `false`" do
-            expect(method_middlewares.super_method_defined?).to eq(false)
+            expect(method_middlewares.super_method_defined?).to be(false)
           end
         end
 
@@ -107,7 +107,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
 
           it "returns `true`" do
-            expect(method_middlewares.super_method_defined?).to eq(false)
+            expect(method_middlewares.super_method_defined?).to be(false)
           end
         end
       end
@@ -125,7 +125,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
 
           it "returns `false`" do
-            expect(method_middlewares.super_method_defined?).to eq(false)
+            expect(method_middlewares.super_method_defined?).to be(false)
           end
         end
 
@@ -141,7 +141,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
 
           it "returns `true`" do
-            expect(method_middlewares.super_method_defined?).to eq(true)
+            expect(method_middlewares.super_method_defined?).to be(true)
           end
         end
       end
@@ -150,7 +150,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     describe "#defined_without_super_method?" do
       context "when method middlewares are NOT defined" do
         it "returns `false`" do
-          expect(method_middlewares.defined_without_super_method?).to eq(false)
+          expect(method_middlewares.defined_without_super_method?).to be(false)
         end
       end
 
@@ -167,7 +167,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
 
           it "returns `true`" do
-            expect(method_middlewares.defined_without_super_method?).to eq(true)
+            expect(method_middlewares.defined_without_super_method?).to be(true)
           end
         end
 
@@ -183,7 +183,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
 
           it "returns `false`" do
-            expect(method_middlewares.defined_without_super_method?).to eq(false)
+            expect(method_middlewares.defined_without_super_method?).to be(false)
           end
         end
       end
@@ -198,13 +198,13 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         it "returns `true`" do
-          expect(method_middlewares.any?).to eq(true)
+          expect(method_middlewares.any?).to be(true)
         end
       end
 
       context "when stack is empty" do
         it "returns `false`" do
-          expect(method_middlewares.any?).to eq(false)
+          expect(method_middlewares.any?).to be(false)
         end
       end
     end
@@ -218,13 +218,13 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         it "returns `false`" do
-          expect(method_middlewares.none?).to eq(false)
+          expect(method_middlewares.none?).to be(false)
         end
       end
 
       context "when stack is empty" do
         it "returns `true`" do
-          expect(method_middlewares.none?).to eq(true)
+          expect(method_middlewares.none?).to be(true)
         end
       end
     end
@@ -468,7 +468,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         end
 
         it "returns `nil`" do
-          expect(method_middlewares.resolve_super_method(entity)).to eq(nil)
+          expect(method_middlewares.resolve_super_method(entity)).to be_nil
         end
       end
 
@@ -537,7 +537,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(scope: :class, method: method, klass: klass) }
 
           it "returns `false`" do
-            expect(method_middlewares == other).to eq(false)
+            expect(method_middlewares == other).to be(false)
           end
         end
 
@@ -545,7 +545,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(scope: scope, method: :step, klass: klass) }
 
           it "returns `false`" do
-            expect(method_middlewares == other).to eq(false)
+            expect(method_middlewares == other).to be(false)
           end
         end
 
@@ -553,7 +553,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(scope: scope, method: method, klass: Class.new) }
 
           it "returns `false`" do
-            expect(method_middlewares == other).to eq(false)
+            expect(method_middlewares == other).to be(false)
           end
         end
 
@@ -561,7 +561,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(scope: scope, method: method, klass: klass).configure { |stack| stack.use middleware } }
 
           it "returns `false`" do
-            expect(method_middlewares == other).to eq(false)
+            expect(method_middlewares == other).to be(false)
           end
         end
 
@@ -569,7 +569,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(scope: scope, method: method, klass: klass) }
 
           it "returns `true`" do
-            expect(method_middlewares == other).to eq(true)
+            expect(method_middlewares == other).to be(true)
           end
         end
       end

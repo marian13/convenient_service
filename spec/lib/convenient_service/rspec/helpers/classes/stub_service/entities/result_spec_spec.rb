@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
         end
 
         it "returns stubbed result" do
-          expect(result_spec.calculate_value.stubbed_result?).to eq(true)
+          expect(result_spec.calculate_value.stubbed_result?).to be(true)
         end
 
         context "when result spec for failure with data" do
@@ -89,7 +89,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
         end
 
         it "returns stubbed result" do
-          expect(result_spec.calculate_value.stubbed_result?).to eq(true)
+          expect(result_spec.calculate_value.stubbed_result?).to be(true)
         end
 
         context "when result spec for error with message" do
@@ -137,7 +137,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
         end
 
         it "returns stubbed result" do
-          expect(result_spec.calculate_value.stubbed_result?).to eq(true)
+          expect(result_spec.calculate_value.stubbed_result?).to be(true)
         end
 
         context "when result spec for success with data" do
@@ -225,7 +225,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
           let(:other) { described_class.new(status: :error, service_class: service_class, chain: chain) }
 
           it "returns `false`" do
-            expect(result_spec == other).to eq(false)
+            expect(result_spec == other).to be(false)
           end
         end
 
@@ -233,7 +233,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
           let(:other) { described_class.new(status: status, service_class: Class.new, chain: chain) }
 
           it "returns `false`" do
-            expect(result_spec == other).to eq(false)
+            expect(result_spec == other).to be(false)
           end
         end
 
@@ -241,7 +241,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
           let(:other) { described_class.new(status: status, service_class: service_class, chain: {args: [:bar], kwargs: {bar: :foo}, block: -> { :bar }}) }
 
           it "returns `false`" do
-            expect(result_spec == other).to eq(false)
+            expect(result_spec == other).to be(false)
           end
         end
 
@@ -249,7 +249,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
           let(:other) { described_class.new(status: status, service_class: service_class, chain: chain) }
 
           it "returns `true`" do
-            expect(result_spec == other).to eq(true)
+            expect(result_spec == other).to be(true)
           end
         end
       end

@@ -22,7 +22,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::PrependModule, type:
       let(:klass) { Class.new }
 
       it "returns `false`" do
-        expect(matcher_result).to eq(false)
+        expect(matcher_result).to be(false)
       end
     end
 
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::PrependModule, type:
       end
 
       it "returns `true`" do
-        expect(matcher_result).to eq(true)
+        expect(matcher_result).to be(true)
       end
     end
 
@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::PrependModule, type:
       end
 
       it "returns `false`" do
-        expect(matcher_result).to eq(false)
+        expect(matcher_result).to be(false)
       end
     end
   end

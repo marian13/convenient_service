@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           let(:other) { described_class.new(:bar) }
 
           it "returns `false`" do
-            expect(name == other).to eq(false)
+            expect(name == other).to be(false)
           end
         end
 
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           let(:other) { described_class.new(:foo) }
 
           it "returns `true`" do
-            expect(name == other).to eq(true)
+            expect(name == other).to be(true)
           end
         end
       end

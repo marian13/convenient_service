@@ -262,7 +262,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
             end
 
             it "returns `false`" do
-              expect(result).to eq(false)
+              expect(result).to be(false)
             end
 
             context "when service class has private instance method" do
@@ -287,7 +287,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
               end
 
               it "returns `false`" do
-                expect(result).to eq(false)
+                expect(result).to be(false)
               end
             end
 
@@ -319,7 +319,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
               end
 
               it "returns `false`" do
-                expect(result).to eq(false)
+                expect(result).to be(false)
               end
             end
           end
@@ -350,7 +350,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
             end
 
             it "returns `true`" do
-              expect(result).to eq(true)
+              expect(result).to be(true)
             end
           end
         end
@@ -375,7 +375,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
           end
 
           it "returns `true`" do
-            expect(result).to eq(true)
+            expect(result).to be(true)
           end
         end
       end
@@ -401,7 +401,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
             end
 
             it "returns `false`" do
-              expect(result).to eq(false)
+              expect(result).to be(false)
             end
 
             context "when service class has private instance method" do
@@ -426,7 +426,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
               end
 
               it "returns `true`" do
-                expect(result).to eq(true)
+                expect(result).to be(true)
               end
             end
 
@@ -458,7 +458,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
               end
 
               it "returns `true`" do
-                expect(result).to eq(true)
+                expect(result).to be(true)
               end
             end
           end
@@ -489,7 +489,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
             end
 
             it "returns `true`" do
-              expect(result).to eq(true)
+              expect(result).to be(true)
             end
           end
         end
@@ -514,7 +514,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
           end
 
           it "returns `true`" do
-            expect(result).to eq(true)
+            expect(result).to be(true)
           end
         end
       end
@@ -546,7 +546,7 @@ RSpec.describe ConvenientService::Core::Concern::InstanceMethods, type: :standar
           ##
           # NOTE: private methods are ignored when `include_private` is `false`.
           #
-          expect(result).to eq(false)
+          expect(result).to be(false)
         end
       end
     end

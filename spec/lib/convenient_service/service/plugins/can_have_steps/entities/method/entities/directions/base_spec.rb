@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           let(:other) { described_class.new }
 
           it "returns `true`" do
-            expect(direction == other).to eq(true)
+            expect(direction == other).to be(true)
           end
         end
       end

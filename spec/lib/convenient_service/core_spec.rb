@@ -44,7 +44,7 @@ RSpec.describe ConvenientService::Core, type: :standard do
         let(:entity_class) { 42 }
 
         it "returns `false`" do
-          expect(described_class.entity_class?(entity_class)).to eq(false)
+          expect(described_class.entity_class?(entity_class)).to be(false)
         end
       end
 
@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::Core, type: :standard do
           let(:entity_class) { Class.new }
 
           it "returns `false`" do
-            expect(described_class.entity_class?(entity_class)).to eq(false)
+            expect(described_class.entity_class?(entity_class)).to be(false)
           end
         end
 
@@ -71,7 +71,7 @@ RSpec.describe ConvenientService::Core, type: :standard do
           let(:entity_class) { service_class }
 
           it "returns `true`" do
-            expect(described_class.entity_class?(entity_class)).to eq(true)
+            expect(described_class.entity_class?(entity_class)).to be(true)
           end
         end
       end
@@ -113,23 +113,23 @@ RSpec.describe ConvenientService::Core, type: :standard do
 
         let(:feature_instance) { feature_class.new }
 
-        specify { expect(described_class.entity_class?(service_class)).to eq(true) }
-        specify { expect(described_class.entity_class?(service_class.result_class)).to eq(true) }
-        specify { expect(described_class.entity_class?(service_class.result_class.data_class)).to eq(true) }
-        specify { expect(described_class.entity_class?(service_class.result_class.message_class)).to eq(true) }
-        specify { expect(described_class.entity_class?(service_class.result_class.code_class)).to eq(true) }
-        specify { expect(described_class.entity_class?(service_class.result_class.status_class)).to eq(true) }
-        specify { expect(described_class.entity_class?(service_class.step_class)).to eq(true) }
-        specify { expect(described_class.entity_class?(feature_class)).to eq(true) }
+        specify { expect(described_class.entity_class?(service_class)).to be(true) }
+        specify { expect(described_class.entity_class?(service_class.result_class)).to be(true) }
+        specify { expect(described_class.entity_class?(service_class.result_class.data_class)).to be(true) }
+        specify { expect(described_class.entity_class?(service_class.result_class.message_class)).to be(true) }
+        specify { expect(described_class.entity_class?(service_class.result_class.code_class)).to be(true) }
+        specify { expect(described_class.entity_class?(service_class.result_class.status_class)).to be(true) }
+        specify { expect(described_class.entity_class?(service_class.step_class)).to be(true) }
+        specify { expect(described_class.entity_class?(feature_class)).to be(true) }
 
-        specify { expect(described_class.entity_class?(service_instance)).to eq(false) }
-        specify { expect(described_class.entity_class?(service_instance.result)).to eq(false) }
-        specify { expect(described_class.entity_class?(service_instance.result.unsafe_data)).to eq(false) }
-        specify { expect(described_class.entity_class?(service_instance.result.unsafe_message)).to eq(false) }
-        specify { expect(described_class.entity_class?(service_instance.result.unsafe_code)).to eq(false) }
-        specify { expect(described_class.entity_class?(service_instance.result.status)).to eq(false) }
-        specify { expect(described_class.entity_class?(service_instance.steps.first)).to eq(false) }
-        specify { expect(described_class.entity_class?(feature_instance)).to eq(false) }
+        specify { expect(described_class.entity_class?(service_instance)).to be(false) }
+        specify { expect(described_class.entity_class?(service_instance.result)).to be(false) }
+        specify { expect(described_class.entity_class?(service_instance.result.unsafe_data)).to be(false) }
+        specify { expect(described_class.entity_class?(service_instance.result.unsafe_message)).to be(false) }
+        specify { expect(described_class.entity_class?(service_instance.result.unsafe_code)).to be(false) }
+        specify { expect(described_class.entity_class?(service_instance.result.status)).to be(false) }
+        specify { expect(described_class.entity_class?(service_instance.steps.first)).to be(false) }
+        specify { expect(described_class.entity_class?(feature_instance)).to be(false) }
       end
     end
 
@@ -176,21 +176,21 @@ RSpec.describe ConvenientService::Core, type: :standard do
 
         let(:service_instance) { service_class.new }
 
-        specify { expect(described_class.entity?(service_class)).to eq(false) }
-        specify { expect(described_class.entity?(service_class.result_class)).to eq(false) }
-        specify { expect(described_class.entity?(service_class.result_class.data_class)).to eq(false) }
-        specify { expect(described_class.entity?(service_class.result_class.message_class)).to eq(false) }
-        specify { expect(described_class.entity?(service_class.result_class.code_class)).to eq(false) }
-        specify { expect(described_class.entity?(service_class.result_class.status_class)).to eq(false) }
-        specify { expect(described_class.entity?(service_class.step_class)).to eq(false) }
+        specify { expect(described_class.entity?(service_class)).to be(false) }
+        specify { expect(described_class.entity?(service_class.result_class)).to be(false) }
+        specify { expect(described_class.entity?(service_class.result_class.data_class)).to be(false) }
+        specify { expect(described_class.entity?(service_class.result_class.message_class)).to be(false) }
+        specify { expect(described_class.entity?(service_class.result_class.code_class)).to be(false) }
+        specify { expect(described_class.entity?(service_class.result_class.status_class)).to be(false) }
+        specify { expect(described_class.entity?(service_class.step_class)).to be(false) }
 
-        specify { expect(described_class.entity?(service_instance)).to eq(true) }
-        specify { expect(described_class.entity?(service_instance.result)).to eq(true) }
-        specify { expect(described_class.entity?(service_instance.result.unsafe_data)).to eq(true) }
-        specify { expect(described_class.entity?(service_instance.result.unsafe_message)).to eq(true) }
-        specify { expect(described_class.entity?(service_instance.result.unsafe_code)).to eq(true) }
-        specify { expect(described_class.entity?(service_instance.result.status)).to eq(true) }
-        specify { expect(described_class.entity?(service_instance.steps.first)).to eq(true) }
+        specify { expect(described_class.entity?(service_instance)).to be(true) }
+        specify { expect(described_class.entity?(service_instance.result)).to be(true) }
+        specify { expect(described_class.entity?(service_instance.result.unsafe_data)).to be(true) }
+        specify { expect(described_class.entity?(service_instance.result.unsafe_message)).to be(true) }
+        specify { expect(described_class.entity?(service_instance.result.unsafe_code)).to be(true) }
+        specify { expect(described_class.entity?(service_instance.result.status)).to be(true) }
+        specify { expect(described_class.entity?(service_instance.steps.first)).to be(true) }
       end
     end
   end

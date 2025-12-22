@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:result) { service.result }
 
         it "returns `false`" do
-          expect(result.strict?).to eq(false)
+          expect(result.strict?).to be(false)
         end
       end
 
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:result) { service.result.strict }
 
         it "returns `true`" do
-          expect(result.strict?).to eq(true)
+          expect(result.strict?).to be(true)
         end
       end
     end
@@ -91,7 +91,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns NOT strict result" do
-          expect(result.strict.strict?).to eq(false)
+          expect(result.strict.strict?).to be(false)
         end
       end
 
@@ -111,7 +111,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns strict result" do
-          expect(result.strict.strict?).to eq(true)
+          expect(result.strict.strict?).to be(true)
         end
       end
 
@@ -131,7 +131,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns NOT strict result" do
-          expect(result.strict.strict?).to eq(false)
+          expect(result.strict.strict?).to be(false)
         end
       end
     end

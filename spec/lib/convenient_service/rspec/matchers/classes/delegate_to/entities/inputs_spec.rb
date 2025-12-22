@@ -259,7 +259,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         end
 
         it "returns `false`" do
-          expect(inputs.has_call_original?).to eq(false)
+          expect(inputs.has_call_original?).to be(false)
         end
       end
 
@@ -269,7 +269,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         end
 
         it "returns `true`" do
-          expect(inputs.has_call_original?).to eq(true)
+          expect(inputs.has_call_original?).to be(true)
         end
       end
     end
@@ -281,7 +281,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         end
 
         it "defaults to `true`" do
-          expect(inputs.should_call_original?).to eq(true)
+          expect(inputs.should_call_original?).to be(true)
         end
       end
 
@@ -291,7 +291,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         end
 
         it "return that set value" do
-          expect(inputs.should_call_original?).to eq(false)
+          expect(inputs.should_call_original?).to be(false)
         end
       end
     end
@@ -470,7 +470,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:other) { described_class.new(object: Object.new, method: method, block_expectation: block_expectation) }
 
           it "returns `false`" do
-            expect(inputs == other).to eq(false)
+            expect(inputs == other).to be(false)
           end
         end
 
@@ -478,7 +478,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           let(:other) { described_class.new(object: object, method: method, block_expectation: block_expectation) }
 
           it "returns `true`" do
-            expect(inputs == other).to eq(true)
+            expect(inputs == other).to be(true)
           end
         end
       end

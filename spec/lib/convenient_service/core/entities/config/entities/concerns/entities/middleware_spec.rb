@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
         let(:other) { 42 }
 
         it "returns `false`" do
-          expect(described_class.original_two_equals(other)).to eq(false)
+          expect(described_class.original_two_equals(other)).to be(false)
         end
       end
 
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
         let(:other) { described_class }
 
         it "returns `true`" do
-          expect(described_class.original_two_equals(other)).to eq(true)
+          expect(described_class.original_two_equals(other)).to be(true)
         end
       end
 
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
         end
 
         it "returns `false`" do
-          expect(described_class.original_two_equals(other)).to eq(false)
+          expect(described_class.original_two_equals(other)).to be(false)
         end
       end
     end
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
           let(:other) { 42 }
 
           it "returns `nil`" do
-            expect(described_class == other).to eq(nil)
+            expect(described_class == other).to be_nil
           end
         end
 
@@ -101,7 +101,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
             let(:other) { Class.new }
 
             it "returns `nil`" do
-              expect(described_class == other).to eq(nil)
+              expect(described_class == other).to be_nil
             end
           end
 
@@ -133,7 +133,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::Concerns::En
         let(:other) { described_class }
 
         it "returns `true`" do
-          expect(described_class == other).to eq(true)
+          expect(described_class == other).to be(true)
         end
       end
     end

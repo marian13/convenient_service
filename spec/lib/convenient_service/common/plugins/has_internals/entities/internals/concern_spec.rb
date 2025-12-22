@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Inter
           let(:other) { 42 }
 
           it "returns `nil`" do
-            expect(internals == other).to eq(nil)
+            expect(internals == other).to be_nil
           end
         end
 
@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Entities::Inter
           let(:other) { internals_class.new }
 
           it "returns `true`" do
-            expect(internals == other).to eq(true)
+            expect(internals == other).to be(true)
           end
         end
       end

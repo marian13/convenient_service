@@ -52,7 +52,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
     describe "#alias?" do
       it "returns `true`" do
-        expect(caller.alias?).to eq(true)
+        expect(caller.alias?).to be(true)
       end
     end
 

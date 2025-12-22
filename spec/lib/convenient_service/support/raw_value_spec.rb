@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Support::RawValue, type: :standard do
           let(:other) { "string" }
 
           it "returns `nil`" do
-            expect(raw_value == other).to eq(nil)
+            expect(raw_value == other).to be_nil
           end
         end
 
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Support::RawValue, type: :standard do
           let(:other) { described_class.wrap(:bar) }
 
           it "returns `false`" do
-            expect(raw_value == other).to eq(false)
+            expect(raw_value == other).to be(false)
           end
         end
 
@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::Support::RawValue, type: :standard do
           let(:other) { described_class.wrap(:foo) }
 
           it "returns `true`" do
-            expect(raw_value == other).to eq(true)
+            expect(raw_value == other).to be(true)
           end
         end
       end

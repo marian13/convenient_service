@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       context "when result is NOT created by `stub_service`" do
         it "returns `false`" do
-          expect(result.stubbed_result?).to eq(false)
+          expect(result.stubbed_result?).to be(false)
         end
       end
 
@@ -61,7 +61,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `true`" do
-          expect(result.stubbed_result?).to eq(true)
+          expect(result.stubbed_result?).to be(true)
         end
       end
     end

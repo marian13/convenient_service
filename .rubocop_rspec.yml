@@ -6,7 +6,7 @@
 # Copied without any modifications from:
 # https://gist.github.com/palkan/623c0816b05ed246bfe0cb406050990a
 #
-require:
+plugins:
   - rubocop-rspec
 
 RSpec/Focus:
@@ -46,13 +46,4 @@ RSpec/MissingExampleGroupArgument:
   Enabled: true
 
 RSpec/ReceiveCounts:
-  Enabled: true
-
-RSpec/Capybara/CurrentPathExpectation:
-  Enabled: true
-
-RSpec/FactoryBot/AttributeDefinedStatically:
-  Enabled: true
-
-RSpec/FactoryBot/CreateList:
   Enabled: true

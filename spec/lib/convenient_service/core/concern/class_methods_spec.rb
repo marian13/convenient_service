@@ -209,7 +209,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
 
       context "when config is NOT committed" do
         it "returns `false`" do
-          expect(service_class.has_committed_config?).to eq(false)
+          expect(service_class.has_committed_config?).to be(false)
         end
       end
 
@@ -219,7 +219,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
         end
 
         it "returns `true`" do
-          expect(service_class.has_committed_config?).to eq(true)
+          expect(service_class.has_committed_config?).to be(true)
         end
       end
     end
@@ -249,7 +249,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
         ##
         # NOTE: If returns `true`, then `config` was NOT cached.
         #
-        expect(service_class.commit_config!).to eq(false)
+        expect(service_class.commit_config!).to be(false)
       end
 
       example_group "`trigger` option" do
@@ -537,7 +537,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
             end
 
             it "returns `false`" do
-              expect(result).to eq(false)
+              expect(result).to be(false)
             end
 
             context "when service class has private class method" do
@@ -564,7 +564,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
               end
 
               it "returns `false`" do
-                expect(result).to eq(false)
+                expect(result).to be(false)
               end
             end
 
@@ -602,7 +602,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
               end
 
               it "returns `false`" do
-                expect(result).to eq(false)
+                expect(result).to be(false)
               end
             end
           end
@@ -639,7 +639,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
             end
 
             it "returns `true`" do
-              expect(result).to eq(true)
+              expect(result).to be(true)
             end
           end
         end
@@ -666,7 +666,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
           end
 
           it "returns `true`" do
-            expect(result).to eq(true)
+            expect(result).to be(true)
           end
         end
       end
@@ -694,7 +694,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
             end
 
             it "returns `false`" do
-              expect(result).to eq(false)
+              expect(result).to be(false)
             end
 
             context "when service class has private class method" do
@@ -721,7 +721,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
               end
 
               it "returns `true`" do
-                expect(result).to eq(true)
+                expect(result).to be(true)
               end
             end
 
@@ -759,7 +759,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
               end
 
               it "returns `true`" do
-                expect(result).to eq(true)
+                expect(result).to be(true)
               end
             end
           end
@@ -796,7 +796,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
             end
 
             it "returns `true`" do
-              expect(result).to eq(true)
+              expect(result).to be(true)
             end
           end
         end
@@ -823,7 +823,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
           end
 
           it "returns `true`" do
-            expect(result).to eq(true)
+            expect(result).to be(true)
           end
         end
       end
@@ -857,7 +857,7 @@ RSpec.describe ConvenientService::Core::Concern::ClassMethods, type: :standard d
           ##
           # NOTE: private methods are ignored when `include_private` is `false`.
           #
-          expect(result).to eq(false)
+          expect(result).to be(false)
         end
       end
     end

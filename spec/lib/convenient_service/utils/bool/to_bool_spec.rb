@@ -17,7 +17,7 @@ RSpec.describe ConvenientService::Utils::Bool::ToBool, type: :standard do
       let(:object) { nil }
 
       it "returns false" do
-        expect(result).to eq(false)
+        expect(result).to be(false)
       end
     end
 
@@ -25,7 +25,7 @@ RSpec.describe ConvenientService::Utils::Bool::ToBool, type: :standard do
       let(:object) { 42 }
 
       it "returns true" do
-        expect(result).to eq(true)
+        expect(result).to be(true)
       end
     end
   end

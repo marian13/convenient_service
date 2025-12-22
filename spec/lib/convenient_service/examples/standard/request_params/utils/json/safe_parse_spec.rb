@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::JSON
         expect(described_class.call(json_string)).to be_nil
       end
 
-      include_examples "respects default value"
+      it_behaves_like "respects default value"
     end
 
     context "when json string is NOT string" do
@@ -40,7 +40,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::JSON
         expect(described_class.call(json_string)).to be_nil
       end
 
-      include_examples "respects default value"
+      it_behaves_like "respects default value"
     end
 
     context "when json string is NOT valid json" do
@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Examples::Standard::RequestParams::Utils::JSON
         expect(described_class.call(json_string)).to be_nil
       end
 
-      include_examples "respects default value"
+      it_behaves_like "respects default value"
     end
 
     context "when json string is valid json" do

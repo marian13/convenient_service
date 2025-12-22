@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
     describe "#usual?" do
       it "returns `true`" do
-        expect(caller.usual?).to eq(true)
+        expect(caller.usual?).to be(true)
       end
     end
 

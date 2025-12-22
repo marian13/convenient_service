@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::IncludeInOrder, type
           let(:string) { "foo baz bar" }
 
           it "returns `false`" do
-            expect(matcher_result).to eq(false)
+            expect(matcher_result).to be(false)
           end
         end
 
@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::IncludeInOrder, type
           let(:string) { "foo bar baz" }
 
           it "returns `true`" do
-            expect(matcher_result).to eq(true)
+            expect(matcher_result).to be(true)
           end
         end
       end
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::IncludeInOrder, type
           let(:string) { "foo baz bar" }
 
           it "returns `false`" do
-            expect(matcher_result).to eq(false)
+            expect(matcher_result).to be(false)
           end
         end
 
@@ -57,7 +57,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::IncludeInOrder, type
           let(:string) { "foo bar baz" }
 
           it "returns `true`" do
-            expect(matcher_result).to eq(true)
+            expect(matcher_result).to be(true)
           end
         end
       end
@@ -67,7 +67,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::IncludeInOrder, type
       let(:keywords) { [] }
 
       it "returns `false`" do
-        expect(matcher_result).to eq(false)
+        expect(matcher_result).to be(false)
       end
     end
   end

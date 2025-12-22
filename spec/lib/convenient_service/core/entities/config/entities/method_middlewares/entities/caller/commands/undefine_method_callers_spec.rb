@@ -73,7 +73,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
 
           it "returns `false`" do
-            expect(command_result).to eq(false)
+            expect(command_result).to be(false)
           end
         end
 
@@ -111,7 +111,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
 
           it "returns `true`" do
-            expect(command_result).to eq(true)
+            expect(command_result).to be(true)
           end
 
           context "when `method` name ends with `!`" do
@@ -160,7 +160,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
 
           it "returns `false`" do
-            expect(command_result).to eq(false)
+            expect(command_result).to be(false)
           end
         end
 
@@ -198,7 +198,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           end
 
           it "returns `true`" do
-            expect(command_result).to eq(true)
+            expect(command_result).to be(true)
           end
 
           context "when `method` name ends with `!`" do

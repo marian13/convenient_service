@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Utils::Hash::TripleEqualityCompare, type: :sta
         let(:other_hash) { {foo: 5} }
 
         it "returns `false`" do
-          expect(command_result).to eq(false)
+          expect(command_result).to be(false)
         end
       end
 
@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Utils::Hash::TripleEqualityCompare, type: :sta
         let(:other_hash) { {foo: 5, bar: "abc", baz: :baz} }
 
         it "returns `false`" do
-          expect(command_result).to eq(false)
+          expect(command_result).to be(false)
         end
       end
 
@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Utils::Hash::TripleEqualityCompare, type: :sta
           let(:other_hash) { {foo: 5, baz: :baz} }
 
           it "returns `false`" do
-            expect(command_result).to eq(false)
+            expect(command_result).to be(false)
           end
         end
 
@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Utils::Hash::TripleEqualityCompare, type: :sta
             let(:other_hash) { {foo: -5, bar: "xyz"} }
 
             it "returns `false`" do
-              expect(command_result).to eq(false)
+              expect(command_result).to be(false)
             end
           end
 
@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Utils::Hash::TripleEqualityCompare, type: :sta
             let(:other_hash) { {foo: 5, bar: "abc"} }
 
             it "returns `true`" do
-              expect(command_result).to eq(true)
+              expect(command_result).to be(true)
             end
           end
         end

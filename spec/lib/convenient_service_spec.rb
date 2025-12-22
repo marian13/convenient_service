@@ -20,7 +20,7 @@ RSpec.describe ConvenientService, type: :standard do
         end
 
         it "return `false`" do
-          expect(described_class.debug?).to eq(false)
+          expect(described_class.debug?).to be(false)
         end
       end
 
@@ -30,7 +30,7 @@ RSpec.describe ConvenientService, type: :standard do
         end
 
         it "return `true`" do
-          expect(described_class.debug?).to eq(true)
+          expect(described_class.debug?).to be(true)
         end
       end
     end
@@ -42,7 +42,7 @@ RSpec.describe ConvenientService, type: :standard do
         end
 
         it "return `false`" do
-          expect(described_class.benchmark?).to eq(false)
+          expect(described_class.benchmark?).to be(false)
         end
       end
 
@@ -52,7 +52,7 @@ RSpec.describe ConvenientService, type: :standard do
         end
 
         it "return `true`" do
-          expect(described_class.benchmark?).to eq(true)
+          expect(described_class.benchmark?).to be(true)
         end
       end
     end
@@ -141,7 +141,7 @@ RSpec.describe ConvenientService, type: :standard do
 
         # rubocop:disable RSpec/MultipleExpectations
         it "does NOT clean `exception` backtrace" do
-          expect { described_class.raise(exception) }.to raise_error { |error| expect(error.backtrace.none? { |line| line.start_with?(described_class.root.to_s) }).to eq(false) }
+          expect { described_class.raise(exception) }.to raise_error { |error| expect(error.backtrace.none? { |line| line.start_with?(described_class.root.to_s) }).to be(false) }
         end
         # rubocop:enable RSpec/MultipleExpectations
       end
@@ -153,7 +153,7 @@ RSpec.describe ConvenientService, type: :standard do
 
         # rubocop:disable RSpec/MultipleExpectations
         it "cleans `exception` backtrace" do
-          expect { described_class.raise(exception) }.to raise_error { |error| expect(error.backtrace.none? { |line| line.start_with?(described_class.root.to_s) }).to eq(true) }
+          expect { described_class.raise(exception) }.to raise_error { |error| expect(error.backtrace.none? { |line| line.start_with?(described_class.root.to_s) }).to be(true) }
         end
         # rubocop:enable RSpec/MultipleExpectations
       end
@@ -217,7 +217,7 @@ RSpec.describe ConvenientService, type: :standard do
 
           # rubocop:disable RSpec/MultipleExpectations
           it "does NOT clean `exception` backtrace" do
-            expect { described_class.reraise(&block) }.to raise_error { |error| expect(error.backtrace.none? { |line| line.start_with?(described_class.root.to_s) }).to eq(false) }
+            expect { described_class.reraise(&block) }.to raise_error { |error| expect(error.backtrace.none? { |line| line.start_with?(described_class.root.to_s) }).to be(false) }
           end
           # rubocop:enable RSpec/MultipleExpectations
         end
@@ -229,7 +229,7 @@ RSpec.describe ConvenientService, type: :standard do
 
           # rubocop:disable RSpec/MultipleExpectations
           it "cleans `exception` backtrace" do
-            expect { described_class.reraise(&block) }.to raise_error { |error| expect(error.backtrace.none? { |line| line.start_with?(described_class.root.to_s) }).to eq(true) }
+            expect { described_class.reraise(&block) }.to raise_error { |error| expect(error.backtrace.none? { |line| line.start_with?(described_class.root.to_s) }).to be(true) }
           end
           # rubocop:enable RSpec/MultipleExpectations
         end

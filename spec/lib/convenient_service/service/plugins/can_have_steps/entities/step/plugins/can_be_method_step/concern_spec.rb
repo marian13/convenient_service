@@ -119,7 +119,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `false`" do
-          expect(step.method_step?).to eq(false)
+          expect(step.method_step?).to be(false)
         end
       end
 
@@ -137,7 +137,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `true`" do
-          expect(step.method_step?).to eq(true)
+          expect(step.method_step?).to be(true)
         end
       end
     end
@@ -155,7 +155,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `false`" do
-          expect(step.result_step?).to eq(false)
+          expect(step.result_step?).to be(false)
         end
       end
 
@@ -174,7 +174,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `false`" do
-            expect(step.result_step?).to eq(false)
+            expect(step.result_step?).to be(false)
           end
         end
 
@@ -192,7 +192,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           end
 
           it "returns `true`" do
-            expect(step.result_step?).to eq(true)
+            expect(step.result_step?).to be(true)
           end
         end
       end

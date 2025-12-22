@@ -7,7 +7,7 @@ inherit_from:
 # - https://github.com/testdouble/standard#usage-via-rubocop
 # - https://evilmartians.com/chronicles/rubocoping-with-legacy-bring-your-ruby-code-up-to-standard
 #
-require:
+plugins:
   ##
   # Rubocop for RSpec files.
   # - https://github.com/rubocop/rubocop-rspec
@@ -42,20 +42,20 @@ require:
   # - https://workingwithruby.com/wwrt/good_oo
   #
   # - rubocop-thread_safety
-  ##
-  # NOTE: Custom Standard cop that should be loaded before `config/base.yml`.
-  # - https://github.com/standardrb/standard-custom/blob/main/lib/standard/cop/block_single_line_braces.rb
-  #
-  - standard/cop/block_single_line_braces
 
 inherit_gem:
   standard: config/base.yml
 
 AllCops:
   ##
-  # https://github.com/testdouble/standard#how-do-i-specify-a-ruby-version-what-is-supported
+  # - https://github.com/testdouble/standard#how-do-i-specify-a-ruby-version-what-is-supported
   #
   TargetRubyVersion: 2.7
+
+  ##
+  # - https://docs.rubocop.org/rubocop/versioning.html#enablingdisabling-pending-cops-in-bulk
+  #
+  NewCops: enable
 
   Exclude:
     ##
@@ -68,9 +68,9 @@ AllCops:
     - TODO/**/*
 
     ##
-    # NOTE: Excludes dependencies from linting.
+    # NOTE: Excludes extracted dependencies from linting.
     #
-    - lib/convenient_service/dependencies/**/*
+    - lib/convenient_service/dependencies/extractions/**/*
 
     ##
     # NOTE: Excludes debug scripts from linting.

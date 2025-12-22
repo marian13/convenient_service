@@ -57,7 +57,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           let(:other) { described_class.new(:bar) }
 
           it "returns `false`" do
-            expect(caller == other).to eq(false)
+            expect(caller == other).to be(false)
           end
         end
 
@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
           let(:other) { described_class.new(:foo) }
 
           it "returns `true`" do
-            expect(caller == other).to eq(true)
+            expect(caller == other).to be(true)
           end
         end
       end
@@ -73,25 +73,25 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
 
     describe "#usual?" do
       it "returns `false`" do
-        expect(caller.usual?).to eq(false)
+        expect(caller.usual?).to be(false)
       end
     end
 
     describe "#alias?" do
       it "returns `false`" do
-        expect(caller.alias?).to eq(false)
+        expect(caller.alias?).to be(false)
       end
     end
 
     describe "#proc?" do
       it "returns `false`" do
-        expect(caller.proc?).to eq(false)
+        expect(caller.proc?).to be(false)
       end
     end
 
     describe "#raw?" do
       it "returns `false`" do
-        expect(caller.raw?).to eq(false)
+        expect(caller.raw?).to be(false)
       end
     end
 

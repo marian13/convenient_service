@@ -86,7 +86,7 @@ module ConvenientService
           # @see https://github.com/rdp/os
           #
           def jruby?
-            engine.match?(/jruby/)
+            engine.include?("jruby")
           end
 
           ##
@@ -95,7 +95,7 @@ module ConvenientService
           # @return [Boolean]
           #
           def truffleruby?
-            engine.match?(/truffleruby/)
+            engine.include?("truffleruby")
           end
 
           ##

@@ -212,7 +212,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 end
 
                 it "returns result with NOT checked status" do
-                  expect(method_value.checked?).to eq(false)
+                  expect(method_value.checked?).to be(false)
                 end
               end
 
@@ -236,7 +236,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 end
 
                 it "returns result with NOT checked status" do
-                  expect(method_value.checked?).to eq(false)
+                  expect(method_value.checked?).to be(false)
                 end
               end
 
@@ -264,7 +264,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 end
 
                 it "returns result with NOT checked status" do
-                  expect(method_value.checked?).to eq(false)
+                  expect(method_value.checked?).to be(false)
                 end
               end
 
@@ -332,7 +332,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns result with NOT checked status" do
-                expect(method_value.checked?).to eq(false)
+                expect(method_value.checked?).to be(false)
               end
             end
 
@@ -356,7 +356,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns result with NOT checked status" do
-                expect(method_value.checked?).to eq(false)
+                expect(method_value.checked?).to be(false)
               end
             end
           end
@@ -432,7 +432,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 end
 
                 it "returns result with NOT checked status" do
-                  expect(method_value.checked?).to eq(false)
+                  expect(method_value.checked?).to be(false)
                 end
               end
 
@@ -456,7 +456,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 end
 
                 it "returns result with NOT checked status" do
-                  expect(method_value.checked?).to eq(false)
+                  expect(method_value.checked?).to be(false)
                 end
               end
 
@@ -484,7 +484,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 end
 
                 it "returns result with NOT checked status" do
-                  expect(method_value.checked?).to eq(false)
+                  expect(method_value.checked?).to be(false)
                 end
               end
 
@@ -550,7 +550,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns result with NOT checked status" do
-                expect(method_value.checked?).to eq(false)
+                expect(method_value.checked?).to be(false)
               end
             end
 
@@ -574,7 +574,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns result with NOT checked status" do
-                expect(method_value.checked?).to eq(false)
+                expect(method_value.checked?).to be(false)
               end
             end
           end
@@ -620,7 +620,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns result with NOT checked status" do
-                expect(method_value.checked?).to eq(false)
+                expect(method_value.checked?).to be(false)
               end
             end
 
@@ -676,7 +676,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 end
 
                 it "returns result with NOT checked status" do
-                  expect(method_value.checked?).to eq(false)
+                  expect(method_value.checked?).to be(false)
                 end
               end
 
@@ -700,7 +700,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 end
 
                 it "returns result with NOT checked status" do
-                  expect(method_value.checked?).to eq(false)
+                  expect(method_value.checked?).to be(false)
                 end
               end
 
@@ -728,7 +728,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                 end
 
                 it "returns result with NOT checked status" do
-                  expect(method_value.checked?).to eq(false)
+                  expect(method_value.checked?).to be(false)
                 end
               end
 
@@ -798,7 +798,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns result with NOT checked status" do
-                expect(method_value.checked?).to eq(false)
+                expect(method_value.checked?).to be(false)
               end
             end
           end
@@ -873,7 +873,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns result with NOT checked status" do
-                expect(method_value.checked?).to eq(false)
+                expect(method_value.checked?).to be(false)
               end
             end
 
@@ -897,7 +897,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns result with NOT checked status" do
-                expect(method_value.checked?).to eq(false)
+                expect(method_value.checked?).to be(false)
               end
             end
 
@@ -925,7 +925,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns result with NOT checked status" do
-                expect(method_value.checked?).to eq(false)
+                expect(method_value.checked?).to be(false)
               end
             end
 
@@ -991,7 +991,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             end
 
             it "returns result with NOT checked status" do
-              expect(method_value.checked?).to eq(false)
+              expect(method_value.checked?).to be(false)
             end
           end
 
@@ -1015,7 +1015,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             end
 
             it "returns result with NOT checked status" do
-              expect(method_value.checked?).to eq(false)
+              expect(method_value.checked?).to be(false)
             end
           end
         end
@@ -1057,7 +1057,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             end
 
             it "returns result with NOT checked status" do
-              expect(method_value.checked?).to eq(false)
+              expect(method_value.checked?).to be(false)
             end
           end
 
@@ -1113,7 +1113,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns result with NOT checked status" do
-                expect(method_value.checked?).to eq(false)
+                expect(method_value.checked?).to be(false)
               end
             end
 
@@ -1137,7 +1137,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns result with NOT checked status" do
-                expect(method_value.checked?).to eq(false)
+                expect(method_value.checked?).to be(false)
               end
             end
 
@@ -1165,7 +1165,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
               end
 
               it "returns result with NOT checked status" do
-                expect(method_value.checked?).to eq(false)
+                expect(method_value.checked?).to be(false)
               end
             end
 
@@ -1233,7 +1233,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             end
 
             it "returns result with NOT checked status" do
-              expect(method_value.checked?).to eq(false)
+              expect(method_value.checked?).to be(false)
             end
           end
         end

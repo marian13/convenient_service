@@ -147,7 +147,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
 
       context "when step collection is NOT committed" do
         it "returns `true`" do
-          expect(step_collection.commit!).to eq(true)
+          expect(step_collection.commit!).to be(true)
         end
 
         ##
@@ -173,7 +173,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
           let(:other_step) { container.step_class.new(*args, **kwargs) }
 
           it "returns `true`" do
-            expect(step_collection.commit!).to eq(true)
+            expect(step_collection.commit!).to be(true)
           end
 
           specify do
@@ -192,7 +192,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
         end
 
         it "returns `false`" do
-          expect(step_collection.commit!).to eq(false)
+          expect(step_collection.commit!).to be(false)
         end
       end
     end
@@ -202,7 +202,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
 
       context "when `steps` are NOT frozen" do
         it "returns `false`" do
-          expect(step_collection.committed?).to eq(false)
+          expect(step_collection.committed?).to be(false)
         end
       end
 
@@ -212,7 +212,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
         end
 
         it "returns `true`" do
-          expect(step_collection.committed?).to eq(true)
+          expect(step_collection.committed?).to be(true)
         end
       end
     end
@@ -281,7 +281,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
           let(:other) { described_class.new(container: Class.new) }
 
           it "returns `false`" do
-            expect(step_collection == other).to eq(false)
+            expect(step_collection == other).to be(false)
           end
         end
 
@@ -289,7 +289,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
           let(:other) { described_class.new(container: container).tap { |collection| collection.create(*args, **kwargs) } }
 
           it "returns `false`" do
-            expect(step_collection == other).to eq(false)
+            expect(step_collection == other).to be(false)
           end
         end
 
@@ -297,7 +297,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Enti
           let(:other) { described_class.new(container: container) }
 
           it "returns `true`" do
-            expect(step_collection == other).to eq(true)
+            expect(step_collection == other).to be(true)
           end
         end
       end

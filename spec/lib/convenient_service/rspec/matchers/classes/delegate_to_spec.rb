@@ -73,7 +73,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           ##
           # TODO: Introduce to `be_empty_proc` matcher.
           #
-          expect([matcher.inputs.block_expectation.instance_of?(Proc), ConvenientService::Support::UNDEFINED[matcher.inputs.block_expectation.call]]).to all eq(true)
+          expect([matcher.inputs.block_expectation.instance_of?(Proc), ConvenientService::Support::UNDEFINED[matcher.inputs.block_expectation.call]]).to all be(true)
         end
       end
     end
@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
 
   example_group "instance methods" do
     describe "#matches?" do
-      context "when NO sub matcher``````                                                     is used" do
+      context "when NO sub matcher`````` is used" do
         let(:matcher) { described_class.new(object, method) }
 
         ##
@@ -91,7 +91,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:block_expectation) { proc {} }
 
           it "returns `false`" do
-            expect(matcher_result).to eq(false)
+            expect(matcher_result).to be(false)
           end
         end
 
@@ -103,7 +103,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
 
@@ -114,7 +114,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo(*args) } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
         end
@@ -127,7 +127,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo } } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
 
@@ -144,7 +144,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
 
@@ -155,7 +155,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs, &block) } } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
         end
@@ -171,7 +171,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:block_expectation) { proc {} }
 
           it "returns `false`" do
-            expect(matcher_result).to eq(false)
+            expect(matcher_result).to be(false)
           end
         end
 
@@ -183,7 +183,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
 
@@ -194,7 +194,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo(*args) } }
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
         end
@@ -207,7 +207,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo } } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
 
@@ -224,7 +224,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
 
@@ -235,7 +235,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs, &block) } } }
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
         end
@@ -251,7 +251,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:block_expectation) { proc {} }
 
           it "returns `false`" do
-            expect(matcher_result).to eq(false)
+            expect(matcher_result).to be(false)
           end
         end
 
@@ -263,7 +263,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
 
@@ -274,7 +274,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo(*args) } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
         end
@@ -287,7 +287,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo } } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
 
@@ -304,7 +304,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
 
@@ -315,7 +315,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs, &block) } } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
         end
@@ -331,7 +331,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:block_expectation) { proc {} }
 
           it "returns `false`" do
-            expect(matcher_result).to eq(false)
+            expect(matcher_result).to be(false)
           end
         end
 
@@ -343,7 +343,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo } }
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
 
@@ -354,7 +354,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo(*args) } }
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
 
@@ -365,7 +365,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo(*args, **kwargs, &block) } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
         end
@@ -378,7 +378,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo } } }
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
 
@@ -395,7 +395,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
 
@@ -412,7 +412,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
 
@@ -423,7 +423,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs) } } }
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
 
@@ -434,7 +434,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs, &block) } } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
         end
@@ -450,7 +450,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:block_expectation) { proc {} }
 
           it "returns `false`" do
-            expect(matcher_result).to eq(false)
+            expect(matcher_result).to be(false)
           end
         end
 
@@ -467,7 +467,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
 
@@ -478,7 +478,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
         end
@@ -497,7 +497,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
 
@@ -514,7 +514,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
         end
@@ -530,7 +530,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:block_expectation) { proc {} }
 
           it "returns `false`" do
-            expect(matcher_result).to eq(false)
+            expect(matcher_result).to be(false)
           end
         end
 
@@ -547,7 +547,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
 
@@ -558,7 +558,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo } }
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
         end
@@ -577,7 +577,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
 
@@ -594,7 +594,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `true`" do
-              expect(matcher_result).to eq(true)
+              expect(matcher_result).to be(true)
             end
           end
         end
@@ -614,7 +614,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:block_expectation) { proc {} }
 
           it "returns `true`" do
-            expect(negative_matcher_result).to eq(true)
+            expect(negative_matcher_result).to be(true)
           end
         end
 
@@ -626,7 +626,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
 
@@ -637,7 +637,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo(*args) } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
         end
@@ -650,7 +650,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo } } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
 
@@ -667,7 +667,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
 
@@ -678,7 +678,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs, &block) } } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
         end
@@ -694,7 +694,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:block_expectation) { proc {} }
 
           it "returns `true`" do
-            expect(negative_matcher_result).to eq(true)
+            expect(negative_matcher_result).to be(true)
           end
         end
 
@@ -706,7 +706,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
 
@@ -717,7 +717,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo(*args) } }
 
             it "returns `true`" do
-              expect(negative_matcher_result).to eq(true)
+              expect(negative_matcher_result).to be(true)
             end
           end
         end
@@ -730,7 +730,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo } } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
 
@@ -747,7 +747,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
 
@@ -758,7 +758,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs, &block) } } }
 
             it "returns `true`" do
-              expect(negative_matcher_result).to eq(true)
+              expect(negative_matcher_result).to be(true)
             end
           end
         end
@@ -774,7 +774,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:block_expectation) { proc {} }
 
           it "returns `true`" do
-            expect(negative_matcher_result).to eq(true)
+            expect(negative_matcher_result).to be(true)
           end
         end
 
@@ -786,7 +786,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
 
@@ -797,7 +797,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo(*args) } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
         end
@@ -810,7 +810,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo } } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
 
@@ -827,7 +827,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
 
@@ -838,7 +838,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs, &block) } } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
         end
@@ -854,7 +854,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:block_expectation) { proc {} }
 
           it "returns `true`" do
-            expect(negative_matcher_result).to eq(true)
+            expect(negative_matcher_result).to be(true)
           end
         end
 
@@ -866,7 +866,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo } }
 
             it "returns `true`" do
-              expect(negative_matcher_result).to eq(true)
+              expect(negative_matcher_result).to be(true)
             end
           end
 
@@ -877,7 +877,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo(*args) } }
 
             it "returns `true`" do
-              expect(negative_matcher_result).to eq(true)
+              expect(negative_matcher_result).to be(true)
             end
           end
 
@@ -888,7 +888,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo(*args, **kwargs, &block) } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
         end
@@ -901,7 +901,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo } } }
 
             it "returns `true`" do
-              expect(negative_matcher_result).to eq(true)
+              expect(negative_matcher_result).to be(true)
             end
           end
 
@@ -918,7 +918,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `true`" do
-              expect(negative_matcher_result).to eq(true)
+              expect(negative_matcher_result).to be(true)
             end
           end
 
@@ -935,7 +935,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
 
@@ -946,7 +946,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs) } } }
 
             it "returns `true`" do
-              expect(negative_matcher_result).to eq(true)
+              expect(negative_matcher_result).to be(true)
             end
           end
 
@@ -957,7 +957,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { 3.times { object.foo(*args, **kwargs, &block) } } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
         end
@@ -973,7 +973,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:block_expectation) { proc {} }
 
           it "returns `true`" do
-            expect(negative_matcher_result).to eq(true)
+            expect(negative_matcher_result).to be(true)
           end
         end
 
@@ -990,7 +990,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `true`" do
-              expect(negative_matcher_result).to eq(true)
+              expect(negative_matcher_result).to be(true)
             end
           end
 
@@ -1001,7 +1001,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
         end
@@ -1020,7 +1020,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `true`" do
-              expect(negative_matcher_result).to eq(true)
+              expect(negative_matcher_result).to be(true)
             end
           end
 
@@ -1037,7 +1037,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
         end
@@ -1053,7 +1053,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:block_expectation) { proc {} }
 
           it "returns `true`" do
-            expect(negative_matcher_result).to eq(true)
+            expect(negative_matcher_result).to be(true)
           end
         end
 
@@ -1070,7 +1070,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `true`" do
-              expect(negative_matcher_result).to eq(true)
+              expect(negative_matcher_result).to be(true)
             end
           end
 
@@ -1081,7 +1081,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             let(:block_expectation) { proc { object.foo } }
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
         end
@@ -1100,7 +1100,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `true`" do
-              expect(negative_matcher_result).to eq(true)
+              expect(negative_matcher_result).to be(true)
             end
           end
 
@@ -1117,7 +1117,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
             end
 
             it "returns `false`" do
-              expect(negative_matcher_result).to eq(false)
+              expect(negative_matcher_result).to be(false)
             end
           end
         end
@@ -1126,7 +1126,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
 
     describe "#supports_block_expectations?" do
       it "returns `true`" do
-        expect(matcher.supports_block_expectations?).to eq(true)
+        expect(matcher.supports_block_expectations?).to be(true)
       end
     end
 
@@ -1158,7 +1158,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           expect(matcher.inputs.expected_arguments).to eq(ConvenientService::Support::Arguments.new(*args, **kwargs, &block))
         end
 
-        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::WithConcreteArguments` instance as argument sub matcher``````                                                    " do
+        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::WithConcreteArguments` instance as argument sub matcher``````" do
           matcher.with_arguments(*args, **kwargs, &block)
 
           expect(matcher.sub_matchers.arguments).to be_instance_of(described_class::Entities::SubMatchers::WithConcreteArguments)
@@ -1200,7 +1200,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
 
     describe "#with_any_arguments" do
       context "when arguments `sub_matcher` is NOT used yet" do
-        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::WithAnyArguments` instance as argument sub matcher``````                                                   " do
+        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::WithAnyArguments` instance as argument sub matcher``````" do
           matcher.with_any_arguments
 
           expect(matcher.sub_matchers.arguments).to be_instance_of(described_class::Entities::SubMatchers::WithAnyArguments)
@@ -1242,7 +1242,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
 
     describe "#without_arguments" do
       context "when arguments `sub_matcher` is NOT used yet" do
-        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::WithoutArguments` instance as argument sub matcher``````                                                   " do
+        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::WithoutArguments` instance as argument sub matcher``````" do
           matcher.without_arguments
 
           expect(matcher.sub_matchers.arguments).to be_instance_of(described_class::Entities::SubMatchers::WithoutArguments)
@@ -1284,7 +1284,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
 
     describe "#and_return_its_value" do
       context "when return value `sub_matcher` is NOT used yet" do
-        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::ReturnDelegationValue` instance as return value sub matcher``````                                                    " do
+        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::ReturnDelegationValue` instance as return value sub matcher``````" do
           matcher.and_return_its_value
 
           expect(matcher.sub_matchers.return_value).to be_instance_of(described_class::Entities::SubMatchers::ReturnDelegationValue)
@@ -1332,7 +1332,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           expect(matcher.inputs.expected_return_value_block).to eq(block)
         end
 
-        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::ReturnCustomValue` instance as return value sub matcher``````                                                    " do
+        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::ReturnCustomValue` instance as return value sub matcher``````" do
           matcher.and_return(&block)
 
           expect(matcher.sub_matchers.return_value).to be_instance_of(described_class::Entities::SubMatchers::ReturnCustomValue)
@@ -1377,7 +1377,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
         it "sets `inputs.should_call_original` as `true`" do
           matcher.with_calling_original
 
-          expect(matcher.inputs.should_call_original?).to eq(true)
+          expect(matcher.inputs.should_call_original?).to be(true)
         end
 
         it "returns matcher" do
@@ -1419,7 +1419,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
         it "sets `inputs.should_call_original` as `true`" do
           matcher.without_calling_original
 
-          expect(matcher.inputs.should_call_original?).to eq(false)
+          expect(matcher.inputs.should_call_original?).to be(false)
         end
 
         it "returns matcher" do
@@ -1482,7 +1482,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:other) { described_class.new(Object.new, method, block_expectation) }
 
           it "returns `false`" do
-            expect(matcher == other).to eq(false)
+            expect(matcher == other).to be(false)
           end
         end
 
@@ -1490,7 +1490,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:other) { described_class.new(object, :qux, block_expectation) }
 
           it "returns `false`" do
-            expect(matcher == other).to eq(false)
+            expect(matcher == other).to be(false)
           end
         end
 
@@ -1498,7 +1498,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:other) { described_class.new(object, method, proc { :qux }) }
 
           it "returns `false`" do
-            expect(matcher == other).to eq(false)
+            expect(matcher == other).to be(false)
           end
         end
 
@@ -1506,7 +1506,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:other) { described_class.new(object, method, block_expectation).tap { |matcher| matcher.outputs.delegations << double } }
 
           it "returns `false`" do
-            expect(matcher == other).to eq(false)
+            expect(matcher == other).to be(false)
           end
         end
 
@@ -1514,7 +1514,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           let(:other) { described_class.new(object, method, block_expectation) }
 
           it "returns `true`" do
-            expect(matcher == other).to eq(true)
+            expect(matcher == other).to be(true)
           end
         end
       end

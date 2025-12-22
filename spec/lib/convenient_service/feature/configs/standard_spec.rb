@@ -114,7 +114,7 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
       end
 
       it "returns only enabled options" do
-        expect(described_class.available_options.to_a.all?(&:enabled?)).to eq(true)
+        expect(described_class.available_options.to_a.all?(&:enabled?)).to be(true)
       end
     end
 
@@ -137,7 +137,7 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
         end
 
         it "returns only enabled options" do
-          expect(described_class.default_options.to_a.all?(&:enabled?)).to eq(true)
+          expect(described_class.default_options.to_a.all?(&:enabled?)).to be(true)
         end
       end
     end
@@ -147,7 +147,7 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
         let(:feature_class) { 42 }
 
         it "returns `false`" do
-          expect(described_class.feature_class?(feature_class)).to eq(false)
+          expect(described_class.feature_class?(feature_class)).to be(false)
         end
       end
 
@@ -156,7 +156,7 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
           let(:feature_class) { Class.new }
 
           it "returns `false`" do
-            expect(described_class.feature_class?(feature_class)).to eq(false)
+            expect(described_class.feature_class?(feature_class)).to be(false)
           end
 
           context "when `feature` is entity class" do
@@ -171,7 +171,7 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
             end
 
             it "returns `false`" do
-              expect(described_class.feature_class?(service_class)).to eq(false)
+              expect(described_class.feature_class?(service_class)).to be(false)
             end
           end
         end
@@ -190,7 +190,7 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
           end
 
           it "returns `true`" do
-            expect(described_class.feature_class?(feature_class)).to eq(true)
+            expect(described_class.feature_class?(feature_class)).to be(true)
           end
         end
       end

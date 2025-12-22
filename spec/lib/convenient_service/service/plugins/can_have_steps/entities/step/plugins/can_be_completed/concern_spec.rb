@@ -75,7 +75,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       context "when `step` is NOT completed" do
         it "returns `false`" do
-          expect(step_instance.evaluated?).to eq(false)
+          expect(step_instance.evaluated?).to be(false)
         end
       end
 
@@ -83,7 +83,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         it "returns `true`" do
           step_instance.mark_as_evaluated!
 
-          expect(step_instance.evaluated?).to eq(true)
+          expect(step_instance.evaluated?).to be(true)
         end
       end
     end
@@ -107,7 +107,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       context "when `step` is NOT completed" do
         it "returns `true`" do
-          expect(step_instance.not_evaluated?).to eq(true)
+          expect(step_instance.not_evaluated?).to be(true)
         end
       end
 
@@ -115,7 +115,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         it "returns `false`" do
           step_instance.mark_as_evaluated!
 
-          expect(step_instance.not_evaluated?).to eq(false)
+          expect(step_instance.not_evaluated?).to be(false)
         end
       end
     end
@@ -129,7 +129,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
 
       it "returns `true`" do
-        expect(step_instance.mark_as_evaluated!).to eq(true)
+        expect(step_instance.mark_as_evaluated!).to be(true)
       end
     end
   end

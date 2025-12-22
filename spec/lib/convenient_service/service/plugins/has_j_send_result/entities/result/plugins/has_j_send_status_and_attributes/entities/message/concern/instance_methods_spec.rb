@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "returns `false`" do
-            expect(message == other).to eq(false)
+            expect(message == other).to be(false)
           end
 
           context "when value is described by RSpec expectations matcher" do
@@ -97,7 +97,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
 
               it "does NOT respect that RSpec expectations matcher" do
-                expect(message == other).to eq(false)
+                expect(message == other).to be(false)
               end
             end
 
@@ -106,7 +106,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: match(/foo/), result: result) }
 
               it "does NOT respect that RSpec expectations matcher" do
-                expect(message == other).to eq(false)
+                expect(message == other).to be(false)
               end
             end
           end
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
 
               it "does NOT respect that RSpec mocks arguments matcher" do
-                expect(message == other).to eq(false)
+                expect(message == other).to be(false)
               end
             end
 
@@ -126,7 +126,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: instance_of(String), result: result) }
 
               it "does NOT respect that RSpec mocks arguments matcher" do
-                expect(message == other).to eq(false)
+                expect(message == other).to be(false)
               end
             end
           end
@@ -140,7 +140,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "returns `false`" do
-            expect(message == other).to eq(false)
+            expect(message == other).to be(false)
           end
         end
 
@@ -148,7 +148,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
 
           it "returns `true`" do
-            expect(message == other).to eq(true)
+            expect(message == other).to be(true)
           end
         end
       end
@@ -178,7 +178,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "returns `false`" do
-            expect(message === other).to eq(false)
+            expect(message === other).to be(false)
           end
 
           context "when value is described by RSpec expectations matcher" do
@@ -187,7 +187,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
 
               it "respects that RSpec expectations matcher" do
-                expect(message === other).to eq(true)
+                expect(message === other).to be(true)
               end
             end
 
@@ -196,7 +196,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: match(/foo/), result: result) }
 
               it "does NOT respect that RSpec expectations matcher" do
-                expect(message === other).to eq(false)
+                expect(message === other).to be(false)
               end
             end
           end
@@ -207,7 +207,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
 
               it "respects that RSpec mocks arguments matcher" do
-                expect(message === other).to eq(true)
+                expect(message === other).to be(true)
               end
             end
 
@@ -216,7 +216,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: instance_of(String), result: result) }
 
               it "does NOT respect that RSpec mocks arguments matcher" do
-                expect(message === other).to eq(false)
+                expect(message === other).to be(false)
               end
             end
           end
@@ -230,7 +230,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "returns `false`" do
-            expect(message === other).to eq(false)
+            expect(message === other).to be(false)
           end
         end
 
@@ -238,7 +238,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message.new(value: value, result: result) }
 
           it "returns `true`" do
-            expect(message === other).to eq(true)
+            expect(message === other).to be(true)
           end
         end
       end

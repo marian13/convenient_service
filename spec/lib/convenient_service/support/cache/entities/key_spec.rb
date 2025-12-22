@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
         let(:other) { described_class.new(:baz, **kwargs, &block) }
 
         it "returns `false`" do
-          expect(key == other).to eq(false)
+          expect(key == other).to be(false)
         end
       end
 
@@ -38,7 +38,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
         let(:other) { described_class.new(*args, baz: :qux, &block) }
 
         it "returns `false`" do
-          expect(key == other).to eq(false)
+          expect(key == other).to be(false)
         end
       end
 
@@ -47,7 +47,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
         let(:other_block) { proc { :baz } }
 
         it "returns `false`" do
-          expect(key == other).to eq(false)
+          expect(key == other).to be(false)
         end
 
         ##
@@ -73,7 +73,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
         let(:other) { described_class.new(*args, **kwargs, &block) }
 
         it "returns `true`" do
-          expect(key == other).to eq(true)
+          expect(key == other).to be(true)
         end
       end
     end
@@ -91,7 +91,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
         let(:other) { described_class.new(:baz, **kwargs, &block) }
 
         it "returns `false`" do
-          expect(key.eql?(other)).to eq(false)
+          expect(key.eql?(other)).to be(false)
         end
       end
 
@@ -99,7 +99,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
         let(:other) { described_class.new(*args, baz: :qux, &block) }
 
         it "returns `false`" do
-          expect(key.eql?(other)).to eq(false)
+          expect(key.eql?(other)).to be(false)
         end
       end
 
@@ -108,7 +108,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
         let(:other_block) { proc { :baz } }
 
         it "returns `false`" do
-          expect(key.eql?(other)).to eq(false)
+          expect(key.eql?(other)).to be(false)
         end
 
         ##
@@ -134,7 +134,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Key, type: :standard
         let(:other) { described_class.new(*args, **kwargs, &block) }
 
         it "returns `true`" do
-          expect(key.eql?(other)).to eq(true)
+          expect(key.eql?(other)).to be(true)
         end
       end
     end

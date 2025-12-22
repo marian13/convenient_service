@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class < ConvenientService::Support::Cache::Entities::Caches::Base).to eq(true) }
+    specify { expect(described_class < ConvenientService::Support::Cache::Entities::Caches::Base).to be(true) }
   end
 
   example_group "class methods" do
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
         end
 
         it "returns `true`" do
-          expect(cache.empty?).to eq(true)
+          expect(cache.empty?).to be(true)
         end
       end
 
@@ -127,7 +127,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
         end
 
         it "returns `false`" do
-          expect(cache.empty?).to eq(false)
+          expect(cache.empty?).to be(false)
         end
       end
     end
@@ -142,7 +142,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
         end
 
         it "returns `false`" do
-          expect(cache.exist?(key)).to eq(false)
+          expect(cache.exist?(key)).to be(false)
         end
       end
 
@@ -152,7 +152,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
         end
 
         it "returns `true`" do
-          expect(cache.exist?(key)).to eq(true)
+          expect(cache.exist?(key)).to be(true)
         end
       end
     end
@@ -168,7 +168,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
 
         context "when `cache` does NOT have `default` value" do
           it "returns `nil`" do
-            expect(cache.read(key)).to eq(nil)
+            expect(cache.read(key)).to be_nil
           end
         end
 
@@ -776,7 +776,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           let(:other) { 42 }
 
           it "returns `nil`" do
-            expect(cache == other).to eq(nil)
+            expect(cache == other).to be_nil
           end
         end
 
@@ -784,7 +784,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           let(:other) { described_class.new(store: [:bar]) }
 
           it "returns `true`" do
-            expect(cache == other).to eq(false)
+            expect(cache == other).to be(false)
           end
         end
 
@@ -792,7 +792,7 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Array, type:
           let(:other) { described_class.new }
 
           it "returns `true`" do
-            expect(cache == other).to eq(true)
+            expect(cache == other).to be(true)
           end
         end
       end

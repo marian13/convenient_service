@@ -19,7 +19,7 @@ RSpec.describe ConvenientService::Dependencies, type: :standard do
         end
 
         it "returns `false`" do
-          expect(described_class.support_logger_non_integer_levels?).to eq(false)
+          expect(described_class.support_logger_non_integer_levels?).to be(false)
         end
       end
 
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Dependencies, type: :standard do
         end
 
         it "returns `true`" do
-          expect(described_class.support_logger_non_integer_levels?).to eq(true)
+          expect(described_class.support_logger_non_integer_levels?).to be(true)
         end
       end
 
@@ -39,7 +39,7 @@ RSpec.describe ConvenientService::Dependencies, type: :standard do
         end
 
         it "returns `true`" do
-          expect(described_class.support_logger_non_integer_levels?).to eq(true)
+          expect(described_class.support_logger_non_integer_levels?).to be(true)
         end
       end
     end
@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Dependencies, type: :standard do
         end
 
         it "returns `false`" do
-          expect(described_class.support_has_j_send_result_params_validations_using_active_model_validations_plugin?).to eq(false)
+          expect(described_class.support_has_j_send_result_params_validations_using_active_model_validations_plugin?).to be(false)
         end
       end
 
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Dependencies, type: :standard do
           end
 
           it "returns `true`" do
-            expect(described_class.support_has_j_send_result_params_validations_using_active_model_validations_plugin?).to eq(true)
+            expect(described_class.support_has_j_send_result_params_validations_using_active_model_validations_plugin?).to be(true)
           end
         end
 
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Dependencies, type: :standard do
           end
 
           it "returns `true`" do
-            expect(described_class.support_has_j_send_result_params_validations_using_active_model_validations_plugin?).to eq(true)
+            expect(described_class.support_has_j_send_result_params_validations_using_active_model_validations_plugin?).to be(true)
           end
         end
 
@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::Dependencies, type: :standard do
           end
 
           it "returns `false`" do
-            expect(described_class.support_has_j_send_result_params_validations_using_active_model_validations_plugin?).to eq(false)
+            expect(described_class.support_has_j_send_result_params_validations_using_active_model_validations_plugin?).to be(false)
           end
         end
       end

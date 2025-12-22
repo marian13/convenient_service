@@ -38,7 +38,7 @@ RSpec.describe "Service with undefined methods by empty middlewares stacks", typ
       describe ".middlewares" do
         context "when `name` is `:method_defined_before_middlewares_stack_configuration`" do
           it "returns NO middlewares" do
-            expect(service_class.middlewares(:method_defined_before_middlewares_stack_configuration).none?).to eq(true)
+            expect(service_class.middlewares(:method_defined_before_middlewares_stack_configuration).none?).to be(true)
           end
 
           specify do
@@ -48,7 +48,7 @@ RSpec.describe "Service with undefined methods by empty middlewares stacks", typ
 
         context "when `name` is `:method_defined_after_middlewares_stack_configuration`" do
           it "returns NO middlewares" do
-            expect(service_class.middlewares(:method_defined_after_middlewares_stack_configuration).none?).to eq(true)
+            expect(service_class.middlewares(:method_defined_after_middlewares_stack_configuration).none?).to be(true)
           end
 
           specify do

@@ -140,7 +140,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware
           end
 
           it "returns result with checked status" do
-            expect(method_value.checked?).to eq(true)
+            expect(method_value.checked?).to be(true)
           end
         end
       end
@@ -148,21 +148,21 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveFallbacks::Middleware
   end
 
   context "when status is `failure`" do
-    include_examples "verify middleware behavior" do
+    it_behaves_like "verify middleware behavior" do
       let(:status) { :failure }
       let(:method_name) { :fallback_failure_result }
     end
   end
 
   context "when status is `error`" do
-    include_examples "verify middleware behavior" do
+    it_behaves_like "verify middleware behavior" do
       let(:status) { :error }
       let(:method_name) { :fallback_error_result }
     end
   end
 
   context "when status is `nil`" do
-    include_examples "verify middleware behavior" do
+    it_behaves_like "verify middleware behavior" do
       let(:status) { nil }
       let(:method_name) { :fallback_result }
     end

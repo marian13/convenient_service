@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities:
     describe "#chain_called?" do
       context "when chain is NOT called" do
         it "returns `false`" do
-          expect(method.chain_called?).to eq(false)
+          expect(method.chain_called?).to be(false)
         end
       end
 
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities:
         end
 
         it "returns `true`" do
-          expect(method.chain_called?).to eq(true)
+          expect(method.chain_called?).to be(true)
         end
       end
     end
@@ -327,7 +327,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities:
           let(:other) { described_class.new(entity: service_class.new, method: method_name, observe_middleware: middleware) }
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -355,7 +355,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities:
           let(:other) { described_class.new(entity: service_instance, method: :negated_result, observe_middleware: middleware) }
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -383,7 +383,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities:
           end
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -395,7 +395,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities:
           end
 
           it "returns `false`" do
-            expect(method == other).to eq(false)
+            expect(method == other).to be(false)
           end
         end
 
@@ -403,7 +403,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::WrapMethod::Entities:
           let(:other) { described_class.new(entity: entity, method: method_name, observe_middleware: middleware) }
 
           it "returns `true`" do
-            expect(method == other).to eq(true)
+            expect(method == other).to be(true)
           end
         end
       end

@@ -18,6 +18,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   let(:service_class) do
     Class.new do
       include ConvenientService::Standard::Config
+
       # rubocop:disable Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
       entity :Result do
         concerns do
@@ -75,7 +76,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             let(:status) { :success }
 
             it "returns `true`" do
-              expect(result_instance.to_bool).to eq(true)
+              expect(result_instance.to_bool).to be(true)
             end
           end
 
@@ -83,7 +84,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             let(:status) { :failure }
 
             it "returns `false`" do
-              expect(result_instance.to_bool).to eq(false)
+              expect(result_instance.to_bool).to be(false)
             end
           end
 
@@ -149,7 +150,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             let(:status) { :failure }
 
             it "returns nil" do
-              expect(result_instance.to_object).to eq(nil)
+              expect(result_instance.to_object).to be_nil
             end
           end
 

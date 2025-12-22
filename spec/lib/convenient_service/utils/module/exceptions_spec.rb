@@ -11,6 +11,6 @@ require "convenient_service"
 
 RSpec.describe ConvenientService::Utils::Module::Exceptions, type: :standard do
   example_group "inheritance" do
-    specify { expect(described_class::NestingUnderAnonymousNamespace < ConvenientService::Exception).to eq(true) }
+    specify { expect(described_class::NestingUnderAnonymousNamespace < ConvenientService::Exception).to be(true) }
   end
 end

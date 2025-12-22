@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:result) { service.result }
 
         it "returns `false`" do
-          expect(result.negated?).to eq(false)
+          expect(result.negated?).to be(false)
         end
       end
 
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:result) { service.negated_result }
 
         it "returns `true`" do
-          expect(result.negated?).to eq(true)
+          expect(result.negated?).to be(true)
         end
       end
     end
@@ -105,7 +105,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `failure` with NOT checked status" do
-          expect(result.negated_result.checked?).to eq(false)
+          expect(result.negated_result.checked?).to be(false)
         end
 
         context "when that `success` has `data`" do
@@ -207,7 +207,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `success` with NOT checked status" do
-          expect(result.negated_result.checked?).to eq(false)
+          expect(result.negated_result.checked?).to be(false)
         end
 
         context "when that `failure` has `data`" do
@@ -309,7 +309,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns copy of that original `error` with NOT checked status" do
-          expect(result.negated_result.checked?).to eq(false)
+          expect(result.negated_result.checked?).to be(false)
         end
 
         context "when that original `error` has `data`" do

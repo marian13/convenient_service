@@ -115,7 +115,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
         let(:other) { "string" }
 
         it "returns nil" do
-          expect(callback_collection == other).to eq(nil)
+          expect(callback_collection == other).to be_nil
         end
       end
 
@@ -123,7 +123,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
         let(:other) { described_class.new.tap { |collection| collection.create(**kwargs) } }
 
         it "returns false" do
-          expect(callback_collection == other).to eq(false)
+          expect(callback_collection == other).to be(false)
         end
       end
 
@@ -131,7 +131,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Entities::C
         let(:other) { described_class.new }
 
         it "returns true" do
-          expect(callback_collection == other).to eq(true)
+          expect(callback_collection == other).to be(true)
         end
       end
     end

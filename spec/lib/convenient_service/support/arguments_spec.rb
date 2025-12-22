@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
   example_group "instance methods" do
     describe "#null_arguments?" do
       it "returns `false`" do
-        expect(arguments.null_arguments?).to eq(false)
+        expect(arguments.null_arguments?).to be(false)
       end
     end
 
@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         let(:arguments) { described_class.new(*args) }
 
         it "returns `true`" do
-          expect(arguments.any?).to eq(true)
+          expect(arguments.any?).to be(true)
         end
       end
 
@@ -76,7 +76,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         let(:arguments) { described_class.new(**kwargs) }
 
         it "returns `true`" do
-          expect(arguments.any?).to eq(true)
+          expect(arguments.any?).to be(true)
         end
       end
 
@@ -84,7 +84,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         let(:arguments) { described_class.new(&block) }
 
         it "returns `true`" do
-          expect(arguments.any?).to eq(true)
+          expect(arguments.any?).to be(true)
         end
       end
 
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         let(:arguments) { described_class.new }
 
         it "returns `false`" do
-          expect(arguments.any?).to eq(false)
+          expect(arguments.any?).to be(false)
         end
       end
     end
@@ -102,7 +102,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         let(:arguments) { described_class.new(*args) }
 
         it "returns `false`" do
-          expect(arguments.none?).to eq(false)
+          expect(arguments.none?).to be(false)
         end
       end
 
@@ -110,7 +110,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         let(:arguments) { described_class.new(**kwargs) }
 
         it "returns `false`" do
-          expect(arguments.none?).to eq(false)
+          expect(arguments.none?).to be(false)
         end
       end
 
@@ -118,7 +118,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         let(:arguments) { described_class.new(&block) }
 
         it "returns `false`" do
-          expect(arguments.none?).to eq(false)
+          expect(arguments.none?).to be(false)
         end
       end
 
@@ -126,7 +126,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         let(:arguments) { described_class.new }
 
         it "returns `true`" do
-          expect(arguments.none?).to eq(true)
+          expect(arguments.none?).to be(true)
         end
       end
     end
@@ -229,7 +229,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         let(:other) { described_class.new(:bar, **kwargs, &block) }
 
         it "returns `false`" do
-          expect(arguments == other).to eq(false)
+          expect(arguments == other).to be(false)
         end
       end
 
@@ -237,7 +237,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         let(:other) { described_class.new(*args, {bar: :baz}, &block) }
 
         it "returns `false`" do
-          expect(arguments == other).to eq(false)
+          expect(arguments == other).to be(false)
         end
       end
 
@@ -246,7 +246,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         let(:other_block) { proc { :bar } }
 
         it "returns `false`" do
-          expect(arguments == other).to eq(false)
+          expect(arguments == other).to be(false)
         end
       end
 
@@ -254,7 +254,7 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         let(:other) { described_class.new(*args, **kwargs, &block) }
 
         it "returns `true`" do
-          expect(arguments == other).to eq(true)
+          expect(arguments == other).to be(true)
         end
       end
     end

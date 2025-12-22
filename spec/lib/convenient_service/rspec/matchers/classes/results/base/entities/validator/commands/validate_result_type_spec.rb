@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:matcher) { be_success }
 
         it "returns `false`" do
-          expect(command_result).to eq(false)
+          expect(command_result).to be(false)
         end
       end
 

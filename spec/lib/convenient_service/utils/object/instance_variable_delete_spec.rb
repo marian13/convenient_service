@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Utils::Object::InstanceVariableDelete, type: :
       it "removes that ivar value" do
         result
 
-        expect(object.instance_variable_defined?(ivar_name)).to eq(false)
+        expect(object.instance_variable_defined?(ivar_name)).to be(false)
       end
 
       it "returns that ivar value" do

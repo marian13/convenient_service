@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(stack: ConvenientService::Support::Middleware::StackBuilder.new.use(proc { :foo })) }
 
           it "returns `false`" do
-            expect(chain_instance == other).to eq(false)
+            expect(chain_instance == other).to be(false)
           end
         end
 
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(stack: stack, env: {foo: :bar}) }
 
           it "returns `false`" do
-            expect(chain_instance == other).to eq(false)
+            expect(chain_instance == other).to be(false)
           end
         end
 
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { described_class.new(stack: stack, env: env) }
 
           it "returns `true`" do
-            expect(chain_instance == other).to eq(true)
+            expect(chain_instance == other).to be(true)
           end
         end
       end

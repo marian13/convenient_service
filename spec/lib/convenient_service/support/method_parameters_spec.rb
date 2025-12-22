@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Support::MethodParameters, type: :standard do
         end
 
         it "returns `false`" do
-          expect(method_parameters.has_rest_kwargs?).to eq(false)
+          expect(method_parameters.has_rest_kwargs?).to be(false)
         end
 
         ##
@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Support::MethodParameters, type: :standard do
         end
 
         it "returns `true`" do
-          expect(method_parameters.has_rest_kwargs?).to eq(true)
+          expect(method_parameters.has_rest_kwargs?).to be(true)
         end
 
         ##
@@ -112,7 +112,7 @@ RSpec.describe ConvenientService::Support::MethodParameters, type: :standard do
           end
         end
 
-        it "returns array with keys of those " do
+        it "returns array with keys of those" do
           expect(method_parameters.named_kwargs_keys).to eq([:foo, :bar])
         end
       end

@@ -29,49 +29,49 @@ RSpec.describe ConvenientService::Dependencies::Queries::Version::NullVersion, t
 
     describe "#null_version?" do
       it "returns `true`" do
-        expect(version.null_version?).to eq(true)
+        expect(version.null_version?).to be(true)
       end
     end
 
     describe "#gem_version" do
       it "returns `nil`" do
-        expect(version.gem_version).to eq(nil)
+        expect(version.gem_version).to be_nil
       end
     end
 
     describe "#<=>" do
       it "returns `nil`" do
-        expect(version <=> other).to eq(nil)
+        expect(version <=> other).to be_nil
       end
     end
 
     describe "#<" do
       it "returns `nil`" do
-        expect(version < other).to eq(nil)
+        expect(version < other).to be_nil
       end
     end
 
     describe "#<=" do
       it "returns `nil`" do
-        expect(version <= other).to eq(nil)
+        expect(version <= other).to be_nil
       end
     end
 
     describe "#==" do
       it "returns `nil`" do
-        expect(version == other).to eq(nil)
+        expect(version == other).to be_nil
       end
     end
 
     describe "#>=" do
       it "returns `nil`" do
-        expect(version >= other).to eq(nil)
+        expect(version >= other).to be_nil
       end
     end
 
     describe "#>" do
       it "returns `nil`" do
-        expect(version > other).to eq(nil)
+        expect(version > other).to be_nil
       end
     end
 

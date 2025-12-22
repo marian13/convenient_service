@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class < ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom).to eq(true) }
+    specify { expect(described_class < ConvenientService::Support::Middleware::StackBuilder::Entities::Builders::Custom).to be(true) }
   end
 
   example_group "instance methods" do
@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         end
 
         it "runs middleware stack" do
-          expect(service.result.success?).to eq(true)
+          expect(service.result.success?).to be(true)
         end
       end
 

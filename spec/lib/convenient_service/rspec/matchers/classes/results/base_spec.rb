@@ -411,7 +411,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base, type:
           let(:other) { described_class.new(statuses: [:failure], result: result).without_step }
 
           it "returns `false`" do
-            expect(matcher == other).to eq(false)
+            expect(matcher == other).to be(false)
           end
         end
 
@@ -419,7 +419,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base, type:
           let(:other) { described_class.new(statuses: statuses, result: result).without_step }
 
           it "returns `false`" do
-            expect(matcher == other).to eq(false)
+            expect(matcher == other).to be(false)
           end
         end
 
@@ -427,7 +427,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base, type:
           let(:other) { described_class.new(statuses: statuses, result: nil) }
 
           it "returns `false`" do
-            expect(matcher == other).to eq(false)
+            expect(matcher == other).to be(false)
           end
         end
 
@@ -435,7 +435,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base, type:
           let(:other) { described_class.new(statuses: statuses, result: result) }
 
           it "returns `true`" do
-            expect(matcher == other).to eq(true)
+            expect(matcher == other).to be(true)
           end
         end
       end

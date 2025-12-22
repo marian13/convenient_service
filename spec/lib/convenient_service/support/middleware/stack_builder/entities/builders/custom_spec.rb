@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         end
 
         it "returns `false`" do
-          expect(stack_builder.has?(middleware)).to eq(false)
+          expect(stack_builder.has?(middleware)).to be(false)
         end
       end
 
@@ -75,7 +75,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         end
 
         it "returns `true`" do
-          expect(stack_builder.has?(middleware)).to eq(true)
+          expect(stack_builder.has?(middleware)).to be(true)
         end
       end
     end
@@ -622,7 +622,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         it "removes that middleware from stack" do
           stack_builder.delete(middleware)
 
-          expect(stack_builder.empty?).to eq(true)
+          expect(stack_builder.empty?).to be(true)
         end
 
         it "returns stack builder" do
@@ -669,7 +669,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
         it "removes that middleware from stack" do
           stack_builder.remove(middleware)
 
-          expect(stack_builder.empty?).to eq(true)
+          expect(stack_builder.empty?).to be(true)
         end
 
         it "returns stack builder" do
@@ -772,7 +772,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
           let(:other) { described_class.new(name: "OtherStack", stack: stack) }
 
           it "returns `false`" do
-            expect(stack_builder == other).to eq(false)
+            expect(stack_builder == other).to be(false)
           end
         end
 
@@ -780,7 +780,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
           let(:other) { described_class.new(name: name, stack: [middleware]) }
 
           it "returns `false`" do
-            expect(stack_builder == other).to eq(false)
+            expect(stack_builder == other).to be(false)
           end
         end
 
@@ -788,7 +788,7 @@ RSpec.describe ConvenientService::Support::Middleware::StackBuilder::Entities::B
           let(:other) { described_class.new(name: name, stack: stack) }
 
           it "returns `true`" do
-            expect(stack_builder == other).to eq(true)
+            expect(stack_builder == other).to be(true)
           end
         end
       end

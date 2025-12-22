@@ -3251,7 +3251,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
 
           it "returns result with unchecked status" do
-            expect(service_instance.steps_result.checked?).to eq(false)
+            expect(service_instance.steps_result.checked?).to be(false)
           end
 
           it "does NOT evaluate results of following steps" do
@@ -3333,7 +3333,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
 
           it "returns result with unchecked status" do
-            expect(service_instance.steps_result.checked?).to eq(false)
+            expect(service_instance.steps_result.checked?).to be(false)
           end
 
           it "saves intermediate step outputs into organizer" do

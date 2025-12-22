@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { middleware_class.new(ConvenientService::Support::Middleware::StackBuilder.new.use(proc { :foo })) }
 
           it "returns `false`" do
-            expect(middleware == other).to eq(false)
+            expect(middleware == other).to be(false)
           end
         end
 
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { middleware_class.new(stack, env: {foo: :bar}) }
 
           it "returns `false`" do
-            expect(middleware == other).to eq(false)
+            expect(middleware == other).to be(false)
           end
         end
 
@@ -74,7 +74,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { middleware_class.new(stack, middleware_arguments: ConvenientService::Support::Arguments.new(:foo)) }
 
           it "returns `false`" do
-            expect(middleware == other).to eq(false)
+            expect(middleware == other).to be(false)
           end
         end
 
@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
           let(:other) { middleware_class.new(stack) }
 
           it "returns `true`" do
-            expect(middleware == other).to eq(true)
+            expect(middleware == other).to be(true)
           end
         end
       end

@@ -56,7 +56,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `false`" do
-          expect(status.checked?).to eq(false)
+          expect(status.checked?).to be(false)
         end
       end
 
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `true`" do
-          expect(status.checked?).to eq(true)
+          expect(status.checked?).to be(true)
         end
       end
     end

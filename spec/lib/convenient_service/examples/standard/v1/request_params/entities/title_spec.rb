@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entitie
         let(:other) { described_class.cast("Memoized ivars over arguments passing") }
 
         it "returns true" do
-          expect(title == other).to eq(false)
+          expect(title == other).to be(false)
         end
       end
 
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entitie
         let(:other) { described_class.cast(value) }
 
         it "returns true" do
-          expect(title == other).to eq(true)
+          expect(title == other).to be(true)
         end
       end
     end

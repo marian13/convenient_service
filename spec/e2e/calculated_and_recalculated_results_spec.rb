@@ -9,7 +9,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass, RSpec/IdenticalEqualityAssertion
 RSpec.describe "Calculated and recalculated results", type: [:standard, :e2e] do
   include ConvenientService::RSpec::Matchers::CacheItsValue
 
@@ -99,4 +99,4 @@ RSpec.describe "Calculated and recalculated results", type: [:standard, :e2e] do
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass, RSpec/IdenticalEqualityAssertion

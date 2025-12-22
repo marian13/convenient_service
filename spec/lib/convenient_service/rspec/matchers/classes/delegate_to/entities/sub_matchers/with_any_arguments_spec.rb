@@ -77,7 +77,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         end
 
         it "returns `false`" do
-          expect(sub_matcher.matches?(block_expectation_value)).to eq(false)
+          expect(sub_matcher.matches?(block_expectation_value)).to be(false)
         end
       end
 
@@ -87,7 +87,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         end
 
         it "returns `true`" do
-          expect(sub_matcher.matches?(block_expectation_value)).to eq(true)
+          expect(sub_matcher.matches?(block_expectation_value)).to be(true)
         end
       end
 
@@ -97,14 +97,14 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         end
 
         it "returns `true`" do
-          expect(sub_matcher.matches?(block_expectation_value)).to eq(true)
+          expect(sub_matcher.matches?(block_expectation_value)).to be(true)
         end
       end
     end
 
     describe "#matches_arguments?" do
       it "returns `true`" do
-        expect(sub_matcher.matches_arguments?(delegation.arguments)).to eq(true)
+        expect(sub_matcher.matches_arguments?(delegation.arguments)).to be(true)
       end
     end
 

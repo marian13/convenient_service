@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entitie
         let(:other) { described_class.cast("json") }
 
         it "returns true" do
-          expect(format == other).to eq(false)
+          expect(format == other).to be(false)
         end
       end
 
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::Examples::Standard::V1::RequestParams::Entitie
         let(:other) { described_class.cast(value) }
 
         it "returns true" do
-          expect(format == other).to eq(true)
+          expect(format == other).to be(true)
         end
       end
     end

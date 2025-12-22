@@ -16,43 +16,43 @@ module ConvenientService
 
               attr_reader :request
 
-              step Services::ExtractParamsFromPath, \
+              step Services::ExtractParamsFromPath,
                 in: [:request, {pattern: raw(/^\/rules\/(?<id>\d+)\.(?<format>\w+)$/)}],
                 out: {params: :params_from_path}
 
-              step Services::ExtractParamsFromBody, \
+              step Services::ExtractParamsFromBody,
                 in: :request,
                 out: {params: :params_from_body}
 
-              step Services::MergeParams, \
+              step Services::MergeParams,
                 in: [:params_from_path, :params_from_body],
                 out: :params
 
-              step Services::LogRequestParams, \
+              step Services::LogRequestParams,
                 in: [:request, :params, tag: raw("Uncasted")]
 
-              step Services::FilterOutUnpermittedParams, \
+              step Services::FilterOutUnpermittedParams,
                 in: [:params, {permitted_keys: raw([:id, :format, :title, :description, :tags, :sources])}],
                 out: :params
 
-              step Services::ApplyDefaultParamValues, \
+              step Services::ApplyDefaultParamValues,
                 in: [:params, defaults: raw({format: "json", tags: [], sources: []})],
                 out: :params
 
-              step Services::ValidateUncastedParams, \
+              step Services::ValidateUncastedParams,
                 in: :params
 
-              step Services::CastParams, \
+              step Services::CastParams,
                 in: :params,
                 out: [:original_params, {casted_params: :params}]
 
-              step Services::LogRequestParams, \
+              step Services::LogRequestParams,
                 in: [:request, :params, tag: raw("Casted")]
 
-              step Services::ValidateCastedParams, \
+              step Services::ValidateCastedParams,
                 in: [:original_params, {casted_params: :params}]
 
-              step :result, \
+              step :result,
                 in: :params,
                 out: :params
 

@@ -289,7 +289,7 @@ gem "rspec-benchmark", "~> 0.6.0"
 # Used for linting Ruby files.
 # - https://github.com/rubocop/rubocop
 #
-gem "rubocop", "~> 1.61.0", platform: :mri
+gem "rubocop", "~> 1.81.0", platform: :mri
 
 ##
 # Used as a set of rules for rubocop for linting common performance issues in Ruby files.
@@ -308,25 +308,25 @@ gem "rubocop", "~> 1.61.0", platform: :mri
 # - https://github.com/rubocop/rubocop-magic_numbers
 # - https://github.com/meetcleo/rubocop-magic_numbers
 #
-gem "rubocop-magic_numbers", "~> 0.4.0", platform: :mri
+gem "rubocop-magic_numbers", "~> 0.5.0", platform: :mri
 
 ##
 # Used as a set of rules for rubocop for linting RSpec files.
 # - https://github.com/rubocop/rubocop-rspec
 #
-gem "rubocop-rspec", "~> 2.27.0", platform: :mri
+gem "rubocop-rspec", "~> 3.8.0", platform: :mri
 
 ##
 # Used as a set of rules for rubocop for enforcing Ruby gem packaging best practices.
 # - https://github.com/utkarsh2102/rubocop-packaging
 #
-gem "rubocop-packaging", "~> 0.5.2", platform: :mri
+gem "rubocop-packaging", "~> 0.6.0", platform: :mri
 
 ##
 # Used as a set of rules for rubocop for linting common thread-safety issues in Ruby files.
 # - https://github.com/rubocop/rubocop-thread_safety
 #
-gem "rubocop-thread_safety", "~> 0.5.1", platform: :mri
+gem "rubocop-thread_safety", "~> 0.7.3", platform: :mri
 
 ##
 # Used for linting of Ruby files.
@@ -345,7 +345,7 @@ gem "tty-prompt"
 # Used as a set of rules for robocop for linting source files.
 # - https://github.com/testdouble/standard
 #
-gem "standard", "~> 1.34.0", platform: :mri
+gem "standard", "~> 1.52.0", platform: :mri
 
 ##
 # Used to calculate coverage of Ruby code.

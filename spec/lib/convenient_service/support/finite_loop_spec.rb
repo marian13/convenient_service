@@ -23,8 +23,8 @@ RSpec.describe ConvenientService::Support::FiniteLoop, type: :standard do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class::Exceptions::MaxIterationCountExceeded < ConvenientService::Exception).to eq(true) }
-    specify { expect(described_class::Exceptions::NoBlockGiven < ConvenientService::Exception).to eq(true) }
+    specify { expect(described_class::Exceptions::MaxIterationCountExceeded < ConvenientService::Exception).to be(true) }
+    specify { expect(described_class::Exceptions::NoBlockGiven < ConvenientService::Exception).to be(true) }
   end
 
   example_group "instance methods" do

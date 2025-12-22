@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
         end
 
         it "returns `true`" do
-          expect(namespace_collection.empty?).to eq(true)
+          expect(namespace_collection.empty?).to be(true)
         end
       end
 
@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
         end
 
         it "returns `false`" do
-          expect(namespace_collection.empty?).to eq(false)
+          expect(namespace_collection.empty?).to be(false)
         end
       end
     end
@@ -110,13 +110,13 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
 
     describe "#<<" do
       it "returns self" do
-        expect((namespace_collection << namespace)).to equal(namespace_collection)
+        expect(namespace_collection << namespace).to equal(namespace_collection)
       end
 
       it "appends namespace to namespace collection" do
         namespace_collection << namespace
 
-        expect(namespace_collection.include?(namespace)).to eq(true)
+        expect(namespace_collection.include?(namespace)).to be(true)
       end
     end
 
@@ -127,7 +127,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
         end
 
         it "returns `false`" do
-          expect(namespace_collection.include?(namespace)).to eq(false)
+          expect(namespace_collection.include?(namespace)).to be(false)
         end
       end
 
@@ -137,7 +137,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
         end
 
         it "returns `true`" do
-          expect(namespace_collection.include?(namespace)).to eq(true)
+          expect(namespace_collection.include?(namespace)).to be(true)
         end
       end
     end
@@ -155,7 +155,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
         it "clears namespace collection" do
           namespace_collection.clear
 
-          expect(namespace_collection.empty?).to eq(true)
+          expect(namespace_collection.empty?).to be(true)
         end
       end
     end
@@ -183,7 +183,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
           let(:other) { described_class.new(namespaces: []) }
 
           it "returns `false`" do
-            expect(namespace_collection == other).to eq(false)
+            expect(namespace_collection == other).to be(false)
           end
         end
 
@@ -191,7 +191,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
           let(:other) { described_class.new(namespaces: namespaces) }
 
           it "returns `true`" do
-            expect(namespace_collection == other).to eq(true)
+            expect(namespace_collection == other).to be(true)
           end
         end
       end

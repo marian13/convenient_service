@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:code_class) { 42 }
 
         it "returns `false`" do
-          expect(klass.code_class?(code_class)).to eq(false)
+          expect(klass.code_class?(code_class)).to be(false)
         end
       end
 
@@ -30,7 +30,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:code_class) { Class.new }
 
           it "returns `false`" do
-            expect(klass.code_class?(code_class)).to eq(false)
+            expect(klass.code_class?(code_class)).to be(false)
           end
 
           context "when `code` is entity class" do
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             end
 
             it "returns `false`" do
-              expect(klass.code_class?(service_class)).to eq(false)
+              expect(klass.code_class?(service_class)).to be(false)
             end
           end
         end
@@ -64,7 +64,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           let(:code_class) { service_class.new.result.unsafe_code.class }
 
           it "returns `true`" do
-            expect(klass.code_class?(code_class)).to eq(true)
+            expect(klass.code_class?(code_class)).to be(true)
           end
         end
       end
@@ -145,7 +145,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       it "returns `false`" do
-        expect(code_class === other).to eq(false)
+        expect(code_class === other).to be(false)
       end
 
       context "when `other` is code instance in terms of `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.code?`" do
@@ -168,7 +168,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `true`" do
-          expect(code_class === other).to eq(true)
+          expect(code_class === other).to be(true)
         end
       end
 
@@ -176,7 +176,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code.cast(:foo) }
 
         it "returns `true`" do
-          expect(code_class === other).to eq(true)
+          expect(code_class === other).to be(true)
         end
       end
 
@@ -186,7 +186,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:other) { descendant_class.cast(:foo) }
 
         it "returns `true`" do
-          expect(code_class === other).to eq(true)
+          expect(code_class === other).to be(true)
         end
       end
     end

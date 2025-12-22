@@ -18,7 +18,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Gems::RSpec, type: :sta
   example_group "class methods" do
     describe ".loaded?" do
       it "returns `true`" do
-        expect(described_class.loaded?).to eq(true)
+        expect(described_class.loaded?).to be(true)
       end
 
       ##

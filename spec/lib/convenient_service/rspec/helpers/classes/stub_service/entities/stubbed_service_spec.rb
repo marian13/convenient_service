@@ -162,7 +162,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
           let(:other) { described_class.new(service_class: Class.new) }
 
           it "returns `false`" do
-            expect(helper == other).to eq(false)
+            expect(helper == other).to be(false)
           end
         end
 
@@ -170,7 +170,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
           let(:other) { described_class.new(service_class: service_class).with_arguments(:foo, :bar) }
 
           it "returns `false`" do
-            expect(helper == other).to eq(false)
+            expect(helper == other).to be(false)
           end
         end
 
@@ -178,7 +178,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
           let(:other) { described_class.new(service_class: service_class).to return_error }
 
           it "returns `false`" do
-            expect(helper == other).to eq(false)
+            expect(helper == other).to be(false)
           end
         end
 
@@ -186,7 +186,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
           let(:other) { described_class.new(service_class: service_class) }
 
           it "returns `true`" do
-            expect(helper == other).to eq(true)
+            expect(helper == other).to be(true)
           end
         end
       end

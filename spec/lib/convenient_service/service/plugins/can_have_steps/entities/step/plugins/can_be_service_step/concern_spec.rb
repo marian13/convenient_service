@@ -116,7 +116,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `false`" do
-          expect(step.service_step?).to eq(false)
+          expect(step.service_step?).to be(false)
         end
       end
 
@@ -132,7 +132,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `true`" do
-          expect(step.service_step?).to eq(true)
+          expect(step.service_step?).to be(true)
         end
       end
     end

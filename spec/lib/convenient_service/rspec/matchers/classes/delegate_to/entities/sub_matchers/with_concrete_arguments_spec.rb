@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
         end
 
         it "returns `false`" do
-          expect(sub_matcher.matches?(block_expectation_value)).to eq(false)
+          expect(sub_matcher.matches?(block_expectation_value)).to be(false)
         end
       end
 
@@ -106,7 +106,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
           end
 
           it "returns `false`" do
-            expect(sub_matcher.matches?(block_expectation_value)).to eq(false)
+            expect(sub_matcher.matches?(block_expectation_value)).to be(false)
           end
         end
 
@@ -117,7 +117,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
             end
 
             it "returns `false`" do
-              expect(sub_matcher.matches?(block_expectation_value)).to eq(false)
+              expect(sub_matcher.matches?(block_expectation_value)).to be(false)
             end
           end
 
@@ -127,7 +127,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
             end
 
             it "returns `true`" do
-              expect(sub_matcher.matches?(block_expectation_value)).to eq(true)
+              expect(sub_matcher.matches?(block_expectation_value)).to be(true)
             end
           end
         end
@@ -139,7 +139,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
             end
 
             it "returns `false`" do
-              expect(sub_matcher.matches?(block_expectation_value)).to eq(false)
+              expect(sub_matcher.matches?(block_expectation_value)).to be(false)
             end
           end
 
@@ -151,7 +151,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
             end
 
             it "returns `true`" do
-              expect(sub_matcher.matches?(block_expectation_value)).to eq(true)
+              expect(sub_matcher.matches?(block_expectation_value)).to be(true)
             end
           end
         end

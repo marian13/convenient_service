@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
         let(:klass) { Class.new }
 
         it "returns `false`" do
-          expect(matcher_result).to eq(false)
+          expect(matcher_result).to be(false)
         end
 
         it "delegates to `ConvenientService::Utils::Method.defined?`" do
@@ -66,7 +66,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
           end
 
           it "returns `false`" do
-            expect(matcher_result).to eq(false)
+            expect(matcher_result).to be(false)
           end
 
           it "delegates to `ConvenientService::Utils::Method.defined?`" do
@@ -92,7 +92,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
             end
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
 
@@ -108,7 +108,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
               end
 
               it "returns `true`" do
-                expect(matcher_result).to eq(true)
+                expect(matcher_result).to be(true)
               end
 
               context "when `object` has method with original method name defined by `attr_reader`" do
@@ -121,7 +121,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -137,7 +137,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -151,7 +151,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -167,7 +167,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -181,7 +181,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -199,7 +199,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
             end
@@ -216,7 +216,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
               end
 
               it "returns `true`" do
-                expect(matcher_result).to eq(true)
+                expect(matcher_result).to be(true)
               end
 
               context "when `object` has method with original method name defined by `attr_reader`" do
@@ -229,7 +229,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -245,7 +245,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -259,7 +259,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -275,7 +275,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -289,7 +289,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -307,7 +307,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
             end
@@ -324,7 +324,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
         let(:klass) { Class.new }
 
         it "returns `false`" do
-          expect(matcher_result).to eq(false)
+          expect(matcher_result).to be(false)
         end
 
         it "delegates to `ConvenientService::Utils::Method.defined?`" do
@@ -357,7 +357,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
           end
 
           it "returns `false`" do
-            expect(matcher_result).to eq(false)
+            expect(matcher_result).to be(false)
           end
 
           it "delegates to `ConvenientService::Utils::Method.defined?`" do
@@ -385,7 +385,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
             end
 
             it "returns `false`" do
-              expect(matcher_result).to eq(false)
+              expect(matcher_result).to be(false)
             end
           end
 
@@ -403,7 +403,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
               end
 
               it "returns `true`" do
-                expect(matcher_result).to eq(true)
+                expect(matcher_result).to be(true)
               end
 
               context "when `object` has method with original method name defined by `attr_reader`" do
@@ -418,7 +418,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -436,7 +436,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -452,7 +452,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -470,7 +470,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -486,7 +486,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -506,7 +506,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
             end
@@ -525,7 +525,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
               end
 
               it "returns `true`" do
-                expect(matcher_result).to eq(true)
+                expect(matcher_result).to be(true)
               end
 
               context "when `object` has method with original method name defined by `attr_reader`" do
@@ -540,7 +540,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -558,7 +558,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -574,7 +574,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -592,7 +592,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -608,7 +608,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
 
@@ -628,7 +628,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::HaveAliasMethod, typ
                 end
 
                 it "returns `true`" do
-                  expect(matcher_result).to eq(true)
+                  expect(matcher_result).to be(true)
                 end
               end
             end

@@ -21,7 +21,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:other) { described_class.new(**kwargs.merge(action: Class.new)) }
 
         it "returns `false`" do
-          expect(params == other).to eq(false)
+          expect(params == other).to be(false)
         end
       end
 
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:other) { described_class.new(**kwargs.merge(inputs: [:baz])) }
 
         it "returns `false`" do
-          expect(params == other).to eq(false)
+          expect(params == other).to be(false)
         end
       end
 
@@ -37,7 +37,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:other) { described_class.new(**kwargs.merge(outputs: [:qux])) }
 
         it "returns `false`" do
-          expect(params == other).to eq(false)
+          expect(params == other).to be(false)
         end
       end
 
@@ -45,7 +45,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:other) { described_class.new(**kwargs.merge(strict: true)) }
 
         it "returns `false`" do
-          expect(params == other).to eq(false)
+          expect(params == other).to be(false)
         end
       end
 
@@ -53,7 +53,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:other) { described_class.new(**kwargs.merge(index: 1)) }
 
         it "returns `false`" do
-          expect(params == other).to eq(false)
+          expect(params == other).to be(false)
         end
       end
 
@@ -61,7 +61,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:other) { described_class.new(**kwargs.merge(organizer: Object.new)) }
 
         it "returns `false`" do
-          expect(params == other).to eq(false)
+          expect(params == other).to be(false)
         end
       end
 
@@ -69,7 +69,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:other) { described_class.new(**kwargs.merge(extra_kwargs: {fallback: false})) }
 
         it "returns `false`" do
-          expect(params == other).to eq(false)
+          expect(params == other).to be(false)
         end
       end
 
@@ -77,7 +77,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         let(:other) { described_class.new(**kwargs) }
 
         it "returns `true`" do
-          expect(params == other).to eq(true)
+          expect(params == other).to be(true)
         end
       end
     end

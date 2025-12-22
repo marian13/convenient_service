@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
         let(:matcher) { be_success }
 
         it "returns `false`" do
-          expect(command_result).to eq(false)
+          expect(command_result).to be(false)
         end
       end
 
@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
           let(:matcher) { be_success.tap { |matcher| matcher.matches?(result) } }
 
           it "returns `true`" do
-            expect(command_result).to eq(true)
+            expect(command_result).to be(true)
           end
         end
 
@@ -62,7 +62,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             end
 
             it "returns `false`" do
-              expect(command_result).to eq(false)
+              expect(command_result).to be(false)
             end
           end
 
@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::Results::Base::Entit
             let(:chain_service) { service }
 
             it "returns `true`" do
-              expect(command_result).to eq(true)
+              expect(command_result).to be(true)
             end
           end
         end

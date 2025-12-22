@@ -114,9 +114,9 @@ module ConvenientService
     #
     def level=(severity)
       if Dependencies.support_logger_non_integer_levels?
-        super(severity)
+        super
       elsif severity.instance_of?(::Integer)
-        super(severity)
+        super
       else
         ::Warning.warn <<~MESSAGE
           `ConvenientService.logger.level` is reset from `#{severity}` to `Logger::INFO`.

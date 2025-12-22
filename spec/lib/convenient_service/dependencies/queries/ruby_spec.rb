@@ -26,7 +26,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `false`" do
-            expect(described_class.mri?).to eq(false)
+            expect(described_class.mri?).to be(false)
           end
         end
 
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `false`" do
-            expect(described_class.mri?).to eq(false)
+            expect(described_class.mri?).to be(false)
           end
         end
       end
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `false`" do
-            expect(described_class.mri?).to eq(false)
+            expect(described_class.mri?).to be(false)
           end
         end
 
@@ -58,7 +58,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `true`" do
-            expect(described_class.mri?).to eq(true)
+            expect(described_class.mri?).to be(true)
           end
         end
       end
@@ -72,7 +72,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `false`" do
-            expect(described_class.ruby?).to eq(false)
+            expect(described_class.ruby?).to be(false)
           end
         end
 
@@ -82,7 +82,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `false`" do
-            expect(described_class.ruby?).to eq(false)
+            expect(described_class.ruby?).to be(false)
           end
         end
       end
@@ -94,7 +94,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `false`" do
-            expect(described_class.ruby?).to eq(false)
+            expect(described_class.ruby?).to be(false)
           end
         end
 
@@ -104,7 +104,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `true`" do
-            expect(described_class.ruby?).to eq(true)
+            expect(described_class.ruby?).to be(true)
           end
         end
       end
@@ -118,7 +118,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `false`" do
-            expect(described_class.jruby?).to eq(false)
+            expect(described_class.jruby?).to be(false)
           end
         end
 
@@ -128,7 +128,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `false`" do
-            expect(described_class.jruby?).to eq(false)
+            expect(described_class.jruby?).to be(false)
           end
         end
       end
@@ -140,7 +140,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `false`" do
-            expect(described_class.jruby?).to eq(false)
+            expect(described_class.jruby?).to be(false)
           end
         end
 
@@ -150,7 +150,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `true`" do
-            expect(described_class.jruby?).to eq(true)
+            expect(described_class.jruby?).to be(true)
           end
         end
       end
@@ -164,7 +164,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `false`" do
-            expect(described_class.truffleruby?).to eq(false)
+            expect(described_class.truffleruby?).to be(false)
           end
         end
 
@@ -174,7 +174,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `false`" do
-            expect(described_class.truffleruby?).to eq(false)
+            expect(described_class.truffleruby?).to be(false)
           end
         end
       end
@@ -186,7 +186,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `false`" do
-            expect(described_class.truffleruby?).to eq(false)
+            expect(described_class.truffleruby?).to be(false)
           end
         end
 
@@ -196,7 +196,7 @@ RSpec.describe ConvenientService::Dependencies::Queries::Ruby, type: :standard d
           end
 
           it "returns `true`" do
-            expect(described_class.truffleruby?).to eq(true)
+            expect(described_class.truffleruby?).to be(true)
           end
         end
       end

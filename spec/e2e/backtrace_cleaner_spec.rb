@@ -31,7 +31,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception backtrace" do
             expect { service.new }.to raise_error(StandardError) do |exception|
               expect(exception.message).to eq("exception from `#initialize`")
-              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -54,7 +54,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception cause backtrace" do
             expect { service.new }.to raise_error(StandardError) do |exception|
               expect(exception.cause.message).to eq("exception from `#initialize`")
-              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -77,7 +77,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception backtrace" do
             expect { service.result }.to raise_error(StandardError) do |exception|
               expect(exception.message).to eq("exception from `#result`")
-              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -100,7 +100,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception cause backtrace" do
             expect { service.result }.to raise_error(StandardError) do |exception|
               expect(exception.cause.message).to eq("exception from `#result`")
-              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -123,7 +123,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception backtrace" do
             expect { service.negated_result }.to raise_error(StandardError) do |exception|
               expect(exception.message).to eq("exception from `#negated_result`")
-              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -146,7 +146,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception cause backtrace" do
             expect { service.negated_result }.to raise_error(StandardError) do |exception|
               expect(exception.cause.message).to eq("exception from `#negated_result`")
-              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -169,7 +169,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception backtrace" do
             expect { service.fallback_failure_result }.to raise_error(StandardError) do |exception|
               expect(exception.message).to eq("exception from `#fallback_failure_result`")
-              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -192,7 +192,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception cause backtrace" do
             expect { service.fallback_failure_result }.to raise_error(StandardError) do |exception|
               expect(exception.cause.message).to eq("exception from `#fallback_failure_result`")
-              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -215,7 +215,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception backtrace" do
             expect { service.fallback_error_result }.to raise_error(StandardError) do |exception|
               expect(exception.message).to eq("exception from `#fallback_error_result`")
-              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -238,7 +238,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception cause backtrace" do
             expect { service.fallback_error_result }.to raise_error(StandardError) do |exception|
               expect(exception.cause.message).to eq("exception from `#fallback_error_result`")
-              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -261,7 +261,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception backtrace" do
             expect { service.fallback_result }.to raise_error(StandardError) do |exception|
               expect(exception.message).to eq("exception from `#fallback_result`")
-              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -284,7 +284,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception cause backtrace" do
             expect { service.fallback_result }.to raise_error(StandardError) do |exception|
               expect(exception.cause.message).to eq("exception from `#fallback_result`")
-              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -307,7 +307,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception backtrace" do
             expect { service.new.rollback_result }.to raise_error(StandardError) do |exception|
               expect(exception.message).to eq("exception from `#rollback_result`")
-              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -330,7 +330,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception cause backtrace" do
             expect { service.new.rollback_result }.to raise_error(StandardError) do |exception|
               expect(exception.cause.message).to eq("exception from `#rollback_result`")
-              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -363,7 +363,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception backtrace" do
             expect { service.result }.to raise_error(StandardError) do |exception|
               expect(exception.message).to eq("exception from service step")
-              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -396,7 +396,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception cause backtrace" do
             expect { service.result }.to raise_error(StandardError) do |exception|
               expect(exception.cause.message).to eq("exception from service step")
-              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -421,7 +421,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception backtrace" do
             expect { service.result }.to raise_error(StandardError) do |exception|
               expect(exception.message).to eq("exception from method step")
-              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations
@@ -446,7 +446,7 @@ RSpec.describe "Backtrace cleaner", type: [:standard, :e2e] do
           it "cleans that exception backtrace" do
             expect { service.result }.to raise_error(StandardError) do |exception|
               expect(exception.cause.message).to eq("exception from method step")
-              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to eq(true)
+              expect(exception.cause.backtrace.none? { |line| line.start_with?(ConvenientService.lib_root.to_s) }).to be(true)
             end
           end
           # rubocop:enable RSpec/MultipleExpectations

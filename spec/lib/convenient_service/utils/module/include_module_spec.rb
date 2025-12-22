@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Utils::Module::IncludeModule, type: :standard 
       let(:mod) { Class.new }
 
       it "returns `false`" do
-        expect(result).to eq(false)
+        expect(result).to be(false)
       end
     end
 
@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Utils::Module::IncludeModule, type: :standard 
       end
 
       it "returns `true`" do
-        expect(result).to eq(true)
+        expect(result).to be(true)
       end
     end
 
@@ -48,7 +48,7 @@ RSpec.describe ConvenientService::Utils::Module::IncludeModule, type: :standard 
       end
 
       it "returns `false`" do
-        expect(result).to eq(false)
+        expect(result).to be(false)
       end
     end
   end

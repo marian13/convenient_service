@@ -22,7 +22,7 @@ module ConvenientService
             # @return [void]
             #
             def initialize(types:)
-              @types = types.map(&Entities::Type.method(:cast!))
+              @types = types.map { |type| Entities::Type.cast!(type) }
             end
 
             ##
@@ -30,7 +30,7 @@ module ConvenientService
             # @return [Boolean]
             #
             def contain_exactly?(other_types)
-              other_types = other_types.map(&Entities::Type.method(:cast!))
+              other_types = other_types.map { |type| Entities::Type.cast!(type) }
 
               Utils::Array.contain_exactly?(types, other_types)
             end

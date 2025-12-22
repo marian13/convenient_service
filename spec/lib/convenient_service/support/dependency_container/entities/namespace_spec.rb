@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
       end
 
       it "returns `lambda` proc" do
-        expect(namespace.body.lambda?).to eq(true)
+        expect(namespace.body.lambda?).to be(true)
       end
 
       it "returns proc with zero arity" do
@@ -90,7 +90,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
           let(:other) { described_class.new(name: "bar") }
 
           it "returns `false`" do
-            expect(namespace == other).to eq(false)
+            expect(namespace == other).to be(false)
           end
         end
 
@@ -98,7 +98,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Entities::Namesp
           let(:other) { described_class.new(name: name) }
 
           it "returns `true`" do
-            expect(namespace == other).to eq(true)
+            expect(namespace == other).to be(true)
           end
         end
       end

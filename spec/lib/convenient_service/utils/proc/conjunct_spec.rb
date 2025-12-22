@@ -20,7 +20,7 @@ RSpec.describe ConvenientService::Utils::Proc::Conjunct, type: :standard do
       let(:procs) { [] }
 
       it "returns proc that always evaluates to nil" do
-        expect(conjuction[item]).to eq(nil)
+        expect(conjuction[item]).to be_nil
       end
 
       example_group "returned proc" do
@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Utils::Proc::Conjunct, type: :standard do
             let(:enumerable) { [] }
 
             it "is evaluated as truthy" do
-              expect(enumerable.all?(&conjuction)).to eq(true)
+              expect(enumerable.all?(&conjuction)).to be(true)
             end
           end
         end
@@ -69,7 +69,7 @@ RSpec.describe ConvenientService::Utils::Proc::Conjunct, type: :standard do
         let(:first_proc) { ->(item) { false } }
 
         it "returns conjuction of those two procs that return false" do
-          expect(conjuction[item]).to eq(false)
+          expect(conjuction[item]).to be(false)
         end
       end
 
@@ -80,7 +80,7 @@ RSpec.describe ConvenientService::Utils::Proc::Conjunct, type: :standard do
           let(:second_proc) { ->(item) { false } }
 
           it "returns conjuction of those two procs that return false" do
-            expect(conjuction[item]).to eq(false)
+            expect(conjuction[item]).to be(false)
           end
         end
 
@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::Utils::Proc::Conjunct, type: :standard do
           let(:second_proc) { ->(item) { true } }
 
           it "returns conjuction of those two procs that return true" do
-            expect(conjuction[item]).to eq(true)
+            expect(conjuction[item]).to be(true)
           end
         end
       end

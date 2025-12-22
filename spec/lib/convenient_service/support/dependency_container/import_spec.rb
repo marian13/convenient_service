@@ -43,7 +43,7 @@ RSpec.describe ConvenientService::Support::DependencyContainer::Import, type: :s
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
-    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::Concern)).to eq(true) }
+    specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::Concern)).to be(true) }
   end
 
   example_group "class methods" do

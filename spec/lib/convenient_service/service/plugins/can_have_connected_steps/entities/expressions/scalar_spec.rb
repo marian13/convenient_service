@@ -182,7 +182,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
 
     describe "#scalar?" do
       it "returns `true`" do
-        expect(expression.scalar?).to eq(true)
+        expect(expression.scalar?).to be(true)
       end
     end
 
@@ -202,7 +202,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           let(:other) { described_class.new(step.copy(overrides: {kwargs: {index: -1}})) }
 
           it "returns `false`" do
-            expect(expression == other).to eq(false)
+            expect(expression == other).to be(false)
           end
         end
 
@@ -210,7 +210,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entit
           let(:other) { described_class.new(step) }
 
           it "returns `true`" do
-            expect(expression == other).to eq(true)
+            expect(expression == other).to be(true)
           end
         end
       end
