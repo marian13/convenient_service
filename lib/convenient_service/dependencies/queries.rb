@@ -456,6 +456,11 @@ module ConvenientService
       #
       def require_test_tools
         ##
+        # - https://github.com/janlelis/paint
+        #
+        require "paint"
+
+        ##
         # - https://github.com/faker-ruby/faker
         #
         require "faker"
