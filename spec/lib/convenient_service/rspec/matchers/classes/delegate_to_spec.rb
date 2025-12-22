@@ -81,7 +81,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
 
   example_group "instance methods" do
     describe "#matches?" do
-      context "when NO sub matcher`````` is used" do
+      context "when NO sub matcher is used" do
         let(:matcher) { described_class.new(object, method) }
 
         ##
@@ -1158,7 +1158,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           expect(matcher.inputs.expected_arguments).to eq(ConvenientService::Support::Arguments.new(*args, **kwargs, &block))
         end
 
-        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::WithConcreteArguments` instance as argument sub matcher``````" do
+        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::WithConcreteArguments` instance as argument sub matcher" do
           matcher.with_arguments(*args, **kwargs, &block)
 
           expect(matcher.sub_matchers.arguments).to be_instance_of(described_class::Entities::SubMatchers::WithConcreteArguments)
@@ -1200,7 +1200,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
 
     describe "#with_any_arguments" do
       context "when arguments `sub_matcher` is NOT used yet" do
-        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::WithAnyArguments` instance as argument sub matcher``````" do
+        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::WithAnyArguments` instance as argument sub matcher" do
           matcher.with_any_arguments
 
           expect(matcher.sub_matchers.arguments).to be_instance_of(described_class::Entities::SubMatchers::WithAnyArguments)
@@ -1242,7 +1242,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
 
     describe "#without_arguments" do
       context "when arguments `sub_matcher` is NOT used yet" do
-        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::WithoutArguments` instance as argument sub matcher``````" do
+        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::WithoutArguments` instance as argument sub matcher" do
           matcher.without_arguments
 
           expect(matcher.sub_matchers.arguments).to be_instance_of(described_class::Entities::SubMatchers::WithoutArguments)
@@ -1284,7 +1284,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
 
     describe "#and_return_its_value" do
       context "when return value `sub_matcher` is NOT used yet" do
-        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::ReturnDelegationValue` instance as return value sub matcher``````" do
+        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::ReturnDelegationValue` instance as return value sub matcher" do
           matcher.and_return_its_value
 
           expect(matcher.sub_matchers.return_value).to be_instance_of(described_class::Entities::SubMatchers::ReturnDelegationValue)
@@ -1332,7 +1332,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo, type: :s
           expect(matcher.inputs.expected_return_value_block).to eq(block)
         end
 
-        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::ReturnCustomValue` instance as return value sub matcher``````" do
+        it "sets `ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities::SubMatchers::ReturnCustomValue` instance as return value sub matcher" do
           matcher.and_return(&block)
 
           expect(matcher.sub_matchers.return_value).to be_instance_of(described_class::Entities::SubMatchers::ReturnCustomValue)
