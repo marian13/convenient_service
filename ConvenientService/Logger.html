@@ -522,9 +522,9 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_level='>level=</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_support_logger_non_integer_levels?'><span class='object_link'><a href="Dependencies/Queries.html#support_logger_non_integer_levels%3F-instance_method" title="ConvenientService::Dependencies::Queries#support_logger_non_integer_levels? (method)">support_logger_non_integer_levels?</a></span></span>
-    <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span>
+    <span class='kw'>super</span>
   <span class='kw'>elsif</span> <span class='id identifier rubyid_severity'>severity</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Integer</span><span class='rparen'>)</span>
-    <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span>
+    <span class='kw'>super</span>
   <span class='kw'>else</span>
     <span class='op'>::</span><span class='const'>Warning</span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span> <span class='heredoc_beg'>&lt;&lt;~MESSAGE</span>
 <span class='tstring_content'>      `ConvenientService.logger.level` is reset from `</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_severity'>severity</span><span class='embexpr_end'>}</span><span class='tstring_content'>` to `Logger::INFO`.
@@ -545,7 +545,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Dec 21 23:57:07 2025 by
+  Generated on Mon Dec 22 01:01:18 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>

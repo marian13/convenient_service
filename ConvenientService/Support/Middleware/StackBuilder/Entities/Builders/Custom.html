@@ -397,7 +397,8 @@
   <span class="private note title">private</span>
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>rubocop:disable Performance/RedundantEqualityComparisonBlock.</p>
+</div></span>
   
 </li>
 
@@ -918,17 +919,17 @@
       <pre class="lines">
 
 
-195
-196
-197
-198
 199
 200
 201
-202</pre>
+202
+203
+204
+205
+206</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 199</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -1143,14 +1144,14 @@
       <pre class="lines">
 
 
-70
-71
-72
-73
-74</pre>
+74
+75
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clear'>clear</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
@@ -1250,16 +1251,16 @@
       <pre class="lines">
 
 
-178
-179
-180
-181
 182
 183
-184</pre>
+184
+185
+186
+187
+188</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 178</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 182</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_index'>index</span> <span class='op'>=</span> <span class='id identifier rubyid_cast_index'>cast_index</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='rparen'>)</span>
@@ -1329,12 +1330,12 @@
       <pre class="lines">
 
 
-214
-215
-216</pre>
+218
+219
+220</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 214</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 218</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dup'>dup</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='comma'>,</span> <span class='label'>stack:</span> <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='rparen'>)</span>
@@ -1430,6 +1431,7 @@
   <strong>This method is part of a private API.</strong>
   You should avoid using this method if possible, as it may be removed or be changed in the future.
 </p>
+<p>rubocop:disable Performance/RedundantEqualityComparisonBlock</p>
 
 
   </div>
@@ -1461,6 +1463,10 @@
       
       
       
+        &mdash;
+        <div class='inline'><p>NOTE: <code>any?(arg)</code> compares with <code>===</code>. For this method <code>==</code> is mandatory.</p>
+</div>
+      
     </li>
   
 </ul>
@@ -1486,12 +1492,12 @@
       <pre class="lines">
 
 
-63
-64
-65</pre>
+66
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_has?'>has?</span><span class='lparen'>(</span><span class='id identifier rubyid_some_middleware'>some_middleware</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_middleware'>middleware</span><span class='op'>|</span> <span class='id identifier rubyid_middleware'>middleware</span> <span class='op'>==</span> <span class='id identifier rubyid_some_middleware'>some_middleware</span> <span class='rbrace'>}</span>
@@ -1600,16 +1606,16 @@
       <pre class="lines">
 
 
-112
-113
-114
-115
 116
 117
-118</pre>
+118
+119
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert'>insert</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_other_middleware'>other_middleware</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_index'>index</span> <span class='op'>=</span> <span class='id identifier rubyid_cast_index'>cast_index</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='rparen'>)</span>
@@ -1718,16 +1724,16 @@
       <pre class="lines">
 
 
-131
-132
-133
-134
 135
 136
-137</pre>
+137
+138
+139
+140
+141</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 131</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 135</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_after'>insert_after</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_other_middleware'>other_middleware</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_index'>index</span> <span class='op'>=</span> <span class='id identifier rubyid_cast_index'>cast_index</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='rparen'>)</span>
@@ -1812,14 +1818,14 @@
       <pre class="lines">
 
 
-153
-154
-155
-156
-157</pre>
+157
+158
+159
+160
+161</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 153</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_after_each'>insert_after_each</span><span class='lparen'>(</span><span class='id identifier rubyid_other_middleware'>other_middleware</span><span class='rparen'>)</span>
   <span class='ivar'>@stack</span> <span class='op'>=</span> <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_stack'>stack</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='op'>|</span> <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_other_middleware'>other_middleware</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -1902,14 +1908,14 @@
       <pre class="lines">
 
 
-143
-144
-145
-146
-147</pre>
+147
+148
+149
+150
+151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 143</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_before_each'>insert_before_each</span><span class='lparen'>(</span><span class='id identifier rubyid_other_middleware'>other_middleware</span><span class='rparen'>)</span>
   <span class='ivar'>@stack</span> <span class='op'>=</span> <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_stack'>stack</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='op'>|</span> <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_other_middleware'>other_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_middleware'>middleware</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -2016,16 +2022,16 @@
       <pre class="lines">
 
 
-165
-166
-167
-168
 169
 170
-171</pre>
+171
+172
+173
+174
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 169</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_other_middleware'>other_middleware</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_index'>index</span> <span class='op'>=</span> <span class='id identifier rubyid_cast_index'>cast_index</span><span class='lparen'>(</span><span class='id identifier rubyid_index_or_middleware'>index_or_middleware</span><span class='rparen'>)</span>
@@ -2095,12 +2101,12 @@
       <pre class="lines">
 
 
-207
-208
-209</pre>
+211
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 207</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 211</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
   <span class='id identifier rubyid_stack'>stack</span>
@@ -2185,14 +2191,14 @@
       <pre class="lines">
 
 
-80
-81
-82
-83
-84</pre>
+84
+85
+86
+87
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='rparen'>)</span>
@@ -2279,14 +2285,14 @@
       <pre class="lines">
 
 
-95
-96
-97
-98
-99</pre>
+99
+100
+101
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/custom.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_middleware'>middleware</span>
@@ -2303,7 +2309,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Dec 21 23:57:12 2025 by
+  Generated on Mon Dec 22 01:01:23 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>

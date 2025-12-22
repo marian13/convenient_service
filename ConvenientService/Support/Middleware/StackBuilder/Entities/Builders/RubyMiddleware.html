@@ -272,7 +272,8 @@
   <span class="private note title">private</span>
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>rubocop:disable Performance/RedundantEqualityComparisonBlock.</p>
+</div></span>
   
 </li>
 
@@ -551,17 +552,17 @@
       <pre class="lines">
 
 
-120
-121
-122
-123
 124
 125
 126
-127</pre>
+127
+128
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 124</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -663,12 +664,12 @@
       <pre class="lines">
 
 
-73
-74
-75</pre>
+77
+78
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call_with_original'>call_with_original</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='comma'>,</span> <span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span><span class='lparen'>(</span><span class='id identifier rubyid_original'>original</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
@@ -734,14 +735,14 @@
       <pre class="lines">
 
 
-59
-60
-61
-62
-63</pre>
+63
+64
+65
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clear'>clear</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
@@ -809,10 +810,6 @@
       <pre class="lines">
 
 
-148
-149
-150
-151
 152
 153
 154
@@ -824,10 +821,14 @@
 160
 161
 162
-163</pre>
+163
+164
+165
+166
+167</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 152</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dup'>dup</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
@@ -936,6 +937,7 @@
   <strong>This method is part of a private API.</strong>
   You should avoid using this method if possible, as it may be removed or be changed in the future.
 </p>
+<p>rubocop:disable Performance/RedundantEqualityComparisonBlock</p>
 
 
   </div>
@@ -967,6 +969,10 @@
       
       
       
+        &mdash;
+        <div class='inline'><p>NOTE: <code>any?(arg)</code> compares with <code>===</code>. For this method <code>==</code> is mandatory.</p>
+</div>
+      
     </li>
   
 </ul>
@@ -992,12 +998,12 @@
       <pre class="lines">
 
 
-52
-53
-54</pre>
+55
+56
+57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_has?'>has?</span><span class='lparen'>(</span><span class='id identifier rubyid_some_middleware'>some_middleware</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_middleware'>middleware</span><span class='op'>|</span> <span class='id identifier rubyid_middleware'>middleware</span> <span class='op'>==</span> <span class='lbracket'>[</span><span class='id identifier rubyid_some_middleware'>some_middleware</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -1063,12 +1069,12 @@
       <pre class="lines">
 
 
-138
-139
-140</pre>
+142
+143
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 138</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 142</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:first</span><span class='rparen'>)</span>
@@ -1175,14 +1181,14 @@
       <pre class="lines">
 
 
-86
-87
-88
-89
-90</pre>
+90
+91
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/middleware/stack_builder/entities/builders/ruby_middleware.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_middleware'>middleware</span><span class='comma'>,</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='id identifier rubyid_block'>block</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -1199,7 +1205,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Dec 21 23:57:14 2025 by
+  Generated on Mon Dec 22 01:01:25 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
