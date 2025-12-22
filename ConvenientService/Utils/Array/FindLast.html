@@ -500,13 +500,6 @@
   <strong>This method is part of a private API.</strong>
   You should avoid using this method if possible, as it may be removed or be changed in the future.
 </p>
-
-  <div class="note notetag">
-    <strong>Note:</strong>
-    <div class='inline'><p>Works with custom <code>Enumerable</code> objects.</p>
-</div>
-  </div>
-
 <p>Returns Can be any type.</p>
 
 
@@ -531,13 +524,6 @@
     </li>
   
 </ul>
-
-  <p class="tag_title">See Also:</p>
-  <ul class="see">
-    
-      <li><a href="https://ruby-doc.org/core-2.7.0/Enumerable.html" target="_parent" title="https://ruby-doc.org/core-2.7.0/Enumerable.html">https://ruby-doc.org/core-2.7.0/Enumerable.html</a></li>
-    
-  </ul>
 <p class="tag_title">Since:</p>
 <ul class="since">
   
@@ -560,19 +546,15 @@
       <pre class="lines">
 
 
-40
-41
-42
-43
-44</pre>
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/find_last.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/utils/array/find_last.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span>
-  <span class='id identifier rubyid_array'>array</span><span class='period'>.</span><span class='id identifier rubyid_reverse_each'>reverse_each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='op'>|</span> <span class='kw'>return</span> <span class='id identifier rubyid_item'>item</span> <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-
-  <span class='kw'>nil</span>
+  <span class='id identifier rubyid_array'>array</span><span class='period'>.</span><span class='id identifier rubyid_rfind'>rfind</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -584,7 +566,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Dec 22 23:13:27 2025 by
+  Generated on Mon Dec 22 23:45:03 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
