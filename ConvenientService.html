@@ -715,6 +715,29 @@ Useful for utils that are always &quot;successful&quot;.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#ci%3F-class_method" title="ci? (class method)">.<strong>ci?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> when Convenient Service is in CI mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#debug%3F-class_method" title="debug? (class method)">.<strong>debug?</strong>  &#x21d2; Boolean </a>
     
 
@@ -1007,12 +1030,12 @@ Useful for debugging Convenient Service internals.</p>
       <pre class="lines">
 
 
-331
-332
-333</pre>
+342
+343
+344</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 342</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_backtrace_cleaner'>backtrace_cleaner</span>
   <span class='ivar'>@backtrace_cleaner</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/BacktraceCleaner.html" title="ConvenientService::Support::BacktraceCleaner (class)">BacktraceCleaner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ConvenientService/Support/BacktraceCleaner.html#initialize-instance_method" title="ConvenientService::Support::BacktraceCleaner#initialize (method)">new</a></span></span>
@@ -1087,7 +1110,79 @@ Useful for debugging Convenient Service internals.</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 227</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_benchmark?'>benchmark?</span>
-  <span class='op'>::</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CONVENIENT_SERVICE_BENCHMARK</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_benchmark?'><span class='object_link'><a href="ConvenientService/Dependencies/Queries.html#benchmark%3F-instance_method" title="ConvenientService::Dependencies::Queries#benchmark? (method)">benchmark?</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ci?-class_method">
+  
+    .<strong>ci?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+<p>Returns <code>true</code> when Convenient Service is in CI mode. In other words <code>$CONVENIENT_SERVICE_CI</code> env variable is set to <code>true</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+238
+239
+240</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 238</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ci?'>ci?</span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_ci?'><span class='object_link'><a href="ConvenientService/Dependencies/Queries.html#ci%3F-instance_method" title="ConvenientService::Dependencies::Queries#ci? (method)">ci?</a></span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1159,7 +1254,7 @@ Useful for debugging Convenient Service internals.</p>
       <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 216</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_debug?'>debug?</span>
-  <span class='op'>::</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CONVENIENT_SERVICE_DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span>
+  <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_debug?'><span class='object_link'><a href="ConvenientService/Dependencies/Queries.html#debug%3F-instance_method" title="ConvenientService::Dependencies::Queries#debug? (method)">debug?</a></span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1224,12 +1319,12 @@ For example, it may return something like: <code>/Users/marian/.asdf/installs/ru
       <pre class="lines">
 
 
-284
-285
-286</pre>
+295
+296
+297</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 284</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 295</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_examples_root'>examples_root</span>
   <span class='ivar'>@examples_root</span> <span class='op'>||=</span> <span class='op'>::</span><span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_root'><span class='object_link'><a href="https://apidocs.convenientservice.org/top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>convenient_service</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>examples</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1297,12 +1392,12 @@ For example, it may return something like: <code>/Users/marian/.asdf/installs/ru
       <pre class="lines">
 
 
-272
-273
-274</pre>
+283
+284
+285</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 272</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 283</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_lib_root'>lib_root</span>
   <span class='ivar'>@lib_root</span> <span class='op'>||=</span> <span class='op'>::</span><span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_root'><span class='object_link'><a href="https://apidocs.convenientservice.org/top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1386,12 +1481,12 @@ Useful for debugging Convenient Service internals.</p>
       <pre class="lines">
 
 
-245
-246
-247</pre>
+256
+257
+258</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 245</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 256</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span>
   <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Logger.html" title="ConvenientService::Logger (class)">Logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
@@ -1468,14 +1563,14 @@ Useful for debugging Convenient Service internals.</p>
       <pre class="lines">
 
 
-349
-350
-351
-352
-353</pre>
+360
+361
+362
+363
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 349</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 360</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_raise'>raise</span><span class='lparen'>(</span><span class='id identifier rubyid_original_exception'>original_exception</span><span class='rparen'>)</span>
   <span class='op'>::</span><span class='const'>Kernel</span><span class='period'>.</span><span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_original_exception'>original_exception</span>
@@ -1557,14 +1652,14 @@ Useful for debugging Convenient Service internals.</p>
       <pre class="lines">
 
 
-369
-370
-371
-372
-373</pre>
+380
+381
+382
+383
+384</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 369</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 380</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reraise'>reraise</span>
   <span class='kw'>yield</span>
@@ -1639,12 +1734,12 @@ For example, it may return something like: <code>/Users/marian/.asdf/installs/ru
       <pre class="lines">
 
 
-260
-261
-262</pre>
+271
+272
+273</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 271</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_root'><span class='object_link'><a href="https://apidocs.convenientservice.org/top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span>
   <span class='ivar'>@root</span> <span class='op'>||=</span> <span class='op'>::</span><span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_expand_path'>expand_path</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>..</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1712,12 +1807,12 @@ For example, it may return something like: <code>/Users/marian/.asdf/installs/ru
       <pre class="lines">
 
 
-296
-297
-298</pre>
+307
+308
+309</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 296</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service.rb', line 307</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_spec_root'>spec_root</span>
   <span class='ivar'>@spec_root</span> <span class='op'>||=</span> <span class='op'>::</span><span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_root'><span class='object_link'><a href="https://apidocs.convenientservice.org/top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>spec</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1732,7 +1827,7 @@ For example, it may return something like: <code>/Users/marian/.asdf/installs/ru
 </div>
 
       <div id="footer">
-  Generated on Mon Dec 22 01:32:44 2025 by
+  Generated on Mon Dec 22 01:53:57 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
