@@ -271,7 +271,7 @@ gem "rerun"
 #
 # NOTE: `RUBY_VERSION <= "3.4"` - same as for `byebug`.
 #
-gem "rouge", platform: :mri if RUBY_VERSION <= "3.4"
+gem "rouge", platform: :mri if RUBY_VERSION <= "4.0"
 
 ##
 # Used for testing Ruby code.
