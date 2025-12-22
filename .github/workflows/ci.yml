@@ -148,6 +148,7 @@ jobs:
             experimental: true
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+      CONVENIENT_SERVICE_CI: true
 
     name: "Test Ruby `${{ matrix.ruby }}`"
     steps:
@@ -298,6 +299,7 @@ jobs:
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
       CONVENIENT_SERVICE_BENCHMARK: true
+      CONVENIENT_SERVICE_CI: true
 
     name: "Benchmark Ruby `${{ matrix.ruby }}`"
     steps:

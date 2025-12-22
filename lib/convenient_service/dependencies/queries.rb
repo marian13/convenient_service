@@ -23,6 +23,39 @@ module ConvenientService
       extend self
 
       ##
+      # Returns `true` when Convenient Service is in debug mode. In other words `$CONVENIENT_SERVICE_DEBUG` env variable is set to `true`.
+      #
+      # @api private
+      # @since 1.0.0
+      # @return [Boolean]
+      #
+      def debug?
+        ::ENV["CONVENIENT_SERVICE_DEBUG"] == "true"
+      end
+
+      ##
+      # Returns `true` when Convenient Service is in benchmark mode. In other words `$CONVENIENT_SERVICE_BENCHMARK` env variable is set to `true`.
+      #
+      # @api private
+      # @since 1.0.0
+      # @return [Boolean]
+      #
+      def benchmark?
+        ::ENV["CONVENIENT_SERVICE_BENCHMARK"] == "true"
+      end
+
+      ##
+      # Returns `true` when Convenient Service is in CI mode. In other words `$CONVENIENT_SERVICE_CI` env variable is set to `true`.
+      #
+      # @api private
+      # @since 1.0.0
+      # @return [Boolean]
+      #
+      def ci?
+        ::ENV["CONVENIENT_SERVICE_CI"] == "true"
+      end
+
+      ##
       # @api private
       #
       # @return [Boolean]
@@ -348,6 +381,8 @@ module ConvenientService
       #   - https://github.com/deivid-rodriguez/byebug/issues/179#issuecomment-152727003
       #
       def require_development_tools(amazing_print: false, awesome_print: true)
+        return if ci?
+
         ##
         # - https://github.com/awesome-print/awesome_print
         #
@@ -392,7 +427,7 @@ module ConvenientService
         ##
         # - https://github.com/rouge-ruby/rouge
         #
-        require "rouge"
+        require "rouge" if support_byebug?
 
         ##
         # - https://ruby-doc.org/stdlib-2.7.0/libdoc/tempfile/rdoc/Tempfile.html

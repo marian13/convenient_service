@@ -214,7 +214,7 @@ module ConvenientService
     # @return [Boolean]
     #
     def debug?
-      ::ENV["CONVENIENT_SERVICE_DEBUG"] == "true"
+      Dependencies.debug?
     end
 
     ##
@@ -225,7 +225,18 @@ module ConvenientService
     # @return [Boolean]
     #
     def benchmark?
-      ::ENV["CONVENIENT_SERVICE_BENCHMARK"] == "true"
+      Dependencies.benchmark?
+    end
+
+    ##
+    # Returns `true` when Convenient Service is in CI mode. In other words `$CONVENIENT_SERVICE_CI` env variable is set to `true`.
+    #
+    # @api private
+    # @since 1.0.0
+    # @return [Boolean]
+    #
+    def ci?
+      Dependencies.ci?
     end
 
     ##

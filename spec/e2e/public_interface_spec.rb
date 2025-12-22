@@ -1384,6 +1384,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
       expect(public_class_methods_of(ConvenientService)).to eq([
         :backtrace_cleaner, # public
         :benchmark?, # private
+        :ci?, # private
         :debug?, # private
         :examples_root, # private
         :lib_root, # private
@@ -1422,6 +1423,9 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         :active_model, # private
         :appraisal_name, # private
         :appraisal_name_for_coverage, # private
+        :benchmark?, # private
+        :ci?, # private
+        :debug?, # private
         :logger, # private
         :paint, # private
         :require_active_model_validations_standard_config_option, # public

@@ -14,46 +14,29 @@ RSpec.describe ConvenientService, type: :standard do
 
   example_group "class methods" do
     describe ".debug?" do
-      context "when `ENV[\"CONVENIENT_SERVICE_DEBUG\"]` is NOT set to `false`" do
-        before do
-          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_DEBUG").and_return(nil)
-        end
-
-        it "return `false`" do
-          expect(described_class.debug?).to be(false)
-        end
-      end
-
-      context "when `ENV[\"CONVENIENT_SERVICE_DEBUG\"]` is set to `\"true\"`" do
-        before do
-          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_DEBUG").and_return("true")
-        end
-
-        it "return `true`" do
-          expect(described_class.debug?).to be(true)
-        end
+      specify do
+        expect { described_class.debug? }
+          .to delegate_to(described_class::Dependencies, :debug?)
+          .without_arguments
+          .and_return_its_value
       end
     end
 
     describe ".benchmark?" do
-      context "when `ENV[\"CONVENIENT_SERVICE_BENCHMARK\"]` is NOT set to `false`" do
-        before do
-          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_BENCHMARK").and_return(nil)
-        end
-
-        it "return `false`" do
-          expect(described_class.benchmark?).to be(false)
-        end
+      specify do
+        expect { described_class.benchmark? }
+          .to delegate_to(described_class::Dependencies, :benchmark?)
+          .without_arguments
+          .and_return_its_value
       end
+    end
 
-      context "when `ENV[\"CONVENIENT_SERVICE_BENCHMARK\"]` is set to `\"true\"`" do
-        before do
-          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_BENCHMARK").and_return("true")
-        end
-
-        it "return `true`" do
-          expect(described_class.benchmark?).to be(true)
-        end
+    describe ".ci?" do
+      specify do
+        expect { described_class.ci? }
+          .to delegate_to(described_class::Dependencies, :ci?)
+          .without_arguments
+          .and_return_its_value
       end
     end
 

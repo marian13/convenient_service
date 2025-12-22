@@ -12,6 +12,72 @@ require "convenient_service"
 # rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Dependencies, type: :standard do
   example_group "class methods" do
+    describe ".debug?" do
+      context "when `ENV[\"CONVENIENT_SERVICE_DEBUG\"]` is NOT set to `false`" do
+        before do
+          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_DEBUG").and_return(nil)
+        end
+
+        it "return `false`" do
+          expect(described_class.debug?).to be(false)
+        end
+      end
+
+      context "when `ENV[\"CONVENIENT_SERVICE_DEBUG\"]` is set to `\"true\"`" do
+        before do
+          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_DEBUG").and_return("true")
+        end
+
+        it "return `true`" do
+          expect(described_class.debug?).to be(true)
+        end
+      end
+    end
+
+    describe ".benchmark?" do
+      context "when `ENV[\"CONVENIENT_SERVICE_BENCHMARK\"]` is NOT set to `false`" do
+        before do
+          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_BENCHMARK").and_return(nil)
+        end
+
+        it "return `false`" do
+          expect(described_class.benchmark?).to be(false)
+        end
+      end
+
+      context "when `ENV[\"CONVENIENT_SERVICE_BENCHMARK\"]` is set to `\"true\"`" do
+        before do
+          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_BENCHMARK").and_return("true")
+        end
+
+        it "return `true`" do
+          expect(described_class.benchmark?).to be(true)
+        end
+      end
+    end
+
+    describe ".ci?" do
+      context "when `ENV[\"CONVENIENT_SERVICE_CI\"]` is NOT set to `false`" do
+        before do
+          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_CI").and_return(nil)
+        end
+
+        it "return `false`" do
+          expect(described_class.ci?).to be(false)
+        end
+      end
+
+      context "when `ENV[\"CONVENIENT_SERVICE_CI\"]` is set to `\"true\"`" do
+        before do
+          allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_CI").and_return("true")
+        end
+
+        it "return `true`" do
+          expect(described_class.ci?).to be(true)
+        end
+      end
+    end
+
     describe ".support_logger_non_integer_levels?" do
       context "when `logger` version is lower than 1.3.0" do
         before do
