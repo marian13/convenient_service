@@ -285,6 +285,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :step, # public
           :step_class, # private
           :steps, # public
+          :stub_result, # public
           :stubbed_results, # private
           :success, # public
           :success? # public

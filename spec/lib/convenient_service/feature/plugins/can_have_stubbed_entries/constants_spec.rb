@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/DescribeClass
-RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Constants, type: :standard do
+RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Constants, type: :standard do
   example_group "constants" do
     describe "::Triggers::STUB_ENTRY" do
       it "returns `ConvenientService::Support::UniqueValue` instance" do

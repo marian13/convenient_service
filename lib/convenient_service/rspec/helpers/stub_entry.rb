@@ -10,18 +10,20 @@ module ConvenientService
     module Helpers
       module StubEntry
         ##
-        # @return [ConvenientService::RSpec::Helpers::StubEntry::Classes::StubEntry]
+        # @param feature_class [Class<ConvenientService::Feature>]
+        # @param entry_name [Symbol, String]
+        # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubbedEntry]
         #
-        def stub_entry(...)
-          Classes::StubEntry.call(...)
+        def stub_entry(feature_class, entry_name)
+          feature_class.stub_entry(entry_name)
         end
 
         ##
         # @param value [Object] Can be any type.
-        # @return [ConvenientService::RSpec::Helpers::StubEntry::Classes::StubEntry::Entities::ValueSpec]
+        # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec]
         #
         def return_value(value)
-          Classes::StubEntry::Entities::ValueSpec.new(value: value)
+          ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec.new(value: value)
         end
       end
     end

@@ -43,6 +43,13 @@ module ConvenientService
             def stubbed_results
               Commands::FetchServiceStubbedResultsCache.call(service: self)
             end
+
+            ##
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubbedService]
+            #
+            def stub_result
+              Entities::StubbedService.new(service_class: self)
+            end
           end
         end
       end

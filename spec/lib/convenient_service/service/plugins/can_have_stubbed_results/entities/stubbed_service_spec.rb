@@ -12,7 +12,7 @@ require "convenient_service"
 # frozen_string_literal: true
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities::StubbedService, type: :standard do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubbedService, type: :standard do
   include ConvenientService::RSpec::Helpers::StubService
 
   include ConvenientService::RSpec::Matchers::DelegateTo
@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
 
-  let(:result_spec) { ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec.new(status: :success) }
+  let(:result_spec) { ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec.new(status: :success) }
   let(:result) { result_spec.for(service_class).calculate_value }
 
   example_group "instance methods" do
@@ -112,7 +112,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubService::Entities
       specify do
         expect { helper.to(result_spec) }
           .to delegate_to(service_class, :commit_config!)
-          .with_arguments(trigger: ConvenientService::RSpec::Helpers::Classes::StubService::Constants::Triggers::STUB_SERVICE)
+          .with_arguments(trigger: ConvenientService::Service::Plugins::CanHaveStubbedResults::Constants::Triggers::STUB_SERVICE)
       end
 
       specify do

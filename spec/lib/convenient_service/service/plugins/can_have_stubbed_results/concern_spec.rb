@@ -46,6 +46,25 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Conce
           .and_return_its_value
       end
     end
+
+    describe ".stub_result" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          def result
+            success
+          end
+        end
+      end
+
+      specify do
+        expect { service_class.stub_result }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubbedService, :new)
+          .with_arguments(service_class: service_class)
+          .and_return_its_value
+      end
+    end
   end
 end
 # rubocop:enable RSpec/NestedGroups

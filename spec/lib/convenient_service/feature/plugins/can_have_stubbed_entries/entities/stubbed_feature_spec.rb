@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::StubbedFeature, type: :standard do
+RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubbedFeature, type: :standard do
   include ConvenientService::RSpec::Helpers::StubEntry
 
   include ConvenientService::RSpec::Matchers::DelegateTo
@@ -36,7 +36,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
 
-  let(:value_spec) { ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::ValueSpec.new(value: "some value") }
+  let(:value_spec) { ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec.new(value: "some value") }
   let(:value) { value_spec.for(feature_class).calculate_value }
 
   example_group "instance methods" do
@@ -116,7 +116,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::
       specify do
         expect { helper.to(value_spec) }
           .to delegate_to(feature_class, :commit_config!)
-          .with_arguments(trigger: ConvenientService::RSpec::Helpers::Classes::StubEntry::Constants::Triggers::STUB_ENTRY)
+          .with_arguments(trigger: ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Constants::Triggers::STUB_ENTRY)
       end
 
       specify do

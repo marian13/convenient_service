@@ -43,6 +43,14 @@ module ConvenientService
             def stubbed_entries
               Commands::FetchFeatureStubbedEntriesCache.call(feature: self)
             end
+
+            ##
+            # @param entry_name [Symbol, String]
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubbedFeature]
+            #
+            def stub_entry(entry_name)
+              Entities::StubbedFeature.new(feature_class: self, entry_name: entry_name)
+            end
           end
         end
       end

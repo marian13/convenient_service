@@ -40,8 +40,8 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubEntry, type: :standard do
 
       specify do
         expect { instance.stub_entry(feature_class, entry_name) }
-          .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubEntry, :call)
-          .with_arguments(feature_class, entry_name)
+          .to delegate_to(feature_class, :stub_entry)
+          .with_arguments(entry_name)
           .and_return_its_value
       end
     end
@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubEntry, type: :standard do
 
       specify do
         expect { instance.return_value(value) }
-          .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::ValueSpec, :new)
+          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec, :new)
           .with_arguments(value: value)
           .and_return_its_value
       end

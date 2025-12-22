@@ -10,39 +10,40 @@ module ConvenientService
     module Helpers
       module StubService
         ##
-        # @return [ConvenientService::RSpec::Helpers::StubEntry::Classes::StubService]
+        # @param service_class [Class<ConvenientService::Service>]
+        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubbedService]
         #
-        def stub_service(...)
-          Classes::StubService.call(...)
+        def stub_service(service_class)
+          service_class.stub_result
         end
 
         ##
         # @param status [Symbol]
-        # @return [ConvenientService::RSpec::Helpers::StubEntry::Classes::StubService::Entities::ResultSpec]
+        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
         #
         def return_result(status)
-          Classes::StubService::Entities::ResultSpec.new(status: status)
+          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec.new(status: status)
         end
 
         ##
-        # @return [ConvenientService::RSpec::Helpers::StubEntry::Classes::StubService::Entities::ResultSpec]
+        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
         #
         def return_success
-          Classes::StubService::Entities::ResultSpec.new(status: :success)
+          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec.new(status: :success)
         end
 
         ##
-        # @return [ConvenientService::RSpec::Helpers::StubEntry::Classes::StubService::Entities::ResultSpec]
+        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
         #
         def return_failure
-          Classes::StubService::Entities::ResultSpec.new(status: :failure)
+          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec.new(status: :failure)
         end
 
         ##
-        # @return [ConvenientService::RSpec::Helpers::StubEntry::Classes::StubService::Entities::ResultSpec]
+        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
         #
         def return_error
-          Classes::StubService::Entities::ResultSpec.new(status: :error)
+          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec.new(status: :error)
         end
       end
     end

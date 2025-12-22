@@ -27,13 +27,19 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
       let(:service_class) do
         Class.new do
           include ConvenientService::Standard::Config
+
+          def result
+            success
+          end
         end
       end
 
       specify do
+        service_class.commit_config!
+
         expect { instance.stub_service(service_class) }
-          .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubService, :call)
-          .with_arguments(service_class)
+          .to delegate_to(service_class, :stub_result)
+          .without_arguments
           .and_return_its_value
       end
     end
@@ -43,7 +49,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
 
       specify do
         expect { instance.return_result(status) }
-          .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec, :new)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec, :new)
           .with_arguments(status: status)
           .and_return_its_value
       end
@@ -52,7 +58,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
     describe "#return_success" do
       specify do
         expect { instance.return_success }
-          .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec, :new)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec, :new)
           .with_arguments(status: :success)
           .and_return_its_value
       end
@@ -61,7 +67,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
     describe "#return_failure" do
       specify do
         expect { instance.return_failure }
-          .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec, :new)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec, :new)
           .with_arguments(status: :failure)
           .and_return_its_value
       end
@@ -70,7 +76,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
     describe "#return_error" do
       specify do
         expect { instance.return_error }
-          .to delegate_to(ConvenientService::RSpec::Helpers::Classes::StubService::Entities::ResultSpec, :new)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec, :new)
           .with_arguments(status: :error)
           .and_return_its_value
       end

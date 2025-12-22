@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::ValueSpec, type: :standard do
+RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec, type: :standard do
   include ConvenientService::RSpec::Matchers::Results
 
   let(:value_spec) { described_class.new(value: value, feature_class: feature_class) }
