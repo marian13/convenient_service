@@ -31,16 +31,22 @@ module ConvenientService
           @block = block
         end
 
-        ##
-        # @return [Object] Can be any type.
-        #
-        # @note Works with custom `Enumerable` objects.
-        # @see https://ruby-doc.org/core-2.7.0/Enumerable.html
-        #
-        def call
-          array.reverse_each { |item| return item if block.call(item) }
+        if Dependencies.ruby.version >= 4.0
+          ##
+          # @return [Object] Can be any type.
+          #
+          def call
+            array.rfind(&block)
+          end
+        else
+          ##
+          # @return [Object] Can be any type.
+          #
+          def call
+            array.reverse_each { |item| return item if block.call(item) }
 
-          nil
+            nil
+          end
         end
       end
     end
