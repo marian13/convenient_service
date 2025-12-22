@@ -36,27 +36,5 @@ RSpec.describe ConvenientService::Utils::Array::FindLast, type: :standard do
         expect(util_result).to eq("baz")
       end
     end
-
-    context "when `array` is custom `Enumerable`" do
-      let(:klass) do
-        Class.new do
-          include Enumerable
-
-          def each(&block)
-            yield("foo")
-            yield("bar")
-            yield("baz")
-
-            self
-          end
-        end
-      end
-
-      let(:array) { klass.new }
-
-      it "does NOT use `Array` methods" do
-        expect(util_result).to eq("baz")
-      end
-    end
   end
 end

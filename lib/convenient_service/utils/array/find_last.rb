@@ -35,6 +35,9 @@ module ConvenientService
           ##
           # @return [Object] Can be any type.
           #
+          # @note Does NOT work with custom `Enumerable` objects.
+          # @note Use `ConvenientService::Utils::Enumerable.find_last` for custom enumerables.
+          #
           def call
             array.rfind(&block)
           end

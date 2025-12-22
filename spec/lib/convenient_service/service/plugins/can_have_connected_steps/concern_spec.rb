@@ -3247,7 +3247,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
           end
 
           it "returns result of intermediate step" do
-            expect(service_instance.steps_result).to eq(ConvenientService::Utils::Array.find_last(service_instance.steps, &:evaluated?).result)
+            expect(service_instance.steps_result).to eq(ConvenientService::Utils::Enumerable.find_last(service_instance.steps, &:evaluated?).result)
           end
 
           it "returns result with unchecked status" do
