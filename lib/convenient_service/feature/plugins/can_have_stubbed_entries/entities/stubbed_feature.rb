@@ -60,9 +60,9 @@ module ConvenientService
             # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubService]
             #
             def to(value_spec)
-              @value_spec = value_spec.for(feature_class)
+              @value_spec = value_spec.for(feature_class, entry_name, arguments)
 
-              Feature::Plugins::CanHaveStubbedEntries.set_feature_stubbed_entry(feature_class, entry_name, arguments, value)
+              @value_spec.register
 
               self
             end
@@ -107,15 +107,6 @@ module ConvenientService
             #   @return [ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::ValueSpec]
             #
             attr_reader :value_spec
-
-            private
-
-            ##
-            # @return [Object] Can be any type.
-            #
-            def value
-              @value ||= value_spec.calculate_value
-            end
           end
         end
       end

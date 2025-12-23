@@ -43,13 +43,19 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
     describe ".new" do
       context "when service class is NOT passed" do
         it "defaults to `nil`" do
-          expect(described_class.new(status: status, chain: chain)).to eq(described_class.new(status: status, service_class: nil, chain: chain))
+          expect(described_class.new(status: status, arguments: arguments, chain: chain)).to eq(described_class.new(status: status, service_class: nil, arguments: arguments, chain: chain))
+        end
+      end
+
+      context "when arguments are NOT passed" do
+        it "defaults to `nil`" do
+          expect(described_class.new(status: status, service_class: service_class, chain: chain)).to eq(described_class.new(status: status, service_class: service_class, arguments: nil, chain: chain))
         end
       end
 
       context "when chain is NOT passed" do
         it "defaults to empty hash" do
-          expect(described_class.new(status: status, service_class: service_class)).to eq(described_class.new(status: status, service_class: service_class, chain: {}))
+          expect(described_class.new(status: status, service_class: service_class, arguments: arguments)).to eq(described_class.new(status: status, service_class: service_class, arguments: arguments, chain: {}))
         end
       end
     end

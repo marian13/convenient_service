@@ -12,31 +12,42 @@ module ConvenientService
         module Entities
           class ValueSpec
             ##
+            # @!attribute [r] value
+            #   @return [Object] Can be any type.
+            #
+            attr_reader :value
+
+            ##
             # @param value [Object] Can be any type.
             # @param feature_class [Class<ConvenientService::Feature>]
+            # @param entry_name [Symbol, String]
+            # @param arguments [ConvenientService::Support::Arguments]
             # @return [void]
             #
-            def initialize(value:, feature_class: nil)
+            def initialize(value:, feature_class: nil, entry_name: nil, arguments: nil)
               @value = value
               @feature_class = feature_class
+              @entry_name = entry_name
+              @arguments = arguments
             end
 
             ##
             # @param feature_class [Class<ConvenientService::Feature>]
+            # @param entry_name [Symbol, String]
+            # @param arguments [ConvenientService::Support::Arguments]
             # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec]
             #
-            def for(feature_class)
-              self.class.new(value: value, feature_class: feature_class)
+            def for(feature_class, entry_name, arguments)
+              self.class.new(value: value, feature_class: feature_class, entry_name: entry_name, arguments: arguments)
             end
 
             ##
-            # @return [Object]
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec]
             #
-            # @internal
-            #    TODO: Assert.
-            #
-            def calculate_value
-              value
+            def register
+              Commands::SetFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments, value: value]
+
+              self
             end
 
             ##
@@ -48,6 +59,8 @@ module ConvenientService
 
               return false if value != other.value
               return false if feature_class != other.feature_class
+              return false if entry_name != other.entry_name
+              return false if arguments != other.arguments
 
               true
             end
@@ -55,16 +68,22 @@ module ConvenientService
             protected
 
             ##
-            # @!attribute [r] value
-            #   @return [Object] Can be any type.
-            #
-            attr_reader :value
-
-            ##
             # @!attribute [r] feature_class
             #   @return [Class<ConvenientService::Feature>]
             #
             attr_reader :feature_class
+
+            ##
+            # @!attribute [r] entry_name
+            #   @return [Symbol, String]
+            #
+            attr_reader :entry_name
+
+            ##
+            # @!attribute [r] arguments
+            #   @return [ConvenientService::Support::Arguments]
+            #
+            attr_reader :arguments
           end
         end
       end

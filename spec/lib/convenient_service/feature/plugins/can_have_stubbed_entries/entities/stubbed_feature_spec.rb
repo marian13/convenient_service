@@ -32,12 +32,14 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
 
   let(:entry_name) { :main }
 
+  let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
+
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
 
   let(:value_spec) { ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec.new(value: "some value") }
-  let(:value) { value_spec.for(feature_class).calculate_value }
+  let(:value) { value_spec.for(feature_class, entry_name, arguments).value }
 
   example_group "instance methods" do
     describe "#with_any_arguments" do
@@ -116,32 +118,70 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
       specify do
         expect { helper.to(value_spec) }
           .to delegate_to(value_spec, :for)
-          .with_arguments(feature_class)
+          .with_arguments(feature_class, entry_name, nil)
       end
 
       specify do
         expect { helper.to(value_spec) }
-          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries, :set_feature_stubbed_entry)
-          .with_arguments(feature_class, entry_name, nil, value)
+          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
+          .with_arguments(feature: feature_class, entry: entry_name, arguments: nil, value: value)
+      end
+
+      specify do
+        other_value_spec = ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec.new(value: :value).for(feature_class, entry_name, nil)
+
+        allow(value_spec).to receive(:for).with(feature_class, entry_name, nil).and_return(other_value_spec)
+
+        expect { helper.to(value_spec) }
+          .to delegate_to(other_value_spec, :register)
+          .without_arguments
+      end
+
+      context "when used with `with_any_arguments`" do
+        let(:arguments) { nil }
+
+        specify do
+          expect { helper.with_any_arguments.to(value_spec) }
+            .to delegate_to(value_spec, :for)
+            .with_arguments(feature_class, entry_name, arguments)
+        end
+
+        specify do
+          expect { helper.with_any_arguments.to(value_spec) }
+            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
+            .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments, value: value)
+        end
       end
 
       context "when used with `with_arguments`" do
-        let(:key) { feature_class.stubbed_entries.keygen(*args, **kwargs, &block) }
+        let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
 
         specify do
           expect { helper.with_arguments(*args, **kwargs, &block).to(value_spec) }
-            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries, :set_feature_stubbed_entry)
-            .with_arguments(feature_class, entry_name, ConvenientService::Support::Arguments.new(*args, **kwargs, &block), value)
+            .to delegate_to(value_spec, :for)
+            .with_arguments(feature_class, entry_name, arguments)
+        end
+
+        specify do
+          expect { helper.with_arguments(*args, **kwargs, &block).to(value_spec) }
+            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
+            .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments, value: value)
         end
       end
 
       context "when used with `without_arguments`" do
-        let(:key) { feature_class.stubbed_entries.keygen(*args, **kwargs, &block) }
+        let(:arguments) { ConvenientService::Support::Arguments.null_arguments }
 
         specify do
           expect { helper.without_arguments.to(value_spec) }
-            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries, :set_feature_stubbed_entry)
-            .with_arguments(feature_class, entry_name, ConvenientService::Support::Arguments.null_arguments, value)
+            .to delegate_to(value_spec, :for)
+            .with_arguments(feature_class, entry_name, arguments)
+        end
+
+        specify do
+          expect { helper.without_arguments.to(value_spec) }
+            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
+            .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments, value: value)
         end
       end
     end
