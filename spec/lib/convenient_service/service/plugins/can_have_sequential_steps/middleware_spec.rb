@@ -137,7 +137,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
           end
 
           it "returns result of intermediate step" do
-            expect(method_value).to eq(ConvenientService::Utils::Enumebable.find_last(service_instance.steps, &:evaluated?).result)
+            expect(method_value).to eq(ConvenientService::Utils::Enumerable.find_last(service_instance.steps, &:evaluated?).result)
           end
 
           it "returns result with unchecked status" do
