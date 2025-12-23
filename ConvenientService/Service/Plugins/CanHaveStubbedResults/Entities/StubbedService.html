@@ -439,18 +439,18 @@
       <pre class="lines">
 
 
+72
+73
 74
 75
 76
 77
 78
 79
-80
-81
-82</pre>
+80</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/entities/stubbed_service.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/entities/stubbed_service.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -543,17 +543,13 @@
 63
 64
 65
-66
-67
-68</pre>
+66</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/entities/stubbed_service.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to'>to</span><span class='lparen'>(</span><span class='id identifier rubyid_result_spec'>result_spec</span><span class='rparen'>)</span>
-  <span class='ivar'>@result_spec</span> <span class='op'>=</span> <span class='id identifier rubyid_result_spec'>result_spec</span>
-
-  <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid_commit_config!'>commit_config!</span><span class='lparen'>(</span><span class='label'>trigger:</span> <span class='const'><span class='object_link'><a href="../Constants.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Constants (module)">Constants</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Constants::Triggers (module)">Triggers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Constants/Triggers.html#STUB_SERVICE-constant" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Constants::Triggers::STUB_SERVICE (constant)">STUB_SERVICE</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@result_spec</span> <span class='op'>=</span> <span class='id identifier rubyid_result_spec'>result_spec</span><span class='period'>.</span><span class='id identifier rubyid_for'>for</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span>
 
   <span class='const'><span class='object_link'><a href="../../../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../CanHaveStubbedResults.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults (module)">CanHaveStubbedResults</a></span></span><span class='period'>.</span><span class='id identifier rubyid_set_service_stubbed_result'><span class='object_link'><a href="../../CanHaveStubbedResults.html#set_service_stubbed_result-class_method" title="ConvenientService::Service::Plugins::CanHaveStubbedResults.set_service_stubbed_result (method)">set_service_stubbed_result</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='comma'>,</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
 
@@ -794,7 +790,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Dec 23 00:13:33 2025 by
+  Generated on Tue Dec 23 00:50:53 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
