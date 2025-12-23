@@ -30,12 +30,14 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
     end
   end
 
+  let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
+
   let(:args) { [:foo] }
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
 
   let(:result_spec) { ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec.new(status: :success) }
-  let(:result) { result_spec.for(service_class).calculate_value }
+  let(:result) { result_spec.for(service_class, arguments).result }
 
   example_group "instance methods" do
     describe "#with_any_arguments" do
@@ -112,36 +114,70 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
       specify do
         expect { helper.to(result_spec) }
           .to delegate_to(result_spec, :for)
-          .with_arguments(service_class)
+          .with_arguments(service_class, nil)
       end
 
       specify do
         expect { helper.to(result_spec) }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults, :set_service_stubbed_result)
-          .with_arguments(service_class, nil, result)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
+          .with_arguments(service: service_class, arguments: nil, result: result)
+      end
+
+      specify do
+        other_result_spec = ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec.new(status: :success).for(service_class, nil)
+
+        allow(result_spec).to receive(:for).with(service_class, nil).and_return(other_result_spec)
+
+        expect { helper.to(result_spec) }
+          .to delegate_to(other_result_spec, :register)
+          .without_arguments
       end
 
       context "when used with `with_any_arguments`" do
+        let(:arguments) { nil }
+
+        specify do
+          expect { helper.to(result_spec) }
+            .to delegate_to(result_spec, :for)
+            .with_arguments(service_class, arguments)
+        end
+
         specify do
           expect { helper.with_any_arguments.to(result_spec) }
-            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults, :set_service_stubbed_result)
-            .with_arguments(service_class, nil, result)
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
+            .with_arguments(service: service_class, arguments: arguments, result: result)
         end
       end
 
       context "when used with `with_arguments`" do
+        let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
+
         specify do
           expect { helper.with_arguments(*args, **kwargs, &block).to(result_spec) }
-            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults, :set_service_stubbed_result)
-            .with_arguments(service_class, ConvenientService::Support::Arguments.new(*args, **kwargs, &block), result)
+            .to delegate_to(result_spec, :for)
+            .with_arguments(service_class, arguments)
+        end
+
+        specify do
+          expect { helper.with_arguments(*args, **kwargs, &block).to(result_spec) }
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
+            .with_arguments(service: service_class, arguments: arguments, result: result)
         end
       end
 
       context "when used with `without_arguments`" do
+        let(:arguments) { ConvenientService::Support::Arguments.null_arguments }
+
         specify do
           expect { helper.without_arguments.to(result_spec) }
-            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults, :set_service_stubbed_result)
-            .with_arguments(service_class, ConvenientService::Support::Arguments.null_arguments, result)
+            .to delegate_to(result_spec, :for)
+            .with_arguments(service_class, arguments)
+        end
+
+        specify do
+          expect { helper.without_arguments.to(result_spec) }
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
+            .with_arguments(service: service_class, arguments: arguments, result: result)
         end
       end
     end

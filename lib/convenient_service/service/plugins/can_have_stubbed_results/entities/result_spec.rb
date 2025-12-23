@@ -18,21 +18,24 @@ module ConvenientService
             ##
             # @param status [Symbol]
             # @param service_class [Class<ConvenientService::Service>]
+            # @param arguments [ConvenientService::Support::Arguments]
             # @param chain [Hash]
             # @return [void]
             #
-            def initialize(status:, service_class: nil, chain: {})
+            def initialize(status:, service_class: nil, arguments: nil, chain: {})
               @status = status
               @service_class = service_class
+              @arguments = arguments
               @chain = chain
             end
 
             ##
             # @param service_class [Class<ConvenientService::Service>]
+            # @param arguments [ConvenientService::Support::Arguments]
             # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
             #
-            def for(service_class)
-              self.class.new(status: status, service_class: service_class, chain: chain)
+            def for(service_class, arguments)
+              self.class.new(status: status, service_class: service_class, arguments: arguments, chain: chain)
             end
 
             ##
@@ -96,9 +99,18 @@ module ConvenientService
             end
 
             ##
-            # @return [Object]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
             #
-            def calculate_value
+            def register
+              Commands::SetServiceStubbedResult[service: service_class, arguments: arguments, result: result]
+
+              self
+            end
+
+            ##
+            # @return [ConvenientService::Service]
+            #
+            def result
               service_class.__send__(status, **kwargs).copy(overrides: {kwargs: {stubbed_result: true}})
             end
 
@@ -111,6 +123,7 @@ module ConvenientService
 
               return false if status != other.status
               return false if service_class != other.service_class
+              return false if arguments != other.arguments
               return false if chain != other.chain
 
               true
@@ -131,8 +144,14 @@ module ConvenientService
             attr_reader :service_class
 
             ##
+            # @!attribute [r] arguments
+            #   @return [ConvenientService::Support::Arguments]
+            #
+            attr_reader :arguments
+
+            ##
             # @!attribute [r] chain
-            #   @return [ConvenientService::Service]
+            #   @return [Hash]
             #
             attr_reader :chain
 

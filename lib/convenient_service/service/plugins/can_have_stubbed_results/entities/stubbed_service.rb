@@ -58,9 +58,9 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubService]
             #
             def to(result_spec)
-              @result_spec = result_spec.for(service_class)
+              @result_spec = result_spec.for(service_class, arguments)
 
-              Service::Plugins::CanHaveStubbedResults.set_service_stubbed_result(service_class, arguments, result)
+              @result_spec.register
 
               self
             end
@@ -98,15 +98,6 @@ module ConvenientService
             #   @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
             #
             attr_reader :result_spec
-
-            private
-
-            ##
-            # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-            #
-            def result
-              @result ||= result_spec.calculate_value
-            end
           end
         end
       end
