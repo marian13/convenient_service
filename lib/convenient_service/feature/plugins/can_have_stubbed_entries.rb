@@ -7,7 +7,6 @@
 
 require_relative "can_have_stubbed_entries/commands"
 require_relative "can_have_stubbed_entries/concern"
-require_relative "can_have_stubbed_entries/constants"
 require_relative "can_have_stubbed_entries/entities"
 require_relative "can_have_stubbed_entries/middleware"
 

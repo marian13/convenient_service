@@ -115,8 +115,8 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
 
       specify do
         expect { helper.to(value_spec) }
-          .to delegate_to(feature_class, :commit_config!)
-          .with_arguments(trigger: ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Constants::Triggers::STUB_ENTRY)
+          .to delegate_to(value_spec, :for)
+          .with_arguments(feature_class)
       end
 
       specify do

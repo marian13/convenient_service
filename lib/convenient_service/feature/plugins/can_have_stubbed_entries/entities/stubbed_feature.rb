@@ -60,9 +60,7 @@ module ConvenientService
             # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubService]
             #
             def to(value_spec)
-              @value_spec = value_spec
-
-              feature_class.commit_config!(trigger: Constants::Triggers::STUB_ENTRY)
+              @value_spec = value_spec.for(feature_class)
 
               Feature::Plugins::CanHaveStubbedEntries.set_feature_stubbed_entry(feature_class, entry_name, arguments, value)
 
@@ -116,7 +114,7 @@ module ConvenientService
             # @return [Object] Can be any type.
             #
             def value
-              @value ||= value_spec.for(feature_class).calculate_value
+              @value ||= value_spec.calculate_value
             end
           end
         end

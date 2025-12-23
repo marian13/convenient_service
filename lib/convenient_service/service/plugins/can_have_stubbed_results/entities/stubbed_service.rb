@@ -58,9 +58,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubService]
             #
             def to(result_spec)
-              @result_spec = result_spec
-
-              service_class.commit_config!(trigger: Constants::Triggers::STUB_SERVICE)
+              @result_spec = result_spec.for(service_class)
 
               Service::Plugins::CanHaveStubbedResults.set_service_stubbed_result(service_class, arguments, result)
 
@@ -107,7 +105,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
             def result
-              @result ||= result_spec.for(service_class).calculate_value
+              @result ||= result_spec.calculate_value
             end
           end
         end

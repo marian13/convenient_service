@@ -111,8 +111,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
 
       specify do
         expect { helper.to(result_spec) }
-          .to delegate_to(service_class, :commit_config!)
-          .with_arguments(trigger: ConvenientService::Service::Plugins::CanHaveStubbedResults::Constants::Triggers::STUB_SERVICE)
+          .to delegate_to(result_spec, :for)
+          .with_arguments(service_class)
       end
 
       specify do
