@@ -208,7 +208,31 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Stubs service if it was NOT stubbed before, otherwise - overrides the previous stub.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unstub_service-instance_method" title="#unstub_service (instance method)">#<strong>unstub_service</strong>(service_class)  &#x21d2; ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Unstubs service if it was stubbed before, otherwise - does nothing.</p>
+</div></span>
   
 </li>
 
@@ -259,12 +283,12 @@
       <pre class="lines">
 
 
-45
-46
-47</pre>
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_service.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_service.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_return_error'>return_error</span>
   <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults (module)">CanHaveStubbedResults</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities/ResultSpec.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec (class)">ResultSpec</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities/ResultSpec.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>status:</span> <span class='symbol'>:error</span><span class='rparen'>)</span>
@@ -311,12 +335,12 @@
       <pre class="lines">
 
 
-38
-39
-40</pre>
+98
+99
+100</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_service.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_service.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_return_failure'>return_failure</span>
   <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults (module)">CanHaveStubbedResults</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities/ResultSpec.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec (class)">ResultSpec</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities/ResultSpec.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>status:</span> <span class='symbol'>:failure</span><span class='rparen'>)</span>
@@ -378,12 +402,12 @@
       <pre class="lines">
 
 
-24
-25
-26</pre>
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_service.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_service.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_return_result'>return_result</span><span class='lparen'>(</span><span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults (module)">CanHaveStubbedResults</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities/ResultSpec.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec (class)">ResultSpec</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities/ResultSpec.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>status:</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
@@ -430,12 +454,12 @@
       <pre class="lines">
 
 
-31
-32
-33</pre>
+91
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_service.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_service.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_return_success'>return_success</span>
   <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults (module)">CanHaveStubbedResults</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities/ResultSpec.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec (class)">ResultSpec</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities/ResultSpec.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>status:</span> <span class='symbol'>:success</span><span class='rparen'>)</span>
@@ -456,12 +480,41 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p>Stubs service if it was NOT stubbed before, otherwise - overrides the previous stub.</p>
+
 
   </div>
 </div>
 <div class="tags">
-  <p class="tag_title">Parameters:</p>
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Unstub service with any arguments.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_success'>success</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='const'><span class='object_link'><a href="../../RSpec.html" title="ConvenientService::RSpec (module)">RSpec</a></span></span><span class='period'>.</span><span class='id identifier rubyid_describe'>describe</span> <span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../RSpec.html" title="ConvenientService::RSpec (module)">RSpec</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Helpers.html" title="ConvenientService::RSpec::Helpers (module)">Helpers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::RSpec::Helpers::StubService (module)">StubService</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../RSpec.html" title="ConvenientService::RSpec (module)">RSpec</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Matchers.html" title="ConvenientService::RSpec::Matchers (module)">Matchers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Matchers/Results.html" title="ConvenientService::RSpec::Matchers::Results (module)">Results</a></span></span>
+
+  <span class='id identifier rubyid_it'>it</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>works</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_stub_service'>stub_service</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_return_error'>return_error</span><span class='period'>.</span><span class='id identifier rubyid_with_code'>with_code</span><span class='lparen'>(</span><span class='symbol'>:custom_code</span><span class='rparen'>)</span>
+
+    <span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_be_error'>be_error</span><span class='period'>.</span><span class='id identifier rubyid_with_code'>with_code</span><span class='lparen'>(</span><span class='symbol'>:custom_code</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
 <ul class="param">
   
     <li>
@@ -490,6 +543,21 @@
     </li>
   
 </ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -497,15 +565,128 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_service.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_service.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stub_service'>stub_service</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid_stub_result'>stub_result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unstub_service-instance_method">
+  
+    #<strong>unstub_service</strong>(service_class)  &#x21d2; <tt><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities/UnstubbedService.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService (class)">ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Unstubs service if it was stubbed before, otherwise - does nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Unstub service with any arguments.</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Standard.html" title="ConvenientService::Standard (module)">Standard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Standard.html#Config-constant" title="ConvenientService::Standard::Config (constant)">Config</a></span></span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+    <span class='id identifier rubyid_success'>success</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='const'><span class='object_link'><a href="../../RSpec.html" title="ConvenientService::RSpec (module)">RSpec</a></span></span><span class='period'>.</span><span class='id identifier rubyid_describe'>describe</span> <span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../RSpec.html" title="ConvenientService::RSpec (module)">RSpec</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Helpers.html" title="ConvenientService::RSpec::Helpers (module)">Helpers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ConvenientService::RSpec::Helpers::StubService (module)">StubService</a></span></span>
+  <span class='id identifier rubyid_include'>include</span> <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../RSpec.html" title="ConvenientService::RSpec (module)">RSpec</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Matchers.html" title="ConvenientService::RSpec::Matchers (module)">Matchers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Matchers/Results.html" title="ConvenientService::RSpec::Matchers::Results (module)">Results</a></span></span>
+
+  <span class='id identifier rubyid_it'>it</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>works</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_stub_service'>stub_service</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_return_error'>return_error</span><span class='period'>.</span><span class='id identifier rubyid_with_code'>with_code</span><span class='lparen'>(</span><span class='symbol'>:custom_code</span><span class='rparen'>)</span>
+
+    <span class='id identifier rubyid_unstub_service'>unstub_service</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_return_result_mock'>to_return_result_mock</span>
+
+    <span class='id identifier rubyid_expect'>expect</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">Service</a></span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to'>to</span> <span class='id identifier rubyid_be_success'>be_success</span><span class='period'>.</span><span class='id identifier rubyid_without_data'>without_data</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>service_class</span>
+      
+      
+        <span class='type'>(<tt>Class&lt;<span class='object_link'><a href="../../Service.html" title="ConvenientService::Service (module)">ConvenientService::Service</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Service/Plugins/CanHaveStubbedResults/Entities/UnstubbedService.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService (class)">ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76
+77
+78</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_service.rb', line 76</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_unstub_service'>unstub_service</span><span class='lparen'>(</span><span class='id identifier rubyid_service_class'>service_class</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid_unstub_result'>unstub_result</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -517,7 +698,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Dec 23 03:06:19 2025 by
+  Generated on Wed Dec 24 01:15:49 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
