@@ -106,7 +106,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#return_value-instance_method" title="#return_value (instance method)">#<strong>return_value</strong>(value)  &#x21d2; ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec </a>
+      <a href="#return_value-instance_method" title="#return_value (instance method)">#<strong>return_value</strong>(value)  &#x21d2; ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock </a>
     
 
     
@@ -128,7 +128,51 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#stub_entry-instance_method" title="#stub_entry (instance method)">#<strong>stub_entry</strong>(feature_class, entry_name)  &#x21d2; ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubbedEntry </a>
+      <a href="#return_value_mock-instance_method" title="#return_value_mock (instance method)">#<strong>return_value_mock</strong>  &#x21d2; ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueUnmock </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stub_entry-instance_method" title="#stub_entry (instance method)">#<strong>stub_entry</strong>(feature_class, entry_name)  &#x21d2; ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::EntryStub </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unstub_entry-instance_method" title="#unstub_entry (instance method)">#<strong>unstub_entry</strong>(feature_class, entry_name)  &#x21d2; ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::EntryUnstub </a>
     
 
     
@@ -159,7 +203,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="return_value-instance_method">
   
-    #<strong>return_value</strong>(value)  &#x21d2; <tt><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities/ValueSpec.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec (class)">ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec</a></span></tt> 
+    #<strong>return_value</strong>(value)  &#x21d2; <tt><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities/ValueMock.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock (class)">ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock</a></span></tt> 
   
 
   
@@ -198,7 +242,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities/ValueSpec.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec (class)">ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities/ValueMock.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock (class)">ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock</a></span></tt>)</span>
       
       
       
@@ -212,15 +256,67 @@
       <pre class="lines">
 
 
-25
-26
-27</pre>
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_entry.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_entry.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_return_value'>return_value</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature/Plugins.html" title="ConvenientService::Feature::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries (module)">CanHaveStubbedEntries</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities/ValueSpec.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec (class)">ValueSpec</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities/ValueSpec.html#initialize-instance_method" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>value:</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature/Plugins.html" title="ConvenientService::Feature::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries (module)">CanHaveStubbedEntries</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities/ValueMock.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock (class)">ValueMock</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities/ValueMock.html#initialize-instance_method" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>value:</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="return_value_mock-instance_method">
+  
+    #<strong>return_value_mock</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities/ValueUnmock.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueUnmock (class)">ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueUnmock</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities/ValueUnmock.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueUnmock (class)">ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueUnmock</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_entry.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_return_value_mock'>return_value_mock</span>
+  <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">Feature</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature/Plugins.html" title="ConvenientService::Feature::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries (module)">CanHaveStubbedEntries</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities/ValueUnmock.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueUnmock (class)">ValueUnmock</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Feature/Plugins/CanHaveStubbedEntries/Entities/ValueUnmock.html#initialize-instance_method" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueUnmock#initialize (method)">new</a></span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -230,7 +326,7 @@
       <div class="method_details ">
   <h3 class="signature " id="stub_entry-instance_method">
   
-    #<strong>stub_entry</strong>(feature_class, entry_name)  &#x21d2; <tt>ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubbedEntry</tt> 
+    #<strong>stub_entry</strong>(feature_class, entry_name)  &#x21d2; <tt>ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::EntryStub</tt> 
   
 
   
@@ -276,7 +372,7 @@
     <li>
       
       
-        <span class='type'>(<tt>ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubbedEntry</tt>)</span>
+        <span class='type'>(<tt>ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::EntryStub</tt>)</span>
       
       
       
@@ -305,12 +401,90 @@
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="unstub_entry-instance_method">
+  
+    #<strong>unstub_entry</strong>(feature_class, entry_name)  &#x21d2; <tt>ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::EntryUnstub</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>feature_class</span>
+      
+      
+        <span class='type'>(<tt>Class&lt;<span class='object_link'><a href="../../Feature.html" title="ConvenientService::Feature (module)">ConvenientService::Feature</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>entry_name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::EntryUnstub</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/rspec/helpers/stub_entry.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_unstub_entry'>unstub_entry</span><span class='lparen'>(</span><span class='id identifier rubyid_feature_class'>feature_class</span><span class='comma'>,</span> <span class='id identifier rubyid_entry_name'>entry_name</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_feature_class'>feature_class</span><span class='period'>.</span><span class='id identifier rubyid_unstub_entry'>unstub_entry</span><span class='lparen'>(</span><span class='id identifier rubyid_entry_name'>entry_name</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Wed Dec 24 01:15:49 2025 by
+  Generated on Wed Dec 24 17:02:56 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
