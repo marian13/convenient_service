@@ -46,10 +46,18 @@ module ConvenientService
 
             ##
             # @param entry_name [Symbol, String]
-            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubbedFeature]
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureStub]
             #
             def stub_entry(entry_name)
-              Entities::StubbedFeature.new(feature_class: self, entry_name: entry_name)
+              Entities::FeatureStub.new(feature_class: self, entry_name: entry_name)
+            end
+
+            ##
+            # @param entry_name [Symbol, String]
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureUnstub]
+            #
+            def unstub_entry(entry_name)
+              Entities::FeatureUnstub.new(feature_class: self, entry_name: entry_name)
             end
           end
         end

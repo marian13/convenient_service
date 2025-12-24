@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubbedFeature, type: :standard do
+RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureStub, type: :standard do
   include ConvenientService::RSpec::Helpers::StubEntry
 
   include ConvenientService::RSpec::Matchers::DelegateTo
@@ -38,8 +38,8 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
 
-  let(:value_spec) { ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec.new(value: "some value") }
-  let(:value) { value_spec.for(feature_class, entry_name, arguments).value }
+  let(:value_mock) { ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock.new(value: "some value") }
+  let(:value) { value_mock.for(feature_class, entry_name, arguments).value }
 
   example_group "instance methods" do
     describe "#with_any_arguments" do
@@ -109,31 +109,29 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
     end
 
     describe "#to" do
-      let(:key) { feature_class.stubbed_entries.keygen }
-
       it "returns `self`" do
-        expect(helper.to(value_spec)).to eq(helper)
+        expect(helper.to(value_mock)).to eq(helper)
       end
 
       specify do
-        expect { helper.to(value_spec) }
-          .to delegate_to(value_spec, :for)
+        expect { helper.to(value_mock) }
+          .to delegate_to(value_mock, :for)
           .with_arguments(feature_class, entry_name, nil)
       end
 
       specify do
-        expect { helper.to(value_spec) }
+        expect { helper.to(value_mock) }
           .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
           .with_arguments(feature: feature_class, entry: entry_name, arguments: nil, value: value)
       end
 
       specify do
-        other_value_spec = ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec.new(value: :value).for(feature_class, entry_name, nil)
+        other_value_mock = ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock.new(value: :value).for(feature_class, entry_name, nil)
 
-        allow(value_spec).to receive(:for).with(feature_class, entry_name, nil).and_return(other_value_spec)
+        allow(value_mock).to receive(:for).with(feature_class, entry_name, nil).and_return(other_value_mock)
 
-        expect { helper.to(value_spec) }
-          .to delegate_to(other_value_spec, :register)
+        expect { helper.to(value_mock) }
+          .to delegate_to(other_value_mock, :register)
           .without_arguments
       end
 
@@ -141,13 +139,13 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
         let(:arguments) { nil }
 
         specify do
-          expect { helper.with_any_arguments.to(value_spec) }
-            .to delegate_to(value_spec, :for)
+          expect { helper.with_any_arguments.to(value_mock) }
+            .to delegate_to(value_mock, :for)
             .with_arguments(feature_class, entry_name, arguments)
         end
 
         specify do
-          expect { helper.with_any_arguments.to(value_spec) }
+          expect { helper.with_any_arguments.to(value_mock) }
             .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
             .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments, value: value)
         end
@@ -157,13 +155,13 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
         let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
 
         specify do
-          expect { helper.with_arguments(*args, **kwargs, &block).to(value_spec) }
-            .to delegate_to(value_spec, :for)
+          expect { helper.with_arguments(*args, **kwargs, &block).to(value_mock) }
+            .to delegate_to(value_mock, :for)
             .with_arguments(feature_class, entry_name, arguments)
         end
 
         specify do
-          expect { helper.with_arguments(*args, **kwargs, &block).to(value_spec) }
+          expect { helper.with_arguments(*args, **kwargs, &block).to(value_mock) }
             .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
             .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments, value: value)
         end
@@ -173,13 +171,13 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
         let(:arguments) { ConvenientService::Support::Arguments.null_arguments }
 
         specify do
-          expect { helper.without_arguments.to(value_spec) }
-            .to delegate_to(value_spec, :for)
+          expect { helper.without_arguments.to(value_mock) }
+            .to delegate_to(value_mock, :for)
             .with_arguments(feature_class, entry_name, arguments)
         end
 
         specify do
-          expect { helper.without_arguments.to(value_spec) }
+          expect { helper.without_arguments.to(value_mock) }
             .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
             .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments, value: value)
         end
@@ -222,7 +220,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
           end
         end
 
-        context "when `other` has different `value_spec`" do
+        context "when `other` has different `value_mock`" do
           let(:other) { described_class.new(feature_class: feature_class, entry_name: entry_name).to return_value(:stub_value) }
 
           it "returns `false`" do

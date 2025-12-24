@@ -10,7 +10,7 @@ module ConvenientService
     module Plugins
       module CanHaveStubbedResults
         module Entities
-          class StubbedService
+          class ServiceStub
             ##
             # @param service_class [Class<ConvenientService::Service>]
             # @return [void]
@@ -24,7 +24,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubbedService]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceStub]
             #
             # @internal
             #   NOTE: `@arguments = nil` means "match any arguments".
@@ -36,7 +36,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubbedService]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceStub]
             #
             def with_arguments(...)
               @arguments = Support::Arguments.new(...)
@@ -45,7 +45,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubbedService]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceStub]
             #
             def without_arguments
               @arguments = Support::Arguments.null_arguments
@@ -54,8 +54,8 @@ module ConvenientService
             end
 
             ##
-            # @param result_spec [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubbedService]
+            # @param result_spec [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceStub]
             #
             def to(result_spec)
               @result_spec = result_spec.for(service_class, arguments)
@@ -95,7 +95,7 @@ module ConvenientService
 
             ##
             # @!attribute [r] result_spec
-            #   @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+            #   @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             attr_reader :result_spec
           end

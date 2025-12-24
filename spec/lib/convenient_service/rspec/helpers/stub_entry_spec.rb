@@ -51,8 +51,17 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubEntry, type: :standard do
 
       specify do
         expect { instance.return_value(value) }
-          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec, :new)
+          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock, :new)
           .with_arguments(value: value)
+          .and_return_its_value
+      end
+    end
+
+    describe "#return_value_mock" do
+      specify do
+        expect { instance.return_value_mock }
+          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueUnmock, :new)
+          .without_arguments
           .and_return_its_value
       end
     end

@@ -16,7 +16,7 @@ module ConvenientService
         # @since 1.0.0
         #
         # @param service_class [Class<ConvenientService::Service>]
-        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubbedService]
+        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceStub]
         #
         # @example Unstub service with any arguments.
         #   class Service
@@ -49,7 +49,7 @@ module ConvenientService
         # @since 1.0.0
         #
         # @param service_class [Class<ConvenientService::Service>]
-        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService]
+        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceUnstub]
         #
         # @example Unstub service with any arguments.
         #   class Service
@@ -67,7 +67,7 @@ module ConvenientService
         #     it "works" do
         #       stub_service(Service).to return_error.with_code(:custom_code)
         #
-        #       unstub_service(Service).to_return_result_mock
+        #       unstub_service(Service).to return_result_mock
         #
         #       expect(Service).to be_success.without_data
         #     end
@@ -79,31 +79,38 @@ module ConvenientService
 
         ##
         # @param status [Symbol]
-        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
         #
         def return_result(status)
-          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec.new(status: status)
+          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock.new(status: status)
         end
 
         ##
-        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
         #
         def return_success
-          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec.new(status: :success)
+          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock.new(status: :success)
         end
 
         ##
-        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
         #
         def return_failure
-          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec.new(status: :failure)
+          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock.new(status: :failure)
         end
 
         ##
-        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
         #
         def return_error
-          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec.new(status: :error)
+          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock.new(status: :error)
+        end
+
+        ##
+        # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultUnmock]
+        #
+        def return_result_mock
+          ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultUnmock.new
         end
       end
     end

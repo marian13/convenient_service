@@ -10,7 +10,7 @@ module ConvenientService
     module Plugins
       module CanHaveStubbedEntries
         module Entities
-          class StubbedFeature
+          class FeatureStub
             ##
             # @param feature_class [Class<ConvenientService::Feature>]
             # @param entry_name [Symbol, String]
@@ -26,7 +26,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubService]
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureStub]
             #
             def with_arguments(...)
               @arguments = Support::Arguments.new(...)
@@ -35,7 +35,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubService]
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureStub]
             #
             # @internal
             #   NOTE: `@arguments = nil` means "match any arguments".
@@ -47,7 +47,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubService]
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureStub]
             #
             def without_arguments
               @arguments = Support::Arguments.null_arguments
@@ -56,13 +56,13 @@ module ConvenientService
             end
 
             ##
-            # @param value_spec [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ResultSpec]
-            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubService]
+            # @param value_mock [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock]
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureStub]
             #
-            def to(value_spec)
-              @value_spec = value_spec.for(feature_class, entry_name, arguments)
+            def to(value_mock)
+              @value_mock = value_mock.for(feature_class, entry_name, arguments)
 
-              @value_spec.register
+              @value_mock.register
 
               self
             end
@@ -77,7 +77,7 @@ module ConvenientService
               return false if feature_class != other.feature_class
               return false if entry_name != other.entry_name
               return false if arguments != other.arguments
-              return false if value_spec != other.value_spec
+              return false if value_mock != other.value_mock
 
               true
             end
@@ -103,10 +103,10 @@ module ConvenientService
             attr_reader :arguments
 
             ##
-            # @!attribute [r] value_spec
-            #   @return [ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::ValueSpec]
+            # @!attribute [r] value_mock
+            #   @return [ConvenientService::RSpec::Helpers::Classes::StubEntry::Entities::ValueMock]
             #
-            attr_reader :value_spec
+            attr_reader :value_mock
           end
         end
       end

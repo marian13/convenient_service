@@ -64,7 +64,30 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Conce
 
       specify do
         expect { feature_class.stub_entry(entry_name) }
-          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::StubbedFeature, :new)
+          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureStub, :new)
+          .with_arguments(feature_class: feature_class, entry_name: entry_name)
+          .and_return_its_value
+      end
+    end
+
+    describe ".unstub_entry" do
+      let(:feature_class) do
+        Class.new do
+          include ConvenientService::Feature::Standard::Config
+
+          entry :main
+
+          def main
+            :main_entry_value
+          end
+        end
+      end
+
+      let(:entry_name) { :main }
+
+      specify do
+        expect { feature_class.unstub_entry(entry_name) }
+          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureUnstub, :new)
           .with_arguments(feature_class: feature_class, entry_name: entry_name)
           .and_return_its_value
       end

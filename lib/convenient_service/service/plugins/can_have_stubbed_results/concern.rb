@@ -45,17 +45,17 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubbedService]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceStub]
             #
             def stub_result
-              Entities::StubbedService.new(service_class: self)
+              Entities::ServiceStub.new(service_class: self)
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceUnstub]
             #
             def unstub_result
-              Entities::UnstubbedService.new(service_class: self)
+              Entities::ServiceUnstub.new(service_class: self)
             end
           end
         end

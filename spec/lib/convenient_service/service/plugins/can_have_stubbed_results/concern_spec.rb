@@ -60,7 +60,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Conce
 
       specify do
         expect { service_class.stub_result }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::StubbedService, :new)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceStub, :new)
           .with_arguments(service_class: service_class)
           .and_return_its_value
       end
@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Conce
 
       specify do
         expect { service_class.unstub_result }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService, :new)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceUnstub, :new)
           .with_arguments(service_class: service_class)
           .and_return_its_value
       end

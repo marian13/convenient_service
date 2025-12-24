@@ -70,7 +70,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
 
       specify do
         expect { instance.return_result(status) }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec, :new)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock, :new)
           .with_arguments(status: status)
           .and_return_its_value
       end
@@ -79,7 +79,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
     describe "#return_success" do
       specify do
         expect { instance.return_success }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec, :new)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock, :new)
           .with_arguments(status: :success)
           .and_return_its_value
       end
@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
     describe "#return_failure" do
       specify do
         expect { instance.return_failure }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec, :new)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock, :new)
           .with_arguments(status: :failure)
           .and_return_its_value
       end
@@ -97,8 +97,17 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
     describe "#return_error" do
       specify do
         expect { instance.return_error }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec, :new)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock, :new)
           .with_arguments(status: :error)
+          .and_return_its_value
+      end
+    end
+
+    describe "#return_result_mock" do
+      specify do
+        expect { instance.return_result_mock }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultUnmock, :new)
+          .without_arguments
           .and_return_its_value
       end
     end

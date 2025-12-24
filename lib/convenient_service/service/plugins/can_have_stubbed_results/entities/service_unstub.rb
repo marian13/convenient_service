@@ -10,7 +10,7 @@ module ConvenientService
     module Plugins
       module CanHaveStubbedResults
         module Entities
-          class UnstubbedService
+          class ServiceUnstub
             ##
             # @param service_class [Class<ConvenientService::Service>]
             # @return [void]
@@ -24,7 +24,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceUnstub]
             #
             # @internal
             #   NOTE: `@arguments = nil` means "match any arguments".
@@ -36,7 +36,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceUnstub]
             #
             def with_arguments(...)
               @arguments = Support::Arguments.new(...)
@@ -45,7 +45,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceUnstub]
             #
             def without_arguments
               @arguments = Support::Arguments.null_arguments
@@ -54,10 +54,13 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService]
+            # @param result_unmock [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultUnmock]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceStub]
             #
-            def to_return_result_mock
-              Commands::DeleteServiceStubbedResult[service: service_class, arguments: arguments]
+            def to(result_unmock)
+              @result_unmock = result_unmock.for(service_class, arguments)
+
+              @result_unmock.register
 
               self
             end
@@ -71,6 +74,7 @@ module ConvenientService
 
               return false if service_class != other.service_class
               return false if arguments != other.arguments
+              return false if result_unmock != other.result_unmock
 
               true
             end
@@ -88,6 +92,12 @@ module ConvenientService
             #   @return [ConvenientService::Support::Arguments]
             #
             attr_reader :arguments
+
+            ##
+            # @!attribute [r] result_unmock
+            #   @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultUnmock]
+            #
+            attr_reader :result_unmock
           end
         end
       end

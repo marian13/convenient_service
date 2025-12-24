@@ -5,5 +5,8 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "entities/stubbed_feature"
-require_relative "entities/value_spec"
+require_relative "entities/feature_stub"
+require_relative "entities/feature_unstub"
+
+require_relative "entities/value_mock"
+require_relative "entities/value_unmock"

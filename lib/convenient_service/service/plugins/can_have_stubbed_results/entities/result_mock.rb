@@ -14,7 +14,7 @@ module ConvenientService
           # @internal
           #   IMPORTANT: Do NOT cache `data`, `message`, and `code` since they can be set multiple times by `with_data`, `and_data`, `with_message`, `and_message`, `with_code`, and `and_code`.
           #
-          class ResultSpec
+          class ResultMock
             ##
             # @param status [Symbol]
             # @param service_class [Class<ConvenientService::Service>]
@@ -32,7 +32,7 @@ module ConvenientService
             ##
             # @param service_class [Class<ConvenientService::Service>]
             # @param arguments [ConvenientService::Support::Arguments]
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def for(service_class, arguments)
               self.class.new(status: status, service_class: service_class, arguments: arguments, chain: chain)
@@ -40,7 +40,7 @@ module ConvenientService
 
             ##
             # @param data [Hash]
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def with_data(data)
               chain[:data] = data
@@ -50,7 +50,7 @@ module ConvenientService
 
             ##
             # @param message [String]
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def with_message(message)
               chain[:message] = message
@@ -60,7 +60,7 @@ module ConvenientService
 
             ##
             # @param code [String]
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def with_code(code)
               chain[:code] = code
@@ -70,7 +70,7 @@ module ConvenientService
 
             ##
             # @param data [Hash]
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def and_data(data)
               chain[:data] = data
@@ -80,7 +80,7 @@ module ConvenientService
 
             ##
             # @param message [String]
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def and_message(message)
               chain[:message] = message
@@ -90,7 +90,7 @@ module ConvenientService
 
             ##
             # @param code [String]
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def and_code(code)
               chain[:code] = code
@@ -99,7 +99,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def register
               Commands::SetServiceStubbedResult[service: service_class, arguments: arguments, result: result]
@@ -108,7 +108,7 @@ module ConvenientService
             end
 
             ##
-            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def unregister
               Commands::DeleteServiceStubbedResult[service: service_class, arguments: arguments]

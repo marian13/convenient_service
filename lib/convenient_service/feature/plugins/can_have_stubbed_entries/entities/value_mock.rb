@@ -10,7 +10,7 @@ module ConvenientService
     module Plugins
       module CanHaveStubbedEntries
         module Entities
-          class ValueSpec
+          class ValueMock
             ##
             # @!attribute [r] value
             #   @return [Object] Can be any type.
@@ -35,17 +35,26 @@ module ConvenientService
             # @param feature_class [Class<ConvenientService::Feature>]
             # @param entry_name [Symbol, String]
             # @param arguments [ConvenientService::Support::Arguments]
-            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec]
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock]
             #
             def for(feature_class, entry_name, arguments)
               self.class.new(value: value, feature_class: feature_class, entry_name: entry_name, arguments: arguments)
             end
 
             ##
-            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueSpec]
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock]
             #
             def register
               Commands::SetFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments, value: value]
+
+              self
+            end
+
+            ##
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock]
+            #
+            def unregister
+              Commands::DeleteFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments]
 
               self
             end
