@@ -6,4 +6,6 @@
 ##
 
 require_relative "entities/stubbed_service"
+require_relative "entities/unstubbed_service"
+
 require_relative "entities/result_spec"

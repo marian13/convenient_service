@@ -108,6 +108,15 @@ module ConvenientService
             end
 
             ##
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultSpec]
+            #
+            def unregister
+              Commands::DeleteServiceStubbedResult[service: service_class, arguments: arguments]
+
+              self
+            end
+
+            ##
             # @return [ConvenientService::Service]
             #
             def result

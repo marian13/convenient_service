@@ -80,6 +80,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
       end
     end
 
+    describe "#unregister" do
+      specify do
+        expect { result_spec.unregister }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::DeleteServiceStubbedResult, :call)
+            .with_arguments(service: service_class, arguments: arguments)
+            .and_return { result_spec }
+      end
+    end
+
     describe "#result" do
       context "when result spec for failure" do
         let(:result_spec) { described_class.new(status: :failure, service_class: service_class, arguments: arguments) }

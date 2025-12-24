@@ -288,7 +288,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :stub_result, # public
           :stubbed_results, # private
           :success, # public
-          :success? # public
+          :success?, # public
+          :unstub_result # public
         ])
       end
 

@@ -50,6 +50,13 @@ module ConvenientService
             def stub_result
               Entities::StubbedService.new(service_class: self)
             end
+
+            ##
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::UnstubbedService]
+            #
+            def unstub_result
+              Entities::UnstubbedService.new(service_class: self)
+            end
           end
         end
       end

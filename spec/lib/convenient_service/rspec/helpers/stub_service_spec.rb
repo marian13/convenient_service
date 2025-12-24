@@ -44,6 +44,27 @@ RSpec.describe ConvenientService::RSpec::Helpers::StubService, type: :standard d
       end
     end
 
+    describe "#unstub_service" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          def result
+            success
+          end
+        end
+      end
+
+      specify do
+        service_class.commit_config!
+
+        expect { instance.unstub_service(service_class) }
+          .to delegate_to(service_class, :unstub_result)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     describe "#return_result" do
       let(:status) { :success }
 
