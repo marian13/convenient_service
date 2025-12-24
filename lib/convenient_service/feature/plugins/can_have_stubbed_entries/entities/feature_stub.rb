@@ -68,6 +68,14 @@ module ConvenientService
             end
 
             ##
+            # @param value [Object] Can be any type.
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock]
+            #
+            def to_return_value(value)
+              @value_mock = Entities::ValueMock.new(value: value)
+            end
+
+            ##
             # @param other [Object] Can be any type.
             # @return [Boolean, nil]
             #

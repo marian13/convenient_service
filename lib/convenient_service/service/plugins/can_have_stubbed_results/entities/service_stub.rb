@@ -54,15 +54,44 @@ module ConvenientService
             end
 
             ##
-            # @param result_spec [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
+            # @param result_mock [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ServiceStub]
             #
-            def to(result_spec)
-              @result_spec = result_spec.for(service_class, arguments)
+            def to(result_mock)
+              @result_mock = result_mock.for(service_class, arguments)
 
-              @result_spec.register
+              @result_mock.register
 
               self
+            end
+
+            ##
+            # @param status [Symbol]
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
+            #
+            def to_return_result(status)
+              @result_mock = Entities::ResultMock.new(status: status)
+            end
+
+            ##
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
+            #
+            def to_return_success
+              @result_mock = Entities::ResultMock.new(status: :success)
+            end
+
+            ##
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
+            #
+            def to_return_failure
+              @result_mock = Entities::ResultMock.new(status: :failure)
+            end
+
+            ##
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
+            #
+            def to_return_error
+              @result_mock = Entities::ResultMock.new(status: :error)
             end
 
             ##
@@ -74,7 +103,7 @@ module ConvenientService
 
               return false if service_class != other.service_class
               return false if arguments != other.arguments
-              return false if result_spec != other.result_spec
+              return false if result_mock != other.result_mock
 
               true
             end
@@ -94,10 +123,10 @@ module ConvenientService
             attr_reader :arguments
 
             ##
-            # @!attribute [r] result_spec
+            # @!attribute [r] result_mock
             #   @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
-            attr_reader :result_spec
+            attr_reader :result_mock
           end
         end
       end

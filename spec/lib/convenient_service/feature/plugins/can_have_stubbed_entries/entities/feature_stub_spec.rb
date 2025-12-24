@@ -184,6 +184,23 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
       end
     end
 
+    describe "#to_return_value" do
+      let(:value) { :foo }
+
+      specify do
+        expect { helper.to_return_value(value) }
+          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock, :new)
+          .with_arguments(value: value)
+          .and_return_its_value
+      end
+
+      it "sets value mock for feature stub" do
+        helper.to_return_value(value)
+
+        expect(helper).not_to eq(described_class.new(feature_class: feature_class, entry_name: entry_name))
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         let(:helper) { described_class.new(feature_class: feature_class, entry_name: entry_name) }

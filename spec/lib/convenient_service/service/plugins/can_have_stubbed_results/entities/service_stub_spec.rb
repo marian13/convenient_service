@@ -182,6 +182,68 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
       end
     end
 
+    describe "#to_return_result" do
+      let(:status) { :success }
+
+      specify do
+        expect { helper.to_return_result(status) }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock, :new)
+          .with_arguments(status: status)
+          .and_return_its_value
+      end
+
+      it "sets result mock for service stub" do
+        helper.to_return_result(status)
+
+        expect(helper).not_to eq(described_class.new(service_class: service_class))
+      end
+    end
+
+    describe "#to_return_success" do
+      specify do
+        expect { helper.to_return_success }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock, :new)
+          .with_arguments(status: :success)
+          .and_return_its_value
+      end
+
+      it "sets result mock for service stub" do
+        helper.to_return_success
+
+        expect(helper).not_to eq(described_class.new(service_class: service_class))
+      end
+    end
+
+    describe "#to_return_failure" do
+      specify do
+        expect { helper.to_return_failure }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock, :new)
+          .with_arguments(status: :failure)
+          .and_return_its_value
+      end
+
+      it "sets result mock for service stub" do
+        helper.to_return_failure
+
+        expect(helper).not_to eq(described_class.new(service_class: service_class))
+      end
+    end
+
+    describe "#to_return_error" do
+      specify do
+        expect { helper.to_return_error }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock, :new)
+          .with_arguments(status: :error)
+          .and_return_its_value
+      end
+
+      it "sets result mock for service stub" do
+        helper.to_return_failure
+
+        expect(helper).not_to eq(described_class.new(service_class: service_class))
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         let(:helper) { described_class.new(service_class: service_class) }
