@@ -37,7 +37,8 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
             [
               ConvenientService::Feature::Plugins::CanHaveEntries::Concern,
               ConvenientService::Common::Plugins::HasInstanceProxy::Concern,
-              ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Concern
+              ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Concern,
+              ConvenientService::Feature::Plugins::CanHaveRSpecStubbedEntries::Concern
             ]
           end
 

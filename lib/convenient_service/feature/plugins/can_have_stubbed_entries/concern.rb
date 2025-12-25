@@ -27,6 +27,13 @@ module ConvenientService
 
           class_methods do
             ##
+            # @return [Thread]
+            #
+            def stubbed_results_store
+              ::Thread.current
+            end
+
+            ##
             # @return [ConvenientService::Support::Cache]
             #
             # @internal

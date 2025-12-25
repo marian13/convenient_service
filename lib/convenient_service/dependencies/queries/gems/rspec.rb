@@ -30,7 +30,7 @@ module ConvenientService
             # @return [ConvenientService::Dependencies::Queries::Version]
             #
             # @internal
-            #   https://github.com/rspec/rspec-core/blob/main/lib/rspec/core/version.rb
+            #   - https://github.com/rspec/rspec-core/blob/main/lib/rspec/core/version.rb
             #
             def version
               loaded? ? Version.new(::RSpec::Core::Version::STRING) : Version.null_version

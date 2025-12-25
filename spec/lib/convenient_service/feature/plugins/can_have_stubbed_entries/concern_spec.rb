@@ -38,6 +38,15 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Conce
   end
 
   example_group "class methods" do
+    describe ".stubbed_entries_store" do
+      specify do
+        expect { feature_class.stubbed_entries_store }
+          .to delegate_to(Thread, :current)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     describe ".stubbed_entries" do
       specify do
         expect { feature_class.stubbed_entries }

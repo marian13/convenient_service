@@ -17,6 +17,7 @@ module ConvenientService
         available_options do
           [
             :essential,
+            :test,
             :rspec
           ]
         end
@@ -24,6 +25,7 @@ module ConvenientService
         default_options do
           [
             :essential,
+            test: Dependencies.rspec.loaded? || Dependencies.minitest.loaded?,
             rspec: Dependencies.rspec.loaded?
           ]
         end
@@ -34,7 +36,8 @@ module ConvenientService
           concerns do
             use ConvenientService::Plugins::Feature::CanHaveEntries::Concern if options.enabled?(:essential)
             use ConvenientService::Plugins::Common::HasInstanceProxy::Concern if options.enabled?(:essential)
-            use ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Concern if options.enabled?(:rspec)
+            use ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Concern if options.enabled?(:test) || options.enabled?(:rspec)
+            use ConvenientService::Plugins::Feature::CanHaveRSpecStubbedEntries::Concern if options.enabled?(:rspec)
           end
 
           middlewares :new, scope: :class do

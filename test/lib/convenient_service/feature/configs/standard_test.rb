@@ -17,22 +17,20 @@ class ConvenientService::Feature::Configs::StandardTest < Minitest::Test
   context "class methods" do
     describe ".default_options" do
       context "when `RSpec` is NOT loaded" do
-        should "return options without `:test` and `:rspec`" do
-          default_options = ConvenientService::Config::Commands::NormalizeOptions.call(options: [:essential, test: false, rspec: false])
+        should "return options without `:rspec`" do
+          default_options = ConvenientService::Config::Commands::NormalizeOptions.call(options: [:essential, :test, rspec: false])
 
           assert_equal(default_options, ConvenientService::Feature::Configs::Standard.default_options)
         end
 
-        should "return enabled options with disabled `:test` and `:rspec` options" do
+        should "return enabled options with disabled `:rspec` options" do
           assert_equal(
             [
               true,
-              false,
               false
             ],
             [
-              ConvenientService::Feature::Configs::Standard.default_options.dup.subtract(:test, :rspec).to_a.all?(&:enabled?),
-              ConvenientService::Feature::Configs::Standard.default_options.enabled?(:test),
+              ConvenientService::Feature::Configs::Standard.default_options.dup.subtract(:rspec).to_a.all?(&:enabled?),
               ConvenientService::Feature::Configs::Standard.default_options.enabled?(:rspec)
             ]
           )

@@ -344,6 +344,11 @@ module ConvenientService
         require "convenient_service/service/plugins/has_j_send_result_params_validations/using_dry_validation"
       end
 
+      ##
+      # @api private
+      #
+      # @return [Boolean]
+      #
       def require_has_memoization_using_memo_wise_plugin
         ##
         # - https://github.com/panorama-ed/memo_wise
@@ -498,6 +503,7 @@ module ConvenientService
         require "rspec/mocks"
 
         require "convenient_service/service/plugins/can_have_rspec_stubbed_results"
+        require "convenient_service/feature/plugins/can_have_rspec_stubbed_entries"
 
         require "convenient_service/rspec"
       end
@@ -609,7 +615,7 @@ module ConvenientService
       ##
       # @api private
       #
-      # @return [ConvenientService::Dependencies::Queries::Ruby]
+      # @return [Class<ConvenientService::Dependencies::Queries::Ruby>]
       #
       def ruby
         Ruby
@@ -618,7 +624,16 @@ module ConvenientService
       ##
       # @api private
       #
-      # @return [ConvenientService::Dependencies::Queries::RSpec]
+      # @return [Class<ConvenientService::Dependencies::Queries::Gems::Minitest>]
+      #
+      def minitest
+        Gems::Minitest
+      end
+
+      ##
+      # @api private
+      #
+      # @return [Class<ConvenientService::Dependencies::Queries::Gems::RSpec>]
       #
       def rspec
         Gems::RSpec
@@ -627,7 +642,7 @@ module ConvenientService
       ##
       # @api private
       #
-      # @return [ConvenientService::Dependencies::Queries::Gems::ActiveModel]
+      # @return [Class<ConvenientService::Dependencies::Queries::Gems::ActiveModel>]
       #
       def active_model
         Gems::ActiveModel
@@ -636,7 +651,7 @@ module ConvenientService
       ##
       # @api private
       #
-      # @return [ConvenientService::Dependencies::Queries::Gems::Logger]
+      # @return [Class<ConvenientService::Dependencies::Queries::Gems::Logger>]
       #
       def logger
         Gems::Logger
@@ -645,7 +660,7 @@ module ConvenientService
       ##
       # @api private
       #
-      # @return [ConvenientService::Dependencies::Queries::Gems::Paint]
+      # @return [Class<ConvenientService::Dependencies::Queries::Gems::Paint>]
       #
       def paint
         Gems::Paint

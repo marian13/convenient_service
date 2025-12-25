@@ -60,7 +60,7 @@ module ConvenientService
             :exception_services_trace,
             :per_instance_caching,
             :backtrace_cleaner,
-            test: Dependencies.rspec.loaded?,
+            test: Dependencies.rspec.loaded? || Dependencies.minitest.loaded?,
             rspec: Dependencies.rspec.loaded?
           ]
         end

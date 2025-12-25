@@ -32,6 +32,7 @@ class ConvenientService::Service::Configs::StandardTest < Minitest::Test
               :exception_services_trace,
               :per_instance_caching,
               :backtrace_cleaner,
+              test: true,
               rspec: false
             ]
           )
