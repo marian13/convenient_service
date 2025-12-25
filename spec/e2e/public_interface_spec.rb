@@ -1430,6 +1430,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         :ci?, # private
         :debug?, # private
         :logger, # private
+        :minitest, # private
         :paint, # private
         :require_active_model_validations_standard_config_option, # public
         :require_alias, # public

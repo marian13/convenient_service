@@ -108,7 +108,7 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
 
   example_group "class methods" do
     describe ".available_options" do
-      let(:available_options) { ConvenientService::Config::Commands::NormalizeOptions.call(options: [:essential, :rspec]) }
+      let(:available_options) { ConvenientService::Config::Commands::NormalizeOptions.call(options: [:essential, :test, :rspec]) }
 
       it "returns available options with `:rspec`" do
         expect(described_class.available_options).to eq(available_options)
@@ -131,7 +131,7 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
       ##
 
       context "when `RSpec` is loaded" do
-        let(:default_options) { ConvenientService::Config::Commands::NormalizeOptions.call(options: [:essential, :rspec]) }
+        let(:default_options) { ConvenientService::Config::Commands::NormalizeOptions.call(options: [:essential, :test, :rspec]) }
 
         it "returns default options with `:rspec`" do
           expect(described_class.default_options).to eq(default_options)

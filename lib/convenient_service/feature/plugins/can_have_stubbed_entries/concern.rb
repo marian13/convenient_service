@@ -29,7 +29,7 @@ module ConvenientService
             ##
             # @return [Thread]
             #
-            def stubbed_results_store
+            def stubbed_entries_store
               ::Thread.current
             end
 
