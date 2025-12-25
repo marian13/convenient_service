@@ -38,6 +38,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Conce
   end
 
   example_group "class methods" do
+    describe ".stubbed_results_store" do
+      specify do
+        expect { service_class.stubbed_results_store }
+          .to delegate_to(Thread, :current)
+          .without_arguments
+          .and_return_its_value
+      end
+    end
+
     describe ".stubbed_results" do
       specify do
         expect { service_class.stubbed_results }

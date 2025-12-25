@@ -18,7 +18,17 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Comma
 
   example_group "class methods" do
     describe ".call" do
-      let(:command) { described_class }
+      let(:command) { described_class.new(service: service) }
+
+      let(:service) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          def result
+            success
+          end
+        end
+      end
 
       context "when `RSpec` current example is NOT set" do
         before do

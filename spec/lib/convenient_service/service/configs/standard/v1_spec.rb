@@ -36,6 +36,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           let(:concerns) do
             [
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Concern,
+              ConvenientService::Service::Plugins::CanHaveRSpecStubbedResults::Concern,
               ConvenientService::Common::Plugins::HasInternals::Concern,
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,

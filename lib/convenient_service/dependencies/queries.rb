@@ -497,6 +497,8 @@ module ConvenientService
         require "rspec/matchers"
         require "rspec/mocks"
 
+        require "convenient_service/service/plugins/can_have_rspec_stubbed_results"
+
         require "convenient_service/rspec"
       end
 

@@ -13,12 +13,12 @@ module ConvenientService
           class FetchServiceStubbedResultsCache < Support::Command
             ##
             # @!attribute [r] service
-            #   @return [ConvenientService::Service]
+            #   @return [Class<ConvenientService::Service>]
             #
             attr_reader :service
 
             ##
-            # @param service [ConvenientService::Service]
+            # @param service [Class<ConvenientService::Service>]
             # @return [void]
             #
             def initialize(service:)
@@ -38,7 +38,7 @@ module ConvenientService
             # @return [ConvenientService::Support::Cache]
             #
             def cache
-              @cache ||= Commands::FetchAllServicesStubbedResultsCache.call
+              @cache ||= Commands::FetchAllServicesStubbedResultsCache.call(service: service)
             end
           end
         end

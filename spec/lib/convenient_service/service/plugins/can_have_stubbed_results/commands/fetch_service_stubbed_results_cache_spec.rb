@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Comma
       specify do
         expect { command.call(service: service) }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::FetchAllServicesStubbedResultsCache, :call)
-          .without_arguments
+          .with_arguments(service: service)
       end
 
       specify do

@@ -40,6 +40,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
           let(:concerns) do
             [
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Concern,
+              ConvenientService::Service::Plugins::CanHaveRSpecStubbedResults::Concern,
               ConvenientService::Common::Plugins::HasInternals::Concern,
               ConvenientService::Common::Plugins::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
@@ -772,6 +773,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
             :memo_wise,
             :not_passed_arguments,
             :finite_loop,
+            :test,
             :rspec
           ]
         )
@@ -813,12 +815,13 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               :exception_services_trace,
               :per_instance_caching,
               :backtrace_cleaner,
+              :test,
               :rspec
             ]
           )
         end
 
-        it "returns default options with `:rspec`" do
+        it "returns default options with `:test` and `:rspec`" do
           expect(described_class.default_options).to eq(default_options)
         end
 

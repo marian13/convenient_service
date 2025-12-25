@@ -41,6 +41,7 @@ module ConvenientService
             :memo_wise,
             :not_passed_arguments,
             :finite_loop,
+            :test,
             :rspec
           ]
         end
@@ -59,6 +60,7 @@ module ConvenientService
             :exception_services_trace,
             :per_instance_caching,
             :backtrace_cleaner,
+            test: Dependencies.rspec.loaded?,
             rspec: Dependencies.rspec.loaded?
           ]
         end
@@ -75,7 +77,8 @@ module ConvenientService
           include ConvenientService::Service::Core
 
           concerns do
-            use ConvenientService::Plugins::Service::CanHaveStubbedResults::Concern if options.enabled?(:rspec)
+            use ConvenientService::Plugins::Service::CanHaveStubbedResults::Concern if options.enabled?(:test) || options.enabled?(:rspec)
+            use ConvenientService::Plugins::Service::CanHaveRSpecStubbedResults::Concern if options.enabled?(:rspec)
             use ConvenientService::Plugins::Common::HasInternals::Concern if options.enabled?(:essential)
             use ConvenientService::Plugins::Common::HasConstructor::Concern if options.enabled?(:essential)
             use ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern if options.enabled?(:essential)
@@ -120,7 +123,7 @@ module ConvenientService
           middlewares :result do
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.enabled?(:per_instance_caching)
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware if options.enabled?(:exception_services_trace)
-            use ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware if options.enabled?(:rspec)
+            use ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware if options.enabled?(:test) || options.enabled?(:rspec)
             use ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware if options.enabled?(:callbacks)
             use ConvenientService::Plugins::Service::CanHaveRollbacks::Middleware if options.enabled?(:rollbacks)
             use ConvenientService::Plugins::Service::SetsParentToForeignResult::Middleware if options.enabled?(:result_parents_trace)
@@ -189,7 +192,7 @@ module ConvenientService
           end
 
           middlewares :result, scope: :class do
-            use ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware if options.enabled?(:rspec)
+            use ConvenientService::Plugins::Service::CanHaveStubbedResults::Middleware if options.enabled?(:test) || options.enabled?(:rspec)
             use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance)
           end
 
@@ -224,7 +227,7 @@ module ConvenientService
               use ConvenientService::Plugins::Result::HasAmazingPrintInspect::Concern if options.enabled?(:amazing_print_inspect)
               use ConvenientService::Plugins::Result::CanBeOwnResult::Concern if options.enabled?(:result_parents_trace)
               use ConvenientService::Plugins::Result::CanHaveParentResult::Concern if options.enabled?(:result_parents_trace)
-              use ConvenientService::Plugins::Result::CanBeStubbedResult::Concern if options.enabled?(:rspec)
+              use ConvenientService::Plugins::Result::CanBeStubbedResult::Concern if options.enabled?(:test) || options.enabled?(:rspec)
               use ConvenientService::Plugins::Result::CanHaveCheckedStatus::Concern if options.enabled?(:code_review_automation)
               use ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern if options.enabled?(:short_syntax)
               # use ConvenientService::Plugins::Result::HelpsToLearnSimilaritiesWithCommonObjects::Concern
