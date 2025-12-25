@@ -70,28 +70,28 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def to_return_result(status)
-              @result_mock = Entities::ResultMock.new(status: status)
+              @result_mock = Entities::ResultMock.new(status: status, service_class: service_class, arguments: arguments)
             end
 
             ##
             # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def to_return_success
-              @result_mock = Entities::ResultMock.new(status: :success)
+              @result_mock = Entities::ResultMock.new(status: :success, service_class: service_class, arguments: arguments)
             end
 
             ##
             # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def to_return_failure
-              @result_mock = Entities::ResultMock.new(status: :failure)
+              @result_mock = Entities::ResultMock.new(status: :failure, service_class: service_class, arguments: arguments)
             end
 
             ##
             # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
             def to_return_error
-              @result_mock = Entities::ResultMock.new(status: :error)
+              @result_mock = Entities::ResultMock.new(status: :error, service_class: service_class, arguments: arguments)
             end
 
             ##

@@ -188,7 +188,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
       specify do
         expect { helper.to_return_result(status) }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock, :new)
-          .with_arguments(status: status)
+          .with_arguments(status: status, service_class: service_class, arguments: arguments)
           .and_return_its_value
       end
 
@@ -203,7 +203,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
       specify do
         expect { helper.to_return_success }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock, :new)
-          .with_arguments(status: :success)
+          .with_arguments(status: :success, service_class: service_class, arguments: arguments)
           .and_return_its_value
       end
 
@@ -218,7 +218,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
       specify do
         expect { helper.to_return_failure }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock, :new)
-          .with_arguments(status: :failure)
+          .with_arguments(status: :failure, service_class: service_class, arguments: arguments)
           .and_return_its_value
       end
 
@@ -233,7 +233,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
       specify do
         expect { helper.to_return_error }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock, :new)
-          .with_arguments(status: :error)
+          .with_arguments(status: :error, service_class: service_class, arguments: arguments)
           .and_return_its_value
       end
 

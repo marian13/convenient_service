@@ -90,7 +90,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Conc
       specify { expect { service_class.steps }.to cache_its_value }
 
       ##
-      # TODO: Implement `delegate_to` that skips block comparion?
+      # TODO: Implement `delegate_to` that skips block comparison?
       #
       specify do
         expect { service_class.steps }.to delegate_to(service_class.internals_class.cache, :fetch)

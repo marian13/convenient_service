@@ -45,7 +45,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
             specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
             specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
             specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-            specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+            specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
             specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
             specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
             specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -61,7 +61,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
@@ -76,7 +76,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -91,7 +91,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with any arguments") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
@@ -106,7 +106,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with args") }
               specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -123,7 +123,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with kwargs") }
               specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -140,7 +140,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with block") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -160,7 +160,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
@@ -176,7 +176,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
@@ -192,7 +192,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with any arguments") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
@@ -208,7 +208,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with args") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
@@ -226,7 +226,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with kwargs") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
@@ -244,7 +244,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with block") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result with default (any arguments)") }
@@ -262,7 +262,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
@@ -278,7 +278,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -294,7 +294,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with any arguments") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
@@ -310,7 +310,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with args") }
               specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -328,7 +328,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with kwargs") }
               specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -346,7 +346,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with block") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -364,7 +364,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
@@ -380,7 +380,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with any arguments") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
@@ -396,7 +396,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with any arguments") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
@@ -412,7 +412,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with args") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with any arguments") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
@@ -430,7 +430,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with kwargs") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with any arguments") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
@@ -448,7 +448,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with block") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from first stubbed result with any arguments") }
@@ -466,7 +466,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with args") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
@@ -484,7 +484,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with args") }
               specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -502,7 +502,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with args") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with any arguments") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
@@ -520,7 +520,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with args") }
               specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -538,7 +538,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with args") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with kwargs") }
               specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -557,7 +557,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from first stubbed result with args") }
               specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with block") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -576,7 +576,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with kwargs") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
@@ -594,7 +594,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with kwargs") }
               specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -612,7 +612,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with kwargs") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with any arguments") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
@@ -630,7 +630,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with args") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with kwargs") }
               specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -649,7 +649,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with kwargs") }
               specify { expect(service_class.result(&block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -667,7 +667,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from first stubbed result with kwargs") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with block") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -686,7 +686,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with block") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result with default (any arguments)") }
@@ -704,7 +704,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with block") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -722,7 +722,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with block") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(*args, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(**kwargs, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_failure.with_message("from second stubbed result with any arguments") }
@@ -740,7 +740,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_failure.with_message("from second stubbed result with args") }
               specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with block") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -759,13 +759,13 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs)).to be_failure.with_message("from second stubbed result with kwargs") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from first stubbed result with block") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
 
+              specify { expect(service_class.result(**other_kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&other_block)).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.result(&other_kwargs)).to be_success.with_data(from: "original result") }
             end
 
             context "when first stub with block, second stub with block" do
@@ -778,7 +778,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.result(*args)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(&block)).to be_failure.with_message("from second stubbed result with block") }
-              specify { expect(service_class.result(*args, *kwargs)).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.result(*args, **kwargs)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(**kwargs, &block)).to be_success.with_data(from: "original result") }
               specify { expect(service_class.result(*args, **kwargs, &block)).to be_success.with_data(from: "original result") }
@@ -788,7 +788,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
           end
         end
 
-        example_group "comparion" do
+        example_group "comparison" do
           let(:klass) do
             Class.new do
               attr_reader :id
@@ -886,7 +886,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
             specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
             specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
             specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-            specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+            specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
             specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
             specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
             specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -902,7 +902,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
@@ -917,7 +917,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -932,7 +932,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with any arguments") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
@@ -947,7 +947,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with args") }
               specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -964,7 +964,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with kwargs") }
               specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -981,7 +981,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with block") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1001,7 +1001,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
@@ -1017,7 +1017,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
@@ -1033,7 +1033,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with any arguments") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
@@ -1049,7 +1049,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with args") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
@@ -1067,7 +1067,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with kwargs") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
@@ -1085,7 +1085,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with block") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from first stubbed result with default (any arguments)") }
@@ -1103,7 +1103,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
@@ -1119,7 +1119,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1135,7 +1135,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with any arguments") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
@@ -1151,7 +1151,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with args") }
               specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1169,7 +1169,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with kwargs") }
               specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1187,7 +1187,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with block") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1205,7 +1205,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
@@ -1221,7 +1221,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with any arguments") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
@@ -1237,7 +1237,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with any arguments") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
@@ -1253,7 +1253,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with args") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with any arguments") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
@@ -1271,7 +1271,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with kwargs") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with any arguments") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
@@ -1289,7 +1289,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with block") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from first stubbed result with any arguments") }
@@ -1307,7 +1307,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with args") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
@@ -1325,7 +1325,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with args") }
               specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1343,7 +1343,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with args") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with any arguments") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
@@ -1361,7 +1361,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with args") }
               specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1379,7 +1379,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with args") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with kwargs") }
               specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1398,7 +1398,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from first stubbed result with args") }
               specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with block") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1417,7 +1417,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with kwargs") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
@@ -1435,7 +1435,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with kwargs") }
               specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1453,7 +1453,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with kwargs") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with any arguments") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
@@ -1471,7 +1471,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with args") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with kwargs") }
               specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1490,7 +1490,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with kwargs") }
               specify { expect(service_class.new(&block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1508,7 +1508,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from first stubbed result with kwargs") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with block") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1527,7 +1527,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with block") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from second stubbed result with default (any arguments)") }
@@ -1545,7 +1545,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with block") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1563,7 +1563,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with block") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(*args, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_failure.with_message("from second stubbed result with any arguments") }
@@ -1581,7 +1581,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_failure.with_message("from second stubbed result with args") }
               specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with block") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
@@ -1600,13 +1600,13 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs).result).to be_failure.with_message("from second stubbed result with kwargs") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from first stubbed result with block") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }
 
+              specify { expect(service_class.new(**other_kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&other_block).result).to be_success.with_data(from: "original result") }
-              specify { expect(service_class.new(&other_kwargs).result).to be_success.with_data(from: "original result") }
             end
 
             context "when first stub with block, second stub with block" do
@@ -1619,7 +1619,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(service_class.new(*args).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(&block).result).to be_failure.with_message("from second stubbed result with block") }
-              specify { expect(service_class.new(*args, *kwargs).result).to be_success.with_data(from: "original result") }
+              specify { expect(service_class.new(*args, **kwargs).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(**kwargs, &block).result).to be_success.with_data(from: "original result") }
               specify { expect(service_class.new(*args, **kwargs, &block).result).to be_success.with_data(from: "original result") }

@@ -59,7 +59,7 @@ RSpec.describe ConvenientService::Common::Plugins::CanHaveCallbacks::Concern, ty
         end
 
         ##
-        # TODO: Implement `delegate_to` that skips block comparion?
+        # TODO: Implement `delegate_to` that skips block comparison?
         #
         specify do
           expect { service_class.callbacks }.to delegate_to(service_class.internals_class.cache, :fetch)
