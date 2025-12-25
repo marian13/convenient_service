@@ -42,7 +42,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
             specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
             specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
             specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-            specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+            specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
             specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
             specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
             specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -58,7 +58,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with default (any arguments)") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from first stubbed entry with default (any arguments)") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
@@ -73,7 +73,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -88,7 +88,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with any arguments") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from first stubbed entry with any arguments") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from first stubbed entry with any arguments") }
@@ -103,7 +103,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with args") }
               specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -120,7 +120,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with kwargs") }
               specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -137,7 +137,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with block") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -157,7 +157,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with default (any arguments)") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from second stubbed entry with default (any arguments)") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
@@ -173,7 +173,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with default (any arguments)") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from first stubbed entry with default (any arguments)") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
@@ -189,7 +189,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with any arguments") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from second stubbed entry with any arguments") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from second stubbed entry with any arguments") }
@@ -205,7 +205,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with args") }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with default (any arguments)") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from first stubbed entry with default (any arguments)") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
@@ -223,7 +223,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with kwargs") }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with default (any arguments)") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from first stubbed entry with default (any arguments)") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
@@ -241,7 +241,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with block") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from first stubbed entry with default (any arguments)") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
@@ -259,7 +259,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with default (any arguments)") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from second stubbed entry with default (any arguments)") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
@@ -275,7 +275,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -291,7 +291,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with any arguments") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from second stubbed entry with any arguments") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from second stubbed entry with any arguments") }
@@ -307,7 +307,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with args") }
               specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -325,7 +325,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with kwargs") }
               specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -343,7 +343,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with block") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -361,7 +361,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with default (any arguments)") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from second stubbed entry with default (any arguments)") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
@@ -377,7 +377,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with any arguments") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from first stubbed entry with any arguments") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from first stubbed entry with any arguments") }
@@ -393,7 +393,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with any arguments") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from second stubbed entry with any arguments") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from second stubbed entry with any arguments") }
@@ -409,7 +409,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with args") }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with any arguments") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from first stubbed entry with any arguments") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from first stubbed entry with any arguments") }
@@ -427,7 +427,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with kwargs") }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with any arguments") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from first stubbed entry with any arguments") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from first stubbed entry with any arguments") }
@@ -445,7 +445,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with block") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from first stubbed entry with any arguments") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from first stubbed entry with any arguments") }
@@ -463,7 +463,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with args") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with default (any arguments)") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from second stubbed entry with default (any arguments)") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
@@ -481,7 +481,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with args") }
               specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -499,7 +499,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with args") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with any arguments") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from second stubbed entry with any arguments") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from second stubbed entry with any arguments") }
@@ -517,7 +517,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with args") }
               specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -535,7 +535,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with args") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with kwargs") }
               specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -554,7 +554,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from first stubbed entry with args") }
               specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with block") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -573,7 +573,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with kwargs") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with default (any arguments)") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from second stubbed entry with default (any arguments)") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
@@ -591,7 +591,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with kwargs") }
               specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -609,7 +609,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with kwargs") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with any arguments") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from second stubbed entry with any arguments") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from second stubbed entry with any arguments") }
@@ -627,7 +627,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with args") }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with kwargs") }
               specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -646,7 +646,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with kwargs") }
               specify { expect(feature_class.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -664,7 +664,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs)).to eq("from first stubbed entry with kwargs") }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with block") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -683,7 +683,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with block") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from second stubbed entry with default (any arguments)") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
@@ -701,7 +701,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with block") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -719,7 +719,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with block") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq("from second stubbed entry with any arguments") }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(**kwargs, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq("from second stubbed entry with any arguments") }
@@ -737,7 +737,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq("from second stubbed entry with args") }
               specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with block") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -756,7 +756,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs)).to eq("from second stubbed entry with kwargs") }
               specify { expect(feature_class.main(&block)).to eq("from first stubbed entry with block") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -775,7 +775,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(&block)).to eq("from second stubbed entry with block") }
-              specify { expect(feature_class.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -883,7 +883,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
             specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
             specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
             specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-            specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+            specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
             specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
             specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
             specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -899,7 +899,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with default (any arguments)") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from first stubbed entry with default (any arguments)") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
@@ -914,7 +914,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -929,7 +929,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with any arguments") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from first stubbed entry with any arguments") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from first stubbed entry with any arguments") }
@@ -944,7 +944,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with args") }
               specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -961,7 +961,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with kwargs") }
               specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -978,7 +978,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with block") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -998,7 +998,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with default (any arguments)") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from second stubbed entry with default (any arguments)") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
@@ -1014,7 +1014,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with default (any arguments)") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from first stubbed entry with default (any arguments)") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
@@ -1030,7 +1030,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with any arguments") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from second stubbed entry with any arguments") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from second stubbed entry with any arguments") }
@@ -1046,7 +1046,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with args") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with default (any arguments)") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from first stubbed entry with default (any arguments)") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
@@ -1064,7 +1064,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with kwargs") }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with default (any arguments)") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from first stubbed entry with default (any arguments)") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
@@ -1082,7 +1082,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with block") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from first stubbed entry with default (any arguments)") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from first stubbed entry with default (any arguments)") }
@@ -1100,7 +1100,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with default (any arguments)") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from second stubbed entry with default (any arguments)") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
@@ -1116,7 +1116,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1132,7 +1132,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with any arguments") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from second stubbed entry with any arguments") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from second stubbed entry with any arguments") }
@@ -1148,7 +1148,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with args") }
               specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1166,7 +1166,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with kwargs") }
               specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1184,7 +1184,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with block") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1202,7 +1202,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with default (any arguments)") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from second stubbed entry with default (any arguments)") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
@@ -1218,7 +1218,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with any arguments") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from first stubbed entry with any arguments") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from first stubbed entry with any arguments") }
@@ -1234,7 +1234,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with any arguments") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from second stubbed entry with any arguments") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from second stubbed entry with any arguments") }
@@ -1250,7 +1250,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with args") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with any arguments") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from first stubbed entry with any arguments") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from first stubbed entry with any arguments") }
@@ -1268,7 +1268,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with kwargs") }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with any arguments") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from first stubbed entry with any arguments") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from first stubbed entry with any arguments") }
@@ -1286,7 +1286,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with block") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from first stubbed entry with any arguments") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from first stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from first stubbed entry with any arguments") }
@@ -1304,7 +1304,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with args") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with default (any arguments)") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from second stubbed entry with default (any arguments)") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
@@ -1322,7 +1322,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with args") }
               specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1340,7 +1340,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with args") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with any arguments") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from second stubbed entry with any arguments") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from second stubbed entry with any arguments") }
@@ -1358,7 +1358,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with args") }
               specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1376,7 +1376,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with args") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with kwargs") }
               specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1395,7 +1395,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from first stubbed entry with args") }
               specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with block") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1414,7 +1414,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with kwargs") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with default (any arguments)") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from second stubbed entry with default (any arguments)") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
@@ -1432,7 +1432,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with kwargs") }
               specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1450,7 +1450,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with kwargs") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with any arguments") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from second stubbed entry with any arguments") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from second stubbed entry with any arguments") }
@@ -1468,7 +1468,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with args") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with kwargs") }
               specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1487,7 +1487,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with kwargs") }
               specify { expect(feature_instance.main(&block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1505,7 +1505,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs)).to eq("from first stubbed entry with kwargs") }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with block") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1524,7 +1524,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with block") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from second stubbed entry with default (any arguments)") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from second stubbed entry with default (any arguments)") }
@@ -1542,7 +1542,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with block") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1560,7 +1560,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with block") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq("from second stubbed entry with any arguments") }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq("from second stubbed entry with any arguments") }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq("from second stubbed entry with any arguments") }
@@ -1578,7 +1578,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq("from second stubbed entry with args") }
               specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with block") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1597,7 +1597,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs)).to eq("from second stubbed entry with kwargs") }
               specify { expect(feature_instance.main(&block)).to eq("from first stubbed entry with block") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
@@ -1616,7 +1616,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(&block)).to eq("from second stubbed entry with block") }
-              specify { expect(feature_instance.main(*args, *kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(*args, **kwargs)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(**kwargs, &block)).to eq(:value_from_main_entry) }
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }

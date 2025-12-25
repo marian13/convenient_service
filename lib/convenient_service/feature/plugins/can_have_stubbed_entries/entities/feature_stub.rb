@@ -72,7 +72,7 @@ module ConvenientService
             # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock]
             #
             def to_return_value(value)
-              @value_mock = Entities::ValueMock.new(value: value)
+              @value_mock = Entities::ValueMock.new(value: value, feature_class: feature_class, entry_name: entry_name, arguments: arguments)
             end
 
             ##

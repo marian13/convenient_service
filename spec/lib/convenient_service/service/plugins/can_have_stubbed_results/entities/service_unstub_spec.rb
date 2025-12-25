@@ -187,6 +187,21 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
       end
     end
 
+    describe "#to_return_result_mock" do
+      specify do
+        expect { helper.to_return_result_mock }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultUnmock, :new)
+          .with_arguments(service_class: service_class, arguments: arguments)
+          .and_return_its_value
+      end
+
+      it "sets result unmock for service unstub" do
+        helper.to_return_result_mock
+
+        expect(helper).not_to eq(described_class.new(service_class: service_class))
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         let(:helper) { described_class.new(service_class: service_class) }

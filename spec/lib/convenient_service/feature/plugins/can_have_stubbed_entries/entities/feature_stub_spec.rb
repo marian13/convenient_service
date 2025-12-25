@@ -190,7 +190,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
       specify do
         expect { helper.to_return_value(value) }
           .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock, :new)
-          .with_arguments(value: value)
+          .with_arguments(value: value, feature_class: feature_class, entry_name: entry_name, arguments: arguments)
           .and_return_its_value
       end
 

@@ -38,7 +38,7 @@ module ConvenientService
             # @return [ConvenientService::Support::Cache]
             #
             def cache
-              @cache ||= Commands::FetchAllFeaturesStubbedEntriesCache.call
+              @cache ||= Commands::FetchAllFeaturesStubbedEntriesCache.call(feature: feature)
             end
           end
         end

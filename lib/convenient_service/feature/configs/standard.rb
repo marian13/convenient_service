@@ -45,11 +45,11 @@ module ConvenientService
           end
 
           middlewares :trigger, scope: :class do
-            use ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Middleware if options.enabled?(:rspec)
+            use ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Middleware if options.enabled?(:test) || options.enabled?(:rspec)
           end
 
           middlewares :trigger do
-            use ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Middleware if options.enabled?(:rspec)
+            use ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Middleware if options.enabled?(:test) || options.enabled?(:rspec)
           end
         end
 

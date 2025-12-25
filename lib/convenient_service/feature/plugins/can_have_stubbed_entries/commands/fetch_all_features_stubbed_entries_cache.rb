@@ -12,6 +12,20 @@ module ConvenientService
         module Commands
           class FetchAllFeaturesStubbedEntriesCache < Support::Command
             ##
+            # @!attribute [r] feature
+            #   @return [ConvenientService::Feature]
+            #
+            attr_reader :feature
+
+            ##
+            # @param feature [ConvenientService::Feature]
+            # @return [void]
+            #
+            def initialize(feature:)
+              @feature = feature
+            end
+
+            ##
             # @return [ConvenientService::Support::Cache]
             #
             # @internal
@@ -21,8 +35,8 @@ module ConvenientService
             #   - https://relishapp.com/rspec/rspec-core/docs/metadata/current-example
             #
             def call
-              if Dependencies.rspec.current_example
-                Utils::Object.memoize_including_falsy_values(Dependencies.rspec.current_example, :@__convenient_service_stubbed_entries__) { Support::Cache.backed_by(:thread_safe_hash).new }
+              if feature.stubbed_entries_store
+                Utils::Object.memoize_including_falsy_values(feature.stubbed_entries_store, :@__convenient_service_stubbed_entries__) { Support::Cache.backed_by(:thread_safe_hash).new }
               else
                 Support::Cache.backed_by(:thread_safe_hash).new
               end

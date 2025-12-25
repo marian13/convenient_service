@@ -66,6 +66,13 @@ module ConvenientService
             end
 
             ##
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultUnmock]
+            #
+            def to_return_result_mock
+              @result_unmock = Entities::ResultUnmock.new(service_class: service_class, arguments: arguments)
+            end
+
+            ##
             # @param other [Object] Can be any type.
             # @return [Boolean, nil]
             #

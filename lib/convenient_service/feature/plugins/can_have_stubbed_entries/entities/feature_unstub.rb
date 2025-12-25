@@ -68,6 +68,13 @@ module ConvenientService
             end
 
             ##
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueUnmock]
+            #
+            def to_return_value_mock
+              @value_unmock = Entities::ValueUnmock.new(feature_class: feature_class, entry_name: entry_name, arguments: arguments)
+            end
+
+            ##
             # @param other [Object] Can be any type.
             # @return [Boolean, nil]
             #
