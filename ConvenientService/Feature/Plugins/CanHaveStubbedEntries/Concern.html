@@ -179,6 +179,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#stubbed_entries_store-class_method" title="stubbed_entries_store (class method)">.<strong>stubbed_entries_store</strong>  &#x21d2; Thread </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#unstub_entry-class_method" title="unstub_entry (class method)">.<strong>unstub_entry</strong>(entry_name)  &#x21d2; ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureUnstub </a>
     
 
@@ -286,12 +308,12 @@
       <pre class="lines">
 
 
-51
-52
-53</pre>
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/concern.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/concern.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stub_entry'>stub_entry</span><span class='lparen'>(</span><span class='id identifier rubyid_entry_name'>entry_name</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Feature/Plugins/CanHaveStubbedEntries/Entities.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Feature/Plugins/CanHaveStubbedEntries/Entities/FeatureStub.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureStub (class)">FeatureStub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/FeatureStub.html#initialize-instance_method" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureStub#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>feature_class:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>entry_name:</span> <span class='id identifier rubyid_entry_name'>entry_name</span><span class='rparen'>)</span>
@@ -353,15 +375,82 @@
       <pre class="lines">
 
 
-43
-44
-45</pre>
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/concern.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/concern.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stubbed_entries'>stubbed_entries</span>
   <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Feature/Plugins/CanHaveStubbedEntries/Commands.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Feature/Plugins/CanHaveStubbedEntries/Commands/FetchFeatureStubbedEntriesCache.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::FetchFeatureStubbedEntriesCache (class)">FetchFeatureStubbedEntriesCache</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'><span class='object_link'><a href="Commands/FetchFeatureStubbedEntriesCache.html#call-instance_method" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::FetchFeatureStubbedEntriesCache#call (method)">call</a></span></span><span class='lparen'>(</span><span class='label'>feature:</span> <span class='kw'>self</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stubbed_entries_store-class_method">
+  
+    .<strong>stubbed_entries_store</strong>  &#x21d2; <tt>Thread</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Thread</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/concern.rb', line 32</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_stubbed_entries_store'>stubbed_entries_store</span>
+  <span class='op'>::</span><span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_current'>current</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -435,12 +524,12 @@
       <pre class="lines">
 
 
-59
-60
-61</pre>
+66
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/concern.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/concern.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unstub_entry'>unstub_entry</span><span class='lparen'>(</span><span class='id identifier rubyid_entry_name'>entry_name</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Feature/Plugins/CanHaveStubbedEntries/Entities.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Feature/Plugins/CanHaveStubbedEntries/Entities/FeatureUnstub.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureUnstub (class)">FeatureUnstub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/FeatureUnstub.html#initialize-instance_method" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::FeatureUnstub#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>feature_class:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>entry_name:</span> <span class='id identifier rubyid_entry_name'>entry_name</span><span class='rparen'>)</span>
@@ -455,7 +544,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Dec 25 00:16:52 2025 by
+  Generated on Thu Dec 25 01:43:10 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
