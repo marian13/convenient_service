@@ -9,7 +9,7 @@ require "test_helper"
 
 require "convenient_service"
 
-module ConvenientService::E2E; end
+require_relative "shared/stub_variants"
 
 class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
   ##

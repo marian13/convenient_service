@@ -99,10 +99,19 @@ module ConvenientService
             end
 
             ##
+            # @param block [Proc, nil]
             # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
-            def register
+            def register(&block)
               Commands::SetServiceStubbedResult[service: service_class, arguments: arguments, result: result]
+
+              if block
+                begin
+                  yield
+                ensure
+                  Commands::DeleteServiceStubbedResult[service: service_class, arguments: arguments]
+                end
+              end
 
               self
             end

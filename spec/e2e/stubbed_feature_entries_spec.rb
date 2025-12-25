@@ -762,7 +762,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_class.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
 
               specify { expect(feature_class.main(&other_block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_class.main(&other_kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_class.main(**other_kwargs)).to eq(:value_from_main_entry) }
             end
 
             context "when first stub with block, second stub with block" do
@@ -1603,7 +1603,7 @@ RSpec.describe "Stubbed service results", type: [:standard, :e2e] do
               specify { expect(feature_instance.main(*args, **kwargs, &block)).to eq(:value_from_main_entry) }
 
               specify { expect(feature_instance.main(&other_block)).to eq(:value_from_main_entry) }
-              specify { expect(feature_instance.main(&other_kwargs)).to eq(:value_from_main_entry) }
+              specify { expect(feature_instance.main(**other_kwargs)).to eq(:value_from_main_entry) }
             end
 
             context "when first stub with block, second stub with block" do

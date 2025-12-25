@@ -42,10 +42,19 @@ module ConvenientService
             end
 
             ##
+            # @param block [Proc, nil]
             # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock]
             #
-            def register
+            def register(&block)
               Commands::SetFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments, value: value]
+
+              if block
+                begin
+                  yield
+                ensure
+                  Commands::DeleteFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments]
+                end
+              end
 
               self
             end
