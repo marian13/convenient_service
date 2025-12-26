@@ -15,7 +15,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
   context "Feature" do
     context "class methods" do
       describe "some entry" do
-        include ConvenientService::E2E::StubVariants
+        extend ConvenientService::E2E::Shared::StubVariants
 
         variants.each do |variant_name|
           context variant_name do
@@ -54,7 +54,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
               context "when one stub" do
                 context "when first stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -76,6 +76,12 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register(&test)
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from first stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from first stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from first stubbed entry with default (any arguments)") }
@@ -87,7 +93,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -109,6 +115,12 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register(&test)
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from first stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == :value_from_main_entry) }
@@ -120,7 +132,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -142,6 +154,12 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register(&test)
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from first stubbed entry with any arguments") }
@@ -153,7 +171,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -175,6 +193,12 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register(&test)
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from first stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == :value_from_main_entry) }
@@ -188,7 +212,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -210,6 +234,12 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register(&test)
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from first stubbed entry with kwargs") }
@@ -223,7 +253,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -242,6 +272,12 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register(&test)
                     end
                   end
 
@@ -260,7 +296,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
               context "when multiple stubs" do
                 context "when first stub with default (any arguments), second stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -285,6 +321,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register do
+                        @feature_class.stub_entry(:main).to_return_value("from second stubbed entry with default (any arguments)").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with default (any arguments)") }
@@ -296,7 +340,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with default (any arguments), second stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -322,6 +366,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register do
+                        @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from first stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from first stubbed entry with default (any arguments)") }
@@ -333,7 +385,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with default (any arguments), second stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -359,6 +411,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register do
+                        @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with any arguments") }
@@ -370,7 +430,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with default (any arguments), second stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -393,6 +453,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").unregister
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register do
+                        @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").register(&test)
+                      end
                     end
                   end
 
@@ -409,7 +477,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with default (any arguments), second stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -432,6 +500,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").unregister
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register do
+                        @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").register(&test)
+                      end
                     end
                   end
 
@@ -448,7 +524,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with default (any arguments), second stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -474,6 +550,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from first stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from first stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from first stubbed entry with default (any arguments)") }
@@ -487,7 +571,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments, second stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -513,6 +597,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register do
+                        @feature_class.stub_entry(:main).to_return_value("from second stubbed entry with default (any arguments)").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from first stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with default (any arguments)") }
@@ -524,7 +616,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments, second stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -549,6 +641,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register do
+                        @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == :value_from_main_entry) }
@@ -560,7 +660,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments, second stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -586,6 +686,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register do
+                        @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from first stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with any arguments") }
@@ -597,7 +705,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments, second stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -620,6 +728,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").unregister
                       @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register do
+                        @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").register(&test)
+                      end
                     end
                   end
 
@@ -636,7 +752,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments, second stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -659,6 +775,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").unregister
                       @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register do
+                        @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").register(&test)
+                      end
                     end
                   end
 
@@ -675,7 +799,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments, second stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -701,6 +825,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from first stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == :value_from_main_entry) }
@@ -714,7 +846,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments, second stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -740,6 +872,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register do
+                        @feature_class.stub_entry(:main).to_return_value("from second stubbed entry with default (any arguments)").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with default (any arguments)") }
@@ -751,7 +891,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments, second stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -777,6 +917,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register do
+                        @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from first stubbed entry with any arguments") }
@@ -788,7 +936,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments, second stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -814,6 +962,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register do
+                        @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with any arguments") }
@@ -825,7 +981,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments, second stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -851,6 +1007,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register do
+                        @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from first stubbed entry with any arguments") }
@@ -864,7 +1028,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments, second stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -890,6 +1054,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register do
+                        @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with kwargs") }
@@ -903,7 +1075,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments, second stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -929,6 +1101,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from first stubbed entry with any arguments") }
@@ -942,7 +1122,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args, second stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -968,6 +1148,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register do
+                        @feature_class.stub_entry(:main).to_return_value("from second stubbed entry with default (any arguments)").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from first stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with default (any arguments)") }
@@ -981,7 +1169,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args, second stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1007,6 +1195,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register do
+                        @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from first stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == :value_from_main_entry) }
@@ -1020,7 +1216,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args, second stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1046,6 +1242,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register do
+                        @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from first stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with any arguments") }
@@ -1059,7 +1263,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args, second stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1085,6 +1289,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register do
+                        @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == :value_from_main_entry) }
@@ -1098,7 +1310,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args, second stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1121,6 +1333,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").unregister
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register do
+                        @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").register(&test)
+                      end
                     end
                   end
 
@@ -1138,7 +1358,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args, second stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1164,6 +1384,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from first stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == :value_from_main_entry) }
@@ -1178,7 +1406,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs, second stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1204,6 +1432,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register do
+                        @feature_class.stub_entry(:main).to_return_value("from second stubbed entry with default (any arguments)").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from first stubbed entry with kwargs") }
@@ -1217,7 +1453,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs, second stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1243,6 +1479,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register do
+                        @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from first stubbed entry with kwargs") }
@@ -1256,7 +1500,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs, second stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1282,6 +1526,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register do
+                        @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from first stubbed entry with kwargs") }
@@ -1295,7 +1547,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs, second stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1318,6 +1570,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").unregister
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register do
+                        @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").register(&test)
+                      end
                     end
                   end
 
@@ -1335,7 +1595,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs, second stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1361,6 +1621,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register do
+                        @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with kwargs") }
@@ -1374,7 +1642,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs, second stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1400,6 +1668,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from first stubbed entry with kwargs") }
@@ -1414,7 +1690,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block, second stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1440,6 +1716,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register do
+                        @feature_class.stub_entry(:main).to_return_value("from second stubbed entry with default (any arguments)").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with default (any arguments)") }
@@ -1453,7 +1737,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block, second stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1479,6 +1763,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register do
+                        @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == :value_from_main_entry) }
@@ -1492,7 +1784,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block, second stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1518,6 +1810,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register do
+                        @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with any arguments") }
@@ -1531,7 +1831,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block, second stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1557,6 +1857,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register do
+                        @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == :value_from_main_entry) }
@@ -1571,7 +1879,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block, second stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1597,6 +1905,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register do
+                        @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from second stubbed entry with kwargs") }
@@ -1611,7 +1927,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block, second stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1634,6 +1950,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").unregister
                       @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").register(&test)
+                      end
                     end
                   end
 
@@ -1704,7 +2028,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 @other_block = proc { @bar }
               end
 
-              include ConvenientService::E2E::StubVariants
+              extend ConvenientService::E2E::Shared::StubVariants
 
               variant "stub/unstub" do
                 setup do
@@ -1738,6 +2062,18 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
               end
 
+              variant "register(&block)" do
+                around do |test|
+                  @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stub without arguments").register do
+                    @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stub with args").register do
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from third stub with kwargs").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from fourth stub with block").register(&test)
+                      end
+                    end
+                  end
+                end
+              end
+
               should("work (#{__LINE__})") { assert_equal(true, @feature_class.main == "from first stub without arguments") }
               should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(*@args) == "from second stub with args") }
               should("work (#{__LINE__})") { assert_equal(true, @feature_class.main(**@kwargs) == "from third stub with kwargs") }
@@ -1750,7 +2086,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
     context "instance methods" do
       describe "some entry" do
-        include ConvenientService::E2E::StubVariants
+        extend ConvenientService::E2E::Shared::StubVariants
 
         variants.each do |variant_name|
           context variant_name do
@@ -1791,7 +2127,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
               context "when one stub" do
                 context "when first stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1813,6 +2149,12 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from first stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from first stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from first stubbed entry with default (any arguments)") }
@@ -1824,7 +2166,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1846,6 +2188,12 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from first stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == :value_from_main_entry) }
@@ -1857,7 +2205,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1879,6 +2227,12 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from first stubbed entry with any arguments") }
@@ -1890,7 +2244,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1912,6 +2266,12 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from first stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == :value_from_main_entry) }
@@ -1925,7 +2285,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1947,6 +2307,12 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from first stubbed entry with kwargs") }
@@ -1960,7 +2326,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -1982,6 +2348,11 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register
+                    end
+                  end
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == :value_from_main_entry) }
@@ -1997,7 +2368,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
               context "when multiple stubs" do
                 context "when first stub with default (any arguments), second stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2022,6 +2393,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register do
+                        @feature_class.stub_entry(:main).to_return_value("from second stubbed entry with default (any arguments)").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with default (any arguments)") }
@@ -2033,7 +2412,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with default (any arguments), second stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2059,6 +2438,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register do
+                        @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from first stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from first stubbed entry with default (any arguments)") }
@@ -2070,7 +2457,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with default (any arguments), second stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2096,6 +2483,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register do
+                        @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with any arguments") }
@@ -2107,7 +2502,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with default (any arguments), second stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2130,6 +2525,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").unregister
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register do
+                        @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").register(&test)
+                      end
                     end
                   end
 
@@ -2146,7 +2549,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with default (any arguments), second stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2169,6 +2572,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").unregister
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register do
+                        @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").register(&test)
+                      end
                     end
                   end
 
@@ -2185,7 +2596,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with default (any arguments), second stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2211,6 +2622,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from first stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from first stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from first stubbed entry with default (any arguments)") }
@@ -2224,7 +2643,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments, second stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2250,6 +2669,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register do
+                        @feature_class.stub_entry(:main).to_return_value("from second stubbed entry with default (any arguments)").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from first stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with default (any arguments)") }
@@ -2261,7 +2688,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments, second stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2286,6 +2713,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register do
+                        @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == :value_from_main_entry) }
@@ -2297,7 +2732,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments, second stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2323,6 +2758,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register do
+                        @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from first stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with any arguments") }
@@ -2334,7 +2777,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments, second stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2357,6 +2800,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").unregister
                       @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register do
+                        @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").register(&test)
+                      end
                     end
                   end
 
@@ -2373,7 +2824,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments, second stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2396,6 +2847,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").unregister
                       @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register do
+                        @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").register(&test)
+                      end
                     end
                   end
 
@@ -2412,7 +2871,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub without arguments, second stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2438,6 +2897,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from first stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == :value_from_main_entry) }
@@ -2451,7 +2918,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments, second stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2477,6 +2944,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register do
+                        @feature_class.stub_entry(:main).to_return_value("from second stubbed entry with default (any arguments)").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with default (any arguments)") }
@@ -2488,7 +2963,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments, second stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2514,6 +2989,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register do
+                        @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from first stubbed entry with any arguments") }
@@ -2525,7 +3008,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments, second stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2550,6 +3033,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register do
+                        @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with any arguments") }
@@ -2561,7 +3052,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments, second stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2587,6 +3078,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register do
+                        @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from first stubbed entry with any arguments") }
@@ -2600,7 +3099,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments, second stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2626,6 +3125,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register do
+                        @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with kwargs") }
@@ -2639,7 +3146,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with any arguments, second stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2665,6 +3172,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from first stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from first stubbed entry with any arguments") }
@@ -2678,7 +3193,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args, second stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2704,6 +3219,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register do
+                        @feature_class.stub_entry(:main).to_return_value("from second stubbed entry with default (any arguments)").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from first stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with default (any arguments)") }
@@ -2717,7 +3240,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args, second stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2743,6 +3266,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register do
+                        @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from first stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == :value_from_main_entry) }
@@ -2756,7 +3287,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args, second stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2782,6 +3313,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register do
+                        @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from first stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with any arguments") }
@@ -2795,7 +3334,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args, second stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2820,6 +3359,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register do
+                        @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == :value_from_main_entry) }
@@ -2833,7 +3380,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args, second stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2856,6 +3403,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").unregister
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register do
+                        @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").register(&test)
+                      end
                     end
                   end
 
@@ -2873,7 +3428,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with args, second stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2899,6 +3454,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from first stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == :value_from_main_entry) }
@@ -2913,7 +3476,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs, second stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2939,6 +3502,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register do
+                        @feature_class.stub_entry(:main).to_return_value("from second stubbed entry with default (any arguments)").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from first stubbed entry with kwargs") }
@@ -2952,7 +3523,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs, second stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -2978,6 +3549,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register do
+                        @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from first stubbed entry with kwargs") }
@@ -2991,7 +3570,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs, second stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -3017,6 +3596,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register do
+                        @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from first stubbed entry with kwargs") }
@@ -3030,7 +3617,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs, second stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -3053,6 +3640,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").unregister
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register do
+                        @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").register(&test)
+                      end
                     end
                   end
 
@@ -3070,7 +3665,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs, second stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -3095,6 +3690,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register do
+                        @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with kwargs") }
@@ -3108,7 +3711,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with kwargs, second stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -3134,6 +3737,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from first stubbed entry with kwargs") }
@@ -3148,7 +3759,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block, second stub with default (any arguments)" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -3174,6 +3785,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register do
+                        @feature_class.stub_entry(:main).to_return_value("from second stubbed entry with default (any arguments)").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with default (any arguments)") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with default (any arguments)") }
@@ -3187,7 +3806,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block, second stub without arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -3213,6 +3832,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register do
+                        @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry without arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == :value_from_main_entry) }
@@ -3226,7 +3853,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block, second stub with any arguments" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -3252,6 +3879,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register do
+                        @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with any arguments") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with any arguments") }
@@ -3265,7 +3900,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block, second stub with args" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -3291,6 +3926,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register do
+                        @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stubbed entry with args") }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == :value_from_main_entry) }
@@ -3305,7 +3948,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block, second stub with kwargs" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -3331,6 +3974,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
                   end
 
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register do
+                        @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").register(&test)
+                      end
+                    end
+                  end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from second stubbed entry with kwargs") }
@@ -3345,7 +3996,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
 
                 context "when first stub with block, second stub with block" do
-                  include ConvenientService::E2E::StubVariants
+                  extend ConvenientService::E2E::Shared::StubVariants
 
                   variant "stub/unstub" do
                     setup do
@@ -3367,6 +4018,14 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     teardown do
                       @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").unregister
                       @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").unregister
+                    end
+                  end
+
+                  variant "register(&block)" do
+                    around do |test|
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").register(&test)
+                      end
                     end
                   end
 
@@ -3439,7 +4098,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 @other_block = proc { @bar }
               end
 
-              include ConvenientService::E2E::StubVariants
+              extend ConvenientService::E2E::Shared::StubVariants
 
               variant "stub/unstub" do
                 setup do
@@ -3473,6 +4132,18 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 end
               end
 
+              variant "register(&block)" do
+                around do |test|
+                  @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stub without arguments").register do
+                    @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stub with args").register do
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from third stub with kwargs").register do
+                        @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from fourth stub with block").register(&test)
+                      end
+                    end
+                  end
+                end
+              end
+
               should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == "from first stub without arguments") }
               should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == "from second stub with args") }
               should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == "from third stub with kwargs") }
@@ -3484,4 +4155,3 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass

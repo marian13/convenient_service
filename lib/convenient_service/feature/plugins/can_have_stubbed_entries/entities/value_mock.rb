@@ -48,15 +48,13 @@ module ConvenientService
             def register(&block)
               Commands::SetFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments, value: value]
 
-              if block
-                begin
-                  yield
-                ensure
-                  Commands::DeleteFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments]
-                end
-              end
+              return self unless block
 
-              self
+              begin
+                yield
+              ensure
+                Commands::DeleteFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments]
+              end
             end
 
             ##

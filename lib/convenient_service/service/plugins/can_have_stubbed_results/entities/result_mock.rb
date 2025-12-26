@@ -105,15 +105,13 @@ module ConvenientService
             def register(&block)
               Commands::SetServiceStubbedResult[service: service_class, arguments: arguments, result: result]
 
-              if block
-                begin
-                  yield
-                ensure
-                  Commands::DeleteServiceStubbedResult[service: service_class, arguments: arguments]
-                end
-              end
+              return self unless block
 
-              self
+              begin
+                yield
+              ensure
+                Commands::DeleteServiceStubbedResult[service: service_class, arguments: arguments]
+              end
             end
 
             ##
