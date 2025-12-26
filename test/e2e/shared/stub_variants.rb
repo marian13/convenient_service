@@ -91,28 +91,29 @@ module ConvenientService
         end
 
         ##
-        # @param name [String]
+        # @param args [Array<Object>]
+        # @param kwargs [Hash{Symbol => Object}]
         # @param block [Proc]
         # @return [void]
         #
-        def should(name, &block)
-          ##
-          # TODO: Continue.
-          #
-          callback = around
+        # @internal
+        #   NOTE: `around_callback = around` is required for closure, otherwise `decorated_block` has no access to `around_callback`.
+        #
+        def should(*args, **kwargs, &block)
+          around_callback = around
 
           decorated_block =
-            if callback
+            if around_callback
               proc do |*args|
                 test = proc { instance_exec(*args, &block) }
 
-                instance_exec(test, &callback)
+                instance_exec(test, &around_callback)
               end
             else
               block
             end
 
-          super(name, &decorated_block)
+          super(*args, **kwargs, &decorated_block)
         end
       end
     end

@@ -190,7 +190,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
       specify do
         expect { helper.to_return_value(value) }
           .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock, :new)
-          .with_arguments(value: value, feature_class: feature_class, entry_name: entry_name, arguments: arguments)
+          .with_arguments(value: value, feature_class: feature_class, entry_name: entry_name, arguments: nil)
           .and_return_its_value
       end
 
@@ -198,6 +198,39 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
         helper.to_return_value(value)
 
         expect(helper).not_to eq(described_class.new(feature_class: feature_class, entry_name: entry_name))
+      end
+
+      context "when used with `with_any_arguments`" do
+        let(:arguments) { nil }
+
+        specify do
+          expect { helper.with_any_arguments.to_return_value(value) }
+            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock, :new)
+            .with_arguments(feature_class: feature_class, entry_name: entry_name, arguments: arguments, value: value)
+            .and_return_its_value
+        end
+      end
+
+      context "when used with `with_arguments`" do
+        let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
+
+        specify do
+          expect { helper.with_arguments(*args, **kwargs, &block).to_return_value(value) }
+            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock, :new)
+            .with_arguments(feature_class: feature_class, entry_name: entry_name, arguments: arguments, value: value)
+            .and_return_its_value
+        end
+      end
+
+      context "when used with `without_arguments`" do
+        let(:arguments) { ConvenientService::Support::Arguments.null_arguments }
+
+        specify do
+          expect { helper.without_arguments.to_return_value(value) }
+            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock, :new)
+            .with_arguments(feature_class: feature_class, entry_name: entry_name, arguments: arguments, value: value)
+            .and_return_its_value
+        end
       end
     end
 

@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
       specify do
         expect { command.call(feature: feature) }
           .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::FetchAllFeaturesStubbedEntriesCache, :call)
-          .without_arguments
+          .with_arguments(feature: feature)
       end
 
       specify do

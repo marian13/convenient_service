@@ -191,7 +191,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
       specify do
         expect { helper.to_return_result_mock }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultUnmock, :new)
-          .with_arguments(service_class: service_class, arguments: arguments)
+          .with_arguments(service_class: service_class, arguments: nil)
           .and_return_its_value
       end
 
@@ -199,6 +199,39 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
         helper.to_return_result_mock
 
         expect(helper).not_to eq(described_class.new(service_class: service_class))
+      end
+
+      context "when used with `with_any_arguments`" do
+        let(:arguments) { nil }
+
+        specify do
+          expect { helper.with_any_arguments.to_return_result_mock }
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultUnmock, :new)
+            .with_arguments(service_class: service_class, arguments: arguments)
+            .and_return_its_value
+        end
+      end
+
+      context "when used with `with_arguments`" do
+        let(:arguments) { ConvenientService::Support::Arguments.new(*args, **kwargs, &block) }
+
+        specify do
+          expect { helper.with_arguments(*args, **kwargs, &block).to_return_result_mock }
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultUnmock, :new)
+            .with_arguments(service_class: service_class, arguments: arguments)
+            .and_return_its_value
+        end
+      end
+
+      context "when used with `without_arguments`" do
+        let(:arguments) { ConvenientService::Support::Arguments.null_arguments }
+
+        specify do
+          expect { helper.without_arguments.to_return_result_mock }
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultUnmock, :new)
+            .with_arguments(service_class: service_class, arguments: arguments)
+            .and_return_its_value
+        end
       end
     end
 

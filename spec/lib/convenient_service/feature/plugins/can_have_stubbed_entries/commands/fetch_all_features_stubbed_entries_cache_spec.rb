@@ -18,7 +18,7 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Comma
 
   example_group "class methods" do
     describe ".call" do
-      let(:command) { described_class.new(feature_class: feature_class) }
+      let(:command) { described_class.new(feature: feature) }
 
       let(:feature) do
         Class.new do
