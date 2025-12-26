@@ -17,8 +17,8 @@ module ConvenientService
 
           ::Enumerator.new do |collection|
             [
-              # "stub/unstub",
-              # "register/unregister",
+              "stub/unstub",
+              "register/unregister",
               "register(&block)"
             ].each do |variant_name|
               ::Thread.current.instance_variable_set(:@convenient_service_stub_variant_name, variant_name)
