@@ -16,6 +16,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
   include ConvenientService::RSpec::Matchers::DelegateTo
   include ConvenientService::RSpec::Matchers::Results
 
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   let(:result_mock) { described_class.new(status: status, service_class: service_class, arguments: arguments, chain: chain) }
 
   let(:status) { :success }
@@ -72,11 +74,46 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
     end
 
     describe "#register" do
-      specify do
-        expect { result_mock.register }
-          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
-            .with_arguments(service: service_class, arguments: arguments, result: result)
-            .and_return { result_mock }
+      context "when `block` is NOT passed" do
+        specify do
+          expect { result_mock.register }
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
+              .with_arguments(service: service_class, arguments: arguments, result: result)
+              .and_return { result_mock }
+        end
+
+        specify do
+          expect { result_mock.register }
+            .not_to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::DeleteServiceStubbedResult, :call)
+            .with_any_arguments
+        end
+      end
+
+      context "when `block` is passed" do
+        let(:block) { proc { :foo } }
+
+        specify do
+          expect { result_mock.register(&block) }
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult, :call)
+              .with_arguments(service: service_class, arguments: arguments, result: result)
+              .and_return { block.call }
+        end
+
+        specify do
+          expect { result_mock.register(&block) }
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::DeleteServiceStubbedResult, :call)
+            .with_arguments(service: service_class, arguments: arguments)
+        end
+
+        context "when `block` raises exception" do
+          let(:block) { proc { 16 / 0 } }
+
+          specify do
+            expect { ignoring_exception(ZeroDivisionError) { result_mock.register(&block) } }
+              .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::DeleteServiceStubbedResult, :call)
+              .with_arguments(service: service_class, arguments: arguments)
+          end
+        end
       end
     end
 
