@@ -614,6 +614,8 @@
       <pre class="lines">
 
 
+137
+138
 139
 140
 141
@@ -621,12 +623,10 @@
 143
 144
 145
-146
-147
-148</pre>
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/entities/result_mock.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/entities/result_mock.rb', line 137</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -1091,9 +1091,7 @@
 112
 113
 114
-115
-116
-117</pre>
+115</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/entities/result_mock.rb', line 105</span>
@@ -1101,15 +1099,13 @@
 <span class='kw'>def</span> <span class='id identifier rubyid_register'>register</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/SetServiceStubbedResult.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::SetServiceStubbedResult (class)">SetServiceStubbedResult</a></span></span><span class='lbracket'>[</span><span class='label'>service:</span> <span class='id identifier rubyid_service_class'>service_class</span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='comma'>,</span> <span class='label'>result:</span> <span class='id identifier rubyid_result'>result</span><span class='rbracket'>]</span>
 
-  <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span>
-    <span class='kw'>begin</span>
-      <span class='kw'>yield</span>
-    <span class='kw'>ensure</span>
-      <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/DeleteServiceStubbedResult.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::DeleteServiceStubbedResult (class)">DeleteServiceStubbedResult</a></span></span><span class='lbracket'>[</span><span class='label'>service:</span> <span class='id identifier rubyid_service_class'>service_class</span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='rbracket'>]</span>
-    <span class='kw'>end</span>
-  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='kw'>self</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block'>block</span>
 
-  <span class='kw'>self</span>
+  <span class='kw'>begin</span>
+    <span class='kw'>yield</span>
+  <span class='kw'>ensure</span>
+    <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/DeleteServiceStubbedResult.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::DeleteServiceStubbedResult (class)">DeleteServiceStubbedResult</a></span></span><span class='lbracket'>[</span><span class='label'>service:</span> <span class='id identifier rubyid_service_class'>service_class</span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1172,12 +1168,12 @@
       <pre class="lines">
 
 
-131
-132
-133</pre>
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/entities/result_mock.rb', line 131</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/entities/result_mock.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
   <span class='id identifier rubyid_service_class'>service_class</span><span class='period'>.</span><span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_status'>status</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='label'>overrides:</span> <span class='lbrace'>{</span><span class='label'>kwargs:</span> <span class='lbrace'>{</span><span class='label'>stubbed_result:</span> <span class='kw'>true</span><span class='rbrace'>}</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -1243,14 +1239,14 @@
       <pre class="lines">
 
 
+120
+121
 122
 123
-124
-125
-126</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/entities/result_mock.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_stubbed_results/entities/result_mock.rb', line 120</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unregister'>unregister</span>
   <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/DeleteServiceStubbedResult.html" title="ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::DeleteServiceStubbedResult (class)">DeleteServiceStubbedResult</a></span></span><span class='lbracket'>[</span><span class='label'>service:</span> <span class='id identifier rubyid_service_class'>service_class</span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='rbracket'>]</span>
@@ -1537,7 +1533,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Dec 25 22:21:31 2025 by
+  Generated on Fri Dec 26 03:52:12 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>

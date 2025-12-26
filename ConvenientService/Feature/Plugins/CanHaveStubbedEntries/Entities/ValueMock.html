@@ -545,6 +545,8 @@
       <pre class="lines">
 
 
+73
+74
 75
 76
 77
@@ -552,12 +554,10 @@
 79
 80
 81
-82
-83
-84</pre>
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/entities/value_mock.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/entities/value_mock.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -755,9 +755,7 @@
 55
 56
 57
-58
-59
-60</pre>
+58</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/entities/value_mock.rb', line 48</span>
@@ -765,15 +763,13 @@
 <span class='kw'>def</span> <span class='id identifier rubyid_register'>register</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/SetFeatureStubbedEntry.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry (class)">SetFeatureStubbedEntry</a></span></span><span class='lbracket'>[</span><span class='label'>feature:</span> <span class='id identifier rubyid_feature_class'>feature_class</span><span class='comma'>,</span> <span class='label'>entry:</span> <span class='id identifier rubyid_entry_name'>entry_name</span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='comma'>,</span> <span class='label'>value:</span> <span class='id identifier rubyid_value'>value</span><span class='rbracket'>]</span>
 
-  <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span>
-    <span class='kw'>begin</span>
-      <span class='kw'>yield</span>
-    <span class='kw'>ensure</span>
-      <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/DeleteFeatureStubbedEntry.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::DeleteFeatureStubbedEntry (class)">DeleteFeatureStubbedEntry</a></span></span><span class='lbracket'>[</span><span class='label'>feature:</span> <span class='id identifier rubyid_feature_class'>feature_class</span><span class='comma'>,</span> <span class='label'>entry:</span> <span class='id identifier rubyid_entry_name'>entry_name</span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='rbracket'>]</span>
-    <span class='kw'>end</span>
-  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='kw'>self</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block'>block</span>
 
-  <span class='kw'>self</span>
+  <span class='kw'>begin</span>
+    <span class='kw'>yield</span>
+  <span class='kw'>ensure</span>
+    <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/DeleteFeatureStubbedEntry.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::DeleteFeatureStubbedEntry (class)">DeleteFeatureStubbedEntry</a></span></span><span class='lbracket'>[</span><span class='label'>feature:</span> <span class='id identifier rubyid_feature_class'>feature_class</span><span class='comma'>,</span> <span class='label'>entry:</span> <span class='id identifier rubyid_entry_name'>entry_name</span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -832,14 +828,14 @@
       <pre class="lines">
 
 
+63
+64
 65
 66
-67
-68
-69</pre>
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/entities/value_mock.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/entities/value_mock.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unregister'>unregister</span>
   <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/DeleteFeatureStubbedEntry.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::DeleteFeatureStubbedEntry (class)">DeleteFeatureStubbedEntry</a></span></span><span class='lbracket'>[</span><span class='label'>feature:</span> <span class='id identifier rubyid_feature_class'>feature_class</span><span class='comma'>,</span> <span class='label'>entry:</span> <span class='id identifier rubyid_entry_name'>entry_name</span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='rbracket'>]</span>
@@ -856,7 +852,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Dec 25 22:21:31 2025 by
+  Generated on Fri Dec 26 03:52:12 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
