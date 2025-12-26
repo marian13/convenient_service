@@ -103,7 +103,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :steps_result, # public
           :steps_result_without_middlewares, # private
           :success, # public
-          :success_without_middlewares # private
+          :success_without_middlewares, # private
+          :to_s # public
         ])
       end
 
@@ -208,7 +209,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :to_args, # public
           :to_arguments, # public
           :to_block, # public
-          :to_kwargs # public
+          :to_kwargs, # public
+          :to_s # public
         ])
       end
 

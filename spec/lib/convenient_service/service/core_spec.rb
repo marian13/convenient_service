@@ -9,7 +9,10 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe ConvenientService::Service::Core, type: :standard do
+  include ConvenientService::RSpec::Matchers::DelegateTo
+
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -31,4 +34,47 @@ RSpec.describe ConvenientService::Service::Core, type: :standard do
       it { is_expected.to include_module(ConvenientService::Core) }
     end
   end
+
+  example_group "instance methods" do
+    describe "#to_s" do
+      let(:service_class) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          def result
+            success
+          end
+        end
+      end
+
+      let(:service_instance) { service_class.new }
+
+      context "when `format` is NOT passed" do
+        it "defaults to `:inspect`" do
+          expect { service_instance.to_s }
+            .to delegate_to(service_instance, :inspect)
+            .without_arguments
+            .and_return_its_value
+        end
+      end
+
+      context "when `format` is passed" do
+        context "when `format` is NOT `:inspect`" do
+          it "returns string in `Object#to_s` representation" do
+            expect(service_instance.to_s(format: :foo)).to match(/#<#<Class:.+?>:.+?>/)
+          end
+        end
+
+        context "when `format` is `:inspect`" do
+          it "returns string in `#inspect` representation" do
+            expect { service_instance.to_s(format: :inspect) }
+              .to delegate_to(service_instance, :inspect)
+              .without_arguments
+              .and_return_its_value
+          end
+        end
+      end
+    end
+  end
 end
+# rubocop:enable RSpec/NestedGroups

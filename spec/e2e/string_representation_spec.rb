@@ -67,7 +67,7 @@ RSpec.describe "String representation", type: [:standard, :e2e] do
   end
 
   specify do
-    expect(service_instance.to_s).to match(/#<#<Class:.+?>:.+?>/) # "#<#<Class:0x00007f01b3802da0>:0x00007f01b2a1a7b0>"
+    expect(service_instance.to_s).to eq("<Service>")
   end
 
   specify do
