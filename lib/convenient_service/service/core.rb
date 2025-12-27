@@ -17,6 +17,7 @@ module ConvenientService
       instance_methods do
         ##
         # @param format [Symbol]
+        # @return [String]
         #
         def to_s(format: :inspect)
           (format == :inspect) ? inspect : super()

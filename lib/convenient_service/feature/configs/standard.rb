@@ -17,6 +17,9 @@ module ConvenientService
         available_options do
           [
             :essential,
+            :inspect,
+            :amazing_print_inspect,
+            :awesome_print_inspect,
             :test,
             :rspec
           ]
@@ -25,6 +28,7 @@ module ConvenientService
         default_options do
           [
             :essential,
+            :inspect,
             test: Dependencies.rspec.loaded? || Dependencies.minitest.loaded?,
             rspec: Dependencies.rspec.loaded?
           ]
@@ -38,6 +42,9 @@ module ConvenientService
             use ConvenientService::Plugins::Common::HasInstanceProxy::Concern if options.enabled?(:essential)
             use ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Concern if options.enabled?(:test) || options.enabled?(:rspec)
             use ConvenientService::Plugins::Feature::CanHaveRSpecStubbedEntries::Concern if options.enabled?(:rspec)
+            use ConvenientService::Plugins::Feature::HasInspect::Concern if options.enabled?(:inspect)
+            use ConvenientService::Plugins::Feature::HasAwesomePrintInspect::Concern if options.enabled?(:awesome_print_inspect)
+            use ConvenientService::Plugins::Feature::HasAmazingPrintInspect::Concern if options.enabled?(:amazing_print_inspect)
           end
 
           middlewares :new, scope: :class do

@@ -13,6 +13,16 @@ module ConvenientService
       included do
         include ::ConvenientService::Core
       end
+
+      instance_methods do
+        ##
+        # @param format [Symbol]
+        # @return [String]
+        #
+        def to_s(format: :inspect)
+          (format == :inspect) ? inspect : super()
+        end
+      end
     end
   end
 end

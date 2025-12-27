@@ -7,5 +7,6 @@
 
 require_relative "plugins/can_have_entries"
 require_relative "plugins/can_have_stubbed_entries"
+require_relative "plugins/has_inspect"
 
 require_relative "plugins/aliases"

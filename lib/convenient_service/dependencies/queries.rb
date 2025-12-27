@@ -176,6 +176,7 @@ module ConvenientService
         require "convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/plugins/has_amazing_print_inspect"
         require "convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/plugins/has_amazing_print_inspect"
         require "convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_amazing_print_inspect"
+        require "convenient_service/feature/plugins/has_amazing_print_inspect"
       end
 
       ##
@@ -282,6 +283,7 @@ module ConvenientService
         require "convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/status/plugins/has_awesome_print_inspect"
         require "convenient_service/service/plugins/has_j_send_result/entities/result/plugins/has_j_send_status_and_attributes/entities/code/plugins/has_awesome_print_inspect"
         require "convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_awesome_print_inspect"
+        require "convenient_service/feature/plugins/has_awesome_print_inspect"
       end
 
       ##

@@ -71,7 +71,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Middleware,
       end
 
       it "returns instance proxy" do
-        expect(method_value).to be_instance_of(klass.instance_proxy_class)
+        expect(Kernel.instance_method(:instance_of?).bind_call(method_value, klass.instance_proxy_class)).to be(true)
       end
 
       example_group "instance proxy" do

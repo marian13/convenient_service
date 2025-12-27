@@ -240,6 +240,7 @@ tasks:
     cmds:
       - rm Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}} 2> /dev/null || true
       - rm Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}}.lock 2> /dev/null || true
+      - rm gemfiles/{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}}* 2> /dev/null || true
       - cp Gemfile Gemfile.{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}}
       - docker build . -f docker/{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}}/Dockerfile -t convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}}
       ##

@@ -25,6 +25,14 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Entities::I
     end
   end
 
+  example_group "inheritance" do
+    include ConvenientService::RSpec::Matchers::BeDirectDescendantOf
+
+    subject { described_class }
+
+    it { is_expected.to be_direct_descendant_of(BasicObject) }
+  end
+
   example_group "instance methods" do
     describe "#instance_proxy_target" do
       it "returns `target` passed to constructor" do
@@ -32,7 +40,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInstanceProxy::Entities::I
       end
 
       it "uses `@__convenient_service_instance_proxy_target__` as instance variable" do
-        expect(instance_proxy.instance_proxy_target).to eq(instance_proxy.instance_variable_get(:@__convenient_service_instance_proxy_target__))
+        expect(instance_proxy.instance_proxy_target).to eq(Kernel.instance_method(:instance_variable_get).bind_call(instance_proxy, :@__convenient_service_instance_proxy_target__))
       end
     end
 

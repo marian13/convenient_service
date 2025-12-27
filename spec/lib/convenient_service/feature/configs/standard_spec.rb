@@ -9,7 +9,7 @@ require "spec_helper"
 
 require "convenient_service"
 
-# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/MultipleDescribes
 RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
@@ -35,10 +35,11 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
         example_group "concerns" do
           let(:concerns) do
             [
-              ConvenientService::Feature::Plugins::CanHaveEntries::Concern,
-              ConvenientService::Common::Plugins::HasInstanceProxy::Concern,
-              ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Concern,
-              ConvenientService::Feature::Plugins::CanHaveRSpecStubbedEntries::Concern
+              ConvenientService::Plugins::Feature::CanHaveEntries::Concern,
+              ConvenientService::Plugins::Common::HasInstanceProxy::Concern,
+              ConvenientService::Plugins::Feature::CanHaveStubbedEntries::Concern,
+              ConvenientService::Plugins::Feature::CanHaveRSpecStubbedEntries::Concern,
+              ConvenientService::Plugins::Feature::HasInspect::Concern
             ]
           end
 
@@ -50,7 +51,7 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
         example_group ".new middlewares" do
           let(:class_new_middlewares) do
             [
-              ConvenientService::Common::Plugins::HasInstanceProxy::Middleware
+              ConvenientService::Plugins::Common::HasInstanceProxy::Middleware
             ]
           end
 
@@ -108,7 +109,18 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
 
   example_group "class methods" do
     describe ".available_options" do
-      let(:available_options) { ConvenientService::Config::Commands::NormalizeOptions.call(options: [:essential, :test, :rspec]) }
+      let(:available_options) do
+        ConvenientService::Config::Commands::NormalizeOptions.call(
+          options: [
+            :essential,
+            :inspect,
+            :amazing_print_inspect,
+            :awesome_print_inspect,
+            :test,
+            :rspec
+          ]
+        )
+      end
 
       it "returns available options with `:rspec`" do
         expect(described_class.available_options).to eq(available_options)
@@ -131,7 +143,16 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
       ##
 
       context "when `RSpec` is loaded" do
-        let(:default_options) { ConvenientService::Config::Commands::NormalizeOptions.call(options: [:essential, :test, :rspec]) }
+        let(:default_options) do
+          ConvenientService::Config::Commands::NormalizeOptions.call(
+            options: [
+              :essential,
+              :inspect,
+              :test,
+              :rspec
+            ]
+          )
+        end
 
         it "returns default options with `:rspec`" do
           expect(described_class.default_options).to eq(default_options)
@@ -225,8 +246,63 @@ RSpec.describe ConvenientService::Feature::Configs::Standard, type: :standard do
     let(:available_options) { described_class.available_options }
     let(:default_options) { described_class.default_options }
 
-    specify { expect(available_options.dup.subtract(default_options).to_a.map(&:name)).to eq([]) }
+    let(:diff) do
+      [
+        :amazing_print_inspect,
+        :awesome_print_inspect
+      ]
+    end
+
+    specify { expect(available_options.dup.subtract(default_options).to_a.map(&:name)).to eq(diff) }
     specify { expect(default_options.dup.subtract(available_options).to_a.map(&:name)).to eq([]) }
   end
 end
-# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
+
+RSpec.describe ConvenientService::Feature::Configs::Standard, type: :amazing_print do
+  example_group "modules" do
+    context "when included" do
+      context "when `:amazing_print_inspect` option is passed" do
+        let(:feature_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(described_class) do |mod|
+              include mod.with(:amazing_print_inspect)
+            end
+          end
+        end
+
+        example_group "feature" do
+          example_group "concerns" do
+            it "adds `ConvenientService::Plugins::Feature::HasAmazingPrintInspect::Concern` after `ConvenientService::Plugins::Feature::HasInspect::Concern` to feature concerns" do
+              expect(feature_class.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Feature::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Feature::HasAmazingPrintInspect::Concern }).not_to be_nil
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+RSpec.describe ConvenientService::Feature::Configs::Standard, type: :awesome_print do
+  example_group "modules" do
+    context "when included" do
+      context "when `:awesome_print_inspect` option is passed" do
+        let(:feature_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(described_class) do |mod|
+              include mod.with(:awesome_print_inspect)
+            end
+          end
+        end
+
+        example_group "feature" do
+          example_group "concerns" do
+            it "adds `ConvenientService::Plugins::Feature::HasAwesomePrintInspect::Concern` after `ConvenientService::Plugins::Feature::HasInspect::Concern` to feature concerns" do
+              expect(feature_class.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Feature::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Feature::HasAwesomePrintInspect::Concern }).not_to be_nil
+            end
+          end
+        end
+      end
+    end
+  end
+end
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/MultipleDescribes

@@ -58,6 +58,24 @@ RSpec.describe "String representation", type: [:standard, :e2e] do
   let(:step_class) { step_instance.class }
   let(:step_instance) { service_instance.steps.first }
 
+  let(:feature_class) do
+    Class.new do
+      include ConvenientService::Feature::Standard::Config
+
+      entry :main
+
+      def main(*args, **kwargs, &block)
+        :value_from_main_entry
+      end
+
+      def self.name
+        "Feature"
+      end
+    end
+  end
+
+  let(:feature_instance) { feature_class.new }
+
   specify do
     expect(service_class.to_s).to match(/#<Class:.+?>/) # "#<Class:0x00007f01b3802da0>"
   end
@@ -239,6 +257,22 @@ RSpec.describe "String representation", type: [:standard, :e2e] do
 
   specify do
     expect(step_instance.inspect).to eq("<Service::Step service: FirstStep>")
+  end
+
+  specify do
+    expect(feature_class.to_s).to match(/#<Class:.+?>/) # "#<Class:0x00007f01b3802da0>"
+  end
+
+  specify do
+    expect(feature_class.inspect).to match(/#<Class:.+?>/) # "#<Class:0x00007f01b3802da0>"
+  end
+
+  specify do
+    expect(feature_instance.to_s).to eq("<Feature>")
+  end
+
+  specify do
+    expect(feature_instance.inspect).to eq("<Feature>")
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers, RSpec/DescribeClass

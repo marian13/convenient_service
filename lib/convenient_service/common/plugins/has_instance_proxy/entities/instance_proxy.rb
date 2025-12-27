@@ -10,7 +10,7 @@ module ConvenientService
     module Plugins
       module HasInstanceProxy
         module Entities
-          class InstanceProxy
+          class InstanceProxy < ::BasicObject
             ##
             # @api private
             #
@@ -33,13 +33,13 @@ module ConvenientService
             ##
             # @return [Class]
             #
-            alias_method :instance_proxy_class, :class
-
-            ##
-            # @return [Class]
+            # @internal
+            #   NOTE: `alias_method :instance_proxy_class, :class` does NOT work, since `BasicObject` does NOT have `class` method. It is defined in `Kernel`.
+            #   - https://ruby-doc.org/core-3.0.2/Kernel.html#method-i-class
+            #   - https://ruby-doc.org/core-2.7.0/UnboundMethod.html#method-i-bind_call
             #
-            def class
-              instance_proxy_target.class
+            def instance_proxy_class
+              ::Kernel.instance_method(:class).bind_call(self)
             end
 
             ##
@@ -49,7 +49,7 @@ module ConvenientService
             # @return [Boolean, nil]
             #
             def ==(other)
-              return unless other.instance_of?(instance_proxy_class)
+              return unless ::Kernel.instance_method(:instance_of?).bind_call(other, instance_proxy_class)
 
               return false if instance_proxy_target != other.instance_proxy_target
 

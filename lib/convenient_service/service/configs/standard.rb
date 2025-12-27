@@ -39,6 +39,8 @@ module ConvenientService
             :active_model_validations,
             :dry_validation,
             :memo_wise,
+            :has_amazing_print_inspect,
+            :has_awesome_print_inspect,
             :not_passed_arguments,
             :finite_loop,
             :test,
