@@ -69,15 +69,7 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName">Object</span>
-      
-        <ul class="fullTree">
-          <li>Object</li>
-          
-            <li class="next">ConvenientService::Common::Plugins::HasInstanceProxy::Entities::InstanceProxy</li>
-          
-        </ul>
-        <a href="#" class="inheritanceTree">show all</a>
+      <span class="inheritName">BasicObject</span>
       
     </dd>
   </dl>
@@ -157,28 +149,6 @@
   
   
   
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#class-instance_method" title="#class (instance method)">#<strong>class</strong>  &#x21d2; Class </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'></div></span>
@@ -512,82 +482,11 @@
       <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/has_instance_proxy/entities/instance_proxy.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='id identifier rubyid_instance_proxy_class'>instance_proxy_class</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='op'>::</span><span class='const'>Kernel</span><span class='period'>.</span><span class='id identifier rubyid_instance_method'>instance_method</span><span class='lparen'>(</span><span class='symbol'>:instance_of?</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_bind_call'>bind_call</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='comma'>,</span> <span class='id identifier rubyid_instance_proxy_class'>instance_proxy_class</span><span class='rparen'>)</span>
 
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_instance_proxy_target'>instance_proxy_target</span> <span class='op'>!=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_proxy_target'>instance_proxy_target</span>
 
   <span class='kw'>true</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="class-instance_method">
-  
-    #<strong>class</strong>  &#x21d2; <tt>Class</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p class="note private">
-  <strong>This method is part of a private API.</strong>
-  You should avoid using this method if possible, as it may be removed or be changed in the future.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Class</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>1.0.0</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-41
-42
-43</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/has_instance_proxy/entities/instance_proxy.rb', line 41</span>
-
-<span class='kw'>def</span> <span class='kw'>class</span>
-  <span class='id identifier rubyid_instance_proxy_target'>instance_proxy_target</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -650,12 +549,16 @@
       <pre class="lines">
 
 
-36</pre>
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/has_instance_proxy/entities/instance_proxy.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/has_instance_proxy/entities/instance_proxy.rb', line 41</span>
 
-<span class='id identifier rubyid_alias_method'>alias_method</span> <span class='symbol'>:instance_proxy_class</span><span class='comma'>,</span> <span class='symbol'>:class</span></pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_instance_proxy_class'>instance_proxy_class</span>
+  <span class='op'>::</span><span class='const'>Kernel</span><span class='period'>.</span><span class='id identifier rubyid_instance_method'>instance_method</span><span class='lparen'>(</span><span class='symbol'>:class</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_bind_call'>bind_call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -738,7 +641,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Dec 26 22:43:17 2025 by
+  Generated on Sat Dec 27 02:11:40 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
