@@ -16,8 +16,39 @@ module ConvenientService
 
       instance_methods do
         ##
+        # Returns string representation of feature.
+        #
+        # @api public
+        # @since 1.0.0
+        #
         # @param format [Symbol]
         # @return [String]
+        #
+        # @note Intended to be used for debugging purposes.
+        #
+        # @example Common usage.
+        #   class Feature
+        #     include ConvenientFeature::Feature::Standard::Config
+        #
+        #     entry :main
+        #
+        #     def main
+        #       :main_entry_value
+        #     end
+        #   end
+        #
+        #   puts Feature.new
+        #   # <Feature>
+        #   # => nil
+        #
+        #   Feature.new.to_s
+        #   # => "<Feature>"
+        #
+        #   Feature.new.to_s(format: :inspect)
+        #   # => "<Feature>"
+        #
+        #   Feature.new.to_s(format: :original)
+        #   # => "#<Feature:0x00005639cd363000>"
         #
         def to_s(format: :inspect)
           (format == :inspect) ? inspect : super()

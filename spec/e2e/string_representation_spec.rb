@@ -110,42 +110,24 @@ RSpec.describe "String representation", type: [:standard, :e2e] do
     end
   end
 
-  if !ConvenientService::Dependencies.ruby.truffleruby? && ConvenientService::Dependencies.ruby.version >= 3.0
-    specify do
-      expect(success.to_s).to match(/#<#<Class:.+?>::Result:.+?>/) # "#<#<Class:0x00007f01b3802da0>::Result:0x00007f01b28f9778>"
-    end
-  else
-    specify do
-      expect(success.to_s).to match(/#<#<Class:.+?>:.+?>/) # "#<#<Class:0x00005589aae9cdf0>:0x00005589aaf1c348>"
-    end
+  specify do
+    expect(success.to_s).to eq("<Service::Result status: :success, data_keys: [:foo, :baz]>")
   end
 
   specify do
     expect(success.inspect).to eq("<Service::Result status: :success, data_keys: [:foo, :baz]>")
   end
 
-  if !ConvenientService::Dependencies.ruby.truffleruby? && ConvenientService::Dependencies.ruby.version >= 3.0
-    specify do
-      expect(failure.to_s).to match(/#<#<Class:.+?>::Result:.+?>/) # "#<#<Class:0x00007f01b3802da0>::Result:0x00007f01b28f9778>"
-    end
-  else
-    specify do
-      expect(failure.to_s).to match(/#<#<Class:.+?>:.+?>/) # "#<#<Class:0x00005589aae9cdf0>:0x00005589aaf1c348>"
-    end
+  specify do
+    expect(failure.to_s).to eq("<Service::Result status: :failure, message: \"foo\">")
   end
 
   specify do
     expect(failure.inspect).to eq("<Service::Result status: :failure, message: \"foo\">")
   end
 
-  if !ConvenientService::Dependencies.ruby.truffleruby? && ConvenientService::Dependencies.ruby.version >= 3.0
-    specify do
-      expect(error.to_s).to match(/#<#<Class:.+?>::Result:.+?>/) # "#<#<Class:0x00007f01b3802da0>::Result:0x00007f01b28f9778>"
-    end
-  else
-    specify do
-      expect(error.to_s).to match(/#<#<Class:.+?>:.+?>/) # "#<#<Class:0x00005589aae9cdf0>:0x00005589aaf1c348>"
-    end
+  specify do
+    expect(error.to_s).to eq("<Service::Result status: :error, message: \"foo\">")
   end
 
   specify do
