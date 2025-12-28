@@ -166,7 +166,7 @@ gem "faker"
 ##
 # Used internally by `rerun`.
 #
-gem "ffi", "~> 1.16.0"
+gem "ffi", "~> 1.17.2"
 
 ##
 # Used to release new Convenient Service versions.
