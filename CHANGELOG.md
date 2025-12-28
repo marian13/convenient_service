@@ -5,6 +5,27 @@
 
 # Changelog
 
+## [0.21.0](https://github.com/marian13/convenient_service/compare/v0.20.0...v0.21.0) (2025-12-28)
+
+
+### Features
+
+* **call:** include tabbed original error message ([bad813a](https://github.com/marian13/convenient_service/commit/bad813aa26487d52e9972b23d41e5ca61f1d181e))
+* **config:** introduce Config.available_options ([e0857e5](https://github.com/marian13/convenient_service/commit/e0857e5c2caa176fc4f64e998f8e31216a1dd210))
+* **feature:** introduce Feature#to_s and Feature#inspect ([fa39639](https://github.com/marian13/convenient_service/commit/fa39639fe53aa0fcdd09c5f0e8edd6db8fe50df4))
+* **forbids_convenient_service_entities_as_constructor_arguments:** add specific exception feature ([06f2e8f](https://github.com/marian13/convenient_service/commit/06f2e8fc743476ac51502f785a15ccb85332db46))
+* **forbids_convenient_service_entities_as_constructor_arguments:** add specific exceptions for status, message, code, custom entity ([521f05d](https://github.com/marian13/convenient_service/commit/521f05db0cf78bd1579a7ae499725ca2c4d64a64))
+* **result:** introduce Result#to_s ([e95b72b](https://github.com/marian13/convenient_service/commit/e95b72be18e9d5d7d5126cf5c582a9df7dd5bb55))
+* **service:** introduce Service#to_s ([ccd55ef](https://github.com/marian13/convenient_service/commit/ccd55efa6ee695a44ffaa8c01574ba143511fa28))
+* **stub_entry:** introduce #register ([1cbe4ea](https://github.com/marian13/convenient_service/commit/1cbe4ea974bec9a0beb5e221a519533fcc577ddc))
+* **stub_service:** introduce #register ([9427fe3](https://github.com/marian13/convenient_service/commit/9427fe3ed3a208f7e29d850ef92ef8be830198d9))
+* **stub_service:** introduce #unregister ([042a335](https://github.com/marian13/convenient_service/commit/042a33574882b79975b2e84139032befdf3eab50))
+* **stubs:** add to_return_result, to_return_value and similar ([79a4cab](https://github.com/marian13/convenient_service/commit/79a4cab394679763e57b9ae18e4b931ec356786e))
+* **stubs:** add unstub_service and unstub_entry ([a55dcbe](https://github.com/marian13/convenient_service/commit/a55dcbe08483f4b3bfdfbdc5b6ce8e379ea5142c))
+* **test:** load CanHaveStubbedResults by default in Minitest ([a153e62](https://github.com/marian13/convenient_service/commit/a153e625f32fe4a30c7829a81fea634c5fa7e9eb))
+* **utils:** add Enumerable.find_last ([29ff27e](https://github.com/marian13/convenient_service/commit/29ff27ecbf4f36b742d1e3008bbd1bf101959789))
+* **utils:** introdeuce Utils::String#tab ([814c544](https://github.com/marian13/convenient_service/commit/814c5445b6ecd7074fc291d47dc1f5e60b10da6e))
+
 ## 0.20.0 (2025-12-06)
 
 
