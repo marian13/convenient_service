@@ -277,7 +277,7 @@ gem "rouge", platform: :mri if RUBY_VERSION <= "4.0"
 # Used for testing Ruby code.
 # - https://rspec.info
 #
-gem "rspec", "~> 3.11.0"
+gem "rspec", "~> 3.13.2"
 
 ##
 # Used for performance testing with RSpec.
