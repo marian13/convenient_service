@@ -117,11 +117,21 @@ module ConvenientService
             ##
             # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
             #
+            alias_method :apply, :register
+
+            ##
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
+            #
             def unregister
               Commands::DeleteServiceStubbedResult[service: service_class, arguments: arguments]
 
               self
             end
+
+            ##
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultMock]
+            #
+            alias_method :revert, :unregister
 
             ##
             # @return [ConvenientService::Service]

@@ -10,17 +10,24 @@ module ConvenientService
     module Shared
       module StubVariants
         ##
+        # @return [Array<String>]
+        #
+        def available_variant_names
+          [
+            "stub/unstub",
+            "register/unregister",
+            "register(&block)"
+          ]
+        end
+
+        ##
         # @return [Enumerator]
         #
         def variants
           ::Thread.current.remove_instance_variable(:@convenient_service_stub_variant_name) if ::Thread.current.instance_variable_defined?(:@convenient_service_stub_variant_name)
 
           ::Enumerator.new do |collection|
-            [
-              "stub/unstub",
-              "register/unregister",
-              "register(&block)"
-            ].each do |variant_name|
+            available_variant_names.each do |variant_name|
               ::Thread.current.instance_variable_set(:@convenient_service_stub_variant_name, variant_name)
 
               collection << variant_name
@@ -42,7 +49,12 @@ module ConvenientService
         #     bb if variant "register(&block)"
         #
         def variant(name, &block)
-          if ::Thread.current.instance_variable_get(:@convenient_service_stub_variant_name) == name
+          current_name = ::Thread.current.instance_variable_get(:@convenient_service_stub_variant_name)
+
+          raise "No current variant name" unless current_name
+          raise "Invalid variant name" unless available_variant_names.include?(name)
+
+          if current_name == name
             block ? yield : true
           else
             false

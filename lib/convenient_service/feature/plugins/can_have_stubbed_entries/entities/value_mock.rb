@@ -60,11 +60,21 @@ module ConvenientService
             ##
             # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock]
             #
+            alias_method :apply, :register
+
+            ##
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock]
+            #
             def unregister
               Commands::DeleteFeatureStubbedEntry[feature: feature_class, entry: entry_name, arguments: arguments]
 
               self
             end
+
+            ##
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock]
+            #
+            alias_method :revert, :unregister
 
             ##
             # @param other [Object] Can be any type.

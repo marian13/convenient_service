@@ -43,6 +43,11 @@ module ConvenientService
             end
 
             ##
+            # @return [ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueUnmock]
+            #
+            alias_method :apply, :register
+
+            ##
             # @param other [Object] Can be any type.
             # @return [Boolean, nil]
             #

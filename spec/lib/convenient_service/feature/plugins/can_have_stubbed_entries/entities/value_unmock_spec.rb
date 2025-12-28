@@ -67,6 +67,15 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
       end
     end
 
+    describe "#apply" do
+      specify do
+        expect { value_unmock.apply }
+          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::DeleteFeatureStubbedEntry, :call)
+            .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments)
+            .and_return { value_unmock }
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         context "when `other` has different class" do

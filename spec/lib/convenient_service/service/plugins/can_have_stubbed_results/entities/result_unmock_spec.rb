@@ -71,6 +71,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveStubbedResults::Entit
       end
     end
 
+    describe "#apply" do
+      specify do
+        expect { result_unmock.apply }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveStubbedResults::Commands::DeleteServiceStubbedResult, :call)
+            .with_arguments(service: service_class, arguments: arguments)
+            .and_return { result_unmock }
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         context "when `other` has different class" do

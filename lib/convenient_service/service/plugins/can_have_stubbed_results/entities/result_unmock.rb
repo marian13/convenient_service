@@ -44,6 +44,11 @@ module ConvenientService
             end
 
             ##
+            # @return [ConvenientService::Service::Plugins::CanHaveStubbedResults::Entities::ResultUnmock]
+            #
+            alias_method :apply, :register
+
+            ##
             # @param other [Object] Can be any type.
             # @return [Boolean, nil]
             #

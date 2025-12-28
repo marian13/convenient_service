@@ -29,6 +29,10 @@ module ConvenientService
             ##
             # @return [Thread]
             #
+            # @internal
+            #   NOTE: Why not `Fiber.current`? Fibers created in one thread are concurrently executed in that one thread.
+            #   NOTE: Why not `Ractor.current`? Each ractor has its own thread.
+            #
             def stubbed_results_store
               ::Thread.current
             end

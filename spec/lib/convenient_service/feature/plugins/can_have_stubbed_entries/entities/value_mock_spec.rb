@@ -114,9 +114,62 @@ RSpec.describe ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entit
       end
     end
 
+    describe "#apply" do
+      context "when `block` is NOT passed" do
+        specify do
+          expect { value_mock.apply }
+            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
+              .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments, value: value)
+              .and_return { value_mock }
+        end
+
+        specify do
+          expect { value_mock.apply }
+            .not_to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::DeleteFeatureStubbedEntry, :call)
+            .with_any_arguments
+        end
+      end
+
+      context "when `block` is passed" do
+        let(:block) { proc { :foo } }
+
+        specify do
+          expect { value_mock.apply(&block) }
+            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::SetFeatureStubbedEntry, :call)
+              .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments, value: value)
+              .and_return { block.call }
+        end
+
+        specify do
+          expect { value_mock.apply(&block) }
+            .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::DeleteFeatureStubbedEntry, :call)
+            .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments)
+        end
+
+        context "when `block` raises exception" do
+          let(:block) { proc { 16 / 0 } }
+
+          specify do
+            expect { ignoring_exception(ZeroDivisionError) { value_mock.apply(&block) } }
+              .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::DeleteFeatureStubbedEntry, :call)
+              .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments)
+          end
+        end
+      end
+    end
+
     describe "#unregister" do
       specify do
         expect { value_mock.unregister }
+          .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::DeleteFeatureStubbedEntry, :call)
+            .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments)
+            .and_return { value_mock }
+      end
+    end
+
+    describe "#revert" do
+      specify do
+        expect { value_mock.revert }
           .to delegate_to(ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::DeleteFeatureStubbedEntry, :call)
             .with_arguments(feature: feature_class, entry: entry_name, arguments: arguments)
             .and_return { value_mock }
