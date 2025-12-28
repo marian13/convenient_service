@@ -245,6 +245,8 @@
     
 
     
+      (also: #apply)
+    
   </span>
   
   
@@ -266,6 +268,8 @@
       <a href="#unregister-instance_method" title="#unregister (instance method)">#<strong>unregister</strong>  &#x21d2; ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Entities::ValueMock </a>
     
 
+    
+      (also: #revert)
     
   </span>
   
@@ -545,19 +549,19 @@
       <pre class="lines">
 
 
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82</pre>
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/entities/value_mock.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/entities/value_mock.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span>
@@ -685,6 +689,10 @@
   
 
   
+    <span class="aliases">Also known as:
+    <span class="names"><span id='apply-instance_method'>apply</span></span>
+    </span>
+  
 
   
 </h3><div class="docstring">
@@ -783,6 +791,10 @@
   
 
   
+    <span class="aliases">Also known as:
+    <span class="names"><span id='revert-instance_method'>revert</span></span>
+    </span>
+  
 
   
 </h3><div class="docstring">
@@ -828,14 +840,14 @@
       <pre class="lines">
 
 
-63
-64
-65
-66
-67</pre>
+68
+69
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/entities/value_mock.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/feature/plugins/can_have_stubbed_entries/entities/value_mock.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unregister'>unregister</span>
   <span class='const'><span class='object_link'><a href="../Commands.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands (module)">Commands</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Commands/DeleteFeatureStubbedEntry.html" title="ConvenientService::Feature::Plugins::CanHaveStubbedEntries::Commands::DeleteFeatureStubbedEntry (class)">DeleteFeatureStubbedEntry</a></span></span><span class='lbracket'>[</span><span class='label'>feature:</span> <span class='id identifier rubyid_feature_class'>feature_class</span><span class='comma'>,</span> <span class='label'>entry:</span> <span class='id identifier rubyid_entry_name'>entry_name</span><span class='comma'>,</span> <span class='label'>arguments:</span> <span class='id identifier rubyid_arguments'>arguments</span><span class='rbracket'>]</span>
@@ -852,7 +864,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 27 17:16:42 2025 by
+  Generated on Sun Dec 28 04:11:40 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.8).
 </div>
