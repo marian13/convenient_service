@@ -123,7 +123,7 @@ end
 #
 # TODO: `commonmarker` v1 does NOT work with `yard-junk`.
 #
-gem "commonmarker", "~> 0.23.10", platform: :mri if RUBY_VERSION >= "3.4"
+gem "commonmarker", "~> 2.6.0", platform: :mri if RUBY_VERSION >= "3.4"
 
 ##
 # Used for debugging CRuby code.
