@@ -157,8 +157,6 @@ appraise "dry" do
 
     gem "dry-core", "~> 0.8.0"
   end
-
-  gem "bigdecimal"
 end
 
 appraise "amazing_print" do
@@ -205,8 +203,6 @@ appraise "all" do
 
     gem "dry-core", "~> 0.8.0"
   end
-
-  gem "bigdecimal"
 
   ##
   # NOTE: Waits for `should-matchers` full support.

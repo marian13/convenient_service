@@ -32,4 +32,3 @@ class ConvenientService::Dependencies::Queries::Gems::MinitestTest < Minitest::T
     end
   end
 end
-# rubocop:enable Minitest/NestedGroups

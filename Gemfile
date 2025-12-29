@@ -89,6 +89,13 @@ gem "benchmark-ips", "~> 2.12.0"
 gem "benchmark-memory", "~> 0.2.0"
 
 ##
+# Used by Rails and Dry appraisals.
+# - https://github.com/ruby/bigdecimal
+# - https://ruby-doc.org/stdlib-2.7.0/libdoc/bigdecimal/rdoc/BigDecimal.html
+#
+gem "bigdecimal"
+
+##
 # Used for debugging any Ruby code (CRuby, JRuby, etc), since it written in plain Ruby.
 # Has minimalistic interface.
 # Does NOT support frame filtering.
