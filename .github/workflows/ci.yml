@@ -112,7 +112,7 @@ jobs:
           - 3.2
           - 3.3
           - 3.4
-          - "4.0.0-preview3"
+          - "4.0"
           ##
           # NOTE: JRuby 9.4 aims CRuby 3.1 compatibility.
           # - https://www.jruby.org/download

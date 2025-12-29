@@ -31,7 +31,7 @@
 # - https://medium.com/swlh/alpine-slim-stretch-buster-jessie-bullseye-bookworm-what-are-the-differences-in-docker-62171ed4531d
 # - https://hub.docker.com/r/timbru31/ruby-node/tags
 #
-FROM ruby:4.0.0-preview3-slim
+FROM ruby:4.0-slim
 
 ##
 # NOTE: `bundle install` dependencies.
