@@ -9,6 +9,7 @@
 --hide-tag author
 --exclude lib/convenient_service/debug/**/*
 --exclude lib/convenient_service/examples/**/*
+--plugin commonmarker
 --plugin convenient_service_concern
 --plugin convenient_service_exclude_self_classes
 'lib/convenient_service.rb'

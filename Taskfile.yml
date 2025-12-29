@@ -684,4 +684,4 @@ tasks:
       #
       # NOTE: `RUBYLIB` is used to extend Ruby's `$LOAD_PATH`. This way yard treats `./yard` folder as a directory with custom gems.
       #
-      - RUBYLIB=./yard bundle exec ./bin/yard-junk --text --html docs/junk-yard.html
+      - RUBYLIB=./yard bundle exec yard-junk --text --html docs/junk-yard.html
