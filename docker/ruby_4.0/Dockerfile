@@ -46,6 +46,9 @@ FROM ruby:4.0-slim
 # NOTE: `curl` for `go-task`.
 # - https://taskfile.dev/docs/installation
 #
+# NOTE: `clang` for `commonmarker`.
+# - https://github.com/gjtorikian/commonmarker/issues/394
+#
 RUN apt-get update -qq \
   && apt-get install --no-install-recommends -y git \
   && apt-get install --no-install-recommends -y make \
@@ -53,6 +56,7 @@ RUN apt-get update -qq \
   && apt-get install --no-install-recommends -y curl \
   && apt-get install --no-install-recommends -y libz-dev \
   && apt-get install --no-install-recommends -y libyaml-dev \
+  && apt-get install --no-install-recommends -y clang \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 

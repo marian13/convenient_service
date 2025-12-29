@@ -121,9 +121,7 @@ end
 # NOTE: `commonmarker` has C extensions, that is why it is NOT supported in JRuby.
 # - https://github.com/gjtorikian/commonmarker/tree/main/ext/commonmarker
 #
-# TODO: `commonmarker` v1 does NOT work with `yard-junk`.
-#
-gem "commonmarker", "~> 0.23.10", platform: :mri if RUBY_VERSION >= "3.4"
+gem "commonmarker", "~> 2.6.0", platform: :mri if RUBY_VERSION >= "4.0"
 
 ##
 # Used for debugging CRuby code.
@@ -171,7 +169,7 @@ gem "ffi", "~> 1.17.2"
 ##
 # Used to release new Convenient Service versions.
 #
-gem "gem-release", platform: :mri if RUBY_VERSION >= "3.4"
+gem "gem-release", platform: :mri if RUBY_VERSION >= "4.0"
 
 ##
 # Used as console/playground with loaded Convenient Service.
@@ -183,7 +181,7 @@ gem "irb", "~> 1.16.0"
 # Used to find missing documentation and to lint existing one.
 # - https://github.com/rrrene/inch
 #
-gem "inch", platform: :mri if RUBY_VERSION >= "3.4"
+gem "inch", platform: :mri if RUBY_VERSION >= "4.0"
 
 ##
 # Used inside examples.
@@ -201,14 +199,18 @@ gem "memory_profiler"
 
 ##
 # Used for testing Ruby code outside RSpec.
+# - https://github.com/minitest/minitest/blob/v5.27.0/Rakefile
 # - https://github.com/minitest/minitest
 # - https://semaphoreci.com/community/tutorials/getting-started-with-minitest
 # - https://cloudbees.com/blog/getting-started-with-minitest
 #
+# TODO: Consider to move to `Appraisals`, since only Rails 5.2 blocks upgrade to Minitest v6.
+# TODO: Appraisal for Minitest v5 and Minitest v6? Is it really nessesary for `Service.stub_result`?
+#
 if RUBY_VERSION >= "4.0"
-  gem "minitest", "~> 6.0.1"
+  gem "minitest", "~> 5.27.0"
 else
-  gem "minitest", "~> 5.18.0"
+  gem "minitest", "~> 5.26.0"
 end
 
 ##
@@ -255,7 +257,7 @@ gem "pry", "~> 0.14.2"
 # - https://github.com/rack/rackup
 # - https://github.com/lsegal/yard/blob/v0.9.37/lib/yard/server/rack_adapter.rb#L6
 #
-gem "rackup", "~> 2.2.1", platform: :mri if RUBY_VERSION >= "3.4"
+gem "rackup", "~> 2.2.1", platform: :mri if RUBY_VERSION >= "4.0"
 
 ##
 # Used as Ruby task runner.
@@ -293,7 +295,7 @@ gem "rspec-benchmark", "~> 0.6.0"
 # Used for linting Ruby files.
 # - https://github.com/rubocop/rubocop
 #
-gem "rubocop", "~> 1.81.0", platform: :mri if RUBY_VERSION >= "3.4"
+gem "rubocop", "~> 1.81.0", platform: :mri if RUBY_VERSION >= "4.0"
 
 ##
 # Used as a set of rules for rubocop for linting common performance issues in Ruby files.
@@ -304,7 +306,7 @@ gem "rubocop", "~> 1.81.0", platform: :mri if RUBY_VERSION >= "3.4"
 #    That is why it is NOT listed as a separate dependency for now.
 #   Once the need for a specific version becomes mandatory, the following line should be uncommented
 #
-# gem "rubocop-performance", platform: :mri if RUBY_VERSION >= "3.4"
+# gem "rubocop-performance", platform: :mri if RUBY_VERSION >= "4.0"
 ##
 
 ##
@@ -312,32 +314,32 @@ gem "rubocop", "~> 1.81.0", platform: :mri if RUBY_VERSION >= "3.4"
 # - https://github.com/rubocop/rubocop-magic_numbers
 # - https://github.com/meetcleo/rubocop-magic_numbers
 #
-gem "rubocop-magic_numbers", "~> 0.5.0", platform: :mri if RUBY_VERSION >= "3.4"
+gem "rubocop-magic_numbers", "~> 0.5.0", platform: :mri if RUBY_VERSION >= "4.0"
 
 ##
 # Used as a set of rules for rubocop for linting RSpec files.
 # - https://github.com/rubocop/rubocop-rspec
 #
-gem "rubocop-rspec", "~> 3.8.0", platform: :mri if RUBY_VERSION >= "3.4"
+gem "rubocop-rspec", "~> 3.8.0", platform: :mri if RUBY_VERSION >= "4.0"
 
 ##
 # Used as a set of rules for rubocop for enforcing Ruby gem packaging best practices.
 # - https://github.com/utkarsh2102/rubocop-packaging
 #
-gem "rubocop-packaging", "~> 0.6.0", platform: :mri if RUBY_VERSION >= "3.4"
+gem "rubocop-packaging", "~> 0.6.0", platform: :mri if RUBY_VERSION >= "4.0"
 
 ##
 # Used as a set of rules for rubocop for linting common thread-safety issues in Ruby files.
 # - https://github.com/rubocop/rubocop-thread_safety
 #
-gem "rubocop-thread_safety", "~> 0.7.3", platform: :mri if RUBY_VERSION >= "3.4"
+gem "rubocop-thread_safety", "~> 0.7.3", platform: :mri if RUBY_VERSION >= "4.0"
 
 ##
 # Used for linting of Ruby files.
 # TODO: Add `.rubycritic` config.
 # - https://github.com/whitesmith/rubycritic
 #
-gem "rubycritic", platform: :mri if RUBY_VERSION >= "3.4"
+gem "rubycritic", platform: :mri if RUBY_VERSION >= "4.0"
 
 ##
 # Used for parsing console input.
@@ -350,7 +352,7 @@ gem "rubycritic", platform: :mri if RUBY_VERSION >= "3.4"
 # Used as a set of rules for robocop for linting source files.
 # - https://github.com/testdouble/standard
 #
-gem "standard", "~> 1.52.0", platform: :mri if RUBY_VERSION >= "3.4"
+gem "standard", "~> 1.52.0", platform: :mri if RUBY_VERSION >= "4.0"
 
 ##
 # Used to calculate coverage of Ruby code.
@@ -404,7 +406,7 @@ gem "yard", "~> 0.9.37" if RUBY_VERSION >= "3.4"
 # Used for linting YARD docs.
 # - https://github.com/zverok/yard-junk
 #
-gem "yard-junk", "~> 0.0.10", platform: :mri if RUBY_VERSION >= "3.4"
+gem "yard-junk", "~> 0.0.10", platform: :mri if RUBY_VERSION >= "4.0"
 
 if ENV["CONVENIENT_SERVICE_BENCHMARK"]
   ##

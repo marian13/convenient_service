@@ -35,7 +35,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.4
+          ruby-version: 4.0
           ##
           # NOTE: Installs the latest compatible Bundler version, runs `bundle install` and caches installed gems.
           # - https://github.com/ruby/setup-ruby#usage
