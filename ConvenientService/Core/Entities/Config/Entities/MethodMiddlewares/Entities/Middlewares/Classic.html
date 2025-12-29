@@ -108,17 +108,17 @@
   <div class='inline'><p>Subclass and override <code>#call</code>.</p>
 </div>
 </div>
-<p>Class <code>ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Classic</code> allows to define middlewares that interacts with <code>call</code> and <code>env</code> directly.
+<p>Class <code>ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Classic</code> allows to define middlewares that interacts with <code>call</code> and <code>env</code> directly.<br />
 For example <code>ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain::Commands::NormalizeEnv</code> was implemeted as middleware up to v0.18.</p>
-<p>class Middleware &lt; MethodClassicMiddleware
+<p>class Middleware &lt; MethodClassicMiddleware<br />
 intended_for any_method, scope: any_scope, entity: any_entity</p>
-<pre class="code ruby"><code class="ruby"><span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_env'>env</span> <span class='op'>=</span> <span class='id identifier rubyid_env'>env</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span>
-  <span class='id identifier rubyid_env'>env</span> <span class='op'>=</span> <span class='id identifier rubyid_env'>env</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>args:</span> <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:args</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span><span class='comma'>,</span> <span class='label'>kwargs:</span> <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:kwargs</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='comma'>,</span> <span class='label'>block:</span> <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='symbol'>:block</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_stack'>stack</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_env'>env</span><span class='rparen'>)</span>
-<span class='kw'>end</span>
-</code></pre>
+<pre class="code ruby"><code class="ruby">&lt;span style=&quot;color:#c0c5ce;&quot;&gt;def call(env = nil)
+&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  env = env.to_h
+&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  env = env.merge(args: env[:args].to_a, kwargs: env[:kwargs].to_h, block: env[:block])
+&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;
+&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  stack.call(env)
+&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;end
+&lt;/span&gt;</code></pre>
 <p>end</p>
 
 
@@ -378,9 +378,9 @@ intended_for any_method, scope: any_scope, entity: any_entity</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Dec 29 14:55:07 2025 by
+  Generated on Mon Dec 29 18:06:31 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.4.8).
+  0.9.38 (ruby-4.0.0).
 </div>
 
     </div>

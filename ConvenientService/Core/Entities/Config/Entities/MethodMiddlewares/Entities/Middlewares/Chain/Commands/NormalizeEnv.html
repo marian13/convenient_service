@@ -108,7 +108,7 @@
 <li>Double splat <code>**</code> raises on <code>nil</code>.</li>
 <li>Umpersand <code>&amp;</code> converts <code>nil</code> to <code>nil</code>.</li>
 </ul>
-<p>The following middleware converts <code>env[:kwargs]</code> to a hash.
+<p>The following middleware converts <code>env[:kwargs]</code> to a hash.<br />
 This way <code>__send__(:next, *env[:args], **env[:kwargs], &amp;env[:block])</code> won't fail even if a user passes <code>nil</code> as <code>kwargs</code>.</p>
 <p>Check the following link for more details:</p>
 <ul>
@@ -455,9 +455,9 @@ This way <code>__send__(:next, *env[:args], **env[:kwargs], &amp;env[:block])</c
 </div>
 
       <div id="footer">
-  Generated on Mon Dec 29 14:55:11 2025 by
+  Generated on Mon Dec 29 18:06:36 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-3.4.8).
+  0.9.38 (ruby-4.0.0).
 </div>
 
     </div>
