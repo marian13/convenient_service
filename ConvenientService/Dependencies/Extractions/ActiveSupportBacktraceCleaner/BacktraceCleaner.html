@@ -391,7 +391,7 @@ These two methods will give you a completely untouched backtrace.</p>
   <div class="discussion">
     <p>Adds a filter from the block provided. Each line in the backtrace will be<br />
 mapped against this filter.</p>
-<h1><a href="#will-turn-myrailsrootappmodelspersonrb-into-appmodelspersonrb" aria-hidden="true" class="anchor" id="will-turn-myrailsrootappmodelspersonrb-into-appmodelspersonrb"></a>Will turn &quot;/my/rails/root/app/models/person.rb&quot; into &quot;app/models/person.rb&quot;</h1>
+<h1>Will turn &quot;/my/rails/root/app/models/person.rb&quot; into &quot;app/models/person.rb&quot;</h1>
 <p>root = Rails.root} + &quot;/&quot;<br />
 backtrace_cleaner.add_filter { |line| line.delete_prefix(root) }</p>
 
@@ -435,7 +435,7 @@ backtrace_cleaner.add_filter { |line| line.delete_prefix(root) }</p>
   <div class="discussion">
     <p>Adds a silencer from the block provided. If the silencer returns +true+<br />
 for a given line, it will be excluded from the clean backtrace.</p>
-<h1><a href="#will-reject-all-lines-that-include-the-word-puma-like-gemspumaserverrb-or-appmy_puma_serverrb" aria-hidden="true" class="anchor" id="will-reject-all-lines-that-include-the-word-puma-like-gemspumaserverrb-or-appmy_puma_serverrb"></a>Will reject all lines that include the word &quot;puma&quot;, like &quot;/gems/puma/server.rb&quot; or &quot;/app/my_puma_server/rb&quot;</h1>
+<h1>Will reject all lines that include the word &quot;puma&quot;, like &quot;/gems/puma/server.rb&quot; or &quot;/app/my_puma_server/rb&quot;</h1>
 <p>backtrace_cleaner.add_silencer { |line| /puma/.match?(line) }</p>
 
 
@@ -682,7 +682,7 @@ the libraries you use.</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Dec 29 18:16:40 2025 by
+  Generated on Mon Dec 29 21:22:37 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-4.0.0).
 </div>

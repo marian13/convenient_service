@@ -93,24 +93,24 @@ base.class_eval do<br />
 scope :disabled, -&gt; { where(disabled: true) }<br />
 end<br />
 end</p>
-<pre class="code ruby"><code class="ruby">&lt;span style=&quot;color:#c0c5ce;&quot;&gt;module ClassMethods
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  ...
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;end
-&lt;/span&gt;</code></pre>
+<pre class="code ruby"><code class="ruby">module ClassMethods
+  ...
+end
+</code></pre>
 <p>end</p>
 <p>By using <!-- raw HTML omitted -->ActiveSupport::Concern<!-- raw HTML omitted --> the above module could instead be<br />
 written as:</p>
 <p>require &quot;active_support/concern&quot;</p>
 <p>module M<br />
 extend ActiveSupport::Concern</p>
-<pre class="code ruby"><code class="ruby">&lt;span style=&quot;color:#c0c5ce;&quot;&gt;included do
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  scope :disabled, -&gt; { where(disabled: true) }
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;end
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;class_methods do
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  ...
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;end
-&lt;/span&gt;</code></pre>
+<pre class="code ruby"><code class="ruby">included do
+  scope :disabled, -&gt; { where(disabled: true) }
+end
+
+class_methods do
+  ...
+end
+</code></pre>
 <p>end</p>
 <p>Moreover, it gracefully handles module dependencies. Given a +Foo+ module<br />
 and a +Bar+ module which depends on the former, we would typically write the<br />
@@ -159,10 +159,10 @@ end</p>
 <p>module Bar<br />
 extend ActiveSupport::Concern<br />
 include Foo</p>
-<pre class="code ruby"><code class="ruby">&lt;span style=&quot;color:#c0c5ce;&quot;&gt;included do
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  self.method_injected_by_foo
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;end
-&lt;/span&gt;</code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_included'>included</span> <span class='kw'>do</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_method_injected_by_foo'>method_injected_by_foo</span>
+<span class='kw'>end</span>
+</code></pre>
 <p>end</p>
 <p>class Host<br />
 include Bar # It works, now Bar takes care of its dependencies<br />
@@ -547,13 +547,13 @@ prepended as well.</p>
 You can define private class methods as well.</p>
 <p>module Example<br />
 extend ActiveSupport::Concern</p>
-<pre class="code ruby"><code class="ruby">&lt;span style=&quot;color:#c0c5ce;&quot;&gt;class_methods do
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  def foo; puts &#39;foo&#39;; end
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  private
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;    def bar; puts &#39;bar&#39;; end
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;end
-&lt;/span&gt;</code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_class_methods'>class_methods</span> <span class='kw'>do</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_foo'>foo</span><span class='semicolon'>;</span> <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&#39;</span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_private'>private</span>
+    <span class='kw'>def</span> <span class='id identifier rubyid_bar'>bar</span><span class='semicolon'>;</span> <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>bar</span><span class='tstring_end'>&#39;</span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span>
+</code></pre>
 <p>end</p>
 <p>class Buzz<br />
 include Example<br />
@@ -869,13 +869,13 @@ When you define more than one +prepended+ block, it raises an exception.</p>
 You can define private class methods as well.</p>
 <p>module Example<br />
 extend ActiveSupport::Concern</p>
-<pre class="code ruby"><code class="ruby">&lt;span style=&quot;color:#c0c5ce;&quot;&gt;singleton_class_methods do
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  def foo; puts &#39;foo&#39;; end
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  private
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;    def bar; puts &#39;bar&#39;; end
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;end
-&lt;/span&gt;</code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_singleton_class_methods'>singleton_class_methods</span> <span class='kw'>do</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_foo'>foo</span><span class='semicolon'>;</span> <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&#39;</span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_private'>private</span>
+    <span class='kw'>def</span> <span class='id identifier rubyid_bar'>bar</span><span class='semicolon'>;</span> <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>bar</span><span class='tstring_end'>&#39;</span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span>
+</code></pre>
 <p>end</p>
 <p>class Buzz<br />
 include Example<br />
@@ -923,7 +923,7 @@ Buzz.singleton_class.bar # =&gt; private method 'bar' called for Buzz:Class(NoMe
 </div>
 
       <div id="footer">
-  Generated on Mon Dec 29 18:16:16 2025 by
+  Generated on Mon Dec 29 21:22:27 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-4.0.0).
 </div>

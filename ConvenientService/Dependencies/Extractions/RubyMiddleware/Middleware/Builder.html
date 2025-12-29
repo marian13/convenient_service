@@ -104,16 +104,16 @@
     <p>This provides a DSL for building up a stack of middlewares.</p>
 <p>This code is based heavily off of <code>Rack::Builder</code> and<br />
 <code>ActionDispatch::MiddlewareStack</code> in Rack and Rails, respectively.</p>
-<h1><a href="#usage" aria-hidden="true" class="anchor" id="usage"></a>Usage</h1>
+<h1>Usage</h1>
 <p>Building a middleware stack is very easy:</p>
-<pre class="code ruby"><code class="ruby">&lt;span style=&quot;color:#c0c5ce;&quot;&gt;app = Middleware::Builder.new do |b|
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  b.use A
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  b.use B
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;end
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;# Call the middleware
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;app.call(7)
-&lt;/span&gt;</code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_app'>app</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Middleware.html" title="ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware (module)">Middleware</a></span></span><span class='op'>::</span><span class='const'>Builder</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Builder#initialize (method)">new</a></span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_b'>b</span><span class='op'>|</span>
+  <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span> <span class='const'>A</span>
+  <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span> <span class='const'>B</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Call the middleware
+</span><span class='id identifier rubyid_app'>app</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='int'>7</span><span class='rparen'>)</span>
+</code></pre>
 
 
   </div>
@@ -461,16 +461,16 @@
     <p>Initializes the builder. An optional block can be passed which<br />
 will either yield the builder or be evaluated in the context of the instance.</p>
 <p>Example:</p>
-<pre class="code ruby"><code class="ruby">&lt;span style=&quot;color:#c0c5ce;&quot;&gt;Builder.new do |b|
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  b.use A
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  b.use B
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;end
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;Builder.new do
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  use A
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;  use B
-&lt;/span&gt;&lt;span style=&quot;color:#c0c5ce;&quot;&gt;end
-&lt;/span&gt;</code></pre>
+<pre class="code ruby"><code class="ruby"><span class='const'><span class='object_link'><a href="" title="ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Builder (class)">Builder</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_b'>b</span><span class='op'>|</span>
+  <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span> <span class='const'>A</span>
+  <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_use'>use</span> <span class='const'>B</span>
+<span class='kw'>end</span>
+
+<span class='const'><span class='object_link'><a href="" title="ConvenientService::Dependencies::Extractions::RubyMiddleware::Middleware::Builder (class)">Builder</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_use'>use</span> <span class='const'>A</span>
+  <span class='id identifier rubyid_use'>use</span> <span class='const'>B</span>
+<span class='kw'>end</span>
+</code></pre>
 
 
   </div>
@@ -1131,7 +1131,7 @@ of the middleware.</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Dec 29 18:16:35 2025 by
+  Generated on Mon Dec 29 21:22:35 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-4.0.0).
 </div>
