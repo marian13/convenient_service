@@ -205,7 +205,11 @@ gem "memory_profiler"
 # - https://semaphoreci.com/community/tutorials/getting-started-with-minitest
 # - https://cloudbees.com/blog/getting-started-with-minitest
 #
-gem "minitest", "~> 5.18.0"
+if RUBY_VERSION >= "4.0"
+  gem "minitest", "~> 6.0.1"
+else
+  gem "minitest", "~> 5.18.0"
+end
 
 ##
 # Used for mutation testing of Ruby code.
