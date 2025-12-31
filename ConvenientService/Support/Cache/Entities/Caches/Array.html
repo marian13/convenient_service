@@ -789,15 +789,23 @@
 145
 146
 147
-148</pre>
+148
+149
+150
+151
+152</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/support/cache/entities/caches/array.rb', line 144</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_default='>default=</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_save_self_as_scope_in_parent!'>save_self_as_scope_in_parent!</span>
-
   <span class='ivar'>@default</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_delete_self_as_scope_in_parent!'>delete_self_as_scope_in_parent!</span> <span class='kw'>if</span> <span class='id identifier rubyid_store'>store</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_save_self_as_scope_in_parent!'>save_self_as_scope_in_parent!</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1654,7 +1662,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Dec 29 21:22:32 2025 by
+  Generated on Wed Dec 31 03:24:57 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-4.0.0).
 </div>
