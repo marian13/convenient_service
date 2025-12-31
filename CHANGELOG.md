@@ -5,6 +5,13 @@
 
 # Changelog
 
+## [0.21.1](https://github.com/marian13/convenient_service/compare/v0.21.0...v0.21.1) (2025-12-31)
+
+
+### Bug Fixes
+
+* **cache:** remove scoped cache from parent when default is set to nil ([d3945d1](https://github.com/marian13/convenient_service/commit/d3945d15047ca949b88cb94e23737661c3d7913a))
+
 ## [0.21.0](https://github.com/marian13/convenient_service/compare/v0.20.0...v0.21.0) (2025-12-28)
 
 
