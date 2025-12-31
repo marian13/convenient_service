@@ -305,7 +305,18 @@ jobs:
           - "4.0"
           - "jruby-9.4"
           - "jruby-10.0"
-          - "truffleruby-25.0"
+        include:
+          - gemfile: Gemfile
+            ruby: "truffleruby-25.0"
+            env:
+              ##
+              # NOTE: `-Xmx4g` means max heap of 4 GB.
+              # - https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/sizing.html
+              #
+              # NOTE: `-Xms1g` means startup heap of 1 GB.
+              # - https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/sizing.html
+              #
+              JAVA_OPTS: "-Xmx4g -Xms1g"
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
       CONVENIENT_SERVICE_BENCHMARK: true
