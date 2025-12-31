@@ -146,6 +146,15 @@ jobs:
           - gemfile: Gemfile
             ruby: "truffleruby-25.0"
             experimental: true
+            env:
+              ##
+              # NOTE: `-Xmx4g` means max heap of 4 GB.
+              # - https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/sizing.html
+              #
+              # NOTE: `-Xms1g` means startup heap of 1 GB.
+              # - https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/sizing.html
+              #
+              JAVA_OPTS: "-Xmx4g -Xms1g"
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
       CONVENIENT_SERVICE_CI: true
@@ -184,6 +193,7 @@ jobs:
         continue-on-error: ${{ matrix.experimental }}
       - name: Install dependencies for appraisals
         run: task deps:install
+        continue-on-error: ${{ matrix.experimental }}
       - name: Run RSpec with Rails 8.1
         run: APPRAISAL=rails_8.1 task rspec
         continue-on-error: ${{ matrix.experimental }}
