@@ -703,67 +703,163 @@ RSpec.describe ConvenientService::Support::Cache::Entities::Caches::Hash, type: 
     end
 
     describe "#default=" do
-      let(:default_value) { 42 }
+      context "when `default_value` is NOT `nil`" do
+        let(:default_value) { 42 }
 
-      context "when `cache` is NOT scoped cache" do
-        let(:cache) { described_class.new }
+        context "when `cache` is NOT scoped cache" do
+          let(:cache) { described_class.new }
 
-        it "sets `default` value" do
-          cache.default = default_value
+          it "sets `default` value" do
+            cache.default = default_value
 
-          expect(cache.default).to eq(default_value)
+            expect(cache.default).to eq(default_value)
+          end
+
+          it "returns `default` value" do
+            expect(cache.default = default_value).to eq(default_value)
+          end
         end
 
-        it "returns `default` value" do
-          expect(cache.default = default_value).to eq(default_value)
+        context "when `cache` is scoped cache" do
+          let(:cache) { described_class.new }
+
+          let(:scoped_cache) { cache.scope(:foo) }
+
+          it "sets `default` value" do
+            scoped_cache.default = default_value
+
+            expect(scoped_cache.default).to eq(default_value)
+          end
+
+          it "returns `default` value" do
+            expect(scoped_cache.default = default_value).to eq(default_value)
+          end
+
+          it "saves scoped cache in parent cache" do
+            expect { scoped_cache.default = default_value }.to change { cache.exist?(:foo) }.from(false).to(true)
+          end
+        end
+
+        context "when `cache` includes scoped caches" do
+          let(:cache) { described_class.new }
+
+          before do
+            cache.scope!(:foo).default = :bar
+          end
+
+          it "does NOT set `default` value of included scoped caches" do
+            expect { cache.default = default_value }.not_to change { cache.scope!(:foo).default }.from(:bar)
+          end
+        end
+
+        context "when `cache` has missing key" do
+          let(:cache) { described_class.new }
+
+          before do
+            cache.default = default_value
+          end
+
+          it "modifies `read` to return `default` value" do
+            expect(cache.read(:missing_key)).to eq(default_value)
+          end
+
+          it "modifies `fetch` without block to return `default` value" do
+            expect(cache.fetch(:missing_key)).to eq(default_value)
+          end
         end
       end
 
-      context "when `cache` is scoped cache" do
-        let(:cache) { described_class.new }
+      context "when `default_value` is `nil`" do
+        let(:default_value) { nil }
 
-        let(:scoped_cache) { cache.scope(:foo) }
+        context "when `cache` is NOT scoped cache" do
+          let(:cache) { described_class.new }
 
-        it "sets `default` value" do
-          scoped_cache.default = default_value
+          it "sets `default` value" do
+            cache.default = default_value
 
-          expect(scoped_cache.default).to eq(default_value)
+            expect(cache.default).to eq(default_value)
+          end
+
+          it "returns `default` value" do
+            expect(cache.default = default_value).to eq(default_value)
+          end
         end
 
-        it "returns `default` value" do
-          expect(scoped_cache.default = default_value).to eq(default_value)
+        context "when `cache` is scoped cache" do
+          let(:cache) { described_class.new }
+
+          let(:scoped_cache) { cache.scope(:foo) }
+
+          it "sets `default` value" do
+            scoped_cache.default = default_value
+
+            expect(scoped_cache.default).to eq(default_value)
+          end
+
+          it "returns `default` value" do
+            expect(scoped_cache.default = default_value).to eq(default_value)
+          end
+
+          context "when that scoped cache is NOT saved in parent" do
+            let(:scoped_cache) { cache.scope(:foo) }
+
+            it "does NOT save scoped cache in parent cache" do
+              expect { scoped_cache.default = default_value }.not_to change { cache.exist?(:foo) }.from(false)
+            end
+          end
+
+          context "when that scoped cache is saved in parent" do
+            let(:scoped_cache) { cache.scope!(:foo) }
+
+            context "when that scoped cache is NOT empty" do
+              before do
+                scoped_cache.write(:bar, :baz)
+              end
+
+              it "does NOT deletes scoped cache in parent cache" do
+                expect { scoped_cache.default = default_value }.not_to change { cache.exist?(:foo) }.from(true)
+              end
+            end
+
+            context "when that scoped cache is empty" do
+              before do
+                scoped_cache
+              end
+
+              it "deletes scoped cache in parent cache" do
+                expect { scoped_cache.default = default_value }.to change { cache.exist?(:foo) }.from(true).to(false)
+              end
+            end
+          end
         end
 
-        it "saves scoped cached in parent cache" do
-          expect { scoped_cache.default = default_value }.to change { cache.exist?(:foo) }.from(false).to(true)
-        end
-      end
+        context "when `cache` includes scoped caches" do
+          let(:cache) { described_class.new }
 
-      context "when `cache` includes scoped caches" do
-        let(:cache) { described_class.new }
+          before do
+            cache.scope!(:foo).default = :bar
+          end
 
-        before do
-          cache.scope!(:foo).default = :bar
-        end
-
-        it "does NOT set `default` value of included scoped caches" do
-          expect { cache.default = default_value }.not_to change { cache.scope!(:foo).default }.from(:bar)
-        end
-      end
-
-      context "when `cache` has missing key" do
-        let(:cache) { described_class.new }
-
-        before do
-          cache.default = default_value
+          it "does NOT set `default` value of included scoped caches" do
+            expect { cache.default = default_value }.not_to change { cache.scope!(:foo).default }.from(:bar)
+          end
         end
 
-        it "modifies `read` to return `default` value" do
-          expect(cache.read(:missing_key)).to eq(default_value)
-        end
+        context "when `cache` has missing key" do
+          let(:cache) { described_class.new }
 
-        it "modifies `fetch` without block to return `default` value" do
-          expect(cache.fetch(:missing_key)).to eq(default_value)
+          before do
+            cache.default = default_value
+          end
+
+          it "modifies `read` to return `default` value" do
+            expect(cache.read(:missing_key)).to eq(default_value)
+          end
+
+          it "modifies `fetch` without block to return `default` value" do
+            expect(cache.fetch(:missing_key)).to eq(default_value)
+          end
         end
       end
     end

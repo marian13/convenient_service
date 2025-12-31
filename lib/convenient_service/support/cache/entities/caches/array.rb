@@ -142,9 +142,13 @@ module ConvenientService
             # @return [Object] Can be any type.
             #
             def default=(value)
-              save_self_as_scope_in_parent!
-
               @default = value
+
+              if value.nil?
+                delete_self_as_scope_in_parent! if store.empty?
+              else
+                save_self_as_scope_in_parent!
+              end
             end
 
             private
