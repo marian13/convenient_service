@@ -56,6 +56,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register
@@ -94,6 +101,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -134,6 +148,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register
@@ -172,6 +193,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -214,6 +242,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register
@@ -254,6 +289,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -298,6 +340,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with default (any arguments), second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register
@@ -341,6 +390,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with default (any arguments), second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -387,6 +443,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with default (any arguments), second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register
@@ -406,8 +469,8 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
 
                     teardown do
-                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").register
-                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").unregister
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").unregister
                     end
                   end
 
@@ -431,6 +494,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with default (any arguments), second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -479,6 +549,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with default (any arguments), second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register
@@ -525,6 +602,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with default (any arguments), second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -573,6 +657,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub without arguments, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register
@@ -618,6 +709,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub without arguments, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register
@@ -661,6 +759,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub without arguments, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -706,6 +811,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub without arguments, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -754,6 +866,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub without arguments, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register
@@ -800,6 +919,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub without arguments, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -848,6 +974,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with any arguments, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register
@@ -892,6 +1025,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with any arguments, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -938,6 +1078,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with any arguments, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register
@@ -982,6 +1129,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with any arguments, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1030,6 +1184,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with any arguments, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register
@@ -1076,6 +1237,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with any arguments, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1124,6 +1292,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with args, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register
@@ -1170,6 +1345,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with args, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1218,6 +1400,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with args, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register
@@ -1237,8 +1426,8 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
 
                     teardown do
-                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").unregister
                       @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from second stubbed entry with any arguments").unregister
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").unregister
                     end
                   end
 
@@ -1264,6 +1453,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with args, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1311,6 +1507,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with args, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1360,6 +1563,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with args, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register
@@ -1408,6 +1618,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with kwargs, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register
@@ -1454,6 +1671,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with kwargs, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1502,6 +1726,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with kwargs, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register
@@ -1548,6 +1779,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with kwargs, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1597,6 +1835,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with kwargs, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register
@@ -1616,7 +1861,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
 
                     teardown do
-                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").unregister
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").unregister
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").unregister
                     end
                   end
@@ -1644,6 +1889,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with kwargs, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register
@@ -1663,7 +1915,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
 
                     teardown do
-                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from second stubbed entry with args").unregister
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").unregister
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").unregister
                     end
                   end
@@ -1691,6 +1943,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with block, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1739,6 +1998,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with block, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register
@@ -1786,6 +2052,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with block, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register
@@ -1832,6 +2105,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with block, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1881,6 +2161,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with block, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register
@@ -1928,6 +2215,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with block, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2029,6 +2323,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
               end
 
               extend ConvenientService::E2E::Shared::StubVariants
+
+              teardown do
+                ##
+                # NOTE: First `teardown` is executed the last.
+                #
+                assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+              end
 
               variant "stub/unstub" do
                 setup do
@@ -2129,6 +2430,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register
@@ -2151,7 +2459,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                   variant "register(&block)" do
                     around do |test|
-                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register
+                      @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register(&test)
                     end
                   end
 
@@ -2167,6 +2475,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2190,7 +2505,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                   variant "register(&block)" do
                     around do |test|
-                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register(&test)
                     end
                   end
 
@@ -2206,6 +2521,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2223,13 +2545,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
 
                     teardown do
-                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").unregister
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").unregister
                     end
                   end
 
                   variant "register(&block)" do
                     around do |test|
-                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register
+                      @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register(&test)
                     end
                   end
 
@@ -2245,6 +2567,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2268,7 +2597,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                   variant "register(&block)" do
                     around do |test|
-                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register
+                      @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register(&test)
                     end
                   end
 
@@ -2286,6 +2615,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2309,7 +2645,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                   variant "register(&block)" do
                     around do |test|
-                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register
+                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register(&test)
                     end
                   end
 
@@ -2327,6 +2663,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2350,9 +2693,10 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                   variant "register(&block)" do
                     around do |test|
-                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register(&test)
                     end
                   end
+
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(*@args) == :value_from_main_entry) }
                   should("work (#{__LINE__})") { assert_equal(true, @feature_instance.main(**@kwargs) == :value_from_main_entry) }
@@ -2369,6 +2713,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
               context "when multiple stubs" do
                 context "when first stub with default (any arguments), second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2413,6 +2764,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with default (any arguments), second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2459,6 +2817,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with default (any arguments), second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register
@@ -2503,6 +2868,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with default (any arguments), second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2551,6 +2923,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with default (any arguments), second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register
@@ -2598,6 +2977,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with default (any arguments), second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").register
@@ -2617,7 +3003,7 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
 
                     teardown do
-                      @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from second stubbed entry with kwargs").unregister
+                      @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from second stubbed entry with block").unregister
                       @feature_class.stub_entry(:main).to_return_value("from first stubbed entry with default (any arguments)").unregister
                     end
                   end
@@ -2644,6 +3030,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub without arguments, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2690,6 +3083,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub without arguments, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register
@@ -2708,8 +3108,8 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                     end
 
                     teardown do
-                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").unregister
                       @feature_class.stub_entry(:main).without_arguments.to_return_value("from second stubbed entry without arguments").unregister
+                      @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").unregister
                     end
                   end
 
@@ -2733,6 +3133,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub without arguments, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2778,6 +3185,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub without arguments, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2826,6 +3240,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub without arguments, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).without_arguments.to_return_value("from first stubbed entry without arguments").register
@@ -2872,6 +3293,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub without arguments, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2920,6 +3348,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with any arguments, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register
@@ -2964,6 +3399,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with any arguments, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3010,6 +3452,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with any arguments, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register
@@ -3053,6 +3502,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with any arguments, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3101,6 +3557,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with any arguments, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_any_arguments.to_return_value("from first stubbed entry with any arguments").register
@@ -3147,6 +3610,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with any arguments, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3195,6 +3665,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with args, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register
@@ -3241,6 +3718,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with args, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3289,6 +3773,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with args, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register
@@ -3336,6 +3827,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with args, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register
@@ -3381,6 +3879,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with args, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3430,6 +3935,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with args, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(*@args).to_return_value("from first stubbed entry with args").register
@@ -3478,6 +3990,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with kwargs, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register
@@ -3524,6 +4043,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with kwargs, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3572,6 +4098,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with kwargs, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register
@@ -3618,6 +4151,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with kwargs, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3667,6 +4207,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with kwargs, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(**@kwargs).to_return_value("from first stubbed entry with kwargs").register
@@ -3712,6 +4259,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with kwargs, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3761,6 +4315,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with block, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register
@@ -3807,6 +4368,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with block, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3855,6 +4423,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with block, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register
@@ -3901,6 +4476,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with block, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3950,6 +4532,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
                 context "when first stub with block, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @feature_class.stub_entry(:main).with_arguments(&@block).to_return_value("from first stubbed entry with block").register
@@ -3997,6 +4586,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
 
                 context "when first stub with block, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -4099,6 +4695,13 @@ class ConvenientService::E2E::StubbedFeatureEntriesTest < Minitest::Test
               end
 
               extend ConvenientService::E2E::Shared::StubVariants
+
+              teardown do
+                ##
+                # NOTE: First `teardown` is executed the last.
+                #
+                assert_equal(true, @feature_class.stubbed_entries.parent.empty?)
+              end
 
               variant "stub/unstub" do
                 setup do

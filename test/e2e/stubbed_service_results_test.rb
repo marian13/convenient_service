@@ -57,6 +57,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.to_return_failure.with_message("from first stubbed result with default (any arguments)").register
@@ -95,6 +102,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -135,6 +149,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_any_arguments.to_return_failure.with_message("from first stubbed result with any arguments").register
@@ -173,6 +194,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -215,6 +243,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(**@kwargs).to_return_failure.with_message("from first stubbed result with kwargs").register
@@ -255,6 +290,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -298,6 +340,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
               context "when multiple stubs" do
                 context "when first stub with default (any arguments), second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -344,6 +393,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with default (any arguments), second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.to_return_failure.with_message("from first stubbed result with default (any arguments)").register
@@ -389,6 +445,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with default (any arguments), second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.to_return_failure.with_message("from first stubbed result with default (any arguments)").register
@@ -433,6 +496,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with default (any arguments), second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -481,6 +551,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with default (any arguments), second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.to_return_failure.with_message("from first stubbed result with default (any arguments)").register
@@ -527,6 +604,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with default (any arguments), second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -575,6 +659,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub without arguments, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.without_arguments.to_return_failure.with_message("from first stubbed result without arguments").register
@@ -619,6 +710,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub without arguments, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -665,6 +763,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub without arguments, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.without_arguments.to_return_failure.with_message("from first stubbed result without arguments").register
@@ -709,6 +814,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub without arguments, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -757,6 +869,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub without arguments, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.without_arguments.to_return_failure.with_message("from first stubbed result without arguments").register
@@ -803,6 +922,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub without arguments, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -851,6 +977,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with any arguments, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_any_arguments.to_return_failure.with_message("from first stubbed result with any arguments").register
@@ -895,6 +1028,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with any arguments, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -941,6 +1081,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with any arguments, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_any_arguments.to_return_failure.with_message("from first stubbed result with any arguments").register
@@ -985,6 +1132,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with any arguments, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1033,6 +1187,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with any arguments, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_any_arguments.to_return_failure.with_message("from first stubbed result with any arguments").register
@@ -1079,6 +1240,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with any arguments, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1127,6 +1295,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with args, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(*@args).to_return_failure.with_message("from first stubbed result with args").register
@@ -1173,6 +1348,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with args, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1221,6 +1403,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with args, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(*@args).to_return_failure.with_message("from first stubbed result with args").register
@@ -1268,6 +1457,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with args, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(*@args).to_return_failure.with_message("from first stubbed result with args").register
@@ -1314,6 +1510,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with args, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1363,6 +1566,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with args, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(*@args).to_return_failure.with_message("from first stubbed result with args").register
@@ -1411,6 +1621,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with kwargs, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(**@kwargs).to_return_failure.with_message("from first stubbed result with kwargs").register
@@ -1457,6 +1674,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with kwargs, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1505,6 +1729,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with kwargs, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(**@kwargs).to_return_failure.with_message("from first stubbed result with kwargs").register
@@ -1551,6 +1782,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with kwargs, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1600,6 +1838,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with kwargs, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(**@kwargs).to_return_failure.with_message("from first stubbed result with kwargs").register
@@ -1646,6 +1891,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with kwargs, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1695,6 +1947,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with block, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(&@block).to_return_failure.with_message("from first stubbed result with block").register
@@ -1741,6 +2000,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with block, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1789,6 +2055,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with block, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(&@block).to_return_failure.with_message("from first stubbed result with block").register
@@ -1835,6 +2108,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with block, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -1884,6 +2164,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with block, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(&@block).to_return_failure.with_message("from first stubbed result with block").register
@@ -1931,6 +2218,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with block, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2033,6 +2327,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
               end
 
               extend ConvenientService::E2E::Shared::StubVariants
+
+              teardown do
+                ##
+                # NOTE: First `teardown` is executed the last.
+                #
+                assert_equal(true, @service_class.stubbed_results.parent.empty?)
+              end
 
               variant "stub/unstub" do
                 setup do
@@ -2132,6 +2433,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.to_return_failure.with_message("from first stubbed result with default (any arguments)").register
@@ -2170,6 +2478,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2210,6 +2525,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_any_arguments.to_return_failure.with_message("from first stubbed result with any arguments").register
@@ -2248,6 +2570,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2290,6 +2619,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(**@kwargs).to_return_failure.with_message("from first stubbed result with kwargs").register
@@ -2330,6 +2666,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2373,6 +2716,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
               context "when multiple stubs" do
                 context "when first stub with default (any arguments), second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2419,6 +2769,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with default (any arguments), second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.to_return_failure.with_message("from first stubbed result with default (any arguments)").register
@@ -2464,6 +2821,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with default (any arguments), second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.to_return_failure.with_message("from first stubbed result with default (any arguments)").register
@@ -2508,6 +2872,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with default (any arguments), second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2556,6 +2927,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with default (any arguments), second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.to_return_failure.with_message("from first stubbed result with default (any arguments)").register
@@ -2602,6 +2980,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with default (any arguments), second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2650,6 +3035,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub without arguments, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.without_arguments.to_return_failure.with_message("from first stubbed result without arguments").register
@@ -2694,6 +3086,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub without arguments, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2740,6 +3139,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub without arguments, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.without_arguments.to_return_failure.with_message("from first stubbed result without arguments").register
@@ -2784,6 +3190,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub without arguments, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2832,6 +3245,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub without arguments, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.without_arguments.to_return_failure.with_message("from first stubbed result without arguments").register
@@ -2878,6 +3298,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub without arguments, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -2926,6 +3353,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with any arguments, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_any_arguments.to_return_failure.with_message("from first stubbed result with any arguments").register
@@ -2970,6 +3404,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with any arguments, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3016,6 +3457,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with any arguments, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_any_arguments.to_return_failure.with_message("from first stubbed result with any arguments").register
@@ -3060,6 +3508,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with any arguments, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3108,6 +3563,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with any arguments, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_any_arguments.to_return_failure.with_message("from first stubbed result with any arguments").register
@@ -3154,6 +3616,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with any arguments, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3202,6 +3671,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with args, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(*@args).to_return_failure.with_message("from first stubbed result with args").register
@@ -3248,6 +3724,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with args, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3296,6 +3779,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with args, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(*@args).to_return_failure.with_message("from first stubbed result with args").register
@@ -3343,6 +3833,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with args, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(*@args).to_return_failure.with_message("from first stubbed result with args").register
@@ -3389,6 +3886,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with args, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3438,6 +3942,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with args, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(*@args).to_return_failure.with_message("from first stubbed result with args").register
@@ -3486,6 +3997,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with kwargs, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(**@kwargs).to_return_failure.with_message("from first stubbed result with kwargs").register
@@ -3532,6 +4050,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with kwargs, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3580,6 +4105,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with kwargs, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(**@kwargs).to_return_failure.with_message("from first stubbed result with kwargs").register
@@ -3626,6 +4158,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with kwargs, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3675,6 +4214,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with kwargs, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(**@kwargs).to_return_failure.with_message("from first stubbed result with kwargs").register
@@ -3721,6 +4267,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with kwargs, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3770,6 +4323,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with block, second stub with default (any arguments)" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(&@block).to_return_failure.with_message("from first stubbed result with block").register
@@ -3816,6 +4376,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with block, second stub without arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3864,6 +4431,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with block, second stub with any arguments" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(&@block).to_return_failure.with_message("from first stubbed result with block").register
@@ -3910,6 +4484,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with block, second stub with args" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -3959,6 +4540,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
                 context "when first stub with block, second stub with kwargs" do
                   extend ConvenientService::E2E::Shared::StubVariants
 
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
+
                   variant "stub/unstub" do
                     setup do
                       @service_class.stub_result.with_arguments(&@block).to_return_failure.with_message("from first stubbed result with block").register
@@ -4006,6 +4594,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
 
                 context "when first stub with block, second stub with block" do
                   extend ConvenientService::E2E::Shared::StubVariants
+
+                  teardown do
+                    ##
+                    # NOTE: First `teardown` is executed the last.
+                    #
+                    assert_equal(true, @service_class.stubbed_results.parent.empty?)
+                  end
 
                   variant "stub/unstub" do
                     setup do
@@ -4108,6 +4703,13 @@ class ConvenientService::E2E::StubbedServiceResultsTest < Minitest::Test
               end
 
               extend ConvenientService::E2E::Shared::StubVariants
+
+              teardown do
+                ##
+                # NOTE: First `teardown` is executed the last.
+                #
+                assert_equal(true, @service_class.stubbed_results.parent.empty?)
+              end
 
               variant "stub/unstub" do
                 setup do
