@@ -2,6 +2,7 @@
 
 require_relative "lib/convenient_service/specification"
 require_relative "lib/convenient_service/version"
+require_relative "lib/convenient_service/dependencies/only_queries"
 
 Gem::Specification.new do |spec|
   spec.name = ConvenientService::Specification::NAME
