@@ -16,13 +16,18 @@
 ##
 
 ##
+# NOTE: Dependencies must be kept in sync with `convenient_service.gemspec`.
+##
+
+##
 # @internal
-#   - https://ruby-doc.org/stdlib-2.7.0/libdoc/pathname/rdoc/Pathname.html
-#   - https://github.com/ruby/pathname
+#   - https://ruby-doc.org/stdlib-2.7.0/libdoc/rubygems/rdoc/Gem/Version.html
+#   - https://github.com/rubygems/rubygems
+#   - https://github.com/rubygems/rubygems/blob/master/lib/rubygems/version.rb
 #
 # @!visibility private
 #
-require "pathname"
+require "rubygems"
 
 ##
 # @internal
@@ -44,13 +49,21 @@ require "logger"
 
 ##
 # @internal
-#   - https://ruby-doc.org/stdlib-2.7.0/libdoc/rubygems/rdoc/Gem/Version.html
-#   - https://github.com/rubygems/rubygems
-#   - https://github.com/rubygems/rubygems/blob/master/lib/rubygems/version.rb
+#   - https://ruby-doc.org/stdlib-2.7.0/libdoc/pathname/rdoc/Pathname.html
+#   - https://github.com/ruby/pathname
 #
 # @!visibility private
 #
-require "rubygems"
+require "pathname"
+
+##
+# @internal
+#   - https://ruby-doc.org/stdlib-2.7.0/libdoc/set/rdoc/Set.html
+#   - https://github.com/ruby/set
+#
+# @!visibility private
+#
+require "set"
 
 ##
 # @internal
@@ -71,12 +84,3 @@ require "singleton"
 # rubocop:disable Lint/RedundantRequireStatement
 require "thread"
 # rubocop:enable Lint/RedundantRequireStatement
-
-##
-# @internal
-#   - https://ruby-doc.org/stdlib-2.7.0/libdoc/set/rdoc/Set.html
-#   - https://github.com/ruby/set
-#
-# @!visibility private
-#
-require "set"

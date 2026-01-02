@@ -53,6 +53,16 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   ##
+  # NOTE: Dependencies must be kept in sync with `lib/convenient_service/dependencies/built_in.rb`.
+  ##
+
+  ##
+  # Used for delegation.
+  # - https://github.com/ruby/delegate
+  #
+  spec.add_dependency "delegate"
+
+  ##
   # Used for logging of the most critical Convenient Service parts, like config auto commitment.
   # - https://github.com/ruby/logger
   #
@@ -62,6 +72,12 @@ Gem::Specification.new do |spec|
   spec.add_dependency "logger"
 
   ##
+  # Used for `ConvenientService.root`.
+  # - https://github.com/ruby/pathname
+  #
+  spec.add_dependency "pathname"
+
+  ##
   # Used by step aware enumerables.
   # - https://github.com/ruby/set
   #
@@ -69,4 +85,16 @@ Gem::Specification.new do |spec|
   # - https://www.ruby-lang.org/en/news/2025/12/18/ruby-4-0-0-preview3-released
   #
   spec.add_dependency "set"
+
+  ##
+  # Used for single logger instance.
+  # - https://github.com/ruby/singleton
+  #
+  spec.add_dependency "singleton"
+
+  ##
+  # Used by stubs.
+  # - https://github.com/ruby/ruby/blob/master/thread.c
+  #
+  spec.add_dependency "thread"
 end
