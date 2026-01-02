@@ -69,7 +69,10 @@ Gem::Specification.new do |spec|
   # Starting from Ruby 4.0, the `logger` is NO longer bundled with the stdlib.
   # - https://github.com/sidekiq/sidekiq/pull/6320
   #
-  # spec.add_dependency "logger"
+  # NOTE: Ruby 3.4 prints the warning below.
+  #   warning: logger was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 4.0.0.
+  #
+  spec.add_dependency "logger" if ConvenientService::Dependencies.ruby >= 3.4
 
   ##
   # Used for `ConvenientService.root`.

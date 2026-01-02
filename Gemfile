@@ -242,6 +242,16 @@ end
 gem "mutex_m"
 
 ##
+# Used inside tests and specs.
+# - https://ruby-doc.org/stdlib-2.7.0/libdoc/ostruct/rdoc/OpenStruct.html
+# - https://github.com/ruby/ostruct
+#
+# NOTE: Ruby 3.4 prints the warning below.
+#   warning: ostruct was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 4.0.0.
+#
+gem "ostruct", require: false if RUBY_VERSION >= "4.0"
+
+##
 # Used for coloring logs.
 # - https://github.com/janlelis/paint
 #
