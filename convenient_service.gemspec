@@ -60,7 +60,7 @@ Gem::Specification.new do |spec|
   # Used for delegation.
   # - https://github.com/ruby/delegate
   #
-  spec.add_dependency "delegate"
+  # spec.add_dependency "delegate"
 
   ##
   # Used for logging of the most critical Convenient Service parts, like config auto commitment.
@@ -69,13 +69,13 @@ Gem::Specification.new do |spec|
   # Starting from Ruby 4.0, the `logger` is NO longer bundled with the stdlib.
   # - https://github.com/sidekiq/sidekiq/pull/6320
   #
-  spec.add_dependency "logger"
+  # spec.add_dependency "logger"
 
   ##
   # Used for `ConvenientService.root`.
   # - https://github.com/ruby/pathname
   #
-  spec.add_dependency "pathname"
+  # spec.add_dependency "pathname"
 
   ##
   # Used by step aware enumerables.
@@ -84,17 +84,17 @@ Gem::Specification.new do |spec|
   # Starting from Ruby 4.0, `Set` is a core class.
   # - https://www.ruby-lang.org/en/news/2025/12/18/ruby-4-0-0-preview3-released
   #
-  spec.add_dependency "set"
+  # spec.add_dependency "set"
 
   ##
   # Used for single logger instance.
   # - https://github.com/ruby/singleton
   #
-  spec.add_dependency "singleton"
+  # spec.add_dependency "singleton"
 
   ##
   # Used by stubs.
   # - https://github.com/ruby/ruby/blob/master/thread.c
   #
-  spec.add_dependency "thread"
+  # spec.add_dependency "thread"
 end
