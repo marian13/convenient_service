@@ -73,7 +73,7 @@ Gem::Specification.new do |spec|
   # NOTE: Ruby 3.4 prints the warning below.
   #   warning: logger was loaded from the standard library, but will no longer be part of the default gems starting from Ruby 4.0.0.
   #
-  spec.add_dependency "logger" if ConvenientService::Dependencies.ruby >= 3.4
+  spec.add_dependency "logger" if ConvenientService::Dependencies.ruby.version >= 3.4
 
   ##
   # Used for `ConvenientService.root`.
