@@ -96,7 +96,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/support/arguments/null_arguments.rb</dd>
+    <dd>lib/convenient_service/support/arguments/null_arguments.rb<span class="defines">,<br />
+  lib/convenient_service/support/arguments/null_arguments/exceptions.rb</span>
+</dd>
   </dl>
   
 </div>
@@ -129,7 +131,17 @@
   
 </ul>
 
-</div>
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Arguments/NullArguments/Exceptions.html" title="ConvenientService::Support::Arguments::NullArguments::Exceptions (module)">Exceptions</a></span>
+    
+  
+    
+  
+</p>
+
 
 
 
@@ -148,6 +160,28 @@
     </h2>
 
     <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#block=-instance_method" title="#block= (instance method)">#<strong>block=</strong>(other_block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
       
         <li class="public ">
   <span class="summary_signature">
@@ -177,6 +211,30 @@
   <span class="summary_signature">
     
       <a href="#null_arguments%3F-instance_method" title="#null_arguments? (instance method)">#<strong>null_arguments?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+      (also: #nil_arguments?)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_arguments-instance_method" title="#to_arguments (instance method)">#<strong>to_arguments</strong>  &#x21d2; ConvenientService::Support::Arguments </a>
     
 
     
@@ -255,18 +313,18 @@
       <pre class="lines">
 
 
-18
-19
 20
 21
-22</pre>
+22
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments/null_arguments.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments/null_arguments.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
-  <span class='ivar'>@args</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-  <span class='ivar'>@kwargs</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@args</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+  <span class='ivar'>@kwargs</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
   <span class='ivar'>@block</span> <span class='op'>=</span> <span class='kw'>nil</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -282,11 +340,88 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="null_arguments?-instance_method">
+  <h3 class="signature first" id="block=-instance_method">
+  
+    #<strong>block=</strong>(other_block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>other_block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments/null_arguments.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_block='>block=</span><span class='lparen'>(</span><span class='id identifier rubyid_other_block'>other_block</span><span class='rparen'>)</span>
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../ConvenientService.html#raise-class_method" title="ConvenientService.raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Arguments/NullArguments/Exceptions.html" title="ConvenientService::Support::Arguments::NullArguments::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Support/Arguments/NullArguments/Exceptions/BlockSetIsNotAllowed.html" title="ConvenientService::Support::Arguments::NullArguments::Exceptions::BlockSetIsNotAllowed (class)">BlockSetIsNotAllowed</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="null_arguments?-instance_method">
   
     #<strong>null_arguments?</strong>  &#x21d2; <tt>Boolean</tt> 
   
 
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='nil_arguments?-instance_method'>nil_arguments?</span></span>
+    </span>
   
 
   
@@ -337,15 +472,86 @@
       <pre class="lines">
 
 
-27
-28
-29</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments/null_arguments.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments/null_arguments.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_null_arguments?'>null_arguments?</span>
   <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_arguments-instance_method">
+  
+    #<strong>to_arguments</strong>  &#x21d2; <tt><span class='object_link'><a href="../Arguments.html" title="ConvenientService::Support::Arguments (class)">ConvenientService::Support::Arguments</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Arguments.html" title="ConvenientService::Support::Arguments (class)">ConvenientService::Support::Arguments</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/support/arguments/null_arguments.rb', line 48</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_arguments'>to_arguments</span>
+  <span class='const'><span class='object_link'><a href="../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Support.html" title="ConvenientService::Support (module)">Support</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Arguments.html" title="ConvenientService::Support::Arguments (class)">Arguments</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Arguments.html#initialize-instance_method" title="ConvenientService::Support::Arguments#initialize (method)">new</a></span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -357,7 +563,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Jan  2 22:56:03 2026 by
+  Generated on Sat Jan  3 16:20:06 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-4.0.0).
 </div>
