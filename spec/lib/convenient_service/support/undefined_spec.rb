@@ -46,7 +46,6 @@ RSpec.describe ConvenientService::Support::Undefined, type: :standard do
 
       ##
       # NOTE: This example group is for instance methods of constant, that is why it is nested.
-      # TODO: Custom matcher.
       #
       example_group "instance methods" do
         describe "#inspect" do

@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Support::NotPassed, type: :standard do
+RSpec.describe ConvenientService::Support::Block, type: :standard do
   example_group "inheritance" do
     ##
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
@@ -20,28 +20,28 @@ RSpec.describe ConvenientService::Support::NotPassed, type: :standard do
 
   example_group "instance methods" do
     describe "#[]" do
-      context "when `value` is NOT `ConvenientService::Support::NOT_PASSED`" do
+      context "when `value` is NOT `ConvenientService::Support::BLOCK`" do
         let(:value) { 42 }
 
         it "returns `false`" do
-          expect(ConvenientService::Support::NOT_PASSED[value]).to be(false)
+          expect(ConvenientService::Support::BLOCK[value]).to be(false)
         end
       end
 
-      context "when `value` is `ConvenientService::Support::NOT_PASSED`" do
-        let(:value) { ConvenientService::Support::NOT_PASSED }
+      context "when `value` is `ConvenientService::Support::BLOCK`" do
+        let(:value) { ConvenientService::Support::BLOCK }
 
         it "returns `true`" do
-          expect(ConvenientService::Support::NOT_PASSED[value]).to be(true)
+          expect(ConvenientService::Support::BLOCK[value]).to be(true)
         end
       end
     end
   end
 
   example_group "constants" do
-    describe "::NOT_PASSED" do
-      it "returns `ConvenientService::Support::NotPassed` instance" do
-        expect(ConvenientService::Support::NOT_PASSED).to be_instance_of(described_class)
+    describe "::BLOCK" do
+      it "returns `ConvenientService::Support::Block` instance" do
+        expect(ConvenientService::Support::BLOCK).to be_instance_of(described_class)
       end
 
       ##
@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Support::NotPassed, type: :standard do
       example_group "instance methods" do
         describe "#inspect" do
           it "returns inspect representation" do
-            expect(ConvenientService::Support::NOT_PASSED.inspect).to eq("not_passed")
+            expect(ConvenientService::Support::BLOCK.inspect).to eq("block")
           end
         end
       end

@@ -11,6 +11,7 @@ require_relative "support/unique_value"
 require_relative "support/not_passed"
 require_relative "support/undefined"
 require_relative "support/never_reach_here"
+require_relative "support/block"
 
 require_relative "support/concern"
 
