@@ -7,15 +7,7 @@
 
 module ConvenientService
   module Support
-    class Undefined < Support::UniqueValue
-      ##
-      # @param value [Object] Can be any type.
-      # @return [Boolean]
-      #
-      def [](value)
-        equal?(value)
-      end
-    end
+    class Undefined < Support::UniqueValue; end
 
     ##
     # @return [ConvenientService::Support::UniqueValue]

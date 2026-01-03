@@ -69,6 +69,40 @@ RSpec.describe ConvenientService::Support::UniqueValue, type: :standard do
       end
     end
 
+    describe "#[]" do
+      context "when `value` is NOT `unique_value`" do
+        let(:value) { 42 }
+
+        it "returns `false`" do
+          expect(unique_value[value]).to be(false)
+        end
+
+        it "delegates to `equal?`" do
+          allow(unique_value).to receive(:equal?).and_call_original
+
+          unique_value[value]
+
+          expect(unique_value).to have_received(:equal?)
+        end
+      end
+
+      context "when `value` is `unique_value`" do
+        let(:value) { unique_value }
+
+        it "returns `true`" do
+          expect(unique_value[value]).to be(true)
+        end
+
+        it "delegates to `equal?`" do
+          allow(unique_value).to receive(:equal?).and_call_original
+
+          unique_value[value]
+
+          expect(unique_value).to have_received(:equal?)
+        end
+      end
+    end
+
     example_group "comparison" do
       describe "#==" do
         let(:unique_value) { described_class.new("foo") }

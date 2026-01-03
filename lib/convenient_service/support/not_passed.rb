@@ -7,15 +7,7 @@
 
 module ConvenientService
   module Support
-    class NotPassed < Support::UniqueValue
-      ##
-      # @param value [Object] Can be any type.
-      # @return [Boolean]
-      #
-      def [](value)
-        equal?(value)
-      end
-    end
+    class NotPassed < Support::UniqueValue; end
 
     ##
     # @return [ConvenientService::Support::UniqueValue]

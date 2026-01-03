@@ -23,6 +23,14 @@ module ConvenientService
       end
 
       ##
+      # @param value [Object] Can be any type.
+      # @return [Boolean]
+      #
+      def [](value)
+        equal?(value)
+      end
+
+      ##
       # @param other [Object] Can be any type.
       # @return [Boolean, nil]
       #
