@@ -5,6 +5,8 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
+require_relative "null_arguments/exceptions"
+
 module ConvenientService
   module Support
     class Arguments
@@ -16,9 +18,16 @@ module ConvenientService
         # @return [void]
         #
         def initialize
-          @args = []
-          @kwargs = {}
+          @args = [].freeze
+          @kwargs = {}.freeze
           @block = nil
+        end
+
+        ##
+        # @param other_block [Proc, nil]
+        #
+        def block=(other_block)
+          ::ConvenientService.raise Exceptions::BlockSetIsNotAllowed.new
         end
 
         ##
@@ -26,6 +35,18 @@ module ConvenientService
         #
         def null_arguments?
           true
+        end
+
+        ##
+        # @return [Boolean]
+        #
+        alias_method :nil_arguments?, :null_arguments?
+
+        ##
+        # @return [ConvenientService::Support::Arguments]
+        #
+        def to_arguments
+          ConvenientService::Support::Arguments.new
         end
       end
     end

@@ -17,19 +17,8 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
   let(:kwargs) { {foo: :bar} }
   let(:block) { proc { :foo } }
 
-  example_group "attributes" do
-    subject { arguments }
-
-    ##
-    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
-    #
-    it { is_expected.to respond_to(:args) }
-    it { is_expected.to respond_to(:kwargs) }
-    it { is_expected.to respond_to(:block) }
-  end
-
   example_group "class methods" do
-    describe "#new" do
+    describe ".new" do
       context "when args are NOT passed" do
         let(:arguments) { described_class.new(**kwargs, &block) }
 
@@ -54,12 +43,74 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         end
       end
     end
+
+    describe ".null_arguments" do
+      it "returns null arguments" do
+        expect(described_class.null_arguments).to be_instance_of(described_class::NullArguments)
+      end
+    end
+
+    describe ".nil_arguments" do
+      it "returns null arguments" do
+        expect(described_class.nil_arguments).to be_instance_of(described_class::NullArguments)
+      end
+    end
   end
 
   example_group "instance methods" do
+    example_group "attributes" do
+      subject { arguments }
+
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      it { is_expected.to respond_to(:args) }
+      it { is_expected.to respond_to(:kwargs) }
+      it { is_expected.to respond_to(:block) }
+      it { is_expected.to respond_to(:block=) }
+    end
+
+    describe "#args" do
+      it "returns args" do
+        expect(arguments.args).to eq(args)
+      end
+    end
+
+    describe "#kwargs" do
+      it "returns kwargs" do
+        expect(arguments.kwargs).to eq(kwargs)
+      end
+    end
+
+    describe "#block" do
+      it "returns block" do
+        expect(arguments.block).to eq(block)
+      end
+    end
+
+    describe "#block=" do
+      let(:other_block) { proc { :bar } }
+
+      it "returns block" do
+        expect(arguments.block = other_block).to eq(other_block)
+      end
+
+      it "sets block" do
+        arguments.block = other_block
+
+        expect(arguments.block).to eq(other_block)
+      end
+    end
+
     describe "#null_arguments?" do
       it "returns `false`" do
         expect(arguments.null_arguments?).to be(false)
+      end
+    end
+
+    describe "#nil_arguments?" do
+      it "returns `false`" do
+        expect(arguments.nil_arguments?).to be(false)
       end
     end
 
@@ -320,6 +371,12 @@ RSpec.describe ConvenientService::Support::Arguments, type: :standard do
         it "returns hash with all possible keys" do
           expect(arguments.deconstruct_keys(nil)).to eq({args: args, kwargs: kwargs, block: block})
         end
+      end
+    end
+
+    describe "#to_arguments" do
+      it "returns self" do
+        expect(arguments.to_arguments).to equal(arguments)
       end
     end
   end

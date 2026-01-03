@@ -13,21 +13,27 @@ module ConvenientService
     class Arguments
       ##
       # @!attribute [r] args
-      #   @return [Array]
+      #   @return [Array<Object>]
       #
       attr_reader :args
 
       ##
       # @!attribute [r] kwargs
-      #   @return [Hash]
+      #   @return [Hash{Symbol => Object}]
       #
       attr_reader :kwargs
 
       ##
       # @!attribute [r] block
-      #   @return [Proc]
+      #   @return [Proc, nil]
       #
       attr_reader :block
+
+      ##
+      # @!attribute [w] block
+      #   @return [Proc, nil]
+      #
+      attr_writer :block
 
       ##
       # @param args [Array<Object>]
@@ -48,6 +54,11 @@ module ConvenientService
         def null_arguments
           @null_arguments ||= Support::Arguments::NullArguments.new
         end
+
+        ##
+        # @return [ConvenientService::Support::Arguments::NullArguments]
+        #
+        alias_method :nil_arguments, :null_arguments
       end
 
       ##
@@ -56,6 +67,11 @@ module ConvenientService
       def null_arguments?
         false
       end
+
+      ##
+      # @return [Boolean]
+      #
+      alias_method :nil_arguments?, :null_arguments?
 
       ##
       # @return [Booleam]
@@ -136,6 +152,13 @@ module ConvenientService
             hash[key] = block
           end
         end
+      end
+
+      ##
+      # @return [ConvenientService::Support::Arguments]
+      #
+      def to_arguments
+        self
       end
     end
   end
