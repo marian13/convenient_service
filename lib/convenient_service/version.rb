@@ -13,5 +13,5 @@ module ConvenientService
   # @since 1.0.0
   # @return [String]
   #
-  VERSION = "0.21.1"
+  VERSION = "0.22.0"
 end
