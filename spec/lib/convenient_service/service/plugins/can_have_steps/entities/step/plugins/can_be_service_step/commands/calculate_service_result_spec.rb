@@ -94,7 +94,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
           specify do
             expect { command_result }
               .to delegate_to(step.service_class, :result)
-              .with_arguments(**step.input_values)
+              .with_arguments(*step.input_arguments.args, **step.input_arguments.kwargs, &step.input_arguments.block)
               .and_return_its_value
           end
         end

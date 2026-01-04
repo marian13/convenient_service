@@ -47,13 +47,7 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                     #
                     def call_method(method)
-                      params = Support::MethodParameters.new(method.parameters)
-
-                      return method.call(**input_values) if params.has_rest_kwargs?
-
-                      return method.call(**input_values.slice(*params.named_kwargs_keys)) if params.named_kwargs_keys.any?
-
-                      method.call
+                      Utils::Method.loose_call(method, *input_arguments.args, **input_arguments.kwargs, &input_arguments.block)
                     end
 
                     ##
@@ -81,10 +75,10 @@ module ConvenientService
                     end
 
                     ##
-                    # @return [Hash{Symbol => Object}]
+                    # @return [ConvenientService::Support::Arguments]
                     #
-                    def input_values
-                      @input_values ||= step.input_values
+                    def input_arguments
+                      @input_arguments ||= step.input_arguments
                     end
                   end
                 end

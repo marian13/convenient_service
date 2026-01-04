@@ -177,14 +177,11 @@ module ConvenientService
                 ##
                 # @api public
                 #
-                # @return [Hash{Symbol => Object}]
+                # @return [ConvenientService::Support::Arguments]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
-                # @internal
-                #   TODO: Refactor to `input_arguments` to support args and block via `step`?
-                #
-                def input_values
-                  @input_values ||= calculate_input_values
+                def input_arguments
+                  @input_arguments ||= calculate_input_arguments
                 end
 
                 ##
@@ -329,14 +326,31 @@ module ConvenientService
                 private
 
                 ##
-                # @return [Hash{Symbol => Object}]
+                # @return [ConvenientService::Support::Arguments]
                 # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepHasNoOrganizer]
                 #
                 # @internal
-                #   TODO: Commands instead of private methods.
+                #   TODO: Refactor `inputs` array to `inputs` collection.
                 #
-                def calculate_input_values
-                  inputs.reduce({}) { |values, input| values.merge(input.key.to_sym => input.value) }
+                def calculate_input_arguments
+                  arguments = Support::Arguments.new
+
+                  inputs.each do |input|
+                    key = input.key.value
+
+                    case key
+                    when ::Symbol
+                      arguments.kwargs[key] = input.value
+                    when ::Integer
+                      arguments.args[key] = input.value
+                    when Support::BLOCK
+                      arguments.block = input.value
+                    else
+                      ::ConvenientService.raise Exceptions::UnsupportedKeyType.new(key: key, step: self)
+                    end
+                  end
+
+                  arguments
                 end
 
                 ##

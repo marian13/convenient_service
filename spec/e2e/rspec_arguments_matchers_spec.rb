@@ -6,5 +6,5 @@
 ##
 
 ##
-# TODO: Direct specs.
+# TODO: Specs.
 ##

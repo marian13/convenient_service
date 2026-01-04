@@ -42,6 +42,23 @@ module ConvenientService
                   initialize(message)
                 end
               end
+
+              class UnsupportedKeyType < ::ConvenientService::Exception
+                ##
+                # @param key [Symbol]
+                # @param step [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
+                # @return [void]
+                #
+                def initialize_with_kwargs(key:, step:)
+                  message = <<~TEXT
+                    Input key `#{key.inspect}` of step `#{step.printable_action}` has unsupported type `#{key.class}`.
+
+                    Maybe there is a typo in `in` definition?
+                  TEXT
+
+                  initialize(message)
+                end
+              end
             end
           end
         end

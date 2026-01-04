@@ -33,13 +33,10 @@ module ConvenientService
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                     # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Exceptions::StepIsNotServiceStep]
                     #
-                    # @internal
-                    #   IMPORTANT: `service.result(**input_values)` is the reason, why services should have only kwargs as arguments.
-                    #
                     def call
                       ::ConvenientService.raise Exceptions::StepIsNotServiceStep.new(step: step) unless step.service_step?
 
-                      service.result(**input_values)
+                      service.result(*input_arguments.args, **input_arguments.kwargs, &input_arguments.block)
                     end
 
                     private
@@ -52,10 +49,10 @@ module ConvenientService
                     end
 
                     ##
-                    # @return [Hash{Symbol => Object}]
+                    # @return [ConvenientService::Support::Arguments]
                     #
-                    def input_values
-                      @input_values ||= step.input_values
+                    def input_arguments
+                      @input_arguments ||= step.input_arguments
                     end
                   end
                 end

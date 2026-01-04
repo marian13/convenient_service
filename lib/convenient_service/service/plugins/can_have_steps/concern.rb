@@ -15,6 +15,14 @@ module ConvenientService
           class_methods do
             ##
             # @api public
+            # @return [ConvenientService::Support::UniqueValue]
+            #
+            def block
+              Support::BLOCK
+            end
+
+            ##
+            # @api public
             #
             # Allows to pass a value to `in` method without its intermediate processing.
             # @see https://userdocs.convenientservice.org/basics/step_to_result_translation_table

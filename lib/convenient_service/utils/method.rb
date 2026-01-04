@@ -6,6 +6,7 @@
 ##
 
 require_relative "method/defined"
+require_relative "method/loose_call"
 require_relative "method/name"
 require_relative "method/remove"
 
@@ -15,6 +16,10 @@ module ConvenientService
       class << self
         def defined?(...)
           Defined.call(...)
+        end
+
+        def loose_call(...)
+          LooseCall.call(...)
         end
 
         def remove(...)

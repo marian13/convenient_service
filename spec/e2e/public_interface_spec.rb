@@ -241,6 +241,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :around_without_middlewares, # private
           :before, # public
           :before_without_middlewares, # private
+          :block, # public
           :call, # public
           :callback, # TODO: Remove `callback`, it should NOT be exposed.
           :callbacks, # public
@@ -1143,7 +1144,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :failure?, # public
           :has_organizer?, # private
           :index, # public
-          :input_values, # public
+          :input_arguments, # public
           :inputs, # private
           :kwargs, # private
           :message, # public
@@ -1183,7 +1184,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
 
       specify do
         expect(private_instance_methods_of(step_class)).to eq([
-          :calculate_input_values, # private # TODO: Remove.
+          :calculate_input_arguments, # private # TODO: Remove.
           :calculate_output_values, # private # TODO: Remove.
           :initialize, # public*
           :method_missing, # public*
@@ -1261,7 +1262,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :fallback_true_step?, # public
           :has_organizer?, # private
           :index, # public
-          :input_values, # public
+          :input_arguments, # public
           :inputs, # private
           :inspect, # public
           :internals, # private
@@ -1315,7 +1316,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
 
       specify do
         expect(private_instance_methods_of(step_class)).to eq([
-          :calculate_input_values, # private # TODO: Remove.
+          :calculate_input_arguments, # private # TODO: Remove.
           :calculate_output_values, # private # TODO: Remove.
           :initialize, # public*
           :method_missing, # public*

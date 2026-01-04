@@ -288,6 +288,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAfterStepCallbacks::M
                       success(baz: :baz).tap { out.puts "step :foo" }
                     end
 
+                    def bar
+                      :bar
+                    end
+
                     define_method(:out) { out }
                   end
                 end

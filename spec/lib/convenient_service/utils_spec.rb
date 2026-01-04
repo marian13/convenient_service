@@ -12,19 +12,30 @@ require "convenient_service"
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Utils, type: :standard do
   example_group "class methods" do
-    describe ".to_bool" do
-      let(:object) { :foo }
+    describe ".memoize_including_falsy_values" do
+      let(:object) { Object.new }
+      let(:ivar_name) { :@foo }
+      let(:value_block) { proc { false } }
 
-      it "delegates to `ConvenientService::Utils::Bool::ToBool.call`" do
-        allow(described_class::Bool::ToBool).to receive(:call).with(object).and_call_original
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+      it "delegates to `ConvenientService::Utils::Object::MemoizeIncludingFalsyValues.call`" do
+        expect(described_class::Object::MemoizeIncludingFalsyValues)
+          .to receive(:call)
+            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+              expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, value_block])
 
-        described_class.to_bool(object)
+              original.call(*actual_args, **actual_kwargs, &actual_block)
+            }
 
-        expect(described_class::Bool::ToBool).to have_received(:call).with(object)
+        described_class.memoize_including_falsy_values(object, ivar_name, &value_block)
       end
+      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
-      it "returns `ConvenientService::Utils::Bool::ToBool.call` value" do
-        expect(described_class.to_bool(object)).to eq(described_class::Bool::ToBool.call(object))
+      it "returns `ConvenientService::Utils::Object::MemoizeIncludingFalsyValues.call` value" do
+        expect(described_class.memoize_including_falsy_values(object, ivar_name, &value_block)).to eq(described_class::Object::MemoizeIncludingFalsyValues.call(object, ivar_name, &value_block))
       end
     end
 
@@ -66,30 +77,19 @@ RSpec.describe ConvenientService::Utils, type: :standard do
       end
     end
 
-    describe ".memoize_including_falsy_values" do
-      let(:object) { Object.new }
-      let(:ivar_name) { :@foo }
-      let(:value_block) { proc { false } }
+    describe ".to_bool" do
+      let(:object) { :foo }
 
-      ##
-      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
-      #
-      # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
-      it "delegates to `ConvenientService::Utils::Object::MemoizeIncludingFalsyValues.call`" do
-        expect(described_class::Object::MemoizeIncludingFalsyValues)
-          .to receive(:call)
-            .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
-              expect([actual_args, actual_kwargs, actual_block]).to eq([[object, ivar_name], {}, value_block])
+      it "delegates to `ConvenientService::Utils::Bool::ToBool.call`" do
+        allow(described_class::Bool::ToBool).to receive(:call).with(object).and_call_original
 
-              original.call(*actual_args, **actual_kwargs, &actual_block)
-            }
+        described_class.to_bool(object)
 
-        described_class.memoize_including_falsy_values(object, ivar_name, &value_block)
+        expect(described_class::Bool::ToBool).to have_received(:call).with(object)
       end
-      # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
-      it "returns `ConvenientService::Utils::Object::MemoizeIncludingFalsyValues.call` value" do
-        expect(described_class.memoize_including_falsy_values(object, ivar_name, &value_block)).to eq(described_class::Object::MemoizeIncludingFalsyValues.call(object, ivar_name, &value_block))
+      it "returns `ConvenientService::Utils::Bool::ToBool.call` value" do
+        expect(described_class.to_bool(object)).to eq(described_class::Bool::ToBool.call(object))
       end
     end
 

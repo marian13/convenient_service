@@ -50,6 +50,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Concern, type:
   end
 
   example_group "class methods" do
+    describe ".block" do
+      it "returns `ConvenientService::Support::BLOCK`" do
+        expect(service_class.block).to equal(ConvenientService::Support::BLOCK)
+      end
+    end
+
     describe ".raw" do
       let(:value) { :foo }
 

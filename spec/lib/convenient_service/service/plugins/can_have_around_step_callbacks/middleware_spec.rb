@@ -353,6 +353,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
                     success(baz: :baz).tap { out.puts "step :foo" }
                   end
 
+                  def bar
+                    :bar
+                  end
+
                   define_method(:out) { out }
                 end
               end
@@ -403,6 +407,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
 
                       def foo
                         success(baz: :baz).tap { out.puts "step :foo" }
+                      end
+
+                      def bar
+                        :bar
                       end
 
                       define_method(:out) { out }

@@ -328,7 +328,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       specify { expect { step.inputs }.to delegate_to(step.params, :inputs) }
     end
 
-    describe "#input_values" do
+    describe "#input_arguments" do
       context "when `organizer` is NOT set" do
         let(:organizer) { nil }
 
@@ -341,23 +341,91 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
 
         it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer`" do
-          expect { step.input_values }
+          expect { step.input_arguments }
             .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
             .with_message(message)
         end
 
         specify do
-          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer) { step.input_values } }
+          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer) { step.input_arguments } }
             .to delegate_to(ConvenientService, :raise)
         end
       end
 
       context "when `organizer` is set" do
-        it "returns input values" do
-          expect(step.input_values).to eq({foo: :organizer_foo})
+        it "returns input arguments" do
+          expect(step.input_arguments).to eq(ConvenientService::Support::Arguments.new(foo: :organizer_foo))
         end
 
-        specify { expect { step.input_values }.to delegate_to(step.inputs.first.key, :to_sym) }
+        context "when inputs have integer key" do
+          let(:step_service_klass) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def initialize(first, second, foo:)
+                @first = first
+                @second = second
+                @foo = foo
+              end
+
+              def result
+                success(data: {bar: :step_service_bar})
+              end
+            end
+          end
+
+          let(:inputs) { [:foo, 0 => -> { :bar }, 1 => -> { :baz }] }
+
+          it "returns input arguments" do
+            expect(step.input_arguments).to eq(ConvenientService::Support::Arguments.new(:bar, :baz, foo: :organizer_foo))
+          end
+        end
+
+        context "when inputs have block key" do
+          let(:step_service_klass) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def initialize(foo:, &block)
+                @foo = foo
+                @block = block
+              end
+
+              def result
+                success(data: {bar: :step_service_bar})
+              end
+            end
+          end
+
+          let(:inputs) { [:foo, ConvenientService::Support::BLOCK => -> { proc { :bar } }] }
+
+          it "returns input arguments" do
+            expect(step.input_arguments.block.call).to eq(:bar)
+          end
+        end
+
+        context "when inputs have unsupported key" do
+          let(:inputs) { [:foo, "abc" => -> { block }] }
+
+          let(:exception_message) do
+            <<~TEXT
+              Input key `"abc"` of step `#{step.printable_action}` has unsupported type `String`.
+
+              Maybe there is a typo in `in` definition?
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::UnsupportedKeyType`" do
+            expect { step.input_arguments }
+              .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::UnsupportedKeyType)
+              .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::UnsupportedKeyType) { step.input_arguments } }
+              .to delegate_to(ConvenientService, :raise)
+          end
+        end
       end
     end
 

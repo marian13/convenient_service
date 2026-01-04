@@ -9,6 +9,7 @@ require "spec_helper"
 
 require "convenient_service"
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Utils::Method, type: :standard do
   describe ".defined?" do
     let(:method) { :foo }
@@ -37,6 +38,49 @@ RSpec.describe ConvenientService::Utils::Method, type: :standard do
 
     it "returns `ConvenientService::Utils::Method::Defined.call` value" do
       expect(described_class.defined?(method, klass, public: public, protected: protected, private: private)).to eq(described_class::Defined.call(method, klass, public: public, protected: protected, private: private))
+    end
+  end
+
+  describe ".loose_call" do
+    let(:klass) do
+      Class.new do
+        def foo
+          [__method__]
+        end
+      end
+    end
+
+    let(:instanse) { klass.new }
+    let(:method) { :foo }
+
+    let(:args) { [:foo] }
+    let(:kwargs) { {foo: :bar} }
+    let(:block) { proc { :foo } }
+
+    ##
+    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+    #
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+    it "delegates to `ConvenientService::Utils::Method::LooseCall.call`" do
+      expect(described_class::LooseCall)
+        .to receive(:call)
+          .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
+            expect([actual_args, actual_kwargs, actual_block]).to eq([args, kwargs, block])
+
+            original.call(*actual_args, **actual_kwargs, &actual_block)
+          }
+
+      described_class.loose_call(method, *args, **kwargs, &block)
+    end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
+
+    it "returns `ConvenientService::Utils::Method::Remove.call` value" do
+      ##
+      # NOTE: Returns `true` when called for the first time, `false` for all the subsequent calls.
+      #
+      described_class.loose_call(method, *args, **kwargs, &block)
+
+      expect(described_class.loose_call(method, *args, **kwargs, &block)).to eq(described_class::Remove.call(method, *args, **kwargs, &block))
     end
   end
 
@@ -81,3 +125,4 @@ RSpec.describe ConvenientService::Utils::Method, type: :standard do
     end
   end
 end
+# rubocop:enable RSpec/MultipleMemoizedHelpers

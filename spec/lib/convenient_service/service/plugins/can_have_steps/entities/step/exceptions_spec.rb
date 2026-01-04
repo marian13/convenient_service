@@ -14,4 +14,5 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   specify { expect(described_class::StepHasNoOrganizer).to be_descendant_of(ConvenientService::Exception) }
   specify { expect(described_class::StepResultDataNotExistingAttribute).to be_descendant_of(ConvenientService::Exception) }
+  specify { expect(described_class::UnsupportedKeyType).to be_descendant_of(ConvenientService::Exception) }
 end
