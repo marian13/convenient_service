@@ -471,9 +471,15 @@ RSpec.describe "Loose method step arguments", type: [:standard, :e2e] do
           service.step :method_step
         end
 
+        # rubocop:disable RSpec/MultipleExpectations
         it "raise `ArgumentError`" do
-          expect { service.result }.to raise_error(ArgumentError).with_message("missing keyword: :foo")
+          if ConvenientService::Dependencies.ruby.jruby?
+            expect { service.result }.to raise_error(ArgumentError).with_message("missing keyword: foo")
+          else
+            expect { service.result }.to raise_error(ArgumentError).with_message("missing keyword: :foo")
+          end
         end
+        # rubocop:enable RSpec/MultipleExpectations
       end
 
       context "when step definition - (foo:)" do
@@ -565,9 +571,15 @@ RSpec.describe "Loose method step arguments", type: [:standard, :e2e] do
           service.step :method_step
         end
 
+        # rubocop:disable RSpec/MultipleExpectations
         it "raise `ArgumentError`" do
-          expect { service.result }.to raise_error(ArgumentError).with_message("missing keywords: :foo, :bar")
+          if ConvenientService::Dependencies.ruby.jruby?
+            expect { service.result }.to raise_error(ArgumentError).with_message("missing keywords: foo")
+          else
+            expect { service.result }.to raise_error(ArgumentError).with_message("missing keywords: :foo, :bar")
+          end
         end
+        # rubocop:enable RSpec/MultipleExpectations
       end
 
       context "when step definition - (foo:)" do
@@ -578,9 +590,15 @@ RSpec.describe "Loose method step arguments", type: [:standard, :e2e] do
             ]
         end
 
+        # rubocop:disable RSpec/MultipleExpectations
         it "raise `ArgumentError`" do
-          expect { service.result }.to raise_error(ArgumentError).with_message("missing keyword: :bar")
+          if ConvenientService::Dependencies.ruby.jruby?
+            expect { service.result }.to raise_error(ArgumentError).with_message("missing keyword: bar")
+          else
+            expect { service.result }.to raise_error(ArgumentError).with_message("missing keyword: :bar")
+          end
         end
+        # rubocop:enable RSpec/MultipleExpectations
       end
 
       context "when step definition - (foo:, bar:)" do
@@ -612,9 +630,15 @@ RSpec.describe "Loose method step arguments", type: [:standard, :e2e] do
           service.step :method_step
         end
 
+        # rubocop:disable RSpec/MultipleExpectations
         it "raise `ArgumentError`" do
-          expect { service.result }.to raise_error(ArgumentError).with_message("missing keyword: :foo")
+          if ConvenientService::Dependencies.ruby.jruby?
+            expect { service.result }.to raise_error(ArgumentError).with_message("missing keyword: foo")
+          else
+            expect { service.result }.to raise_error(ArgumentError).with_message("missing keyword: :foo")
+          end
         end
+        # rubocop:enable RSpec/MultipleExpectations
       end
 
       context "when step definition - (foo:)" do

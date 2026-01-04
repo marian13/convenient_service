@@ -46,6 +46,9 @@ module ConvenientService
                     # @param method [Method]
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                     #
+                    # @internal
+                    #   TODO: Extract loose arguments from own method, but call regular method. This way middlewares can be applied to method steps.
+                    #
                     def call_method(method)
                       Utils::Method.loose_call(method, *input_arguments.args, **input_arguments.kwargs, &input_arguments.block)
                     end
