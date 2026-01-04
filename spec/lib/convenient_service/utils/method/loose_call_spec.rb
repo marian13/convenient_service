@@ -7,5 +7,5 @@
 
 ##
 # TODO: Direct specs.
-# NOTE: Current tested indirectly by `spec/e2e/loose_method_steps_spec.rb`.
+# NOTE: Currently tested indirectly by `spec/e2e/loose_method_steps_spec.rb`.
 ##

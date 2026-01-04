@@ -51,7 +51,7 @@ RSpec.describe ConvenientService::Utils::Method, type: :standard do
     end
 
     let(:instanse) { klass.new }
-    let(:method) { :foo }
+    let(:method) { instanse.method(:foo) }
 
     let(:args) { [:foo] }
     let(:kwargs) { {foo: :bar} }
@@ -65,7 +65,7 @@ RSpec.describe ConvenientService::Utils::Method, type: :standard do
       expect(described_class::LooseCall)
         .to receive(:call)
           .and_wrap_original { |original, *actual_args, **actual_kwargs, &actual_block|
-            expect([actual_args, actual_kwargs, actual_block]).to eq([args, kwargs, block])
+            expect([actual_args, actual_kwargs, actual_block]).to eq([[method, *args], kwargs, block])
 
             original.call(*actual_args, **actual_kwargs, &actual_block)
           }
@@ -74,13 +74,13 @@ RSpec.describe ConvenientService::Utils::Method, type: :standard do
     end
     # rubocop:enable RSpec/MultipleExpectations, RSpec/MessageSpies, RSpec/ExampleLength
 
-    it "returns `ConvenientService::Utils::Method::Remove.call` value" do
+    it "returns `ConvenientService::Utils::Method::LooseCall.call` value" do
       ##
       # NOTE: Returns `true` when called for the first time, `false` for all the subsequent calls.
       #
       described_class.loose_call(method, *args, **kwargs, &block)
 
-      expect(described_class.loose_call(method, *args, **kwargs, &block)).to eq(described_class::Remove.call(method, *args, **kwargs, &block))
+      expect(described_class.loose_call(method, *args, **kwargs, &block)).to eq(described_class::LooseCall.call(method, *args, **kwargs, &block))
     end
   end
 
