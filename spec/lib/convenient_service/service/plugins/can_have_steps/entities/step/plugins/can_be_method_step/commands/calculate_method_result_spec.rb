@@ -173,14 +173,27 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
                     end
                   end
 
-                  it "raises `ArgumentError`" do
-                    expect { command_result }.to raise_error(ArgumentError)
-                  end
+                  if ConvenientService::Dependencies.ruby.version >= 3.0
+                    it "raises `ArgumentError`" do
+                      expect { command_result }.to raise_error(ArgumentError)
+                    end
 
-                  specify do
-                    expect { ignoring_exception(ArgumentError) { command_result } }
-                      .to delegate_to(ConvenientService::Utils::Module, :get_own_instance_method)
-                      .with_arguments(step.organizer.class, step.method, private: true)
+                    specify do
+                      expect { ignoring_exception(ArgumentError) { command_result } }
+                        .to delegate_to(ConvenientService::Utils::Module, :get_own_instance_method)
+                        .with_arguments(step.organizer.class, step.method, private: true)
+                    end
+                  else
+                    ##
+                    # HACK: Ruby 2.7 `(*args, **kwargs)` unexpected behaviour.
+                    #
+                    it "suprisingly calls that own method with that required arg" do
+                      ##
+                      # NOTE: Own method returns `success`, while prepended returns `failure`.
+                      # See `organizer_service_class` definition above.
+                      #
+                      expect(command_result).to be_success.with_data(required_arg: {})
+                    end
                   end
                 end
 

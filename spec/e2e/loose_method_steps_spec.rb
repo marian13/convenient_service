@@ -165,6 +165,9 @@ RSpec.describe "Loose method step arguments", type: [:standard, :e2e] do
             expect { service.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1)")
           end
         else
+          ##
+          # HACK: Ruby 2.7 `(*args, **kwargs)` unexpected behaviour.
+          #
           it "uses unpredicatble loose args" do
             expect(service.result).to be_success.with_data(args: [{}, "Inside `arg2`"])
           end
@@ -278,6 +281,9 @@ RSpec.describe "Loose method step arguments", type: [:standard, :e2e] do
             expect { service.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 2)")
           end
         else
+          ##
+          # HACK: Ruby 2.7 `(*args, **kwargs)` unexpected behaviour.
+          #
           it "uses unpredicatble loose args" do
             expect(service.result).to be_success.with_data(args: ["Outside `arg1`", {}])
           end
@@ -318,6 +324,9 @@ RSpec.describe "Loose method step arguments", type: [:standard, :e2e] do
             expect { service.result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 0, expected 1..2)")
           end
         else
+          ##
+          # HACK: Ruby 2.7 `(*args, **kwargs)` unexpected behaviour.
+          #
           it "uses unpredicatble loose args" do
             expect(service.result).to be_success.with_data(args: [{}, "Default `arg2`"])
           end
