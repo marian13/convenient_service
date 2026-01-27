@@ -484,7 +484,8 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :with_failure_and_error_fallback, # public
           :with_failure_fallback, # public
           :with_fallback, # public
-          :with_fallback_for # public
+          :with_fallback_for, # public
+          :with_renamed_keys # public
         ])
       end
 
