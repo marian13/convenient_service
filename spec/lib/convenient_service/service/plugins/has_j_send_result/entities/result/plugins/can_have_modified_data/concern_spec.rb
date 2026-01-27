@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
         end
 
-        specify do
+        it "returns original result" do
           expect { result.with_renamed_keys(foo: :qux) }.to cache_its_value
         end
 
@@ -86,7 +86,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
         end
 
-        specify do
+        it "returns original result" do
           expect { result.with_renamed_keys(foo: :qux) }.to cache_its_value
         end
 
@@ -147,9 +147,123 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
               .with_message(exception_message)
           end
 
-          specify do
+          it "returns original result" do
             expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveModifiedData::Exceptions::NotExistingAttribute) { result.with_renamed_keys(renamings) } }
               .to delegate_to(ConvenientService, :raise)
+          end
+        end
+
+        context "when `values` are `nil`" do
+          it "returns original result" do
+            expect { result.with_renamed_keys(nil) }.to cache_its_value
+          end
+        end
+      end
+    end
+
+    describe "#with_extra_keys" do
+      let(:result) { service.result }
+
+      context "when result has `failure` status" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              failure("from original result")
+            end
+          end
+        end
+
+        it "returns original result" do
+          expect { result.with_extra_keys(foo: :qux) }.to cache_its_value
+        end
+
+        context "when data has key for overriding" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                failure(foo: :foo)
+              end
+            end
+          end
+
+          it "ignores that key" do
+            expect(result.with_extra_keys(foo: :qux)).to be_failure.with_data(foo: :foo)
+          end
+        end
+      end
+
+      context "when result has `error` status" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              failure("from original result")
+            end
+          end
+        end
+
+        it "returns original result" do
+          expect { result.with_extra_keys(foo: :qux) }.to cache_its_value
+        end
+
+        context "when data has key for overriding" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                error(foo: :foo)
+              end
+            end
+          end
+
+          it "ignores that key" do
+            expect(result.with_extra_keys(foo: :qux)).to be_error.with_data(foo: :foo)
+          end
+        end
+      end
+
+      context "when result has success status" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              success(bar: :bar)
+            end
+          end
+        end
+
+        let(:values) { {foo: :qux, baz: :quux} }
+
+        it "merges data keys according to `values`" do
+          expect(result.with_extra_keys(values)).to be_success.with_data(foo: :qux, bar: :bar, baz: :quux)
+        end
+
+        context "when data has key for overriding" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success(foo: :foo, bar: :bar, baz: :baz)
+              end
+            end
+          end
+
+          it "oveerides those data keys according to `values`" do
+            expect(result.with_extra_keys(values)).to be_success.with_data(foo: :qux, bar: :bar, baz: :quux)
+          end
+        end
+
+        context "when `values` are `nil`" do
+          it "returns original result" do
+            expect { result.with_extra_keys(nil) }.to cache_its_value
           end
         end
       end
