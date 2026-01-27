@@ -5,6 +5,18 @@
 
 # Changelog
 
+## [0.22.0](https://github.com/marian13/convenient_service/compare/v0.21.1...v0.22.0) (2026-01-27)
+
+
+### Features
+
+* **arguments:** add block attr writer, nil_arguments aliases, to_arguments methods, and exceptions for null_arguments ([91ae785](https://github.com/marian13/convenient_service/commit/91ae7850166b9bfadc86b93e5c5003db4311f118))
+* **results:** introduce #with_extra_keys ([1b9bd47](https://github.com/marian13/convenient_service/commit/1b9bd4750ef0412174eccc7f90c439c12dce1013))
+* **results:** introduce #with_only_keys and #with_except_keys ([3f13a72](https://github.com/marian13/convenient_service/commit/3f13a7231e5852c1b04e94e27697790e4c37881b))
+* **results:** introduce with_renamed_keys ([9931495](https://github.com/marian13/convenient_service/commit/9931495fe8cee57fa8fa145e72928010d3546abf))
+* **step:** allow positional arguments and block as step inputs (positional arguments need Ruby 3.0+) ([558c435](https://github.com/marian13/convenient_service/commit/558c435887ae34befcd0c915166513210f37c277))
+* **support:** introduce block unique value ([7009202](https://github.com/marian13/convenient_service/commit/700920224536410e10c72cecb982745daa5b53ee))
+
 ## [0.21.1](https://github.com/marian13/convenient_service/compare/v0.21.0...v0.21.1) (2025-12-31)
 
 
