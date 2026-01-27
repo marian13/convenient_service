@@ -12,5 +12,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveModifiedData::Exceptions, type: :standard do
   include ConvenientService::RSpec::Matchers::BeDescendantOf
 
-  specify { expect(described_class::NotExistingAttribute).to be_descendant_of(ConvenientService::Exception) }
+  specify { expect(described_class::NotExistingAttributeForOnly).to be_descendant_of(ConvenientService::Exception) }
+  specify { expect(described_class::NotExistingAttributeForExcept).to be_descendant_of(ConvenientService::Exception) }
+  specify { expect(described_class::NotExistingAttributeForRename).to be_descendant_of(ConvenientService::Exception) }
 end

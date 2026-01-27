@@ -14,7 +14,35 @@ module ConvenientService
             module Plugins
               module CanHaveModifiedData
                 module Exceptions
-                  class NotExistingAttribute < ::ConvenientService::Exception
+                  class NotExistingAttributeForOnly < ::ConvenientService::Exception
+                    ##
+                    # @param key [Symbol]
+                    # @return [void]
+                    #
+                    def initialize_with_kwargs(key:)
+                      message = <<~TEXT
+                        Data attribute by key `:#{key}` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.
+                      TEXT
+
+                      initialize(message)
+                    end
+                  end
+
+                  class NotExistingAttributeForExcept < ::ConvenientService::Exception
+                    ##
+                    # @param key [Symbol]
+                    # @return [void]
+                    #
+                    def initialize_with_kwargs(key:)
+                      message = <<~TEXT
+                        Data attribute by key `:#{key}` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.
+                      TEXT
+
+                      initialize(message)
+                    end
+                  end
+
+                  class NotExistingAttributeForRename < ::ConvenientService::Exception
                     ##
                     # @param key [Symbol]
                     # @return [void]

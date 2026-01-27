@@ -481,11 +481,13 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :unsafe_data, # public
           :unsafe_message, # public
           :with_error_fallback, # public
+          :with_except_keys, # public
           :with_extra_keys, # public
           :with_failure_and_error_fallback, # public
           :with_failure_fallback, # public
           :with_fallback, # public
           :with_fallback_for, # public
+          :with_only_keys, # public
           :with_renamed_keys # public
         ])
       end
