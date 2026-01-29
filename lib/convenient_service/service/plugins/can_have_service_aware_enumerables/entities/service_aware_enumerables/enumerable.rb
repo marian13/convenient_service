@@ -58,6 +58,16 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Enumerable]
+              #
+              def service_aware_each(&iteration_block)
+                each(&service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @overload all?(pattern)
               #   @param pattern [Object]
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
@@ -75,6 +85,21 @@ module ConvenientService
               ##
               # @api public
               #
+              # @overload service_aware_all?(pattern)
+              #   @param pattern [Object]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload service_aware_all?(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_all?(*args, &iteration_block)
+                all?(*args, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @overload any?(pattern)
               #   @param pattern [Object]
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
@@ -87,6 +112,21 @@ module ConvenientService
                 with_processing_return_value_as_boolean(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
                   enumerable.any?(*args, &service_aware_iteration_block)
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @overload service_aware_any?(pattern)
+              #   @param pattern [Object]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload service_aware_any?(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_any?(*args, &iteration_block)
+                any?(*args, &service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -121,10 +161,30 @@ module ConvenientService
               # @param iteration_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
+              def service_aware_chunk(&iteration_block)
+                chunk(&service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
               def chunk_while(&iteration_block)
                 with_processing_return_value_as_enumerator_generator(arguments(&iteration_block)) do |&service_aware_iteration_block|
                   enumerable.chunk_while(&service_aware_iteration_block)
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_chunk_while(&iteration_block)
+                chunk_while(&service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -151,6 +211,16 @@ module ConvenientService
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
+              def service_aware_collect(&iteration_block)
+                collect(&service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
               def collect_concat(&iteration_block)
                 if iteration_block
                   with_processing_return_value_as_array(arguments(&iteration_block)) do |&service_aware_iteration_block|
@@ -161,6 +231,16 @@ module ConvenientService
                     enumerable.collect_concat
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_collect_concat(&iteration_block)
+                collect_concat(&service_aware_iteration_block_from(iteration_block))
               end
 
               if Dependencies.ruby.version >= 3.1
@@ -199,6 +279,24 @@ module ConvenientService
               ##
               # @api public
               #
+              # @overload service_aware_count
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload service_aware_count(item)
+              #   @param item [Object]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload service_aware_count(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_count(*args, &iteration_block)
+                count(*args, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param n [Integer, nil]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
@@ -218,6 +316,17 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param n [Integer, nil]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_cycle(n = nil, &iteration_block)
+                cycle(n, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param ifnone [Proc, nil]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
@@ -232,6 +341,17 @@ module ConvenientService
                     enumerable.detect(ifnone)
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param ifnone [Proc, nil]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_detect(ifnone = nil, &iteration_block)
+                detect(ifnone, &service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -267,6 +387,16 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_drop_while(&iteration_block)
+                drop_while(&service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param n [Integer]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
@@ -286,6 +416,17 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param n [Integer]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_each_cons(n, &iteration_block)
+                each_cons(n, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
@@ -299,6 +440,16 @@ module ConvenientService
                     enumerable.each_entry
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_each_entry(&iteration_block)
+                each_entry(&service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -323,6 +474,17 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param n [Integer]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_each_slice(n, &iteration_block)
+                each_slice(n, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
@@ -336,6 +498,16 @@ module ConvenientService
                     enumerable.each_with_index
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_each_with_index(&iteration_block)
+                each_with_index(&service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -355,6 +527,17 @@ module ConvenientService
                     enumerable.each_with_object(obj)
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param obj [Object] Can be any type.
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_each_with_object(obj, &iteration_block)
+                each_with_object(obj, &service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -392,6 +575,16 @@ module ConvenientService
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
+              def service_aware_filter(&iteration_block)
+                filter(&service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
               def filter_map(&iteration_block)
                 if iteration_block
                   with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
@@ -402,6 +595,16 @@ module ConvenientService
                     enumerable.filter_map
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_filter_map(&iteration_block)
+                filter_map(&service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -426,6 +629,17 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param ifnone [Proc, nil]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_find(ifnone = nil, &iteration_block)
+                find(ifnone, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
@@ -439,6 +653,16 @@ module ConvenientService
                     enumerable.find_all
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_find_all(&iteration_block)
+                find_all(&service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -458,6 +682,17 @@ module ConvenientService
                     enumerable.find_index
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param args [Array<Object>]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_find_index(*args, &iteration_block)
+                find_index(*args, &service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -499,6 +734,16 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_flat_map(&iteration_block)
+                flat_map(&service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @overload grep(pattern)
               #   @param pattern [Object]
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
@@ -512,6 +757,22 @@ module ConvenientService
                 with_processing_return_value_as_enumerable(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
                   enumerable.grep(*args, &service_aware_iteration_block)
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @overload service_aware_grep(pattern)
+              #   @param pattern [Object]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload service_aware_grep(pattern, &iteration_block)
+              #   @param pattern [Object]
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_grep(*args, &iteration_block)
+                grep(*args, &service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -535,6 +796,22 @@ module ConvenientService
               ##
               # @api public
               #
+              # @overload service_aware_grep_v(pattern)
+              #   @param pattern [Object]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload service_aware_grep_v(pattern, &iteration_block)
+              #   @param pattern [Object]
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_grep_v(*args, &iteration_block)
+                grep_v(*args, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
@@ -548,6 +825,16 @@ module ConvenientService
                     enumerable.group_by
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_group_by(&iteration_block)
+                group_by(&service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -575,6 +862,17 @@ module ConvenientService
                     enumerable.inject(*args, &service_aware_iteration_block)
                   end
                 end
+
+                ##
+                # @api public
+                #
+                # @param args [Array<Object>]
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+                #
+                def service_aware_inject(*args, &iteration_block)
+                  inject(*args, &service_aware_iteration_block_from(iteration_block))
+                end
               else
                 ##
                 # @api public
@@ -588,6 +886,18 @@ module ConvenientService
                   with_processing_return_value_as_object(arguments(*args, **kwargs, &iteration_block)) do |*args, **kwargs, &service_aware_iteration_block|
                     enumerable.inject(*args, **kwargs, &service_aware_iteration_block)
                   end
+                end
+
+                ##
+                # @api public
+                #
+                # @param args [Array<Object>]
+                # @param kwargs [Hash{Symbol => Object}]
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+                #
+                def service_aware_inject(*args, **kwargs, &iteration_block)
+                  inject(*args, **kwargs, &service_aware_iteration_block_from(iteration_block))
                 end
               end
 
@@ -623,6 +933,16 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_map(&iteration_block)
+                map(&service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param n [Integer, nil]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
@@ -637,6 +957,17 @@ module ConvenientService
                     enumerable.max(&service_aware_iteration_block)
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param n [Integer, nil]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_max(n = nil, &iteration_block)
+                max(n, &service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -662,6 +993,17 @@ module ConvenientService
                     enumerable.max_by
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param n [Integer, nil]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_max_by(n = nil, &iteration_block)
+                max_by(n, &service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -702,6 +1044,17 @@ module ConvenientService
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
+              def service_aware_min(n = nil, &iteration_block)
+                min(n, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
+              # @param n [Integer, nil]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
               def min_by(n = nil, &iteration_block)
                 if iteration_block
                   if n
@@ -723,6 +1076,17 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param n [Integer, nil]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_min_by(n = nil, &iteration_block)
+                min_by(n, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
@@ -730,6 +1094,16 @@ module ConvenientService
                 with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
                   enumerable.minmax(&service_aware_iteration_block)
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_minmax(&iteration_block)
+                minmax(&service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -753,6 +1127,16 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_minmax_by(&iteration_block)
+                minmax_by(&service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @overload none?(pattern)
               #   @param pattern [Object]
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
@@ -765,6 +1149,21 @@ module ConvenientService
                 with_processing_return_value_as_boolean(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
                   enumerable.none?(*args, &service_aware_iteration_block)
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @overload service_aware_none?(pattern)
+              #   @param pattern [Object]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload service_aware_none?(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_none?(*args, &iteration_block)
+                none?(*args, &service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -787,6 +1186,21 @@ module ConvenientService
               ##
               # @api public
               #
+              # @overload service_aware_one?(pattern)
+              #   @param pattern [Object]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload service_aware_one?(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_one?(*args, &iteration_block)
+                one?(*args, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
@@ -802,6 +1216,16 @@ module ConvenientService
                 end
               end
 
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_partition(&iteration_block)
+                partition(&service_aware_iteration_block_from(iteration_block))
+              end
+
               if Dependencies.ruby.version > 3.0
                 ##
                 # @api public
@@ -814,6 +1238,17 @@ module ConvenientService
                   with_processing_return_value_as_object(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
                     enumerable.reduce(*args, &service_aware_iteration_block)
                   end
+                end
+
+                ##
+                # @api public
+                #
+                # @param args [Array<Object>]
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+                #
+                def service_aware_reduce(*args, &iteration_block)
+                  reduce(*args, &service_aware_iteration_block_from(iteration_block))
                 end
               else
                 ##
@@ -828,6 +1263,18 @@ module ConvenientService
                   with_processing_return_value_as_object(arguments(*args, **kwargs, &iteration_block)) do |*args, **kwargs, &service_aware_iteration_block|
                     enumerable.reduce(*args, **kwargs, &service_aware_iteration_block)
                   end
+                end
+
+                ##
+                # @api public
+                #
+                # @param args [Array<Object>]
+                # @param kwargs [Hash{Symbol => Object}]
+                # @param iteration_block [Proc, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+                #
+                def service_aware_reduce(*args, **kwargs, &iteration_block)
+                  reduce(*args, **kwargs, &service_aware_iteration_block_from(iteration_block))
                 end
               end
 
@@ -855,6 +1302,16 @@ module ConvenientService
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
+              def service_aware_reject(&iteration_block)
+                reject(&service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
               def reverse_each(&iteration_block)
                 if iteration_block
                   with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
@@ -865,6 +1322,16 @@ module ConvenientService
                     enumerable.reverse_each
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_reverse_each(&iteration_block)
+                reverse_each(&service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -888,6 +1355,16 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_select(&iteration_block)
+                select(&service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @overload slice_after(pattern)
               #   @param pattern [Object] Can be any type.
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
@@ -900,6 +1377,21 @@ module ConvenientService
                 with_processing_return_value_as_enumerator_generator(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
                   enumerable.slice_after(*args, &service_aware_iteration_block)
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @overload service_aware_slice_after(pattern)
+              #   @param pattern [Object] Can be any type.
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload service_aware_slice_after(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_slice_after(*args, &iteration_block)
+                slice_after(*args, &service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -922,6 +1414,21 @@ module ConvenientService
               ##
               # @api public
               #
+              # @overload slice_before(pattern)
+              #   @param pattern [Object] Can be any type.
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload slice_before(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_slice_before(*args, &iteration_block)
+                slice_before(*args, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param iteration_block [Proc]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
@@ -929,6 +1436,16 @@ module ConvenientService
                 with_processing_return_value_as_enumerator_generator(arguments(&iteration_block)) do |&service_aware_iteration_block|
                   enumerable.slice_when(&service_aware_iteration_block)
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_slice_when(&iteration_block)
+                slice_when(&service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -949,6 +1466,16 @@ module ConvenientService
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
+              def service_aware_sort(&iteration_block)
+                sort(&service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
               def sort_by(&iteration_block)
                 if iteration_block
                   with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
@@ -959,6 +1486,16 @@ module ConvenientService
                     enumerable.sort_by
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_sort_by(&iteration_block)
+                sort_by(&service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -989,6 +1526,29 @@ module ConvenientService
               ##
               # @api public
               #
+              # @overload service_aware_sum
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload service_aware_sum(init)
+              #   @param init [Integer]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload service_aware_sum(&iteration_block)
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @overload service_aware_sum(init, &iteration_block)
+              #   @param init [Integer]
+              #   @param iteration_block [Proc]
+              #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_sum(init = 0, &iteration_block)
+                sum(init, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param n [Integer, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
@@ -1014,6 +1574,16 @@ module ConvenientService
                     enumerable.take_while
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_take_while(&iteration_block)
+                take_while(&service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -1053,10 +1623,38 @@ module ConvenientService
               # @internal
               #   TODO: Specs for arguments.
               #
+              def service_aware_to_a(*args, &iteration_block)
+                to_a(*args, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
+              # @param args [Array<Object>]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @internal
+              #   TODO: Specs for arguments.
+              #
               def to_h(*args, &iteration_block)
                 with_processing_return_value_as_hash(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
                   enumerable.to_h(*args, &service_aware_iteration_block)
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param args [Array<Object>]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              # @internal
+              #   TODO: Specs for arguments.
+              #
+              def service_aware_to_h(*args, &iteration_block)
+                to_h(*args, &service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -1075,6 +1673,17 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param args [Array<Object>]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_to_set(*args, &iteration_block)
+                to_set(*args, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
@@ -1082,6 +1691,16 @@ module ConvenientService
                 with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
                   enumerable.uniq(&service_aware_iteration_block)
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_uniq(&iteration_block)
+                uniq(&service_aware_iteration_block_from(iteration_block))
               end
 
               ##
@@ -1103,6 +1722,17 @@ module ConvenientService
                     enumerable.zip(*other_enums)
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param other_enums [Array<Object>]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def service_aware_zip(*other_enums, &iteration_block)
+                zip(*other_enums, &service_aware_iteration_block_from(iteration_block))
               end
             end
           end

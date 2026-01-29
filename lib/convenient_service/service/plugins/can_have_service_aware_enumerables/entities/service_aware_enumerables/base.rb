@@ -454,7 +454,7 @@ module ConvenientService
               def with_processing_return_value(iterator_arguments, iterator_block, &with_processing_return_value_block)
                 return yield(Support::UNDEFINED, propagated_result) if propagated_result
 
-                response = catch(:propagated_result) { {object: iterator_block.call(*iterator_arguments.args, **iterator_arguments.kwargs, &service_aware_iteration_block_from(iterator_arguments.block))} }
+                response = catch(:propagated_result) { {object: iterator_block.call(*iterator_arguments.args, **iterator_arguments.kwargs, &iterator_arguments.block)} }
 
                 return yield(Support::UNDEFINED, response[:propagated_result]) if response.has_key?(:propagated_result)
 

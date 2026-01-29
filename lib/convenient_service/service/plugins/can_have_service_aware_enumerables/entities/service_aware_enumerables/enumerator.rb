@@ -169,6 +169,17 @@ module ConvenientService
               ##
               # @api public
               #
+              # @param offset [Integer, nil]
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Enumerable, ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Enumerator]
+              #
+              def service_aware_with_index(offset = nil, &iteration_block)
+                with_index(offset, &service_aware_iteration_block_from(iteration_block))
+              end
+
+              ##
+              # @api public
+              #
               # @param obj [Object] Can be any type.
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Enumerable, ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Enumerator]
@@ -183,6 +194,17 @@ module ConvenientService
                     enumerator.with_object(obj)
                   end
                 end
+              end
+
+              ##
+              # @api public
+              #
+              # @param obj [Object] Can be any type.
+              # @param iteration_block [Proc, nil]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Enumerable, ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Enumerator]
+              #
+              def service_aware_with_object(obj, &iteration_block)
+                with_object(obj, &service_aware_iteration_block_from(iteration_block))
               end
             end
           end
