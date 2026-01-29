@@ -60,7 +60,7 @@
 * **cache:** allow to specify backend for scopes ([23ead4e](https://github.com/marian13/convenient_service/commit/23ead4e6f698db162a9cd655bbaa1842ab4f3b7a))
 * **cache:** autoremove empty scopes ([c0808e1](https://github.com/marian13/convenient_service/commit/c0808e199895eef445408f3abb2e91a968c6828e))
 * **cache:** introduce get/set aliases ([5630548](https://github.com/marian13/convenient_service/commit/56305485eb4d244a3e80414b173f0635d28c7f8d))
-* **can_have_step_aware_enumerables:** add == to compare enumerables ([77df593](https://github.com/marian13/convenient_service/commit/77df593687c861bf9ea2b0f2971641374742e178))
+* **can_have_service_aware_enumerables:** add == to compare enumerables ([77df593](https://github.com/marian13/convenient_service/commit/77df593687c861bf9ea2b0f2971641374742e178))
 * **concern:** add eval_included_block and eval_prepended_block template methods ([756a358](https://github.com/marian13/convenient_service/commit/756a3587771d3dd9204c3994ca31686e80733448))
 * **config:** add a way to compare configs ([3069b7d](https://github.com/marian13/convenient_service/commit/3069b7d859b489599e7949167b601e514ba9c310))
 * **config:** autodelete cache for methods without middlewares ([1238d4d](https://github.com/marian13/convenient_service/commit/1238d4d131149c854ffca95c402bbd1eb62a0605))

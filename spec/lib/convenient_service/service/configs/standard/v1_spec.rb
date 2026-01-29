@@ -46,7 +46,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               ConvenientService::Service::Plugins::HasNegatedJSendResult::Concern,
               ConvenientService::Service::Plugins::CanHaveSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveSequentialSteps::Concern,
-              ConvenientService::Service::Plugins::CanHaveStepAwareEnumerables::Concern,
+              ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Concern,
               ConvenientService::Service::Plugins::CanBeCalled::Concern,
               ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
               ConvenientService::Service::Plugins::HasInspect::Concern,

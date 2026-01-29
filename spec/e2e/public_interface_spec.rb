@@ -198,9 +198,9 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :regular_result_without_middlewares, # private
           :result, # public
           :result_without_middlewares, # private
+          :service_aware_enumerable, # public
+          :service_aware_enumerator, # public
           :step, # public
-          :step_aware_enumerable, # public
-          :step_aware_enumerator, # public
           :steps, # public
           :steps_result, # public
           :steps_result_without_middlewares, # private

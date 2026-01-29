@@ -50,7 +50,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Service::HasNegatedJSendResult::Concern,
               ConvenientService::Plugins::Service::CanHaveSteps::Concern,
               ConvenientService::Plugins::Service::CanHaveConnectedSteps::Concern,
-              ConvenientService::Plugins::Service::CanHaveStepAwareEnumerables::Concern,
+              ConvenientService::Plugins::Service::CanHaveServiceAwareEnumerables::Concern,
               ConvenientService::Plugins::Service::CanBeCalled::Concern,
               ConvenientService::Plugins::Common::CanHaveCallbacks::Concern,
               ConvenientService::Plugins::Service::CanHaveFallbacks::Concern,

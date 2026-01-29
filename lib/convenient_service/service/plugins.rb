@@ -18,7 +18,7 @@ require_relative "plugins/has_negated_j_send_result"
 require_relative "plugins/can_have_steps"
 require_relative "plugins/can_have_sequential_steps"
 require_relative "plugins/can_have_connected_steps"
-require_relative "plugins/can_have_step_aware_enumerables"
+require_relative "plugins/can_have_service_aware_enumerables"
 
 require_relative "plugins/can_be_called"
 
