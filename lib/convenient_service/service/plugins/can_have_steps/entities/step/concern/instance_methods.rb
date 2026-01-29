@@ -323,6 +323,30 @@ module ConvenientService
                   Support::Arguments.new(action, **kwargs.merge(in: inputs, out: outputs, index: index, container: container, organizer: organizer(raise_when_missing: false), **extra_kwargs))
                 end
 
+                ##
+                # @api private
+                #
+                # @internal
+                #   TODO: Move to `CanBeUsedInStepAwareEnumerables`.
+                #
+                def to_service_aware_iteration_block_argument
+                  if result.success?
+                    if outputs.none?
+                      return true
+                    elsif outputs.one?
+                      return result.unsafe_data[outputs.first.key.to_sym]
+                    else
+                      return outputs.each_with_object({}) { |output, hash| hash[output.key.to_sym] = result.unsafe_data[output.key.to_sym] }
+                    end
+                  end
+
+                  if result.failure?
+                    return outputs.none? ? false : nil
+                  end
+
+                  throw :propagated_result, {propagated_result: result}
+                end
+
                 private
 
                 ##

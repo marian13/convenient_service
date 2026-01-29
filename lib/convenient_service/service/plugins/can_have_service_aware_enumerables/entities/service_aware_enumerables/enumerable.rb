@@ -45,8 +45,8 @@ module ConvenientService
               #
               def each(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.each(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.each(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -77,8 +77,8 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def all?(*args, &iteration_block)
-                with_processing_return_value_as_boolean(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                  enumerable.all?(*args, &service_aware_iteration_block)
+                with_processing_return_value_as_boolean(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                  enumerable.all?(*args, &iteration_block)
                 end
               end
 
@@ -109,8 +109,8 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def any?(*args, &iteration_block)
-                with_processing_return_value_as_boolean(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                  enumerable.any?(*args, &service_aware_iteration_block)
+                with_processing_return_value_as_boolean(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                  enumerable.any?(*args, &iteration_block)
                 end
               end
 
@@ -150,8 +150,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def chunk(&iteration_block)
-                with_processing_return_value_as_enumerator_generator(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                  enumerable.chunk(&service_aware_iteration_block)
+                with_processing_return_value_as_enumerator_generator(arguments(&iteration_block)) do |&iteration_block|
+                  enumerable.chunk(&iteration_block)
                 end
               end
 
@@ -172,8 +172,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def chunk_while(&iteration_block)
-                with_processing_return_value_as_enumerator_generator(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                  enumerable.chunk_while(&service_aware_iteration_block)
+                with_processing_return_value_as_enumerator_generator(arguments(&iteration_block)) do |&iteration_block|
+                  enumerable.chunk_while(&iteration_block)
                 end
               end
 
@@ -195,8 +195,8 @@ module ConvenientService
               #
               def collect(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_array(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.collect(&service_aware_iteration_block)
+                  with_processing_return_value_as_array(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.collect(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -223,8 +223,8 @@ module ConvenientService
               #
               def collect_concat(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_array(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.collect_concat(&service_aware_iteration_block)
+                  with_processing_return_value_as_array(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.collect_concat(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator(arguments(&iteration_block)) do
@@ -271,8 +271,8 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def count(*args, &iteration_block)
-                with_processing_return_value_as_object(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                  enumerable.count(*args, &service_aware_iteration_block)
+                with_processing_return_value_as_object(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                  enumerable.count(*args, &iteration_block)
                 end
               end
 
@@ -303,8 +303,8 @@ module ConvenientService
               #
               def cycle(n = nil, &iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_object(arguments(n, &iteration_block)) do |n, &service_aware_iteration_block|
-                    enumerable.cycle(n, &service_aware_iteration_block)
+                  with_processing_return_value_as_object(arguments(n, &iteration_block)) do |n, &iteration_block|
+                    enumerable.cycle(n, &iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator(arguments(n)) do |n|
@@ -333,8 +333,8 @@ module ConvenientService
               #
               def detect(ifnone = nil, &iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_object_or_nil(arguments(ifnone, &iteration_block)) do |ifnone, &service_aware_iteration_block|
-                    enumerable.detect(ifnone, &service_aware_iteration_block)
+                  with_processing_return_value_as_object_or_nil(arguments(ifnone, &iteration_block)) do |ifnone, &iteration_block|
+                    enumerable.detect(ifnone, &iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator(arguments(ifnone)) do |ifnone|
@@ -374,8 +374,8 @@ module ConvenientService
               #
               def drop_while(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.drop_while(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.drop_while(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -403,8 +403,8 @@ module ConvenientService
               #
               def each_cons(n, &iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(n, &iteration_block)) do |n, &service_aware_iteration_block|
-                    enumerable.each_cons(n, &service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(n, &iteration_block)) do |n, &iteration_block|
+                    enumerable.each_cons(n, &iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator(arguments(n)) do |n|
@@ -432,8 +432,8 @@ module ConvenientService
               #
               def each_entry(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.each_entry(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.each_entry(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -461,8 +461,8 @@ module ConvenientService
               #
               def each_slice(n, &iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(n, &iteration_block)) do |n, &service_aware_iteration_block|
-                    enumerable.each_slice(n, &service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(n, &iteration_block)) do |n, &iteration_block|
+                    enumerable.each_slice(n, &iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator(arguments(n)) do |n|
@@ -490,8 +490,8 @@ module ConvenientService
               #
               def each_with_index(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.each_with_index(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.each_with_index(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -519,8 +519,8 @@ module ConvenientService
               #
               def each_with_object(obj, &iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_object(arguments(obj, &iteration_block)) do |obj, &service_aware_iteration_block|
-                    enumerable.each_with_object(obj, &service_aware_iteration_block)
+                  with_processing_return_value_as_object(arguments(obj, &iteration_block)) do |obj, &iteration_block|
+                    enumerable.each_with_object(obj, &iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator(arguments(obj)) do |obj|
@@ -559,8 +559,8 @@ module ConvenientService
               #
               def filter(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.filter(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.filter(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -587,8 +587,8 @@ module ConvenientService
               #
               def filter_map(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.filter_map(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.filter_map(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -616,8 +616,8 @@ module ConvenientService
               #
               def find(ifnone = nil, &iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_object_or_nil(arguments(ifnone, &iteration_block)) do |ifnone, &service_aware_iteration_block|
-                    enumerable.find(ifnone, &service_aware_iteration_block)
+                  with_processing_return_value_as_object_or_nil(arguments(ifnone, &iteration_block)) do |ifnone, &iteration_block|
+                    enumerable.find(ifnone, &iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator(arguments(ifnone)) do |ifnone|
@@ -645,8 +645,8 @@ module ConvenientService
               #
               def find_all(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.find_all(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.find_all(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator(arguments(&iteration_block)) do
@@ -674,8 +674,8 @@ module ConvenientService
               #
               def find_index(*args, &iteration_block)
                 if iteration_block || args.any?
-                  with_processing_return_value_as_object_or_nil(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                    enumerable.find_index(*args, &service_aware_iteration_block)
+                  with_processing_return_value_as_object_or_nil(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                    enumerable.find_index(*args, &iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -721,8 +721,8 @@ module ConvenientService
               #
               def flat_map(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.flat_map(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.flat_map(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator(arguments(&iteration_block)) do
@@ -754,8 +754,8 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def grep(*args, &iteration_block)
-                with_processing_return_value_as_enumerable(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                  enumerable.grep(*args, &service_aware_iteration_block)
+                with_processing_return_value_as_enumerable(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                  enumerable.grep(*args, &iteration_block)
                 end
               end
 
@@ -788,8 +788,8 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def grep_v(*args, &iteration_block)
-                with_processing_return_value_as_enumerable(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                  enumerable.grep_v(*args, &service_aware_iteration_block)
+                with_processing_return_value_as_enumerable(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                  enumerable.grep_v(*args, &iteration_block)
                 end
               end
 
@@ -817,8 +817,8 @@ module ConvenientService
               #
               def group_by(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_hash(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.group_by(&service_aware_iteration_block)
+                  with_processing_return_value_as_hash(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.group_by(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -858,8 +858,8 @@ module ConvenientService
                 # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
                 #
                 def inject(*args, &iteration_block)
-                  with_processing_return_value_as_object(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                    enumerable.inject(*args, &service_aware_iteration_block)
+                  with_processing_return_value_as_object(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                    enumerable.inject(*args, &iteration_block)
                   end
                 end
 
@@ -883,8 +883,8 @@ module ConvenientService
                 # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
                 #
                 def inject(*args, **kwargs, &iteration_block)
-                  with_processing_return_value_as_object(arguments(*args, **kwargs, &iteration_block)) do |*args, **kwargs, &service_aware_iteration_block|
-                    enumerable.inject(*args, **kwargs, &service_aware_iteration_block)
+                  with_processing_return_value_as_object(arguments(*args, **kwargs, &iteration_block)) do |*args, **kwargs, &iteration_block|
+                    enumerable.inject(*args, **kwargs, &iteration_block)
                   end
                 end
 
@@ -920,8 +920,8 @@ module ConvenientService
               #
               def map(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.map(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.map(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -949,12 +949,12 @@ module ConvenientService
               #
               def max(n = nil, &iteration_block)
                 if n
-                  with_processing_return_value_as_enumerable(arguments(n, &iteration_block)) do |n, &service_aware_iteration_block|
-                    enumerable.max(n, &service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(n, &iteration_block)) do |n, &iteration_block|
+                    enumerable.max(n, &iteration_block)
                   end
                 else
-                  with_processing_return_value_as_object_or_nil(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.max(&service_aware_iteration_block)
+                  with_processing_return_value_as_object_or_nil(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.max(&iteration_block)
                   end
                 end
               end
@@ -980,12 +980,12 @@ module ConvenientService
               def max_by(n = nil, &iteration_block)
                 if iteration_block
                   if n
-                    with_processing_return_value_as_enumerable(arguments(n, &iteration_block)) do |n, &service_aware_iteration_block|
-                      enumerable.max_by(n, &service_aware_iteration_block)
+                    with_processing_return_value_as_enumerable(arguments(n, &iteration_block)) do |n, &iteration_block|
+                      enumerable.max_by(n, &iteration_block)
                     end
                   else
-                    with_processing_return_value_as_object_or_nil(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                      enumerable.max_by(&service_aware_iteration_block)
+                    with_processing_return_value_as_object_or_nil(arguments(&iteration_block)) do |&iteration_block|
+                      enumerable.max_by(&iteration_block)
                     end
                   end
                 else
@@ -1027,12 +1027,12 @@ module ConvenientService
               #
               def min(n = nil, &iteration_block)
                 if n
-                  with_processing_return_value_as_enumerable(arguments(n, &iteration_block)) do |n, &service_aware_iteration_block|
-                    enumerable.min(n, &service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(n, &iteration_block)) do |n, &iteration_block|
+                    enumerable.min(n, &iteration_block)
                   end
                 else
-                  with_processing_return_value_as_object_or_nil(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.min(&service_aware_iteration_block)
+                  with_processing_return_value_as_object_or_nil(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.min(&iteration_block)
                   end
                 end
               end
@@ -1058,12 +1058,12 @@ module ConvenientService
               def min_by(n = nil, &iteration_block)
                 if iteration_block
                   if n
-                    with_processing_return_value_as_enumerable(arguments(n, &iteration_block)) do |n, &service_aware_iteration_block|
-                      enumerable.min_by(n, &service_aware_iteration_block)
+                    with_processing_return_value_as_enumerable(arguments(n, &iteration_block)) do |n, &iteration_block|
+                      enumerable.min_by(n, &iteration_block)
                     end
                   else
-                    with_processing_return_value_as_object_or_nil(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                      enumerable.min_by(&service_aware_iteration_block)
+                    with_processing_return_value_as_object_or_nil(arguments(&iteration_block)) do |&iteration_block|
+                      enumerable.min_by(&iteration_block)
                     end
                   end
                 else
@@ -1091,8 +1091,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def minmax(&iteration_block)
-                with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                  enumerable.minmax(&service_aware_iteration_block)
+                with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                  enumerable.minmax(&iteration_block)
                 end
               end
 
@@ -1114,8 +1114,8 @@ module ConvenientService
               #
               def minmax_by(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.minmax_by(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.minmax_by(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -1146,8 +1146,8 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def none?(*args, &iteration_block)
-                with_processing_return_value_as_boolean(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                  enumerable.none?(*args, &service_aware_iteration_block)
+                with_processing_return_value_as_boolean(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                  enumerable.none?(*args, &iteration_block)
                 end
               end
 
@@ -1178,8 +1178,8 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def one?(*args, &iteration_block)
-                with_processing_return_value_as_boolean(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                  enumerable.one?(*args, &service_aware_iteration_block)
+                with_processing_return_value_as_boolean(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                  enumerable.one?(*args, &iteration_block)
                 end
               end
 
@@ -1206,8 +1206,8 @@ module ConvenientService
               #
               def partition(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.partition(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.partition(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -1235,8 +1235,8 @@ module ConvenientService
                 # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
                 #
                 def reduce(*args, &iteration_block)
-                  with_processing_return_value_as_object(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                    enumerable.reduce(*args, &service_aware_iteration_block)
+                  with_processing_return_value_as_object(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                    enumerable.reduce(*args, &iteration_block)
                   end
                 end
 
@@ -1260,8 +1260,8 @@ module ConvenientService
                 # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
                 #
                 def reduce(*args, **kwargs, &iteration_block)
-                  with_processing_return_value_as_object(arguments(*args, **kwargs, &iteration_block)) do |*args, **kwargs, &service_aware_iteration_block|
-                    enumerable.reduce(*args, **kwargs, &service_aware_iteration_block)
+                  with_processing_return_value_as_object(arguments(*args, **kwargs, &iteration_block)) do |*args, **kwargs, &iteration_block|
+                    enumerable.reduce(*args, **kwargs, &iteration_block)
                   end
                 end
 
@@ -1286,8 +1286,8 @@ module ConvenientService
               #
               def reject(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.reject(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.reject(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -1314,8 +1314,8 @@ module ConvenientService
               #
               def reverse_each(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.reverse_each(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.reverse_each(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -1342,8 +1342,8 @@ module ConvenientService
               #
               def select(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.select(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.select(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -1374,8 +1374,8 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def slice_after(*args, &iteration_block)
-                with_processing_return_value_as_enumerator_generator(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                  enumerable.slice_after(*args, &service_aware_iteration_block)
+                with_processing_return_value_as_enumerator_generator(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                  enumerable.slice_after(*args, &iteration_block)
                 end
               end
 
@@ -1406,8 +1406,8 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def slice_before(*args, &iteration_block)
-                with_processing_return_value_as_enumerator_generator(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                  enumerable.slice_before(*args, &service_aware_iteration_block)
+                with_processing_return_value_as_enumerator_generator(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                  enumerable.slice_before(*args, &iteration_block)
                 end
               end
 
@@ -1433,8 +1433,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def slice_when(&iteration_block)
-                with_processing_return_value_as_enumerator_generator(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                  enumerable.slice_when(&service_aware_iteration_block)
+                with_processing_return_value_as_enumerator_generator(arguments(&iteration_block)) do |&iteration_block|
+                  enumerable.slice_when(&iteration_block)
                 end
               end
 
@@ -1455,8 +1455,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def sort(&iteration_block)
-                with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                  enumerable.sort(&service_aware_iteration_block)
+                with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                  enumerable.sort(&iteration_block)
                 end
               end
 
@@ -1478,8 +1478,8 @@ module ConvenientService
               #
               def sort_by(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.sort_by(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.sort_by(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -1518,8 +1518,8 @@ module ConvenientService
               #   @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def sum(init = 0, &iteration_block)
-                with_processing_return_value_as_object(arguments(init, &iteration_block)) do |init, &service_aware_iteration_block|
-                  enumerable.sum(init, &service_aware_iteration_block)
+                with_processing_return_value_as_object(arguments(init, &iteration_block)) do |init, &iteration_block|
+                  enumerable.sum(init, &iteration_block)
                 end
               end
 
@@ -1566,8 +1566,8 @@ module ConvenientService
               #
               def take_while(&iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                    enumerable.take_while(&service_aware_iteration_block)
+                  with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                    enumerable.take_while(&iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerator do
@@ -1608,8 +1608,8 @@ module ConvenientService
               #   TODO: Specs for arguments.
               #
               def to_a(*args, &iteration_block)
-                with_processing_return_value_as_array(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                  enumerable.to_a(*args, &service_aware_iteration_block)
+                with_processing_return_value_as_array(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                  enumerable.to_a(*args, &iteration_block)
                 end
               end
 
@@ -1638,8 +1638,8 @@ module ConvenientService
               #   TODO: Specs for arguments.
               #
               def to_h(*args, &iteration_block)
-                with_processing_return_value_as_hash(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                  enumerable.to_h(*args, &service_aware_iteration_block)
+                with_processing_return_value_as_hash(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                  enumerable.to_h(*args, &iteration_block)
                 end
               end
 
@@ -1665,8 +1665,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def to_set(*args, &iteration_block)
-                with_processing_return_value_as_set(arguments(*args, &iteration_block)) do |*args, &service_aware_iteration_block|
-                  enumerable.to_set(*args, &service_aware_iteration_block)
+                with_processing_return_value_as_set(arguments(*args, &iteration_block)) do |*args, &iteration_block|
+                  enumerable.to_set(*args, &iteration_block)
                 end
               end
 
@@ -1688,8 +1688,8 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
               def uniq(&iteration_block)
-                with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&service_aware_iteration_block|
-                  enumerable.uniq(&service_aware_iteration_block)
+                with_processing_return_value_as_enumerable(arguments(&iteration_block)) do |&iteration_block|
+                  enumerable.uniq(&iteration_block)
                 end
               end
 
@@ -1714,8 +1714,8 @@ module ConvenientService
                 casted_other_enums = other_enums.map { |collection| cast_service_aware_enumerable(collection) }.map(&:enumerable)
 
                 if iteration_block
-                  with_processing_return_value_as_object(arguments(*casted_other_enums, &iteration_block)) do |*other_enums, &service_aware_iteration_block|
-                    enumerable.zip(*other_enums, &service_aware_iteration_block)
+                  with_processing_return_value_as_object(arguments(*casted_other_enums, &iteration_block)) do |*other_enums, &iteration_block|
+                    enumerable.zip(*other_enums, &iteration_block)
                   end
                 else
                   with_processing_return_value_as_enumerable(arguments(*casted_other_enums)) do |*other_enums|

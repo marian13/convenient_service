@@ -12,6 +12,15 @@ module ConvenientService
         module Concern
           include Support::Concern
 
+          ##
+          # TODO: Implement in `CanBeUsedInStepAwareEnumerables`.
+          #
+          # class_methods do
+          #   def to_service_aware_iteration_block_argument
+          #   end
+          # end
+          ##
+
           instance_methods do
             ##
             # @api public

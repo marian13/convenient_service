@@ -1175,6 +1175,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :to_arguments, # private
           :to_kwargs, # private
           :to_s, # public
+          :to_service_aware_iteration_block_argument, # private
           :unsafe_code, # public
           :unsafe_data, # public
           :unsafe_message, # public
@@ -1304,6 +1305,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :to_arguments, # private
           :to_kwargs, # private
           :to_s, # public
+          :to_service_aware_iteration_block_argument, # private
           :uc, # public
           :ud, # public
           :um, # public

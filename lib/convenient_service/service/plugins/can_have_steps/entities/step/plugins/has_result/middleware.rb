@@ -13,7 +13,7 @@ module ConvenientService
           class Step
             module Plugins
               ##
-              # TODO: Rename.
+              # TODO: Rename. Сurrent name confuses to often.
               #
               module HasResult
                 class Middleware < MethodChainMiddleware
@@ -57,6 +57,7 @@ module ConvenientService
                   #
                   # @internal
                   #   TODO: Remove `step.outputs.none?` to enforce users to specify outputs for all steps. Will be a breaking change.
+                  #   TODO: Refactor this method. It looks too ugly.
                   #   NOTE: `result_outputs` are usual and alias outputs.
                   #   NOTE: `custom_outputs` are proc and raw outputs.
                   #

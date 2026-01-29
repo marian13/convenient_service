@@ -228,53 +228,41 @@ module ConvenientService
               # @param iteration_block [Proc, nil]
               # @return [Proc]
               #
+              # @internal
+              #   NOTE: It may look very appealing to return data objects instead of hashes. For example:
+              #     # With hashes.
+              #     result =
+              #       service_aware_enumerable(users)
+              #         .map { |user| step ProcessUser, in: :user, out: [:attributes, :associations] }
+              #         .each { |values| p [values[:attributes], values[:associations]] }
+              #         .result(data_key: :items)
+              #
+              #     result.data[:items]
+              #     # => [{attributes: {}, associations: []}, {attributes: {}, associations: []}]
+              #
+              #     # With data objects.
+              #     result =
+              #       service_aware_enumerable(users)
+              #         .map { |user| step ProcessUser, in: :user, out: [:attributes, :associations] }
+              #         .each { |data| p [data.attributes, data.associations] }
+              #         .result(data_key: :items)
+              #
+              #     result.data[:items]
+              #     # => [<...Data attributes: {}, associations: []>, <...Data attributes: {}, associations: []>]
+              #
+              #     But:
+              #     - Is it OK to return nested data objects from results?
+              #     - If not, how can those nested data objects be efficiently converted into hashes only for the results (data may return arrays, hashes, sets, enumerators, arithmetic sequences, etc.)?
+              #
+              #     next data.one? ? data.values.first : result.create_data(data)
+              #
               def service_aware_iteration_block_from(iteration_block)
                 return unless iteration_block
 
                 proc do |*args|
-                  value = iteration_block.call(*args)
+                  service = iteration_block.call(*args)
 
-                  next value unless Plugins::CanHaveSteps.step?(value)
-
-                  if value.success?
-                    next true if value.outputs.none?
-
-                    ##
-                    # NOTE: It may look very appealing to return data objects instead of hashes. For example:
-                    #   # With hashes.
-                    #   result =
-                    #     service_aware_enumerable(users)
-                    #       .map { |user| step ProcessUser, in: :user, out: [:attributes, :associations] }
-                    #       .each { |values| p [values[:attributes], values[:associations]] }
-                    #       .result(data_key: :items)
-                    #
-                    #   result.data[:items]
-                    #   # => [{attributes: {}, associations: []}, {attributes: {}, associations: []}]
-                    #
-                    #   # With data objects.
-                    #   result =
-                    #     service_aware_enumerable(users)
-                    #       .map { |user| step ProcessUser, in: :user, out: [:attributes, :associations] }
-                    #       .each { |data| p [data.attributes, data.associations] }
-                    #       .result(data_key: :items)
-                    #
-                    #   result.data[:items]
-                    #   # => [<...Data attributes: {}, associations: []>, <...Data attributes: {}, associations: []>]
-                    #
-                    #   But:
-                    #   - Is it OK to return nested data objects from results?
-                    #   - If not, how can those nested data objects be efficiently converted into hashes only for the results (data may return arrays, hashes, sets, enumerators, arithmetic sequences, etc.)?
-                    #
-                    # next value.outputs.one? ? value.output_values.values.first : value.result.create_data(value.output_values)
-
-                    next value.outputs.one? ? value.output_values.values.first : value.output_values
-                  end
-
-                  if value.failure?
-                    next value.outputs.none? ? false : nil
-                  end
-
-                  throw :propagated_result, {propagated_result: value.result}
+                  service.to_service_aware_iteration_block_argument
                 end
               end
 
