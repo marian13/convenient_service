@@ -2970,13 +2970,13 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect([0, 1, 2, 3, 4, 5].each_with_index { |number, index| index.abs }).to eq([0, 1, 2, 3, 4, 5])
             expect(chain_enumerator([0, 1, 2, 3, 4, 5]).each_with_index { |status, index| index.abs }.to_a).to eq([0, 1, 2, 3, 4, 5])
 
-            expect(service.service_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).service_aware_each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: enumerable([0, 1, 2, 3, 4, 5]))
-            expect(service.service_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).service_aware_each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
-            expect(service.service_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).service_aware_each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
-            expect(service.service_aware_enumerable([0, 1, 2, 3, 4, 5]).service_aware_each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
-            expect(service.service_aware_enumerable(set([0, 1, 2, 3, 4, 5])).service_aware_each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: set([0, 1, 2, 3, 4, 5]))
-            expect(service.service_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).service_aware_each_with_index { |(key, value), index| value.to_s.ord }.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5})
-            expect(service.service_aware_enumerable((0..5)).service_aware_each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: (0..5))
+            expect(service.service_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: enumerable([0, 1, 2, 3, 4, 5]))
+            expect(service.service_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+            expect(service.service_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+            expect(service.service_aware_enumerable([0, 1, 2, 3, 4, 5]).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: [0, 1, 2, 3, 4, 5])
+            expect(service.service_aware_enumerable(set([0, 1, 2, 3, 4, 5])).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: set([0, 1, 2, 3, 4, 5]))
+            expect(service.service_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).each_with_index { |(key, value), index| value.to_s.ord }.result).to be_success.with_data(values: {0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5})
+            expect(service.service_aware_enumerable((0..5)).each_with_index { |number, index| index.abs }.result).to be_success.with_data(values: (0..5))
           else
             # NOTE: Block.
             expect([0, 1, 2, 3, 4, 5].each_with_index { |number, index| index.abs }).to eq([0, 1, 2, 3, 4, 5])
@@ -8381,14 +8381,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect({1 => 1}.zip { |array| raise if array.map(&:sum).sum != 2 }).to eq(nil)
             expect((1..1).zip { |integer| raise if integer.sum != 1 }).to eq(nil)
 
-            expect(service.service_aware_enumerable(enumerable([1])).service_aware_zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
-            expect(service.service_aware_enumerator(enumerator([1])).service_aware_zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
-            expect(service.service_aware_enumerator(lazy_enumerator([1])).service_aware_zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
-            expect(service.service_aware_enumerator(chain_enumerator([1])).service_aware_zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.service_aware_enumerable(enumerable([1])).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.service_aware_enumerator(enumerator([1])).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.service_aware_enumerator(lazy_enumerator([1])).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.service_aware_enumerator(chain_enumerator([1])).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
             expect(service.service_aware_enumerable([1]).zip { |array| raise if array.sum != 1 }.result).to be_success.with_data(value: nil)
-            expect(service.service_aware_enumerable(set([1])).service_aware_zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
-            expect(service.service_aware_enumerable({1 => 1}).service_aware_zip { |array| raise if array.service_aware_map(&:sum).sum != 2 }.result).to be_success.with_data(value: nil)
-            expect(service.service_aware_enumerable((1..1)).service_aware_zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.service_aware_enumerable(set([1])).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
+            expect(service.service_aware_enumerable({1 => 1}).zip { |array| raise if array.service_aware_map(&:sum).sum != 2 }.result).to be_success.with_data(value: nil)
+            expect(service.service_aware_enumerable((1..1)).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
           else
             # No argument, block.
             expect([1].zip { |array| raise if array.sum != 1 }).to eq(nil)
