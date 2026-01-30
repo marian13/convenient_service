@@ -432,4 +432,3 @@ gem "yard", "~> 0.9.37" if RUBY_VERSION >= "3.4"
 # - https://github.com/zverok/yard-junk
 #
 gem "yard-junk", "~> 0.0.10", platform: :mri if RUBY_VERSION >= "4.0"
-
