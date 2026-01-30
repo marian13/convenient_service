@@ -148,7 +148,8 @@
   <span class="private note title">private</span>
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Can be any type.</p>
+</div></span>
   
 </li>
 
@@ -189,11 +190,36 @@
   You should avoid using this method if possible, as it may be removed or be changed in the future.
 </p>
 
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Throws <code>:propagated_result</code> when status is <code>error</code>.</p>
+</div>
+  </div>
+
+<p>Returns Can be any type.</p>
+
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can be any type.</p>
+</div>
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Since:</p>
 <ul class="since">
   
@@ -216,8 +242,6 @@
       <pre class="lines">
 
 
-23
-24
 25
 26
 27
@@ -232,10 +256,12 @@
 36
 37
 38
-39</pre>
+39
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_used_in_service_aware_enumerables/concern.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_used_in_service_aware_enumerables/concern.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_service_aware_iteration_block_value'>to_service_aware_iteration_block_value</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_success?'>success?</span>
@@ -264,7 +290,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Jan 30 14:38:16 2026 by
+  Generated on Fri Jan 30 15:19:56 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-4.0.1).
 </div>
