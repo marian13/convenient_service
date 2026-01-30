@@ -37,8 +37,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             [
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Concern,
               ConvenientService::Service::Plugins::CanHaveRSpecStubbedResults::Concern,
-              ConvenientService::Common::Plugins::HasInternals::Concern,
-              ConvenientService::Common::Plugins::HasConstructor::Concern,
+              ConvenientService::Plugins::Common::HasInternals::Concern,
+              ConvenientService::Plugins::Common::HasConstructor::Concern,
               ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
               ConvenientService::Service::Plugins::HasResult::Concern,
               ConvenientService::Service::Plugins::HasJSendResult::Concern,
@@ -48,10 +48,10 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               ConvenientService::Service::Plugins::CanHaveSequentialSteps::Concern,
               ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Concern,
               ConvenientService::Service::Plugins::CanBeCalled::Concern,
-              ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
+              ConvenientService::Plugins::Common::CanHaveCallbacks::Concern,
               ConvenientService::Service::Plugins::HasInspect::Concern,
-              ConvenientService::Common::Plugins::CachesConstructorArguments::Concern,
-              ConvenientService::Common::Plugins::CanBeCopied::Concern,
+              ConvenientService::Plugins::Common::CachesConstructorArguments::Concern,
+              ConvenientService::Plugins::Common::CanBeCopied::Concern,
               ConvenientService::Service::Plugins::CanHaveRecalculations::Concern,
               ConvenientService::Service::Plugins::CanNotBeInherited::Concern,
               ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Concern,
@@ -85,8 +85,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           let(:initialize_middlewares) do
             [
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
-              ConvenientService::Common::Plugins::CachesConstructorArguments::Middleware,
-              ConvenientService::Common::Plugins::CleansExceptionBacktrace::Middleware,
+              ConvenientService::Plugins::Common::CachesConstructorArguments::Middleware,
+              ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware,
               ConvenientService::Service::Plugins::CanHaveSteps::Middleware,
               ConvenientService::Service::Plugins::ForbidsConvenientServiceEntitiesAsConstructorArguments::Middleware
             ]
@@ -136,13 +136,13 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         example_group "#result middlewares" do
           let(:result_middlewares) do
             [
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Plugins::Common::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
               ConvenientService::Service::Plugins::CanHaveStubbedResults::Middleware,
-              ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
+              ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware,
               ConvenientService::Service::Plugins::SetsParentToForeignResult::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
-              ConvenientService::Common::Plugins::CleansExceptionBacktrace::Middleware,
+              ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware,
               ConvenientService::Service::Plugins::CanHaveSequentialSteps::Middleware
 
               ##
@@ -177,7 +177,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         example_group "#regular_result middlewares" do
           let(:regular_result_middlewares) do
             [
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+              ConvenientService::Plugins::Common::CachesReturnValue::Middleware
             ]
           end
 
@@ -189,7 +189,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         example_group "#steps_result middlewares" do
           let(:steps_result_middlewares) do
             [
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+              ConvenientService::Plugins::Common::CachesReturnValue::Middleware
             ]
           end
 
@@ -201,11 +201,11 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
         example_group "#negated_result middlewares" do
           let(:negated_result_middlewares) do
             [
-              ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
+              ConvenientService::Plugins::Common::CachesReturnValue::Middleware,
               ConvenientService::Service::Plugins::CollectsServicesInException::Middleware,
-              ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Middleware,
+              ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware,
               ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Middleware,
-              ConvenientService::Common::Plugins::CleansExceptionBacktrace::Middleware
+              ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware
             ]
           end
 
@@ -266,7 +266,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           example_group "concerns" do
             let(:concerns) do
               [
-                ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+                ConvenientService::Plugins::Common::HasInternals::Entities::Internals::Plugins::HasCache::Concern
               ]
             end
 
@@ -280,9 +280,9 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           example_group "concerns" do
             let(:concerns) do
               [
-                ConvenientService::Common::Plugins::HasInternals::Concern,
-                ConvenientService::Common::Plugins::HasConstructor::Concern,
-                ConvenientService::Common::Plugins::HasConstructorWithoutInitialize::Concern,
+                ConvenientService::Plugins::Common::HasInternals::Concern,
+                ConvenientService::Plugins::Common::HasConstructor::Concern,
+                ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveStep::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeCalled::Concern,
@@ -295,7 +295,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeStubbedResult::Concern,
                 ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Concern,
-                ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern
+                ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
               ]
             end
 
@@ -319,7 +319,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           example_group "#negated_result middlewares" do
             let(:negated_result_middlewares) do
               [
-                ConvenientService::Common::Plugins::EnsuresNegatedJSendResult::Middleware
+                ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware
               ]
             end
 
@@ -410,7 +410,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             example_group "concerns" do
               let(:concerns) do
                 [
-                  ConvenientService::Common::Plugins::HasInternals::Concern,
+                  ConvenientService::Plugins::Common::HasInternals::Concern,
                   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern,
                   ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Concern
                 ]
@@ -497,7 +497,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               example_group "concerns" do
                 let(:concerns) do
                   [
-                    ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+                    ConvenientService::Plugins::Common::HasInternals::Entities::Internals::Plugins::HasCache::Concern
                   ]
                 end
 
@@ -512,7 +512,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             example_group "concerns" do
               let(:concerns) do
                 [
-                  ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+                  ConvenientService::Plugins::Common::HasInternals::Entities::Internals::Plugins::HasCache::Concern
                 ]
               end
 
@@ -527,19 +527,19 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           example_group "concerns" do
             let(:concerns) do
               [
-                ConvenientService::Common::Plugins::HasInternals::Concern,
-                ConvenientService::Step::Plugins::HasResult::Concern,
+                ConvenientService::Plugins::Common::HasInternals::Concern,
+                ConvenientService::Plugins::Step::HasResult::Concern,
 
-                ConvenientService::Step::Plugins::CanBeCompleted::Concern,
-                ConvenientService::Step::Plugins::CanBeServiceStep::Concern,
-                ConvenientService::Step::Plugins::CanBeMethodStep::Concern,
+                ConvenientService::Plugins::Step::CanBeCompleted::Concern,
+                ConvenientService::Plugins::Step::CanBeServiceStep::Concern,
+                ConvenientService::Plugins::Step::CanBeMethodStep::Concern,
 
-                ConvenientService::Step::Plugins::CanBeUsedInServiceAwareEnumerables::Concern,
+                ConvenientService::Plugins::Step::CanBeUsedInServiceAwareEnumerables::Concern,
 
-                ConvenientService::Common::Plugins::CanHaveCallbacks::Concern,
-                ConvenientService::Step::Plugins::HasInspect::Concern,
+                ConvenientService::Plugins::Common::CanHaveCallbacks::Concern,
+                ConvenientService::Plugins::Step::HasInspect::Concern,
 
-                ConvenientService::Common::Plugins::HasJSendResultDuckShortSyntax::Concern
+                ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
               ]
             end
 
@@ -551,13 +551,13 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           example_group "#result middlewares" do
             let(:result_middlewares) do
               [
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware,
-                ConvenientService::Common::Plugins::CanHaveCallbacks::Middleware,
-                ConvenientService::Step::Plugins::HasResult::Middleware,
-                ConvenientService::Step::Plugins::CanHaveParentResult::Middleware,
-                ConvenientService::Step::Plugins::RaisesOnNotResultReturnValue::Middleware,
-                ConvenientService::Step::Plugins::CanBeServiceStep::Middleware,
-                ConvenientService::Step::Plugins::CanBeMethodStep::Middleware
+                ConvenientService::Plugins::Common::CachesReturnValue::Middleware,
+                ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware,
+                ConvenientService::Plugins::Step::HasResult::Middleware,
+                ConvenientService::Plugins::Step::CanHaveParentResult::Middleware,
+                ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware,
+                ConvenientService::Plugins::Step::CanBeServiceStep::Middleware,
+                ConvenientService::Plugins::Step::CanBeMethodStep::Middleware
               ]
             end
 
@@ -569,7 +569,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           example_group "#service_result middlewares" do
             let(:service_result_middlewares) do
               [
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                ConvenientService::Plugins::Common::CachesReturnValue::Middleware
               ]
             end
 
@@ -581,7 +581,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           example_group "#method_result middlewares" do
             let(:method_result_middlewares) do
               [
-                ConvenientService::Common::Plugins::CachesReturnValue::Middleware
+                ConvenientService::Plugins::Common::CachesReturnValue::Middleware
               ]
             end
 
@@ -594,7 +594,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             example_group "concerns" do
               let(:concerns) do
                 [
-                  ConvenientService::Common::Plugins::HasInternals::Entities::Internals::Plugins::HasCache::Concern
+                  ConvenientService::Plugins::Common::HasInternals::Entities::Internals::Plugins::HasCache::Concern
                 ]
               end
 
@@ -760,8 +760,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :amazing
 
           example_group "service step" do
             example_group "concerns" do
-              it "adds `ConvenientService::Step::Plugins::HasAmazingPrintInspect::Concern` from service concerns" do
-                expect(service_class::Step.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Step::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Step::Plugins::HasAmazingPrintInspect::Concern }).not_to be_nil
+              it "adds `ConvenientService::Plugins::Step::HasAmazingPrintInspect::Concern` from service concerns" do
+                expect(service_class::Step.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Step::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Step::HasAmazingPrintInspect::Concern }).not_to be_nil
               end
             end
           end
@@ -832,8 +832,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :awesome
 
           example_group "service step" do
             example_group "concerns" do
-              it "adds `ConvenientService::Step::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do
-                expect(service_class::Step.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Step::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Step::Plugins::HasAwesomePrintInspect::Concern }).not_to be_nil
+              it "adds `ConvenientService::Plugins::Step::HasAwesomePrintInspect::Concern` from service concerns" do
+                expect(service_class::Step.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Step::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Step::HasAwesomePrintInspect::Concern }).not_to be_nil
               end
             end
           end

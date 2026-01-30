@@ -19,6 +19,8 @@ module ConvenientService
                   instance_methods do
                     ##
                     # @api private
+                    # @return [Object] Can be any type.
+                    # @note Throws `:propagated_result` when status is `error`.
                     #
                     def to_service_aware_iteration_block_value
                       if result.success?
