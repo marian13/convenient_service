@@ -922,8 +922,8 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           #
           if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Failure propagation.
-            expect(lazy_enumerator([:failure, :failure, :failure]).service_aware_select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
-            expect(lazy_enumerator([:failure, :failure, :failure]).service_aware_select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
+            expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
+            expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
 
             # expect(service.service_aware_enumerable(enumerable([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
             # expect(service.service_aware_enumerator(enumerator([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
@@ -1044,8 +1044,8 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           #
           if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Failure propagation.
-            expect(lazy_enumerator([:failure, :failure, :failure]).service_aware_select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
-            expect(lazy_enumerator([:failure, :failure, :failure]).service_aware_select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
+            expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
+            expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
 
             # expect(service.service_aware_enumerable(enumerable([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
             # expect(service.service_aware_enumerator(enumerator([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
@@ -2892,10 +2892,10 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Empty collection.
             expect([].each_with_index { |status, index| index.abs }).to eq([])
-            expect(set([]).service_aware_each_with_index { |status, index| index.abs }).to eq(set([]))
-            expect({}.service_aware_each_with_index { |status, index| index.abs }).to eq({})
-            expect((:success...:success).service_aware_each_with_index { |status, index| index.abs }).to eq((:success...:success))
-            expect(chain_enumerator([]).service_aware_each_with_index { |status, index| index.abs }.to_a).to eq([])
+            expect(set([]).each_with_index { |status, index| index.abs }).to eq(set([]))
+            expect({}.each_with_index { |status, index| index.abs }).to eq({})
+            expect((:success...:success).each_with_index { |status, index| index.abs }).to eq((:success...:success))
+            expect(chain_enumerator([]).each_with_index { |status, index| index.abs }.to_a).to eq([])
 
             expect(service.service_aware_enumerable(enumerable([])).service_aware_each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: enumerable([]))
             expect(service.service_aware_enumerator(enumerator([])).service_aware_each_with_index { |status, index| index.abs }.result).to be_success.with_data(values: [])
@@ -3134,16 +3134,16 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             # NOTE: Block.
             expect(["0", "1", "2", "3", "4", "5"].each_with_object(+"") { |string, object| concat_strings(object, string) }).to eq("12345")
 
-            expect(service.service_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
-            expect(service.service_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
-            expect(service.service_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.service_aware_enumerable(enumerable(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.service_aware_enumerator(enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.service_aware_enumerator(lazy_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
             expect(chain_enumerator(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| concat_strings(object, string) }).to eq("12345")
-            expect(service.service_aware_enumerator(chain_enumerator(["0", "1", "2", "3", "4", "5"])).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
-            expect(service.service_aware_enumerable(["0", "1", "2", "3", "4", "5"]).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
-            expect(service.service_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.service_aware_enumerator(chain_enumerator(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.service_aware_enumerable(["0", "1", "2", "3", "4", "5"]).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.service_aware_enumerable(set(["0", "1", "2", "3", "4", "5"])).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
             expect({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}.each_with_object(+"") { |(key, value), object| concat_strings(object, value) }).to eq("12345")
             expect(service.service_aware_enumerable({"0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"}).each_with_object(+"") { |(key, value), object| concat_strings(object, value) }.result).to be_success.with_data(value: "12345")
-            expect(service.service_aware_enumerable(("0".."5")).with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
+            expect(service.service_aware_enumerable(("0".."5")).each_with_object(+"") { |string, object| concat_strings(object, string) }.result).to be_success.with_data(value: "12345")
           else
             # NOTE: Block.
             expect(["0", "1", "2", "3", "4", "5"].each_with_object(+"") { |string, object| concat_strings(object, string) }).to eq("12345")
@@ -3760,7 +3760,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
 
             expect(service.service_aware_enumerable(enumerable([:success, :failure, :success, :failure])).service_aware_find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
             expect(service.service_aware_enumerator(enumerator([:success, :failure, :success, :failure])).service_aware_find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
-            expect { service.service_aware_enumerator(lazy_enumerator([:success, :failure, :success, :failure])).service_aware_find_all.result }.to raise_error(ArgumentError).with_message("tried to call lazy service_aware_find_all without a block")
+            expect { service.service_aware_enumerator(lazy_enumerator([:success, :failure, :success, :failure])).service_aware_find_all.result }.to raise_error(ArgumentError).with_message("tried to call lazy find_all without a block")
             expect(service.service_aware_enumerator(chain_enumerator([:success, :failure, :success, :failure])).service_aware_find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
             expect(service.service_aware_enumerable([:success, :failure, :success, :failure]).service_aware_find_all.result).to be_success.with_data(values: [:success, :failure, :success, :failure])
             expect(service.service_aware_enumerable(set([:success, :failure])).service_aware_find_all.result).to be_success.with_data(values: [:success, :failure])
@@ -5538,7 +5538,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.service_aware_enumerable({1 => 1, -1 => -1, :exception => :exception}).service_aware_min { |hash, other_hash| step compare_numbers_service, in: [number: -> { hash.last }, other_number: -> { other_hash.last }], out: :number_code }.result).to be_error.without_data
             expect(service.service_aware_enumerable((-2..-1)).service_aware_min { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
 
-            expect((-1..-1).service_aware_min { raise }).to eq(nil)
+            expect((-1..-1).min { raise }).to eq(nil)
             expect(service.service_aware_enumerable((-1..-1)).service_aware_min { raise }.result).to be_success.with_data(value: -1)
           else
             # NOTE: Error result.
@@ -5849,7 +5849,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.service_aware_enumerable({1 => 1, -1 => -1, :exception => :exception}).service_aware_minmax { |hash, other_hash| step compare_numbers_service, in: [number: -> { hash.last }, other_number: -> { other_hash.last }], out: :number_code }.result).to be_error.without_data
             expect(service.service_aware_enumerable((-2..-1)).service_aware_minmax { |number, other_number| step compare_numbers_service, in: [number: -> { number }, other_number: -> { other_number }], out: :number_code }.result).to be_error.without_data
 
-            expect((-1..-1).service_aware_minmax { raise }).to eq([nil, nil])
+            expect((-1..-1).minmax { raise }).to eq([nil, nil])
             expect(service.service_aware_enumerable((-1..-1)).service_aware_minmax { raise }.result).to be_success.with_data(values: [-1, -1])
           else
             # NOTE: Error result.
@@ -8378,7 +8378,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect([1].zip { |array| raise if array.sum != 1 }).to eq(nil)
             expect(lazy_enumerator([1]).zip { |integer| raise if integer.sum != 1 }).to eq(nil)
             expect(set([1]).zip { |integer| raise if integer.sum != 1 }).to eq(nil)
-            expect({1 => 1}.zip { |array| raise if array.service_aware_map(&:sum).sum != 2 }).to eq(nil)
+            expect({1 => 1}.zip { |array| raise if array.map(&:sum).sum != 2 }).to eq(nil)
             expect((1..1).zip { |integer| raise if integer.sum != 1 }).to eq(nil)
 
             expect(service.service_aware_enumerable(enumerable([1])).service_aware_zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
