@@ -5,6 +5,29 @@
 
 # Changelog
 
+## [0.23.0](https://github.com/marian13/convenient_service/compare/v0.22.0...v0.23.0) (2026-01-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* **loops:** rename step_aware to service_aware
+
+### Features
+
+* **loops:** separate service aware and not aware methods ([65ce0dc](https://github.com/marian13/convenient_service/commit/65ce0dc002050c3e75fdccd34575ae8b1f7916d8))
+* **loops:** separate service aware and not aware methods ([a38e35b](https://github.com/marian13/convenient_service/commit/a38e35bbd06fba0655a22e475f766e0079ea2a0c))
+* **loops:** separate service aware and not aware methods ([850b24e](https://github.com/marian13/convenient_service/commit/850b24e0fbd2f53698fc9511830de33dc02aebb3))
+
+
+### Miscellaneous Chores
+
+* release 0.23.0 ([323673b](https://github.com/marian13/convenient_service/commit/323673b0628182d5f7d38aafa07927beb44d1451))
+
+
+### Code Refactoring
+
+* **loops:** rename step_aware to service_aware ([0a6e43f](https://github.com/marian13/convenient_service/commit/0a6e43ff5c1ce833a29ebeb73c99e382cf14213b))
+
 ## [0.22.0](https://github.com/marian13/convenient_service/compare/v0.21.1...v0.22.0) (2026-01-27)
 
 
