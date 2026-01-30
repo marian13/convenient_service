@@ -329,7 +329,7 @@ module ConvenientService
                 # @internal
                 #   TODO: Move to `CanBeUsedInStepAwareEnumerables`.
                 #
-                def to_service_aware_iteration_block_argument
+                def to_service_aware_iteration_block_value
                   if result.success?
                     if outputs.none?
                       return true

@@ -135,7 +135,22 @@ module ConvenientService
               # @param enums [Array<Enumerable>]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
+              # @internal
+              #   TODO: Direct specs for cast.
+              #
               def chain(*enums)
+                with_processing_return_value_as_chain_enumerator(arguments(*enums)) do |*enums|
+                  enumerable.chain(*enums)
+                end
+              end
+
+              ##
+              # @api public
+              #
+              # @param enums [Array<Enumerable>]
+              # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
+              #
+              def step_aware_chain(*enums)
                 casted_enums = enums.map { |collection| cast_service_aware_enumerable(collection) }.map(&:enumerable)
 
                 with_processing_return_value_as_chain_enumerator(arguments(*casted_enums)) do |*enums|
@@ -1706,19 +1721,17 @@ module ConvenientService
               ##
               # @api public
               #
-              # @param other_enums [Array<Object>]
+              # @param enums [Array<Object>]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
-              def zip(*other_enums, &iteration_block)
-                casted_other_enums = other_enums.map { |collection| cast_service_aware_enumerable(collection) }.map(&:enumerable)
-
+              def zip(*enums, &iteration_block)
                 if iteration_block
-                  with_processing_return_value_as_object(arguments(*casted_other_enums, &iteration_block)) do |*other_enums, &iteration_block|
+                  with_processing_return_value_as_object(arguments(*enums, &iteration_block)) do |*other_enums, &iteration_block|
                     enumerable.zip(*other_enums, &iteration_block)
                   end
                 else
-                  with_processing_return_value_as_enumerable(arguments(*casted_other_enums)) do |*other_enums|
+                  with_processing_return_value_as_enumerable(arguments(*enums)) do |*other_enums|
                     enumerable.zip(*other_enums)
                   end
                 end
@@ -1727,12 +1740,17 @@ module ConvenientService
               ##
               # @api public
               #
-              # @param other_enums [Array<Object>]
+              # @param enums [Array<Object>]
               # @param iteration_block [Proc, nil]
               # @return [ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Entities::ServiceAwareEnumerables::Base]
               #
-              def service_aware_zip(*other_enums, &iteration_block)
-                zip(*other_enums, &service_aware_iteration_block_from(iteration_block))
+              # @internal
+              #   TODO: Direct specs for cast.
+              #
+              def service_aware_zip(*enums, &iteration_block)
+                casted_enums = enums.map { |collection| cast_service_aware_enumerable(collection) }.map(&:enumerable)
+
+                zip(*casted_enums, &service_aware_iteration_block_from(iteration_block))
               end
             end
           end

@@ -262,7 +262,7 @@ module ConvenientService
                 proc do |*args|
                   service = iteration_block.call(*args)
 
-                  service.to_service_aware_iteration_block_argument
+                  service.to_service_aware_iteration_block_value
                 end
               end
 

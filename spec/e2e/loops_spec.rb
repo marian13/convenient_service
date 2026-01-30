@@ -972,6 +972,128 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
         end
       end
 
+      describe "#step_aware_chain" do
+        specify do
+          # NOTE: Empty collection.
+          expect([].chain([2]).to_a).to eq([2])
+
+          expect(service.service_aware_enumerable(enumerable([])).step_aware_chain([2]).result).to be_success.with_data(values: [2])
+          expect(service.service_aware_enumerator(enumerator([])).step_aware_chain([2]).result).to be_success.with_data(values: [2])
+          expect(service.service_aware_enumerator(lazy_enumerator([])).step_aware_chain([2]).result).to be_success.with_data(values: [2])
+          expect(service.service_aware_enumerator(chain_enumerator([])).step_aware_chain([2]).result).to be_success.with_data(values: [2])
+          expect(service.service_aware_enumerable([]).step_aware_chain([2]).result).to be_success.with_data(values: [2])
+          expect(service.service_aware_enumerable(set([])).step_aware_chain([2]).result).to be_success.with_data(values: [2])
+          expect(service.service_aware_enumerable({}).step_aware_chain([2]).result).to be_success.with_data(values: [2])
+          expect(service.service_aware_enumerable((1...1)).step_aware_chain([2]).result).to be_success.with_data(values: [2])
+
+          # No argument.
+          expect([1].chain.to_a).to eq([1])
+          expect({1 => 1}.chain.to_a).to eq([[1, 1]])
+
+          expect(service.service_aware_enumerable(enumerable([1])).step_aware_chain.result).to be_success.with_data(values: [1])
+          expect(service.service_aware_enumerator(enumerator([1])).step_aware_chain.result).to be_success.with_data(values: [1])
+          expect(service.service_aware_enumerator(lazy_enumerator([1])).step_aware_chain.result).to be_success.with_data(values: [1])
+          expect(service.service_aware_enumerator(chain_enumerator([1])).step_aware_chain.result).to be_success.with_data(values: [1])
+          expect(service.service_aware_enumerable([1]).step_aware_chain.result).to be_success.with_data(values: [1])
+          expect(service.service_aware_enumerable(set([1])).step_aware_chain.result).to be_success.with_data(values: [1])
+          expect(service.service_aware_enumerable({1 => 1}).step_aware_chain.result).to be_success.with_data(values: [[1, 1]])
+          expect(service.service_aware_enumerable((1..1)).step_aware_chain.result).to be_success.with_data(values: [1])
+
+          # One argument.
+          expect([1].chain([2]).to_a).to eq([1, 2])
+          expect({1 => 1}.chain([2]).to_a).to eq([[1, 1], 2])
+          expect({1 => 1}.chain({2 => 2}).to_a).to eq([[1, 1], [2, 2]])
+
+          expect(service.service_aware_enumerable(enumerable([1])).step_aware_chain([2]).result).to be_success.with_data(values: [1, 2])
+          expect(service.service_aware_enumerator(enumerator([1])).step_aware_chain([2]).result).to be_success.with_data(values: [1, 2])
+          expect(service.service_aware_enumerator(lazy_enumerator([1])).step_aware_chain([2]).result).to be_success.with_data(values: [1, 2])
+          expect(service.service_aware_enumerator(chain_enumerator([1])).step_aware_chain([2]).result).to be_success.with_data(values: [1, 2])
+          expect(service.service_aware_enumerable([1]).step_aware_chain([2]).result).to be_success.with_data(values: [1, 2])
+          expect(service.service_aware_enumerable(set([1])).step_aware_chain([2]).result).to be_success.with_data(values: [1, 2])
+          expect(service.service_aware_enumerable({1 => 1}).step_aware_chain([2]).result).to be_success.with_data(values: [[1, 1], 2])
+          expect(service.service_aware_enumerable({1 => 1}).step_aware_chain({2 => 2}).result).to be_success.with_data(values: [[1, 1], [2, 2]])
+          expect(service.service_aware_enumerable((1..1)).step_aware_chain([2]).result).to be_success.with_data(values: [1, 2])
+
+          # Multiple arguments.
+          expect([1].chain([2], [3]).to_a).to eq([1, 2, 3])
+          expect({1 => 1}.chain([2], [3]).to_a).to eq([[1, 1], 2, 3])
+          expect({1 => 1}.chain({2 => 2}, {3 => 3}).to_a).to eq([[1, 1], [2, 2], [3, 3]])
+
+          expect(service.service_aware_enumerable(enumerable([1])).step_aware_chain([2], [3]).result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.service_aware_enumerator(enumerator([1])).step_aware_chain([2], [3]).result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.service_aware_enumerator(lazy_enumerator([1])).step_aware_chain([2], [3]).result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.service_aware_enumerator(chain_enumerator([1])).step_aware_chain([2], [3]).result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.service_aware_enumerable([1]).step_aware_chain([2], [3]).result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.service_aware_enumerable(set([1])).step_aware_chain([2], [3]).result).to be_success.with_data(values: [1, 2, 3])
+          expect(service.service_aware_enumerable({1 => 1}).step_aware_chain([2], [3]).result).to be_success.with_data(values: [[1, 1], 2, 3])
+          expect(service.service_aware_enumerable({1 => 1}).step_aware_chain({2 => 2}, {3 => 3}).result).to be_success.with_data(values: [[1, 1], [2, 2], [3, 3]])
+          expect(service.service_aware_enumerable((1..1)).step_aware_chain([2], [3]).result).to be_success.with_data(values: [1, 2, 3])
+
+          # NOTE: Error propagation.
+          expect(service.service_aware_enumerable(enumerable([:success, :error, :exception])).service_aware_filter { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_error.without_data
+          expect(service.service_aware_enumerator(enumerator([:success, :error, :exception])).service_aware_filter { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_error.without_data
+          expect(service.service_aware_enumerator(lazy_enumerator([:success, :error, :exception])).service_aware_filter { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_error.without_data
+          expect(service.service_aware_enumerator(chain_enumerator([:success, :error, :exception])).service_aware_filter { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_error.without_data
+          expect(service.service_aware_enumerable([:success, :error, :exception]).service_aware_filter { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_error.without_data
+          expect(service.service_aware_enumerable(set([:success, :error, :exception])).service_aware_filter { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_error.without_data
+          expect(service.service_aware_enumerable({success: :success, error: :error, exception: :exception}).service_aware_filter { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_error.without_data
+          expect(service.service_aware_enumerable((:error..:error)).service_aware_filter { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_error.without_data
+
+          ##
+          # HACK: `Enumerator::Lazy.chain` returns `Enumetator::Chain` in JRuby.
+          #
+          if ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
+            # NOTE: Failure propagation.
+            expect(lazy_enumerator([:failure, :failure, :failure]).service_aware_select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
+            expect(lazy_enumerator([:failure, :failure, :failure]).service_aware_select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
+
+            # expect(service.service_aware_enumerable(enumerable([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerator(enumerator([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerable([:failure, :failure, :failure]).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerable(set([:failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerable({failure: :failure}).service_aware_select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerable((:failure..:failure)).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+          elsif ConvenientService::Dependencies.ruby.version >= 3.1
+            # NOTE: Failure propagation.
+            expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
+            expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Lazy)
+
+            # expect(service.service_aware_enumerable(enumerable([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerator(enumerator([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerable([:failure, :failure, :failure]).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerable(set([:failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerable({failure: :failure}).service_aware_select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerable((:failure..:failure)).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+          else
+            # NOTE: Failure propagation.
+            expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3]).to_a).to eq([2, 3])
+            expect(lazy_enumerator([:failure, :failure, :failure]).select { |status| status_condition[status] }.chain([2], [3])).to be_instance_of(Enumerator::Chain)
+            # expect(service.service_aware_enumerable(enumerable([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerator(enumerator([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerator(lazy_enumerator([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_success.with_data(values: [2, 3])
+            # expect(service.service_aware_enumerator(chain_enumerator([:failure, :failure, :failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerable([:failure, :failure, :failure]).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerable(set([:failure])).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerable({failure: :failure}).service_aware_select_exactly(2) { |key, value| step status_service, in: [status: -> { value }] }.chain([2], [3]).result).to be_failure.without_data
+            # expect(service.service_aware_enumerable((:failure..:failure)).service_aware_select_exactly(2) { |status| step status_service, in: [status: -> { status }] }.chain([2], [3]).result).to be_failure.without_data
+          end
+
+          # NOTE: Usage on terminal chaining.
+          expect { service.service_aware_enumerable(enumerable([:success, :exception, :exception])).first.service_aware_chain([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.service_aware_enumerator(enumerator([:success, :exception, :exception])).first.service_aware_chain([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.service_aware_enumerator(lazy_enumerator([:success, :exception, :exception])).first.service_aware_chain([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.service_aware_enumerator(chain_enumerator([:success, :exception, :exception])).first.service_aware_chain([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.service_aware_enumerable([:success, :exception, :exception]).first.service_aware_chain([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.service_aware_enumerable(set([:success, :exception, :exception])).first.service_aware_chain([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.service_aware_enumerable({success: :success, exception: :exception}).first.service_aware_chain([2], [3]).result }.to raise_error(ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+          expect { service.service_aware_enumerable((:success..:success)).first.service_aware_chain([2], [3]) }.to raise_error(ConvenientService::Service::Plugins::CanHaveServiceAwareEnumerables::Exceptions::AlreadyUsedTerminalChaining)
+        end
+      end
+
       describe "#service_aware_chunk" do
         specify do
           # NOTE: Empty collection.
@@ -2292,14 +2414,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect({}.each_cons(2) { |status| status_condition[status] }).to eq(nil)
             expect((:success...:success).each_cons(2) { |status| status_condition[status] }).to eq(nil)
 
-            expect(service.service_aware_enumerable(enumerable([])).service_aware_each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerator(enumerator([])).service_aware_each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-            expect(service.service_aware_enumerator(lazy_enumerator([])).service_aware_each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-            expect(service.service_aware_enumerator(chain_enumerator([])).service_aware_each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
-            expect(service.service_aware_enumerable([]).service_aware_each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerable(set([])).service_aware_each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerable({}).service_aware_each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerable((:success...:success)).service_aware_each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable(enumerable([])).each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerator(enumerator([])).each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+            expect(service.service_aware_enumerator(lazy_enumerator([])).each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+            expect(service.service_aware_enumerator(chain_enumerator([])).each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: [])
+            expect(service.service_aware_enumerable([]).each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable(set([])).each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable({}).each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable((:success...:success)).each_cons(2) { |status| status_condition[status] }.result).to be_success.with_data(values: nil)
           end
 
           # NOTE: No block.
@@ -2332,15 +2454,15 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             # NOTE: Block.
             expect([0, 1, 2, 3, 4, 5].each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }).to eq(nil)
 
-            expect(service.service_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).service_aware_each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).service_aware_each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: [])
-            expect(service.service_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).service_aware_each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: [])
-            expect(service.service_aware_enumerator(chain_enumerator([0, 1, 2, 3, 4, 5])).service_aware_each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: [])
-            expect(service.service_aware_enumerable([0, 1, 2, 3, 4, 5]).service_aware_each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerable(set([0, 1, 2, 3, 4, 5])).service_aware_each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).service_aware_each_cons(2) { |numbers| numbers.map(&:last).map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerable((0..5)).service_aware_each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerable((0..0)).service_aware_each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: [])
+            expect(service.service_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: [])
+            expect(service.service_aware_enumerator(chain_enumerator([0, 1, 2, 3, 4, 5])).each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: [])
+            expect(service.service_aware_enumerable([0, 1, 2, 3, 4, 5]).each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable(set([0, 1, 2, 3, 4, 5])).each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).each_cons(2) { |numbers| numbers.map(&:last).map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable((0..5)).each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable((0..0)).each_cons(2) { |numbers| numbers.map(&:to_s).map(&:ord) }.result).to be_success.with_data(values: nil)
           end
 
           if ConvenientService::Dependencies.ruby.version >= 3.1
@@ -2645,14 +2767,14 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             # NOTE: Block.
             expect([0, 1, 2, 3, 4, 5].each_slice(2) { |numbers| numbers.map(&:even?) }).to eq(nil)
 
-            expect(service.service_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).service_aware_each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).service_aware_each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: [])
-            expect(service.service_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).service_aware_each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: [])
-            expect(service.service_aware_enumerator(chain_enumerator([0, 1, 2, 3, 4, 5])).service_aware_each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: [])
-            expect(service.service_aware_enumerable([0, 1, 2, 3, 4, 5]).service_aware_each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerable(set([0, 1, 2, 3, 4, 5])).service_aware_each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).service_aware_each_slice(2) { |(key, value), index| value.to_s.ord }.result).to be_success.with_data(values: nil)
-            expect(service.service_aware_enumerable((0..5)).service_aware_each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable(enumerable([0, 1, 2, 3, 4, 5])).each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerator(enumerator([0, 1, 2, 3, 4, 5])).each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: [])
+            expect(service.service_aware_enumerator(lazy_enumerator([0, 1, 2, 3, 4, 5])).each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: [])
+            expect(service.service_aware_enumerator(chain_enumerator([0, 1, 2, 3, 4, 5])).each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: [])
+            expect(service.service_aware_enumerable([0, 1, 2, 3, 4, 5]).each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable(set([0, 1, 2, 3, 4, 5])).each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable({0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5}).each_slice(2) { |(key, value), index| value.to_s.ord }.result).to be_success.with_data(values: nil)
+            expect(service.service_aware_enumerable((0..5)).each_slice(2) { |numbers| numbers.map(&:even?) }.result).to be_success.with_data(values: nil)
           end
 
           if ConvenientService::Dependencies.ruby.version >= 3.1

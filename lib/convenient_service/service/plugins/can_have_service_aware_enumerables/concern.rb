@@ -16,7 +16,7 @@ module ConvenientService
           # TODO: Implement in `CanBeUsedInStepAwareEnumerables`.
           #
           # class_methods do
-          #   def to_service_aware_iteration_block_argument
+          #   def to_service_aware_iteration_block_value
           #   end
           # end
           ##
