@@ -471,6 +471,26 @@ tasks:
       - task: deps:install
 
   ##
+  # The following gems are Convenient Service alternatives in some ways.
+  # Used for performance comparisons.
+  # See `benchmark/empty_service`.
+  # - https://github.com/sunny/actor
+  # - https://github.com/collectiveidea/interactor
+  # - https://github.com/trailblazer/trailblazer-operation
+  # - https://github.com/AaronLasseigne/active_interaction
+  # - https://github.com/adomokos/light-service
+  # - https://github.com/cypriss/mutations
+  #
+  install:alternatives:
+    cmds:
+      - gem install service_actor -v 3.7.0
+      - gem install interactor -v 3.1.2
+      - gem install trailblazer-operation -v 0.10.1
+      - gem install active_interaction -v 5.5.0
+      - gem install light-service -v 0.18.0
+      - gem install mutations -v 0.9.1
+
+  ##
   # NOTE: See `task console` for usage examples.
   #
   irb:

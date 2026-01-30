@@ -10,10 +10,15 @@ ENV["CONVENIENT_SERVICE_BENCHMARK"] = "true"
 ##
 # - https://github.com/SamSaffron/memory_profiler
 # - https://github.com/zombocom/derailed_benchmarks/blob/v2.2.1/bin/derailed#L49
-#
-require "bundler/setup"
+##
 
-# require "convenient_service/dependencies/only_development_tools"
+##
+# NOTE: `require "bundler/setup"` restrict $LOAD_PATH only to gems listed in Gemfile. That is why it is NOT used here.
+# require "bundler/setup"
+##
+
+# rubocop:disable Packaging/RequireRelativeHardcodingLib
+# require "../../../lib/convenient_service/dependencies/only_development_tools"
 require "memory_profiler"
 require "fileutils"
 require "paint"
@@ -25,7 +30,7 @@ end
 FileUtils.mkdir_p("tmp/objects_report")
 
 MemoryProfiler
-  .report { require "convenient_service" }
+  .report { require_relative "../../../lib/convenient_service" }
   .pretty_print(to_file: "tmp/objects_report/convenient_service.txt")
   .then { print_progress }
 
@@ -61,3 +66,4 @@ MemoryProfiler
 
 puts
 puts "Output is saved into `tmp/objects_report` folder."
+# rubocop:enable Packaging/RequireRelativeHardcodingLib

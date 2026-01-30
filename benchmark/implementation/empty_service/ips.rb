@@ -7,17 +7,22 @@
 
 ENV["CONVENIENT_SERVICE_BENCHMARK"] = "true"
 
-require "bundler/setup"
+##
+# NOTE: `require "bundler/setup"` restrict $LOAD_PATH only to gems listed in Gemfile. That is why it is NOT used here.
+# require "bundler/setup"
+##
 
-# require "convenient_service/dependencies/only_development_tools"
+# rubocop:disable Packaging/RequireRelativeHardcodingLib
+# require "../../../lib/convenient_service/dependencies/only_development_tools"
 require "service_actor"
 require "interactor"
 require "trailblazer/operation"
 require "active_interaction"
 require "light-service"
 require "mutations"
-require "convenient_service"
+require_relative "../../../lib/convenient_service"
 require "benchmark/ips"
+# rubocop:enable Packaging/RequireRelativeHardcodingLib
 
 ##
 # Imaginary no gem service. Used as unattainable standard.
