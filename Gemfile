@@ -158,6 +158,14 @@ gem "derailed_benchmarks", "~> 2.1.2"
 gem "diffy", "~> 3.4.0"
 
 ##
+# Not used. Just added to avoid the following error when installing Ruby 4.0 in CI:
+#   Bundler cannot reinstall erb-6.0.1 because there's a previous installation of it at /opt/hostedtoolcache/Ruby/4.0.1/x64/lib/ruby/gems/4.0.0/gems/erb-6.0.1 that is unsafe to remove.
+#   The parent of /opt/hostedtoolcache/Ruby/4.0.1/x64/lib/ruby/gems/4.0.0/gems/erb-6.0.1 is world-writable and does not have the sticky bit set, making it insecure to remove due to potential vulnerabilities.
+#   Please change the permissions of /opt/hostedtoolcache/Ruby/4.0.1/x64/lib/ruby/gems/4.0.0/gems or choose a different install path.
+#
+gem "erb", "~> 5"
+
+##
 # Used for measing memory of `require "convenient_service"`.
 # - https://github.com/zombocom/get_process_mem
 #
@@ -424,3 +432,4 @@ gem "yard", "~> 0.9.37" if RUBY_VERSION >= "3.4"
 # - https://github.com/zverok/yard-junk
 #
 gem "yard-junk", "~> 0.0.10", platform: :mri if RUBY_VERSION >= "4.0"
+
