@@ -561,15 +561,17 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
             let(:concerns) do
               [
                 ConvenientService::Plugins::Common::HasInternals::Concern,
-                ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::HasResult::Concern,
+                ConvenientService::Plugins::Step::HasResult::Concern,
 
-                ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::CanBeCompleted::Concern,
-                ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::CanBeServiceStep::Concern,
-                ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Concern,
+                ConvenientService::Plugins::Step::CanBeCompleted::Concern,
+                ConvenientService::Plugins::Step::CanBeServiceStep::Concern,
+                ConvenientService::Plugins::Step::CanBeMethodStep::Concern,
+
+                ConvenientService::Plugins::Step::CanBeUsedInServiceAwareEnumerables::Concern,
 
                 ConvenientService::Plugins::Common::CanHaveCallbacks::Concern,
-                ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Concern,
-                ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern,
+                ConvenientService::Plugins::Step::CanHaveFallbacks::Concern,
+                ConvenientService::Plugins::Step::HasInspect::Concern,
 
                 ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
               ]
@@ -585,12 +587,12 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               [
                 ConvenientService::Plugins::Common::CachesReturnValue::Middleware,
                 ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware,
-                ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::HasResult::Middleware,
-                ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::CanHaveParentResult::Middleware,
-                ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure),
-                ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::RaisesOnNotResultReturnValue::Middleware,
-                ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::CanBeServiceStep::Middleware,
-                ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::CanBeMethodStep::Middleware
+                ConvenientService::Plugins::Step::HasResult::Middleware,
+                ConvenientService::Plugins::Step::CanHaveParentResult::Middleware,
+                ConvenientService::Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure),
+                ConvenientService::Plugins::Step::RaisesOnNotResultReturnValue::Middleware,
+                ConvenientService::Plugins::Step::CanBeServiceStep::Middleware,
+                ConvenientService::Plugins::Step::CanBeMethodStep::Middleware
               ]
             end
 
@@ -997,8 +999,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :amazing_pri
 
           example_group "service step" do
             example_group "concerns" do
-              it "adds `ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::HasAmazingPrintInspect::Concern` from service concerns" do
-                expect(service_class::Step.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::HasAmazingPrintInspect::Concern }).not_to be_nil
+              it "adds `ConvenientService::Plugins::Step::HasAmazingPrintInspect::Concern` from service concerns" do
+                expect(service_class::Step.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Step::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Step::HasAmazingPrintInspect::Concern }).not_to be_nil
               end
             end
           end
@@ -1069,8 +1071,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :awesome_pri
 
           example_group "service step" do
             example_group "concerns" do
-              it "adds `ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do
-                expect(service_class::Step.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Service::CanHaveSteps::Entities::Step::Plugins::HasAwesomePrintInspect::Concern }).not_to be_nil
+              it "adds `ConvenientService::Plugins::Step::HasAwesomePrintInspect::Concern` from service concerns" do
+                expect(service_class::Step.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Step::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Step::HasAwesomePrintInspect::Concern }).not_to be_nil
               end
             end
           end

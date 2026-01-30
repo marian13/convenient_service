@@ -338,6 +338,7 @@ module ConvenientService
               use ConvenientService::Plugins::Step::CanBeCompleted::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::CanBeServiceStep::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::CanBeMethodStep::Concern if options.enabled?(:essential)
+              use ConvenientService::Plugins::Step::CanBeUsedInServiceAwareEnumerables::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern if options.enabled?(:callbacks)
               use ConvenientService::Plugins::Step::CanHaveFallbacks::Concern if options.enabled?(:fallbacks)
               use ConvenientService::Plugins::Step::HasInspect::Concern if options.enabled?(:inspect)

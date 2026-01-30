@@ -13,7 +13,7 @@ module ConvenientService
           include Support::Concern
 
           ##
-          # TODO: Implement in `CanBeUsedInStepAwareEnumerables`.
+          # TODO: Implement in `CanBeUsedInServiceAwareEnumerables`.
           #
           # class_methods do
           #   def to_service_aware_iteration_block_value
