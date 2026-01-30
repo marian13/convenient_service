@@ -163,7 +163,7 @@ gem "diffy", "~> 3.4.0"
 #   The parent of /opt/hostedtoolcache/Ruby/4.0.1/x64/lib/ruby/gems/4.0.0/gems/erb-6.0.1 is world-writable and does not have the sticky bit set, making it insecure to remove due to potential vulnerabilities.
 #   Please change the permissions of /opt/hostedtoolcache/Ruby/4.0.1/x64/lib/ruby/gems/4.0.0/gems or choose a different install path.
 #
-gem "erb", "~> 5"
+gem "erb", "~> 5" if RUBY_VERSION >= "4.0"
 
 ##
 # Used for measing memory of `require "convenient_service"`.
