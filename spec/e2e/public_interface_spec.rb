@@ -449,6 +449,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :inspect, # public
           :internals, # private
           :jsend_attributes, # private
+          :key_mode, # private
           :message, # public
           :message_without_middlewares, # private
           :negated?, # public
@@ -474,12 +475,14 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :to_arguments, # public
           :to_kwargs, # public
           :to_s, # public
+          :to_service_aware_iteration_block_value, # private
           :uc, # public
           :ud, # public
           :um, # public
           :unsafe_code, # public
           :unsafe_data, # public
           :unsafe_message, # public
+          :with_all_keys, # public
           :with_error_fallback, # public
           :with_except_keys, # public
           :with_extra_keys, # public
@@ -487,6 +490,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :with_failure_fallback, # public
           :with_fallback, # public
           :with_fallback_for, # public
+          :with_none_keys, # public
           :with_only_keys, # public
           :with_renamed_keys # public
         ])

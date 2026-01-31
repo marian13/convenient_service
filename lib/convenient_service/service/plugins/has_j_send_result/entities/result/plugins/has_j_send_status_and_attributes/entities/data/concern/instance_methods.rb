@@ -14,6 +14,10 @@ module ConvenientService
             module Plugins
               module HasJSendStatusAndAttributes
                 module Entities
+                  ##
+                  # @internal
+                  #   NOTE: Support of the `HasMethodReaders` plugin makes the code too ugly.
+                  #
                   class Data
                     module Concern
                       module InstanceMethods
@@ -135,7 +139,7 @@ module ConvenientService
                         end
 
                         ##
-                        # @return [Array<Symbol>]
+                        # @return [Struct]
                         #
                         alias_method :__struct__, :struct
 

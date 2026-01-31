@@ -20,6 +20,7 @@ module ConvenientService
                     ##
                     # @api private
                     # @return [Object] Can be any type.
+                    # @raise [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Exceptions::StepResultDataNotExistingAttribute]
                     # @note Throws `:propagated_result` when status is `error`.
                     #
                     def to_service_aware_iteration_block_value

@@ -12,7 +12,7 @@ module ConvenientService
         module Entities
           class Result
             module Plugins
-              module CanHaveModifiedData
+              module CanBeUsedInServiceAwareEnumerables
                 module Exceptions
                   class NotExistingAttributeForOnly < ::ConvenientService::Exception
                     ##

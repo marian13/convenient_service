@@ -5,5 +5,4 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "can_have_modified_data/concern"
-require_relative "can_have_modified_data/exceptions"
+require_relative "entities/key_modes"

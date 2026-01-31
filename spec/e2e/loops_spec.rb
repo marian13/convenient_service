@@ -8387,7 +8387,7 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.service_aware_enumerator(chain_enumerator([1])).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
             expect(service.service_aware_enumerable([1]).zip { |array| raise if array.sum != 1 }.result).to be_success.with_data(value: nil)
             expect(service.service_aware_enumerable(set([1])).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
-            expect(service.service_aware_enumerable({1 => 1}).zip { |array| raise if array.service_aware_map(&:sum).sum != 2 }.result).to be_success.with_data(value: nil)
+            expect(service.service_aware_enumerable({1 => 1}).zip { |array| raise if array.map(&:sum).sum != 2 }.result).to be_success.with_data(value: nil)
             expect(service.service_aware_enumerable((1..1)).zip { |integer| raise if integer.sum != 1 }.result).to be_success.with_data(value: nil)
           else
             # No argument, block.
