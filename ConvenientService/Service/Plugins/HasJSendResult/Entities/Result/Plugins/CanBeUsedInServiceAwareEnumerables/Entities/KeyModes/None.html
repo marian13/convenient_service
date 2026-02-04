@@ -516,12 +516,12 @@
       <pre class="lines">
 
 
-64
 65
-66</pre>
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/none.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/none.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_to_result_with_all_keys'>modify_to_result_with_all_keys</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_many_from'>many_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
@@ -591,6 +591,19 @@
     </li>
   
 </ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Exceptions/NotExistingAttributeForExcept.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept (class)">ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Since:</p>
 <ul class="since">
   
@@ -613,19 +626,19 @@
       <pre class="lines">
 
 
-73
-74
 75
 76
-77</pre>
+77
+78
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/none.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/none.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_to_result_with_except_keys'>modify_to_result_with_except_keys</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_many_from'>many_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
 
-  <span class='id identifier rubyid_raise_not_existing_attribute_exception'>raise_not_existing_attribute_exception</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='rparen'>)</span>
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../../../../../../../ConvenientService.html#raise-class_method" title="ConvenientService.raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../../Exceptions.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Exceptions/NotExistingAttributeForExcept.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept (class)">NotExistingAttributeForExcept</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../../../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>key:</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -714,14 +727,14 @@
       <pre class="lines">
 
 
-84
-85
 86
 87
-88</pre>
+88
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/none.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/none.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_to_result_with_extra_keys'>modify_to_result_with_extra_keys</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_values'>values</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_many_from'>many_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
@@ -879,6 +892,19 @@
     </li>
   
 </ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Exceptions/NotExistingAttributeForOnly.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly (class)">ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Since:</p>
 <ul class="since">
   
@@ -901,19 +927,19 @@
       <pre class="lines">
 
 
-54
 55
 56
 57
-58</pre>
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/none.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/none.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_to_result_with_only_keys'>modify_to_result_with_only_keys</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='kw'>if</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
 
-  <span class='id identifier rubyid_raise_not_existing_attribute_exception'>raise_not_existing_attribute_exception</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='rparen'>)</span>
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../../../../../../../ConvenientService.html#raise-class_method" title="ConvenientService.raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../../Exceptions.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Exceptions/NotExistingAttributeForOnly.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly (class)">NotExistingAttributeForOnly</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../../../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>key:</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -980,6 +1006,19 @@
     </li>
   
 </ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Exceptions/NotExistingAttributeForRename.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename (class)">ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Since:</p>
 <ul class="since">
   
@@ -1002,19 +1041,23 @@
       <pre class="lines">
 
 
-95
-96
-97
 98
-99</pre>
+99
+100
+101
+102
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/none.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/none.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_to_result_with_renamed_keys'>modify_to_result_with_renamed_keys</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_renamings'>renamings</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='kw'>if</span> <span class='id identifier rubyid_renamings'>renamings</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
 
-  <span class='id identifier rubyid_raise_not_existing_attribute_exception'>raise_not_existing_attribute_exception</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_renamings'>renamings</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_renamed_key'>renamed_key</span> <span class='op'>=</span> <span class='id identifier rubyid_renamings'>renamings</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+
+  <span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../../../../../../ConvenientService.html" title="ConvenientService (module)">ConvenientService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_raise'><span class='object_link'><a href="../../../../../../../../../../ConvenientService.html#raise-class_method" title="ConvenientService.raise (method)">raise</a></span></span> <span class='const'><span class='object_link'><a href="../../Exceptions.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Exceptions/NotExistingAttributeForRename.html" title="ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename (class)">NotExistingAttributeForRename</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../../../../../../../Exception.html#new-class_method" title="ConvenientService::Exception.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>key:</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='label'>renamed_key:</span> <span class='id identifier rubyid_renamed_key'>renamed_key</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1097,7 +1140,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb  4 01:42:05 2026 by
+  Generated on Wed Feb  4 02:24:00 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-4.0.1).
 </div>
