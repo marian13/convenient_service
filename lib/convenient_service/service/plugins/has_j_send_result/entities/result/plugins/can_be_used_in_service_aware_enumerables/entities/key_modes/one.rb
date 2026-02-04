@@ -60,6 +60,7 @@ module ConvenientService
                       # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       # @param keys [Array<Symbol>]
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                      # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly]
                       #
                       def modify_to_result_with_only_keys(result, keys)
                         return none_from(result) if keys.none?
@@ -67,9 +68,10 @@ module ConvenientService
                         return keys.one? ? one_from(result) : many_from(result) unless success?(result)
 
                         old_data = data(result)
+
                         extra_keys = keys - old_data.__keys__
 
-                        raise_not_existing_attribute_exception(result, extra_keys.first) if extra_keys.any?
+                        ::ConvenientService.raise Exceptions::NotExistingAttributeForOnly.new(key: extra_keys.first) if extra_keys.any?
 
                         result
                       end
@@ -78,15 +80,17 @@ module ConvenientService
                       # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       # @param keys [Array<Symbol>]
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                      # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept]
                       #
                       def modify_to_result_with_except_keys(result, keys)
                         return many_from(result) if keys.none?
                         return many_from(result) unless success?(result)
 
                         old_data = data(result)
+
                         extra_keys = keys - old_data.__keys__
 
-                        raise_not_existing_attribute_exception(result, extra_keys.first) if extra_keys.any?
+                        ::ConvenientService.raise Exceptions::NotExistingAttributeForExcept.new(key: extra_keys.first) if extra_keys.any?
 
                         many_from(result, {})
                       end
@@ -101,6 +105,7 @@ module ConvenientService
                         return many_from(result) unless success?(result)
 
                         old_data = data(result)
+
                         new_data = old_data.to_h.merge(values)
 
                         many_from(result, new_data)
@@ -110,19 +115,21 @@ module ConvenientService
                       # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       # @param renamings [Hash{Symbol => Symbol}]
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                      # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename]
                       #
                       def modify_to_result_with_renamed_keys(result, renamings)
                         return result if renamings.none?
                         return result unless success?(result)
 
                         old_data = data(result)
+
                         extra_keys = renamings.keys - old_data.__keys__
 
-                        raise_not_existing_attribute_exception(result, extra_keys.first) if extra_keys.any?
+                        key, renamed_key = renamings.first
 
-                        old_key, new_key = renamings.first
+                        ::ConvenientService.raise Exceptions::NotExistingAttributeForRename.new(key: key, renamed_key: renamed_key) if extra_keys.any?
 
-                        one_from(result, {new_key => old_data[old_key]})
+                        one_from(result, {renamed_key => old_data[key]})
                       end
                     end
                   end

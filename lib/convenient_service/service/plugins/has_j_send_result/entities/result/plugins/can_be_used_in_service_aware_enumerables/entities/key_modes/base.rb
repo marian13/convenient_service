@@ -74,17 +74,6 @@ module ConvenientService
 
                       ##
                       # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
-                      # @param key [Symbol]
-                      #
-                      # @internal
-                      #   TODO: Raise custom exception, since failures and error can also have data.
-                      #
-                      def raise_not_existing_attribute_exception(result, key)
-                        data(result)[key] # triggers `NotExistingAttribute` exception.
-                      end
-
-                      ##
-                      # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       def none_from(result)

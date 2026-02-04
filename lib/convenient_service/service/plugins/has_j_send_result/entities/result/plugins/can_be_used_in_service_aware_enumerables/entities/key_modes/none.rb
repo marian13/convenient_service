@@ -50,11 +50,12 @@ module ConvenientService
                       # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       # @param keys [Array<Symbol>]
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                      # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly]
                       #
                       def modify_to_result_with_only_keys(result, keys)
                         return result if keys.none?
 
-                        raise_not_existing_attribute_exception(result, keys.first)
+                        ::ConvenientService.raise Exceptions::NotExistingAttributeForOnly.new(key: keys.first)
                       end
 
                       ##
@@ -69,11 +70,12 @@ module ConvenientService
                       # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       # @param keys [Array<Symbol>]
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                      # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept]
                       #
                       def modify_to_result_with_except_keys(result, keys)
                         return many_from(result) if keys.none?
 
-                        raise_not_existing_attribute_exception(result, keys.first)
+                        ::ConvenientService.raise Exceptions::NotExistingAttributeForExcept.new(key: keys.first)
                       end
 
                       ##
@@ -91,11 +93,14 @@ module ConvenientService
                       # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       # @param renamings [Hash{Symbol => Symbol}]
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                      # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename]
                       #
                       def modify_to_result_with_renamed_keys(result, renamings)
                         return result if renamings.none?
 
-                        raise_not_existing_attribute_exception(result, renamings.first.first)
+                        key, renamed_key = renamings.first
+
+                        ::ConvenientService.raise Exceptions::NotExistingAttributeForRename.new(key: key, renamed_key: renamed_key)
                       end
                     end
                   end
