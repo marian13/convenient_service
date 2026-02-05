@@ -319,6 +319,130 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
     end
 
+    describe "#fetch" do
+      specify do
+        expect { data.fetch(:foo) }
+          .to delegate_to(data, :__value__)
+          .without_arguments
+      end
+
+      context "when `block` is NOT passed" do
+        it "returns `data` attribute by string key" do
+          expect(data.fetch("foo")).to eq(:bar)
+        end
+
+        it "returns `data` attribute by symbol key" do
+          expect(data.fetch(:foo)).to eq(:bar)
+        end
+
+        context "when NO `data` attribute exist for passed key" do
+          let(:exception_message) do
+            <<~TEXT
+              Data attribute `abc` does NOT exist. Make sure the corresponding result returns it.
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute`" do
+            expect { data.fetch(:abc) }
+              .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute)
+              .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute) { data.fetch(:abc) } }
+              .to delegate_to(ConvenientService, :raise)
+          end
+        end
+      end
+
+      context "when `block` is passed" do
+        let(:block) { proc { |key| "missing key: :#{key}" }}
+
+        it "returns `data` attribute by string key" do
+          expect(data.fetch("foo", &block)).to eq(:bar)
+        end
+
+        it "returns `data` attribute by symbol key" do
+          expect(data.fetch(:foo, &block)).to eq(:bar)
+        end
+
+        context "when NO `data` attribute exist for passed key" do
+          it "returns `block` value" do
+            expect(data.fetch(:foo, &block)).to eq("missing key: :foo")
+          end
+
+          it "passes `key` as `block` arg" do
+            expect { data.fetch(:abc, &block) }
+              .to delegate_to(block, :call)
+              .with_arguments(key)
+              .and_return_its_value
+          end
+        end
+      end
+    end
+
+    describe "#__fetch__" do
+      specify do
+        expect { data.__fetch__(:foo) }
+          .to delegate_to(data, :__value__)
+          .without_arguments
+      end
+
+      context "when `block` is NOT passed" do
+        it "returns `data` attribute by string key" do
+          expect(data.__fetch__("foo")).to eq(:bar)
+        end
+
+        it "returns `data` attribute by symbol key" do
+          expect(data.__fetch__(:foo)).to eq(:bar)
+        end
+
+        context "when NO `data` attribute exist for passed key" do
+          let(:exception_message) do
+            <<~TEXT
+              Data attribute `abc` does NOT exist. Make sure the corresponding result returns it.
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute`" do
+            expect { data.__fetch__(:abc) }
+              .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute)
+              .with_message(exception_message)
+          end
+
+          specify do
+            expect { ignoring_exception(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute) { data.__fetch__(:abc) } }
+              .to delegate_to(ConvenientService, :raise)
+          end
+        end
+      end
+
+      context "when `block` is passed" do
+        let(:block) { proc { |key| "missing key: :#{key}" }}
+
+        it "returns `data` attribute by string key" do
+          expect(data.__fetch__("foo", &block)).to eq(:bar)
+        end
+
+        it "returns `data` attribute by symbol key" do
+          expect(data.__fetch__(:foo, &block)).to eq(:bar)
+        end
+
+        context "when NO `data` attribute exist for passed key" do
+          it "returns `block` value" do
+            expect(data.__fetch__(:foo, &block)).to eq("missing key: :foo")
+          end
+
+          it "passes `key` as `block` arg" do
+            expect { data.__fetch__(:abc, &block) }
+              .to delegate_to(block, :call)
+              .with_arguments(key)
+              .and_return_its_value
+          end
+        end
+      end
+    end
+
     example_group "comparisons" do
       describe "#==" do
         context "when `other` has different class" do

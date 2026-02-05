@@ -127,6 +127,9 @@ module ConvenientService
 
                         key, renamed_key = renamings.first
 
+                        ##
+                        # TODO: Unit.
+                        #
                         ::ConvenientService.raise Exceptions::NotExistingAttributeForRename.new(key: key, renamed_key: renamed_key) if extra_keys.any?
 
                         one_from(result, {renamed_key => old_data[key]})

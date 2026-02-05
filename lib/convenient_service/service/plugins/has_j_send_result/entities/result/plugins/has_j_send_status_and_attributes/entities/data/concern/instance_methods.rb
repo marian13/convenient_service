@@ -144,6 +144,29 @@ module ConvenientService
                         alias_method :__struct__, :struct
 
                         ##
+                        # @param key [String, Symbol]
+                        # @return [Object] Can be any type.
+                        # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute]
+                        #
+                        def [](key)
+                          __value__.fetch(key.to_sym) { ::ConvenientService.raise Exceptions::NotExistingAttribute.new(attribute: key) }
+                        end
+
+                        ##
+                        # @param key [String, Symbol]
+                        # @return [Object] Can be any type.
+                        # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute]
+                        #
+                        def fetch(key, &block)
+                          __value__.fetch(key.to_sym) { block ? yield(key) : ::ConvenientService.raise(Exceptions::NotExistingAttribute.new(attribute: key)) }
+                        end
+
+                        ##
+                        # @return [Object] Can be any type.
+                        #
+                        alias_method :__fetch__, :fetch
+
+                        ##
                         # @param other [Object] Can be any type.
                         # @return [Boolean, nil]
                         #
@@ -211,15 +234,6 @@ module ConvenientService
                           end
 
                           true
-                        end
-
-                        ##
-                        # @param key [String, Symbol]
-                        # @return [Object] Can be any type.
-                        # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute]
-                        #
-                        def [](key)
-                          __value__.fetch(key.to_sym) { ::ConvenientService.raise Exceptions::NotExistingAttribute.new(attribute: key) }
                         end
 
                         ##

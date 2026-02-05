@@ -584,6 +584,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :[], # public
           :__attributes__, # public
           :__empty__?, # public
+          :__fetch__, # private
           :__has_attribute__?, # public
           :__keys__, # public
           :__result__, # private
@@ -592,6 +593,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :attributes, # public
           :copy, # private
           :empty?, # public
+          :fetch, # private
           :has_attribute?, # public
           :keys, # public
           :result, # private
@@ -680,6 +682,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
             :[], # public
             :__attributes__, # public
             :__empty__?, # public
+            :__fetch__, # private
             :__has_attribute__?, # public
             :__keys__, # public
             :__result__, # private
@@ -688,6 +691,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
             :attributes, # public
             :copy, # private
             :empty?, # public
+            :fetch, # private
             :has_attribute?, # public
             :inspect, # public
             :keys, # public
