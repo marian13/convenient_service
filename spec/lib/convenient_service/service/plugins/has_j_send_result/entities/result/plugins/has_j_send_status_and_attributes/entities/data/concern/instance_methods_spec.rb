@@ -302,7 +302,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       context "when NO `data` attribute exist for passed key" do
         let(:exception_message) do
           <<~TEXT
-            Data attribute `abc` does NOT exist. Make sure the corresponding result returns it.
+            Data attribute `:abc` does NOT exist. Make sure the corresponding result returns it.
           TEXT
         end
 
@@ -338,7 +338,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when NO `data` attribute exist for passed key" do
           let(:exception_message) do
             <<~TEXT
-              Data attribute `abc` does NOT exist. Make sure the corresponding result returns it.
+              Data attribute `:abc` does NOT exist. Make sure the corresponding result returns it.
             TEXT
           end
 
@@ -356,7 +356,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       context "when `block` is passed" do
-        let(:block) { proc { |key| "missing key: :#{key}" }}
+        let(:block) { proc { |key| "missing key: :#{key}" } }
 
         it "returns `data` attribute by string key" do
           expect(data.fetch("foo", &block)).to eq(:bar)
@@ -400,7 +400,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         context "when NO `data` attribute exist for passed key" do
           let(:exception_message) do
             <<~TEXT
-              Data attribute `abc` does NOT exist. Make sure the corresponding result returns it.
+              Data attribute `:abc` does NOT exist. Make sure the corresponding result returns it.
             TEXT
           end
 
@@ -418,7 +418,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       context "when `block` is passed" do
-        let(:block) { proc { |key| "missing key: :#{key}" }}
+        let(:block) { proc { |key| "missing key: :#{key}" } }
 
         it "returns `data` attribute by string key" do
           expect(data.__fetch__("foo", &block)).to eq(:bar)

@@ -21,7 +21,7 @@ module ConvenientService
                     #
                     def initialize_with_kwargs(attribute:)
                       message = <<~TEXT
-                        Data attribute `#{attribute}` does NOT exist. Make sure the corresponding result returns it.
+                        Data attribute `:#{attribute}` does NOT exist. Make sure the corresponding result returns it.
                       TEXT
 
                       initialize(message)

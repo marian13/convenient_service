@@ -139,7 +139,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
           let(:exception_message) do
             <<~TEXT
-              Data attribute `baz` does NOT exist. Make sure the corresponding result returns it.
+              Data attribute `:baz` does NOT exist. Make sure the corresponding result returns it.
             TEXT
           end
 
@@ -367,7 +367,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
           let(:exception_message) do
             <<~TEXT
-              Data attribute `baz` does NOT exist. Make sure the corresponding result returns it.
+              Data attribute `:baz` does NOT exist. Make sure the corresponding result returns it.
             TEXT
           end
 
@@ -540,7 +540,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
             let(:exception_message) do
               <<~TEXT
-                Data attribute `qux` does NOT exist. Make sure the corresponding result returns it.
+                Data attribute `:qux` does NOT exist. Make sure the corresponding result returns it.
               TEXT
             end
 
@@ -564,7 +564,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
             let(:exception_message) do
               <<~TEXT
-                Data attribute `qux` does NOT exist. Make sure the corresponding result returns it.
+                Data attribute `:qux` does NOT exist. Make sure the corresponding result returns it.
               TEXT
             end
 
@@ -588,7 +588,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
             let(:exception_message) do
               <<~TEXT
-                Data attribute `qux` does NOT exist. Make sure the corresponding result returns it.
+                Data attribute `:qux` does NOT exist. Make sure the corresponding result returns it.
               TEXT
             end
 
