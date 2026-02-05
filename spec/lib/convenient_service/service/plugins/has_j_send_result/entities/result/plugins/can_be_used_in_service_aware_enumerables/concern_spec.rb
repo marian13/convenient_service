@@ -139,13 +139,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
           let(:exception_message) do
             <<~TEXT
-              Data attribute `:baz` does NOT exist. Make sure the corresponding result returns it.
+              Data attribute by key `:baz` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute`" do
+          it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly`" do
             expect { result.with_only_keys(*keys) }
-              .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute)
+              .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly)
               .with_message(exception_message)
           end
         end
@@ -255,8 +255,16 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
             end
           end
 
-          it "drops data keys according to `keys`" do
-            expect(result.with_except_keys(*keys)).to be_success.with_data(bar: :bar)
+          let(:exception_message) do
+            <<~TEXT
+              Data attribute by key `:baz` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.
+            TEXT
+          end
+
+          it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept`" do
+            expect { result.with_except_keys(*keys) }
+              .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept)
+              .with_message(exception_message)
           end
         end
 
@@ -367,13 +375,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
           let(:exception_message) do
             <<~TEXT
-              Data attribute `:baz` does NOT exist. Make sure the corresponding result returns it.
+              Data attribute by key `:baz` does NOT exist. That is why it can NOT be renamed to `:quux`. Make sure the corresponding result has it.
             TEXT
           end
 
-          it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute`" do
+          it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename`" do
             expect { result.with_renamed_keys(**renamings) }
-              .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute)
+              .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename)
               .with_message(exception_message)
           end
         end
@@ -540,13 +548,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
             let(:exception_message) do
               <<~TEXT
-                Data attribute `:qux` does NOT exist. Make sure the corresponding result returns it.
+                Data attribute by key `:qux` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.
               TEXT
             end
 
-            it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute`" do
+            it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly`" do
               expect { result.to_service_aware_iteration_block_value }
-                .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute)
+                .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly)
                 .with_message(exception_message)
             end
           end
@@ -564,13 +572,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
             let(:exception_message) do
               <<~TEXT
-                Data attribute `:qux` does NOT exist. Make sure the corresponding result returns it.
+                Data attribute by key `:qux` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.
               TEXT
             end
 
-            it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute`" do
+            it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly`" do
               expect { result.to_service_aware_iteration_block_value }
-                .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute)
+                .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly)
                 .with_message(exception_message)
             end
           end
@@ -588,13 +596,13 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
             let(:exception_message) do
               <<~TEXT
-                Data attribute `:qux` does NOT exist. Make sure the corresponding result returns it.
+                Data attribute by key `:qux` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.
               TEXT
             end
 
-            it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute`" do
+            it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly`" do
               expect { result.to_service_aware_iteration_block_value }
-                .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute)
+                .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly)
                 .with_message(exception_message)
             end
           end

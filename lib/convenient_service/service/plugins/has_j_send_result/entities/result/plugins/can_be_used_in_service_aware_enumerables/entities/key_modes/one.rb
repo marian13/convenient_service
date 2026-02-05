@@ -71,7 +71,7 @@ module ConvenientService
 
                         extra_keys = keys - old_data.__keys__
 
-                        ::ConvenientService.raise Exceptions::NotExistingAttributeForOnly.new(key: extra_keys.first) if extra_keys.any?
+                        raise_not_existing_only_key(extra_keys.first) if extra_keys.any?
 
                         result
                       end
@@ -90,7 +90,7 @@ module ConvenientService
 
                         extra_keys = keys - old_data.__keys__
 
-                        ::ConvenientService.raise Exceptions::NotExistingAttributeForExcept.new(key: extra_keys.first) if extra_keys.any?
+                        raise_not_existing_except_key(extra_keys.first) if extra_keys.any?
 
                         many_from(result, {})
                       end
@@ -127,10 +127,7 @@ module ConvenientService
 
                         key, renamed_key = renamings.first
 
-                        ##
-                        # TODO: Unit.
-                        #
-                        ::ConvenientService.raise Exceptions::NotExistingAttributeForRename.new(key: key, renamed_key: renamed_key) if extra_keys.any?
+                        raise_not_existing_rename_key(key, renamed_key) if extra_keys.any?
 
                         one_from(result, {renamed_key => old_data[key]})
                       end

@@ -158,7 +158,7 @@ module ConvenientService
                         # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute]
                         #
                         def fetch(key, &block)
-                          __value__.fetch(key.to_sym) { block ? yield(key) : ::ConvenientService.raise(Exceptions::NotExistingAttribute.new(attribute: key)) }
+                          __value__.fetch(key.to_sym) { block ? yield(self, key) : ::ConvenientService.raise(Exceptions::NotExistingAttribute.new(attribute: key)) }
                         end
 
                         ##

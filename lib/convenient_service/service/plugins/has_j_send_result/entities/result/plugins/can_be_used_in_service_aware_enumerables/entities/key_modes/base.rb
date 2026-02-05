@@ -97,6 +97,30 @@ module ConvenientService
                       def many_from(result, data = result.unsafe_data)
                         result.copy(overrides: {kwargs: {data: data, key_mode: Entities::KeyModes.many}})
                       end
+
+                      ##
+                      # @param key [Symbol]
+                      # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly]
+                      #
+                      def raise_not_existing_only_key(key)
+                        ::ConvenientService.raise Exceptions::NotExistingAttributeForOnly.new(key: key)
+                      end
+
+                      ##
+                      # @param key [Symbol]
+                      # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept]
+                      #
+                      def raise_not_existing_except_key(key)
+                        ::ConvenientService.raise Exceptions::NotExistingAttributeForExcept.new(key: key)
+                      end
+
+                      ##
+                      # @param key [Symbol]
+                      # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename]
+                      #
+                      def raise_not_existing_rename_key(key, renamed_key)
+                        ::ConvenientService.raise Exceptions::NotExistingAttributeForRename.new(key: key, renamed_key: renamed_key)
+                      end
                     end
                   end
                 end

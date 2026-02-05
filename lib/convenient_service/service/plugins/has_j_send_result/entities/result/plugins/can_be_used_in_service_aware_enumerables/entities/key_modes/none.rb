@@ -55,7 +55,7 @@ module ConvenientService
                       def modify_to_result_with_only_keys(result, keys)
                         return result if keys.none?
 
-                        ::ConvenientService.raise Exceptions::NotExistingAttributeForOnly.new(key: keys.first)
+                        raise_not_existing_only_key(keys.first)
                       end
 
                       ##
@@ -75,7 +75,7 @@ module ConvenientService
                       def modify_to_result_with_except_keys(result, keys)
                         return many_from(result) if keys.none?
 
-                        ::ConvenientService.raise Exceptions::NotExistingAttributeForExcept.new(key: keys.first)
+                        raise_not_existing_except_key(keys.first)
                       end
 
                       ##
@@ -100,7 +100,7 @@ module ConvenientService
 
                         key, renamed_key = renamings.first
 
-                        ::ConvenientService.raise Exceptions::NotExistingAttributeForRename.new(key: key, renamed_key: renamed_key)
+                        raise_not_existing_rename_key(key, renamed_key)
                       end
                     end
                   end

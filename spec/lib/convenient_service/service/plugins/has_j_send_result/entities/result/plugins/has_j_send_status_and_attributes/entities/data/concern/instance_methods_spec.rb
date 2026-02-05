@@ -356,7 +356,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       context "when `block` is passed" do
-        let(:block) { proc { |key| "missing key: :#{key}" } }
+        let(:block) { proc { |data, key| [:block_value, data, key] } }
 
         it "returns `data` attribute by string key" do
           expect(data.fetch("foo", &block)).to eq(:bar)
@@ -368,14 +368,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
         context "when NO `data` attribute exist for passed key" do
           it "returns `block` value" do
-            expect(data.fetch(:foo, &block)).to eq("missing key: :foo")
-          end
-
-          it "passes `key` as `block` arg" do
-            expect { data.fetch(:abc, &block) }
-              .to delegate_to(block, :call)
-              .with_arguments(key)
-              .and_return_its_value
+            expect(data.fetch(:abc, &block)).to eq([:block_value, data, :abc])
           end
         end
       end
@@ -418,7 +411,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
 
       context "when `block` is passed" do
-        let(:block) { proc { |key| "missing key: :#{key}" } }
+        let(:block) { proc { |data, key| [:block_value, data, key] } }
 
         it "returns `data` attribute by string key" do
           expect(data.__fetch__("foo", &block)).to eq(:bar)
@@ -430,14 +423,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
         context "when NO `data` attribute exist for passed key" do
           it "returns `block` value" do
-            expect(data.__fetch__(:foo, &block)).to eq("missing key: :foo")
-          end
-
-          it "passes `key` as `block` arg" do
-            expect { data.__fetch__(:abc, &block) }
-              .to delegate_to(block, :call)
-              .with_arguments(key)
-              .and_return_its_value
+            expect(data.__fetch__(:abc, &block)).to eq([:block_value, data, :abc])
           end
         end
       end

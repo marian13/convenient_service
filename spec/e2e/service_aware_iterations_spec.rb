@@ -76,6 +76,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code) }).to be_success.with_data(values: [{}, nil]) }
       specify { expect(iterate { |result| result.with_extra_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
       specify { expect(iterate { |result| result.with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{number_string: "one", number_code: 49, number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string) }).to be_success.with_data(values: [{string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code) }).to be_success.with_data(values: [{string: "one", code: 49}, nil]) }
 
       # With none keys.
       specify { expect(iterate { |result| result.with_none_keys.with_none_keys }).to be_success.with_data(values: [true, false]) }
@@ -88,6 +91,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect { iterate { |result| result.with_none_keys.with_except_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
       specify { expect(iterate { |result| result.with_none_keys.with_extra_keys }).to be_success.with_data(values: [{}, nil]) }
       specify { expect(iterate { |result| result.with_none_keys.with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_none_keys.with_renamed_keys }).to be_success.with_data(values: [true, false]) }
+      specify { expect { iterate { |result| result.with_none_keys.with_renamed_keys(number_string: :string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_none_keys.with_renamed_keys(number_string: :string, number_code: :code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
 
       # With zero keys.
       specify { expect(iterate { |result| result.with_only_keys.with_none_keys }).to be_success.with_data(values: [true, false]) }
@@ -100,6 +106,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect { iterate { |result| result.with_only_keys.with_except_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
       specify { expect(iterate { |result| result.with_only_keys.with_extra_keys }).to be_success.with_data(values: [{}, nil]) }
       specify { expect(iterate { |result| result.with_only_keys.with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_only_keys.with_renamed_keys }).to be_success.with_data(values: [true, false]) }
+      specify { expect { iterate { |result| result.with_only_keys.with_renamed_keys(number_string: :string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_only_keys.with_renamed_keys(number_string: :string, number_code: :code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
 
       # With one key.
       specify { expect(iterate { |result| result.with_only_keys(:number_string).with_none_keys }).to be_success.with_data(values: [true, false]) }
@@ -112,6 +121,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect { iterate { |result| result.with_only_keys(:number_string).with_except_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_code` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
       specify { expect(iterate { |result| result.with_only_keys(:number_string).with_extra_keys }).to be_success.with_data(values: [{number_string: "one"}, nil]) }
       specify { expect(iterate { |result| result.with_only_keys(:number_string).with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{number_string: "one", number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_renamed_keys }).to be_success.with_data(values: ["one", nil]) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_renamed_keys(number_string: :string) }).to be_success.with_data(values: ["one", nil]) }
+      specify { expect { iterate { |result| result.with_only_keys(:number_string).with_renamed_keys(number_string: :string, number_code: :code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
 
       # With many keys.
       specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_none_keys }).to be_success.with_data(values: [true, false]) }
@@ -124,6 +136,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_except_keys(:number_string, :number_code) }).to be_success.with_data(values: [{}, nil]) }
       specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_extra_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
       specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{number_string: "one", number_code: 49, number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_renamed_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_renamed_keys(number_string: :string) }).to be_success.with_data(values: [{string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_renamed_keys(number_string: :string, number_code: :code) }).to be_success.with_data(values: [{string: "one", code: 49}, nil]) }
 
       # With all keys.
       specify { expect(iterate { |result| result.with_all_keys.with_none_keys }).to be_success.with_data(values: [true, false]) }
@@ -136,6 +151,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_all_keys.with_except_keys(:number_string, :number_code) }).to be_success.with_data(values: [{}, nil]) }
       specify { expect(iterate { |result| result.with_all_keys.with_extra_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
       specify { expect(iterate { |result| result.with_all_keys.with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{number_string: "one", number_code: 49, number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_all_keys.with_renamed_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_all_keys.with_renamed_keys(number_string: :string) }).to be_success.with_data(values: [{string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_all_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_success.with_data(values: [{string: "one", code: 49}, nil]) }
 
       # With zero except keys.
       specify { expect(iterate { |result| result.with_except_keys.with_none_keys }).to be_success.with_data(values: [true, false]) }
@@ -148,30 +166,39 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_except_keys.with_except_keys(:number_string, :number_code) }).to be_success.with_data(values: [{}, nil]) }
       specify { expect(iterate { |result| result.with_except_keys.with_extra_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
       specify { expect(iterate { |result| result.with_except_keys.with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{number_string: "one", number_code: 49, number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_except_keys.with_renamed_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_except_keys.with_renamed_keys(number_string: :string) }).to be_success.with_data(values: [{string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_except_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_success.with_data(values: [{string: "one", code: 49}, nil]) }
 
       # With one except key.
       specify { expect(iterate { |result| result.with_except_keys(:number_string).with_none_keys }).to be_success.with_data(values: [true, false]) }
       specify { expect(iterate { |result| result.with_except_keys(:number_string).with_only_keys }).to be_success.with_data(values: [true, false]) }
-      specify { expect { iterate { |result| result.with_except_keys(:number_string).with_only_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute).with_message("Data attribute `:number_string` does NOT exist. Make sure the corresponding result returns it.\n") }
-      specify { expect { iterate { |result| result.with_except_keys(:number_string).with_only_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute).with_message("Data attribute `:number_string` does NOT exist. Make sure the corresponding result returns it.\n") }
+      specify { expect { iterate { |result| result.with_except_keys(:number_string).with_only_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_except_keys(:number_string).with_only_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.\n") }
       specify { expect(iterate { |result| result.with_except_keys(:number_string).with_all_keys }).to be_success.with_data(values: [{number_code: 49}, nil]) }
       specify { expect(iterate { |result| result.with_except_keys(:number_string).with_except_keys }).to be_success.with_data(values: [{number_code: 49}, nil]) }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_except_keys(:number_string) }).to be_success.with_data(values: [{number_code: 49}, nil]) }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_except_keys(:number_string, :number_code) }).to be_success.with_data(values: [{}, nil]) }
+      specify { expect { iterate { |result| result.with_except_keys(:number_string).with_except_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_except_keys(:number_string).with_except_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
       specify { expect(iterate { |result| result.with_except_keys(:number_string).with_extra_keys }).to be_success.with_data(values: [{number_code: 49}, nil]) }
       specify { expect(iterate { |result| result.with_except_keys(:number_string).with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{number_code: 49, number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_renamed_keys }).to be_success.with_data(values: [{number_code: 49}, nil]) }
+      specify { expect { iterate { |result| result.with_except_keys(:number_string).with_renamed_keys(number_string: :string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_except_keys(:number_string).with_renamed_keys(number_string: :string, number_code: :code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
 
       # With many except keys.
       specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_none_keys }).to be_success.with_data(values: [true, false]) }
       specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_only_keys }).to be_success.with_data(values: [true, false]) }
-      specify { expect { iterate { |result| result.with_except_keys(:number_string, :number_code).with_only_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute).with_message("Data attribute `:number_string` does NOT exist. Make sure the corresponding result returns it.\n") }
-      specify { expect { iterate { |result| result.with_except_keys(:number_string, :number_code).with_only_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Exceptions::NotExistingAttribute).with_message("Data attribute `:number_string` does NOT exist. Make sure the corresponding result returns it.\n") }
+      specify { expect { iterate { |result| result.with_except_keys(:number_string, :number_code).with_only_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_except_keys(:number_string, :number_code).with_only_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.\n") }
       specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_all_keys }).to be_success.with_data(values: [{}, nil]) }
       specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_except_keys }).to be_success.with_data(values: [{}, nil]) }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_except_keys(:number_string) }).to be_success.with_data(values: [{}, nil]) }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_except_keys(:number_string, :number_code) }).to be_success.with_data(values: [{}, nil]) }
+      specify { expect { iterate { |result| result.with_except_keys(:number_string, :number_code).with_except_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_except_keys(:number_string, :number_code).with_except_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
       specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_extra_keys }).to be_success.with_data(values: [{}, nil]) }
       specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_renamed_keys }).to be_success.with_data(values: [{}, nil]) }
+      specify { expect { iterate { |result| result.with_except_keys(:number_string, :number_code).with_renamed_keys(number_string: :string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_except_keys(:number_string, :number_code).with_renamed_keys(number_string: :string, number_code: :code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
 
       # With zero extra key.
       specify { expect(iterate { |result| result.with_extra_keys.with_none_keys }).to be_success.with_data(values: [true, false]) }
@@ -184,6 +211,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_extra_keys.with_except_keys(:number_string, :number_code) }).to be_success.with_data(values: [{}, nil]) }
       specify { expect(iterate { |result| result.with_extra_keys.with_extra_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
       specify { expect(iterate { |result| result.with_extra_keys.with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{number_string: "one", number_code: 49, number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_renamed_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_renamed_keys(number_string: :string) }).to be_success.with_data(values: [{string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_success.with_data(values: [{string: "one", code: 49}, nil]) }
 
       # With one extra key.
       specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_none_keys }).to be_success.with_data(values: [true, false]) }
@@ -196,6 +226,54 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_except_keys(:number_string, :number_code) }).to be_success.with_data(values: [{number_char: "1"}, nil]) }
       specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_extra_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49, number_char: "1"}, nil]) }
       specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_extra_keys(number_char: "2") }).to be_success.with_data(values: [{number_string: "one", number_code: 49, number_char: "2"}, nil]) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_renamed_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49, number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_renamed_keys(number_string: :string) }).to be_success.with_data(values: [{string: "one", number_code: 49, number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_renamed_keys(number_string: :string, number_code: :code) }).to be_success.with_data(values: [{string: "one", code: 49, number_char: "1"}, nil]) }
+
+      # With zero renamed key.
+      specify { expect(iterate { |result| result.with_renamed_keys.with_none_keys }).to be_success.with_data(values: [true, false]) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_only_keys }).to be_success.with_data(values: [true, false]) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_only_keys(:number_string) }).to be_success.with_data(values: ["one", nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_only_keys(:number_string, :number_code) }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_all_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_except_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_except_keys(:number_string) }).to be_success.with_data(values: [{number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_except_keys(:number_string, :number_code) }).to be_success.with_data(values: [{}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_extra_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{number_string: "one", number_code: 49, number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_renamed_keys }).to be_success.with_data(values: [{number_string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_renamed_keys(number_string: :string) }).to be_success.with_data(values: [{string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_success.with_data(values: [{string: "one", code: 49}, nil]) }
+
+      # With one renamed key.
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_none_keys }).to be_success.with_data(values: [true, false]) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_only_keys }).to be_success.with_data(values: [true, false]) }
+      specify { expect { iterate { |result| result.with_renamed_keys(number_string: :string).with_only_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_renamed_keys(number_string: :string).with_only_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.\n") }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_all_keys }).to be_success.with_data(values: [{string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_except_keys }).to be_success.with_data(values: [{string: "one", number_code: 49}, nil]) }
+      specify { expect { iterate { |result| result.with_renamed_keys(number_string: :string).with_except_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_renamed_keys(number_string: :string).with_except_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_extra_keys }).to be_success.with_data(values: [{string: "one", number_code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{string: "one", number_code: 49, number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_renamed_keys }).to be_success.with_data(values: [{string: "one", number_code: 49}, nil]) }
+      specify { expect { iterate { |result| result.with_renamed_keys(number_string: :string).with_renamed_keys(number_string: :string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_renamed_keys(number_string: :string).with_renamed_keys(number_string: :string, number_code: :code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
+
+      # With many renamed keys.
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_none_keys }).to be_success.with_data(values: [true, false]) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_only_keys }).to be_success.with_data(values: [true, false]) }
+      specify { expect { iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_only_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_only_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.\n") }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_all_keys }).to be_success.with_data(values: [{string: "one", code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_except_keys }).to be_success.with_data(values: [{string: "one", code: 49}, nil]) }
+      specify { expect { iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_except_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_except_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_extra_keys }).to be_success.with_data(values: [{string: "one", code: 49}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_extra_keys(number_char: "1") }).to be_success.with_data(values: [{string: "one", code: 49, number_char: "1"}, nil]) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_renamed_keys }).to be_success.with_data(values: [{string: "one", code: 49}, nil]) }
+      specify { expect { iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_renamed_keys(number_string: :string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_renamed_keys(number_string: :string, number_code: :code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
     end
 
     example_group "error" do
@@ -213,6 +291,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code) }).to be_error }
       specify { expect(iterate { |result| result.with_extra_keys }).to be_error }
       specify { expect(iterate { |result| result.with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
 
       # With none keys.
       specify { expect(iterate { |result| result.with_none_keys.with_none_keys }).to be_error }
@@ -225,6 +306,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect { iterate { |result| result.with_none_keys.with_except_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
       specify { expect(iterate { |result| result.with_none_keys.with_extra_keys }).to be_error }
       specify { expect(iterate { |result| result.with_none_keys.with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_none_keys.with_renamed_keys }).to be_error }
+      specify { expect { iterate { |result| result.with_none_keys.with_renamed_keys(number_string: :string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_none_keys.with_renamed_keys(number_string: :string, number_code: :code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
 
       # With zero keys.
       specify { expect(iterate { |result| result.with_only_keys.with_none_keys }).to be_error }
@@ -237,6 +321,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect { iterate { |result| result.with_only_keys.with_except_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
       specify { expect(iterate { |result| result.with_only_keys.with_extra_keys }).to be_error }
       specify { expect(iterate { |result| result.with_only_keys.with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_only_keys.with_renamed_keys }).to be_error }
+      specify { expect { iterate { |result| result.with_only_keys.with_renamed_keys(number_string: :string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
+      specify { expect { iterate { |result| result.with_only_keys.with_renamed_keys(number_string: :string, number_code: :code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
 
       # With one key.
       specify { expect(iterate { |result| result.with_only_keys(:number_string).with_none_keys }).to be_error }
@@ -249,6 +336,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_only_keys(:number_string).with_except_keys(:number_string, :number_code) }).to be_error }
       specify { expect(iterate { |result| result.with_only_keys(:number_string).with_extra_keys }).to be_error }
       specify { expect(iterate { |result| result.with_only_keys(:number_string).with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_renamed_keys(number_string: :string) }).to be_error }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
 
       # With many keys.
       specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_none_keys }).to be_error }
@@ -261,6 +351,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_except_keys(:number_string, :number_code) }).to be_error }
       specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_extra_keys }).to be_error }
       specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_renamed_keys(number_string: :string) }).to be_error }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
 
       # With all keys.
       specify { expect(iterate { |result| result.with_all_keys.with_none_keys }).to be_error }
@@ -273,6 +366,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_all_keys.with_except_keys(:number_string, :number_code) }).to be_error }
       specify { expect(iterate { |result| result.with_all_keys.with_extra_keys }).to be_error }
       specify { expect(iterate { |result| result.with_all_keys.with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_all_keys.with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_all_keys.with_renamed_keys(number_string: :string) }).to be_error }
+      specify { expect(iterate { |result| result.with_all_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
 
       # With zero except keys.
       specify { expect(iterate { |result| result.with_except_keys.with_none_keys }).to be_error }
@@ -285,6 +381,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_except_keys.with_except_keys(:number_string, :number_code) }).to be_error }
       specify { expect(iterate { |result| result.with_except_keys.with_extra_keys }).to be_error }
       specify { expect(iterate { |result| result.with_except_keys.with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_except_keys.with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_except_keys.with_renamed_keys(number_string: :string) }).to be_error }
+      specify { expect(iterate { |result| result.with_except_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
 
       # With one except key.
       specify { expect(iterate { |result| result.with_except_keys(:number_string).with_none_keys }).to be_error }
@@ -297,6 +396,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_except_keys(:number_string).with_except_keys(:number_string, :number_code) }).to be_error }
       specify { expect(iterate { |result| result.with_except_keys(:number_string).with_extra_keys }).to be_error }
       specify { expect(iterate { |result| result.with_except_keys(:number_string).with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_renamed_keys(number_string: :string) }).to be_error }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
 
       # With many except keys.
       specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_none_keys }).to be_error }
@@ -309,6 +411,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_except_keys(:number_string, :number_code) }).to be_error }
       specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_extra_keys }).to be_error }
       specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_renamed_keys(number_string: :string) }).to be_error }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
 
       # With zero extra key.
       specify { expect(iterate { |result| result.with_extra_keys.with_none_keys }).to be_error }
@@ -321,6 +426,9 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_extra_keys.with_except_keys(:number_string, :number_code) }).to be_error }
       specify { expect(iterate { |result| result.with_extra_keys.with_extra_keys }).to be_error }
       specify { expect(iterate { |result| result.with_extra_keys.with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_extra_keys.with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_extra_keys.with_renamed_keys(number_string: :string) }).to be_error }
+      specify { expect(iterate { |result| result.with_extra_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
 
       # With one extra key.
       specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_none_keys }).to be_error }
@@ -333,6 +441,54 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_except_keys(:number_string, :number_code) }).to be_error }
       specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_extra_keys }).to be_error }
       specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_extra_keys(number_char: "2") }).to be_error }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_renamed_keys(number_string: :string) }).to be_error }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+
+      # With zero renamed key.
+      specify { expect(iterate { |result| result.with_renamed_keys.with_none_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_only_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_only_keys(:number_string) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_only_keys(:number_string, :number_code) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_all_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_except_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_except_keys(:number_string) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_except_keys(:number_string, :number_code) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_extra_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_renamed_keys(number_string: :string) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+
+      # With one renamed key.
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_none_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_only_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_only_keys(:number_string) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_only_keys(:number_string, :number_code) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_all_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_except_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_except_keys(:number_string) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_except_keys(:number_string, :number_code) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_extra_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_renamed_keys(number_string: :string) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+
+      # With many renamed keys.
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_none_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_only_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_only_keys(:number_string) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_only_keys(:number_string, :number_code) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_all_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_except_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_except_keys(:number_string) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_except_keys(:number_string, :number_code) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_extra_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_extra_keys(number_char: "1") }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_renamed_keys(number_string: :string) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
     end
   end
 

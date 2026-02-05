@@ -57,7 +57,7 @@ module ConvenientService
                         return keys.one? ? one_from(result) : many_from(result) unless success?(result)
 
                         old_data = data(result)
-                        new_data = keys.each_with_object({}) { |key, new_data| new_data[key] = old_data[key] }
+                        new_data = keys.each_with_object({}) { |key, new_data| new_data[key] = old_data.__fetch__(key) { raise_not_existing_only_key(key) } }
 
                         new_data.one? ? one_from(result, new_data) : many_from(result, new_data)
                       end
@@ -80,6 +80,11 @@ module ConvenientService
                         return result unless success?(result)
 
                         old_data = data(result)
+
+                        extra_keys = keys - old_data.__keys__
+
+                        raise_not_existing_except_key(extra_keys.first) if extra_keys.any?
+
                         new_data = (old_data.__keys__ - keys).each_with_object({}) { |key, new_data| new_data[key] = old_data[key] }
 
                         many_from(result, new_data)
@@ -115,7 +120,7 @@ module ConvenientService
                           old_data.__keys__
                             .each_with_object({}) { |key, namings| namings[key] = key }
                             .merge(renamings)
-                            .each_with_object({}) { |(old_key, new_key), new_data| new_data[new_key] = old_data[old_key] }
+                            .each_with_object({}) { |(old_key, new_key), new_data| new_data[new_key] = old_data.__fetch__(old_key) { raise_not_existing_rename_key(old_key, new_key) } }
 
                         many_from(result, new_data)
                       end
