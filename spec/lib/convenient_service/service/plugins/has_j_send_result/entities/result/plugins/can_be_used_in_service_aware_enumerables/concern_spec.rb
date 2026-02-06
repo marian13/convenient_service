@@ -42,7 +42,117 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
     include ConvenientService::RSpec::Matchers::CacheItsValue
     include ConvenientService::RSpec::Matchers::Results
 
-    describe "#with_only_keys" do
+    describe "#key_mode" do
+      let(:service) do
+        Class.new do
+          include ConvenientService::Standard::Config
+
+          def result
+            success(foo: :foo, bar: :bar, baz: :baz)
+          end
+        end
+      end
+
+      context "when result is NOT modified" do
+        let(:result) { service.result }
+
+        it "returns `many` key mode" do
+          expect(result.key_mode).to eq(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Entities::KeyModes.many)
+        end
+
+        it "does NOT return key mode from result extra keys" do
+          expect(result.key_mode).not_to eq(result.extra_kwargs[:key_mode])
+        end
+      end
+
+      context "when result is modified by `with_none_keys`" do
+        let(:result) { service.result.with_none_keys }
+
+        it "returns `none` key mode" do
+          expect(result.key_mode).to eq(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Entities::KeyModes.none)
+        end
+
+        it "returns key mode from result extra keys" do
+          expect(result.key_mode).to eq(result.extra_kwargs[:key_mode])
+        end
+      end
+
+      context "when result is modified by `with_only_keys`" do
+        context "when result is modified by `with_only_keys` with one key" do
+          let(:result) { service.result.with_only_keys(:foo) }
+
+          it "returns `one` key mode" do
+            expect(result.key_mode).to eq(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Entities::KeyModes.one)
+          end
+
+          it "returns key mode from result extra keys" do
+            expect(result.key_mode).to eq(result.extra_kwargs[:key_mode])
+          end
+        end
+
+        context "when result is modified by `with_only_keys` with many keys" do
+          let(:result) { service.result.with_only_keys(:foo, :bar) }
+
+          it "returns `many` key mode" do
+            expect(result.key_mode).to eq(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Entities::KeyModes.many)
+          end
+
+          it "returns key mode from result extra keys" do
+            expect(result.key_mode).to eq(result.extra_kwargs[:key_mode])
+          end
+        end
+      end
+
+      context "when result is modified by `with_all_keys`" do
+        let(:result) { service.result.with_all_keys }
+
+        it "returns `many` key mode" do
+          expect(result.key_mode).to eq(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Entities::KeyModes.many)
+        end
+
+        it "returns key mode from result extra keys" do
+          expect(result.key_mode).not_to eq(result.extra_kwargs[:key_mode])
+        end
+      end
+
+      context "when result is modified by `with_except_keys`" do
+        let(:result) { service.result.with_except_keys(:foo) }
+
+        it "returns `many` key mode" do
+          expect(result.key_mode).to eq(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Entities::KeyModes.many)
+        end
+
+        it "returns key mode from result extra keys" do
+          expect(result.key_mode).to eq(result.extra_kwargs[:key_mode])
+        end
+      end
+
+      context "when result is modified by `with_extra_keys`" do
+        let(:result) { service.result.with_extra_keys(qux: :qux) }
+
+        it "returns `many` key mode" do
+          expect(result.key_mode).to eq(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Entities::KeyModes.many)
+        end
+
+        it "returns key mode from result extra keys" do
+          expect(result.key_mode).to eq(result.extra_kwargs[:key_mode])
+        end
+      end
+
+      context "when result is modified by `with_renamed_keys`" do
+        let(:result) { service.result.with_renamed_keys(foo: :qux) }
+
+        it "returns `many` key mode" do
+          expect(result.key_mode).to eq(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Entities::KeyModes.many)
+        end
+
+        it "returns key mode from result extra keys" do
+          expect(result.key_mode).to eq(result.extra_kwargs[:key_mode])
+        end
+      end
+    end
+
+    describe "#with_none_keys" do
       let(:result) { service.result }
 
       context "when result has `failure` status" do
@@ -57,10 +167,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns original result" do
-          expect(result.with_only_keys(:foo)).to be_failure.with_message("from original result")
+          expect(result.with_none_keys).to be_failure.with_message("from original result")
         end
 
-        context "when data has key for only selection" do
+        context "when data has key for dropping" do
           let(:service) do
             Class.new do
               include ConvenientService::Standard::Config
@@ -72,7 +182,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "ignores that key" do
-            expect(result.with_only_keys(:foo)).to be_failure.with_data(foo: :foo, bar: :bar, baz: :baz)
+            expect(result.with_none_keys).to be_failure.with_data(foo: :foo, bar: :bar, baz: :baz)
           end
         end
       end
@@ -89,7 +199,93 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns original result" do
-          expect(result.with_only_keys(:foo)).to be_error.with_message("from original result")
+          expect(result.with_none_keys).to be_error.with_message("from original result")
+        end
+
+        context "when data has key for dropping" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                error(foo: :foo, bar: :bar, baz: :baz)
+              end
+            end
+          end
+
+          it "ignores that key" do
+            expect(result.with_none_keys).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz)
+          end
+        end
+      end
+
+      context "when result has `success` status" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              success(foo: :foo, bar: :bar, baz: :baz)
+            end
+          end
+        end
+
+        let(:keys) { [:foo, :baz] }
+
+        it "drop all keys" do
+          expect(result.with_none_keys).to be_success.without_data
+        end
+      end
+    end
+
+    describe "#with_only_keys" do
+      let(:result) { service.result }
+
+      context "when result has `failure` status" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              failure("from original result")
+            end
+          end
+        end
+
+        it "returns original result" do
+          expect(result.with_only_keys).to be_failure.with_message("from original result")
+        end
+
+        context "when data has key for only selection" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                failure(foo: :foo, bar: :bar, baz: :baz)
+              end
+            end
+          end
+
+          it "ignores that key" do
+            expect(result.with_only_keys).to be_failure.with_data(foo: :foo, bar: :bar, baz: :baz)
+          end
+        end
+      end
+
+      context "when result has `error` status" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              error("from original result")
+            end
+          end
+        end
+
+        it "returns original result" do
+          expect(result.with_only_keys).to be_error.with_message("from original result")
         end
 
         context "when data has key for only selection" do
@@ -104,7 +300,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "ignores that key" do
-            expect(result.with_only_keys(:foo)).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz)
+            expect(result.with_only_keys).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz)
           end
         end
       end
@@ -123,7 +319,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:keys) { [:foo, :baz] }
 
         it "selects data keys according to `keys`" do
-          expect(result.with_only_keys(*keys)).to be_success.with_data(foo: :foo, baz: :baz)
+          expect(result.with_only_keys).to be_success.with_data(foo: :foo, baz: :baz)
         end
 
         context "when original result does NOT have attribute by `key`" do
@@ -144,7 +340,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly`" do
-            expect { result.with_only_keys(*keys) }
+            expect { result.with_only_keys }
               .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly)
               .with_message(exception_message)
           end
@@ -156,6 +352,92 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           it "returns result without keys" do
             expect(result.with_only_keys(*keys)).to be_success.without_data
           end
+        end
+      end
+    end
+
+    describe "#with_all_keys" do
+      let(:result) { service.result }
+
+      context "when result has `failure` status" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              failure("from original result")
+            end
+          end
+        end
+
+        it "returns original result" do
+          expect(result.with_all_keys).to be_failure.with_message("from original result")
+        end
+
+        context "when data has key for selection" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                failure(foo: :foo, bar: :bar, baz: :baz)
+              end
+            end
+          end
+
+          it "ignores that key" do
+            expect(result.with_only_keys(:foo).with_all_keys).to be_failure.with_data(foo: :foo, bar: :bar, baz: :baz)
+          end
+        end
+      end
+
+      context "when result has `error` status" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              error("from original result")
+            end
+          end
+        end
+
+        it "returns original result" do
+          expect(result.with_all_keys).to be_error.with_message("from original result")
+        end
+
+        context "when data has key for selection" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                error(foo: :foo, bar: :bar, baz: :baz)
+              end
+            end
+          end
+
+          it "ignores that key" do
+            expect(result.with_only_keys(:foo).with_all_keys).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz)
+          end
+        end
+      end
+
+      context "when result has `success` status" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              success(foo: :foo, bar: :bar, baz: :baz)
+            end
+          end
+        end
+
+        let(:keys) { [:foo, :baz] }
+
+        it "selects all keys" do
+          expect(result.with_all_keys).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz)
         end
       end
     end
@@ -278,6 +560,118 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
       end
     end
 
+    describe "#with_extra_keys" do
+      let(:result) { service.result }
+
+      context "when result has `failure` status" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              failure("from original result")
+            end
+          end
+        end
+
+        it "returns original result" do
+          expect(result.with_extra_keys(foo: :qux)).to be_failure.with_message("from original result")
+        end
+
+        context "when data has key for overriding" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                failure(foo: :foo, bar: :bar, baz: :baz)
+              end
+            end
+          end
+
+          it "ignores that key" do
+            expect(result.with_extra_keys(foo: :qux)).to be_failure.with_data(foo: :foo, bar: :bar, baz: :baz)
+          end
+        end
+      end
+
+      context "when result has `error` status" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              error("from original result")
+            end
+          end
+        end
+
+        it "returns original result" do
+          expect(result.with_extra_keys(foo: :qux)).to be_error.with_message("from original result")
+        end
+
+        context "when data has key for overriding" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                error(foo: :foo, bar: :bar, baz: :baz)
+              end
+            end
+          end
+
+          it "ignores that key" do
+            expect(result.with_extra_keys(foo: :qux)).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz)
+          end
+        end
+      end
+
+      context "when result has `success` status" do
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              success(foo: :foo, bar: :bar, baz: :baz)
+            end
+          end
+        end
+
+        let(:values) { {qux: :qux, quux: :quux} }
+
+        it "merges data keys according to `values`" do
+          expect(result.with_extra_keys(**values)).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz, qux: :qux, quux: :quux)
+        end
+
+        context "when data has key for overriding" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success(foo: :foo, bar: :bar, baz: :baz)
+              end
+            end
+          end
+
+          let(:values) { {foo: :qux, baz: :quux} }
+
+          it "overrides those data keys according to `values`" do
+            expect(result.with_extra_keys(**values)).to be_success.with_data(foo: :qux, bar: :bar, baz: :quux)
+          end
+        end
+
+        context "when `values` are empty" do
+          let(:values) { {} }
+
+          it "returns original result" do
+            expect(result.with_extra_keys(**values)).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz)
+          end
+        end
+      end
+    end
+
     describe "#with_renamed_keys" do
       let(:result) { service.result }
 
@@ -391,118 +785,6 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
           it "returns result with all keys" do
             expect(result.with_renamed_keys(**renamings)).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz)
-          end
-        end
-      end
-    end
-
-    describe "#with_extra_keys" do
-      let(:result) { service.result }
-
-      context "when result has `failure` status" do
-        let(:service) do
-          Class.new do
-            include ConvenientService::Standard::Config
-
-            def result
-              failure("from original result")
-            end
-          end
-        end
-
-        it "returns original result" do
-          expect(result.with_extra_keys(foo: :qux)).to be_failure.with_message("from original result")
-        end
-
-        context "when data has key for overriding" do
-          let(:service) do
-            Class.new do
-              include ConvenientService::Standard::Config
-
-              def result
-                failure(foo: :foo, bar: :bar, baz: :baz)
-              end
-            end
-          end
-
-          it "ignores that key" do
-            expect(result.with_extra_keys(foo: :qux)).to be_failure.with_data(foo: :foo, bar: :bar, baz: :baz)
-          end
-        end
-      end
-
-      context "when result has `error` status" do
-        let(:service) do
-          Class.new do
-            include ConvenientService::Standard::Config
-
-            def result
-              error("from original result")
-            end
-          end
-        end
-
-        it "returns original result" do
-          expect(result.with_extra_keys(foo: :qux)).to be_error.with_message("from original result")
-        end
-
-        context "when data has key for overriding" do
-          let(:service) do
-            Class.new do
-              include ConvenientService::Standard::Config
-
-              def result
-                error(foo: :foo, bar: :bar, baz: :baz)
-              end
-            end
-          end
-
-          it "ignores that key" do
-            expect(result.with_extra_keys(foo: :qux)).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz)
-          end
-        end
-      end
-
-      context "when result has `success` status" do
-        let(:service) do
-          Class.new do
-            include ConvenientService::Standard::Config
-
-            def result
-              success(foo: :foo, bar: :bar, baz: :baz)
-            end
-          end
-        end
-
-        let(:values) { {qux: :qux, quux: :quux} }
-
-        it "merges data keys according to `values`" do
-          expect(result.with_extra_keys(**values)).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz, qux: :qux, quux: :quux)
-        end
-
-        context "when data has key for overriding" do
-          let(:service) do
-            Class.new do
-              include ConvenientService::Standard::Config
-
-              def result
-                success(foo: :foo, bar: :bar, baz: :baz)
-              end
-            end
-          end
-
-          let(:values) { {foo: :qux, baz: :quux} }
-
-          it "overrides those data keys according to `values`" do
-            expect(result.with_extra_keys(**values)).to be_success.with_data(foo: :qux, bar: :bar, baz: :quux)
-          end
-        end
-
-        context "when `values` are empty" do
-          let(:values) { {} }
-
-          it "returns original result" do
-            expect(result.with_extra_keys(**values)).to be_success.with_data(foo: :foo, bar: :bar, baz: :baz)
           end
         end
       end

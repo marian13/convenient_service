@@ -29,13 +29,10 @@ module ConvenientService
                       # @note Throws `:propagated_result` when status is `error`.
                       #
                       def create_service_aware_iteration_block_value(result)
-                        if success?(result)
-                          data(result).to_h
-                        elsif failure?(result)
-                          nil
-                        else
-                          propagate_result(result)
-                        end
+                        return data_all_key_values(result) if success?(result)
+                        return if failure?(result)
+
+                        propagate_result(result)
                       end
 
                       ##
@@ -43,7 +40,7 @@ module ConvenientService
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       def modify_to_result_with_none_keys(result)
-                        none_from(result)
+                        success?(result) ? none_from(result, {}) : none_from(result)
                       end
 
                       ##
@@ -52,14 +49,18 @@ module ConvenientService
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       def modify_to_result_with_only_keys(result, keys)
-                        return none_from(result) if keys.none?
+                        if success?(result)
+                          return none_from(result, {}) if keys.none?
 
-                        return keys.one? ? one_from(result) : many_from(result) unless success?(result)
+                          old_data = data(result)
+                          new_data = keys.each_with_object({}) { |key, new_data| new_data[key] = old_data.__fetch__(key) { raise_not_existing_only_key(key) } }
 
-                        old_data = data(result)
-                        new_data = keys.each_with_object({}) { |key, new_data| new_data[key] = old_data.__fetch__(key) { raise_not_existing_only_key(key) } }
+                          new_data.one? ? one_from(result, new_data) : many_from(result, new_data)
+                        else
+                          return none_from(result) if keys.none?
 
-                        new_data.one? ? one_from(result, new_data) : many_from(result, new_data)
+                          keys.one? ? one_from(result) : many_from(result)
+                        end
                       end
 
                       ##
@@ -76,8 +77,9 @@ module ConvenientService
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       def modify_to_result_with_except_keys(result, keys)
-                        return result if keys.none?
                         return result unless success?(result)
+
+                        return result if keys.none?
 
                         old_data = data(result)
 
@@ -96,8 +98,9 @@ module ConvenientService
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       def modify_to_result_with_extra_keys(result, values)
-                        return result if values.none?
                         return result unless success?(result)
+
+                        return result if values.none?
 
                         old_data = data(result)
                         new_data = old_data.to_h.merge(values)
@@ -111,8 +114,9 @@ module ConvenientService
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       def modify_to_result_with_renamed_keys(result, renamings)
-                        return result if renamings.none?
                         return result unless success?(result)
+
+                        return result if renamings.none?
 
                         old_data = data(result)
 

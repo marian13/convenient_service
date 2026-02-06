@@ -29,13 +29,10 @@ module ConvenientService
                       # @note Throws `:propagated_result` when status is `error`.
                       #
                       def create_service_aware_iteration_block_value(result)
-                        if success?(result)
-                          true
-                        elsif failure?(result)
-                          false
-                        else
-                          propagate_result(result)
-                        end
+                        return true if success?(result)
+                        return false if failure?(result)
+
+                        propagate_result(result)
                       end
 
                       ##
@@ -53,9 +50,7 @@ module ConvenientService
                       # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly]
                       #
                       def modify_to_result_with_only_keys(result, keys)
-                        return result if keys.none?
-
-                        raise_not_existing_only_key(keys.first)
+                        keys.none? ? result : raise_not_existing_only_key(keys.first)
                       end
 
                       ##
@@ -73,9 +68,7 @@ module ConvenientService
                       # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept]
                       #
                       def modify_to_result_with_except_keys(result, keys)
-                        return many_from(result) if keys.none?
-
-                        raise_not_existing_except_key(keys.first)
+                        keys.none? ? many_from(result) : raise_not_existing_except_key(keys.first)
                       end
 
                       ##
@@ -84,9 +77,7 @@ module ConvenientService
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       def modify_to_result_with_extra_keys(result, values)
-                        return many_from(result) if values.none?
-
-                        many_from(result, values)
+                        values.none? ? many_from(result) : many_from(result, values)
                       end
 
                       ##

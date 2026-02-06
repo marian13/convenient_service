@@ -65,6 +65,24 @@ module ConvenientService
 
                       ##
                       # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                      # @return [Hash{Symbol => Object}]
+                      #
+                      def data_all_key_values(result)
+                        result.unsafe_data.to_h
+                      end
+
+                      ##
+                      # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                      # @return [Object] Can be any type.
+                      #
+                      def data_first_value(result)
+                        _, value = result.unsafe_data.to_h.first
+
+                        value
+                      end
+
+                      ##
+                      # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       # @return [void]
                       # @note Throws `:propagated_result`.
                       #
@@ -76,8 +94,8 @@ module ConvenientService
                       # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
-                      def none_from(result)
-                        result.copy(overrides: {kwargs: {data: {}, key_mode: Entities::KeyModes.none}})
+                      def none_from(result, data = result.unsafe_data)
+                        result.copy(overrides: {kwargs: {data: data, key_mode: Entities::KeyModes.none}})
                       end
 
                       ##

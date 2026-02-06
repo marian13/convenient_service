@@ -29,15 +29,10 @@ module ConvenientService
                       # @note Throws `:propagated_result` when status is `error`.
                       #
                       def create_service_aware_iteration_block_value(result)
-                        if success?(result)
-                          _, value = data(result).to_h.first
+                        return data_first_value(result) if success?(result)
+                        return if failure?(result)
 
-                          value
-                        elsif failure?(result)
-                          nil
-                        else
-                          propagate_result(result)
-                        end
+                        propagate_result(result)
                       end
 
                       ##
@@ -53,7 +48,7 @@ module ConvenientService
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       def modify_to_result_with_none_keys(result)
-                        none_from(result)
+                        success?(result) ? none_from(result, {}) : none_from(result)
                       end
 
                       ##
@@ -63,17 +58,21 @@ module ConvenientService
                       # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly]
                       #
                       def modify_to_result_with_only_keys(result, keys)
-                        return none_from(result) if keys.none?
+                        if success?(result)
+                          return none_from(result, {}) if keys.none?
 
-                        return keys.one? ? one_from(result) : many_from(result) unless success?(result)
+                          old_data = data(result)
 
-                        old_data = data(result)
+                          extra_keys = keys - old_data.__keys__
 
-                        extra_keys = keys - old_data.__keys__
+                          raise_not_existing_only_key(extra_keys.first) if extra_keys.any?
 
-                        raise_not_existing_only_key(extra_keys.first) if extra_keys.any?
+                          result
+                        else
+                          return none_from(result) if keys.none?
 
-                        result
+                          keys.one? ? one_from(result) : many_from(result)
+                        end
                       end
 
                       ##
@@ -83,8 +82,9 @@ module ConvenientService
                       # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept]
                       #
                       def modify_to_result_with_except_keys(result, keys)
-                        return many_from(result) if keys.none?
                         return many_from(result) unless success?(result)
+
+                        return many_from(result) if keys.none?
 
                         old_data = data(result)
 
@@ -101,8 +101,9 @@ module ConvenientService
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       def modify_to_result_with_extra_keys(result, values)
-                        return many_from(result) if values.none?
                         return many_from(result) unless success?(result)
+
+                        return many_from(result) if values.none?
 
                         old_data = data(result)
 
@@ -118,8 +119,9 @@ module ConvenientService
                       # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename]
                       #
                       def modify_to_result_with_renamed_keys(result, renamings)
-                        return result if renamings.none?
                         return result unless success?(result)
+
+                        return result if renamings.none?
 
                         old_data = data(result)
 
