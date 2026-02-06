@@ -30,7 +30,7 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
         when 3 then success(number_string: "three", number_code: 51)
         when 4 then success(number_string: "four", number_code: 52)
         when 5 then success(number_string: "five", number_code: 53)
-        when -Float::INFINITY..-1 then error
+        when -Float::INFINITY..-1 then error(foo: :foo, bar: :bar, baz: :baz)
         else
           raise
         end
@@ -280,215 +280,215 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
       let(:collection) { [-1, :exception] }
 
       # Default (with all keys).
-      specify { expect(iterate { |result| result }).to be_error }
-      specify { expect(iterate { |result| result.with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+      specify { expect(iterate { |result| result }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
 
       # With none keys.
-      specify { expect(iterate { |result| result.with_none_keys.with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_none_keys.with_only_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_none_keys.with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_none_keys.with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
       specify { expect { iterate { |result| result.with_none_keys.with_only_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.\n") }
       specify { expect { iterate { |result| result.with_none_keys.with_only_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.\n") }
-      specify { expect(iterate { |result| result.with_none_keys.with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_none_keys.with_except_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_none_keys.with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_none_keys.with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
       specify { expect { iterate { |result| result.with_none_keys.with_except_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
       specify { expect { iterate { |result| result.with_none_keys.with_except_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
-      specify { expect(iterate { |result| result.with_none_keys.with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_none_keys.with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_none_keys.with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_none_keys.with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_none_keys.with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_none_keys.with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
       specify { expect { iterate { |result| result.with_none_keys.with_renamed_keys(number_string: :string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
       specify { expect { iterate { |result| result.with_none_keys.with_renamed_keys(number_string: :string, number_code: :code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
 
       # With zero keys.
-      specify { expect(iterate { |result| result.with_only_keys.with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys.with_only_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_only_keys.with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys.with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
       specify { expect { iterate { |result| result.with_only_keys.with_only_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.\n") }
       specify { expect { iterate { |result| result.with_only_keys.with_only_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be selected. Make sure the corresponding result has it.\n") }
-      specify { expect(iterate { |result| result.with_only_keys.with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys.with_except_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_only_keys.with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys.with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
       specify { expect { iterate { |result| result.with_only_keys.with_except_keys(:number_string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
       specify { expect { iterate { |result| result.with_only_keys.with_except_keys(:number_string, :number_code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForExcept).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be dropped. Make sure the corresponding result has it.\n") }
-      specify { expect(iterate { |result| result.with_only_keys.with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys.with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys.with_renamed_keys }).to be_error }
+      specify { expect(iterate { |result| result.with_only_keys.with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys.with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys.with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
       specify { expect { iterate { |result| result.with_only_keys.with_renamed_keys(number_string: :string) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
       specify { expect { iterate { |result| result.with_only_keys.with_renamed_keys(number_string: :string, number_code: :code) } }.to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForRename).with_message("Data attribute by key `:number_string` does NOT exist. That is why it can NOT be renamed to `:string`. Make sure the corresponding result has it.\n") }
 
       # With one key.
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_only_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_only_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_only_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_except_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_except_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_except_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_renamed_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_renamed_keys(number_string: :string) }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_only_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_only_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_except_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_except_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_renamed_keys(number_string: :string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
 
       # With many keys.
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_only_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_only_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_only_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_except_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_except_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_except_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_renamed_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_renamed_keys(number_string: :string) }).to be_error }
-      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_only_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_only_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_except_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_except_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_renamed_keys(number_string: :string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_only_keys(:number_string, :number_code).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
 
       # With all keys.
-      specify { expect(iterate { |result| result.with_all_keys.with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys.with_only_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys.with_only_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys.with_only_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys.with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys.with_except_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys.with_except_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys.with_except_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys.with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys.with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys.with_renamed_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys.with_renamed_keys(number_string: :string) }).to be_error }
-      specify { expect(iterate { |result| result.with_all_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+      specify { expect(iterate { |result| result.with_all_keys.with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys.with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys.with_only_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys.with_only_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys.with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys.with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys.with_except_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys.with_except_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys.with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys.with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys.with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys.with_renamed_keys(number_string: :string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_all_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
 
       # With zero except keys.
-      specify { expect(iterate { |result| result.with_except_keys.with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys.with_only_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys.with_only_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys.with_only_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys.with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys.with_except_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys.with_except_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys.with_except_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys.with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys.with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys.with_renamed_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys.with_renamed_keys(number_string: :string) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+      specify { expect(iterate { |result| result.with_except_keys.with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys.with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys.with_only_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys.with_only_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys.with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys.with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys.with_except_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys.with_except_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys.with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys.with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys.with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys.with_renamed_keys(number_string: :string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
 
       # With one except key.
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_only_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_only_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_only_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_except_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_except_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_except_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_renamed_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_renamed_keys(number_string: :string) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_only_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_only_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_except_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_except_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_renamed_keys(number_string: :string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
 
       # With many except keys.
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_only_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_only_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_only_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_except_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_except_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_except_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_renamed_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_renamed_keys(number_string: :string) }).to be_error }
-      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_only_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_only_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_except_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_except_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_renamed_keys(number_string: :string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_except_keys(:number_string, :number_code).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
 
       # With zero extra key.
-      specify { expect(iterate { |result| result.with_extra_keys.with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys.with_only_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys.with_only_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys.with_only_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys.with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys.with_except_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys.with_except_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys.with_except_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys.with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys.with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys.with_renamed_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys.with_renamed_keys(number_string: :string) }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+      specify { expect(iterate { |result| result.with_extra_keys.with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_only_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_only_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_except_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_except_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_renamed_keys(number_string: :string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
 
       # With one extra key.
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_only_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_only_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_only_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_except_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_except_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_except_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_extra_keys(number_char: "2") }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_renamed_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_renamed_keys(number_string: :string) }).to be_error }
-      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_only_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_only_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_except_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_except_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_extra_keys(number_char: "2") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_renamed_keys(number_string: :string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_extra_keys(number_char: "1").with_renamed_keys(number_string: :string, number_code: :code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
 
       # With zero renamed key.
-      specify { expect(iterate { |result| result.with_renamed_keys.with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys.with_only_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys.with_only_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys.with_only_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys.with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys.with_except_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys.with_except_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys.with_except_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys.with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys.with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys.with_renamed_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys.with_renamed_keys(number_string: :string) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_only_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_only_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_except_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_except_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_renamed_keys(number_string: :string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys.with_renamed_keys(number_string: :string, number_code: :code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
 
       # With one renamed key.
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_only_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_only_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_only_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_except_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_except_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_except_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_renamed_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_renamed_keys(number_string: :string) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_only_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_only_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_except_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_except_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_renamed_keys(number_string: :string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
 
       # With many renamed keys.
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_none_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_only_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_only_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_only_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_all_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_except_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_except_keys(:number_string) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_except_keys(:number_string, :number_code) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_extra_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_extra_keys(number_char: "1") }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_renamed_keys }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_renamed_keys(number_string: :string) }).to be_error }
-      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_none_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_only_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_only_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_only_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_all_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_except_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_except_keys(:number_string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_except_keys(:number_string, :number_code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_extra_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_extra_keys(number_char: "1") }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_renamed_keys }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_renamed_keys(number_string: :string) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { |result| result.with_renamed_keys(number_string: :string, number_code: :code).with_renamed_keys(number_string: :string, number_code: :code) }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
     end
   end
 
@@ -514,12 +514,12 @@ RSpec.describe "Step aware iterations", type: [:standard, :e2e] do
     example_group "error" do
       let(:collection) { [-1, :exception] }
 
-      specify { expect(iterate { {} }).to be_error }
-      specify { expect(iterate { {out: []} }).to be_error }
-      specify { expect(iterate { {out: :number_string} }).to be_error }
-      specify { expect(iterate { {out: [:number_string, :number_code]} }).to be_error }
-      specify { expect(iterate { {out: [number_char: "1"]} }).to be_error }
-      specify { expect(iterate { {out: [:number_string, number_char: "1"]} }).to be_error }
+      specify { expect(iterate { {} }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { {out: []} }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { {out: :number_string} }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { {out: [:number_string, :number_code]} }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { {out: [number_char: "1"]} }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
+      specify { expect(iterate { {out: [:number_string, number_char: "1"]} }).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz) }
     end
   end
 end

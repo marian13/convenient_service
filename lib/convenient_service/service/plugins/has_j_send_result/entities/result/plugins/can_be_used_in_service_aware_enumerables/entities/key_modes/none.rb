@@ -77,7 +77,7 @@ module ConvenientService
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       def modify_to_result_with_extra_keys(result, values)
-                        values.none? ? many_from(result) : many_from(result, values)
+                        success?(result) ? many_from(result, values) : many_from(result)
                       end
 
                       ##

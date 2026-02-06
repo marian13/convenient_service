@@ -253,7 +253,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns original result" do
-          expect(result.with_only_keys).to be_failure.with_message("from original result")
+          expect(result.with_only_keys(:foo, :bar)).to be_failure.with_message("from original result")
         end
 
         context "when data has key for only selection" do
@@ -268,7 +268,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "ignores that key" do
-            expect(result.with_only_keys).to be_failure.with_data(foo: :foo, bar: :bar, baz: :baz)
+            expect(result.with_only_keys(:foo, :bar)).to be_failure.with_data(foo: :foo, bar: :bar, baz: :baz)
           end
         end
       end
@@ -285,7 +285,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns original result" do
-          expect(result.with_only_keys).to be_error.with_message("from original result")
+          expect(result.with_only_keys(:foo, :bar)).to be_error.with_message("from original result")
         end
 
         context "when data has key for only selection" do
@@ -300,7 +300,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "ignores that key" do
-            expect(result.with_only_keys).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz)
+            expect(result.with_only_keys(:foo, :bar)).to be_error.with_data(foo: :foo, bar: :bar, baz: :baz)
           end
         end
       end
@@ -319,7 +319,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:keys) { [:foo, :baz] }
 
         it "selects data keys according to `keys`" do
-          expect(result.with_only_keys).to be_success.with_data(foo: :foo, baz: :baz)
+          expect(result.with_only_keys(*keys)).to be_success.with_data(foo: :foo, baz: :baz)
         end
 
         context "when original result does NOT have attribute by `key`" do
@@ -340,7 +340,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
           end
 
           it "raises `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly`" do
-            expect { result.with_only_keys }
+            expect { result.with_only_keys(*keys) }
               .to raise_error(ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Exceptions::NotExistingAttributeForOnly)
               .with_message(exception_message)
           end
@@ -457,7 +457,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns original result" do
-          expect(result.with_only_keys(:foo)).to be_failure.with_message("from original result")
+          expect(result.with_only_keys(:foo, :bar)).to be_failure.with_message("from original result")
         end
 
         context "when data has key for except dropping" do
@@ -489,7 +489,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns original result" do
-          expect(result.with_only_keys(:foo)).to be_error.with_message("from original result")
+          expect(result.with_only_keys(:foo, :bar)).to be_error.with_message("from original result")
         end
 
         context "when data has key for except dropping" do

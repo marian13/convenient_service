@@ -92,6 +92,7 @@ module ConvenientService
 
                       ##
                       # @param result [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                      # @param data [Hash{Symbol => Object}]
                       # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
                       #
                       def none_from(result, data = result.unsafe_data)
