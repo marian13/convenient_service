@@ -423,22 +423,16 @@
 33
 34
 35
-36
-37
-38
-39</pre>
+36</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_service_aware_iteration_block_value'>create_service_aware_iteration_block_value</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_success?'>success?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_data'>data</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span>
-  <span class='kw'>elsif</span> <span class='id identifier rubyid_failure?'>failure?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
-    <span class='kw'>nil</span>
-  <span class='kw'>else</span>
-    <span class='id identifier rubyid_propagate_result'>propagate_result</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_data_all_key_values'>data_all_key_values</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_success?'>success?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>if</span> <span class='id identifier rubyid_failure?'>failure?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_propagate_result'>propagate_result</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -587,12 +581,12 @@
       <pre class="lines">
 
 
-69
 70
-71</pre>
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_to_result_with_all_keys'>modify_to_result_with_all_keys</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result'>result</span>
@@ -684,7 +678,6 @@
       <pre class="lines">
 
 
-78
 79
 80
 81
@@ -697,14 +690,17 @@
 88
 89
 90
-91</pre>
+91
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_to_result_with_except_keys'>modify_to_result_with_except_keys</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='kw'>if</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='kw'>unless</span> <span class='id identifier rubyid_success?'>success?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='kw'>if</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
 
   <span class='id identifier rubyid_old_data'>old_data</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
 
@@ -803,22 +799,24 @@
       <pre class="lines">
 
 
-98
-99
 100
 101
 102
 103
 104
 105
-106</pre>
+106
+107
+108
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_to_result_with_extra_keys'>modify_to_result_with_extra_keys</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_values'>values</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='kw'>if</span> <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='kw'>unless</span> <span class='id identifier rubyid_success?'>success?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='kw'>if</span> <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
 
   <span class='id identifier rubyid_old_data'>old_data</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new_data'>new_data</span> <span class='op'>=</span> <span class='id identifier rubyid_old_data'>old_data</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_values'>values</span><span class='rparen'>)</span>
@@ -901,15 +899,15 @@
       <pre class="lines">
 
 
-45
-46
-47</pre>
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_to_result_with_none_keys'>modify_to_result_with_none_keys</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_none_from'>none_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_success?'>success?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_none_from'>none_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_none_from'>none_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -998,6 +996,9 @@
       <pre class="lines">
 
 
+51
+52
+53
 54
 55
 56
@@ -1007,20 +1008,25 @@
 60
 61
 62
-63</pre>
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_to_result_with_only_keys'>modify_to_result_with_only_keys</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_none_from'>none_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_success?'>success?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_none_from'>none_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
 
-  <span class='kw'>return</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_one?'>one?</span> <span class='op'>?</span> <span class='id identifier rubyid_one_from'>one_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_many_from'>many_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_success?'>success?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_old_data'>old_data</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_new_data'>new_data</span> <span class='op'>=</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_each_with_object'>each_with_object</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_new_data'>new_data</span><span class='op'>|</span> <span class='id identifier rubyid_new_data'>new_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_old_data'>old_data</span><span class='period'>.</span><span class='id identifier rubyid___fetch__'>__fetch__</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_raise_not_existing_only_key'>raise_not_existing_only_key</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='rbrace'>}</span>
 
-  <span class='id identifier rubyid_old_data'>old_data</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_new_data'>new_data</span> <span class='op'>=</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_each_with_object'>each_with_object</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_new_data'>new_data</span><span class='op'>|</span> <span class='id identifier rubyid_new_data'>new_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_old_data'>old_data</span><span class='period'>.</span><span class='id identifier rubyid___fetch__'>__fetch__</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_raise_not_existing_only_key'>raise_not_existing_only_key</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_new_data'>new_data</span><span class='period'>.</span><span class='id identifier rubyid_one?'>one?</span> <span class='op'>?</span> <span class='id identifier rubyid_one_from'>one_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_new_data'>new_data</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_many_from'>many_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_new_data'>new_data</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_none_from'>none_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
 
-  <span class='id identifier rubyid_new_data'>new_data</span><span class='period'>.</span><span class='id identifier rubyid_one?'>one?</span> <span class='op'>?</span> <span class='id identifier rubyid_one_from'>one_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_new_data'>new_data</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_many_from'>many_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_new_data'>new_data</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_one?'>one?</span> <span class='op'>?</span> <span class='id identifier rubyid_one_from'>one_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_many_from'>many_from</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1109,9 +1115,6 @@
       <pre class="lines">
 
 
-113
-114
-115
 116
 117
 118
@@ -1122,14 +1125,19 @@
 123
 124
 125
-126</pre>
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_used_in_service_aware_enumerables/entities/key_modes/many.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_to_result_with_renamed_keys'>modify_to_result_with_renamed_keys</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='comma'>,</span> <span class='id identifier rubyid_renamings'>renamings</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='kw'>if</span> <span class='id identifier rubyid_renamings'>renamings</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='kw'>unless</span> <span class='id identifier rubyid_success?'>success?</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='kw'>if</span> <span class='id identifier rubyid_renamings'>renamings</span><span class='period'>.</span><span class='id identifier rubyid_none?'>none?</span>
 
   <span class='id identifier rubyid_old_data'>old_data</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
 
@@ -1151,7 +1159,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Feb  5 22:46:38 2026 by
+  Generated on Fri Feb  6 01:58:13 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-4.0.1).
 </div>
