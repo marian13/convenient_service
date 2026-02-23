@@ -78,7 +78,7 @@ gem "benchmark", "~> 0.5.0"
 # - https://github.com/evanphx/benchmark-ips
 # - https://www.johnnunemaker.com/how-to-benchmark-your-ruby-gem
 #
-gem "benchmark-ips", "~> 2.12.0"
+gem "benchmark-ips", "~> 2.14.0"
 
 ##
 # Used for benchmarking (memory allocation). See `benchmark` directory.
