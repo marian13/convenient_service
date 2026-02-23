@@ -308,7 +308,11 @@ gem "rouge", platform: :mri if RUBY_VERSION <= "4.0"
 # Used for testing Ruby code.
 # - https://rspec.info
 #
-gem "rspec", "~> 3.11.0"
+if RUBY_VERSION >= "4.0"
+  gem "rspec", "~> 4.0.0.beta1"
+else
+  gem "rspec", "~> 3.11.0"
+end
 
 ##
 # Used for performance testing with RSpec.

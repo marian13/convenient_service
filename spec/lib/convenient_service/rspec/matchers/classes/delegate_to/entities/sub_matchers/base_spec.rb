@@ -77,7 +77,7 @@ RSpec.describe ConvenientService::RSpec::Matchers::Classes::DelegateTo::Entities
       end
 
       it "returns opposite of `#matches?`" do
-        allow(sub_matcher).to receive(:maches?).and_return(true, false, true, false)
+        allow(sub_matcher).to receive(:matches?).and_return(true, false, true, false)
 
         expect([sub_matcher.does_not_match?(block_expectation_value), !sub_matcher.does_not_match?(block_expectation_value)]).to eq([!sub_matcher.matches?(block_expectation_value), sub_matcher.matches?(block_expectation_value)])
       end

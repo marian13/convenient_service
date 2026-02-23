@@ -601,8 +601,10 @@ tasks:
   #
   rspec:
     cmds:
-      - "{{.BUNDLE_EXEC_PREFIX}} rspec --profile --color --format progress {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}"
+      - "{{.BUNDLE_EXEC_PREFIX}} rspec --profile --format progress {{.COLOR_SUFFIX}} {{.REQUIRE_SUFFIX}} {{.GIT_STAGED_RSPEC_FILES}} {{.CLI_ARGS}}"
     vars:
+      COLOR_SUFFIX:
+        sh: ruby -e 'puts "--color" if RUBY_VERSION.to_s[0].to_i < 4'
       REQUIRE_SUFFIX:
         sh: ruby -e 'puts case "{{.APPRAISAL}}" when /rails/ then "--require rails_helper" when /dry/ then "--require dry_helper" when /amazing_print/ then "--require amazing_print_helper" when /awesome_print/ then "--require awesome_print_helper" when /memo_wise/ then "--require memo_wise_helper" else "--require standard_helper" end'
       GIT_STAGED_RSPEC_FILES:

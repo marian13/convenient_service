@@ -106,7 +106,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Serv
             let(:other) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service.new(Class.new) }
 
             before do
-              allow(described_class).to receive(:cast).and_call_original
+              allow(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service).to receive(:cast).and_call_original
             end
 
             it "returns `false`" do

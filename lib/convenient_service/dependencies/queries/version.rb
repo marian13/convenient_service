@@ -42,6 +42,24 @@ module ConvenientService
         end
 
         ##
+        # @return [ConvenientService::Dependencies::Queries::Version]
+        #
+        # @example Beta version is considered as lower than major version.
+        #   ConvenientService::Dependencies::Queries::Version.new("4.0.0.beta1") >= 4
+        #   # => false
+        #
+        # @example That is why there is a way to compare only by the first segment of version.
+        #   ConvenientService::Dependencies::Queries::Version.new("4.0.0.beta1").major_version >= 4
+        #   # => true
+        #
+        # @internal
+        #   TODO: Add direct specs.
+        #
+        def major_version
+          self.class.new(gem_version&.segments&.first.to_s)
+        end
+
+        ##
         # @return [Gem::Version, nil]
         #
         def gem_version
