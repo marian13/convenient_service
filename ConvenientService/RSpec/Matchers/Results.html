@@ -6,13 +6,13 @@
 <title>
   Module: ConvenientService::RSpec::Matchers::Results
   
-    &mdash; Documentation by YARD 0.9.39
+    &mdash; Documentation by YARD 0.9.43
   
 </title>
 
-  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "ConvenientService::RSpec::Matchers::Results";
@@ -27,6 +27,8 @@
 
   </head>
   <body>
+    <div id="main_progress" aria-hidden="true"></div>
+
     <div class="nav_wrap">
       <iframe id="nav" src="../../../class_list.html?1"></iframe>
       <div id="resizer"></div>
@@ -73,7 +75,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeError.html" title="ConvenientService::RSpec::Matchers::Results::BeError (module)">BeError</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeFailure.html" title="ConvenientService::RSpec::Matchers::Results::BeFailure (module)">BeFailure</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeNotError.html" title="ConvenientService::RSpec::Matchers::Results::BeNotError (module)">BeNotError</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeNotFailure.html" title="ConvenientService::RSpec::Matchers::Results::BeNotFailure (module)">BeNotFailure</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeNotSuccess.html" title="ConvenientService::RSpec::Matchers::Results::BeNotSuccess (module)">BeNotSuccess</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeResult.html" title="ConvenientService::RSpec::Matchers::Results::BeResult (module)">BeResult</a></span>, <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeSuccess.html" title="ConvenientService::RSpec::Matchers::Results::BeSuccess (module)">BeSuccess</a></span>, <span class='object_link'><a href="../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">Support::Concern</a></span></dd>
+      <dd><span class='object_link'><a href="../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">Support::Concern</a></span>, Results::BeError, Results::BeFailure, Results::BeNotError, Results::BeNotFailure, Results::BeNotSuccess, Results::BeResult, Results::BeSuccess</dd>
   </dl>
   
   
@@ -88,8 +90,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/rspec/matchers/results.rb<span class="defines">,<br />
-  lib/convenient_service/rspec/matchers/results/be_error.rb,<br /> lib/convenient_service/rspec/matchers/results/be_result.rb,<br /> lib/convenient_service/rspec/matchers/results/be_failure.rb,<br /> lib/convenient_service/rspec/matchers/results/be_success.rb,<br /> lib/convenient_service/rspec/matchers/results/be_not_error.rb,<br /> lib/convenient_service/rspec/matchers/results/be_not_failure.rb,<br /> lib/convenient_service/rspec/matchers/results/be_not_success.rb,<br /> lib/convenient_service/rspec/matchers/results/be_result/exceptions.rb</span>
+    <dd>lib/convenient_service/rspec/matchers/results.rb<span class="defines">,<br>
+  lib/convenient_service/rspec/matchers/results/be_error.rb,<br> lib/convenient_service/rspec/matchers/results/be_result.rb,<br> lib/convenient_service/rspec/matchers/results/be_failure.rb,<br> lib/convenient_service/rspec/matchers/results/be_success.rb,<br> lib/convenient_service/rspec/matchers/results/be_not_error.rb,<br> lib/convenient_service/rspec/matchers/results/be_not_failure.rb,<br> lib/convenient_service/rspec/matchers/results/be_not_success.rb,<br> lib/convenient_service/rspec/matchers/results/be_result/exceptions.rb</span>
+
 </dd>
   </dl>
   
@@ -119,84 +122,15 @@
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
   <h2>Method Summary</h2>
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeResult.html" title="ConvenientService::RSpec::Matchers::Results::BeResult (module)">BeResult</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Results/BeResult.html#be_result-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeResult#be_result (method)">#be_result</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeNotSuccess.html" title="ConvenientService::RSpec::Matchers::Results::BeNotSuccess (module)">BeNotSuccess</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Results/BeNotSuccess.html#be_not_success-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeNotSuccess#be_not_success (method)">#be_not_success</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeNotFailure.html" title="ConvenientService::RSpec::Matchers::Results::BeNotFailure (module)">BeNotFailure</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Results/BeNotFailure.html#be_not_failure-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeNotFailure#be_not_failure (method)">#be_not_failure</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeNotError.html" title="ConvenientService::RSpec::Matchers::Results::BeNotError (module)">BeNotError</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Results/BeNotError.html#be_not_error-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeNotError#be_not_error (method)">#be_not_error</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeSuccess.html" title="ConvenientService::RSpec::Matchers::Results::BeSuccess (module)">BeSuccess</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Results/BeSuccess.html#be_success-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeSuccess#be_success (method)">#be_success</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeFailure.html" title="ConvenientService::RSpec::Matchers::Results::BeFailure (module)">BeFailure</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Results/BeFailure.html#be_failure-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeFailure#be_failure (method)">#be_failure</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/RSpec/Matchers/Results/BeError.html" title="ConvenientService::RSpec::Matchers::Results::BeError (module)">BeError</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Results/BeError.html#be_error-instance_method" title="ConvenientService::RSpec::Matchers::Results::BeError#be_error (method)">#be_error</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">Support::Concern</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../../Support/Concern.html#included-class_method" title="ConvenientService::Support::Concern.included (method)">included</a></span></p>
@@ -205,9 +139,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Apr 12 04:46:23 2026 by
+  Generated on Sun May  3 20:12:38 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.43 (ruby-4.0.3).
 </div>
 
     </div>

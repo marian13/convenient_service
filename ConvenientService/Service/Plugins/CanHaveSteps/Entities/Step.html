@@ -6,13 +6,13 @@
 <title>
   Class: ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   
-    &mdash; Documentation by YARD 0.9.39
+    &mdash; Documentation by YARD 0.9.43
   
 </title>
 
-  <link rel="stylesheet" href="../../../../../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../../../../../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step";
@@ -27,6 +27,8 @@
 
   </head>
   <body>
+    <div id="main_progress" aria-hidden="true"></div>
+
     <div class="nav_wrap">
       <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
       <div id="resizer"></div>
@@ -99,8 +101,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb<span class="defines">,<br />
-  lib/convenient_service/service/plugins/can_have_steps/entities/step.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/concern.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/exceptions.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/structs/params.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/extract_params.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_result/concern.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_inspect/concern.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_result/exceptions.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_result/middleware.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_completed/concern.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_method_step/concern.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_have_fallbacks/concern.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_service_step/concern.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_method_step/exceptions.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_method_step/middleware.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_have_fallbacks/exceptions.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_have_fallbacks/middleware.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_service_step/exceptions.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_service_step/middleware.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_have_parent_result/middleware.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_amazing_print_inspect/concern.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_awesome_print_inspect/concern.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/raises_on_not_result_return_value/exceptions.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/raises_on_not_result_return_value/middleware.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_used_in_service_aware_enumerables/concern.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_method_step/commands/calculate_method_result.rb,<br /> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_service_step/commands/calculate_service_result.rb</span>
+    <dd>lib/convenient_service/service/plugins/can_have_steps/entities/step/concern/instance_methods.rb<span class="defines">,<br>
+  lib/convenient_service/service/plugins/can_have_steps/entities/step.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/concern.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/exceptions.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/structs/params.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/extract_params.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_result/concern.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_inspect/concern.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_result/exceptions.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_result/middleware.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_completed/concern.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_method_step/concern.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_have_fallbacks/concern.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_service_step/concern.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_method_step/exceptions.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_method_step/middleware.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_have_fallbacks/exceptions.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_have_fallbacks/middleware.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_service_step/exceptions.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_service_step/middleware.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_have_parent_result/middleware.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_amazing_print_inspect/concern.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_awesome_print_inspect/concern.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/raises_on_not_result_return_value/exceptions.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/raises_on_not_result_return_value/middleware.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_used_in_service_aware_enumerables/concern.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_method_step/commands/calculate_method_result.rb,<br> lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/can_be_service_step/commands/calculate_service_result.rb</span>
+
 </dd>
   </dl>
   
@@ -164,6 +167,8 @@
   
   
   
+  
+  
   <h2>Method Summary</h2>
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../../Support/Concern.html" title="ConvenientService::Support::Concern (module)">ConvenientService::Support::Concern</a></span></h3>
@@ -173,9 +178,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Apr 12 04:46:30 2026 by
+  Generated on Sun May  3 20:12:47 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.39 (ruby-4.0.2).
+  0.9.43 (ruby-4.0.3).
 </div>
 
     </div>
