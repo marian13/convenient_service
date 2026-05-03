@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatBacktrace, type: :standard do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Commands::FormatBacktrace, type: :standard do
   example_group "class methods" do
     describe ".call" do
       subject(:command_result) { described_class.call(backtrace: exception.backtrace, max_size: max_size) }
@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           MESSAGE
         end
 
-        it "defaults to `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::DEFAULT_MAX_BACKTRACE_SIZE`" do
+        it "defaults to `ConvenientService::Service::Plugins::CanHaveFormattedExceptions::DEFAULT_MAX_BACKTRACE_SIZE`" do
           expect(command_result).to eq(formatted_backtrace)
         end
       end

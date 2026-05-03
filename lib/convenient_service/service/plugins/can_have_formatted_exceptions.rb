@@ -5,4 +5,5 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "rescues_result_unhandled_exceptions/middleware"
+require_relative "can_have_formatted_exceptions/commands"
+require_relative "can_have_formatted_exceptions/constants"

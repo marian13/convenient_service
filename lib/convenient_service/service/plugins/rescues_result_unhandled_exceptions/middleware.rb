@@ -92,14 +92,14 @@ module ConvenientService
           # @return [String]
           #
           def format_exception(exception, *args, **kwargs, &block)
-            Commands::FormatException.call(exception: exception, args: args, kwargs: kwargs, block: block, max_backtrace_size: max_backtrace_size)
+            Plugins::CanHaveFormattedExceptions::Commands::FormatException.call(exception: exception, args: args, kwargs: kwargs, block: block, max_backtrace_size: max_backtrace_size)
           end
 
           ##
           # @return [Integer]
           #
           def max_backtrace_size
-            middleware_arguments.kwargs.fetch(:max_backtrace_size) { Constants::DEFAULT_MAX_BACKTRACE_SIZE }
+            middleware_arguments.kwargs.fetch(:max_backtrace_size) { Plugins::CanHaveFormattedExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE }
           end
 
           ##

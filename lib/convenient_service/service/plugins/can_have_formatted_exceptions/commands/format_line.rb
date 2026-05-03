@@ -8,21 +8,21 @@
 module ConvenientService
   module Service
     module Plugins
-      module RescuesResultUnhandledExceptions
+      module CanHaveFormattedExceptions
         module Commands
-          class FormatClass < Support::Command
+          class FormatLine < Support::Command
             ##
-            # @!attribute [r] klass
-            #   @return [Class]
+            # @!attribute [r] line
+            #   @return [String]
             #
-            attr_reader :klass
+            attr_reader :line
 
             ##
-            # @param klass [Class]
+            # @param line [String]
             # @return [void]
             #
-            def initialize(klass:)
-              @klass = klass
+            def initialize(line:)
+              @line = line
             end
 
             ##
@@ -32,10 +32,10 @@ module ConvenientService
             #
             # @example Line.
             #
-            #   StandardError:
+            #   # /gem/lib/convenient_service/factories/services.rb:120:in `result'
             #
             def call
-              "#{klass}:"
+              "# #{line}"
             end
           end
         end

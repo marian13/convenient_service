@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatException, type: :standard do
+RSpec.describe ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Commands::FormatException, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do
@@ -41,25 +41,25 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
       specify do
         expect { command_result }
-          .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatClass, :call)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Commands::FormatClass, :call)
           .with_arguments(klass: exception.class)
       end
 
       specify do
         expect { command_result }
-          .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatMessage, :call)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Commands::FormatMessage, :call)
           .with_arguments(message: exception.message)
       end
 
       specify do
         expect { command_result }
-          .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatBacktrace, :call)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Commands::FormatBacktrace, :call)
           .with_arguments(backtrace: exception.backtrace, max_size: max_backtrace_size)
       end
 
       specify do
         expect { command_result }
-          .to delegate_to(ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::Commands::FormatCause, :call)
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Commands::FormatCause, :call)
           .with_arguments(cause: exception.cause)
       end
 
@@ -297,7 +297,7 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
           MESSAGE
         end
 
-        it "defaults to `ConvenientService::Service::Plugins::RescuesResultUnhandledExceptions::DEFAULT_MAX_BACKTRACE_SIZE`" do
+        it "defaults to `ConvenientService::Service::Plugins::CanHaveFormattedExceptions::DEFAULT_MAX_BACKTRACE_SIZE`" do
           expect(command_result).to eq(formatted_exception)
         end
       end

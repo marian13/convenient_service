@@ -8,7 +8,7 @@
 module ConvenientService
   module Service
     module Plugins
-      module RescuesResultUnhandledExceptions
+      module CanHaveFormattedExceptions
         module Commands
           class FormatCause < Support::Command
             ##
