@@ -127,6 +127,11 @@ jobs:
           # - https://www.jruby.org/2026/02/02/jruby-10-0-3-0.html
           #
           - "jruby-10.0.2"
+          ##
+          # NOTE: JRuby 10.1 aims CRuby 4.0 compatibility.
+          # - https://www.jruby.org/2026/04/21/jruby-10-1-0-0.html
+          #
+          - "jruby-10.1"
         experimental: [false]
         ##
         # NOTE: How to skip failures for specific Ruby versions?
@@ -308,10 +313,12 @@ jobs:
           - 3.4
           - "4.0"
           - "jruby-9.4"
+          ##
           # TODO: Check JRuby 10.0.3.
           # - https://www.jruby.org/2026/02/02/jruby-10-0-3-0.html
           #
           - "jruby-10.0.2"
+          - "jruby-10.1"
         include:
           - gemfile: Gemfile
             ruby: "truffleruby-25.0"

@@ -170,6 +170,7 @@ tasks:
   #   task docker:bash RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=4.0
   #   task docker:bash RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=9.4
   #   task docker:bash RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=10.0
+  #   task docker:bash RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=10.1
   #   task docker:bash RUBY_ENGINE=truffleruby RUBY_ENGINE_VERSION=22.3
   #   task docker:bash RUBY_ENGINE=truffleruby RUBY_ENGINE_VERSION=24.0
   #
@@ -178,6 +179,9 @@ tasks:
   #
   # NOTE: JRuby 10.0 aims CRuby 3.4 compatibility.
   # - https://www.jruby.org/download
+  #
+  # NOTE: JRuby 10.1 aims CRuby 4.0 compatibility.
+  # - https://www.jruby.org/2026/04/21/jruby-10-1-0-0.htmls
   #
   # NOTE: TruffleRuby 22.3 aims CRuby 3.1 compatibility.
   # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
@@ -210,6 +214,7 @@ tasks:
   #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=4.0 task docker:build
   #   RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=9.4 task docker:build
   #   RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=10.0 task docker:build
+  #   RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=10.1 task docker:build
   #   RUBY_ENGINE=truffleruby RUBY_ENGINE_VERSION=22.3 task docker:build
   #   RUBY_ENGINE=truffleruby RUBY_ENGINE_VERSION=24.0 task docker:build
   #
@@ -218,6 +223,9 @@ tasks:
   #
   # NOTE: JRuby 10.0 aims CRuby 3.4 compatibility.
   # - https://www.jruby.org/download
+  #
+  # NOTE: JRuby 10.1 aims CRuby 4.0 compatibility.
+  # - https://www.jruby.org/2026/04/21/jruby-10-1-0-0.htmls
   #
   # NOTE: TruffleRuby 22.3 aims CRuby 3.1 compatibility.
   # - https://github.com/oracle/truffleruby/blob/master/doc/user/compatibility.md
