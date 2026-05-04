@@ -81,7 +81,7 @@ module ConvenientService
               message: format_exception(exception, *args, **kwargs, &block),
               code: :unhandled_exception
             )
-              .copy(overrides: {kwargs: {unhandled_exception: exception}})
+              .copy(overrides: {kwargs: {exceptions: {unhandled: exception}}})
           end
 
           ##

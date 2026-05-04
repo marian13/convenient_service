@@ -10,7 +10,7 @@ require "spec_helper"
 require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromException::Concern, type: :standard do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromUnhandledException::Concern, type: :standard do
   example_group "modules" do
     include ConvenientService::RSpec::Matchers::IncludeModule
 
@@ -34,7 +34,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   end
 
   example_group "instance methods" do
-    describe "#from_exception?" do
+    describe "#from_unhandled_exception?" do
       let(:result) { service.result }
 
       let(:service) do
@@ -49,7 +49,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       context "when result is NOT created from unhandled exception`" do
         it "returns `false`" do
-          expect(result.from_exception?).to be(false)
+          expect(result.from_unhandled_exception?).to be(false)
         end
       end
 
@@ -65,12 +65,12 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         end
 
         it "returns `true`" do
-          expect(result.from_exception?).to be(true)
+          expect(result.from_unhandled_exception?).to be(true)
         end
       end
     end
 
-    describe "#exception" do
+    describe "#unhandled_exception" do
       let(:result) { service.result }
 
       let(:service) do
@@ -85,7 +85,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       context "when result is NOT created from unhandled exception" do
         it "returns `nil`" do
-          expect(result.exception).to be_nil
+          expect(result.unhandled_exception).to be_nil
         end
       end
 
@@ -103,7 +103,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
         let(:exception) { service.new.result.unsafe_data[:unhandled_exception] }
 
         it "returns exception" do
-          expect(result.exception).to eq(exception)
+          expect(result.unhandled_exception).to eq(exception)
         end
       end
     end
