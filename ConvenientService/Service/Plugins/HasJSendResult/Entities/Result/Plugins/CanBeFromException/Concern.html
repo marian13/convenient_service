@@ -137,7 +137,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#from_unhandled_exception%3F-instance_method" title="#from_unhandled_exception? (instance method)">#<strong>from_unhandled_exception?</strong>  &#x21d2; Boolean </a>
+      <a href="#exception-instance_method" title="#exception (instance method)">#<strong>exception</strong>  &#x21d2; StandardError<sup>?</sup> </a>
     
 
     
@@ -159,7 +159,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#unhandled_exception-instance_method" title="#unhandled_exception (instance method)">#<strong>unhandled_exception</strong>  &#x21d2; StandardError<sup>?</sup> </a>
+      <a href="#from_exception%3F-instance_method" title="#from_exception? (instance method)">#<strong>from_exception?</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -201,76 +201,9 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="from_unhandled_exception?-instance_method">
+  <h3 class="signature first" id="exception-instance_method">
   
-    #<strong>from_unhandled_exception?</strong>  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>1.0.0</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-25
-26
-27</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_from_exception/concern.rb', line 25</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_from_unhandled_exception?'>from_unhandled_exception?</span>
-  <span class='const'><span class='object_link'><a href="../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="../../../../../../../Utils.html#to_bool-class_method" title="ConvenientService::Utils.to_bool (method)">to_bool</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_unhandled_exception'>unhandled_exception</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="unhandled_exception-instance_method">
-  
-    #<strong>unhandled_exception</strong>  &#x21d2; <tt>StandardError</tt><sup>?</sup> 
+    #<strong>exception</strong>  &#x21d2; <tt>StandardError</tt><sup>?</sup> 
   
 
   
@@ -326,8 +259,75 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_from_exception/concern.rb', line 34</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_unhandled_exception'>unhandled_exception</span>
-  <span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span><span class='lbracket'>[</span><span class='symbol'>:unhandled_exception</span><span class='rbracket'>]</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_exception'>exception</span>
+  <span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span><span class='lbracket'>[</span><span class='symbol'>:exceptions</span><span class='rbracket'>]</span><span class='op'>&amp;.</span><span class='id identifier rubyid_values'>values</span><span class='op'>&amp;.</span><span class='id identifier rubyid_first'>first</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="from_exception?-instance_method">
+  
+    #<strong>from_exception?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result/entities/result/plugins/can_be_from_exception/concern.rb', line 25</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_from_exception?'>from_exception?</span>
+  <span class='const'><span class='object_link'><a href="../../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="../../../../../../../Utils.html#to_bool-class_method" title="ConvenientService::Utils.to_bool (method)">to_bool</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_exception'>exception</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -339,7 +339,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun May  3 23:06:42 2026 by
+  Generated on Mon May  4 15:35:31 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.43 (ruby-4.0.3).
 </div>
