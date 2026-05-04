@@ -54,7 +54,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveHandledExceptions::Co
       let(:result) { service.result }
       let(:exception) { result.unsafe_data[:handled_exception] }
 
-      let(:formatted_message) { ConvenientService::Service::Plugins::CanHaveFormattedExceptions::format_exception(exception, args: [], kwargs: {}, block: nil, max_backtrace_size: max_backtrace_size) }
+      let(:formatted_message) { ConvenientService::Service::Plugins::CanHaveFormattedExceptions.format_exception(exception, args: [], kwargs: {}, block: nil, max_backtrace_size: max_backtrace_size) }
       let(:max_backtrace_size) { ConvenientService::Service::Plugins::CanHaveFormattedExceptions.default_max_backtrace_size }
 
       it "returns error result with data, message and code" do
