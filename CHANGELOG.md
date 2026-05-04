@@ -5,6 +5,13 @@
 
 # Changelog
 
+## [0.24.0](https://github.com/marian13/convenient_service/compare/v0.23.0...v0.24.0) (2026-05-04)
+
+
+### Features
+
+* **exceptions:** itroduce error_from_exception ([741ceab](https://github.com/marian13/convenient_service/commit/741ceaba377d7f6378b14bc7f611082c0eb4a69e))
+
 ## [0.23.0](https://github.com/marian13/convenient_service/compare/v0.22.0...v0.23.0) (2026-02-06)
 
 
