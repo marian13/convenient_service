@@ -54,8 +54,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveHandledExceptions::Co
       let(:result) { service.result }
       let(:exception) { result.unsafe_data[:handled_exception] }
 
-      let(:formatted_message) { ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Commands::FormatException.call(exception: exception, args: [], kwargs: {}, block: nil, max_backtrace_size: max_backtrace_size) }
-      let(:max_backtrace_size) { ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE }
+      let(:formatted_message) { ConvenientService::Service::Plugins::CanHaveFormattedExceptions::format_exception(exception, args: [], kwargs: {}, block: nil, max_backtrace_size: max_backtrace_size) }
+      let(:max_backtrace_size) { ConvenientService::Service::Plugins::CanHaveFormattedExceptions.default_max_backtrace_size }
 
       it "returns error result with data, message and code" do
         expect(result).to be_error.with_data(handled_exception: be_instance_of(ZeroDivisionError)).and_message(formatted_message).and_code(:handled_exception).comparing_by(:===)
@@ -67,6 +67,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveHandledExceptions::Co
 
       it "returns error result from handled exception" do
         expect(result.from_handled_exception?).to be(true)
+      end
+
+      specify do
+        expect { result.service.recalculate.result }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions, :default_max_backtrace_size)
+          .without_arguments
       end
 
       context "when `fault_tolerance` option is enabled" do
@@ -102,8 +108,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveHandledExceptions::Co
 
         specify do
           expect { result.service.recalculate.result }
-            .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Commands::FormatException, :call)
-            .with_arguments(exception: exception, max_backtrace_size: 3)
+            .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions, :format_exception)
+            .with_arguments(exception, max_backtrace_size: 3)
         end
       end
     end

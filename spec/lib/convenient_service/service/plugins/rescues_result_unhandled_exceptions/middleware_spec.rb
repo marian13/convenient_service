@@ -365,8 +365,8 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
                 specify do
                   expect { method_value }
-                    .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Commands::FormatException, :call)
-                    .with_arguments(exception: exception, args: [], kwargs: {}, block: nil, max_backtrace_size: max_backtrace_size)
+                    .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions, :format_exception)
+                    .with_arguments(exception, args: [], kwargs: {}, block: nil, max_backtrace_size: max_backtrace_size)
                 end
 
                 it "returns `failure` with formatted exception" do
@@ -393,8 +393,8 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
 
                 specify do
                   expect { method_value }
-                    .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Commands::FormatException, :call)
-                    .with_arguments(exception: exception, args: [], kwargs: {}, block: nil, max_backtrace_size: max_backtrace_size)
+                    .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions, :format_exception)
+                    .with_arguments(exception, args: [], kwargs: {}, block: nil, max_backtrace_size: max_backtrace_size)
                 end
 
                 it "returns `error` with formatted exception" do
@@ -432,12 +432,12 @@ RSpec.describe ConvenientService::Service::Plugins::RescuesResultUnhandledExcept
               end
 
               let(:method) { wrap_method(service_instance, method_name, observe_middleware: middleware) }
-              let(:max_backtrace_size) { ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE }
+              let(:max_backtrace_size) { ConvenientService::Service::Plugins::CanHaveFormattedExceptions.default_max_backtrace_size }
 
-              it "defaults to `ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE`" do
+              it "defaults to `ConvenientService::Service::Plugins::CanHaveFormattedExceptions.default_max_backtrace_size`" do
                 expect { method_value }
-                  .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions::Commands::FormatException, :call)
-                  .with_arguments(exception: exception, args: [], kwargs: {}, block: nil, max_backtrace_size: max_backtrace_size)
+                  .to delegate_to(ConvenientService::Service::Plugins::CanHaveFormattedExceptions, :format_exception)
+                  .with_arguments(exception, args: [], kwargs: {}, block: nil, max_backtrace_size: max_backtrace_size)
               end
             end
           end

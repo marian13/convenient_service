@@ -18,10 +18,10 @@ module ConvenientService
             # @param max_backtrace_size [Integer]
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
-            def error_from_exception(exception, max_backtrace_size: Plugins::CanHaveFormattedExceptions::Constants::DEFAULT_MAX_BACKTRACE_SIZE)
+            def error_from_exception(exception, max_backtrace_size: Plugins::CanHaveFormattedExceptions.default_max_backtrace_size)
               error(
                 data: {handled_exception: exception},
-                message: Plugins::CanHaveFormattedExceptions::Commands::FormatException.call(exception: exception, max_backtrace_size: max_backtrace_size),
+                message: Plugins::CanHaveFormattedExceptions.format_exception(exception, max_backtrace_size: max_backtrace_size),
                 code: :handled_exception
               )
                 .copy(overrides: {kwargs: {exceptions: {handled: exception}}})
