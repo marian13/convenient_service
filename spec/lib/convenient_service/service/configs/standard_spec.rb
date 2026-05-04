@@ -58,6 +58,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Common::CachesConstructorArguments::Concern,
               ConvenientService::Plugins::Common::CanBeCopied::Concern,
               ConvenientService::Plugins::Service::CanHaveRecalculations::Concern,
+              ConvenientService::Plugins::Service::CanHaveHandledExceptions::Concern,
               ConvenientService::Plugins::Service::CanNotBeInherited::Concern,
               ConvenientService::Plugins::Service::HasJSendResultShortSyntax::Concern,
               ConvenientService::Plugins::Service::HasJSendResultStatusCheckShortSyntax::Concern
@@ -311,6 +312,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
                 ConvenientService::Plugins::Result::HasPatternMatchingSupport::Concern,
                 ConvenientService::Plugins::Result::CanBeFromFallback::Concern,
                 ConvenientService::Plugins::Result::CanHaveFallbacks::Concern,
+                ConvenientService::Plugins::Result::CanBeFromException::Concern,
+                ConvenientService::Plugins::Result::CanBeFromHandledException::Concern,
                 ConvenientService::Plugins::Result::HasInspect::Concern,
                 ConvenientService::Plugins::Result::CanBeOwnResult::Concern,
                 ConvenientService::Plugins::Result::CanHaveParentResult::Concern,

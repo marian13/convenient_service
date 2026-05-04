@@ -180,6 +180,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :constructor_arguments, # public
           :copy, # private
           :error, # public
+          :error_from_exception, # public
           :error_without_middlewares, # private
           :failure, # public
           :failure_without_middlewares, # private
@@ -438,14 +439,18 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :deconstruct, # public
           :deconstruct_keys, # public
           :error?, # public
+          :exception, # public
           :extra_kwargs, # private
           :failure?, # public
           :foreign_result_for?, # private
+          :from_exception?, # public
           :from_fallback?, # public
           :from_fallback_error_result?, # public
           :from_fallback_failure_result?, # public
           :from_fallback_result?, # public
+          :from_handled_exception?, # public
           :from_step?, # public
+          :handled_exception, # public
           :inspect, # public
           :internals, # private
           :jsend_attributes, # private

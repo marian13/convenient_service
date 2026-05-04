@@ -49,7 +49,7 @@ module ConvenientService
             # @param max_backtrace_size [Integer]
             # @return [void]
             #
-            def initialize(exception:, args:, kwargs:, block:, max_backtrace_size: Constants::DEFAULT_MAX_BACKTRACE_SIZE)
+            def initialize(exception:, args: [], kwargs: {}, block: nil, max_backtrace_size: Constants::DEFAULT_MAX_BACKTRACE_SIZE)
               @exception = exception
               @args = args
               @kwargs = kwargs

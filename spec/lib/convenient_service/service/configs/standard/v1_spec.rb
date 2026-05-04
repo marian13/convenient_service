@@ -53,6 +53,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               ConvenientService::Plugins::Common::CachesConstructorArguments::Concern,
               ConvenientService::Plugins::Common::CanBeCopied::Concern,
               ConvenientService::Service::Plugins::CanHaveRecalculations::Concern,
+              ConvenientService::Service::Plugins::CanHaveHandledExceptions::Concern,
               ConvenientService::Service::Plugins::CanNotBeInherited::Concern,
               ConvenientService::Service::Plugins::HasJSendResultShortSyntax::Concern,
               ConvenientService::Service::Plugins::HasJSendResultStatusCheckShortSyntax::Concern
@@ -283,18 +284,20 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
                 ConvenientService::Plugins::Common::HasInternals::Concern,
                 ConvenientService::Plugins::Common::HasConstructor::Concern,
                 ConvenientService::Plugins::Common::HasConstructorWithoutInitialize::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveStep::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeCalled::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeStrict::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeUsedInServiceAwareEnumerables::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasNegatedResult::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasPatternMatchingSupport::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeOwnResult::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveParentResult::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeStubbedResult::Concern,
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanHaveCheckedStatus::Concern,
+                ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Concern,
+                ConvenientService::Plugins::Result::CanHaveStep::Concern,
+                ConvenientService::Plugins::Result::CanBeCalled::Concern,
+                ConvenientService::Plugins::Result::CanBeStrict::Concern,
+                ConvenientService::Plugins::Result::CanBeUsedInServiceAwareEnumerables::Concern,
+                ConvenientService::Plugins::Result::HasNegatedResult::Concern,
+                ConvenientService::Plugins::Result::HasPatternMatchingSupport::Concern,
+                ConvenientService::Plugins::Result::CanBeFromException::Concern,
+                ConvenientService::Plugins::Result::CanBeFromHandledException::Concern,
+                ConvenientService::Plugins::Result::HasInspect::Concern,
+                ConvenientService::Plugins::Result::CanBeOwnResult::Concern,
+                ConvenientService::Plugins::Result::CanHaveParentResult::Concern,
+                ConvenientService::Plugins::Result::CanBeStubbedResult::Concern,
+                ConvenientService::Plugins::Result::CanHaveCheckedStatus::Concern,
                 ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
               ]
             end
@@ -307,7 +310,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           example_group "#initialize middlewares" do
             let(:initialize_middlewares) do
               [
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Middleware
+                ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Middleware
               ]
             end
 
@@ -331,7 +334,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           example_group "#data middlewares" do
             let(:data_middlewares) do
               [
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Middleware
+                ConvenientService::Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
               ]
             end
 
@@ -343,7 +346,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           example_group "#message middlewares" do
             let(:message_middlewares) do
               [
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Middleware
+                ConvenientService::Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
               ]
             end
 
@@ -355,7 +358,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
           example_group "#code middlewares" do
             let(:code_middlewares) do
               [
-                ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::RaisesOnNotCheckedResultStatus::Middleware
+                ConvenientService::Plugins::Result::RaisesOnNotCheckedResultStatus::Middleware
               ]
             end
 
@@ -368,7 +371,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             example_group "concerns" do
               let(:concerns) do
                 [
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern
+                  ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern
                 ]
               end
 
@@ -382,7 +385,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             example_group "concerns" do
               let(:concerns) do
                 [
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern
+                  ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern
                 ]
               end
 
@@ -396,7 +399,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             example_group "concerns" do
               let(:concerns) do
                 [
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern
+                  ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern
                 ]
               end
 
@@ -411,8 +414,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
               let(:concerns) do
                 [
                   ConvenientService::Plugins::Common::HasInternals::Concern,
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern,
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Concern
+                  ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern,
+                  ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Concern
                 ]
               end
 
@@ -424,7 +427,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             example_group "#success? middlewares" do
               let(:is_success_middlewares) do
                 [
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware
+                  ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware
                 ]
               end
 
@@ -436,7 +439,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             example_group "#failure? middlewares" do
               let(:is_failure_middlewares) do
                 [
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware
+                  ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware
                 ]
               end
 
@@ -448,7 +451,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             example_group "#error? middlewares" do
               let(:is_error_middlewares) do
                 [
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware
+                  ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware
                 ]
               end
 
@@ -460,7 +463,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             example_group "#not_success? middlewares" do
               let(:is_not_success_middlewares) do
                 [
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware
+                  ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware
                 ]
               end
 
@@ -472,7 +475,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             example_group "#not_failure? middlewares" do
               let(:is_not_failure_middlewares) do
                 [
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware
+                  ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware
                 ]
               end
 
@@ -484,7 +487,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :standar
             example_group "#not_error? middlewares" do
               let(:is_not_error_middlewares) do
                 [
-                  ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware
+                  ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::CanBeChecked::Middleware
                 ]
               end
 
@@ -720,39 +723,39 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :amazing
 
           example_group "service result" do
             example_group "concerns" do
-              it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasAmazingPrintInspect::Concern` after `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern` to service result concerns" do
-                expect(service_class::Result.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasAmazingPrintInspect::Concern }).not_to be_nil
+              it "adds `ConvenientService::Plugins::Result::HasAmazingPrintInspect::Concern` after `ConvenientService::Plugins::Result::HasInspect::Concern` to service result concerns" do
+                expect(service_class::Result.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Result::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Result::HasAmazingPrintInspect::Concern }).not_to be_nil
               end
             end
 
             example_group "service result data" do
               example_group "concerns" do
-                it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasAmazingPrintInspect::Concern` after `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern` to service result data" do
-                  expect(service_class::Result::Data.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasAmazingPrintInspect::Concern }).not_to be_nil
+                it "adds `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasAmazingPrintInspect::Concern` after `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern` to service result data" do
+                  expect(service_class::Result::Data.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasAmazingPrintInspect::Concern }).not_to be_nil
                 end
               end
             end
 
             example_group "service result message" do
               example_group "concerns" do
-                it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasAmazingPrintInspect::Concern` after `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern` to service result message" do
-                  expect(service_class::Result::Message.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasAmazingPrintInspect::Concern }).not_to be_nil
+                it "adds `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasAmazingPrintInspect::Concern` after `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern` to service result message" do
+                  expect(service_class::Result::Message.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasAmazingPrintInspect::Concern }).not_to be_nil
                 end
               end
             end
 
             example_group "service result code" do
               example_group "concerns" do
-                it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasAmazingPrintInspect::Concern` after `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern` to service result code" do
-                  expect(service_class::Result::Code.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasAmazingPrintInspect::Concern }).not_to be_nil
+                it "adds `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasAmazingPrintInspect::Concern` after `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern` to service result code" do
+                  expect(service_class::Result::Code.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasAmazingPrintInspect::Concern }).not_to be_nil
                 end
               end
             end
 
             example_group "service result status" do
               example_group "concerns" do
-                it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasAmazingPrintInspect::Concern` from service concerns" do
-                  expect(service_class::Result::Status.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasAmazingPrintInspect::Concern }).not_to be_nil
+                it "adds `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasAmazingPrintInspect::Concern` from service concerns" do
+                  expect(service_class::Result::Status.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasAmazingPrintInspect::Concern }).not_to be_nil
                 end
               end
             end
@@ -792,39 +795,39 @@ RSpec.describe ConvenientService::Service::Configs::Standard::V1, type: :awesome
 
           example_group "service result" do
             example_group "concerns" do
-              it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasAwesomePrintInspect::Concern` after `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern` to service result concerns" do
-                expect(service_class::Result.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasAwesomePrintInspect::Concern }).not_to be_nil
+              it "adds `ConvenientService::Plugins::Result::HasAwesomePrintInspect::Concern` after `ConvenientService::Plugins::Result::HasInspect::Concern` to service result concerns" do
+                expect(service_class::Result.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Result::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Result::HasAwesomePrintInspect::Concern }).not_to be_nil
               end
             end
 
             example_group "service result data" do
               example_group "concerns" do
-                it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasAwesomePrintInspect::Concern` after `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern` to service result data" do
-                  expect(service_class::Result::Data.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasAwesomePrintInspect::Concern }).not_to be_nil
+                it "adds `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasAwesomePrintInspect::Concern` after `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern` to service result data" do
+                  expect(service_class::Result::Data.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Data::Plugins::HasAwesomePrintInspect::Concern }).not_to be_nil
                 end
               end
             end
 
             example_group "service result message" do
               example_group "concerns" do
-                it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasAwesomePrintInspect::Concern` after `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern` to service result message" do
-                  expect(service_class::Result::Message.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasAwesomePrintInspect::Concern }).not_to be_nil
+                it "adds `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasAwesomePrintInspect::Concern` after `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern` to service result message" do
+                  expect(service_class::Result::Message.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Message::Plugins::HasAwesomePrintInspect::Concern }).not_to be_nil
                 end
               end
             end
 
             example_group "service result code" do
               example_group "concerns" do
-                it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasAwesomePrintInspect::Concern` after `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern` to service result code" do
-                  expect(service_class::Result::Code.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasAwesomePrintInspect::Concern }).not_to be_nil
+                it "adds `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasAwesomePrintInspect::Concern` after `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern` to service result code" do
+                  expect(service_class::Result::Code.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Code::Plugins::HasAwesomePrintInspect::Concern }).not_to be_nil
                 end
               end
             end
 
             example_group "service result status" do
               example_group "concerns" do
-                it "adds `ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do
-                  expect(service_class::Result::Status.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasAwesomePrintInspect::Concern }).not_to be_nil
+                it "adds `ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasAwesomePrintInspect::Concern` from service concerns" do
+                  expect(service_class::Result::Status.concerns.to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasInspect::Concern && current_middleware == ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Entities::Status::Plugins::HasAwesomePrintInspect::Concern }).not_to be_nil
                 end
               end
             end
