@@ -34,6 +34,21 @@ module ConvenientService
                     def handled_exception
                       extra_kwargs.dig(:exceptions, :handled)
                     end
+
+                    ##
+                    # TODO: error.from_exception(exception)
+                    # TODO: error.from_exception(exception, max_backtrace_size: 5)
+                    # TODO: error("custom_message").from_exception(exception)
+                    # TODO: error(code: :custom_code).from_exception(exception)
+                    #
+                    # @internal
+                    #   If `error` message is default, use `from_exception` message.
+                    #   If `error` code is default, use `from_exception` code.
+                    #
+                    # def from_exception(exception, **kwargs)
+                    #   # ...
+                    # end
+                    ##
                   end
                 end
               end
