@@ -14,6 +14,54 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult, type: :stand
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   example_group "class methods" do
+    specify do
+      expect(described_class.success_status).to equal(described_class::Constants::SUCCESS_STATUS)
+    end
+
+    specify do
+      expect(described_class.failure_status).to equal(described_class::Constants::FAILURE_STATUS)
+    end
+
+    specify do
+      expect(described_class.error_status).to equal(described_class::Constants::ERROR_STATUS)
+    end
+
+    specify do
+      expect(described_class.default_success_data).to equal(described_class::Constants::DEFAULT_SUCCESS_DATA)
+    end
+
+    specify do
+      expect(described_class.default_failure_data).to equal(described_class::Constants::DEFAULT_FAILURE_DATA)
+    end
+
+    specify do
+      expect(described_class.default_error_data).to equal(described_class::Constants::DEFAULT_ERROR_DATA)
+    end
+
+    specify do
+      expect(described_class.default_success_message).to equal(described_class::Constants::DEFAULT_SUCCESS_MESSAGE)
+    end
+
+    specify do
+      expect(described_class.default_failure_message).to equal(described_class::Constants::DEFAULT_FAILURE_MESSAGE)
+    end
+
+    specify do
+      expect(described_class.default_error_message).to equal(described_class::Constants::DEFAULT_ERROR_MESSAGE)
+    end
+
+    specify do
+      expect(described_class.default_success_code).to equal(described_class::Constants::DEFAULT_SUCCESS_CODE)
+    end
+
+    specify do
+      expect(described_class.default_failure_code).to equal(described_class::Constants::DEFAULT_FAILURE_CODE)
+    end
+
+    specify do
+      expect(described_class.default_error_code).to equal(described_class::Constants::DEFAULT_ERROR_CODE)
+    end
+
     describe ".result_class?" do
       context "when `result` is NOT class" do
         let(:result_class) { 42 }

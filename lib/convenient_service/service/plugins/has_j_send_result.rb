@@ -15,6 +15,90 @@ module ConvenientService
       module HasJSendResult
         class << self
           ##
+          # @return [Symbol]
+          #
+          def success_status
+            Constants::SUCCESS_STATUS
+          end
+
+          ##
+          # @return [Symbol]
+          #
+          def failure_status
+            Constants::FAILURE_STATUS
+          end
+
+          ##
+          # @return [Symbol]
+          #
+          def error_status
+            Constants::ERROR_STATUS
+          end
+
+          ##
+          # @return [Hash{Symbol => Object}]
+          #
+          def default_success_data
+            Constants::DEFAULT_SUCCESS_DATA
+          end
+
+          ##
+          # @return [Hash{Symbol => Object}]
+          #
+          def default_failure_data
+            Constants::DEFAULT_FAILURE_DATA
+          end
+
+          ##
+          # @return [Hash{Symbol => Object}]
+          #
+          def default_error_data
+            Constants::DEFAULT_ERROR_DATA
+          end
+
+          ##
+          # @return [String]
+          #
+          def default_success_message
+            Constants::DEFAULT_SUCCESS_MESSAGE
+          end
+
+          ##
+          # @return [String]
+          #
+          def default_failure_message
+            Constants::DEFAULT_FAILURE_MESSAGE
+          end
+
+          ##
+          # @return [String]
+          #
+          def default_error_message
+            Constants::DEFAULT_ERROR_MESSAGE
+          end
+
+          ##
+          # @return [Symbol]
+          #
+          def default_success_code
+            Constants::DEFAULT_SUCCESS_CODE
+          end
+
+          ##
+          # @return [Symbol]
+          #
+          def default_failure_code
+            Constants::DEFAULT_FAILURE_CODE
+          end
+
+          ##
+          # @return [Symbol]
+          #
+          def default_error_code
+            Constants::DEFAULT_ERROR_CODE
+          end
+
+          ##
           # Checks whether an object is a result class.
           #
           # @api public

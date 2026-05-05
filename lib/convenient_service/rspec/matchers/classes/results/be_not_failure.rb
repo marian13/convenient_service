@@ -18,8 +18,8 @@ module ConvenientService
             #
             def statuses
               [
-                Service::Plugins::HasJSendResult::Constants::SUCCESS_STATUS,
-                Service::Plugins::HasJSendResult::Constants::ERROR_STATUS
+                Service::Plugins::HasJSendResult.success_status,
+                Service::Plugins::HasJSendResult.error_status
               ]
             end
           end

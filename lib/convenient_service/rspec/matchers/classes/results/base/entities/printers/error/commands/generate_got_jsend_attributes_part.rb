@@ -90,7 +90,7 @@ module ConvenientService
                       # @return [String]
                       #
                       def code_part
-                        (code == Service::Plugins::HasJSendResult::Constants::DEFAULT_ERROR_CODE) ? "" : "with code `#{code}`"
+                        (code == Service::Plugins::HasJSendResult.default_error_code) ? "" : "with code `#{code}`"
                       end
 
                       ##

@@ -17,7 +17,7 @@ module ConvenientService
             # @return [Array<Symbol>]
             #
             def statuses
-              [Service::Plugins::HasJSendResult::Constants::FAILURE_STATUS]
+              [Service::Plugins::HasJSendResult.failure_status]
             end
           end
         end
