@@ -99,6 +99,69 @@ module ConvenientService
           end
 
           ##
+          # @return [Boolean]
+          #
+          def default_success_data?(other)
+            default_success_data.equal?(other)
+          end
+
+          ##
+          # @return [Boolean]
+          #
+          def default_failure_data?(other)
+            default_failure_data.equal?(other)
+          end
+
+          ##
+          # @return [Boolean]
+          #
+          def default_error_data?(other)
+            default_error_data.equal?(other)
+          end
+
+          ##
+          # @return [Boolean]
+          #
+          def default_success_message?(other)
+            default_success_message.equal?(other)
+          end
+
+          ##
+          # @return [Boolean]
+          #
+          def default_failure_message?(other)
+            default_failure_message.equal?(other)
+          end
+
+          ##
+          # @return [Boolean]
+          #
+          def default_error_message?(other)
+            default_error_message.equal?(other)
+          end
+
+          ##
+          # @return [Boolean]
+          #
+          def default_success_code?(other)
+            default_success_code.equal?(other)
+          end
+
+          ##
+          # @return [Boolean]
+          #
+          def default_failure_code?(other)
+            default_failure_code.equal?(other)
+          end
+
+          ##
+          # @return [Boolean]
+          #
+          def default_error_code?(other)
+            default_error_code.equal?(other)
+          end
+
+          ##
           # Checks whether an object is a result class.
           #
           # @api public

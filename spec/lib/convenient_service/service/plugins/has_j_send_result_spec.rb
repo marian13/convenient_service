@@ -62,6 +62,168 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult, type: :stand
       expect(described_class.default_error_code).to equal(described_class::Constants::DEFAULT_ERROR_CODE)
     end
 
+    describe ".default_success_data?" do
+      context "when `other` is NOT default success data" do
+        let(:other) { 42 }
+
+        it "return `false`" do
+          expect(described_class.default_success_data?(other)).to be(false)
+        end
+      end
+
+      context "when `other` is default success data" do
+        let(:other) { described_class.default_success_data }
+
+        it "return `true`" do
+          expect(described_class.default_success_data?(other)).to be(true)
+        end
+      end
+    end
+
+    describe ".default_failure_data?" do
+      context "when `other` is NOT default failure data" do
+        let(:other) { 42 }
+
+        it "return `false`" do
+          expect(described_class.default_failure_data?(other)).to be(false)
+        end
+      end
+
+      context "when `other` is default failure data" do
+        let(:other) { described_class.default_failure_data }
+
+        it "return `true`" do
+          expect(described_class.default_failure_data?(other)).to be(true)
+        end
+      end
+    end
+
+    describe ".default_error_data?" do
+      context "when `other` is NOT default error data" do
+        let(:other) { 42 }
+
+        it "return `false`" do
+          expect(described_class.default_error_data?(other)).to be(false)
+        end
+      end
+
+      context "when `other` is default error data" do
+        let(:other) { described_class.default_error_data }
+
+        it "return `true`" do
+          expect(described_class.default_error_data?(other)).to be(true)
+        end
+      end
+    end
+
+    describe ".default_success_message?" do
+      context "when `other` is NOT default success message" do
+        let(:other) { 42 }
+
+        it "return `false`" do
+          expect(described_class.default_success_message?(other)).to be(false)
+        end
+      end
+
+      context "when `other` is default success message" do
+        let(:other) { described_class.default_success_message }
+
+        it "return `true`" do
+          expect(described_class.default_success_message?(other)).to be(true)
+        end
+      end
+    end
+
+    describe ".default_failure_message?" do
+      context "when `other` is NOT default failure message" do
+        let(:other) { 42 }
+
+        it "return `false`" do
+          expect(described_class.default_failure_message?(other)).to be(false)
+        end
+      end
+
+      context "when `other` is default failure message" do
+        let(:other) { described_class.default_failure_message }
+
+        it "return `true`" do
+          expect(described_class.default_failure_message?(other)).to be(true)
+        end
+      end
+    end
+
+    describe ".default_error_message?" do
+      context "when `other` is NOT default error message" do
+        let(:other) { 42 }
+
+        it "return `false`" do
+          expect(described_class.default_error_message?(other)).to be(false)
+        end
+      end
+
+      context "when `other` is default error message" do
+        let(:other) { described_class.default_error_message }
+
+        it "return `true`" do
+          expect(described_class.default_error_message?(other)).to be(true)
+        end
+      end
+    end
+
+    describe ".default_success_code?" do
+      context "when `other` is NOT default success code" do
+        let(:other) { 42 }
+
+        it "return `false`" do
+          expect(described_class.default_success_code?(other)).to be(false)
+        end
+      end
+
+      context "when `other` is default success code" do
+        let(:other) { described_class.default_success_code }
+
+        it "return `true`" do
+          expect(described_class.default_success_code?(other)).to be(true)
+        end
+      end
+    end
+
+    describe ".default_failure_code?" do
+      context "when `other` is NOT default failure code" do
+        let(:other) { 42 }
+
+        it "return `false`" do
+          expect(described_class.default_failure_code?(other)).to be(false)
+        end
+      end
+
+      context "when `other` is default failure code" do
+        let(:other) { described_class.default_failure_code }
+
+        it "return `true`" do
+          expect(described_class.default_failure_code?(other)).to be(true)
+        end
+      end
+    end
+
+    describe ".default_error_code?" do
+      context "when `other` is NOT default error code" do
+        let(:other) { 42 }
+
+        it "return `false`" do
+          expect(described_class.default_error_code?(other)).to be(false)
+        end
+      end
+
+      context "when `other` is default error code" do
+        let(:other) { described_class.default_error_code }
+
+        it "return `true`" do
+          expect(described_class.default_error_code?(other)).to be(true)
+        end
+      end
+    end
+
     describe ".result_class?" do
       context "when `result` is NOT class" do
         let(:result_class) { 42 }
