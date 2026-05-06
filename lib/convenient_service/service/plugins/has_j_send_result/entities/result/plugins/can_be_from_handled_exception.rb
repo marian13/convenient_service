@@ -6,3 +6,4 @@
 ##
 
 require_relative "can_be_from_handled_exception/concern"
+require_relative "can_be_from_handled_exception/exceptions"
