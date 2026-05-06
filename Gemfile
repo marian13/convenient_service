@@ -149,7 +149,11 @@ gem "debug", platform: :mri
 # Used for measing memory of `require "convenient_service"`.
 # - https://github.com/zombocom/derailed_benchmarks
 #
-gem "derailed_benchmarks", "~> 2.2.1"
+if RUBY_VERSION < "3.0"
+  gem "derailed_benchmarks", "~> 2.1.2"
+else
+  gem "derailed_benchmarks", "~> 2.2.1"
+end
 
 ##
 # Used for finding diffs between strings. Useful in console or specs.
