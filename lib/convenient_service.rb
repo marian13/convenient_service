@@ -344,6 +344,16 @@ module ConvenientService
     end
 
     ##
+    # @api public
+    # @since 1.0.0
+    # @param block [Proc, nil]
+    # @return [ConvenientService::Service::Plugins::CanHaveInlineServices::Entities::Proxy]
+    #
+    def inline(&block)
+      Service::Plugins::CanHaveInlineServices.proxy(&block)
+    end
+
+    ##
     # Raises Convenient Service exceptions.
     # Cleans exception backtrace with `ConvenientService.backtrace_cleaner.clean` before delegating to `Kernel.raise`.
     #

@@ -94,6 +94,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::CanBeCalled::Concern if options.enabled?(:essential)
             use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern if options.enabled?(:callbacks)
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Concern if options.enabled?(:fallbacks)
+            use ConvenientService::Plugins::Service::CanHaveInlineServices::Concern if options.enabled?(:essential)
             use ConvenientService::Plugins::Service::HasInspect::Concern if options.enabled?(:inspect)
             use ConvenientService::Plugins::Service::HasAwesomePrintInspect::Concern if options.enabled?(:awesome_print_inspect)
             use ConvenientService::Plugins::Service::HasAmazingPrintInspect::Concern if options.enabled?(:amazing_print_inspect)

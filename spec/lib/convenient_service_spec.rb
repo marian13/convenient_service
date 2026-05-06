@@ -80,6 +80,17 @@ RSpec.describe ConvenientService, type: :standard do
       end
     end
 
+    describe ".inline" do
+      let(:block) { proc { :foo } }
+
+      specify do
+        expect { described_class.inline(&block) }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveInlineServices, :proxy)
+          .with_arguments(&block)
+          .and_return_its_value
+      end
+    end
+
     describe ".raise" do
       ##
       # IMPORTANT: CRuby `Kernel.raise` supports `cause` keyword starting from 2.6.

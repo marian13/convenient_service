@@ -54,6 +54,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Service::CanBeCalled::Concern,
               ConvenientService::Plugins::Common::CanHaveCallbacks::Concern,
               ConvenientService::Plugins::Service::CanHaveFallbacks::Concern,
+              ConvenientService::Plugins::Service::CanHaveInlineServices::Concern,
               ConvenientService::Plugins::Service::HasInspect::Concern,
               ConvenientService::Plugins::Common::CachesConstructorArguments::Concern,
               ConvenientService::Plugins::Common::CanBeCopied::Concern,
