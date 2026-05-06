@@ -78,7 +78,7 @@ gem "benchmark", "~> 0.5.0"
 # - https://github.com/evanphx/benchmark-ips
 # - https://www.johnnunemaker.com/how-to-benchmark-your-ruby-gem
 #
-gem "benchmark-ips", "~> 2.12.0"
+gem "benchmark-ips", "~> 2.14.0"
 
 ##
 # Used for benchmarking (memory allocation). See `benchmark` directory.
@@ -149,7 +149,7 @@ gem "debug", platform: :mri
 # Used for measing memory of `require "convenient_service"`.
 # - https://github.com/zombocom/derailed_benchmarks
 #
-gem "derailed_benchmarks", "~> 2.1.2"
+gem "derailed_benchmarks", "~> 2.2.1"
 
 ##
 # Used for finding diffs between strings. Useful in console or specs.
