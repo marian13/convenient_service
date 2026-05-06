@@ -35,75 +35,157 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
   example_group "instance methods" do
     describe "#from_exception?" do
-      let(:result) { service.result }
+      example_group "unhandled exception" do
+        let(:result) { service.result }
 
-      let(:service) do
-        Class.new do
-          include ConvenientService::Standard::Config.with(:fault_tolerance)
-
-          def result
-            success
-          end
-        end
-      end
-
-      context "when result is NOT created from unhandled exception`" do
-        it "returns `false`" do
-          expect(result.from_exception?).to be(false)
-        end
-      end
-
-      context "when result is created from unhandled exception" do
         let(:service) do
           Class.new do
             include ConvenientService::Standard::Config.with(:fault_tolerance)
 
             def result
-              raise ZeroDivisionError, "exception message", caller.take(5)
+              success
             end
           end
         end
 
-        it "returns `true`" do
-          expect(result.from_exception?).to be(true)
+        context "when result is NOT created from unhandled exception`" do
+          it "returns `false`" do
+            expect(result.from_exception?).to be(false)
+          end
+        end
+
+        context "when result is created from unhandled exception" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config.with(:fault_tolerance)
+
+              def result
+                raise ZeroDivisionError, "exception message", caller.take(5)
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(result.from_exception?).to be(true)
+          end
+        end
+      end
+
+      example_group "handled exception" do
+        let(:result) { service.result }
+
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              success
+            end
+          end
+        end
+
+        context "when result is NOT created from handled exception`" do
+          it "returns `false`" do
+            expect(result.from_exception?).to be(false)
+          end
+        end
+
+        context "when result is created from handled exception" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                raise ZeroDivisionError, "exception message", caller.take(5)
+              rescue => exception
+                error_from_exception(exception)
+              end
+            end
+          end
+
+          it "returns `true`" do
+            expect(result.from_exception?).to be(true)
+          end
         end
       end
     end
 
     describe "#exception" do
-      let(:result) { service.result }
+      example_group "unhandled exception" do
+        let(:result) { service.result }
 
-      let(:service) do
-        Class.new do
-          include ConvenientService::Standard::Config.with(:fault_tolerance)
-
-          def result
-            success
-          end
-        end
-      end
-
-      context "when result is NOT created from unhandled exception" do
-        it "returns `nil`" do
-          expect(result.exception).to be_nil
-        end
-      end
-
-      context "when result is created from unhandled exception" do
         let(:service) do
           Class.new do
             include ConvenientService::Standard::Config.with(:fault_tolerance)
 
             def result
-              raise ZeroDivisionError, "exception message", caller.take(5)
+              success
             end
           end
         end
 
-        let(:exception) { service.new.result.unsafe_data[:unhandled_exception] }
+        context "when result is NOT created from unhandled exception" do
+          it "returns `nil`" do
+            expect(result.exception).to be_nil
+          end
+        end
 
-        it "returns exception" do
-          expect(result.exception).to eq(exception)
+        context "when result is created from unhandled exception" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config.with(:fault_tolerance)
+
+              def result
+                raise ZeroDivisionError, "exception message", caller.take(5)
+              end
+            end
+          end
+
+          let(:exception) { service.new.result.unsafe_data[:unhandled_exception] }
+
+          it "returns exception" do
+            expect(result.exception).to eq(exception)
+          end
+        end
+      end
+
+      example_group "handled exception" do
+        let(:result) { service.result }
+
+        let(:service) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              success
+            end
+          end
+        end
+
+        context "when result is NOT created from handled exception" do
+          it "returns `nil`" do
+            expect(result.exception).to be_nil
+          end
+        end
+
+        context "when result is created from handled exception" do
+          let(:service) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                raise ZeroDivisionError, "exception message", caller.take(5)
+              rescue => exception
+                error_from_exception(exception)
+              end
+            end
+          end
+
+          let(:exception) { service.new.result.unsafe_data[:handled_exception] }
+
+          it "returns exception" do
+            expect(result.exception).to eq(exception)
+          end
         end
       end
     end

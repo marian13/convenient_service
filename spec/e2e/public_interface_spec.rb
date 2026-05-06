@@ -443,6 +443,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :extra_kwargs, # private
           :failure?, # public
           :foreign_result_for?, # private
+          :from_exception, # public
           :from_exception?, # public
           :from_fallback?, # public
           :from_fallback_error_result?, # public
