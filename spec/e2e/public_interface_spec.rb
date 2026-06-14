@@ -1473,7 +1473,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         :require_has_memoization_using_memo_wise_plugin, # public
         :require_memo_wise_standard_config_option, # public
         :require_rails_examples, # private
-        :require_rspec_extentions, # public
+        :require_rspec_extensions, # public
         :require_standard_examples, # private
         :require_test_tools, # private
         :require_wraps_result_in_db_transaction_using_active_record_base_transaction_plugin, # public

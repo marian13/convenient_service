@@ -12,4 +12,4 @@
 
 require "convenient_service"
 
-ConvenientService::Dependencies.require_rspec_extentions
+ConvenientService::Dependencies.require_rspec_extensions

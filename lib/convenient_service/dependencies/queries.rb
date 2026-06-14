@@ -499,7 +499,7 @@ module ConvenientService
       # @return [Boolean]
       # @note Expected to be called from `spec_helper.rb`.
       #
-      def require_rspec_extentions
+      def require_rspec_extensions
         require "rspec/expectations"
         require "rspec/matchers"
         require "rspec/mocks"
