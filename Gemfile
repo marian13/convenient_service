@@ -197,6 +197,12 @@ gem "gem-release", platform: :mri if RUBY_VERSION >= "4.0"
 gem "irb", "~> 1.16.0"
 
 ##
+# Not used directly. It is `faker` internal dependency.
+# - https://github.com/ruby-i18n/i18n
+#
+gem "i18n", "~> 1.14.0" if RUBY_VERSION < "3.2"
+
+##
 # Used to find missing documentation and to lint existing one.
 # - https://github.com/rrrene/inch
 #
