@@ -89,13 +89,13 @@ jobs:
     runs-on: ubuntu-24.04
     name: Lint
     env:
-      BUNDLE_GEMFILE: ${{ inputs.working_directory }}/Gemfile
+      BUNDLE_GEMFILE: ${{ inputs.working_directory || '.' }}/Gemfile
     ##
     # NOTE: `defaults.run.working-directory` is repeated in every job since workflow-level `defaults` do not support expressions.
     #
     defaults:
       run:
-        working-directory: ${{ inputs.working_directory }}
+        working-directory: ${{ inputs.working_directory || '.' }}
     steps:
       - uses: marian13/ensure-source-branch-contains-destination-branch@v1
       - uses: actions/checkout@v7
@@ -219,14 +219,14 @@ jobs:
               #
               JAVA_OPTS: "-Xmx4g -Xms1g"
     env:
-      BUNDLE_GEMFILE: ${{ inputs.working_directory }}/${{ matrix.gemfile }}
+      BUNDLE_GEMFILE: ${{ inputs.working_directory || '.' }}/${{ matrix.gemfile }}
 
     ##
     # NOTE: `defaults.run.working-directory` is repeated in every job since workflow-level `defaults` do not support expressions.
     #
     defaults:
       run:
-        working-directory: ${{ inputs.working_directory }}
+        working-directory: ${{ inputs.working_directory || '.' }}
 
     name: "Test Ruby `${{ matrix.ruby }}`"
     steps:
@@ -433,7 +433,7 @@ jobs:
               #
               JAVA_OPTS: "-Xmx4g -Xms1g"
     env:
-      BUNDLE_GEMFILE: ${{ inputs.working_directory }}/${{ matrix.gemfile }}
+      BUNDLE_GEMFILE: ${{ inputs.working_directory || '.' }}/${{ matrix.gemfile }}
       CONVENIENT_SERVICE_BENCHMARK: true
 
     ##
@@ -441,7 +441,7 @@ jobs:
     #
     defaults:
       run:
-        working-directory: ${{ inputs.working_directory }}
+        working-directory: ${{ inputs.working_directory || '.' }}
 
     name: "Benchmark Ruby `${{ matrix.ruby }}`"
     steps:
