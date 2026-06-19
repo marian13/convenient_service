@@ -65,7 +65,7 @@ on:
         required: false
         type: boolean
         default: false
-      bundle_gemfile_prefix:
+      bundle_gemfile_dir:
         required: false
         type: string
         default: '.'
@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-24.04
     name: Lint
     env:
-      BUNDLE_GEMFILE: ${{ inputs.bundle_gemfile_prefix || '.' }}/Gemfile
+      BUNDLE_GEMFILE: ${{ github.workspace }}/${{ inputs.bundle_gemfile_dir || '.' }}/Gemfile
 
     steps:
       - uses: marian13/ensure-source-branch-contains-destination-branch@v1
@@ -221,7 +221,7 @@ jobs:
               #
               JAVA_OPTS: "-Xmx4g -Xms1g"
     env:
-      BUNDLE_GEMFILE: ${{ inputs.bundle_gemfile_prefix || '.' }}/${{ matrix.gemfile }}
+      BUNDLE_GEMFILE: ${{ github.workspace }}/${{ inputs.bundle_gemfile_dir || '.' }}/${{ matrix.gemfile }}
 
 
 
@@ -437,7 +437,7 @@ jobs:
               #
               JAVA_OPTS: "-Xmx4g -Xms1g"
     env:
-      BUNDLE_GEMFILE: ${{ inputs.bundle_gemfile_prefix || '.' }}/${{ matrix.gemfile }}
+      BUNDLE_GEMFILE: ${{ github.workspace }}/${{ inputs.bundle_gemfile_dir || '.' }}/${{ matrix.gemfile }}
       CONVENIENT_SERVICE_BENCHMARK: true
 
 
