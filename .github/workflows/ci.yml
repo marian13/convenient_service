@@ -225,6 +225,9 @@ jobs:
         uses: arduino/setup-task@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install dependencies
+        run: task install
+        continue-on-error: ${{ matrix.experimental }}
       - name: Run RSpec without appraisals
         run: task rspec
         ##
@@ -233,9 +236,6 @@ jobs:
         # - https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idcontinue-on-error
         # - https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#startswith
         #
-        continue-on-error: ${{ matrix.experimental }}
-      - name: Install dependencies for appraisals
-        run: task deps:install
         continue-on-error: ${{ matrix.experimental }}
       - name: Run RSpec with Rails 8.1
         run: APPRAISAL=rails_8.1 task rspec
