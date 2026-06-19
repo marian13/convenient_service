@@ -66,6 +66,14 @@ on:
         type: boolean
         default: false
 
+##
+# NOTE: `BUNDLE_PATH` is set globally so bundler installs gems into a predictable directory.
+# This allows `actions/cache` to cache both main and appraisal gems under a single path across all jobs.
+#
+env:
+  BUNDLE_PATH: vendor/bundle
+  CONVENIENT_SERVICE_CI: true
+
 jobs:
   lint:
     ##
@@ -93,11 +101,15 @@ jobs:
         with:
           ruby-version: 4.0
           ##
-          # NOTE: Installs the latest compatible Bundler version, runs `bundle install` and caches installed gems.
-          # - https://github.com/ruby/setup-ruby#usage
-          # - https://github.com/ruby/setup-ruby#bundler
+          # NOTE: `bundler-cache: true` is intentionally omitted.
+          # `task install` runs `bundle install` and `bin/appraisal install`.
+          # Using `actions/cache` instead allows caching both main and appraisal gems under a single combined key.
           #
-          bundler-cache: true
+      - uses: actions/cache@v4
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-4.0-gems-${{ hashFiles('Gemfile.lock', 'gemfiles/*.gemfile.lock') }}
+          restore-keys: ${{ runner.os }}-4.0-gems-
       ##
       # NOTE: Installs Task (task runner). Repo token is required to increase API quota.
       # - https://taskfile.dev/installation/#github-actions
@@ -196,7 +208,6 @@ jobs:
               JAVA_OPTS: "-Xmx4g -Xms1g"
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
-      CONVENIENT_SERVICE_CI: true
 
     name: "Test Ruby `${{ matrix.ruby }}`"
     steps:
@@ -215,11 +226,15 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           ##
-          # NOTE: Installs the latest compatible Bundler version, runs `bundle install` and caches installed gems.
-          # - https://github.com/ruby/setup-ruby#usage
-          # - https://github.com/ruby/setup-ruby#bundler
+          # NOTE: `bundler-cache: true` is intentionally omitted.
+          # `task install` runs `bundle install` and `bin/appraisal install`.
+          # Using `actions/cache` instead allows caching both main and appraisal gems under a single combined key.
           #
-          bundler-cache: true
+      - uses: actions/cache@v4
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles('Gemfile.lock', 'gemfiles/*.gemfile.lock') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.ruby }}-gems-
       ##
       # NOTE: Installs Task (task runner). Repo token is required to increase API quota.
       # - https://taskfile.dev/installation/#github-actions
@@ -401,7 +416,6 @@ jobs:
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
       CONVENIENT_SERVICE_BENCHMARK: true
-      CONVENIENT_SERVICE_CI: true
 
     name: "Benchmark Ruby `${{ matrix.ruby }}`"
     steps:
@@ -419,7 +433,16 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          bundler-cache: true
+          ##
+          # NOTE: `bundler-cache: true` is intentionally omitted.
+          # `task install` runs `bundle install` and `bin/appraisal install`.
+          # Using `actions/cache` instead allows caching both main and appraisal gems under a single combined key.
+          #
+      - uses: actions/cache@v4
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles('Gemfile.lock', 'gemfiles/*.gemfile.lock') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.ruby }}-gems-
       - name: Install Task (task runner)
         uses: arduino/setup-task@v2
         with:
