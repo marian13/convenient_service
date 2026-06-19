@@ -49,6 +49,22 @@ on:
   push:
     branches:
       - main
+  ##
+  # NOTE: `workflow_call` allows to reuse workflows.
+  # - https://docs.github.com/en/actions/how-tos/reuse-automations/reuse-workflows
+  #
+  workflow_call:
+    inputs:
+      repository:
+        required: false
+        type: string
+      ref:
+        required: false
+        type: string
+      submodules:
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   lint:
@@ -62,7 +78,16 @@ jobs:
     name: Lint
     steps:
       - uses: marian13/ensure-source-branch-contains-destination-branch@v1
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
+        with:
+          ##
+          # NOTE: `actions/checkout@v7` uses default values when an option is not provided or is an empty string.
+          # - https://github.com/actions/checkout#usage
+          # - https://github.com/actions/checkout/blob/v7.0.0/src/input-helper.ts#L23
+          #
+          repository: ${{ inputs.repository }}
+          ref: ${{ inputs.ref }}
+          submodules: ${{ inputs.submodules }}
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -170,7 +195,16 @@ jobs:
 
     name: "Test Ruby `${{ matrix.ruby }}`"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
+        with:
+          ##
+          # NOTE: `actions/checkout@v7` uses default values when an option is not provided or is an empty string.
+          # - https://github.com/actions/checkout#usage
+          # - https://github.com/actions/checkout/blob/v7.0.0/src/input-helper.ts#L23
+          #
+          repository: ${{ inputs.repository }}
+          ref: ${{ inputs.ref }}
+          submodules: ${{ inputs.submodules }}
       - name: "Set up Ruby `${{ matrix.ruby }}`"
         uses: ruby/setup-ruby@v1
         with:
@@ -367,7 +401,16 @@ jobs:
 
     name: "Benchmark Ruby `${{ matrix.ruby }}`"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
+        with:
+          ##
+          # NOTE: `actions/checkout@v7` uses default values when an option is not provided or is an empty string.
+          # - https://github.com/actions/checkout#usage
+          # - https://github.com/actions/checkout/blob/v7.0.0/src/input-helper.ts#L23
+          #
+          repository: ${{ inputs.repository }}
+          ref: ${{ inputs.ref }}
+          submodules: ${{ inputs.submodules }}
       - name: "Set up Ruby `${{ matrix.ruby }}`"
         uses: ruby/setup-ruby@v1
         with:
