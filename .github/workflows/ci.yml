@@ -112,10 +112,17 @@ jobs:
           # `task install` runs `bundle install` and `bin/appraisal install`.
           # Using `actions/cache` instead allows caching both main and appraisal gems under a single combined key.
           #
+      ##
+      # NOTE: `CACHE_WEEK` is used to automatically invalidate the cache every week.
+      #
+      - name: Set cache week
+        run: echo "CACHE_WEEK=$(date +%Y-%U)" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-4.0-gems-${{ hashFiles('Gemfile.lock', 'gemfiles/*.gemfile.lock') }}
+          path: |
+            vendor/bundle
+            gemfiles/vendor/bundle
+          key: ${{ runner.os }}-4.0-gems-${{ hashFiles('Gemfile', 'Appraisals') }}-${{ env.CACHE_WEEK }}
           restore-keys: ${{ runner.os }}-4.0-gems-
       ##
       # NOTE: Installs Task (task runner). Repo token is required to increase API quota.
@@ -239,10 +246,17 @@ jobs:
           # `task install` runs `bundle install` and `bin/appraisal install`.
           # Using `actions/cache` instead allows caching both main and appraisal gems under a single combined key.
           #
+      ##
+      # NOTE: `CACHE_WEEK` is used to automatically invalidate the cache every week.
+      #
+      - name: Set cache week
+        run: echo "CACHE_WEEK=$(date +%Y-%U)" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles('Gemfile.lock', 'gemfiles/*.gemfile.lock') }}
+          path: |
+            vendor/bundle
+            gemfiles/vendor/bundle
+          key: ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles('Gemfile', 'Appraisals') }}-${{ env.CACHE_WEEK }}
           restore-keys: ${{ runner.os }}-${{ matrix.ruby }}-gems-
       ##
       # NOTE: Installs Task (task runner). Repo token is required to increase API quota.
@@ -449,10 +463,17 @@ jobs:
           # `task install` runs `bundle install` and `bin/appraisal install`.
           # Using `actions/cache` instead allows caching both main and appraisal gems under a single combined key.
           #
+      ##
+      # NOTE: `CACHE_WEEK` is used to automatically invalidate the cache every week.
+      #
+      - name: Set cache week
+        run: echo "CACHE_WEEK=$(date +%Y-%U)" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles('Gemfile.lock', 'gemfiles/*.gemfile.lock') }}
+          path: |
+            vendor/bundle
+            gemfiles/vendor/bundle
+          key: ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles('Gemfile', 'Appraisals') }}-${{ env.CACHE_WEEK }}
           restore-keys: ${{ runner.os }}-${{ matrix.ruby }}-gems-
       - name: Install Task (task runner)
         uses: arduino/setup-task@v2
