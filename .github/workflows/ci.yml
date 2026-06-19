@@ -99,12 +99,17 @@ jobs:
           #
           bundler-cache: true
       ##
-      # NOTE: Installs Task (task runner).
+      # NOTE: Installs Task (task runner). Repo token is required to increase API quota.
       # - https://taskfile.dev/installation/#github-actions
       # - https://github.com/go-task/task
+      # - https://github.com/arduino/setup-task?tab=readme-ov-file#repo-token
       #
       - name: Install Task (task runner)
-        uses: arduino/setup-task@v1
+        uses: arduino/setup-task@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install dependencies
+        run: task install
       - name: Run Rubocop
         run: task rubocop
       - name: Run Yard-Junk (docs linter)
@@ -227,7 +232,6 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Install dependencies
         run: task install
-        continue-on-error: ${{ matrix.experimental }}
       - name: Run RSpec without appraisals
         run: task rspec
         ##
@@ -420,6 +424,8 @@ jobs:
         uses: arduino/setup-task@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install dependencies
+        run: task install
       - run: ruby benchmark/implementation/commit_config/ips.rb
         continue-on-error: true
       - run: ruby benchmark/implementation/commit_config/profile.rb
