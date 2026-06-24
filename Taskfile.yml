@@ -314,6 +314,53 @@ tasks:
       - *from-host-os
 
   ##
+  # NOTE: Usage examples.
+  #   ```ruby tmp/success_service.rb
+  #   # frozen_string_literal: true
+  #
+  #   require "convenient_service"
+  #
+  #   class SuccessService
+  #     include ConvenientService::Standard::Config
+  #
+  #     attr_reader :index
+  #
+  #     def initialize(index:)
+  #       @index = index
+  #     end
+  #
+  #     def result
+  #       success(id: index)
+  #     end
+  #   end
+  #
+  #   puts SuccessService.result
+  #   ```
+  #
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=2.7 APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task docker:run
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.0 APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task docker:run
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.1 APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task docker:run
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.2 APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task docker:run
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.3 APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task docker:run
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=3.4 APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task docker:run
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=4.0 APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task docker:run
+  #   RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=9.4 APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task docker:run
+  #   RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=10.0 APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task docker:run
+  #   RUBY_ENGINE=jruby RUBY_ENGINE_VERSION=10.1 APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task docker:run
+  #   RUBY_ENGINE=truffleruby RUBY_ENGINE_VERSION=22.3 APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task docker:run
+  #   RUBY_ENGINE=truffleruby RUBY_ENGINE_VERSION=24.0 APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task docker:run
+  #
+  # NOTE: See more `APPRAISAL` and `FILE` exammples in `task run`.
+  #
+  docker:run:
+    cmds:
+      - docker run --rm -i -v $(pwd):/gem convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}} bash -c "task APPRAISAL={{.APPRAISAL}} FILE={{.FILE}} run"
+    preconditions:
+      - *from-host-os
+    requires:
+      vars: [RUBY_ENGINE, RUBY_ENGINE_VERSION, FILE]
+
+  ##
   # NOTE: Dev only command.
   # NOTE: macOS specific command.
   #
@@ -673,6 +720,54 @@ tasks:
     vars:
       AUTOCORRECT_SUFFIX:
         sh: ruby -e 'puts "-A" if "{{.AUTOCORRECT}}" == "true"'
+
+  ##
+  # NOTE: Usage examples.
+  #   ```ruby tmp/success_service.rb
+  #   # frozen_string_literal: true
+  #
+  #   require "convenient_service"
+  #
+  #   class SuccessService
+  #     include ConvenientService::Standard::Config
+  #
+  #     attr_reader :index
+  #
+  #     def initialize(index:)
+  #       @index = index
+  #     end
+  #
+  #     def result
+  #       success(id: index)
+  #     end
+  #   end
+  #
+  #   puts SuccessService.result
+  #   ```
+  #
+  #   APPRAISAL=all FILE=tmp/success_service.rb task run
+  #   APPRAISAL=amazing_print FILE=tmp/success_service.rb task run
+  #   APPRAISAL=awesome_print FILE=tmp/success_service.rb task run
+  #   APPRAISAL=memo_wise FILE=tmp/success_service.rb task run
+  #   APPRAISAL=dry FILE=tmp/success_service.rb task run
+  #   APPRAISAL=rails_5.2 FILE=tmp/success_service.rb task run
+  #   APPRAISAL=rails_6.0 FILE=tmp/success_service.rb task run
+  #   APPRAISAL=rails_6.1 FILE=tmp/success_service.rb task run
+  #   APPRAISAL=rails_7.0 FILE=tmp/success_service.rb task run
+  #   APPRAISAL=rails_7.1 FILE=tmp/success_service.rb task run
+  #   APPRAISAL=rails_7.2 FILE=tmp/success_service.rb task run
+  #   APPRAISAL=rails_8.0 FILE=tmp/success_service.rb task run
+  #   APPRAISAL=rails_8.1 FILE=tmp/success_service.rb task run
+  #   FILE=tmp/success_service.rb task run
+  #
+  # NOTE: Setting `APPRAISAL` after `task console` does NOT work. Consider to open an issue.
+  # NOTE: `BUNDLE_EXEC_PREFIX` must be kept in sync with `Appraisals` file.
+  #
+  run:
+    cmds:
+      - "{{.BUNDLE_EXEC_PREFIX}} ruby {{.FILE}}"
+    vars:
+      BUNDLE_EXEC_PREFIX: *BUNDLE_EXEC_PREFIX
 
   ##
   # NOTE: Usage examples.
