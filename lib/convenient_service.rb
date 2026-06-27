@@ -213,6 +213,8 @@ module ConvenientService
     # @since 1.0.0
     # @return [Boolean]
     #
+    # @see https://userdocs.convenientservice.org/comprehensive_docs/docs/the_how/how_to_debug_the_convenient_service_lib_itself.html
+    #
     def debug?
       Dependencies.debug?
     end
@@ -249,6 +251,7 @@ module ConvenientService
     #
     # @see https://github.com/ruby/logger
     # @see https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html
+    # @see https://userdocs.convenientservice.org/comprehensive_docs/docs/the_how/how_to_debug_the_convenient_service_lib_itself.html
     #
     # @example Set log level.
     #   ConvenientService.logger.level = Logger::DEBUG
