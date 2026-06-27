@@ -407,10 +407,10 @@
 <span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>STDOUT</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_logger'>logger</span><span class='op'>|</span>
     <span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>=</span>
-      <span class='kw'>if</span> <span class='op'>::</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CONVENIENT_SERVICE_DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span>
-        <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>DEBUG</span>
-      <span class='kw'>elsif</span> <span class='op'>::</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CONVENIENT_SERVICE_LOGGER_LEVEL</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+      <span class='kw'>if</span> <span class='op'>::</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CONVENIENT_SERVICE_LOGGER_LEVEL</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
         <span class='op'>::</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CONVENIENT_SERVICE_LOGGER_LEVEL</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+      <span class='kw'>elsif</span> <span class='op'>::</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CONVENIENT_SERVICE_DEBUG</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span>
+        <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>DEBUG</span>
       <span class='kw'>else</span>
         <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>INFO</span>
       <span class='kw'>end</span>
@@ -500,15 +500,21 @@
 <div class="tags">
   
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://userdocs.convenientservice.org/comprehensive_docs/docs/the_what/what_is_convenient_service_logger.html" target="_parent" title="https://userdocs.convenientservice.org/comprehensive_docs/docs/the_what/what_is_convenient_service_logger.html">https://userdocs.convenientservice.org/comprehensive_docs/docs/the_what/what_is_convenient_service_logger.html</a></li>
+    
+      <li><a href="https://userdocs.convenientservice.org/comprehensive_docs/docs/the_how/how_to_configure_convenient_service_logger.html" target="_parent" title="https://userdocs.convenientservice.org/comprehensive_docs/docs/the_how/how_to_configure_convenient_service_logger.html">https://userdocs.convenientservice.org/comprehensive_docs/docs/the_how/how_to_configure_convenient_service_logger.html</a></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-115
-116
-117
 118
 119
 120
@@ -520,10 +526,13 @@
 126
 127
 128
-129</pre>
+129
+130
+131
+132</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/logger.rb', line 118</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_level='>level=</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Dependencies.html" title="ConvenientService::Dependencies (module)">Dependencies</a></span></span><span class='period'>.</span><span class='id identifier rubyid_support_logger_non_integer_levels?'><span class='object_link'><a href="Dependencies/Queries.html#support_logger_non_integer_levels%3F-instance_method" title="ConvenientService::Dependencies::Queries#support_logger_non_integer_levels? (method)">support_logger_non_integer_levels?</a></span></span>
@@ -550,7 +559,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Jun 27 17:26:59 2026 by
+  Generated on Sat Jun 27 18:55:32 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-4.0.5).
 </div>
