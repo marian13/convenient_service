@@ -272,6 +272,7 @@ module ConvenientService
     #
     # @see https://ruby-doc.org/core-2.7.1/Kernel.html#method-i-__dir__
     # @see https://api.rubyonrails.org/classes/Rails.html#method-c-root
+    # @see https://userdocs.convenientservice.org/comprehensive_docs/docs/the_how/how_to_get_convenient_service_root_folder.html
     #
     def root
       @root ||= ::Pathname.new(::File.expand_path(::File.join(__dir__, "..")))
