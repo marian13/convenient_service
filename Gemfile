@@ -197,6 +197,12 @@ gem "gem-release", platform: :mri if RUBY_VERSION >= "4.0"
 gem "irb", "~> 1.16.0"
 
 ##
+# Not used. Added since `rdoc` >= 8.0 depends on `rbs`, which has a C extension that fails to install on JRuby and TruffleRuby.
+# - https://github.com/ruby/rdoc/blob/master/History.rdoc
+#
+gem "rdoc", "~> 7.0", platforms: [:jruby, :truffleruby]
+
+##
 # Not used directly. It is `faker` internal dependency.
 # - https://github.com/ruby-i18n/i18n
 #
