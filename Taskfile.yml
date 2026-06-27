@@ -361,6 +361,19 @@ tasks:
       vars: [RUBY_ENGINE, RUBY_ENGINE_VERSION, FILE]
 
   ##
+  # NOTE: Usage examples.
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=4.0 task docker:rspec -- spec/lib/convenient_service/logger_spec.rb
+  #   RUBY_ENGINE=ruby RUBY_ENGINE_VERSION=4.0 APPRAISAL=rails_8.1 task docker:rspec -- spec/lib/convenient_service/logger_spec.rb
+  #
+  docker:rspec:
+    cmds:
+      - docker run --rm -i -v $(pwd):/gem convenient_service:{{.RUBY_ENGINE}}_{{.RUBY_ENGINE_VERSION}} bash -c "task APPRAISAL={{.APPRAISAL}} rspec -- {{.CLI_ARGS}}"
+    preconditions:
+      - *from-host-os
+    requires:
+      vars: [RUBY_ENGINE, RUBY_ENGINE_VERSION]
+
+  ##
   # NOTE: Dev only command.
   # NOTE: macOS specific command.
   #
