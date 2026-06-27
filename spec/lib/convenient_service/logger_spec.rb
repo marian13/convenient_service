@@ -55,7 +55,7 @@ RSpec.describe ConvenientService::Logger, type: :standard do
             allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_DEBUG").and_return("true")
           end
 
-          it "sets logger level to `Logger::DEBUG` ignoring `ENV[\"CONVENIENT_SERVICE_LOGGER_LEVEL\"]` value" do
+          it "sets logger level to `Logger::DEBUG`" do
             logger
 
             expect(logger.level).to eq(Logger::DEBUG)
@@ -79,10 +79,10 @@ RSpec.describe ConvenientService::Logger, type: :standard do
             allow(ENV).to receive(:[]).with("CONVENIENT_SERVICE_DEBUG").and_return("true")
           end
 
-          it "sets logger level to `Logger::DEBUG` ignoring `ENV[\"CONVENIENT_SERVICE_LOGGER_LEVEL\"]` value" do
+          it "sets logger level to `ENV[\"CONVENIENT_SERVICE_LOGGER_LEVEL\"]` ignoring `ENV[\"CONVENIENT_SERVICE_DEBUG\"]`" do
             logger
 
-            expect(logger.level).to eq(Logger::DEBUG)
+            expect(logger.level).to eq(Logger::WARN)
           end
         end
       end

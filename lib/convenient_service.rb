@@ -252,6 +252,8 @@ module ConvenientService
     # @see https://github.com/ruby/logger
     # @see https://ruby-doc.org/stdlib-2.7.0/libdoc/logger/rdoc/Logger.html
     # @see https://userdocs.convenientservice.org/comprehensive_docs/docs/the_how/how_to_debug_the_convenient_service_lib_itself.html
+    # @see https://userdocs.convenientservice.org/comprehensive_docs/docs/the_what/what_is_convenient_service_logger.html
+    # @see https://userdocs.convenientservice.org/comprehensive_docs/docs/the_how/how_to_configure_convenient_service_logger.html
     #
     # @example Set log level.
     #   ConvenientService.logger.level = Logger::DEBUG

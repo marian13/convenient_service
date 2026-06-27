@@ -46,10 +46,10 @@ module ConvenientService
       def new
         super(::STDOUT).tap do |logger|
           logger.level =
-            if ::ENV["CONVENIENT_SERVICE_DEBUG"] == "true"
-              ::Logger::DEBUG
-            elsif ::ENV["CONVENIENT_SERVICE_LOGGER_LEVEL"]
+            if ::ENV["CONVENIENT_SERVICE_LOGGER_LEVEL"]
               ::ENV["CONVENIENT_SERVICE_LOGGER_LEVEL"]
+            elsif ::ENV["CONVENIENT_SERVICE_DEBUG"] == "true"
+              ::Logger::DEBUG
             else
               ::Logger::INFO
             end
@@ -97,6 +97,9 @@ module ConvenientService
 
     ##
     # @api public
+    #
+    # @see https://userdocs.convenientservice.org/comprehensive_docs/docs/the_what/what_is_convenient_service_logger.html
+    # @see https://userdocs.convenientservice.org/comprehensive_docs/docs/the_how/how_to_configure_convenient_service_logger.html
     #
     # @internal
     #   IMPORTANT: Older versions of `Logger` do NOT support `level` as a string.
