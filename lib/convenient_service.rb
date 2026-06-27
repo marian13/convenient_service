@@ -286,6 +286,9 @@ module ConvenientService
     # @since 1.0.0
     # @return [Pathname]
     #
+    # @internal
+    #   TODO: Consider to make public for plugin devs.
+    #
     def lib_root
       @lib_root ||= ::Pathname.new(::File.join(root, "lib"))
     end
@@ -297,6 +300,9 @@ module ConvenientService
     # @api private
     # @since 1.0.0
     # @return [Pathname]
+    #
+    # @internal
+    #   TODO: Consider to make public for plugin devs.
     #
     def examples_root
       @examples_root ||= ::Pathname.new(::File.join(root, "lib", "convenient_service", "examples"))
