@@ -1413,7 +1413,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         :backtrace_cleaner, # public
         :benchmark?, # private
         :ci?, # private
-        :debug?, # private
+        :debug?, # public
         :examples_root, # private
         :inline, # public
         :lib_root, # private
@@ -1454,7 +1454,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
         :appraisal_name_for_coverage, # private
         :benchmark?, # private
         :ci?, # private
-        :debug?, # private
+        :debug?, # public
         :logger, # private
         :minitest, # private
         :paint, # private

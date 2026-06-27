@@ -209,7 +209,7 @@ module ConvenientService
     ##
     # Returns `true` when Convenient Service is in debug mode. In other words `$CONVENIENT_SERVICE_DEBUG` env variable is set to `true`.
     #
-    # @api private
+    # @api public
     # @since 1.0.0
     # @return [Boolean]
     #
