@@ -5,6 +5,19 @@
 
 # Changelog
 
+## [0.25.0](https://github.com/marian13/convenient_service/compare/v0.24.0...v0.25.0) (2026-06-28)
+
+
+### Features
+
+* **exceptios:** introduce error.from_exception to have a way to set custom attributes ([28a3b32](https://github.com/marian13/convenient_service/commit/28a3b32402e44531793caf9b4179bbe7efc59432))
+* **services:** introduce inline services ([efd1fe5](https://github.com/marian13/convenient_service/commit/efd1fe5ac65f93a1f240298adc4fcc947393caeb))
+
+
+### Bug Fixes
+
+* **logger:** increase CONVENIENT_SERVICE_LOGGER_LEVEL precedence ([5ac965f](https://github.com/marian13/convenient_service/commit/5ac965fe0bb25800a15c55b9a829d61b66e977c5))
+
 ## [0.24.0](https://github.com/marian13/convenient_service/compare/v0.23.0...v0.24.0) (2026-05-04)
 
 
