@@ -389,11 +389,7 @@ jobs:
           - 3.4
           - "4.0"
           - "jruby-9.4"
-          ##
-          # TODO: Check JRuby 10.0.3.
-          # - https://www.jruby.org/2026/02/02/jruby-10-0-3-0.html
-          #
-          - "jruby-10.0.2"
+          - "jruby-10.0"
           ##
           # HACK: Sorry, JRuby, but fixes like the following is probably too much, I need to finish v1 docs first:
           #   if ConvenientService::Dependencies.ruby.match?("jruby >= 10.1")
