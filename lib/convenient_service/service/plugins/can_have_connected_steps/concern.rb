@@ -23,6 +23,7 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::CanHaveConnectedSteps::Entities::Expressions::Base]
             #
             # @note It is NOT recommended to rely on the return value of this method, since it may differ across different `step` related plugins.
+            # @see https://userdocs.convenientservice.org/comprehensive_docs/docs/the_what/what_step_input_types_are_available.html
             #
             def step(*args, **kwargs)
               previous_expression = steps.expression

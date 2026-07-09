@@ -24,13 +24,8 @@ module ConvenientService
             ##
             # @api public
             #
-            # Allows to pass a value to `in` method without its intermediate processing.
             # @see https://userdocs.convenientservice.org/basics/step_to_result_translation_table
-            #
-            # @example `:chat_v2` is passed to `AssertFeatureEnabled` as it is.
-            #   step AssertFeatureEnabled, in: {name: raw(:chat_v2)}
-            #   # that is converted to the following service invocation:
-            #   AssertFeatureEnabled.result(name: :chat_v2)
+            # @see https://userdocs.convenientservice.org/comprehensive_docs/docs/the_what/what_is_a_step_raw_input.html
             #
             # @param value [Object] Can be any type.
             # @return [ConvenientService::Support::RawValue]
