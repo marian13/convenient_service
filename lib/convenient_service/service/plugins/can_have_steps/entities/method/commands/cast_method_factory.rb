@@ -27,7 +27,7 @@ module ConvenientService
                 end
 
                 ##
-                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factries::Base, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Base, nil]
                 #
                 def call
                   return unless factory_class
@@ -59,28 +59,25 @@ module ConvenientService
                 end
 
                 ##
-                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factries::Base, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Base, nil]
                 #
                 def cast_symbol
                   Entities::Factories::Symbol
                 end
 
                 ##
-                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factries::Base, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Base, nil]
                 #
                 def cast_string
                   Entities::Factories::String
                 end
 
                 ##
-                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factries::Base, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Base, nil]
                 #
                 def cast_hash
                   return unless other.keys.one?
 
-                  ##
-                  # TODO: Add `other.keys.first.is_a?(Integer)` and `other.keys.first == Support::BLOCK` to support args and block via `step`?
-                  #
                   value = other.values.first
 
                   case value
@@ -96,7 +93,7 @@ module ConvenientService
                 end
 
                 ##
-                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factries::Base, nil]
+                # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Factories::Base, nil]
                 #
                 def cast_method
                   Entities::Factories::Method
