@@ -290,6 +290,13 @@
     </li>
   
 </ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://userdocs.convenientservice.org/comprehensive_docs/docs/best_practices/declare_in_out_explicitly_on_method_steps.html" target="_parent" title="https://userdocs.convenientservice.org/comprehensive_docs/docs/best_practices/declare_in_out_explicitly_on_method_steps.html">https://userdocs.convenientservice.org/comprehensive_docs/docs/best_practices/declare_in_out_explicitly_on_method_steps.html</a></li>
+    
+  </ul>
 <p class="tag_title">Since:</p>
 <ul class="since">
   
@@ -312,12 +319,12 @@
       <pre class="lines">
 
 
-25
-26
-27</pre>
+27
+28
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/concern.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/concern.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_step'>step</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
@@ -383,12 +390,12 @@
       <pre class="lines">
 
 
-34
-35
-36</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/concern.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/concern.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
   <span class='id identifier rubyid_internals_class'>internals_class</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:steps</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSequentialSteps/Entities.html" title="ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/CanHaveSequentialSteps/Entities/StepCollection.html" title="ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities::StepCollection (class)">StepCollection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Entities/StepCollection.html#initialize-instance_method" title="ConvenientService::Service::Plugins::CanHaveSequentialSteps::Entities::StepCollection#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>container:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -478,18 +485,18 @@
       <pre class="lines">
 
 
-51
-52
 53
 54
 55
 56
 57
 58
-59</pre>
+59
+60
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/concern.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_sequential_steps/concern.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
   <span class='id identifier rubyid_internals'>internals</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:steps</span><span class='rparen'>)</span> <span class='kw'>do</span>
@@ -510,7 +517,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Jul 11 13:27:53 2026 by
+  Generated on Sat Jul 11 16:48:28 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.44 (ruby-4.0.5).
 </div>
