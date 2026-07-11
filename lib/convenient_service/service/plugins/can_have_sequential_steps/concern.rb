@@ -22,6 +22,8 @@ module ConvenientService
             # @param kwargs [Hash{Symbol => Object}]
             # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step]
             #
+            # @see https://userdocs.convenientservice.org/comprehensive_docs/docs/best_practices/declare_in_out_explicitly_on_method_steps.html
+            #
             def step(*args, **kwargs)
               steps.create(*args, **kwargs)
             end
