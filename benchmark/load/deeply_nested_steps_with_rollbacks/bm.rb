@@ -120,7 +120,9 @@ Benchmark.bm(50) do |x|
     # NOTE: `Enumerator.produce` does NOT work with hashes in Ruby 4 (due to the new `size: nil` keyword). That is why it was replaced with `loop.with_object`.
     #
     nesting = loop.with_object({levels: 0, klass: klass}) do |_, nesting|
-      nesting[:klass].steps.none? ? nesting.merge!(levels: nesting[:levels] + 1, klass: nesting[:klass].steps.first.action) : break(nesting)
+      break nesting if nesting[:klass].steps.none?
+
+      nesting.merge!(levels: nesting[:levels] + 1, klass: nesting[:klass].steps.first.action)
     end
 
     x.report("Run service   (n = `#{nesting[:levels]}`, s = `#{klass.steps.size - 1}`, t = `#{(klass.steps.size - 1)**nesting[:levels]}`)") { run_service(klass) }
