@@ -25,7 +25,7 @@ module ConvenientService
                 ##
                 # @return [String]
                 #
-                delegate :to_s, :to_sym, to: :value
+                delegate :to_s, to: :value
 
                 ##
                 # @return [Symbol]

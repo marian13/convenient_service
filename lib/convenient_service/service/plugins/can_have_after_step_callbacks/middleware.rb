@@ -65,6 +65,10 @@ module ConvenientService
           #     end
           #   end
           #
+          # @internal
+          #   IMPORTANT: `result.step.result` does NOT take result from internal cache, it raises instead. That is frustrating to the end-users, but there is NO workaroud yet.
+          #   TODO: Think about passing `result` with `callback_arguments`. Not perfect, but better than nothing.
+          #
           def next(method, **kwargs, &block)
             return chain.next(method, **kwargs, &block) if method != :step
 

@@ -18,7 +18,7 @@ module ConvenientService
                   # @return [ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Key]
                   #
                   def create_key
-                    Entities::Key.new(other)
+                    Entities::Key.new(other.to_sym)
                   end
 
                   ##

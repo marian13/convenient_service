@@ -249,7 +249,7 @@ RSpec.describe "Service with all types of steps", type: [:standard, :e2e] do
               TEXT
             end
 
-            it "prints progress bar after each step" do
+            it "prints logs after each step" do
               result
 
               expect(actual_output).to eq(expected_output)

@@ -29,7 +29,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       specify do
         expect { factory.create_key }
           .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Entities::Key, :new)
-          .with_arguments(factory.other)
+          .with_arguments(factory.other.to_sym)
           .and_return_its_value
       end
     end
