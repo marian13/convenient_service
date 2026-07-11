@@ -1712,8 +1712,15 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
           if ConvenientService::Dependencies.ruby.match?("jruby >= 9.5") && ConvenientService::Dependencies.ruby.match?("jruby < 10.1")
             # NOTE: Item.
             expect([:success, :failure, :success, :failure].count(:success)).to eq(2)
-            expect { (:success..:success).count(:success) }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
-            expect { (:failure..:failure).count(:success) }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
+
+            ##
+            # NOTE: JRuby 10.0.2 still raises an exception for one-element ranges. But JRuby 10.0.6 does not.
+            #
+            # expect { (:success..:success).count(:success) }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
+            # expect { (:failure..:failure).count(:success) }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
+            #
+            expect((:success..:success).count(:success)).to eq(1)
+            expect((:failure..:failure).count(:success)).to eq(0)
 
             expect(service.service_aware_enumerable(enumerable([:success, :failure, :success, :failure])).service_aware_count(:success).result).to be_success.with_data(value: 2)
             expect(service.service_aware_enumerator(enumerator([:success, :failure, :success, :failure])).service_aware_count(:success).result).to be_success.with_data(value: 2)
@@ -1722,8 +1729,15 @@ RSpec.describe "Loops", type: [:standard, :e2e] do
             expect(service.service_aware_enumerable([:success, :failure, :success, :failure]).service_aware_count(:success).result).to be_success.with_data(value: 2)
             expect(service.service_aware_enumerable(set([:success, :failure])).service_aware_count(:success).result).to be_success.with_data(value: 1)
             expect(service.service_aware_enumerable({success: :success, failure: :failure}).service_aware_count([:success, :success]).result).to be_success.with_data(value: 1)
-            expect { service.service_aware_enumerable((:success..:success)).service_aware_count(:success).result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
-            expect { service.service_aware_enumerable((:failure..:failure)).service_aware_count(:success).result }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
+
+            ##
+            # NOTE: JRuby 10.0.2 still raises an exception for one-element ranges. But JRuby 10.0.6 does not.
+            #
+            # expect { (:success..:success).count(:success) }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
+            # expect { (:failure..:failure).count(:success) }.to raise_error(ArgumentError).with_message("wrong number of arguments (given 1, expected 0)")
+            #
+            expect(service.service_aware_enumerable((:success..:success)).service_aware_count(:success).result).to be_success.with_data(value: 1)
+            expect(service.service_aware_enumerable((:failure..:failure)).service_aware_count(:success).result).to be_success.with_data(value: 0)
           elsif ConvenientService::Dependencies.ruby.match?("jruby < 9.5")
             # NOTE: Item.
             expect([:success, :failure, :success, :failure].count(:success)).to eq(2)
