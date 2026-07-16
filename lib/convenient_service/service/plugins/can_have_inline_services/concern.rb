@@ -14,7 +14,7 @@ module ConvenientService
 
           instance_methods do
             ##
-            # @api public
+            # @api private
             # @param block [Proc, nil]
             # @return [ConvenientService::Service::Plugins::CanHaveInlineServices::Entities::Proxy]
             #

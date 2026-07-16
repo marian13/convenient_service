@@ -190,7 +190,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :fallback_failure_result_without_middlewares, # private
           :fallback_result, # public
           :fallback_result_without_middlewares, # private
-          :inline, # public
+          :inline, # private
           :inspect, # public
           :internals, # private
           :negated_result, # public
