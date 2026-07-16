@@ -567,7 +567,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
                 ConvenientService::Plugins::Common::HasInternals::Concern,
                 ConvenientService::Plugins::Step::HasResult::Concern,
 
-                ConvenientService::Plugins::Step::CanBeCompleted::Concern,
+                ConvenientService::Plugins::Step::CanBeEvaluated::Concern,
                 ConvenientService::Plugins::Step::CanBeServiceStep::Concern,
                 ConvenientService::Plugins::Step::CanBeMethodStep::Concern,
 

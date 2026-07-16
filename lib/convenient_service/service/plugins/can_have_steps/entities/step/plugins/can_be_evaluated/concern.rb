@@ -12,7 +12,7 @@ module ConvenientService
         module Entities
           class Step
             module Plugins
-              module CanBeCompleted
+              module CanBeEvaluated
                 module Concern
                   include Support::Concern
 

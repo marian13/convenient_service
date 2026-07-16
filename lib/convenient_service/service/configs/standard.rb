@@ -339,7 +339,7 @@ module ConvenientService
             concerns do
               use ConvenientService::Plugins::Common::HasInternals::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::HasResult::Concern if options.enabled?(:essential)
-              use ConvenientService::Plugins::Step::CanBeCompleted::Concern if options.enabled?(:essential)
+              use ConvenientService::Plugins::Step::CanBeEvaluated::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::CanBeServiceStep::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::CanBeMethodStep::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::CanBeUsedInServiceAwareEnumerables::Concern if options.enabled?(:essential)
