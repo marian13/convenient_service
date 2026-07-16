@@ -16,7 +16,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:caller) { described_class.new(proc) }
-  let(:proc) { -> { :bar } }
+  let(:proc) { -> { :foo } }
   let(:direction) { :input }
 
   example_group "inheritance" do
@@ -28,7 +28,12 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
   end
 
   example_group "instance methods" do
-    let(:service_class) { Class.new }
+    let(:service_class) do
+      Class.new do
+        include ConvenientService::Core
+      end
+    end
+
     let(:service_instance) { service_class.new }
 
     let(:container) { ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service.cast(service_class) }
@@ -67,8 +72,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Meth
       let(:direction) { :output }
       let(:index) { 0 }
 
-      it "returns `false`" do
-        expect(caller.define_output_in_container!(container, index: index, method: method)).to be(false)
+      specify do
+        caller.define_output_in_container!(container, index: index, method: method)
+
+        expect { caller.define_output_in_container!(container, index: index, method: method) }
+          .to delegate_to(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Commands::DefineMethodInContainer, :call)
+          .with_arguments(container: container, index: index, method: method)
+          .and_return_its_value
       end
     end
   end

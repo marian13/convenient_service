@@ -69,7 +69,7 @@ module ConvenientService
             return chain.next(method, **kwargs, &block) if method != :step
 
             entity.step_class.class_exec(kwargs, block) do |kwargs, block|
-              before :result, **kwargs.merge(source_location: block.source_location) do
+              before :organizer_result, **kwargs.merge(source_location: block.source_location) do
                 organizer.instance_exec(
                   params.to_callback_arguments,
                   &block

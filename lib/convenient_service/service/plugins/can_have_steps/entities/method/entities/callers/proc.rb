@@ -26,7 +26,7 @@ module ConvenientService
                   end
 
                   def define_output_in_container!(container, index:, method:)
-                    false
+                    Commands::DefineMethodInContainer.call(method: method, container: container, index: index)
                   end
 
                   private

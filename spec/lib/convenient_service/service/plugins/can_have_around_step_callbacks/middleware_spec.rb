@@ -95,13 +95,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
           ##
           # NOTE: Comprehensive suite context checks whether a proper `block` with `instance_exec` is passed to callback.
           #
-          expect(service_class.step_class.callbacks.for([:around, :result])).not_to be_empty
+          expect(service_class.step_class.callbacks.for([:around, :organizer_result])).not_to be_empty
         end
 
         it "passes original block source location to around `:result` callback for service step class" do
           method_value
 
-          expect(service_class.step_class.callbacks.for([:around, :result]).first.source_location).to eq(block.source_location)
+          expect(service_class.step_class.callbacks.for([:around, :organizer_result]).first.source_location).to eq(block.source_location)
         end
 
         example_group "comprehensive suite" do
@@ -114,10 +114,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
                 klass.class_exec(out) do |out|
                   include ConvenientService::Standard::Config
 
-                  step :foo
+                  step :first_step
 
-                  def foo
-                    success.tap { out.puts "step :foo" }
+                  def first_step
+                    success.tap { out.puts "step :first_step" }
                   end
 
                   define_method(:out) { out }
@@ -129,7 +129,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
               <<~TEXT
                 first around before step
                   chain - Proc
-                step :foo
+                step :first_step
                 first around after step
               TEXT
             end
@@ -158,10 +158,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
                 klass.class_exec(out) do |out|
                   include ConvenientService::Standard::Config
 
-                  step :foo
+                  step :first_step
 
-                  def foo
-                    success.tap { out.puts "step :foo" }
+                  def first_step
+                    success.tap { out.puts "step :first_step" }
                   end
 
                   define_method(:out) { out }
@@ -172,7 +172,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
             let(:text) do
               <<~TEXT
                 first around before step
-                step :foo
+                step :first_step
                   step - #{service_class.step_class}
                 first around after step
               TEXT
@@ -204,10 +204,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
                   klass.class_exec(out) do |out|
                     include ConvenientService::Standard::Config
 
-                    step :foo
+                    step :first_step
 
-                    def foo
-                      success.tap { out.puts "step :foo" }
+                    def first_step
+                      success.tap { out.puts "step :first_step" }
                     end
 
                     define_method(:out) { out }
@@ -260,10 +260,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
                 klass.class_exec(out) do |out|
                   include ConvenientService::Standard::Config
 
-                  step :foo
+                  step :first_step
 
-                  def foo
-                    success.tap { out.puts "step :foo" }
+                  def first_step
+                    success.tap { out.puts "step :first_step" }
                   end
 
                   define_method(:out) { out }
@@ -280,7 +280,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
                 <<~TEXT
                   first around before step
                   some instance method
-                  step :foo
+                  step :first_step
                   first around after step
                 TEXT
               end
@@ -309,10 +309,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
                     klass.class_exec(out) do |out|
                       include ConvenientService::Standard::Config
 
-                      step :foo
+                      step :first_step
 
-                      def foo
-                        success.tap { out.puts "step :foo" }
+                      def first_step
+                        success.tap { out.puts "step :first_step" }
                       end
 
                       define_method(:out) { out }
@@ -336,25 +336,25 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
           end
 
           example_group "method arguments" do
-            let(:args) { [:foo] }
-            let(:kwargs) { {foo: :bar} }
-            let(:block) { proc { :foo } }
+            let(:args) { [:first_step] }
+            let(:kwargs) { {first_step: :first_step_first_input} }
+            let(:block) { proc { :first_step } }
 
             let(:service_class) do
               Class.new.tap do |klass|
                 klass.class_exec(out) do |out|
                   include ConvenientService::Standard::Config
 
-                  step :foo,
-                    in: :bar,
-                    out: :baz
+                  step :first_step,
+                    in: :first_step_first_input,
+                    out: :first_step_first_output
 
-                  def foo
-                    success(baz: :baz).tap { out.puts "step :foo" }
+                  def first_step
+                    success(first_step_first_output: "first_step_first_output_value").tap { out.puts "step :first_step" }
                   end
 
-                  def bar
-                    :bar
+                  def first_step_first_input
+                    "first_step_first_input_value"
                   end
 
                   define_method(:out) { out }
@@ -366,10 +366,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
               let(:text) do
                 <<~TEXT
                   first around before step
-                    args - [:foo]
+                    args - [:first_step]
                     kwargs.keys - [:in, :out, :strict, :index]
                     block - nil
-                  step :foo
+                  step :first_step
                   first around after step
                 TEXT
               end
@@ -400,17 +400,17 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
                     klass.class_exec(out) do |out|
                       include ConvenientService::Standard::Config
 
-                      step :foo,
-                        in: :bar,
-                        out: :baz,
+                      step :first_step,
+                        in: :first_step_first_input,
+                        out: :first_step_first_output,
                         cache: false
 
-                      def foo
-                        success(baz: :baz).tap { out.puts "step :foo" }
+                      def first_step
+                        success(first_step_first_output: "first_step_first_output_value").tap { out.puts "step :first_step" }
                       end
 
-                      def bar
-                        :bar
+                      def first_step_first_input
+                        "first_step_first_input_value"
                       end
 
                       define_method(:out) { out }
@@ -421,10 +421,10 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
                 let(:text) do
                   <<~TEXT
                     first around before step
-                      args - [:foo]
+                      args - [:first_step]
                       kwargs.keys - [:in, :out, :strict, :index, :cache]
                       block - nil
-                    step :foo
+                    step :first_step
                     first around after step
                   TEXT
                 end
@@ -435,6 +435,169 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAroundStepCallbacks::
                   expect(output).to eq(text)
                 end
               end
+            end
+          end
+
+          example_group "step/organizer data access" do
+            let(:service_class) do
+              Class.new.tap do |klass|
+                klass.class_exec(out) do |out|
+                  include ConvenientService::Standard::Config
+
+                  step :first_step,
+                    in: :first_step_first_input,
+                    out: [
+                      :first_step_first_output,
+                      {shared_output: -> { "first_step_shared_output_value" }}
+                    ]
+
+                  step :second_step,
+                    in: :second_step_first_input,
+                    out: [
+                      :second_step_first_output,
+                      {shared_output: -> { "second_step_shared_output_value" }}
+                    ]
+
+                  step :third_step,
+                    in: :third_step_first_input,
+                    out: [
+                      :third_step_first_output,
+                      {shared_output: -> { "third_step_shared_output_value" }}
+                    ]
+
+                  def first_step
+                    success(first_step_first_output: "first_step_first_output_value").tap { out.puts "step :first_step" }
+                  end
+
+                  def first_step_first_input
+                    "first_step_first_input_value"
+                  end
+
+                  def second_step
+                    success(second_step_first_output: "second_step_first_output_value").tap { out.puts "step :first_step" }
+                  end
+
+                  def second_step_first_input
+                    "second_step_first_input_value"
+                  end
+
+                  def third_step
+                    success(third_step_first_output: "third_step_first_output_value").tap { out.puts "step :first_step" }
+                  end
+
+                  def third_step_first_input
+                    "third_step_first_input_value"
+                  end
+
+                  define_method(:out) { out }
+                end
+              end
+            end
+
+            let(:text) do
+              <<~TEXT
+                before step 0
+                  output first_step_first_output via reader - not_completed
+                  output second_step_first_output via reader - not_completed
+                  output third_step_first_output via reader - not_completed
+                  output shared_output via reader - not_completed
+                step :first_step
+                after step 0
+                  outputs via step.result - first_step_first_output_value,first_step_shared_output_value
+                  output first_step_first_output via reader - first_step_first_output_value
+                  output second_step_first_output via reader - not_completed
+                  output third_step_first_output via reader - not_completed
+                  output shared_output via reader - first_step_shared_output_value
+                before step 1
+                  output first_step_first_output via reader - first_step_first_output_value
+                  output second_step_first_output via reader - not_completed
+                  output third_step_first_output via reader - not_completed
+                  output shared_output via reader - first_step_shared_output_value
+                step :first_step
+                after step 1
+                  outputs via step.result - second_step_first_output_value,second_step_shared_output_value
+                  output first_step_first_output via reader - first_step_first_output_value
+                  output second_step_first_output via reader - second_step_first_output_value
+                  output third_step_first_output via reader - not_completed
+                  output shared_output via reader - second_step_shared_output_value
+                before step 2
+                  output first_step_first_output via reader - first_step_first_output_value
+                  output second_step_first_output via reader - second_step_first_output_value
+                  output third_step_first_output via reader - not_completed
+                  output shared_output via reader - second_step_shared_output_value
+                step :first_step
+                after step 2
+                  outputs via step.result - third_step_first_output_value,third_step_shared_output_value
+                  output first_step_first_output via reader - first_step_first_output_value
+                  output second_step_first_output via reader - second_step_first_output_value
+                  output third_step_first_output via reader - third_step_first_output_value
+                  output shared_output via reader - third_step_shared_output_value
+              TEXT
+            end
+
+            before do
+              service_class.around(:step) do |chain, arguments|
+                to_value = ->(&block) do
+                  block.call
+                rescue ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::OutMethodStepIsNotCompleted
+                  "not_completed"
+                end
+
+                out.puts "before step #{arguments.kwargs[:index]}"
+
+                case arguments
+                in {kwargs: {index: 0}}
+                  out.puts "  output first_step_first_output via reader - #{to_value.call { first_step_first_output }}"
+                  out.puts "  output second_step_first_output via reader - #{to_value.call { second_step_first_output }}"
+                  out.puts "  output third_step_first_output via reader - #{to_value.call { third_step_first_output }}"
+                  out.puts "  output shared_output via reader - #{to_value.call { shared_output }}"
+                in {kwargs: {index: 1}}
+                  out.puts "  output first_step_first_output via reader - #{first_step_first_output}"
+                  out.puts "  output second_step_first_output via reader - #{to_value.call { second_step_first_output }}"
+                  out.puts "  output third_step_first_output via reader - #{to_value.call { third_step_first_output }}"
+                  out.puts "  output shared_output via reader - #{shared_output}"
+                in {kwargs: {index: 2}}
+                  out.puts "  output first_step_first_output via reader - #{first_step_first_output}"
+                  out.puts "  output second_step_first_output via reader - #{second_step_first_output}"
+                  out.puts "  output third_step_first_output via reader - #{to_value.call { third_step_first_output }}"
+                  out.puts "  output shared_output via reader - #{shared_output}"
+                else
+                  raise
+                end
+
+                step = chain.yield
+
+                out.puts "after step #{step.index}"
+
+                case step.index
+                when 0
+                  out.puts "  outputs via step.result - #{step.result.call.values.join(",")}"
+                  out.puts "  output first_step_first_output via reader - #{first_step_first_output}"
+                  out.puts "  output second_step_first_output via reader - #{to_value.call { second_step_first_output }}"
+                  out.puts "  output third_step_first_output via reader - #{to_value.call { third_step_first_output }}"
+                  out.puts "  output shared_output via reader - #{shared_output}"
+                when 1
+                  out.puts "  outputs via step.result - #{step.result.call.values.join(",")}"
+                  out.puts "  output first_step_first_output via reader - #{first_step_first_output}"
+                  out.puts "  output second_step_first_output via reader - #{second_step_first_output}"
+                  out.puts "  output third_step_first_output via reader - #{to_value.call { third_step_first_output }}"
+                  out.puts "  output shared_output via reader - #{shared_output}"
+                when 2
+                  out.puts "  outputs via step.result - #{step.result.call.values.join(",")}"
+                  out.puts "  output first_step_first_output via reader - #{first_step_first_output}"
+                  out.puts "  output second_step_first_output via reader - #{second_step_first_output}"
+                  out.puts "  output third_step_first_output via reader - #{third_step_first_output}"
+                  out.puts "  output shared_output via reader - #{shared_output}"
+                else
+                  raise
+                end
+              end
+            end
+
+            it "has access to step/organizer data" do
+              service_class.result
+
+              expect(output).to eq(text)
             end
           end
         end

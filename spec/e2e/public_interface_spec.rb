@@ -1174,6 +1174,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :not_success?, # public
           :organizer, # public
           :organizer_result, # public
+          :organizer_result_without_middlewares, # private
           :output_values, # public
           :outputs, # private
           :params, # private
@@ -1301,6 +1302,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :ok?, # public
           :organizer, # public
           :organizer_result, # public
+          :organizer_result_without_middlewares, # private
           :output_values, # public
           :outputs, # private
           :params, # private

@@ -353,7 +353,6 @@ module ConvenientService
 
             middlewares :result do
               use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.enabled?(:per_instance_caching)
-              use ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware if options.enabled?(:callbacks)
               use ConvenientService::Plugins::Step::HasResult::Middleware if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::CanHaveParentResult::Middleware if options.enabled?(:result_parents_trace)
               use ConvenientService::Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure) if options.enabled?(:fallbacks)
@@ -368,6 +367,11 @@ module ConvenientService
 
             middlewares :service_result do
               use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.enabled?(:per_instance_caching)
+            end
+
+            middlewares :organizer_result do
+              use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.enabled?(:per_instance_caching)
+              use ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware if options.enabled?(:callbacks)
             end
 
             entity :Internals do

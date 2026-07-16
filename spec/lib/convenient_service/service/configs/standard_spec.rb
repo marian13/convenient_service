@@ -590,7 +590,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
             let(:result_middlewares) do
               [
                 ConvenientService::Plugins::Common::CachesReturnValue::Middleware,
-                ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware,
                 ConvenientService::Plugins::Step::HasResult::Middleware,
                 ConvenientService::Plugins::Step::CanHaveParentResult::Middleware,
                 ConvenientService::Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure),
@@ -626,6 +625,19 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
 
             it "sets service step middlewares for `#method_result`" do
               expect(service_class::Step.middlewares(:method_result).to_a).to eq(method_result_middlewares)
+            end
+          end
+
+          example_group "#organizer_result middlewares" do
+            let(:organizer_result_middlewares) do
+              [
+                ConvenientService::Plugins::Common::CachesReturnValue::Middleware,
+                ConvenientService::Plugins::Common::CanHaveCallbacks::Middleware
+              ]
+            end
+
+            it "sets service step middlewares for `#organizer_result`" do
+              expect(service_class::Step.middlewares(:organizer_result).to_a).to eq(organizer_result_middlewares)
             end
           end
 
