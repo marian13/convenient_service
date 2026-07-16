@@ -37,7 +37,7 @@ module ConvenientService
               # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
               #
               def result
-                step.result
+                step.organizer_result
               end
 
               ##

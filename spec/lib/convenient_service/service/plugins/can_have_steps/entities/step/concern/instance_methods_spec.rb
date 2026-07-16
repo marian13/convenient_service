@@ -324,6 +324,49 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
+    describe "#organizer_result" do
+      context "when `organizer` is NOT set" do
+        let(:organizer) { nil }
+
+        let(:message) do
+          <<~TEXT
+            Organizer for method `:#{inputs.first}` is NOT assigned yet.
+
+            Did you forget to set it?
+          TEXT
+        end
+
+        it "returns `ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer`" do
+          expect { step.organizer_result }
+            .to raise_error(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer)
+            .with_message(message)
+        end
+
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::CanHaveSteps::Entities::Method::Exceptions::MethodHasNoOrganizer) { step.organizer_result } }
+            .to delegate_to(ConvenientService, :raise)
+        end
+      end
+
+      context "when `organizer` is set" do
+        it "returns original result" do
+          expect(step.organizer_result).to eq(step.result)
+        end
+
+        specify do
+          expect { step.organizer_result }
+            .to delegate_to(step, :save_outputs_in_organizer!)
+            .without_arguments
+        end
+
+        specify do
+          expect { step.organizer_result }
+            .to delegate_to(step, :mark_as_evaluated!)
+            .without_arguments
+        end
+      end
+    end
+
     describe "#inputs" do
       specify { expect { step.inputs }.to delegate_to(step.params, :inputs) }
     end

@@ -1173,6 +1173,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :not_failure?, # public
           :not_success?, # public
           :organizer, # public
+          :organizer_result, # public
           :output_values, # public
           :outputs, # private
           :params, # private
@@ -1299,6 +1300,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :not_success?, # public
           :ok?, # public
           :organizer, # public
+          :organizer_result, # public
           :output_values, # public
           :outputs, # private
           :params, # private

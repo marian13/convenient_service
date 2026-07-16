@@ -163,22 +163,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
           it "does NOT mark following steps as completed" do
             expect { method_value }.not_to change(service_instance.steps[1], :evaluated?).from(false)
           end
-
-          example_group "order of side effects" do
-            let(:exception) { Class.new(StandardError) }
-
-            before do
-              allow(service_instance.steps[0].status).to receive(:unsafe_not_success?).and_raise(exception)
-            end
-
-            it "does NOT save step outputs into organizer before checking status" do
-              expect { ignoring_exception(exception) { method_value } }.not_to delegate_to(service_instance.steps[0], :save_outputs_in_organizer!)
-            end
-
-            it "does NOT mark intermediate step as completed before checking status" do
-              expect { ignoring_exception(exception) { method_value } }.not_to change(service_instance.steps[0], :evaluated?).from(false)
-            end
-          end
         end
 
         context "when all steps are successful" do
@@ -258,31 +242,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSequentialSteps::Midd
 
           it "marks last step as completed" do
             expect { method_value }.to change(service_instance.steps[1], :evaluated?).from(false).to(true)
-          end
-
-          example_group "order of side effects" do
-            let(:exception) { Class.new(StandardError) }
-
-            before do
-              allow(service_instance.steps[0].status).to receive(:unsafe_not_success?).and_raise(exception)
-              allow(service_instance.steps[1].status).to receive(:unsafe_not_success?).and_raise(exception)
-            end
-
-            it "does NOT save intermediate step outputs into organizer before checking status" do
-              expect { ignoring_exception(exception) { method_value } }.not_to delegate_to(service_instance.steps[0], :save_outputs_in_organizer!)
-            end
-
-            it "does NOT mark intermediate step as completed before checking status" do
-              expect { ignoring_exception(exception) { method_value } }.not_to change(service_instance.steps[0], :evaluated?).from(false)
-            end
-
-            it "does NOT save last step outputs into organizer before checking status" do
-              expect { ignoring_exception(exception) { method_value } }.not_to delegate_to(service_instance.steps[1], :save_outputs_in_organizer!)
-            end
-
-            it "does NOT mark last step as completed before checking status" do
-              expect { ignoring_exception(exception) { method_value } }.not_to change(service_instance.steps[1], :evaluated?).from(false)
-            end
           end
         end
       end

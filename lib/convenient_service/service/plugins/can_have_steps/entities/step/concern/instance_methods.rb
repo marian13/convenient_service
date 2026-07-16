@@ -175,6 +175,19 @@ module ConvenientService
                 end
 
                 ##
+                # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                #
+                def organizer_result
+                  original_result = result
+
+                  save_outputs_in_organizer!
+
+                  mark_as_evaluated!
+
+                  original_result
+                end
+
+                ##
                 # @api public
                 #
                 # @return [ConvenientService::Support::Arguments]

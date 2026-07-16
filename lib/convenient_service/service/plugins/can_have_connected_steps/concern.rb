@@ -718,12 +718,6 @@ module ConvenientService
             def steps_result
               ::ConvenientService.raise Exceptions::ServiceHasNoSteps.new(service_class: self.class) if steps.none?
 
-              steps.each_evaluated_step do |step|
-                step.save_outputs_in_organizer!
-
-                step.mark_as_evaluated!
-              end
-
               steps.result
             end
 

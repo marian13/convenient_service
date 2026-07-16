@@ -52,11 +52,7 @@ module ConvenientService
           #   Do NOT spend too much time on that again, you have a lot of other tasks to do.
           #
           def find_first_not_successful_step_with_side_effects_during_lookup
-            entity.steps.find do |step|
-              step.status.unsafe_not_success?
-                .tap { step.save_outputs_in_organizer! }
-                .tap { step.mark_as_evaluated! }
-            end
+            entity.steps.find { |step| step.organizer_result.status.unsafe_not_success? }
           end
 
           ##
