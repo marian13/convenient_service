@@ -5,6 +5,21 @@
 
 # Changelog
 
+## [0.25.0](https://github.com/marian13/convenient_service/compare/v0.24.0...v0.25.0) (2026-07-16)
+
+
+### Features
+
+* **exceptios:** introduce error.from_exception to have a way to set custom attributes ([28a3b32](https://github.com/marian13/convenient_service/commit/28a3b32402e44531793caf9b4179bbe7efc59432))
+* **services:** introduce inline services ([efd1fe5](https://github.com/marian13/convenient_service/commit/efd1fe5ac65f93a1f240298adc4fcc947393caeb))
+
+
+### Bug Fixes
+
+* **callbacks:** allow to access result and outputs in step around/after callbacks ([a474563](https://github.com/marian13/convenient_service/commit/a4745636e76d2281e18ba241424084d936494b72))
+* **logger:** increase CONVENIENT_SERVICE_LOGGER_LEVEL precedence ([5ac965f](https://github.com/marian13/convenient_service/commit/5ac965fe0bb25800a15c55b9a829d61b66e977c5))
+* **steps:** disallow using strings as kwargs keys in step inputs ([cab793b](https://github.com/marian13/convenient_service/commit/cab793bdb3e560df0177e8038989dc150e0fd332))
+
 ## [0.24.0](https://github.com/marian13/convenient_service/compare/v0.23.0...v0.24.0) (2026-05-04)
 
 
