@@ -472,6 +472,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :parent, # public
           :parents, # public
           :parents_enum, # public
+          :result, # public
           :service, # public
           :status, # public
           :step, # public
