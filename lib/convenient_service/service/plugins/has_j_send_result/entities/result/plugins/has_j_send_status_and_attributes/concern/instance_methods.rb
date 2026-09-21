@@ -104,6 +104,13 @@ module ConvenientService
                     end
 
                     ##
+                    # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                    #
+                    def result
+                      self
+                    end
+
+                    ##
                     # @param status [Symbol]
                     # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Entities::Status]
                     # @raise [ConvenientService::Support::Castable::Exceptions::FailedToCast]

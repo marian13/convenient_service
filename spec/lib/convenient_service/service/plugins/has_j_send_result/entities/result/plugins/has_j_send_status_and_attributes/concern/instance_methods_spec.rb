@@ -13,6 +13,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::HasJSendStatusAndAttributes::Concern::InstanceMethods, type: :standard do
   include ConvenientService::RSpec::Helpers::IgnoringException
 
+  include ConvenientService::RSpec::Matchers::CacheItsValue
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:service_class) do
@@ -142,6 +143,16 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
 
       it "returns casted JSend attributes" do
         expect(result_instance.jsend_attributes).to eq(jsend_attributes)
+      end
+    end
+
+    describe "#result" do
+      it "returns self" do
+        expect(result_instance.result).to eq(result_instance)
+      end
+
+      specify do
+        expect { result_instance.result }.to cache_its_value
       end
     end
 
