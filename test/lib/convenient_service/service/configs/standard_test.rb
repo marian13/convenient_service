@@ -28,6 +28,7 @@ class ConvenientService::Service::Configs::StandardTest < Minitest::Test
               :result_parents_trace,
               :code_review_automation,
               :short_syntax,
+              :duck_typing,
               :type_safety,
               :exception_services_trace,
               :per_instance_caching,
