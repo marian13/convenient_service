@@ -79,262 +79,40 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue
       end
 
       context "when `result` is NOT result" do
-        context "when `result` is NOT result duck (does NOT respond to #result)" do
-          context "when that #result does NOT raise exception" do
-            let(:service_class) do
-              Class.new.tap do |klass|
-                klass.class_exec(middleware) do |middleware|
-                  include ConvenientService::Standard::Config
+        let(:service_class) do
+          Class.new.tap do |klass|
+            klass.class_exec(middleware) do |middleware|
+              include ConvenientService::Standard::Config
 
-                  middlewares :result do
-                    observe middleware
-                  end
-
-                  def result
-                    "string value"
-                  end
-                end
-              end
-            end
-
-            let(:exception_message) do
-              <<~TEXT
-                Return value of service `#{service_class}` is NOT a `Result`.
-                It is `String`.
-
-                Did you forget to call `success`, `failure`, or `error` from the `:#{method_name}` method?
-              TEXT
-            end
-
-            it "raises `ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult`" do
-              expect { method_value }
-                .to raise_error(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult)
-                .with_message(exception_message)
-            end
-
-            specify do
-              expect { ignoring_exception(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult) { method_value } }
-                .to delegate_to(ConvenientService, :raise)
-            end
-          end
-
-          context "when that #result raises exception" do
-            let(:exception_message) { "exception from result" }
-
-            context "when that #result does NOT raise `NoMethodError` exception" do
-              let(:service_class) do
-                Class.new.tap do |klass|
-                  klass.class_exec(middleware) do |middleware|
-                    include ConvenientService::Standard::Config
-
-                    middlewares :result do
-                      observe middleware
-                    end
-
-                    def result
-                      raise ArgumentError, "exception from result"
-                    end
-                  end
-                end
+              middlewares :result do
+                observe middleware
               end
 
-              it "raises `ArgumentError`" do
-                expect { method_value }
-                  .to raise_error(ArgumentError)
-                  .with_message(exception_message)
-              end
-
-              specify do
-                expect { ignoring_exception(ArgumentError) { method_value } }
-                  .not_to delegate_to(ConvenientService, :raise)
-              end
-            end
-
-            context "when that #result raises `NoMethodError` exception" do
-              let(:service_class) do
-                Class.new.tap do |klass|
-                  klass.class_exec(middleware) do |middleware|
-                    include ConvenientService::Standard::Config
-
-                    middlewares :result do
-                      observe middleware
-                    end
-
-                    def result
-                      raise NoMethodError, "exception from result"
-                    end
-                  end
-                end
-              end
-
-              it "raises `NoMethodError`" do
-                expect { method_value }
-                  .to raise_error(NoMethodError)
-                  .with_message(exception_message)
-              end
-
-              specify do
-                expect { ignoring_exception(NoMethodError) { method_value } }
-                  .not_to delegate_to(ConvenientService, :raise)
+              def result
+                "string value"
               end
             end
           end
         end
 
-        context "when `result` is result duck (responds to #result)" do
-          context "when that #result does NOT raise exception" do
-            context "when that #result does NOT return result" do
-              let(:service_class) do
-                Class.new.tap do |klass|
-                  klass.class_exec(middleware) do |middleware|
-                    include ConvenientService::Standard::Config
+        let(:exception_message) do
+          <<~TEXT
+            Return value of service `#{service_class}` is NOT a `Result`.
+            It is `String`.
 
-                    middlewares :result do
-                      observe middleware
-                    end
+            Did you forget to call `success`, `failure`, or `error` from the `:#{method_name}` method?
+          TEXT
+        end
 
-                    def result
-                      OpenStruct.new(result: 42)
-                    end
-                  end
-                end
-              end
+        it "raises `ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult`" do
+          expect { method_value }
+            .to raise_error(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult)
+            .with_message(exception_message)
+        end
 
-              let(:exception_message) do
-                <<~TEXT
-                  Return value of service `#{service_class}` is NOT a `Result`.
-                  It is `Integer`.
-
-                  Did you forget to call `success`, `failure`, or `error` from the `:#{method_name}` method?
-                TEXT
-              end
-
-              it "raises `ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult`" do
-                expect { method_value }
-                  .to raise_error(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult)
-                  .with_message(exception_message)
-              end
-
-              specify do
-                expect { ignoring_exception(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult) { method_value } }
-                  .to delegate_to(ConvenientService, :raise)
-              end
-            end
-
-            context "when that #result returns result" do
-              let(:service_class) do
-                Class.new.tap do |klass|
-                  klass.class_exec(middleware, first_step) do |middleware, first_step|
-                    include ConvenientService::Standard::Config
-
-                    define_singleton_method(:first_step) { first_step }
-
-                    middlewares :result do
-                      observe middleware
-                    end
-
-                    def result
-                      step first_step
-                    end
-
-                    private
-
-                    def first_step
-                      self.class.first_step
-                    end
-                  end
-                end
-              end
-
-              let(:first_step) do
-                Class.new do
-                  include ConvenientService::Standard::Config
-
-                  def result
-                    success(from: :first_step)
-                  end
-                end
-              end
-
-              it "returns original method value" do
-                expect(method_value).to be_success.with_data(from: :first_step)
-              end
-            end
-          end
-
-          context "when that #result raises exception" do
-            let(:service_class) do
-              Class.new.tap do |klass|
-                klass.class_exec(middleware, first_step) do |middleware, first_step|
-                  include ConvenientService::Standard::Config
-
-                  define_singleton_method(:first_step) { first_step }
-
-                  middlewares :result do
-                    observe middleware
-                  end
-
-                  def result
-                    step first_step
-                  end
-
-                  private
-
-                  def first_step
-                    self.class.first_step
-                  end
-                end
-              end
-            end
-
-            let(:exception_message) { "exception from first_step" }
-
-            context "when that #result does NOT raise `NoMethodError` exception" do
-              let(:first_step) do
-                Class.new do
-                  include ConvenientService::Standard::Config
-
-                  def result
-                    raise ArgumentError, "exception from first_step"
-                  end
-                end
-              end
-
-              it "raises `ArgumentError`" do
-                expect { method_value }
-                  .to raise_error(ArgumentError)
-                  .with_message(exception_message)
-              end
-
-              specify do
-                expect { ignoring_exception(ArgumentError) { method_value } }
-                  .not_to delegate_to(ConvenientService, :raise)
-              end
-            end
-
-            context "when that #result raises `NoMethodError` exception" do
-              let(:first_step) do
-                Class.new do
-                  include ConvenientService::Standard::Config
-
-                  def result
-                    raise NoMethodError, "exception from first_step"
-                  end
-                end
-              end
-
-              it "raises `NoMethodError`" do
-                expect { method_value }
-                  .to raise_error(NoMethodError)
-                  .with_message(exception_message)
-              end
-
-              specify do
-                expect { ignoring_exception(NoMethodError) { method_value } }
-                  .not_to delegate_to(ConvenientService, :raise)
-              end
-            end
-          end
+        specify do
+          expect { ignoring_exception(ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue::Exceptions::ReturnValueNotKindOfResult) { method_value } }
+            .to delegate_to(ConvenientService, :raise)
         end
       end
 
@@ -349,14 +127,14 @@ RSpec.describe ConvenientService::Service::Plugins::RaisesOnNotResultReturnValue
               end
 
               def result
-                success(from: :result)
+                success
               end
             end
           end
         end
 
         it "returns original method value" do
-          expect(method_value).to be_success.with_data(from: :result)
+          expect(method_value).to be_success.without_data
         end
       end
     end

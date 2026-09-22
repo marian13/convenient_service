@@ -29,6 +29,7 @@ module ConvenientService
             :result_parents_trace,
             :code_review_automation,
             :short_syntax,
+            :duck_typing,
             :type_safety,
             :exception_services_trace,
             :per_instance_caching,
@@ -58,6 +59,7 @@ module ConvenientService
             :result_parents_trace,
             :code_review_automation,
             :short_syntax,
+            :duck_typing,
             :type_safety,
             :exception_services_trace,
             :per_instance_caching,
@@ -134,6 +136,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.enabled?(:type_safety)
             use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance)
             use ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware if options.enabled?(:backtrace_cleaner)
+            use ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware if options.enabled?(:duck_typing)
             use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware if options.enabled?(:active_model_validations)
             use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Middleware if options.enabled?(:dry_validation)
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware if options.enabled?(:essential)
@@ -146,6 +149,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.enabled?(:type_safety)
             use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance)
             use ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware if options.enabled?(:backtrace_cleaner)
+            use ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware if options.enabled?(:duck_typing)
           end
 
           middlewares :regular_result do
@@ -160,27 +164,30 @@ module ConvenientService
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.enabled?(:per_instance_caching)
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware if options.enabled?(:exception_services_trace)
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.enabled?(:type_safety)
-            # use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance) # TODO: Dedicted `rescue`?
+            # use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance) # TODO: Dedicated `rescue`?
             use ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware if options.enabled?(:backtrace_cleaner)
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :failure) if options.enabled?(:fallbacks)
+            use ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware if options.enabled?(:duck_typing)
           end
 
           middlewares :fallback_error_result do
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.enabled?(:per_instance_caching)
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware if options.enabled?(:exception_services_trace)
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.enabled?(:type_safety)
-            # use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance) # TODO: Dedicted `rescue`?
+            # use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance) # TODO: Dedicated `rescue`?
             use ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware if options.enabled?(:backtrace_cleaner)
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :error) if options.enabled?(:fallbacks)
+            use ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware if options.enabled?(:duck_typing)
           end
 
           middlewares :fallback_result do
             use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.enabled?(:per_instance_caching)
             use ConvenientService::Plugins::Service::CollectsServicesInException::Middleware if options.enabled?(:exception_services_trace)
             use ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware if options.enabled?(:type_safety)
-            # use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance) # TODO: Dedicted `rescue`?
+            # use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance) # TODO: Dedicated `rescue`?
             use ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware if options.enabled?(:backtrace_cleaner)
             use ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: nil) if options.enabled?(:fallbacks)
+            use ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware if options.enabled?(:duck_typing)
           end
 
           middlewares :success do

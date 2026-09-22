@@ -133,6 +133,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Service::SetsParentToForeignResult::Middleware,
               ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware,
+              ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware,
               ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware
 
               ##
@@ -178,7 +179,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Service::CollectsServicesInException::Middleware,
               ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware,
-              ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :failure)
+              ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :failure),
+              ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware
             ]
           end
 
@@ -194,7 +196,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Service::CollectsServicesInException::Middleware,
               ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware,
-              ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :error)
+              ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :error),
+              ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware
             ]
           end
 
@@ -210,7 +213,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Service::CollectsServicesInException::Middleware,
               ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware,
-              ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: nil)
+              ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: nil),
+              ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware
             ]
           end
 
@@ -226,7 +230,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Service::CollectsServicesInException::Middleware,
               ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware,
               ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
-              ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware
+              ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware,
+              ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware
             ]
           end
 
@@ -760,7 +765,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
       # - https://github.com/marian13/convenient_service/discussions/43
       #
       it "applies its `included` block only once" do
-        expect(service_class.middlewares(:result).to_a.size).to eq(8)
+        expect(service_class.middlewares(:result).to_a.size).to eq(9)
       end
     end
   end
@@ -780,6 +785,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
             :result_parents_trace,
             :code_review_automation,
             :short_syntax,
+            :duck_typing,
             :type_safety,
             :exception_services_trace,
             :per_instance_caching,
@@ -832,6 +838,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               :result_parents_trace,
               :code_review_automation,
               :short_syntax,
+              :duck_typing,
               :type_safety,
               :exception_services_trace,
               :per_instance_caching,
