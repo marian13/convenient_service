@@ -18,13 +18,18 @@ module ConvenientService
           # @internal
           #   NOTE: When original result is a result duck and it has `NoMethodError` exception, that exception should be raised just like any other exception. See specs for details.
           #
+          #   NOTE: `exception.receiver` is available on `NameError` descendants (like `NoMethodError`), but NOT on `StandardError`.
+          #   - https://ruby-doc.org/core-2.7.1/NoMethodError.html
+          #   - https://ruby-doc.org/core-2.7.1/NameError.html#method-i-receiver
+          #   - https://ruby-doc.org/core-2.7.1/StandardError.html
+          #
           def next(...)
             result_duck = chain.next(...)
 
             begin
               result_duck.result
             rescue ::NoMethodError => exception
-              raise exception if result_duck.respond_to?(:result)
+              raise exception if exception.receiver != result_duck
 
               result_duck
             end
