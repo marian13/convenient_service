@@ -8,7 +8,7 @@
 module ConvenientService
   module Common
     module Plugins
-      module ConvertsResultDuckToResult
+      module TriesToConvertResultDuckToResult
         class Middleware < MethodChainMiddleware
           intended_for :result, entity: any_entity
 

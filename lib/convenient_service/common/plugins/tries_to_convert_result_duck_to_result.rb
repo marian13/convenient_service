@@ -5,4 +5,4 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
-require_relative "converts_result_duck_to_result/middleware"
+require_relative "tries_to_convert_result_duck_to_result/middleware"

@@ -133,7 +133,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Service::SetsParentToForeignResult::Middleware,
               ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware,
-              ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware,
+              ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware,
               ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware
 
               ##
@@ -180,7 +180,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware,
               ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :failure),
-              ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware
+              ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware
             ]
           end
 
@@ -197,7 +197,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware,
               ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: :error),
-              ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware
+              ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware
             ]
           end
 
@@ -214,7 +214,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware,
               ConvenientService::Plugins::Service::CanHaveFallbacks::Middleware.with(status: nil),
-              ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware
+              ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware
             ]
           end
 
@@ -231,7 +231,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               ConvenientService::Plugins::Common::EnsuresNegatedJSendResult::Middleware,
               ConvenientService::Plugins::Service::RaisesOnNotResultReturnValue::Middleware,
               ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware,
-              ConvenientService::Plugins::Common::ConvertsResultDuckToResult::Middleware
+              ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware
             ]
           end
 
@@ -1167,8 +1167,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :rails do
           end
 
           example_group "#result middlewares" do
-            it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware` after `ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware` to service middlewares for `#result`" do
-              expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware }).not_to be_nil
+            it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware` after `ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware` to service middlewares for `#result`" do
+              expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware }).not_to be_nil
             end
           end
         end
@@ -1215,8 +1215,8 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :dry do
           end
 
           example_group "#result middlewares" do
-            it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Middleware` after `ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware` to service middlewares for `#result`" do
-              expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Middleware }).not_to be_nil
+            it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Middleware` after `ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware` to service middlewares for `#result`" do
+              expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Middleware }).not_to be_nil
             end
           end
         end
