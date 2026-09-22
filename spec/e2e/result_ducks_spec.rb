@@ -109,6 +109,22 @@ RSpec.describe "Result Ducks", type: [:standard, :e2e] do
             expect(service_instance.result).to be_success.with_data(from: :inline_service)
           end
         end
+
+        context "when result duck is result" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success(from: :result).result
+              end
+            end
+          end
+
+          it "returns result" do
+            expect(service_instance.result).to be_success.with_data(from: :result)
+          end
+        end
       end
     end
   end
