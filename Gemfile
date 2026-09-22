@@ -200,7 +200,7 @@ gem "irb", "~> 1.16.0"
 # Not used. Added since `rdoc` >= 8.0 depends on `rbs`, which has a C extension that fails to install on JRuby.
 # - https://github.com/ruby/rdoc/blob/master/History.rdoc
 #
-gem "rdoc", "~> 7.0", platforms: [:jruby]
+gem "rdoc", "~> 7.0", platform: :jruby
 
 ##
 # Not used directly. It is `faker` internal dependency.
@@ -410,7 +410,17 @@ gem "standard", "~> 1.52.0", platform: :mri if RUBY_VERSION >= "4.0"
 # Used to calculate coverage of Ruby code.
 # - https://github.com/simplecov-ruby/simplecov
 #
-gem "simplecov"
+# NOTE: JRuby does NOT support Prism on which SimpleCov 1.3+ depend on.
+# - https://github.com/simplecov-ruby/simplecov/blob/v1.3.0/lib/simplecov/static_coverage_extractor.rb#L3
+#
+# TODO: Check what is JRuby Prism parser.
+# - https://rubygems.org/gems/jruby-prism-parser
+#
+if RUBY_ENGINE == "jruby"
+  gem "simplecov", "~> 1.2.0"
+else
+  gem "simplecov"
+end
 
 ##
 # Used to share and merge coverage info.
