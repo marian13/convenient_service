@@ -416,7 +416,7 @@ gem "standard", "~> 1.52.0", platform: :mri if RUBY_VERSION >= "4.0"
 # TODO: Check what is JRuby Prism parser.
 # - https://rubygems.org/gems/jruby-prism-parser
 #
-if RUBY_ENGINE == "jruby"
+if RUBY_ENGINE == "jruby" && RUBY_VERSION >= "3.2"
   gem "simplecov", "~> 1.2.0"
 else
   gem "simplecov"
