@@ -282,6 +282,13 @@ gem "ostruct", require: false if RUBY_VERSION >= "4.0"
 gem "paint"
 
 ##
+# Used internally by SimpleCov.
+# - https://github.com/ruby/prism
+# - https://github.com/simplecov-ruby/simplecov/blob/v1.3.0/lib/simplecov/static_coverage_extractor.rb#L3
+#
+gem "prism", platform: :mri if RUBY_VERSION >= "4.0"
+
+##
 # Used inside examples.
 # - https://github.com/jfelchner/ruby-progressbar
 #
