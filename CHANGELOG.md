@@ -5,6 +5,14 @@
 
 # Changelog
 
+## [0.26.0](https://github.com/marian13/convenient_service/compare/v0.25.0...v0.26.0) (2026-09-23)
+
+
+### Features
+
+* **result:** result on result returns self ([0f0d2ea](https://github.com/marian13/convenient_service/commit/0f0d2ea266a3e0dd3950e12884fb7929e06389e4))
+* **service:** support result ducks as results ([800124b](https://github.com/marian13/convenient_service/commit/800124bf9966652d919c291ee48eb62169d0f493))
+
 ## [0.25.0](https://github.com/marian13/convenient_service/compare/v0.24.0...v0.25.0) (2026-07-16)
 
 
