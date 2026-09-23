@@ -239,25 +239,17 @@
 29
 30
 31
-32
-33
-34
-35
-36</pre>
+32</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/common/plugins/tries_to_convert_result_duck_to_result/middleware.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_result_duck'>result_duck</span> <span class='op'>=</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_original_object'>original_object</span> <span class='op'>=</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
 
-  <span class='kw'>begin</span>
-    <span class='id identifier rubyid_result_duck'>result_duck</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span>
-  <span class='kw'>rescue</span> <span class='op'>::</span><span class='const'>NoMethodError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_exception'>exception</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_exception'>exception</span> <span class='kw'>if</span> <span class='id identifier rubyid_exception'>exception</span><span class='period'>.</span><span class='id identifier rubyid_receiver'>receiver</span> <span class='op'>!=</span> <span class='id identifier rubyid_result_duck'>result_duck</span>
+  <span class='id identifier rubyid_result_duck'>result_duck</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_try_convert'>try_convert</span><span class='lparen'>(</span><span class='id identifier rubyid_original_object'>original_object</span><span class='rparen'>)</span>
 
-    <span class='id identifier rubyid_result_duck'>result_duck</span>
-  <span class='kw'>end</span>
+  <span class='id identifier rubyid_result_duck'>result_duck</span> <span class='op'>?</span> <span class='id identifier rubyid_result'>result</span> <span class='op'>:</span> <span class='id identifier rubyid_original_object'>original_object</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -269,7 +261,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Sep 22 22:51:02 2026 by
+  Generated on Wed Sep 23 00:55:13 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.45 (ruby-4.0.7).
 </div>
