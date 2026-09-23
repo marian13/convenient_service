@@ -35,8 +35,13 @@ module ConvenientService
                       extra_kwargs.dig(:exceptions, :handled)
                     end
 
+                    ##
+                    # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
+                    # @raise [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result::Plugins::CanBeFromHandledException::Exceptions::FromExceptionOnNotErrorResult]
+                    #
                     def from_exception(exception, **kwargs)
                       ::ConvenientService.raise Exceptions::FromExceptionOnNotErrorResult.new(result: self) unless status.unsafe_error?
+
                       data =
                         if Service::Plugins::HasJSendResult.default_error_data == unsafe_data.to_h
                           {handled_exception: exception}

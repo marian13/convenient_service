@@ -24,15 +24,28 @@ module ConvenientService
           #   - https://ruby-doc.org/core-2.7.1/StandardError.html
           #
           def next(...)
-            result_duck = chain.next(...)
+            original_object = chain.next(...)
 
-            begin
-              result_duck.result
-            rescue ::NoMethodError => exception
-              raise exception if exception.receiver != result_duck
+            result_duck, result = try_convert(original_object)
 
-              result_duck
-            end
+            result_duck ? result : original_object
+          end
+
+          private
+
+          ##
+          # @param original_object [Object] Can be any type.
+          # @return [Array]
+          # @raise [NoMethodError]
+          #
+          def try_convert(original_object)
+            result = original_object.result
+
+            [true, result]
+          rescue ::NoMethodError => exception
+            raise exception if original_object.respond_to?(:result)
+
+            [false, nil]
           end
         end
       end

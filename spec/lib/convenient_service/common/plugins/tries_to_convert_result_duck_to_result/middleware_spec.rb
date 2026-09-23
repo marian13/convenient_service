@@ -296,25 +296,81 @@ RSpec.describe ConvenientService::Common::Plugins::TriesToConvertResultDuckToRes
               end
 
               context "when that #result raises `NoMethodError` exception" do
-                let(:first_step) do
-                  Class.new do
-                    include ConvenientService::Standard::Config
+                context "when that #result raises NOT native `NoMethodError` exception" do
+                  let(:first_step) do
+                    Class.new do
+                      include ConvenientService::Standard::Config
 
-                    def result
-                      raise NoMethodError, "exception from first_step"
+                      def result
+                        raise NoMethodError, "exception from first_step"
+                      end
                     end
+                  end
+
+                  it "raises that NOT native `NoMethodError`" do
+                    expect { method_value }
+                      .to raise_error(NoMethodError)
+                      .with_message(exception_message)
+                  end
+
+                  specify do
+                    expect { ignoring_exception(NoMethodError) { method_value } }
+                      .not_to delegate_to(ConvenientService, :raise)
                   end
                 end
 
-                it "raises `NoMethodError`" do
-                  expect { method_value }
-                    .to raise_error(NoMethodError)
-                    .with_message(exception_message)
-                end
+                context "when that #result raises native `NoMethodError` exception" do
+                  context "when that native `NoMethodError` exception receiver does NOT respond to `result`" do
+                    let(:first_step) do
+                      Class.new do
+                        include ConvenientService::Standard::Config
 
-                specify do
-                  expect { ignoring_exception(NoMethodError) { method_value } }
-                    .not_to delegate_to(ConvenientService, :raise)
+                        def result
+                          Set.new.not_existing_method
+                        end
+                      end
+                    end
+
+                    it "raises that native `NoMethodError`" do
+                      expect { method_value }
+                        .to raise_error(NoMethodError)
+                        .with_message(/not_existing_method/)
+                    end
+
+                    specify do
+                      expect { ignoring_exception(NoMethodError) { method_value } }
+                        .not_to delegate_to(ConvenientService, :raise)
+                    end
+                  end
+
+                  context "when that native `NoMethodError` exception receiver responds to `result`" do
+                    let(:first_step) do
+                      Class.new do
+                        include ConvenientService::Standard::Config
+
+                        def result
+                          klass = Class.new do
+                            def result
+                              Set.new.not_existing_method
+                            end
+                          end
+
+                          klass.new
+                        end
+                      end
+                    end
+
+                    it "raises that native `NoMethodError`" do
+                      expect { method_value }
+                        .to raise_error(NoMethodError)
+                        .with_message(/not_existing_method/)
+                    end
+
+                    specify do
+                      expect { ignoring_exception(NoMethodError) { method_value } }
+                        .not_to delegate_to(ConvenientService, :raise)
+                    end
+                  end
                 end
               end
             end
@@ -567,7 +623,7 @@ RSpec.describe ConvenientService::Common::Plugins::TriesToConvertResultDuckToRes
                   end
                 end
 
-                it "raises `ArgumentError`" do
+                it "raises that NOT `NoMethodError` exception" do
                   expect { method_value }
                     .to raise_error(ArgumentError)
                     .with_message(exception_message)
@@ -580,25 +636,81 @@ RSpec.describe ConvenientService::Common::Plugins::TriesToConvertResultDuckToRes
               end
 
               context "when that #result raises `NoMethodError` exception" do
-                let(:first_step) do
-                  Class.new do
-                    include ConvenientService::Standard::Config
+                context "when that #result raises NOT native `NoMethodError` exception" do
+                  let(:first_step) do
+                    Class.new do
+                      include ConvenientService::Standard::Config
 
-                    def result
-                      raise NoMethodError, "exception from first_step"
+                      def result
+                        raise NoMethodError, "exception from first_step"
+                      end
                     end
+                  end
+
+                  it "raises that NOT native `NoMethodError` exception" do
+                    expect { method_value }
+                      .to raise_error(NoMethodError)
+                      .with_message(exception_message)
+                  end
+
+                  specify do
+                    expect { ignoring_exception(NoMethodError) { method_value } }
+                      .not_to delegate_to(ConvenientService, :raise)
                   end
                 end
 
-                it "raises `NoMethodError`" do
-                  expect { method_value }
-                    .to raise_error(NoMethodError)
-                    .with_message(exception_message)
-                end
+                context "when that #result raises native `NoMethodError` exception" do
+                  context "when that native `NoMethodError` exception receiver does NOT respond to `result`" do
+                    let(:first_step) do
+                      Class.new do
+                        include ConvenientService::Standard::Config
 
-                specify do
-                  expect { ignoring_exception(NoMethodError) { method_value } }
-                    .not_to delegate_to(ConvenientService, :raise)
+                        def result
+                          Set.new.not_existing_method
+                        end
+                      end
+                    end
+
+                    it "raises that native `NoMethodError` exception" do
+                      expect { method_value }
+                        .to raise_error(NoMethodError)
+                        .with_message(/not_existing_method/)
+                    end
+
+                    specify do
+                      expect { ignoring_exception(NoMethodError) { method_value } }
+                        .not_to delegate_to(ConvenientService, :raise)
+                    end
+                  end
+
+                  context "when that native `NoMethodError` exception receiver responds to `result`" do
+                    let(:first_step) do
+                      Class.new do
+                        include ConvenientService::Standard::Config
+
+                        def result
+                          klass = Class.new do
+                            def result
+                              Set.new.not_existing_method
+                            end
+                          end
+
+                          klass.new
+                        end
+                      end
+                    end
+
+                    it "raises that native `NoMethodError` exception" do
+                      expect { method_value }
+                        .to raise_error(NoMethodError)
+                        .with_message(/not_existing_method/)
+                    end
+
+                    specify do
+                      expect { ignoring_exception(NoMethodError) { method_value } }
+                        .not_to delegate_to(ConvenientService, :raise)
+                    end
+                  end
                 end
               end
             end
