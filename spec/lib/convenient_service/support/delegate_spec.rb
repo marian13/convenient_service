@@ -16,22 +16,22 @@ RSpec.describe ConvenientService::Support::Delegate, type: :standard do
     # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
     #
     specify { expect(described_class.ancestors.drop_while { |ancestor| ancestor != described_class }.include?(ConvenientService::Support::Concern)).to be(true) }
-  end
 
-  example_group "when included" do
-    let(:klass) do
-      Class.new.tap do |klass|
-        klass.class_exec(described_class) do |mod|
-          include mod
+    context "when included" do
+      let(:klass) do
+        Class.new.tap do |klass|
+          klass.class_exec(described_class) do |mod|
+            include mod
+          end
         end
       end
-    end
 
-    ##
-    # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
-    #
-    specify { expect(klass.singleton_class.ancestors.drop_while { |ancestor| ancestor != klass.singleton_class }.include?(Forwardable)).to be(true) }
-    specify { expect(klass.singleton_class.ancestors.drop_while { |ancestor| ancestor != klass.singleton_class }.include?(described_class::ClassMethodsForForwardable)).to be(true) }
+      ##
+      # NOTE: Do NOT use custom RSpec helpers and matchers inside Utils and Support to avoid cyclic module dependencies.
+      #
+      specify { expect(klass.singleton_class.ancestors.drop_while { |ancestor| ancestor != klass.singleton_class }.include?(Forwardable)).to be(true) }
+      specify { expect(klass.singleton_class.ancestors.drop_while { |ancestor| ancestor != klass.singleton_class }.include?(described_class::ClassMethodsForForwardable)).to be(true) }
+    end
   end
 
   example_group "class methods" do

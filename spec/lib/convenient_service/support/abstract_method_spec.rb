@@ -15,15 +15,15 @@ RSpec.describe ConvenientService::Support::AbstractMethod, type: :standard do
     it "extends `ConvenientService::Support::Concern`" do
       expect(described_class.included_modules).to include(ConvenientService::Support::Concern)
     end
-  end
 
-  example_group "when included" do
-    let(:klass) { Class.new }
+    context "when included" do
+      let(:klass) { Class.new }
 
-    it "extends `ConvenientService::Support::AbstractMethod::ClassMethods` to class" do
-      klass.include described_class
+      it "extends `ConvenientService::Support::AbstractMethod::ClassMethods` to class" do
+        klass.include described_class
 
-      expect(klass.singleton_class.included_modules).to include(described_class::ClassMethods)
+        expect(klass.singleton_class.included_modules).to include(described_class::ClassMethods)
+      end
     end
   end
 

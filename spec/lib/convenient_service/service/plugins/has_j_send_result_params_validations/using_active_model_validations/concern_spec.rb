@@ -18,17 +18,17 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
     subject { described_class }
 
     it { is_expected.to include_module(ConvenientService::Support::Concern) }
-  end
 
-  example_group "when included" do
-    subject do
-      Class.new.tap do |klass|
-        klass.class_exec(described_class) do |mod|
-          include mod
+    context "when included" do
+      subject do
+        Class.new.tap do |klass|
+          klass.class_exec(described_class) do |mod|
+            include mod
+          end
         end
       end
-    end
 
-    it { is_expected.to include_module(ActiveModel::Validations) }
+      it { is_expected.to include_module(ActiveModel::Validations) }
+    end
   end
 end
