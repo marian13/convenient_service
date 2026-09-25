@@ -16,21 +16,21 @@ module ConvenientService
         attr_reader :name
 
         ##
-        # @!attribute [r] data
+        # @!attribute [r] details
         #   @return [Hash{Symbol => Object}]
         #
-        attr_reader :data
+        attr_reader :details
 
         ##
         # @param name [Symbol]
         # @param enabled [Object] Can be any type.
-        # @param data [Hash{Symbol => Object}]
+        # @param details [Hash{Symbol => Object}]
         # @return [void]
         #
-        def initialize(name:, enabled: false, **data)
+        def initialize(name:, enabled: false, **details)
           @name = name
           @enabled = Utils.to_bool(enabled)
-          @data = data
+          @details = details
         end
 
         ##
@@ -44,15 +44,12 @@ module ConvenientService
         # @param other [Object] Can be any type.
         # @return [Boolean, nil]
         #
-        # @internal
-        #   TODO: Tests.
-        #
         def ==(other)
           return unless other.instance_of?(self.class)
 
           return false if name != other.name
           return false if enabled != other.enabled
-          return false if data != other.data
+          return false if details != other.details
 
           true
         end

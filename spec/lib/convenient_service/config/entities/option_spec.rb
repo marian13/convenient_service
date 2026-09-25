@@ -13,27 +13,27 @@ require "convenient_service"
 RSpec.describe ConvenientService::Config::Entities::Option, type: :standard do
   include ConvenientService::RSpec::Matchers::DelegateTo
 
-  let(:option) { described_class.new(name: name, enabled: enabled, **data) }
+  let(:option) { described_class.new(name: name, enabled: enabled, **details) }
 
   let(:name) { :fallbacks }
   let(:enabled) { true }
-  let(:data) { {status: :failure, exception: false} }
+  let(:details) { {status: :failure, exception: false} }
 
   example_group "class methods" do
     describe ".new" do
       context "when `enabled` is NOT passed" do
-        let(:option) { described_class.new(name: name, **data) }
+        let(:option) { described_class.new(name: name, **details) }
 
         it "defaults to `false`" do
           expect(option.enabled?).to be(false)
         end
       end
 
-      context "when `data` is NOT passed" do
+      context "when `details` is NOT passed" do
         let(:option) { described_class.new(name: name, enabled: enabled) }
 
         it "defaults to empty hash" do
-          expect(option.data).to eq({})
+          expect(option.details).to eq({})
         end
       end
     end
@@ -46,7 +46,15 @@ RSpec.describe ConvenientService::Config::Entities::Option, type: :standard do
       subject { option }
 
       it { is_expected.to have_attr_reader(:name) }
-      it { is_expected.to have_attr_reader(:data) }
+      it { is_expected.to have_attr_reader(:details) }
+    end
+
+    example_group "alias methods" do
+      include ConvenientService::RSpec::Matchers::HaveAliasMethod
+
+      subject { option }
+
+      it { is_expected.to have_alias_method(:data, :details) }
     end
 
     describe "#enabled?" do
@@ -86,14 +94,14 @@ RSpec.describe ConvenientService::Config::Entities::Option, type: :standard do
         end
 
         context "when `other` have different `enabled`" do
-          let(:other) { described_class.new(name: name, enabled: false, **data) }
+          let(:other) { described_class.new(name: name, enabled: false, **details) }
 
           it "returns `false`" do
             expect(option == other).to be(false)
           end
         end
 
-        context "when `other` have different `data`" do
+        context "when `other` have different `details`" do
           let(:other) { described_class.new(name: name, enabled: enabled, status: :error) }
 
           it "returns `false`" do
@@ -102,7 +110,7 @@ RSpec.describe ConvenientService::Config::Entities::Option, type: :standard do
         end
 
         context "when `other` has same attributes" do
-          let(:other) { described_class.new(name: name, enabled: enabled, **data) }
+          let(:other) { described_class.new(name: name, enabled: enabled, **details) }
 
           it "returns `true`" do
             expect(option == other).to be(true)
