@@ -26,6 +26,22 @@ module ConvenientService
                   module Concern
                     module ClassMethods
                       ##
+                      # @param option [ConvenientService::Config::Entities::Option]
+                      # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
+                      #
+                      def from(option, *data_keys)
+                        return self unless option
+                        return self if option.data.empty?
+                        return self if data_keys.empty?
+
+                        data_values = option.data.slice(*data_keys)
+
+                        return self if data_values.empty?
+
+                        with(**data_values)
+                      end
+
+                      ##
                       # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::MiddlewareCreators::With]
                       #
                       def with(...)
