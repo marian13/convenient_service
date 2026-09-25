@@ -8,10 +8,6 @@
 module ConvenientService
   module Config
     module Entities
-      ##
-      # @internal
-      #   TODO: Specs.
-      #
       class OptionCollection
         ##
         # @!attribute [r] options

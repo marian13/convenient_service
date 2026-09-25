@@ -12,7 +12,7 @@ require "convenient_service"
 return unless defined? ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Middleware, type: :standard do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Middleware, type: :dry do
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -51,14 +51,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(status, middleware) do |status, middleware|
-              include ConvenientService::Standard::Config
-
-              concerns do
-                use ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Concern
-              end
+              include ConvenientService::Standard::Config.with({name: :dry_validation, enabled: true, status: status})
 
               middlewares :result do
-                use_and_observe middleware.with(status: status)
+                observe middleware.with(status: status)
               end
 
               contract do
@@ -80,14 +76,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
           let(:service_class) do
             Class.new.tap do |klass|
               klass.class_exec(status, middleware) do |status, middleware|
-                include ConvenientService::Standard::Config
-
-                concerns do
-                  use ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Concern
-                end
+                include ConvenientService::Standard::Config.with({name: :dry_validation, enabled: true, status: status})
 
                 middlewares :result do
-                  use_and_observe middleware.with(status: status)
+                  observe middleware.with(status: status)
                 end
 
                 contract do
@@ -159,14 +151,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
     let(:service_class) do
       Class.new.tap do |klass|
         klass.class_exec(middleware) do |middleware|
-          include ConvenientService::Standard::Config
-
-          concerns do
-            use ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::Concern
-          end
+          include ConvenientService::Standard::Config.with(:dry_validation)
 
           middlewares :result do
-            use_and_observe middleware
+            observe middleware
           end
 
           contract do

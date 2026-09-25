@@ -77,7 +77,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         specify do
           expect { middleware_class.from(option, *data_keys) }
             .to delegate_to(middleware_class, :with)
-            .with_arguments(**{foo: :bar, quux: :quuz})
+            .with_arguments(foo: :bar, quux: :quuz)
             .and_return_its_value
         end
       end
@@ -88,7 +88,7 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
         specify do
           expect { middleware_class.from(option, *data_keys) }
             .to delegate_to(middleware_class, :with)
-            .with_arguments(**{foo: :bar, quux: :quuz})
+            .with_arguments(foo: :bar, quux: :quuz)
             .and_return_its_value
         end
       end

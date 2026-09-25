@@ -22,6 +22,11 @@ module ConvenientService
         attr_reader :details
 
         ##
+        # @return [Hash{Symbol => Object}]
+        #
+        alias_method :data, :details
+
+        ##
         # @param name [Symbol]
         # @param enabled [Object] Can be any type.
         # @param details [Hash{Symbol => Object}]
