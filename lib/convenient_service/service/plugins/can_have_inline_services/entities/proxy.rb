@@ -40,6 +40,11 @@ module ConvenientService
             ##
             # @return [Boolean]
             #
+            # @internal
+            #   TODO: Define `def self.name` to avoid the following `validates` exception.
+            #     ArgumentError:
+            #       Class name cannot be blank. You need to supply a name argument when anonymous class given
+            #
             def define
               return false if self.defined?
 

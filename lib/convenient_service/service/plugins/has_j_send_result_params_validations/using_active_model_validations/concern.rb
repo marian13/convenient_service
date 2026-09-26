@@ -13,8 +13,20 @@ module ConvenientService
           module Concern
             include ::ConvenientService::Concern
 
-            included do |service_class|
-              service_class.include ::ActiveModel::Validations
+            class << self
+              ##
+              # @param skip_validations [Boolean]
+              # @return [Module]
+              #
+              def with(skip_validations: false)
+                return self unless skip_validations
+
+                Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations::NoOpConcern
+              end
+            end
+
+            included do
+              include ::ActiveModel::Validations
             end
           end
         end

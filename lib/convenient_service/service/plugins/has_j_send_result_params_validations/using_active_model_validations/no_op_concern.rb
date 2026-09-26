@@ -28,24 +28,42 @@ module ConvenientService
             class_methods do
               ##
               # @return [void]
+              # @see https://github.com/rails/rails/blob/v8.1.4/activemodel/lib/active_model/validations/validates.rb#L111
+              #
+              def validates(*attributes)
+              end
+
+              ##
+              # @return [void]
+              # @see https://github.com/rails/rails/blob/v8.1.4/activemodel/lib/active_model/validations/validates.rb#L153
+              #
+              def validates!(*attributes)
+              end
+
+              ##
+              # @return [void]
+              # @see https://github.com/rails/rails/blob/v8.1.4/activemodel/lib/active_model/validations.rb#L89
               #
               def validates_each(*attr_names, &block)
               end
 
               ##
               # @return [void]
+              # @see https://github.com/rails/rails/blob/v8.1.4/activemodel/lib/active_model/validations.rb#L162
               #
               def validate(*args, &block)
               end
 
               ##
               # @return [void]
+              # @see https://github.com/rails/rails/blob/v8.1.4/activemodel/lib/active_model/validations.rb#L206
               #
               def validators
               end
 
               ##
               # @return [void]
+              # @see https://github.com/rails/rails/blob/v8.1.4/activemodel/lib/active_model/validations.rb#L268
               #
               def validators_on(*attributes)
               end
@@ -54,6 +72,7 @@ module ConvenientService
             instance_methods do
               ##
               # @return [Array]
+              # @see https://github.com/rails/rails/blob/v8.1.4/activemodel/lib/active_model/validations.rb#L330
               #
               def errors
                 @errors ||= []
@@ -61,6 +80,7 @@ module ConvenientService
 
               ##
               # @return [Boolean]
+              # @see https://github.com/rails/rails/blob/v8.1.4/activemodel/lib/active_model/validations.rb#L363
               #
               def valid?(context = nil)
                 true
@@ -68,11 +88,13 @@ module ConvenientService
 
               ##
               # @return [Boolean]
+              # @see https://github.com/rails/rails/blob/v8.1.4/activemodel/lib/active_model/validations.rb#L372
               #
               alias_method :validate, :valid?
 
               ##
               # @return [Boolean]
+              # @see https://github.com/rails/rails/blob/v8.1.4/activemodel/lib/active_model/validations.rb#L410
               #
               def invalid?(context = nil)
                 false
@@ -80,6 +102,7 @@ module ConvenientService
 
               ##
               # @return [Boolean]
+              # @see https://github.com/rails/rails/blob/v8.1.4/activemodel/lib/active_model/validations.rb#L419
               #
               def validate!(context = nil)
                 true

@@ -17,9 +17,10 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
             def next(...)
-              return result_from_active_model_validations if active_model_validations_errors.any?
+              return chain.next(...) if skip_validations?
+              return chain.next(...) if active_model_validations_errors.none?
 
-              chain.next(...)
+              result_from_active_model_validations
             end
 
             private
@@ -56,6 +57,13 @@ module ConvenientService
             #
             def status
               middleware_arguments.kwargs.fetch(:status) { :error }
+            end
+
+            ##
+            # @return [Boolean]
+            #
+            def skip_validations?
+              middleware_arguments.kwargs.fetch(:skip_validations) { false }
             end
           end
         end

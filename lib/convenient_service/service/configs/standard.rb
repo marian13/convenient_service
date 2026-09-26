@@ -110,7 +110,7 @@ module ConvenientService
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingActiveModelAttributeAssignment::Concern if options.enabled?(:active_model_attribute_assignment)
             use ConvenientService::Plugins::Common::AssignsAttributesInConstructor::UsingDryInitializer::Concern if options.enabled?(:dry_initializer)
             use ConvenientService::Plugins::Common::HasAttributes::UsingActiveModelAttributes::Concern if options.enabled?(:active_model_attributes)
-            use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern if options.enabled?(:active_model_validations)
+            use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern.from(options[:active_model_validations], :skip_validations) if options.enabled?(:active_model_validations)
             use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Concern if options.enabled?(:dry_validation)
             use ConvenientService::Plugins::Common::HasMemoization::UsingMemoWise::Concern if options.enabled?(:memo_wise)
             use ConvenientService::Plugins::Common::CanHaveNotPassedArguments::Concern if options.enabled?(:not_passed_arguments)
@@ -137,7 +137,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance)
             use ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware if options.enabled?(:backtrace_cleaner)
             use ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware if options.enabled?(:duck_typing)
-            use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware.from(options[:active_model_validations], :status) if options.enabled?(:active_model_validations)
+            use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware.from(options[:active_model_validations], :status, :skip_validations) if options.enabled?(:active_model_validations)
             use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Middleware.from(options[:dry_validation], :status) if options.enabled?(:dry_validation)
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware if options.enabled?(:essential)
           end

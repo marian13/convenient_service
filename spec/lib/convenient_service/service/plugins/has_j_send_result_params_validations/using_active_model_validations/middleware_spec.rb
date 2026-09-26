@@ -11,7 +11,7 @@ require "convenient_service"
 
 return unless defined? ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations
 
-# rubocop:disable RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware, type: :rails do
   let(:middleware) { described_class }
 
@@ -46,15 +46,16 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
 
         subject(:method_value) { method.call }
 
-        let(:method) { wrap_method(service_instance, :result, observe_middleware: middleware.with(status: status)) }
+        let(:method) { wrap_method(service_instance, :result, observe_middleware: middleware.with(status: status, skip_validations: skip_validations)) }
+        let(:skip_validations) { false }
 
         let(:service_class) do
           Class.new.tap do |klass|
-            klass.class_exec(status, middleware) do |status, middleware|
-              include ConvenientService::Standard::Config.with({name: :active_model_validations, enabled: true, status: status})
+            klass.class_exec(status, skip_validations, middleware) do |status, skip_validations, middleware|
+              include ConvenientService::Standard::Config.with({name: :active_model_validations, enabled: true, status: status, skip_validations: skip_validations})
 
               middlewares :result do
-                observe middleware.with(status: status)
+                observe middleware.with(status: status, skip_validations: skip_validations)
               end
 
               attr_reader :foo
@@ -102,6 +103,17 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
           end
         end
 
+        context "when `skip_validations` is `true`" do
+          let(:skip_validations) { true }
+          let(:service_instance) { service_class.new(foo: "bar") }
+
+          specify do
+            expect { method_value }
+              .to call_chain_next.on(method)
+              .and_return_its_value
+          end
+        end
+
         context "when validation does NOT have any errors" do
           let(:service_instance) { service_class.new(foo: "x") }
 
@@ -127,6 +139,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
 
           it "returns result with `:unsatisfied_active_model_validations` as code" do
             expect(method_value).to be_result(status).with_code(:unsatisfied_active_model_validations)
+          end
+
+          specify do
+            expect { method_value }.not_to call_chain_next.on(method)
           end
         end
       end
@@ -213,4 +229,4 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
     end
   end
 end
-# rubocop:enable RSpec/NestedGroups
+# rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
