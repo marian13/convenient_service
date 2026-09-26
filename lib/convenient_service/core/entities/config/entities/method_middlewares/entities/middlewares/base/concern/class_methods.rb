@@ -27,18 +27,11 @@ module ConvenientService
                     module ClassMethods
                       ##
                       # @param option [ConvenientService::Config::Entities::Option]
+                      # @param detail_keys [Array<Symbol>]
                       # @return [ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Base]
                       #
-                      def from(option, *data_keys)
-                        return self unless option
-                        return self if option.data.empty?
-                        return self if data_keys.empty?
-
-                        data_values = option.data.slice(*data_keys)
-
-                        return self if data_values.empty?
-
-                        with(**data_values)
+                      def from(option, *detail_keys)
+                        ::ConvenientService::Core::Entities::Config::Commands::BuildEntityFromConfigOption.call(base_entity: self, option: option, detail_keys: detail_keys)
                       end
 
                       ##

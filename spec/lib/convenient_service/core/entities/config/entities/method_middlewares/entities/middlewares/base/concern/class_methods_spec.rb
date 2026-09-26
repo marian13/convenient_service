@@ -43,54 +43,15 @@ RSpec.describe ConvenientService::Core::Entities::Config::Entities::MethodMiddle
     end
 
     describe ".from" do
-      let(:option) { ConvenientService::Config::Entities::Option.new(name: :some_option, enabled: true, **data) }
-      let(:data) { {foo: :bar, baz: :qux, quux: :quuz} }
-      let(:data_keys) { [:foo, :baz] }
+      let(:option) { ConvenientService::Config::Entities::Option.new(name: :some_option, enabled: true, **details) }
+      let(:details) { {foo: :bar, baz: :qux, quux: :quuz} }
+      let(:detail_keys) { [:foo, :baz] }
 
-      context "when `option` is `nil`" do
-        let(:option) { nil }
-
-        it "returns original middleware class" do
-          expect(middleware_class.from(option, *data_keys)).to eq(middleware_class)
-        end
-      end
-
-      context "when `data_keys` are empty" do
-        let(:data_keys) { [] }
-
-        it "returns original middleware class" do
-          expect(middleware_class.from(option, *data_keys)).to eq(middleware_class)
-        end
-      end
-
-      context "when `option` data is empty" do
-        let(:data) { {} }
-
-        it "returns original middleware class" do
-          expect(middleware_class.from(option, *data_keys)).to eq(middleware_class)
-        end
-      end
-
-      context "when `data_keys` are subset of `option` data" do
-        let(:data_keys) { [:foo, :quux] }
-
-        specify do
-          expect { middleware_class.from(option, *data_keys) }
-            .to delegate_to(middleware_class, :with)
-            .with_arguments(foo: :bar, quux: :quuz)
-            .and_return_its_value
-        end
-      end
-
-      context "when `data_keys` are superset of `option` data" do
-        let(:data_keys) { [:foo, :quux, :cargo] }
-
-        specify do
-          expect { middleware_class.from(option, *data_keys) }
-            .to delegate_to(middleware_class, :with)
-            .with_arguments(foo: :bar, quux: :quuz)
-            .and_return_its_value
-        end
+      specify do
+        expect { middleware_class.from(option, *detail_keys) }
+          .to delegate_to(ConvenientService::Core::Entities::Config::Commands::BuildEntityFromConfigOption, :call)
+          .with_arguments(base_entity: middleware_class, option: option, detail_keys: detail_keys)
+          .and_return_its_value
       end
     end
 

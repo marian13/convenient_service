@@ -5,6 +5,7 @@
 # @license LGPLv3 <https://www.gnu.org/licenses/lgpl-3.0.html>
 ##
 
+require_relative "commands/build_entity_from_config_option"
 require_relative "commands/create_entity_class"
 require_relative "commands/find_entity_class"
 require_relative "commands/find_or_create_entity_class"
