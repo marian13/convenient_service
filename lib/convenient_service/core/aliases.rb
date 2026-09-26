@@ -94,4 +94,43 @@ module ConvenientService
   #   # => <Service::Result status: :success>
   #
   MethodChainMiddleware = ::ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Chain
+
+  ##
+  # Alias to base class for method middlewares using `chain.next`.
+  #
+  # @api public
+  # @since 1.0.0
+  # @return [Class]
+  #
+  # @example Common usage.
+  #   class Middleware < ConvenientService::MethodMiddleware
+  #     def next(*args, **kwargs, &block)
+  #       p [args, kwargs, block]
+  #
+  #       value = chain.next(*args, **kwargs, &block)
+  #
+  #       p value
+  #
+  #       value
+  #     end
+  #   end
+  #
+  #   class Service
+  #     include ConvenientService::Standard::Config
+  #
+  #     middlewares :result do
+  #       insert_before 0, Middleware
+  #     end
+  #
+  #     def result
+  #       success
+  #     end
+  #   end
+  #
+  #   Service.result
+  #   # {args: [], kwargs: {}, block: nil, entity: <Service>, method: :result}
+  #   # <Service::Result status: :success>
+  #   # => <Service::Result status: :success>
+  #
+  MethodMiddleware = MethodChainMiddleware
 end
