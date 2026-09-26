@@ -5,6 +5,19 @@
 
 # Changelog
 
+## [0.27.0](https://github.com/marian13/convenient_service/compare/v0.26.0...v0.27.0) (2026-09-26)
+
+
+### Features
+
+* **configs:** add .from and .with support to concerns ([d9d0146](https://github.com/marian13/convenient_service/commit/d9d014665ede57f99d94e579dfc7e9062943b451))
+* **configs:** allow to pass status detail to active_model_validations option ([057fdb9](https://github.com/marian13/convenient_service/commit/057fdb9d87e94f6168ff460119ceb94195ce2a1b))
+* **configs:** allow to pass status detail to dry_validation option ([64f888d](https://github.com/marian13/convenient_service/commit/64f888df5517829b3cc6c1d3888410522aa7e34b))
+* **configs:** introduce concern wrapper ([5218fde](https://github.com/marian13/convenient_service/commit/5218fde71c1e80e8552018bc2ecf15843bd1a937))
+* **middlewares:** add shorter ConvenientService::MethodMiddleware alias ([f81c968](https://github.com/marian13/convenient_service/commit/f81c968d595ef85b280355ec9a368a103d46a353))
+* **middlewares:** add shorter ConvenientService::Middleware alias ([1c35414](https://github.com/marian13/convenient_service/commit/1c35414b9771c7e4a240509f92370ab96af8aa37))
+* **middlewares:** introduce from method to extract option data ([32d3b99](https://github.com/marian13/convenient_service/commit/32d3b9934a9a3aa447d042480dd5a61e1059489a))
+
 ## [0.26.0](https://github.com/marian13/convenient_service/compare/v0.25.0...v0.26.0) (2026-09-23)
 
 
