@@ -68,7 +68,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Support::Concern) }
+    it { is_expected.to include_module(ConvenientService::Concern) }
 
     ##
     # TODO: Custom matcher. This code is repeated too often.

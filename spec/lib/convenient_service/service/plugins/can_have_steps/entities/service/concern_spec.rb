@@ -16,7 +16,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Serv
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Support::Concern) }
+    it { is_expected.to include_module(ConvenientService::Concern) }
 
     context "when included" do
       subject { service_class }

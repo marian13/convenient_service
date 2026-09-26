@@ -28,7 +28,7 @@ RSpec.describe ConvenientService::Common::Plugins::HasInternals::Concern, type: 
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Support::Concern) }
+    it { is_expected.to include_module(ConvenientService::Concern) }
   end
 
   example_group "instance methods" do

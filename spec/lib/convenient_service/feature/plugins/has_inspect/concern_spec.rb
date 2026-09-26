@@ -18,7 +18,7 @@ RSpec.describe ConvenientService::Feature::Plugins::HasInspect::Concern, type: :
 
     subject { described_class }
 
-    it { is_expected.to include_module(ConvenientService::Support::Concern) }
+    it { is_expected.to include_module(ConvenientService::Concern) }
 
     context "when included" do
       subject { feature_class }
