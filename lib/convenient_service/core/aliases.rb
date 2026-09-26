@@ -132,5 +132,5 @@ module ConvenientService
   #   # <Service::Result status: :success>
   #   # => <Service::Result status: :success>
   #
-  MethodMiddleware = MethodChainMiddleware
+  Middleware = MethodChainMiddleware
 end
