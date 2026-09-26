@@ -10,7 +10,7 @@ module ConvenientService
     module Plugins
       module CanBeCopied
         module Concern
-          include Support::Concern
+          include ::ConvenientService::Concern
 
           ##
           # @internal

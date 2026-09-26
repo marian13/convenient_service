@@ -11,7 +11,7 @@ module ConvenientService
       module HasMemoization
         module UsingMemoWise
           module Concern
-            include Support::Concern
+            include ::ConvenientService::Concern
 
             included do
               prepend ::MemoWise

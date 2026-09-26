@@ -10,7 +10,7 @@ module ConvenientService
     module Plugins
       module HasJSendResultDuckShortSyntax
         module Concern
-          include Support::Concern
+          include ::ConvenientService::Concern
 
           instance_methods do
             ##

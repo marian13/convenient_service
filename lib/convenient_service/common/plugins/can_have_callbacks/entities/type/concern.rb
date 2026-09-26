@@ -12,7 +12,7 @@ module ConvenientService
         module Entities
           class Type
             module Concern
-              include Support::Concern
+              include ::ConvenientService::Concern
 
               class_methods do
                 ##

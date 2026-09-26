@@ -11,7 +11,7 @@ module ConvenientService
       module HasJSendResultParamsValidations
         module UsingActiveModelValidations
           module Concern
-            include Support::Concern
+            include ::ConvenientService::Concern
 
             included do |service_class|
               service_class.include ::ActiveModel::Validations

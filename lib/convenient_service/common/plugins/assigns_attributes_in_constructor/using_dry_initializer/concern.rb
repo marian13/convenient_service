@@ -11,7 +11,7 @@ module ConvenientService
       module AssignsAttributesInConstructor
         module UsingDryInitializer
           module Concern
-            include Support::Concern
+            include ::ConvenientService::Concern
 
             included do |service_class|
               service_class.extend ::Dry::Initializer

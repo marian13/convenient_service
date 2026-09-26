@@ -19,7 +19,7 @@ module ConvenientService
                 module Entities
                   class Status
                     module Concern
-                      include Support::Concern
+                      include ::ConvenientService::Concern
 
                       included do |code_class|
                         code_class.include Support::Castable

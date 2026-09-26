@@ -7,6 +7,8 @@
 
 require_relative "concerns/entities"
 
+require_relative "concerns/usual"
+
 module ConvenientService
   module Core
     module Entities

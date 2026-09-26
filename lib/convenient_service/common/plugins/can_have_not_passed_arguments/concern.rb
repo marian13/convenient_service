@@ -10,7 +10,7 @@ module ConvenientService
     module Plugins
       module CanHaveNotPassedArguments
         module Concern
-          include Support::Concern
+          include ::ConvenientService::Concern
 
           class_methods do
             private

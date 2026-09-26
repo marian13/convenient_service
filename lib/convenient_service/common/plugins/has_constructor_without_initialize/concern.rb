@@ -10,7 +10,7 @@ module ConvenientService
     module Plugins
       module HasConstructorWithoutInitialize
         module Concern
-          include Support::Concern
+          include ::ConvenientService::Concern
 
           class_methods do
             ##

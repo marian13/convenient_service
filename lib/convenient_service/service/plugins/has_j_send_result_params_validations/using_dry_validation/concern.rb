@@ -11,7 +11,7 @@ module ConvenientService
       module HasJSendResultParamsValidations
         module UsingDryValidation
           module Concern
-            include Support::Concern
+            include ::ConvenientService::Concern
 
             class_methods do
               def contract(&block)

@@ -14,7 +14,7 @@ module ConvenientService
             module Plugins
               module CanBeEvaluated
                 module Concern
-                  include Support::Concern
+                  include ::ConvenientService::Concern
 
                   instance_methods do
                     ##

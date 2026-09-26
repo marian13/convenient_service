@@ -17,7 +17,7 @@ module ConvenientService
             module Plugins
               module HasJSendStatusAndAttributes
                 module Concern
-                  include Support::Concern
+                  include ::ConvenientService::Concern
 
                   included do |result_class|
                     result_class.include InstanceMethods

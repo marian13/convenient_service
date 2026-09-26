@@ -15,7 +15,7 @@ module ConvenientService
         module Entities
           class Service
             module Concern
-              include Support::Concern
+              include ::ConvenientService::Concern
 
               included do |service_klass|
                 service_klass.include Support::Castable

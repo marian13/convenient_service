@@ -14,7 +14,7 @@ module ConvenientService
         module Entities
           class Step
             module Concern
-              include Support::Concern
+              include ::ConvenientService::Concern
 
               included do |step_class|
                 step_class.include InstanceMethods

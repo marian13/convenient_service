@@ -16,7 +16,7 @@ module ConvenientService
             module Plugins
               module HelpsToLearnSimilaritiesWithCommonObjects
                 module Concern
-                  include Support::Concern
+                  include ::ConvenientService::Concern
 
                   included do |result_class|
                     result_class.include InstanceMethods

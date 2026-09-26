@@ -11,6 +11,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/DescribeClass
 RSpec.describe "convenient_service/core/aliases", type: :standard do
+  specify { expect(ConvenientService::Concern).to eq(ConvenientService::Core::Entities::Config::Entities::Concerns::Usual) }
+
   specify { expect(ConvenientService::ConcernMiddleware).to eq(ConvenientService::Core::Entities::Config::Entities::Concerns::Entities::Middleware) }
 
   specify { expect(ConvenientService::MethodClassicMiddleware).to eq(ConvenientService::Core::Entities::Config::Entities::MethodMiddlewares::Entities::Middlewares::Classic) }

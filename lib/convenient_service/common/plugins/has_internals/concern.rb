@@ -10,7 +10,7 @@ module ConvenientService
     module Plugins
       module HasInternals
         module Concern
-          include Support::Concern
+          include ::ConvenientService::Concern
 
           instance_methods do
             def internals

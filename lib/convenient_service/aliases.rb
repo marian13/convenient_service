@@ -63,17 +63,6 @@ module ConvenientService
   Command = ::ConvenientService::Support::Command
 
   ##
-  # Convenient Service concern (Like Rails concern, but with some customizations).
-  #
-  # @api public
-  # @since 1.0.0
-  # @return [Module]
-  #
-  # @note Expected to be used from Convenient Service plugins.
-  #
-  Concern = ::ConvenientService::Support::Concern
-
-  ##
   # Convenient Service dependency container.
   #
   # @api public

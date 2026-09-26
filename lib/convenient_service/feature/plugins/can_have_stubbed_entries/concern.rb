@@ -10,7 +10,7 @@ module ConvenientService
     module Plugins
       module CanHaveStubbedEntries
         module Concern
-          include Support::Concern
+          include ::ConvenientService::Concern
 
           included do
             extend ClassMethods

@@ -7,6 +7,17 @@
 
 module ConvenientService
   ##
+  # Convenient Service concern (Like Rails concern, but with some customizations).
+  #
+  # @api public
+  # @since 1.0.0
+  # @return [Module]
+  #
+  # @note Expected to be used from Convenient Service plugins.
+  #
+  Concern = ::ConvenientService::Core::Entities::Config::Entities::Concerns::Usual
+
+  ##
   # Base class for concern middlewares.
   #
   # @api private

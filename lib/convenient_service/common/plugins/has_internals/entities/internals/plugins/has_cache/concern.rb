@@ -18,7 +18,7 @@ module ConvenientService
               #
               module HasCache
                 module Concern
-                  include Support::Concern
+                  include ::ConvenientService::Concern
 
                   class_methods do
                     ##

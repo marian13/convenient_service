@@ -13,7 +13,7 @@ module ConvenientService
     module Plugins
       module HasJSendResult
         module Concern
-          include Support::Concern
+          include ::ConvenientService::Concern
 
           included do |service_class|
             service_class.include InstanceMethods

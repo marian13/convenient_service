@@ -11,7 +11,7 @@ module ConvenientService
       module HasAttributes
         module UsingActiveModelAttributes
           module Concern
-            include Support::Concern
+            include ::ConvenientService::Concern
 
             included do |service_class|
               service_class.include Patches::ActiveModelAttributes
