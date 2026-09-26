@@ -137,7 +137,7 @@ module ConvenientService
             use ConvenientService::Plugins::Service::RescuesResultUnhandledExceptions::Middleware if options.enabled?(:fault_tolerance)
             use ConvenientService::Plugins::Common::CleansExceptionBacktrace::Middleware if options.enabled?(:backtrace_cleaner)
             use ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware if options.enabled?(:duck_typing)
-            use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware if options.enabled?(:active_model_validations)
+            use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware.from(options[:active_model_validations], :status) if options.enabled?(:active_model_validations)
             use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Middleware.from(options[:dry_validation], :status) if options.enabled?(:dry_validation)
             use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware if options.enabled?(:essential)
           end

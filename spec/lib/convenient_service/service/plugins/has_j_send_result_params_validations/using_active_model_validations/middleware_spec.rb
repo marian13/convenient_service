@@ -12,7 +12,7 @@ require "convenient_service"
 return unless defined? ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations
 
 # rubocop:disable RSpec/NestedGroups
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware, type: :standard do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware, type: :rails do
   let(:middleware) { described_class }
 
   example_group "inheritance" do
@@ -51,14 +51,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
         let(:service_class) do
           Class.new.tap do |klass|
             klass.class_exec(status, middleware) do |status, middleware|
-              include ConvenientService::Standard::Config
-
-              concerns do
-                use ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern
-              end
+              include ConvenientService::Standard::Config.with({name: :active_model_validations, enabled: true, status: status})
 
               middlewares :result do
-                use_and_observe middleware.with(status: status)
+                observe middleware.with(status: status)
               end
 
               attr_reader :foo
@@ -147,14 +143,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
     let(:service_class) do
       Class.new.tap do |klass|
         klass.class_exec(middleware) do |middleware|
-          include ConvenientService::Standard::Config
-
-          concerns do
-            use ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern
-          end
+          include ConvenientService::Standard::Config.with(:active_model_validations)
 
           middlewares :result do
-            use_and_observe middleware
+            observe middleware
           end
 
           attr_reader :foo

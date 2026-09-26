@@ -1172,6 +1172,24 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :rails do
             end
           end
         end
+
+        context "when `:active_model_validations` option is passed with `status` detail" do
+          let(:service_class) do
+            Class.new.tap do |klass|
+              klass.class_exec(described_class) do |mod|
+                include mod.with({name: :active_model_validations, enabled: true, status: :failure})
+              end
+            end
+          end
+
+          example_group "service" do
+            example_group "#result middlewares" do
+              it "adds `ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware` after `ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware` to service middlewares for `#result`" do
+                expect(service_class.middlewares(:result).to_a.each_cons(2).find { |previous_middleware, current_middleware| previous_middleware == ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware && current_middleware == ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware.with(status: :failure) }).not_to be_nil
+              end
+            end
+          end
+        end
       end
     end
   end

@@ -11,7 +11,7 @@ require "convenient_service"
 
 return unless defined? ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations
 
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern, type: :standard do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations::Concern, type: :rails do
   include ConvenientService::RSpec::Matchers::IncludeModule
 
   example_group "modules" do
