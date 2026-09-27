@@ -12,7 +12,7 @@ require "convenient_service"
 return unless defined? ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
-RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::NoOpConcern, type: :rails do
+RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::NoOpConcern, type: :dry do
   include ConvenientService::RSpec::Matchers::IncludeModule
   include ConvenientService::RSpec::Matchers::ExtendModule
 
@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
       mod.instance_method(method_name).parameters
     end
 
-    specify { expect(method_for(:contract, described_class::ClassMethods)).to eq(method_for(:contract, described_class)) }
+    specify { expect(method_for(:contract, described_class::ClassMethods)).to eq(method_for(:contract, ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::NoOpConcern::ClassMethods)) }
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
