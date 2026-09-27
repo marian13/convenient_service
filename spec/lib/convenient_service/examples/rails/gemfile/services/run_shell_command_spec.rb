@@ -35,7 +35,7 @@ RSpec.describe ConvenientService::Examples::Rails::Gemfile::Services::RunShellCo
 
       before do
         stub_service(ConvenientService::Examples::Rails::Gemfile::Services::PrintShellCommand)
-          .with_arguments(command: command, skip: debug)
+          .with_arguments(command: command, skip: !debug)
           .to return_success
       end
 
