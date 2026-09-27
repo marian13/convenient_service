@@ -259,17 +259,13 @@
 45
 46
 47
-48
-49
-50</pre>
+48</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/plugins/has_result/middleware.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='kw'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_chain'>chain</span><span class='period'>.</span><span class='id identifier rubyid_next'>next</span><span class='lparen'>(</span><span class='op'>...</span><span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_strict'>strict</span> <span class='kw'>if</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_strict?'>strict?</span>
 
   <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span>
     <span class='label'>overrides:</span> <span class='lbrace'>{</span>
@@ -292,7 +288,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Sep 27 02:04:41 2026 by
+  Generated on Sun Sep 27 23:20:19 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.45 (ruby-4.0.7).
 </div>

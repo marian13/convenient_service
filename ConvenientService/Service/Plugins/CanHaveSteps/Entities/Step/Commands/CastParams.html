@@ -380,28 +380,6 @@
 </li>
 
       
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#strict-instance_method" title="#strict (instance method)">#<strong>strict</strong>  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  <span class="private note title">private</span>
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
     </ul>
     
   
@@ -627,12 +605,12 @@
       <pre class="lines">
 
 
+48
 49
-50
-51</pre>
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_action'>action</span>
   <span class='ivar'>@action</span> <span class='op'>||=</span> <span class='id identifier rubyid_original_params'>original_params</span><span class='period'>.</span><span class='id identifier rubyid_action'>action</span>
@@ -708,8 +686,7 @@
 40
 41
 42
-43
-44</pre>
+43</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 33</span>
@@ -719,7 +696,6 @@
     <span class='label'>action:</span> <span class='id identifier rubyid_action'>action</span><span class='comma'>,</span>
     <span class='label'>inputs:</span> <span class='id identifier rubyid_inputs'>inputs</span><span class='comma'>,</span>
     <span class='label'>outputs:</span> <span class='id identifier rubyid_outputs'>outputs</span><span class='comma'>,</span>
-    <span class='label'>strict:</span> <span class='id identifier rubyid_strict'>strict</span><span class='comma'>,</span>
     <span class='label'>index:</span> <span class='id identifier rubyid_index'>index</span><span class='comma'>,</span>
     <span class='label'>container:</span> <span class='id identifier rubyid_container'>container</span><span class='comma'>,</span>
     <span class='label'>organizer:</span> <span class='id identifier rubyid_organizer'>organizer</span><span class='comma'>,</span>
@@ -787,12 +763,12 @@
       <pre class="lines">
 
 
-84
-85
-86</pre>
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_container'>container</span>
   <span class='ivar'>@container</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../Entities.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities (module)">Entities</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Service.html" title="ConvenientService::Service::Plugins::CanHaveSteps::Entities::Service (class)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_cast!'>cast!</span><span class='lparen'>(</span><span class='id identifier rubyid_original_params'>original_params</span><span class='period'>.</span><span class='id identifier rubyid_container'>container</span><span class='rparen'>)</span>
@@ -858,12 +834,12 @@
       <pre class="lines">
 
 
-98
-99
-100</pre>
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span>
   <span class='ivar'>@extra_kwargs</span> <span class='op'>||=</span> <span class='id identifier rubyid_original_params'>original_params</span><span class='period'>.</span><span class='id identifier rubyid_extra_kwargs'>extra_kwargs</span>
@@ -929,12 +905,12 @@
       <pre class="lines">
 
 
-77
-78
-79</pre>
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='ivar'>@index</span> <span class='op'>||=</span> <span class='id identifier rubyid_original_params'>original_params</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span>
@@ -1000,12 +976,12 @@
       <pre class="lines">
 
 
+55
 56
-57
-58</pre>
+57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inputs'>inputs</span>
   <span class='ivar'>@inputs</span> <span class='op'>||=</span> <span class='id identifier rubyid_cast_inputs'>cast_inputs</span>
@@ -1071,12 +1047,12 @@
       <pre class="lines">
 
 
-91
-92
-93</pre>
+83
+84
+85</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_organizer'>organizer</span>
   <span class='const'><span class='object_link'><a href="../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_memoize_including_falsy_values'><span class='object_link'><a href="../../../../../../Utils.html#memoize_including_falsy_values-class_method" title="ConvenientService::Utils.memoize_including_falsy_values (method)">memoize_including_falsy_values</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:@organizer</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_original_params'>original_params</span><span class='period'>.</span><span class='id identifier rubyid_organizer'>organizer</span> <span class='rbrace'>}</span>
@@ -1142,86 +1118,15 @@
       <pre class="lines">
 
 
+62
 63
-64
-65</pre>
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_outputs'>outputs</span>
   <span class='ivar'>@outputs</span> <span class='op'>||=</span> <span class='id identifier rubyid_cast_outputs'>cast_outputs</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="strict-instance_method">
-  
-    #<strong>strict</strong>  &#x21d2; <tt>Boolean</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p class="note private">
-  <strong>This method is part of a private API.</strong>
-  You should avoid using this method if possible, as it may be removed or be changed in the future.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-<p class="tag_title">Since:</p>
-<ul class="since">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'><p>1.0.0</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-70
-71
-72</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/can_have_steps/entities/step/commands/cast_params.rb', line 70</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_strict'>strict</span>
-  <span class='const'><span class='object_link'><a href="../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_memoize_including_falsy_values'><span class='object_link'><a href="../../../../../../Utils.html#memoize_including_falsy_values-class_method" title="ConvenientService::Utils.memoize_including_falsy_values (method)">memoize_including_falsy_values</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='symbol'>:@strict</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="../../../../../../Utils.html" title="ConvenientService::Utils (module)">Utils</a></span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="../../../../../../Utils.html#to_bool-class_method" title="ConvenientService::Utils.to_bool (method)">to_bool</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_original_params'>original_params</span><span class='period'>.</span><span class='id identifier rubyid_strict'>strict</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1233,7 +1138,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Sep 27 02:04:40 2026 by
+  Generated on Sun Sep 27 23:20:18 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.45 (ruby-4.0.7).
 </div>
