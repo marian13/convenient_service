@@ -10,7 +10,7 @@ module ConvenientService
     module Plugins
       module HasJSendResultParamsValidations
         module UsingDryValidation
-          module Concern
+          module NoOpConcern
             include ::ConvenientService::Concern
 
             class << self
@@ -19,22 +19,20 @@ module ConvenientService
               # @return [Module]
               #
               def with(skip_validations: false)
-                return self unless skip_validations
+                return self if skip_validations
 
-                Plugins::HasJSendResultParamsValidations::UsingDryValidation::NoOpConcern
+                Plugins::HasJSendResultParamsValidations::UsingDryValidation::Concern
               end
             end
 
             class_methods do
               ##
               # @param block [Proc, nil]
-              # @return [Class<Dry::Validation::Contract>]
+              # @return [nil]
               #
-              # @note `nil` is returned when `skip_validations` option detail is `true`.
+              # @note `Class<Dry::Validation::Contract>` is returned when `skip_validations` option detail is `false` or not used.
               #
               def contract(&block)
-                (@contract ||= ::Class.new(::Dry::Validation::Contract))
-                  .tap { |contract| contract.class_exec(&block) if block }
               end
             end
           end

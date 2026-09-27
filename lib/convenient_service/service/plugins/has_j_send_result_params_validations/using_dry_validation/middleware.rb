@@ -21,9 +21,10 @@ module ConvenientService
             # @return [ConvenientService::Service::Plugins::HasJSendResult::Entities::Result]
             #
             def next(...)
-              return result_from_dry_validation if dry_validation_errors.any?
+              return chain.next(...) if skip_validations?
+              return chain.next(...) if dry_validation_errors.none?
 
-              chain.next(...)
+              result_from_dry_validation
             end
 
             private
@@ -72,6 +73,13 @@ module ConvenientService
             #
             def status
               middleware_arguments.kwargs.fetch(:status) { :error }
+            end
+
+            ##
+            # @return [Boolean]
+            #
+            def skip_validations?
+              middleware_arguments.kwargs.fetch(:skip_validations) { false }
             end
 
             ##

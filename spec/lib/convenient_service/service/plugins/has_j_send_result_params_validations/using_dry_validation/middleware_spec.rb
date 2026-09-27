@@ -46,15 +46,15 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
 
         subject(:method_value) { method.call }
 
-        let(:method) { wrap_method(service_instance, :result, observe_middleware: middleware.with(status: status)) }
+        let(:method) { wrap_method(service_instance, :result, observe_middleware: middleware.with(status: status, skip_validations: skip_validations)) }
 
         let(:service_class) do
           Class.new.tap do |klass|
-            klass.class_exec(status, middleware) do |status, middleware|
-              include ConvenientService::Standard::Config.with({name: :dry_validation, enabled: true, status: status})
+            klass.class_exec(status, skip_validations, middleware) do |status, skip_validations, middleware|
+              include ConvenientService::Standard::Config.with({name: :dry_validation, enabled: true, status: status, skip_validations: skip_validations})
 
               middlewares :result do
-                observe middleware.with(status: status)
+                observe middleware.with(status: status, skip_validations: skip_validations)
               end
 
               contract do
@@ -71,21 +71,26 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
         end
 
         let(:service_instance) { service_class.new }
+        let(:skip_validations) { false }
 
         context "when contact does NOT have schema" do
           let(:service_class) do
             Class.new.tap do |klass|
-              klass.class_exec(status, middleware) do |status, middleware|
-                include ConvenientService::Standard::Config.with({name: :dry_validation, enabled: true, status: status})
+              klass.class_exec(status, skip_validations, middleware) do |status, skip_validations, middleware|
+                include ConvenientService::Standard::Config.with({name: :dry_validation, enabled: true, status: status, skip_validations: skip_validations})
 
                 middlewares :result do
-                  observe middleware.with(status: status)
+                  observe middleware.with(status: status, skip_validations: skip_validations)
                 end
 
                 contract do
                   params do
                     required(:foo).value(:string, max_size?: 2)
                   end
+                end
+
+                def initialize(foo:)
+                  @foo = foo
                 end
 
                 def result
@@ -95,9 +100,18 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
             end
           end
 
-          before do
-            service_instance.internals.cache.write(:constructor_arguments, ConvenientService::Support::Arguments.new(foo: "x"))
+          let(:service_instance) { service_class.new(foo: "x") }
+
+          specify do
+            expect { method_value }
+              .to call_chain_next.on(method)
+              .and_return_its_value
           end
+        end
+
+        context "when `skip_validations` is `true`" do
+          let(:skip_validations) { true }
+          let(:service_instance) { service_class.new(foo: "bar") }
 
           specify do
             expect { method_value }
@@ -107,9 +121,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
         end
 
         context "when validation does NOT have any errors" do
-          before do
-            service_instance.internals.cache.write(:constructor_arguments, ConvenientService::Support::Arguments.new(foo: "x"))
-          end
+          let(:service_instance) { service_class.new(foo: "x") }
 
           specify do
             expect { method_value }
@@ -119,9 +131,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
         end
 
         context "when validation has any error" do
-          before do
-            service_instance.internals.cache.write(:constructor_arguments, ConvenientService::Support::Arguments.new(foo: "bar"))
-          end
+          let(:service_instance) { service_class.new(foo: "bar") }
 
           let(:errors) { service_class.contract.new.call(**service_instance.constructor_arguments.kwargs).errors.to_h.transform_values(&:first) }
 
@@ -135,6 +145,10 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
 
           it "returns result with `:unsatisfied_dry_validation` as code" do
             expect(method_value).to be_result(status).with_code(:unsatisfied_dry_validation)
+          end
+
+          specify do
+            expect { method_value }.not_to call_chain_next.on(method)
           end
         end
       end

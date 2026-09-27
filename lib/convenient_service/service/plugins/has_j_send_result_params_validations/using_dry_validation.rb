@@ -6,4 +6,5 @@
 ##
 
 require_relative "using_dry_validation/concern"
+require_relative "using_dry_validation/no_op_concern"
 require_relative "using_dry_validation/middleware"
