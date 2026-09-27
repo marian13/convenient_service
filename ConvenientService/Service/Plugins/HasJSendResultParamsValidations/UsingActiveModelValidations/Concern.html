@@ -75,7 +75,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="../../../../Core/Entities/Config/Entities/Concerns/Usual.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Usual (module)">Core::Entities::Config::Entities::Concerns::Usual</a></span></dd>
+      <dd>ActiveModel::Validations, <span class='object_link'><a href="../../../../Core/Entities/Config/Entities/Concerns/Usual.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Usual (module)">Core::Entities::Config::Entities::Concerns::Usual</a></span></dd>
   </dl>
   
   
@@ -126,6 +126,40 @@
 
 
 
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#with-class_method" title="with (class method)">.<strong>with</strong>(skip_validations: false)  &#x21d2; Module </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+    
+  
+
 
   
   
@@ -134,16 +168,115 @@
   
   
   
-  <h2>Method Summary</h2>
+  
+  
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../../../../Core/Entities/Config/Entities/Concerns/Usual.html" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Usual (module)">Core::Entities::Config::Entities::Concerns::Usual</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../../../../Core/Entities/Config/Entities/Concerns/Usual.html#included-class_method" title="ConvenientService::Core::Entities::Config::Entities::Concerns::Usual.included (method)">included</a></span></p>
 
 
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="with-class_method">
+  
+    .<strong>with</strong>(skip_validations: false)  &#x21d2; <tt>Module</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>skip_validations</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Module</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+21
+22
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/convenient_service/service/plugins/has_j_send_result_params_validations/using_active_model_validations/concern.rb', line 21</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_with'>with</span><span class='lparen'>(</span><span class='label'>skip_validations:</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>self</span> <span class='kw'>unless</span> <span class='id identifier rubyid_skip_validations'>skip_validations</span>
+
+  <span class='const'><span class='object_link'><a href="../../../Plugins.html" title="ConvenientService::Service::Plugins (module)">Plugins</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../HasJSendResultParamsValidations.html" title="ConvenientService::Service::Plugins::HasJSendResultParamsValidations (module)">HasJSendResultParamsValidations</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../UsingActiveModelValidations.html" title="ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations (module)">UsingActiveModelValidations</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="https://apidocs.convenientservice.org/ConvenientService/Service/Plugins/HasJSendResultParamsValidations/UsingActiveModelValidations/NoOpConcern.html" title="ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingActiveModelValidations::NoOpConcern (module)">NoOpConcern</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 </div>
 
       <div id="footer">
-  Generated on Sat Sep 26 17:10:27 2026 by
+  Generated on Sun Sep 27 00:18:35 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.45 (ruby-4.0.7).
 </div>
