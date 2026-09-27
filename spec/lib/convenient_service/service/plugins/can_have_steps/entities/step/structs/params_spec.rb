@@ -13,7 +13,7 @@ require "convenient_service"
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Structs::Params, type: :standard do
   example_group "instance methods" do
     describe "#==" do
-      let(:kwargs) { {action: Class.new, inputs: [:foo], outputs: [:bar], strict: false, index: 0, organizer: Object.new, extra_kwargs: {fallback: true}} }
+      let(:kwargs) { {action: Class.new, inputs: [:foo], outputs: [:bar], index: 0, organizer: Object.new, extra_kwargs: {fallback: true}} }
 
       let(:params) { described_class.new(**kwargs) }
 
@@ -35,14 +35,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       context "when `other` has different `outputs`" do
         let(:other) { described_class.new(**kwargs.merge(outputs: [:qux])) }
-
-        it "returns `false`" do
-          expect(params == other).to be(false)
-        end
-      end
-
-      context "when `other` has different `strict`" do
-        let(:other) { described_class.new(**kwargs.merge(strict: true)) }
 
         it "returns `false`" do
           expect(params == other).to be(false)
@@ -83,21 +75,21 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
     end
 
     describe "#to_callback_arguments" do
-      let(:kwargs) { {action: Class.new, inputs: [:foo], outputs: [:bar], strict: false, index: 0, organizer: Object.new, extra_kwargs: {}} }
+      let(:kwargs) { {action: Class.new, inputs: [:foo], outputs: [:bar], index: 0, organizer: Object.new, extra_kwargs: {}} }
 
       let(:params) { described_class.new(**kwargs) }
 
       it "returns callback arguments" do
-        expect(params.to_callback_arguments).to eq(ConvenientService::Support::Arguments.new(params.action, in: params.inputs, out: params.outputs, strict: params.strict, index: params.index))
+        expect(params.to_callback_arguments).to eq(ConvenientService::Support::Arguments.new(params.action, in: params.inputs, out: params.outputs, index: params.index))
       end
 
       context "when params have extra kwargs" do
-        let(:kwargs) { {action: Class.new, inputs: [:foo], outputs: [:bar], strict: false, index: 0, organizer: Object.new, extra_kwargs: {fallback: true}} }
+        let(:kwargs) { {action: Class.new, inputs: [:foo], outputs: [:bar], index: 0, organizer: Object.new, extra_kwargs: {fallback: true}} }
 
         let(:params) { described_class.new(**kwargs) }
 
         it "returns callback arguments with extra kwargs" do
-          expect(params.to_callback_arguments).to eq(ConvenientService::Support::Arguments.new(params.action, in: params.inputs, out: params.outputs, strict: params.strict, index: params.index, fallback: params.extra_kwargs[:fallback]))
+          expect(params.to_callback_arguments).to eq(ConvenientService::Support::Arguments.new(params.action, in: params.inputs, out: params.outputs, index: params.index, fallback: params.extra_kwargs[:fallback]))
         end
       end
     end

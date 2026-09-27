@@ -209,7 +209,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveBeforeStepCallbacks::
               <<~TEXT
                 first before step
                   args - [:first_step]
-                  kwargs.keys - [:in, :out, :strict, :index]
+                  kwargs.keys - [:in, :out, :index]
                   block - nil
                 step :first_step
               TEXT
@@ -259,7 +259,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveBeforeStepCallbacks::
                 <<~TEXT
                   first before step
                     args - [:first_step]
-                    kwargs.keys - [:in, :out, :strict, :index, :cache]
+                    kwargs.keys - [:in, :out, :index, :cache]
                     block - nil
                   step :first_step
                 TEXT

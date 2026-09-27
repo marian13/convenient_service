@@ -35,7 +35,6 @@ module ConvenientService
                     action: action,
                     inputs: inputs,
                     outputs: outputs,
-                    strict: strict,
                     index: index,
                     container: container,
                     organizer: organizer,
@@ -62,13 +61,6 @@ module ConvenientService
                 #
                 def outputs
                   @outputs ||= cast_outputs
-                end
-
-                ##
-                # @return [Boolean]
-                #
-                def strict
-                  Utils.memoize_including_falsy_values(self, :@strict) { Utils.to_bool(original_params.strict) }
                 end
 
                 ##

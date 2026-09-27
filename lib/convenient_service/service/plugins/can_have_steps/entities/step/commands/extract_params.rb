@@ -43,11 +43,10 @@ module ConvenientService
                     action: args.first,
                     inputs: Utils::Array.wrap(kwargs[:in]),
                     outputs: Utils::Array.wrap(kwargs[:out]),
-                    strict: kwargs[:strict],
                     index: kwargs[:index],
                     container: kwargs[:container],
                     organizer: kwargs[:organizer],
-                    extra_kwargs: Utils::Hash.except(kwargs, [:in, :out, :strict, :index, :container, :organizer])
+                    extra_kwargs: Utils::Hash.except(kwargs, [:in, :out, :index, :container, :organizer])
                   )
                 end
               end

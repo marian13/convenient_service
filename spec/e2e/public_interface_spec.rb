@@ -1187,7 +1187,6 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :service_result, # public
           :service_result_without_middlewares, # private
           :status, # public
-          :strict?, # public
           :success?, # public
           :to_args, # private
           :to_arguments, # private

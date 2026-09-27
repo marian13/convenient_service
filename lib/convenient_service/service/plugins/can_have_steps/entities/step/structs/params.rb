@@ -12,9 +12,9 @@ module ConvenientService
         module Entities
           class Step
             module Structs
-              Params = ::Struct.new(:action, :inputs, :outputs, :strict, :index, :container, :organizer, :extra_kwargs, keyword_init: true) do
+              Params = ::Struct.new(:action, :inputs, :outputs, :index, :container, :organizer, :extra_kwargs, keyword_init: true) do
                 def to_callback_arguments
-                  Support::Arguments.new(action, in: inputs, out: outputs, strict: strict, index: index, **extra_kwargs)
+                  Support::Arguments.new(action, in: inputs, out: outputs, index: index, **extra_kwargs)
                 end
               end
             end

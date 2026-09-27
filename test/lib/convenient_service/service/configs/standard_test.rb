@@ -23,6 +23,7 @@ class ConvenientService::Service::Configs::StandardTest < Minitest::Test
               :essential,
               :callbacks,
               :fallbacks,
+              :strictness,
               :inspect,
               :recalculation,
               :result_parents_trace,

@@ -19,6 +19,7 @@ module ConvenientService
             [
               :essential,
               :callbacks,
+              :strictness,
               :inspect,
               :recalculation,
               :result_parents_trace,
@@ -36,6 +37,7 @@ module ConvenientService
             [
               :essential,
               :callbacks,
+              :strictness,
               :inspect,
               :recalculation,
               :result_parents_trace,

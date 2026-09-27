@@ -16,9 +16,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
   example_group "class methods" do
     describe ".call" do
       let(:args) { [Class.new] }
-      let(:default_kwargs) { {in: [:foo], out: [:bar], strict: strict, index: index, container: container, organizer: organizer} }
+      let(:default_kwargs) { {in: [:foo], out: [:bar], index: index, container: container, organizer: organizer} }
       let(:kwargs) { default_kwargs }
-      let(:strict) { false }
       let(:index) { 0 }
       let(:container) { Object }
       let(:organizer) { Object.new }
@@ -74,12 +73,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
         end
       end
 
-      example_group "`strict`" do
-        it "returns `kwargs[:strict]` as `strict`" do
-          expect(command_result.strict).to eq(strict)
-        end
-      end
-
       example_group "`index`" do
         it "returns `kwargs[:index]` as `index`" do
           expect(command_result.index).to eq(index)
@@ -99,15 +92,15 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
 
       example_group "`extra_kwargs`" do
-        let(:default_kwargs) { {in: [:foo], out: [:bar], strict: strict, index: index, organizer: organizer, fallback: false} }
+        let(:default_kwargs) { {in: [:foo], out: [:bar], index: index, organizer: organizer, fallback: false} }
 
         specify do
           expect { command_result }
             .to delegate_to(ConvenientService::Utils::Hash, :except)
-            .with_arguments(default_kwargs, [:in, :out, :strict, :index, :container, :organizer])
+            .with_arguments(default_kwargs, [:in, :out, :index, :container, :organizer])
         end
 
-        it "returns `kwargs` without `[:in, :out, :strict, :index, :container, :organizer]` keys as `extra_kwargs`" do
+        it "returns `kwargs` without `[:in, :out, :index, :container, :organizer]` keys as `extra_kwargs`" do
           expect(command_result.extra_kwargs).to eq({fallback: false})
         end
       end

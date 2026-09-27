@@ -580,6 +580,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
 
                 ConvenientService::Plugins::Common::CanHaveCallbacks::Concern,
                 ConvenientService::Plugins::Step::CanHaveFallbacks::Concern,
+                ConvenientService::Plugins::Step::CanBeStrict::Concern,
                 ConvenientService::Plugins::Step::HasInspect::Concern,
 
                 ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
@@ -595,6 +596,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
             let(:result_middlewares) do
               [
                 ConvenientService::Plugins::Common::CachesReturnValue::Middleware,
+                ConvenientService::Plugins::Step::CanBeStrict::Middleware,
                 ConvenientService::Plugins::Step::HasResult::Middleware,
                 ConvenientService::Plugins::Step::CanHaveParentResult::Middleware,
                 ConvenientService::Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure),
@@ -780,6 +782,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
             :fallbacks,
             :rollbacks,
             :fault_tolerance,
+            :strictness,
             :inspect,
             :recalculation,
             :result_parents_trace,
@@ -833,6 +836,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               :essential,
               :callbacks,
               :fallbacks,
+              :strictness,
               :inspect,
               :recalculation,
               :result_parents_trace,

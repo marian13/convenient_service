@@ -235,15 +235,6 @@ module ConvenientService
                 end
 
                 ##
-                # @api public
-                #
-                # @return [Boolean]
-                #
-                def strict?
-                  params.strict
-                end
-
-                ##
                 # @api private
                 #
                 # @return [Boolean]

@@ -35,8 +35,6 @@ module ConvenientService
                   def next(...)
                     result = chain.next(...)
 
-                    result = result.strict if step.strict?
-
                     result.copy(
                       overrides: {
                         kwargs: {

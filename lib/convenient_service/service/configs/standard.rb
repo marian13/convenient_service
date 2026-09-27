@@ -24,6 +24,7 @@ module ConvenientService
             :fallbacks,
             :rollbacks,
             :fault_tolerance,
+            :strictness,
             :inspect,
             :recalculation,
             :result_parents_trace,
@@ -54,6 +55,7 @@ module ConvenientService
             :essential,
             :callbacks,
             :fallbacks,
+            :strictness,
             :inspect,
             :recalculation,
             :result_parents_trace,
@@ -227,7 +229,7 @@ module ConvenientService
               use ConvenientService::Plugins::Result::HasJSendStatusAndAttributes::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Result::CanHaveStep::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Result::CanBeCalled::Concern if options.enabled?(:essential)
-              use ConvenientService::Plugins::Result::CanBeStrict::Concern if options.enabled?(:essential)
+              use ConvenientService::Plugins::Result::CanBeStrict::Concern if options.enabled?(:strictness)
               use ConvenientService::Plugins::Result::CanBeUsedInServiceAwareEnumerables::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Result::HasNegatedResult::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Result::HasPatternMatchingSupport::Concern if options.enabled?(:essential)
@@ -352,6 +354,7 @@ module ConvenientService
               use ConvenientService::Plugins::Step::CanBeUsedInServiceAwareEnumerables::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern if options.enabled?(:callbacks)
               use ConvenientService::Plugins::Step::CanHaveFallbacks::Concern if options.enabled?(:fallbacks)
+              use ConvenientService::Plugins::Step::CanBeStrict::Concern if options.enabled?(:strictness)
               use ConvenientService::Plugins::Step::HasInspect::Concern if options.enabled?(:inspect)
               use ConvenientService::Plugins::Step::HasAwesomePrintInspect::Concern if options.enabled?(:awesome_print_inspect)
               use ConvenientService::Plugins::Step::HasAmazingPrintInspect::Concern if options.enabled?(:amazing_print_inspect)
@@ -360,6 +363,7 @@ module ConvenientService
 
             middlewares :result do
               use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.enabled?(:per_instance_caching)
+              use ConvenientService::Plugins::Step::CanBeStrict::Middleware if options.enabled?(:strictness)
               use ConvenientService::Plugins::Step::HasResult::Middleware if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::CanHaveParentResult::Middleware if options.enabled?(:result_parents_trace)
               use ConvenientService::Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure) if options.enabled?(:fallbacks)

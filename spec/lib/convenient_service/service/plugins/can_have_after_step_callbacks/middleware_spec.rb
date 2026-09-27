@@ -252,7 +252,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAfterStepCallbacks::M
                 step :first_step
                 first after step
                   args - [:first_step]
-                  kwargs.keys - [:in, :out, :strict, :index]
+                  kwargs.keys - [:in, :out, :index]
                   block - nil
               TEXT
             end
@@ -302,7 +302,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveAfterStepCallbacks::M
                   step :first_step
                   first after step
                     args - [:first_step]
-                    kwargs.keys - [:in, :out, :strict, :index, :cache]
+                    kwargs.keys - [:in, :out, :index, :cache]
                     block - nil
                 TEXT
               end
