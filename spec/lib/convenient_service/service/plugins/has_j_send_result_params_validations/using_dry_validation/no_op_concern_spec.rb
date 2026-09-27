@@ -63,7 +63,7 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResultParamsValidati
       mod.instance_method(method_name).parameters
     end
 
-    specify { expect(method_for(:contract, described_class::ClassMethods)).to eq(method_for(:contract,ConvenientService::Service::Plugins::HasJSendResultParamsValidations::UsingDryValidation::NoOpConcern)) }
+    specify { expect(method_for(:contract, described_class::ClassMethods)).to eq(method_for(:contract, described_class)) }
   end
 end
 # rubocop:enable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
