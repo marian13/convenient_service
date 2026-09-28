@@ -144,7 +144,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
 
       context "when `names` are NOT passed" do
         it "returns `false`" do
-          expect(option_collection.any_enabled?).to eq(false)
+          expect(option_collection.any_enabled?).to be(false)
         end
       end
 
@@ -154,7 +154,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
             let(:names) { [:essential, :fallbacks, :strictness] }
 
             it "returns `false`" do
-              expect(option_collection.any_enabled?(*names)).to eq(false)
+              expect(option_collection.any_enabled?(*names)).to be(false)
             end
           end
 
@@ -162,7 +162,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
             let(:names) { [:essential, :fallbacks, :inspect] }
 
             it "returns `true`" do
-              expect(option_collection.any_enabled?(*names)).to eq(true)
+              expect(option_collection.any_enabled?(*names)).to be(true)
             end
           end
 
@@ -170,7 +170,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
             let(:names) { [:essential, :rollbacks, :inspect] }
 
             it "returns `true`" do
-              expect(option_collection.any_enabled?(*names)).to eq(true)
+              expect(option_collection.any_enabled?(*names)).to be(true)
             end
           end
 
@@ -178,7 +178,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
             let(:names) { [:callbacks, :rollbacks, :inspect] }
 
             it "returns `true`" do
-              expect(option_collection.any_enabled?(*names)).to eq(true)
+              expect(option_collection.any_enabled?(*names)).to be(true)
             end
           end
         end
@@ -187,7 +187,7 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
           let(:names) { [] }
 
           it "returns `false`" do
-            expect(option_collection.any_enabled?(*names)).to eq(false)
+            expect(option_collection.any_enabled?(*names)).to be(false)
           end
         end
       end
