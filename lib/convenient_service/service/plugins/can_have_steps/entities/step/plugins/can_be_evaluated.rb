@@ -6,3 +6,4 @@
 ##
 
 require_relative "can_be_evaluated/concern"
+require_relative "can_be_evaluated/middleware"

@@ -358,12 +358,6 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
             .to delegate_to(step, :save_outputs_in_organizer!)
             .without_arguments
         end
-
-        specify do
-          expect { step.organizer_result }
-            .to delegate_to(step, :mark_as_evaluated!)
-            .without_arguments
-        end
       end
     end
 

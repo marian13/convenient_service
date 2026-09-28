@@ -182,8 +182,6 @@ module ConvenientService
 
                   save_outputs_in_organizer!
 
-                  mark_as_evaluated!
-
                   original_result
                 end
 

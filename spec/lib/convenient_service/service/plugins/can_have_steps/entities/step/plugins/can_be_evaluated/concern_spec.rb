@@ -15,7 +15,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
   let(:service_class) do
     Class.new do
-      include ConvenientService::Standard::Config
+      include ConvenientService::Standard::Config.with(:rollbacks)
 
       step :foo
 
@@ -73,13 +73,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       #     .and_return_its_value
       # end
 
-      context "when `step` is NOT completed" do
+      context "when `step` is NOT evaluated" do
         it "returns `false`" do
           expect(step_instance.evaluated?).to be(false)
         end
       end
 
-      context "when `step` is completed" do
+      context "when `step` is evaluated" do
         it "returns `true`" do
           step_instance.mark_as_evaluated!
 
@@ -105,13 +105,13 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       #     .and_return_its_value
       # end
 
-      context "when `step` is NOT completed" do
+      context "when `step` is NOT evaluated" do
         it "returns `true`" do
           expect(step_instance.not_evaluated?).to be(true)
         end
       end
 
-      context "when `step` is completed" do
+      context "when `step` is evaluated" do
         it "returns `false`" do
           step_instance.mark_as_evaluated!
 
@@ -120,7 +120,7 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
       end
     end
 
-    describe "#mark_as_completed" do
+    describe "#mark_as_evaluated!" do
       specify do
         expect { step_instance.mark_as_evaluated! }
           .to delegate_to(step_instance.internals.cache, :write)

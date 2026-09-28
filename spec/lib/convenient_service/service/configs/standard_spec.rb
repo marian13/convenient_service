@@ -572,7 +572,6 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
                 ConvenientService::Plugins::Common::HasInternals::Concern,
                 ConvenientService::Plugins::Step::HasResult::Concern,
 
-                ConvenientService::Plugins::Step::CanBeEvaluated::Concern,
                 ConvenientService::Plugins::Step::CanBeServiceStep::Concern,
                 ConvenientService::Plugins::Step::CanBeMethodStep::Concern,
 
@@ -581,6 +580,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
                 ConvenientService::Plugins::Common::CanHaveCallbacks::Concern,
                 ConvenientService::Plugins::Step::CanHaveFallbacks::Concern,
                 ConvenientService::Plugins::Step::CanBeStrict::Concern,
+                ConvenientService::Plugins::Step::CanBeEvaluated::Concern,
                 ConvenientService::Plugins::Step::HasInspect::Concern,
 
                 ConvenientService::Plugins::Common::HasJSendResultDuckShortSyntax::Concern
@@ -597,6 +597,7 @@ RSpec.describe ConvenientService::Service::Configs::Standard, type: :standard do
               [
                 ConvenientService::Plugins::Common::CachesReturnValue::Middleware,
                 ConvenientService::Plugins::Step::CanBeStrict::Middleware,
+                ConvenientService::Plugins::Step::CanBeEvaluated::Middleware,
                 ConvenientService::Plugins::Step::HasResult::Middleware,
                 ConvenientService::Plugins::Step::CanHaveParentResult::Middleware,
                 ConvenientService::Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure),

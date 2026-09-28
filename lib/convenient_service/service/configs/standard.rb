@@ -348,13 +348,13 @@ module ConvenientService
             concerns do
               use ConvenientService::Plugins::Common::HasInternals::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::HasResult::Concern if options.enabled?(:essential)
-              use ConvenientService::Plugins::Step::CanBeEvaluated::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::CanBeServiceStep::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::CanBeMethodStep::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::CanBeUsedInServiceAwareEnumerables::Concern if options.enabled?(:essential)
               use ConvenientService::Plugins::Common::CanHaveCallbacks::Concern if options.enabled?(:callbacks)
               use ConvenientService::Plugins::Step::CanHaveFallbacks::Concern if options.enabled?(:fallbacks)
               use ConvenientService::Plugins::Step::CanBeStrict::Concern if options.enabled?(:strictness)
+              use ConvenientService::Plugins::Step::CanBeEvaluated::Concern if options.any_enabled?(:rollbacks, :exception_services_trace)
               use ConvenientService::Plugins::Step::HasInspect::Concern if options.enabled?(:inspect)
               use ConvenientService::Plugins::Step::HasAwesomePrintInspect::Concern if options.enabled?(:awesome_print_inspect)
               use ConvenientService::Plugins::Step::HasAmazingPrintInspect::Concern if options.enabled?(:amazing_print_inspect)
@@ -364,6 +364,7 @@ module ConvenientService
             middlewares :result do
               use ConvenientService::Plugins::Common::CachesReturnValue::Middleware if options.enabled?(:per_instance_caching)
               use ConvenientService::Plugins::Step::CanBeStrict::Middleware if options.enabled?(:strictness)
+              use ConvenientService::Plugins::Step::CanBeEvaluated::Middleware if options.any_enabled?(:rollbacks, :exception_services_trace)
               use ConvenientService::Plugins::Step::HasResult::Middleware if options.enabled?(:essential)
               use ConvenientService::Plugins::Step::CanHaveParentResult::Middleware if options.enabled?(:result_parents_trace)
               use ConvenientService::Plugins::Step::CanHaveFallbacks::Middleware.with(fallback_true_status: :failure) if options.enabled?(:fallbacks)
