@@ -94,6 +94,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       context "when original result raises exception" do
         before do
+          first_step.commit_config!
+
           allow(first_step).to receive(:result).and_raise(ArgumentError)
         end
 
