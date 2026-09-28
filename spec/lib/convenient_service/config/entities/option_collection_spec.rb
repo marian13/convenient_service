@@ -130,6 +130,69 @@ RSpec.describe ConvenientService::Config::Entities::OptionCollection, type: :sta
       end
     end
 
+    describe "#any_enabled?" do
+      let(:options) do
+        {
+          essential: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: false),
+          callbacks: ConvenientService::Config::Entities::Option.new(name: :callbacks, enabled: true),
+          fallbacks: ConvenientService::Config::Entities::Option.new(name: :fallbacks, enabled: false),
+          rollbacks: ConvenientService::Config::Entities::Option.new(name: :rollbacks, enabled: true),
+          strictness: ConvenientService::Config::Entities::Option.new(name: :strictness, enabled: false),
+          inspect: ConvenientService::Config::Entities::Option.new(name: :inspect, enabled: true)
+        }
+      end
+
+      context "when `names` are NOT passed" do
+        it "returns `false`" do
+          expect(option_collection.any_enabled?).to eq(false)
+        end
+      end
+
+      context "when `names` are passed" do
+        context "when `names` are NOT empty" do
+          context "when none of those `names` is enabled" do
+            let(:names) { [:essential, :fallbacks, :strictness] }
+
+            it "returns `false`" do
+              expect(option_collection.any_enabled?(*names)).to eq(false)
+            end
+          end
+
+          context "when one of those `names` is enabled" do
+            let(:names) { [:essential, :fallbacks, :inspect] }
+
+            it "returns `true`" do
+              expect(option_collection.any_enabled?(*names)).to eq(true)
+            end
+          end
+
+          context "when many of those `names` are enabled" do
+            let(:names) { [:essential, :rollbacks, :inspect] }
+
+            it "returns `true`" do
+              expect(option_collection.any_enabled?(*names)).to eq(true)
+            end
+          end
+
+          context "when all of those `names` are enabled" do
+            let(:names) { [:callbacks, :rollbacks, :inspect] }
+
+            it "returns `true`" do
+              expect(option_collection.any_enabled?(*names)).to eq(true)
+            end
+          end
+        end
+
+        context "when `names` are empty" do
+          let(:names) { [] }
+
+          it "returns `false`" do
+            expect(option_collection.any_enabled?(*names)).to eq(false)
+          end
+        end
+      end
+    end
+
     describe "#keys" do
       specify do
         expect { option_collection.keys }

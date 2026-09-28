@@ -62,6 +62,14 @@ module ConvenientService
         end
 
         ##
+        # @param names [Array<Symbol>]
+        # @return [Boolean]
+        #
+        def any_enabled?(*names)
+          names.any? { |name| enabled?(name) }
+        end
+
+        ##
         # @param name [Symbol]
         # @return [Boolean]
         #
