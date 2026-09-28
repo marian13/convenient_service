@@ -3278,6 +3278,8 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             let(:exception) { Class.new(StandardError) }
 
             before do
+              first_step.commit_config!
+
               allow(first_step).to receive(:result).and_raise(exception)
             end
 
@@ -3360,6 +3362,9 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveConnectedSteps::Conce
             let(:exception) { Class.new(StandardError) }
 
             before do
+              first_step.commit_config!
+              second_step.commit_config!
+
               allow(first_step).to receive(:result).and_raise(exception)
               allow(second_step).to receive(:result).and_raise(exception)
             end
