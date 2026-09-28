@@ -11,6 +11,8 @@ require "convenient_service"
 
 # rubocop:disable RSpec/NestedGroups, RSpec/MultipleMemoizedHelpers
 RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step::Plugins::CanBeEvaluated::Middleware, type: :standard do
+  include ConvenientService::RSpec::Helpers::IgnoringException
+
   include ConvenientService::RSpec::Matchers::DelegateTo
 
   let(:middleware) { described_class }
@@ -79,15 +81,27 @@ RSpec.describe ConvenientService::Service::Plugins::CanHaveSteps::Entities::Step
 
       specify do
         expect { method_value }
-          .to delegate_to(step, :mark_as_evaluated!)
-          .without_arguments
+          .to call_chain_next.on(method)
+            .without_arguments
+            .and_return { step.result }
       end
 
       specify do
         expect { method_value }
-          .to call_chain_next.on(method)
-            .without_arguments
-            .and_return { step.result }
+          .to delegate_to(step, :mark_as_evaluated!)
+          .without_arguments
+      end
+
+      context "when original result raises exception" do
+        before do
+          allow(first_step).to receive(:result).and_raise(ArgumentError)
+        end
+
+        specify do
+          expect { ignoring_exception(ArgumentError) { method_value } }
+            .not_to delegate_to(step, :mark_as_evaluated!)
+            .with_any_arguments
+        end
       end
     end
   end
