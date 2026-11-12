@@ -353,6 +353,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :message_without_middlewares, # private
           :negated_result, # public
           :negated_result_without_middlewares, # private
+          :to_h, # public
           :to_s # public
         ])
       end
@@ -481,6 +482,7 @@ RSpec.describe "Public interface", type: [:standard, :e2e] do
           :stubbed_result?, # public
           :success?, # public
           :to_arguments, # public
+          :to_h, # public
           :to_kwargs, # public
           :to_s, # public
           :to_service_aware_iteration_block_value, # private
