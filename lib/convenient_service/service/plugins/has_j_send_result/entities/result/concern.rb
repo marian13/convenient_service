@@ -20,6 +20,18 @@ module ConvenientService
 
               instance_methods do
                 ##
+                # @return [Hash{Symbol => Object}]
+                #
+                def to_h
+                  {
+                    status: status.to_sym,
+                    data: unsafe_data.to_h,
+                    message: unsafe_message.to_s,
+                    code: unsafe_code.to_sym
+                  }
+                end
+
+                ##
                 # Returns string representation of result.
                 #
                 # @api public

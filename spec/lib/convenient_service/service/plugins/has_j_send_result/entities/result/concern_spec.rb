@@ -47,6 +47,310 @@ RSpec.describe ConvenientService::Service::Plugins::HasJSendResult::Entities::Re
   end
 
   example_group "instance methods" do
+    describe "#to_h" do
+      let(:result) { service_class.result }
+
+      context "when result `status` is `:success`" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              success(data: {foo: :bar, baz: :qux}, message: "foo", code: :foo)
+            end
+          end
+        end
+
+        let(:hash) do
+          {
+            status: :success,
+            data: {foo: :bar, baz: :qux},
+            message: "foo",
+            code: :foo
+          }
+        end
+
+        it "returns hash representation" do
+          expect(result.to_h).to eq(hash)
+        end
+
+        context "when result has NO `data`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success(message: "foo", code: :foo)
+              end
+            end
+          end
+
+          let(:hash) do
+            {
+              status: :success,
+              data: {},
+              message: "foo",
+              code: :foo
+            }
+          end
+
+          it "returns hash representation with default `data`" do
+            expect(result.to_h).to eq(hash)
+          end
+        end
+
+        context "when result has NO `message`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success(data: {foo: :bar, baz: :qux}, code: :foo)
+              end
+            end
+          end
+
+          let(:hash) do
+            {
+              status: :success,
+              data: {foo: :bar, baz: :qux},
+              message: "",
+              code: :foo
+            }
+          end
+
+          it "returns hash representation with default `message`" do
+            expect(result.to_h).to eq(hash)
+          end
+        end
+
+        context "when result has NO `code`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                success(data: {foo: :bar, baz: :qux}, message: "foo")
+              end
+            end
+          end
+
+          let(:hash) do
+            {
+              status: :success,
+              data: {foo: :bar, baz: :qux},
+              message: "foo",
+              code: :default_success
+            }
+          end
+
+          it "returns hash representation with default `code`" do
+            expect(result.to_h).to eq(hash)
+          end
+        end
+      end
+
+      context "when result `status` is `:failure`" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              failure(data: {foo: :bar, baz: :qux}, message: "foo", code: :foo)
+            end
+          end
+        end
+
+        let(:hash) do
+          {
+            status: :failure,
+            data: {foo: :bar, baz: :qux},
+            message: "foo",
+            code: :foo
+          }
+        end
+
+        it "returns hash representation" do
+          expect(result.to_h).to eq(hash)
+        end
+
+        context "when result has NO `data`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                failure(message: "foo", code: :foo)
+              end
+            end
+          end
+
+          let(:hash) do
+            {
+              status: :failure,
+              data: {},
+              message: "foo",
+              code: :foo
+            }
+          end
+
+          it "returns hash representation with default `data`" do
+            expect(result.to_h).to eq(hash)
+          end
+        end
+
+        context "when result has NO `message`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                failure(data: {foo: :bar, baz: :qux}, code: :foo)
+              end
+            end
+          end
+
+          let(:hash) do
+            {
+              status: :failure,
+              data: {foo: :bar, baz: :qux},
+              message: "",
+              code: :foo
+            }
+          end
+
+          it "returns hash representation with default `message`" do
+            expect(result.to_h).to eq(hash)
+          end
+        end
+
+        context "when result has NO `code`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                failure(data: {foo: :bar, baz: :qux}, message: "foo")
+              end
+            end
+          end
+
+          let(:hash) do
+            {
+              status: :failure,
+              data: {foo: :bar, baz: :qux},
+              message: "foo",
+              code: :default_failure
+            }
+          end
+
+          it "returns hash representation with default `code`" do
+            expect(result.to_h).to eq(hash)
+          end
+        end
+      end
+
+      context "when result `status` is `:error`" do
+        let(:service_class) do
+          Class.new do
+            include ConvenientService::Standard::Config
+
+            def result
+              error(data: {foo: :bar, baz: :qux}, message: "foo", code: :foo)
+            end
+          end
+        end
+
+        let(:hash) do
+          {
+            status: :error,
+            data: {foo: :bar, baz: :qux},
+            message: "foo",
+            code: :foo
+          }
+        end
+
+        it "returns hash representation" do
+          expect(result.to_h).to eq(hash)
+        end
+
+        context "when result has NO `data`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                error(message: "foo", code: :foo)
+              end
+            end
+          end
+
+          let(:hash) do
+            {
+              status: :error,
+              data: {},
+              message: "foo",
+              code: :foo
+            }
+          end
+
+          it "returns hash representation with default `data`" do
+            expect(result.to_h).to eq(hash)
+          end
+        end
+
+        context "when result has NO `message`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                error(data: {foo: :bar, baz: :qux}, code: :foo)
+              end
+            end
+          end
+
+          let(:hash) do
+            {
+              status: :error,
+              data: {foo: :bar, baz: :qux},
+              message: "",
+              code: :foo
+            }
+          end
+
+          it "returns hash representation with default `message`" do
+            expect(result.to_h).to eq(hash)
+          end
+        end
+
+        context "when result has NO `code`" do
+          let(:service_class) do
+            Class.new do
+              include ConvenientService::Standard::Config
+
+              def result
+                error(data: {foo: :bar, baz: :qux}, message: "foo")
+              end
+            end
+          end
+
+          let(:hash) do
+            {
+              status: :error,
+              data: {foo: :bar, baz: :qux},
+              message: "foo",
+              code: :default_error
+            }
+          end
+
+          it "returns hash representation with default `code`" do
+            expect(result.to_h).to eq(hash)
+          end
+        end
+      end
+    end
+
     describe "#to_s" do
       let(:service_class) do
         Class.new do
