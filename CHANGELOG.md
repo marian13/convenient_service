@@ -5,6 +5,13 @@
 
 # Changelog
 
+## [0.28.0](https://github.com/marian13/convenient_service/compare/v0.27.0...v0.28.0) (2026-11-12)
+
+
+### Features
+
+* **results:** introduce Result#to_h ([957ee2b](https://github.com/marian13/convenient_service/commit/957ee2b83990557f7f1e52f8dafd28277c6810ff))
+
 ## [0.27.0](https://github.com/marian13/convenient_service/compare/v0.26.0...v0.27.0) (2026-09-28)
 
 
