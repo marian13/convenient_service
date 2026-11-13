@@ -31,7 +31,7 @@ module ConvenientService
                 #
                 # @overload initialize(klass:, plain_stack:)
                 #   @param klass [Class]
-                #   @param name [ConvenientService::Support::Middleware::StackBuilder]
+                #   @param plain_stack [ConvenientService::Support::Middleware::StackBuilder]
                 #   @return [void]
                 #
                 def initialize(klass:, name: nil, plain_stack: nil)

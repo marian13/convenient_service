@@ -141,7 +141,7 @@ module ConvenientService
             use ConvenientService::Plugins::Common::TriesToConvertResultDuckToResult::Middleware if options.enabled?(:duck_typing)
             use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingActiveModelValidations::Middleware.from(options[:active_model_validations], :status, :skip_validations) if options.enabled?(:active_model_validations)
             use ConvenientService::Plugins::Service::HasJSendResultParamsValidations::UsingDryValidation::Middleware.from(options[:dry_validation], :status, :skip_validations) if options.enabled?(:dry_validation)
-            use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware if options.enabled?(:essential)
+            use ConvenientService::Plugins::Service::CanHaveConnectedSteps::Middleware, pin: :bottom if options.enabled?(:essential)
           end
 
           middlewares :negated_result do

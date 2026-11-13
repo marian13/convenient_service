@@ -40,6 +40,13 @@ module ConvenientService
               ::ConvenientService.raise Exceptions::NotSupportedBackend.new(backend: backend)
             end
           end
+
+          ##
+          # @return [ConvenientService::Support::Middleware::StackBuilder::Entities::Creators::WithPins]
+          #
+          def with_pins
+            Entities::Creators::WithPins.new
+          end
         end
       end
     end
